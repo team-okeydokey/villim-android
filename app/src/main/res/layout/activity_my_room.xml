@@ -18,10 +18,10 @@
         android:layout_height="wrap_content"
         android:background="@drawable/rounded_rectangle">
 
-        <TextView
+        <ImageView
+            android:id="@+id/myroom_thumbnail"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/myroom_title" />
+            android:layout_height="wrap_content" />
 
     </android.support.v7.widget.LinearLayoutCompat>
 
