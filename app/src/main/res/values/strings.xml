@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Villim</string>
+
+    <!-- MyRoom Activity -->
     <string name="myroom_title">My room</string>
+    <string name="open_room">Open</string>
 </resources>

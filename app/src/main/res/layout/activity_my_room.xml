@@ -26,4 +26,22 @@
 
     </android.support.v7.widget.LinearLayoutCompat>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="5dp"
+            android:background="#FF0000FF" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/circle"
+            android:text="@string/open_room" />
+
+
+    </RelativeLayout>
+
 </android.support.v7.widget.LinearLayoutCompat>

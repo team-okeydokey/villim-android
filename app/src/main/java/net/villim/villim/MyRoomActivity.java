@@ -29,14 +29,6 @@ public class MyRoomActivity extends AppCompatActivity {
     private void populateView() {
         // Fetch and insert room thumbnail.
         Glide.with(this).load(R.drawable.prugio_thumbnail).into(myroomThumbnail);
-
-        // Draw line.
-        LineView bottomLine = new LineView(getApplicationContext(), 0,600,300,600, 0);
-        bottomLine.setLayoutParams(new LinearLayoutCompat.LayoutParams(
-                LinearLayoutCompat.LayoutParams.MATCH_PARENT,
-                LinearLayoutCompat.LayoutParams.MATCH_PARENT));
-
-        mainLayout.addView(bottomLine);
     }
 
 
