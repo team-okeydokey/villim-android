@@ -4,4 +4,7 @@
     <!-- MyRoom Activity -->
     <string name="myroom_title">My room</string>
     <string name="open_room">Open</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
