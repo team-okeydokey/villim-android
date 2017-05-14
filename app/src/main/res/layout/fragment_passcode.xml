@@ -14,7 +14,7 @@
 
         <!-- Title -->
         <TextView
-            style="@style/FragmentTitle"
+            style="@style/h1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/passcode_title" />
@@ -32,6 +32,7 @@
                 android:padding="20dp">
 
                 <TextView
+                    style="@style/h2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/passcode_instructions"/>
@@ -43,6 +44,7 @@
 
                 <!-- Curent Passcode -->
                 <TextView
+                    style="@style/h3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/passcode_current"/>
@@ -53,6 +55,7 @@
 
                 <!-- New Passcode -->
                 <TextView
+                    style="@style/h3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/passcode_new"/>
@@ -63,6 +66,7 @@
 
                 <!-- Verify New Passcode -->
                 <TextView
+                    style="@style/h3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/passcode_new_verify"/>

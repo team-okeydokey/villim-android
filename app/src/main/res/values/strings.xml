@@ -7,7 +7,7 @@
 
 
     <!-- Passcode Fragment -->
-    <string name="passcode_title">Doorlock Passcode</string>
+    <string name="passcode_title">Doorlock passcode</string>
     <string name="passcode_instructions">Change doorlock passcode</string>
     <string name="passcode_current">Current passcode</string>
     <string name="passcode_new">New passcode</string>

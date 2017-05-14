@@ -4,6 +4,10 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
 
+    <!-- Font Colots -->
+    <color name="h2">#a0a0a0</color>
+    <color name="h3">#A0A0A0</color>
+
     <!-- MainActivity -->
     <color name="mainBackground">#D0D0D0</color>
 </resources>

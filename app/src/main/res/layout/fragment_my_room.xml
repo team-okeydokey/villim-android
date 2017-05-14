@@ -14,7 +14,7 @@
 
         <!-- Title -->
         <TextView
-            style="@style/FragmentTitle"
+            style="@style/h1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/myroom_title" />
@@ -46,6 +46,7 @@
 
                     <TextView
                         android:id="@+id/myroom_roomname"
+                        style="@style/h2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
 
@@ -72,7 +73,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:src="@drawable/ic_card_travel_white_48dp"
-                                android:tint="@color/cardview_dark_background" />
+                                android:tint="@color/h3" />
 
                             <TextView
                                 android:id="@+id/myroom_numguest"
@@ -92,7 +93,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:src="@drawable/ic_card_travel_white_48dp"
-                                android:tint="@color/cardview_dark_background" />
+                                android:tint="@color/h3" />
 
                             <TextView
                                 android:id="@+id/myroom_roomtype"
@@ -112,7 +113,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:src="@drawable/ic_card_travel_white_48dp"
-                                android:tint="@color/cardview_dark_background" />
+                                android:tint="@color/h3" />
 
                             <TextView
                                 android:id="@+id/myroom_numbed"
@@ -132,7 +133,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:src="@drawable/ic_card_travel_white_48dp"
-                                android:tint="@color/cardview_dark_background" />
+                                android:tint="@color/h3" />
 
                             <TextView
                                 android:id="@+id/myroom_numbath"
@@ -151,8 +152,10 @@
 
                     <TextView
                         android:id="@+id/myroom_roomduration"
+                        style="@style/h3"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:gravity="center" />
 
                 </android.support.v7.widget.LinearLayoutCompat>
 
