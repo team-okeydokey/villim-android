@@ -13,4 +13,9 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="FragmentTitle">
+        <item name="android:textSize">18pt</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
 </resources>

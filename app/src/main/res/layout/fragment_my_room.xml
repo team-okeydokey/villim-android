@@ -14,7 +14,7 @@
 
         <!-- Title -->
         <TextView
-            android:id="@+id/myroom_title"
+            style="@style/FragmentTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/myroom_title" />
@@ -160,6 +160,6 @@
         </android.support.v7.widget.CardView>
 
     </android.support.v7.widget.LinearLayoutCompat>
-    
+
 
 </RelativeLayout>

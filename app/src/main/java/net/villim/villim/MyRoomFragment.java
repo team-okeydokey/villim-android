@@ -15,7 +15,6 @@ import com.bumptech.glide.Glide;
 
 public class MyRoomFragment extends Fragment {
 
-    private TextView myroomTitle;
     private TextView myroomRoomName;
 
     private TextView myroomNumGuest;
@@ -45,8 +44,6 @@ public class MyRoomFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View myRoomView = inflater.inflate(R.layout.fragment_my_room, container, false);
-
-        myroomTitle = (TextView) myRoomView.findViewById(R.id.myroom_title);
 
         // Room name.
         myroomRoomName = (TextView) myRoomView.findViewById(R.id.myroom_roomname);
