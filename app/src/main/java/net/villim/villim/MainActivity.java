@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private static class MainFragmentPagerAdapter extends FragmentPagerAdapter {
-        private static int NUM_ITEMS = 1;
+        private static int NUM_ITEMS = 2;
 
         public MainFragmentPagerAdapter(FragmentManager fragmentManager) {
             super(fragmentManager);
@@ -39,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
             switch (position) {
                 case 0: // Fragment # 0 - This will show FirstFragment
                     return MyRoomFragment.newInstance();
+                case 1: // Fragment # 0 - This will show FirstFragment
+                    return PasscodeFragment.newInstance();
                 default:
                     return null;
             }
