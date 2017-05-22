@@ -2,9 +2,8 @@
     <string name="app_name">Villim</string>
 
     <!-- Navigation Drawer Items -->
-    <string-array
-        name="drawer_items">
-        <item></item>
+    <string-array name="drawer_items">
+        <item>프로필</item>
         <item>방 찾기</item>
         <item>내 방</item>
         <item>방문 신청</item>
@@ -16,7 +15,6 @@
     <!-- MyRoom Fragment -->
     <string name="myroom_title">My room</string>
     <string name="open_room">Open</string>
-
 
     <!-- Passcode Fragment -->
     <string name="passcode_title">Doorlock passcode</string>

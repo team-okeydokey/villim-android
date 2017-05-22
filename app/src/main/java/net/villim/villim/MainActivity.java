@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
                 fragmentClass = MyRoomFragment.class;
                 break;
             default:
-                fragmentClass = MyRoomFragment.class;
+                fragmentClass = PolicyFragment.class;
         }
 
         try {
