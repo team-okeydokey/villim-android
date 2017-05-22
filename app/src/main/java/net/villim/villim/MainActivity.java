@@ -1,6 +1,8 @@
 package net.villim.villim;
 
 import android.content.res.Configuration;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -71,6 +73,36 @@ public class MainActivity extends AppCompatActivity {
         // Highlight the selected item, update the title, and close the drawer
         drawerListView.setItemChecked(position, true);
         drawerLayout.closeDrawer(drawerListView);
+
+        // Insert Fragment.
+        Fragment fragment = null;
+        Class fragmentClass;
+
+        switch(position) {
+            case 0:
+                fragmentClass = MyRoomFragment.class;
+                break;
+            case 1:
+                fragmentClass = MyRoomFragment.class;
+                break;
+            case 2:
+                fragmentClass = MyRoomFragment.class;
+                break;
+            case 3:
+                fragmentClass = MyRoomFragment.class;
+                break;
+            default:
+                fragmentClass = MyRoomFragment.class;
+        }
+
+        try {
+            fragment = (Fragment) fragmentClass.newInstance();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.main_frame, fragment).commit();
     }
 
     @Override

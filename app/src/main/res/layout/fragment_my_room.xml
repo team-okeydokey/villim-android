@@ -164,5 +164,27 @@
 
     </android.support.v7.widget.LinearLayoutCompat>
 
+    <!-- Bottom bar and button -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="5dp"
+            android:layout_centerVertical="true"
+            android:background="#FF0000FF" />
+
+        <Button
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_margin="20dp"
+            android:background="@drawable/circle"
+            android:text="@string/open_room" />
+
+    </RelativeLayout>
 
 </RelativeLayout>
