@@ -1,6 +1,18 @@
 <resources>
     <string name="app_name">Villim</string>
 
+    <!-- Navigation Drawer Items -->
+    <string-array
+        name="drawer_items">
+        <item></item>
+        <item>방 찾기</item>
+        <item>내 방</item>
+        <item>방문 신청</item>
+        <item>이용 약관</item>
+    </string-array>
+    <string name="drawer_open">메뉴 열기</string>
+    <string name="drawer_close">메뉴 닫기</string>
+
     <!-- MyRoom Fragment -->
     <string name="myroom_title">My room</string>
     <string name="open_room">Open</string>
