@@ -38,7 +38,7 @@ public class ProfileFragment extends Fragment {
 
         // Remove bottom bar.
         activity = ((MainActivity) getActivity());
-        activity.setBottomButton(false, null);
+        activity.showBottomButtons(false, false);
 
         profileListView = (ListView) profileView.findViewById(R.id.profile_listView);
         profileItems = getResources().getStringArray(R.array.profile_items);

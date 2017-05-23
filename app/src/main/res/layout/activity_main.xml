@@ -39,7 +39,15 @@
                 android:background="#ff6d7fe2" />
 
             <Button
-                android:id="@+id/bottom_button"
+                android:id="@+id/bottom_button_left"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_toLeftOf="@+id/bottom_button_right"
+                android:layout_centerVertical="true"
+                android:background="@drawable/circle" />
+
+            <Button
+                android:id="@+id/bottom_button_right"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_alignParentRight="true"

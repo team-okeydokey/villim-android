@@ -43,15 +43,16 @@ public class MyRoomFragment extends Fragment {
         View myRoomView = inflater.inflate(R.layout.fragment_my_room, container, false);
 
         activity = ((MainActivity) getActivity());
-        activity.registerBottomButtonListener(new View.OnClickListener() {
+        activity.registerBottomButtonListener(false, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
             }
         });
 
-        // Set bottom button text.
+        // Configure bottom buttons.
         String bottomButtonText = getActivity().getString(R.string.open_room);
-        activity.setBottomButton(true, bottomButtonText);
+        activity.setBottomButtonText(false, bottomButtonText);
+        activity.showBottomButtons(false, true);
 
         // Room name.
         roomName = (TextView) myRoomView.findViewById(R.id.room_name);
@@ -70,6 +71,10 @@ public class MyRoomFragment extends Fragment {
                         .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_left, R.anim.exit_to_right)
                         .replace(R.id.main_frame, new PasscodeFragment())
                         .addToBackStack(null).commitAllowingStateLoss();
+
+                // Animate bottom buttons.
+                activity.animateBottomButton(true, false, true);
+                activity.animateBottomButton(false, true, true);
             }
         });
 

@@ -27,6 +27,7 @@
     <string name="passcode_new">비밀번호</string>
     <string name="passcode_new_confirm">비밀번호 확인</string>
     <string name="passcode_change_done">확인</string>
+    <string name="passcode_change_cancel">취소</string>
 
     <!-- Visit Fragment -->
     <string name="visit_title">방문 목록</string>

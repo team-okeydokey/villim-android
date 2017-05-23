@@ -12,7 +12,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
-import android.view.animation.AnimationSet;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -21,9 +20,7 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 
 public class MainActivity extends AppCompatActivity {
-
-    private boolean animateBottomButtons;
-
+    ;
     private Toolbar toolBar;
     private String[] drawerItems;
     private DrawerLayout drawerLayout;
@@ -31,20 +28,20 @@ public class MainActivity extends AppCompatActivity {
     private ActionBarDrawerToggle drawerToggle;
     private CharSequence actionBarTitle;
     private RelativeLayout bottomBar;
-    private Button bottomButton;
+    private Button bottomButtonRight;
+    private Button bottomButtonLeft;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        animateBottomButtons = false;
-
         toolBar = (Toolbar) findViewById(R.id.toolBar);
         setSupportActionBar(toolBar);
 
         bottomBar = (RelativeLayout) findViewById(R.id.bottom_bar);
-        bottomButton = (Button) findViewById(R.id.bottom_button);
+        bottomButtonLeft = (Button) findViewById(R.id.bottom_button_left);
+        bottomButtonRight = (Button) findViewById(R.id.bottom_button_right);
         bottomBar.setVisibility(View.INVISIBLE);
 
         /* Navigation Drawer. */
@@ -102,9 +99,7 @@ public class MainActivity extends AppCompatActivity {
         Fragment fragment = null;
         Class fragmentClass;
 
-        animateBottomButtons = false;
-
-        switch(position) {
+        switch (position) {
             case 0:
                 fragmentClass = ProfileFragment.class;
                 break;
@@ -165,36 +160,62 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void setBottomButton(boolean visible, CharSequence text) {
+    @Override
+    public void onBackPressed() {
+        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.main_frame);
+        if (fragment instanceof PasscodeFragment) {
+            animateBottomButton(true, true, false);
+            animateBottomButton(false, true, true);
+        }
+        super.onBackPressed();
+    }
 
-        int visibility = visible ?  View.VISIBLE : View.INVISIBLE;
-        bottomBar.setVisibility(visibility);
+    public void showBottomButtons(boolean left, boolean right) {
+        int barVisibility = left | right ? View.VISIBLE : View.GONE;
+        int leftButtonVisibility = left ? View.VISIBLE : View.INVISIBLE;
+        int rightButtonVisibility = right ? View.VISIBLE : View.INVISIBLE;
+        bottomBar.setVisibility(barVisibility);
+        bottomButtonLeft.setVisibility(leftButtonVisibility);
+        bottomButtonRight.setVisibility(rightButtonVisibility);
+    }
 
-        // Animate buttons.
-        if (animateBottomButtons) {
+    public void setBottomButtonText(boolean left, CharSequence text) {
+        Button button = left ? bottomButtonLeft : bottomButtonRight;
+        button.setText(text);
+    }
 
-            final Animation circleShrink = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.circle_shrink);
-            final Animation circleExpand = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.circle_expand);
+    public void animateBottomButton(boolean left, boolean shrink, boolean expand) {
+        final Animation circleShrink = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.circle_shrink);
+        final Animation circleExpand = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.circle_expand);
 
+        final Button button = left ? bottomButtonLeft : bottomButtonRight;
+        if (shrink && expand) {
             circleShrink.setAnimationListener(new Animation.AnimationListener() {
                 @Override
-                public void onAnimationStart(Animation animation) {}
+                public void onAnimationStart(Animation animation) {
+                }
+
                 @Override
-                public void onAnimationRepeat(Animation animation) {}
+                public void onAnimationRepeat(Animation animation) {
+                }
+
                 @Override
-                public void onAnimationEnd(Animation animation) { bottomButton.startAnimation(circleExpand); }
+                public void onAnimationEnd(Animation animation) {
+                    button.startAnimation(circleExpand);
+                }
             });
-            bottomButton.startAnimation(circleShrink);
+            button.startAnimation(circleShrink);
+        } else if (shrink) {
+            circleShrink.setAnimationListener(null);
+            button.startAnimation(circleShrink);
+        } else if (expand) {
+            button.startAnimation(circleExpand);
         }
-        bottomButton.setText(text);
     }
 
-    public void setAnimateBottomButtons(boolean animate) {
-        animateBottomButtons = animate;
-    }
-
-    public void registerBottomButtonListener(View.OnClickListener listener) {
-        bottomButton.setOnClickListener(listener);
+    public void registerBottomButtonListener(boolean left, View.OnClickListener listener) {
+        Button button = left ? bottomButtonLeft : bottomButtonRight;
+        button.setOnClickListener(listener);
     }
 
 }

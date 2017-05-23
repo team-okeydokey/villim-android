@@ -34,8 +34,7 @@ public class PolicyFragment extends Fragment {
 
         // Set bottom button text.
         activity = ((MainActivity) getActivity());
-        String bottomButtonText = getActivity().getString(R.string.open_room);
-        activity.setBottomButton(true, bottomButtonText);
+        activity.showBottomButtons(false, false);
 
         return policyView;
     }
