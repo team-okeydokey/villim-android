@@ -20,7 +20,7 @@
     </style>
 
     <style name="h1"> <!-- Fragment title -->
-        <item name="android:textSize">15pt</item>
+        <item name="android:textSize">12pt</item>
         <item name="android:textStyle">bold</item>
     </style>
 
@@ -30,7 +30,7 @@
     </style>
 
     <style name="h3">
-        <item name="android:textSize">8pt</item>
+        <item name="android:textSize">10pt</item>
         <item name="android:color">@color/h3</item>
     </style>
 

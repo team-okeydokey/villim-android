@@ -15,15 +15,9 @@ import com.bumptech.glide.Glide;
 
 public class MyRoomFragment extends Fragment {
 
-    private TextView myroomRoomName;
-
-    private TextView myroomNumGuest;
-    private TextView myroomRoomType;
-    private TextView myroomNumBed;
-    private TextView myroomNumBath;
-
-    private TextView myroomRoomDuration;
-    private ImageView myroomThumbnail;
+    private TextView roomName;
+    private TextView keyExpirationDate;
+    private ImageView roomThumbnail;
 
     public MyRoomFragment() {
         // Required empty public constructor
@@ -46,18 +40,11 @@ public class MyRoomFragment extends Fragment {
         View myRoomView = inflater.inflate(R.layout.fragment_my_room, container, false);
 
         // Room name.
-        myroomRoomName = (TextView) myRoomView.findViewById(R.id.myroom_roomname);
-
-        // Room info.
-        myroomNumGuest = (TextView) myRoomView.findViewById(R.id.myroom_numguest);
-        myroomRoomType = (TextView) myRoomView.findViewById(R.id.myroom_roomtype);
-        myroomNumBed = (TextView) myRoomView.findViewById(R.id.myroom_numbed);
-        myroomNumBath = (TextView) myRoomView.findViewById(R.id.myroom_numbath);
+        roomName = (TextView) myRoomView.findViewById(R.id.room_name);
 
         // Room duration.
-        myroomRoomDuration = (TextView) myRoomView.findViewById(R.id.myroom_roomduration);
-
-        myroomThumbnail = (ImageView) myRoomView.findViewById(R.id.myroom_thumbnail);
+        roomThumbnail = (ImageView) myRoomView.findViewById(R.id.room_thumbnail);
+        keyExpirationDate = (TextView) myRoomView.findViewById(R.id.key_expiration_date);
 
         populateView();
 
@@ -69,21 +56,15 @@ public class MyRoomFragment extends Fragment {
         // Network operation to fetch.
 
         // Populate room name.
-        myroomRoomName.setText("Prugio Studio");
-
-        // Populate room information.
-        myroomNumGuest.setText("Guest 1");
-        myroomRoomType.setText("Studio");
-        myroomNumBed.setText("Bed 1");
-        myroomNumBath.setText("Bath 1");
+        roomName.setText("프루지오 스튜디오");
 
         // Populate room duration.
-        myroomRoomDuration.setText("Duration of stay: 2017/04/16 ~ 06/19");
+        keyExpirationDate.setText("2017-08-12");
 
         // Fetch and insert room thumbnail.
         Glide.with(this)
                 .load(R.drawable.prugio_thumbnail)
-                .into(myroomThumbnail);
+                .into(roomThumbnail);
     }
 
     @Override

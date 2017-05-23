@@ -13,8 +13,10 @@
     <string name="drawer_close">메뉴 닫기</string>
 
     <!-- MyRoom Fragment -->
-    <string name="myroom_title">My room</string>
-    <string name="open_room">Open</string>
+    <string name="myroom_title">내 방</string>
+    <string name="myroom_key_expiration_date">열쇠 유효기간</string>
+    <string name="myroom_change_passcode">도어락 비밀번호 변경</string>
+    <string name="open_room">열림</string>
 
     <!-- Passcode Fragment -->
     <string name="passcode_title">Doorlock passcode</string>

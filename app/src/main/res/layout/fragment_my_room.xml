@@ -1,168 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="net.villim.villim.MyRoomFragment">
 
-    <android.support.v7.widget.LinearLayoutCompat
+    <!-- Title -->
+    <TextView
+        android:id="@+id/room_name"
+        style="@style/h1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/room_thumbnail"
+        android:gravity="center"
+        android:text="@string/myroom_title" />
+
+    <!-- Thumbnail -->
+    <com.mikhaellopez.circularimageview.CircularImageView
+        android:id="@+id/room_thumbnail"
+        android:layout_width="175dp"
+        android:layout_height="175dp"
+        android:layout_above="@+id/key_expiration_text"
+        android:layout_centerInParent="true"
+        android:layout_margin="20dp" />
+
+    <!-- Key expiration text -->
+    <TextView
+        android:id="@+id/key_expiration_text"
+        style="@style/h3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:text="@string/myroom_key_expiration_date" />
+
+    <!-- Key expiration date -->
+    <TextView
+        android:id="@+id/key_expiration_date"
+        style="@style/h3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/key_expiration_text"
+        android:gravity="center" />
+
+    <!-- Change passcode Button -->
+    <Button
+        android:id="@+id/change_passcode_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/key_expiration_date"
+        android:layout_centerHorizontal="true"
         android:layout_margin="20dp"
-        android:orientation="vertical">
-
-        <!-- Title -->
-        <TextView
-            style="@style/h1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/myroom_title" />
-
-        <!-- Room cards -->
-        <android.support.v7.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="15dp">
-
-            <android.support.v7.widget.LinearLayoutCompat
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:id="@+id/myroom_thumbnail"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:cropToPadding="true" />
-
-
-                <!-- Room info -->
-                <android.support.v7.widget.LinearLayoutCompat
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="20dp">
-
-                    <TextView
-                        android:id="@+id/myroom_roomname"
-                        style="@style/h2"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="#a0a0a0a0" />
-
-                    <!-- Iconographs -->
-                    <android.support.v7.widget.LinearLayoutCompat
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:padding="20dp">
-
-                        <!-- Number of guests -->
-                        <android.support.v7.widget.LinearLayoutCompat
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:orientation="vertical">
-
-                            <ImageView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:src="@drawable/ic_card_travel_white_48dp"
-                                android:tint="@color/h3" />
-
-                            <TextView
-                                android:id="@+id/myroom_numguest"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:gravity="center" />
-                        </android.support.v7.widget.LinearLayoutCompat>
-
-                        <!-- Room type -->
-                        <android.support.v7.widget.LinearLayoutCompat
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:orientation="vertical">
-
-                            <ImageView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:src="@drawable/ic_card_travel_white_48dp"
-                                android:tint="@color/h3" />
-
-                            <TextView
-                                android:id="@+id/myroom_roomtype"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:gravity="center" />
-                        </android.support.v7.widget.LinearLayoutCompat>
-
-                        <!-- Number of beds -->
-                        <android.support.v7.widget.LinearLayoutCompat
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:orientation="vertical">
-
-                            <ImageView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:src="@drawable/ic_card_travel_white_48dp"
-                                android:tint="@color/h3" />
-
-                            <TextView
-                                android:id="@+id/myroom_numbed"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:gravity="center" />
-                        </android.support.v7.widget.LinearLayoutCompat>
-
-                        <!-- Number of baths -->
-                        <android.support.v7.widget.LinearLayoutCompat
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:orientation="vertical">
-
-                            <ImageView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:src="@drawable/ic_card_travel_white_48dp"
-                                android:tint="@color/h3" />
-
-                            <TextView
-                                android:id="@+id/myroom_numbath"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:gravity="center" />
-                        </android.support.v7.widget.LinearLayoutCompat>
-
-                    </android.support.v7.widget.LinearLayoutCompat>
-
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="#a0a0a0a0" />
-
-                    <TextView
-                        android:id="@+id/myroom_roomduration"
-                        style="@style/h3"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center" />
-
-                </android.support.v7.widget.LinearLayoutCompat>
-
-            </android.support.v7.widget.LinearLayoutCompat>
-        </android.support.v7.widget.CardView>
-
-    </android.support.v7.widget.LinearLayoutCompat>
+        android:background="@drawable/change_passcode_button_rounded_rectangle"
+        android:gravity="center"
+        android:text="@string/myroom_change_passcode" />
 
     <!-- Bottom bar and button -->
     <RelativeLayout
@@ -186,5 +77,6 @@
             android:text="@string/open_room" />
 
     </RelativeLayout>
+
 
 </RelativeLayout>
