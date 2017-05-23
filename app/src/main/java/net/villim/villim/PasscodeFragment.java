@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 
 public class PasscodeFragment extends Fragment {
 
+    private MainActivity activity;
+
     public PasscodeFragment() {
         // Required empty public constructor
     }
@@ -30,13 +32,22 @@ public class PasscodeFragment extends Fragment {
         // Inflate the layout for this fragment
         View passcodeView = inflater.inflate(R.layout.fragment_passcode, container, false);
 
+        activity = ((MainActivity) getActivity());
+
         // Set title.
 //        getActivity().setTitle(getString(R.string.passcode_title));
 
-        // Set bottom button text.
+        // Set bottom button.
+        activity.setFlip(true);
         String bottomButtonText = getString(R.string.passcode_change_done);
-        ((MainActivity)getActivity()).setBottomButton(true, bottomButtonText);
-
+        activity.setBottomButton(true, bottomButtonText);
+        activity.registerBottomButtonListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Dismiss fragment.
+                getActivity().onBackPressed();
+            }
+        });
 
         return passcodeView;
     }

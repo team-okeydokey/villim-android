@@ -10,6 +10,8 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -17,6 +19,8 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 
 public class MainActivity extends AppCompatActivity {
+
+    private boolean flip;
 
     private Toolbar toolBar;
     private String[] drawerItems;
@@ -32,11 +36,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        flip = false;
+
         toolBar = (Toolbar) findViewById(R.id.toolBar);
         setSupportActionBar(toolBar);
 
         bottomBar = (RelativeLayout) findViewById(R.id.bottom_bar);
         bottomButton = (Button) findViewById(R.id.bottom_button);
+        bottomBar.setVisibility(View.INVISIBLE);
 
         /* Navigation Drawer. */
         actionBarTitle = getResources().getString(R.string.app_name);
@@ -89,6 +96,8 @@ public class MainActivity extends AppCompatActivity {
         // Insert Fragment.
         Fragment fragment = null;
         Class fragmentClass;
+
+        flip = false;
 
         switch(position) {
             case 0:
@@ -156,8 +165,20 @@ public class MainActivity extends AppCompatActivity {
         int visibility = visible ?  View.VISIBLE : View.INVISIBLE;
         bottomBar.setVisibility(visibility);
 
+        // Flip button.
+        if (flip) {
+            Animation flipRightIn = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.flip_right);
+            bottomButton.startAnimation(flipRightIn);
+        }
         bottomButton.setText(text);
     }
 
+    public void setFlip(boolean flipCoin) {
+        flip = flipCoin;
+    }
+
+    public void registerBottomButtonListener(View.OnClickListener listener) {
+        bottomButton.setOnClickListener(listener);
+    }
 
 }

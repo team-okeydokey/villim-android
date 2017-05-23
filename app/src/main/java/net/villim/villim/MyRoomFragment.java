@@ -16,6 +16,7 @@ import com.bumptech.glide.Glide;
 
 public class MyRoomFragment extends Fragment {
 
+    private MainActivity activity;
     private TextView roomName;
     private TextView keyExpirationDate;
     private ImageView roomThumbnail;
@@ -41,8 +42,15 @@ public class MyRoomFragment extends Fragment {
         // Inflate the layout for this fragment
         View myRoomView = inflater.inflate(R.layout.fragment_my_room, container, false);
 
+        activity = ((MainActivity) getActivity());
+        activity.registerBottomButtonListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            }
+        });
+
         // Set title.
-        getActivity().setTitle(getString(R.string.myroom_title));
+        activity.setTitle(getString(R.string.myroom_title));
 
         // Room name.
         roomName = (TextView) myRoomView.findViewById(R.id.room_name);
@@ -86,7 +94,7 @@ public class MyRoomFragment extends Fragment {
 
         // Set bottom button text.
         String bottomButtonText = getActivity().getString(R.string.open_room);
-        ((MainActivity)getActivity()).setBottomButton(true, bottomButtonText);
+        activity.setBottomButton(true, bottomButtonText);
     }
 
     @Override
