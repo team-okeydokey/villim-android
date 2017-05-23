@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,6 +19,7 @@ public class MyRoomFragment extends Fragment {
     private TextView roomName;
     private TextView keyExpirationDate;
     private ImageView roomThumbnail;
+    private Button changePasscodeButton;
 
     public MyRoomFragment() {
         // Required empty public constructor
@@ -45,6 +47,19 @@ public class MyRoomFragment extends Fragment {
         // Room duration.
         roomThumbnail = (ImageView) myRoomView.findViewById(R.id.room_thumbnail);
         keyExpirationDate = (TextView) myRoomView.findViewById(R.id.key_expiration_date);
+
+        // Change passcode button.
+        changePasscodeButton = (Button) myRoomView.findViewById(R.id.change_passcode_button);
+        changePasscodeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_left, R.anim.exit_to_right)
+                        .replace(R.id.main_frame, new PasscodeFragment())
+                        .addToBackStack(null).commitAllowingStateLoss();
+            }
+        });
 
         populateView();
 
