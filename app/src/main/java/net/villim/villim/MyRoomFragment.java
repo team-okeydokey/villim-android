@@ -80,6 +80,10 @@ public class MyRoomFragment extends Fragment {
         Glide.with(this)
                 .load(R.drawable.prugio_thumbnail)
                 .into(roomThumbnail);
+
+        // Set bottom button text.
+        String bottomButtonText = getActivity().getString(R.string.open_room);
+        ((MainActivity)getActivity()).setBottomButton(true, bottomButtonText);
     }
 
     @Override

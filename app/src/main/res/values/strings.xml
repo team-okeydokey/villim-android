@@ -24,5 +24,6 @@
     <string name="passcode_current">Current passcode</string>
     <string name="passcode_new">New passcode</string>
     <string name="passcode_new_verify">Verify new passcode</string>
+    <string name="passcode_change_done">확인</string>
 
 </resources>

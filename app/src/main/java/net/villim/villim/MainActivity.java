@@ -11,7 +11,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -20,11 +22,16 @@ public class MainActivity extends AppCompatActivity {
     private ListView drawerListView;
     private ActionBarDrawerToggle drawerToggle;
     private CharSequence actionBarTitle;
+    private RelativeLayout bottomBar;
+    private Button bottomButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        bottomBar = (RelativeLayout) findViewById(R.id.bottom_bar);
+        bottomButton = (Button) findViewById(R.id.bottom_button);
 
         /* Navigation Drawer. */
         actionBarTitle = getResources().getString(R.string.app_name);
@@ -135,6 +142,14 @@ public class MainActivity extends AppCompatActivity {
         // Handle your other action bar items...
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void setBottomButton(boolean visible, CharSequence text) {
+
+        int visibility = visible ?  View.VISIBLE : View.INVISIBLE;
+        bottomBar.setVisibility(visibility);
+
+        bottomButton.setText(text);
     }
 
 
