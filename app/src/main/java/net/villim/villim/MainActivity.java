@@ -78,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Set default screen to 방 찾기.
         selectItem(1);
+        setTitle(drawerItems[1]);
     }
 
 
@@ -104,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
                 fragmentClass = ProfileFragment.class;
                 break;
             case 1:
-                fragmentClass = MyRoomFragment.class;
+                fragmentClass = ExploreFragment.class;
                 break;
             case 2:
                 fragmentClass = MyRoomFragment.class;
