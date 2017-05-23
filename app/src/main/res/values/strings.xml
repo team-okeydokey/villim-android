@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">Villim</string>
+
+    <!-- Navigation Drawer Items -->
+    <string-array name="drawer_items">
+        <item>프로필</item>
+        <item>방 찾기</item>
+        <item>내 방</item>
+        <item>방문 신청</item>
+        <item>이용 약관</item>
+    </string-array>
+    <string name="drawer_open">메뉴 열기</string>
+    <string name="drawer_close">메뉴 닫기</string>
+
+    <!-- MyRoom Fragment -->
+    <string name="myroom_title">내 방</string>
+    <string name="myroom_key_expiration_date">열쇠 유효기간</string>
+    <string name="myroom_change_passcode">도어락 비밀번호 변경</string>
+    <string name="open_room">열림</string>
+
+    <!-- Passcode Fragment -->
+    <string name="passcode_title">도어락 설정</string>
+    <string name="passcode_title_2">도어락 비밀번호 변경</string>
+    <string name="passcode_instructions">설정 방법\n
+    1. 아래 칸에 비밀번호 입력\n
+    2. 설정 후 도어락 앞에서 확인 버튼 클릭</string>
+    <string name="passcode_new">비밀번호</string>
+    <string name="passcode_new_confirm">비밀번호 확인</string>
+    <string name="passcode_change_done">확인</string>
+
+</resources>
