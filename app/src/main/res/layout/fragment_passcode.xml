@@ -17,12 +17,14 @@
             style="@style/h1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:text="@string/passcode_title" />
 
         <!--Card -->
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="20dp"
             app:cardCornerRadius="15dp">
 
             <android.support.v7.widget.LinearLayoutCompat
@@ -35,45 +37,46 @@
                     style="@style/h2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/passcode_instructions"/>
+                    android:text="@string/passcode_title_2" />
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginTop="20dp"
                     android:background="#a0a0a0a0" />
 
-                <!-- Curent Passcode -->
+                <!-- Passcode change instructions -->
                 <TextView
-                    style="@style/h3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/passcode_current"/>
-                
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/passcode_instructions" />
 
                 <!-- New Passcode -->
                 <TextView
                     style="@style/h3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/passcode_new"/>
+                    android:text="@string/passcode_new" />
 
                 <EditText
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/new_passcode_rounded_rectangle" />
 
-                <!-- Verify New Passcode -->
+                <!-- Confirm New Passcode -->
                 <TextView
                     style="@style/h3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/passcode_new_verify"/>
+                    android:text="@string/passcode_new_confirm" />
 
                 <EditText
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/new_passcode_rounded_rectangle" />
 
             </android.support.v7.widget.LinearLayoutCompat>
         </android.support.v7.widget.CardView>

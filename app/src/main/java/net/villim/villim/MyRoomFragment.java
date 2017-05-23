@@ -41,6 +41,9 @@ public class MyRoomFragment extends Fragment {
         // Inflate the layout for this fragment
         View myRoomView = inflater.inflate(R.layout.fragment_my_room, container, false);
 
+        // Set title.
+        getActivity().setTitle(getString(R.string.myroom_title));
+
         // Room name.
         roomName = (TextView) myRoomView.findViewById(R.id.room_name);
 

@@ -30,9 +30,13 @@ public class PasscodeFragment extends Fragment {
         // Inflate the layout for this fragment
         View passcodeView = inflater.inflate(R.layout.fragment_passcode, container, false);
 
+        // Set title.
+//        getActivity().setTitle(getString(R.string.passcode_title));
+
         // Set bottom button text.
-        String bottomButtonText = getActivity().getString(R.string.passcode_change_done);
+        String bottomButtonText = getString(R.string.passcode_change_done);
         ((MainActivity)getActivity()).setBottomButton(true, bottomButtonText);
+
 
         return passcodeView;
     }

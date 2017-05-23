@@ -19,11 +19,13 @@
     <string name="open_room">열림</string>
 
     <!-- Passcode Fragment -->
-    <string name="passcode_title">Doorlock passcode</string>
-    <string name="passcode_instructions">Change doorlock passcode</string>
-    <string name="passcode_current">Current passcode</string>
-    <string name="passcode_new">New passcode</string>
-    <string name="passcode_new_verify">Verify new passcode</string>
+    <string name="passcode_title">도어락 설정</string>
+    <string name="passcode_title_2">도어락 비밀번호 변경</string>
+    <string name="passcode_instructions">설정 방법\n
+    1. 아래 칸에 비밀번호 입력\n
+    2. 설정 후 도어락 앞에서 확인 버튼 클릭</string>
+    <string name="passcode_new">비밀번호</string>
+    <string name="passcode_new_confirm">비밀번호 확인</string>
     <string name="passcode_change_done">확인</string>
 
 </resources>
