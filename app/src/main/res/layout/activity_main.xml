@@ -1,19 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/drawer"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <!-- The main content view -->
 
+    <!-- The main content view -->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#ff6d7fe2"
+            app:contentInsetEnd="0dp"
+            app:contentInsetStart="0dp"></android.support.v7.widget.Toolbar>
 
         <!-- Fragments are loaded here -->
         <FrameLayout
             android:id="@+id/main_frame"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:layout_below="@+id/toolBar" />
 
         <!-- Bottom bar and button -->
         <RelativeLayout
