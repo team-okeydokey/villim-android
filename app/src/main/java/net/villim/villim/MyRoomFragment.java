@@ -49,8 +49,9 @@ public class MyRoomFragment extends Fragment {
             }
         });
 
-        // Set title.
-        activity.setTitle(getString(R.string.myroom_title));
+        // Set bottom button text.
+        String bottomButtonText = getActivity().getString(R.string.open_room);
+        activity.setBottomButton(true, bottomButtonText);
 
         // Room name.
         roomName = (TextView) myRoomView.findViewById(R.id.room_name);
@@ -91,10 +92,6 @@ public class MyRoomFragment extends Fragment {
         Glide.with(this)
                 .load(R.drawable.prugio_thumbnail)
                 .into(roomThumbnail);
-
-        // Set bottom button text.
-        String bottomButtonText = getActivity().getString(R.string.open_room);
-        activity.setBottomButton(true, bottomButtonText);
     }
 
     @Override

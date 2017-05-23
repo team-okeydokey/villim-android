@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 
 public class PolicyFragment extends Fragment {
 
+    private MainActivity activity;
 
     public PolicyFragment() {
         // Required empty public constructor
@@ -30,6 +31,11 @@ public class PolicyFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View policyView = inflater.inflate(R.layout.fragment_policy, container, false);
+
+        // Set bottom button text.
+        activity = ((MainActivity) getActivity());
+        String bottomButtonText = getActivity().getString(R.string.open_room);
+        activity.setBottomButton(true, bottomButtonText);
 
         return policyView;
     }

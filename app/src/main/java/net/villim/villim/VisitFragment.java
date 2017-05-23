@@ -41,15 +41,9 @@ public class VisitFragment extends Fragment {
         // Inflate the layout for this fragment
         View visitView = inflater.inflate(R.layout.fragment_visit, container, false);
 
+        // Remove bottom bar.
         activity = ((MainActivity) getActivity());
-        activity.registerBottomButtonListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-            }
-        });
-
-        // Set title.
-        activity.setTitle(getString(R.string.visit_title));
+        activity.setBottomButton(false, null);
 
         // Room name.
         roomName = (TextView) visitView.findViewById(R.id.room_name);
@@ -77,9 +71,6 @@ public class VisitFragment extends Fragment {
         Glide.with(this)
                 .load(R.drawable.prugio_thumbnail)
                 .into(roomThumbnail);
-
-        // Remove bottom bar.
-        activity.setBottomButton(false, null);
     }
 
     @Override
