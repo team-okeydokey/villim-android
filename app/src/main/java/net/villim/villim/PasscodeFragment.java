@@ -38,7 +38,7 @@ public class PasscodeFragment extends Fragment {
 //        getActivity().setTitle(getString(R.string.passcode_title));
 
         // Set bottom button.
-        activity.setFlip(true);
+        activity.setAnimateBottomButtons(true);
         String bottomButtonText = getString(R.string.passcode_change_done);
         activity.setBottomButton(true, bottomButtonText);
         activity.registerBottomButtonListener(new View.OnClickListener() {

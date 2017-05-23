@@ -1,5 +1,6 @@
 package net.villim.villim;
 
+import android.animation.AnimatorSet;
 import android.content.res.Configuration;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -11,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -20,7 +22,7 @@ import android.widget.RelativeLayout;
 
 public class MainActivity extends AppCompatActivity {
 
-    private boolean flip;
+    private boolean animateBottomButtons;
 
     private Toolbar toolBar;
     private String[] drawerItems;
@@ -36,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        flip = false;
+        animateBottomButtons = false;
 
         toolBar = (Toolbar) findViewById(R.id.toolBar);
         setSupportActionBar(toolBar);
@@ -76,6 +78,9 @@ public class MainActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
+
+        // Set default screen to 방 찾기.
+        selectItem(1);
     }
 
 
@@ -97,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
         Fragment fragment = null;
         Class fragmentClass;
 
-        flip = false;
+        animateBottomButtons = false;
 
         switch(position) {
             case 0:
@@ -165,16 +170,27 @@ public class MainActivity extends AppCompatActivity {
         int visibility = visible ?  View.VISIBLE : View.INVISIBLE;
         bottomBar.setVisibility(visibility);
 
-        // Flip button.
-        if (flip) {
-            Animation flipRightIn = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.flip_right);
-            bottomButton.startAnimation(flipRightIn);
+        // Animate buttons.
+        if (animateBottomButtons) {
+
+            final Animation circleShrink = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.circle_shrink);
+            final Animation circleExpand = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.circle_expand);
+
+            circleShrink.setAnimationListener(new Animation.AnimationListener() {
+                @Override
+                public void onAnimationStart(Animation animation) {}
+                @Override
+                public void onAnimationRepeat(Animation animation) {}
+                @Override
+                public void onAnimationEnd(Animation animation) { bottomButton.startAnimation(circleExpand); }
+            });
+            bottomButton.startAnimation(circleShrink);
         }
         bottomButton.setText(text);
     }
 
-    public void setFlip(boolean flipCoin) {
-        flip = flipCoin;
+    public void setAnimateBottomButtons(boolean animate) {
+        animateBottomButtons = animate;
     }
 
     public void registerBottomButtonListener(View.OnClickListener listener) {
