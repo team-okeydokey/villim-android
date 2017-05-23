@@ -165,7 +165,7 @@ public class MainActivity extends AppCompatActivity {
         Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.main_frame);
         if (fragment instanceof PasscodeFragment) {
             animateBottomButton(true, true, false);
-            animateBottomButton(false, true, true);
+//            animateBottomButton(false, true, true);
         }
         super.onBackPressed();
     }

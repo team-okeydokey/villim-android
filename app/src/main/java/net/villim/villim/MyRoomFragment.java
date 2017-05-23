@@ -74,7 +74,7 @@ public class MyRoomFragment extends Fragment {
 
                 // Animate bottom buttons.
                 activity.animateBottomButton(true, false, true);
-                activity.animateBottomButton(false, true, true);
+//                activity.animateBottomButton(false, true, true);
             }
         });
 
