@@ -162,7 +162,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void setBottomButton(boolean visible, CharSequence text) {
 
-        int visibility = visible ?  View.VISIBLE : View.GONE;
+        int visibility = visible ?  View.VISIBLE : View.INVISIBLE;
         bottomBar.setVisibility(visibility);
 
         // Flip button.

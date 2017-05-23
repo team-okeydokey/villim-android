@@ -18,8 +18,8 @@
     <!-- Thumbnail -->
     <com.mikhaellopez.circularimageview.CircularImageView
         android:id="@+id/room_thumbnail"
-        android:layout_width="175dp"
-        android:layout_height="175dp"
+        android:layout_width="@dimen/room_thumbnail_image_diameter"
+        android:layout_height="@dimen/room_thumbnail_image_diameter"
         android:layout_above="@+id/key_expiration_text"
         android:layout_centerInParent="true"
         android:layout_margin="20dp" />
