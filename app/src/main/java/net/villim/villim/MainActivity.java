@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
 
         switch(position) {
             case 0:
-                fragmentClass = MyRoomFragment.class;
+                fragmentClass = ProfileFragment.class;
                 break;
             case 1:
                 fragmentClass = MyRoomFragment.class;
@@ -110,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
                 fragmentClass = MyRoomFragment.class;
                 break;
             case 3:
-                fragmentClass = MyRoomFragment.class;
+                fragmentClass = VisitFragment.class;
                 break;
             default:
                 fragmentClass = PolicyFragment.class;

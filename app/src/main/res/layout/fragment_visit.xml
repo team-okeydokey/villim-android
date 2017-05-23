@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="net.villim.villim.MyRoomFragment">
+    tools:context="net.villim.villim.VisitFragment">
 
     <!-- Title -->
     <TextView
@@ -20,40 +20,28 @@
         android:id="@+id/room_thumbnail"
         android:layout_width="@dimen/room_thumbnail_image_diameter"
         android:layout_height="@dimen/room_thumbnail_image_diameter"
-        android:layout_above="@+id/key_expiration_text"
+        android:layout_above="@+id/visit_date_label"
         android:layout_centerInParent="true"
         android:layout_margin="20dp" />
 
-    <!-- Key expiration text -->
+    <!-- Visit date text -->
     <TextView
-        android:id="@+id/key_expiration_text"
+        android:id="@+id/visit_date_label"
         style="@style/h3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:gravity="center"
-        android:text="@string/myroom_key_expiration_date" />
+        android:text="@string/visit_date" />
 
-    <!-- Key expiration date -->
+    <!-- Visit date -->
     <TextView
-        android:id="@+id/key_expiration_date"
+        android:id="@+id/visit_date"
         style="@style/h3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/key_expiration_text"
+        android:layout_below="@+id/visit_date_label"
         android:gravity="center" />
-
-    <!-- Change passcode Button -->
-    <Button
-        android:id="@+id/change_passcode_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/key_expiration_date"
-        android:layout_centerHorizontal="true"
-        android:layout_margin="20dp"
-        android:background="@drawable/change_passcode_button_rounded_rectangle"
-        android:gravity="center"
-        android:text="@string/myroom_change_passcode" />
 
 
 </RelativeLayout>
