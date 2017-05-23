@@ -37,7 +37,7 @@ public class ProfileFragment extends Fragment {
 
         profileListView = (ListView) profileView.findViewById(R.id.profile_listView);
         profileItems = getResources().getStringArray(R.array.profile_items);
-        profileListView.setAdapter(new ArrayAdapter<String>(activity, R.layout.profile_list_item, profileItems));
+        profileListView.setAdapter(new ArrayAdapter<String>(activity, R.layout.profile_list_item, R.id.profile_list_item_title, profileItems));
 
         // Set title.
         activity.setTitle(getString(R.string.profile_title));

@@ -10,4 +10,8 @@
 
     <!-- MainActivity -->
     <color name="mainBackground">#D0D0D0</color>
+
+
+    <!-- Profile Fragment -->
+    <color name="profile_list_item_value">#A0A0A0</color>
 </resources>

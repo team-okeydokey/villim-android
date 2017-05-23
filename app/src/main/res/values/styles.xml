@@ -34,4 +34,16 @@
         <item name="android:color">@color/h3</item>
     </style>
 
+
+    <!-- Profile Fragment -->
+    <style name="profile_list_item_title">
+        <item name="android:textSize">8pt</item>
+        <item name="android:color">@color/h3</item>
+    </style>
+
+    <style name="profile_list_item_value">
+        <item name="android:textSize">6pt</item>
+        <item name="android:color">@color/profile_list_item_value</item>
+    </style>
+
 </resources>
