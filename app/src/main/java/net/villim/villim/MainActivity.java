@@ -9,8 +9,10 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
@@ -20,7 +22,7 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 
 public class MainActivity extends AppCompatActivity {
-    ;
+
     private Toolbar toolBar;
     private String[] drawerItems;
     private DrawerLayout drawerLayout;
@@ -80,7 +82,6 @@ public class MainActivity extends AppCompatActivity {
         selectItem(1);
         setTitle(drawerItems[1]);
     }
-
 
     /* Listener for navigation drawer items */
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
@@ -218,5 +219,6 @@ public class MainActivity extends AppCompatActivity {
         Button button = left ? bottomButtonLeft : bottomButtonRight;
         button.setOnClickListener(listener);
     }
+
 
 }
