@@ -1,60 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:background="#000"
     android:layout_height="match_parent"
-    tools:context="net.villim.villim.MyRoomFragment">
+    android:id="@+id/root_frame" >
 
-    <!-- Title -->
-    <TextView
-        android:id="@+id/room_name"
-        style="@style/h1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/room_thumbnail"
-        android:gravity="center"
-        android:text="@string/myroom_title" />
-
-    <!-- Thumbnail -->
-    <com.mikhaellopez.circularimageview.CircularImageView
-        android:id="@+id/room_thumbnail"
-        android:layout_width="@dimen/room_thumbnail_image_diameter"
-        android:layout_height="@dimen/room_thumbnail_image_diameter"
-        android:layout_above="@+id/key_expiration_text"
-        android:layout_centerInParent="true"
-        android:layout_margin="20dp" />
-
-    <!-- Key expiration text -->
-    <TextView
-        android:id="@+id/key_expiration_text"
-        style="@style/h3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:gravity="center"
-        android:text="@string/myroom_key_expiration_date" />
-
-    <!-- Key expiration date -->
-    <TextView
-        android:id="@+id/key_expiration_date"
-        style="@style/h3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/key_expiration_text"
-        android:gravity="center" />
-
-    <!-- Change passcode Button -->
-    <Button
-        android:id="@+id/change_passcode_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/key_expiration_date"
-        android:layout_centerHorizontal="true"
-        android:layout_margin="20dp"
-        android:background="@drawable/change_passcode_button_rounded_rectangle"
-        android:gravity="center"
-        android:text="@string/myroom_change_passcode" />
-
-    <include layout="@layout/bottom_bar" />
-
-</RelativeLayout>
+</FrameLayout>

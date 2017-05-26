@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,81 +33,22 @@ public class MyRoomFragment extends Fragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View myRoomView = inflater.inflate(R.layout.fragment_my_room, container, false);
+		/* Inflate the layout for this fragment */
+        View view = inflater.inflate(R.layout.fragment_my_room, container, false);
 
-        activity = ((MainActivity) getActivity());
-//        activity.registerBottomButtonListener(false, new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//            }
-//        });
+        FragmentTransaction transaction = getFragmentManager()
+                .beginTransaction();
+		/*
+		 * When this container fragment is created, we fill it with our first
+		 * "real" fragment
+		 */
+        transaction.replace(R.id.root_frame, new MyRoomOpenFragment());
 
-        // Configure bottom buttons.
-//        String bottomButtonText = getActivity().getString(R.string.open_room);
-//        activity.setBottomButtonText(false, bottomButtonText);
-//        activity.showBottomButtons(false, true);
+        transaction.commit();
 
-        // Room name.
-        roomName = (TextView) myRoomView.findViewById(R.id.room_name);
-
-        // Room duration.
-        roomThumbnail = (ImageView) myRoomView.findViewById(R.id.room_thumbnail);
-        keyExpirationDate = (TextView) myRoomView.findViewById(R.id.key_expiration_date);
-
-        // Change passcode button.
-        changePasscodeButton = (Button) myRoomView.findViewById(R.id.change_passcode_button);
-//        changePasscodeButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                getActivity().getSupportFragmentManager()
-//                        .beginTransaction()
-//                        .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_left, R.anim.exit_to_right)
-//                        .replace(R.id.main_frame, new PasscodeFragment())
-//                        .addToBackStack(null).commitAllowingStateLoss();
-//
-//                // Animate bottom buttons.
-//                activity.animateBottomButton(true, false, true);
-////                activity.animateBottomButton(false, true, true);
-//            }
-//        });
-
-        populateView();
-
-        return myRoomView;
-    }
-
-    // Make this async.
-    private void populateView() {
-        // Network operation to fetch.
-
-        // Populate room name.
-        roomName.setText("프루지오 스튜디오");
-
-        // Populate room duration.
-        keyExpirationDate.setText("2017-08-12");
-
-        // Fetch and insert room thumbnail.
-        Glide.with(this)
-                .load(R.drawable.prugio_thumbnail)
-                .into(roomThumbnail);
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
+        return view;
     }
 
 }

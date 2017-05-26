@@ -9,16 +9,16 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
-public class ExploreFragment extends Fragment {
+public class DiscoverFragment extends Fragment {
 
     private MainActivity activity;
 
-    public ExploreFragment() {
+    public DiscoverFragment() {
         // Required empty public constructor
     }
 
-    public static ExploreFragment newInstance() {
-        ExploreFragment fragment = new ExploreFragment();
+    public static DiscoverFragment newInstance() {
+        DiscoverFragment fragment = new DiscoverFragment();
         return fragment;
     }
 
