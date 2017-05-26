@@ -1,13 +1,11 @@
 <resources>
     <string name="app_name">Villim</string>
 
-    <!-- Navigation Drawer Items -->
-    <string-array name="drawer_items">
-        <item>프로필</item>
+    <!-- Tab Items -->
+    <string-array name="tab_items">
         <item>방 찾기</item>
         <item>내 방</item>
-        <item>방문 신청</item>
-        <item>이용 약관</item>
+        <item>프로필</item>
     </string-array>
     <string name="drawer_open">메뉴 열기</string>
     <string name="drawer_close">메뉴 닫기</string>

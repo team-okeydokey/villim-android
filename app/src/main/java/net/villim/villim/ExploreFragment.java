@@ -35,7 +35,7 @@ public class ExploreFragment extends Fragment {
 
         // Remove bottom bar.
         activity = ((MainActivity) getActivity());
-        activity.showBottomButtons(false, false);
+//        activity.showBottomButtons(false, false);
 
         populateView();
 

@@ -29,6 +29,10 @@ public class ProfileFragment extends Fragment {
         // Required empty public constructor
     }
 
+    public static ProfileFragment newInstance() {
+        ProfileFragment fragment = new ProfileFragment();
+        return fragment;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -38,13 +42,10 @@ public class ProfileFragment extends Fragment {
 
         // Remove bottom bar.
         activity = ((MainActivity) getActivity());
-        activity.showBottomButtons(false, false);
+//        activity.showBottomButtons(false, false);
 
         profileListView = (ListView) profileView.findViewById(R.id.profile_listView);
         profileItems = getResources().getStringArray(R.array.profile_items);
-
-        // Set title.
-        activity.setTitle(getString(R.string.profile_title));
 
         // Add header.
         View profileListHeader = inflater.inflate(R.layout.profile_list_header, profileListView, false);

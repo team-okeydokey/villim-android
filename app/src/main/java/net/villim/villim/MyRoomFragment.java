@@ -43,16 +43,16 @@ public class MyRoomFragment extends Fragment {
         View myRoomView = inflater.inflate(R.layout.fragment_my_room, container, false);
 
         activity = ((MainActivity) getActivity());
-        activity.registerBottomButtonListener(false, new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-            }
-        });
+//        activity.registerBottomButtonListener(false, new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//            }
+//        });
 
         // Configure bottom buttons.
-        String bottomButtonText = getActivity().getString(R.string.open_room);
-        activity.setBottomButtonText(false, bottomButtonText);
-        activity.showBottomButtons(false, true);
+//        String bottomButtonText = getActivity().getString(R.string.open_room);
+//        activity.setBottomButtonText(false, bottomButtonText);
+//        activity.showBottomButtons(false, true);
 
         // Room name.
         roomName = (TextView) myRoomView.findViewById(R.id.room_name);
@@ -63,20 +63,20 @@ public class MyRoomFragment extends Fragment {
 
         // Change passcode button.
         changePasscodeButton = (Button) myRoomView.findViewById(R.id.change_passcode_button);
-        changePasscodeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getActivity().getSupportFragmentManager()
-                        .beginTransaction()
-                        .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_left, R.anim.exit_to_right)
-                        .replace(R.id.main_frame, new PasscodeFragment())
-                        .addToBackStack(null).commitAllowingStateLoss();
-
-                // Animate bottom buttons.
-                activity.animateBottomButton(true, false, true);
-//                activity.animateBottomButton(false, true, true);
-            }
-        });
+//        changePasscodeButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                getActivity().getSupportFragmentManager()
+//                        .beginTransaction()
+//                        .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_left, R.anim.exit_to_right)
+//                        .replace(R.id.main_frame, new PasscodeFragment())
+//                        .addToBackStack(null).commitAllowingStateLoss();
+//
+//                // Animate bottom buttons.
+//                activity.animateBottomButton(true, false, true);
+////                activity.animateBottomButton(false, true, true);
+//            }
+//        });
 
         populateView();
 

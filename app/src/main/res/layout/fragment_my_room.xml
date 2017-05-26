@@ -55,5 +55,6 @@
         android:gravity="center"
         android:text="@string/myroom_change_passcode" />
 
+    <include layout="@layout/bottom_bar" />
 
 </RelativeLayout>

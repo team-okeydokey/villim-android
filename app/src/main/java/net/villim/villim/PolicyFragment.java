@@ -34,7 +34,7 @@ public class PolicyFragment extends Fragment {
 
         // Set bottom button text.
         activity = ((MainActivity) getActivity());
-        activity.showBottomButtons(false, false);
+//        activity.showBottomButtons(false, false);
 
         return policyView;
     }

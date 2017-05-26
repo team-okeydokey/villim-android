@@ -43,7 +43,7 @@ public class VisitFragment extends Fragment {
 
         // Remove bottom bar.
         activity = ((MainActivity) getActivity());
-        activity.showBottomButtons(false, false);
+//        activity.showBottomButtons(false, false);
 
         // Room name.
         roomName = (TextView) visitView.findViewById(R.id.room_name);
