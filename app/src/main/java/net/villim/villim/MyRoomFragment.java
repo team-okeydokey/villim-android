@@ -44,7 +44,7 @@ public class MyRoomFragment extends Fragment {
 		 * When this container fragment is created, we fill it with our first
 		 * "real" fragment
 		 */
-        transaction.replace(R.id.root_frame, new MyRoomOpenFragment());
+        transaction.replace(R.id.myroom_root, new MyRoomOpenFragment());
 
         transaction.commit();
 

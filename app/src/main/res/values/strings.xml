@@ -12,6 +12,12 @@
     <string name="drawer_open">메뉴 열기</string>
     <string name="drawer_close">메뉴 닫기</string>
 
+    <!-- Discover Fragment -->
+    <string name="key_thumbnail">key_thumbnail</string>
+    <string name="key_title">key_title</string>
+    <string name="key_review">key_review</string>
+    <string name="key_price">key_price</string>
+
     <!-- MyRoom Fragment -->
     <string name="myroom_title">내 방</string>
     <string name="myroom_key_expiration_date">열쇠 유효기간</string>
