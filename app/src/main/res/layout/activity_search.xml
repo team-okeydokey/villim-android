@@ -28,4 +28,34 @@
 
     </android.support.v7.widget.Toolbar>
 
+
+    <!-- Bottom bar to pick dates. -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/search_bottom_bar"
+        android:gravity="center_vertical"
+        android:padding="@dimen/search_activity_padding">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:text="@string/search_no_date"
+            android:textColor="@android:color/white" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/select_date_button"
+            android:clickable="true"
+            android:drawableLeft="@drawable/ic_date_range_black_24dp"
+            android:gravity="center"
+            android:text="@string/search_choose_date"
+            android:textColor="#ffffffff" />
+
+    </RelativeLayout>
+
 </RelativeLayout>

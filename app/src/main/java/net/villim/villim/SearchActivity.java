@@ -32,5 +32,5 @@ public class SearchActivity extends AppCompatActivity {
         onBackPressed();
         return true;
     }
-    
+
 }
