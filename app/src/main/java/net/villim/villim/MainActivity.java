@@ -1,184 +1,132 @@
 package net.villim.villim;
 
-import android.content.res.Configuration;
+import android.content.Intent;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ListView;
-import android.widget.RelativeLayout;
+import android.widget.TextView;
+
 
 public class MainActivity extends AppCompatActivity {
 
-    private boolean flip;
-
     private Toolbar toolBar;
-    private String[] drawerItems;
-    private DrawerLayout drawerLayout;
-    private ListView drawerListView;
-    private ActionBarDrawerToggle drawerToggle;
-    private CharSequence actionBarTitle;
-    private RelativeLayout bottomBar;
-    private Button bottomButton;
+    private TextView toolbarTextView;
+    private String[] tabItems;
+    private int[] tabIcons;
+    private CharSequence toolBarTitle;
+    private TabLayout tabLayout;
+    private ViewPager viewPager;
+    private Button searchButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        flip = false;
-
+        /* Toolbar */
         toolBar = (Toolbar) findViewById(R.id.toolBar);
+        toolbarTextView = (TextView) findViewById(R.id.toolbar_title);
+        toolBarTitle = getString(R.string.app_name);
         setSupportActionBar(toolBar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        setTitle(toolBarTitle);
 
-        bottomBar = (RelativeLayout) findViewById(R.id.bottom_bar);
-        bottomButton = (Button) findViewById(R.id.bottom_button);
-        bottomBar.setVisibility(View.INVISIBLE);
+        /* Bototm tab */
+        viewPager = (ViewPager) findViewById(R.id.view_pager);
+        tabItems = getResources().getStringArray(R.array.tab_items);
+        tabIcons = getResources().getIntArray(R.array.tab_icons);
+        // Set default screen to 방 찾기.
+        TabAdapter tabAdapter = new TabAdapter(getSupportFragmentManager());
+        viewPager.setAdapter(tabAdapter);
+        viewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
 
-        /* Navigation Drawer. */
-        actionBarTitle = getResources().getString(R.string.app_name);
-        drawerItems = getResources().getStringArray(R.array.drawer_items);
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawer);
-        drawerListView = (ListView) findViewById(R.id.drawer_list);
-        drawerListView.setAdapter(new ArrayAdapter<String>(this,
-                R.layout.drawer_list_item, drawerItems));
-        drawerListView.setOnItemClickListener(new DrawerItemClickListener());
-        drawerToggle = new ActionBarDrawerToggle(this, drawerLayout,
-                R.string.drawer_open, R.string.drawer_close) {
-
-            /** Called when a drawer has settled in a completely closed state. */
-            public void onDrawerClosed(View view) {
-                super.onDrawerClosed(view);
-                setTitle(actionBarTitle);
-                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                toolBarTitle = tabItems[position];
+                //setTitle(toolBarTitle);
             }
 
-            /** Called when a drawer has settled in a completely open state. */
-            public void onDrawerOpened(View drawerView) {
-                super.onDrawerOpened(drawerView);
-                setTitle(actionBarTitle);
-                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+        });
+        tabLayout = (TabLayout) findViewById(R.id.tab_layout);
+        tabLayout.setupWithViewPager(viewPager);
+
+        // Iterate over all tabs and set the custom view
+        for (int i = 0; i < tabLayout.getTabCount(); i++) {
+            TabLayout.Tab tab = tabLayout.getTabAt(i);
+            tab.setCustomView(R.layout.tab);
+            tab.setIcon(R.drawable.ic_whatshot_black_24dp);
+        }
+
+        /* Search Button */
+        searchButton = (Button) findViewById(R.id.search_button);
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent = new Intent(MainActivity.this, SearchActivity.class);
+                MainActivity.this.startActivity(myIntent);
             }
-        };
+        });
 
-        // Set the drawer toggle as the DrawerListener.
-        drawerLayout.addDrawerListener(drawerToggle);
-
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
     }
 
+    private class TabAdapter extends FragmentPagerAdapter {
 
-    /* Listener for navigation drawer items */
-    private class DrawerItemClickListener implements ListView.OnItemClickListener {
+        public TabAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
         @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            selectItem(position);
-            setTitle(drawerItems[position]);
-        }
-    }
-
-    private void selectItem(int position) {
-        // Highlight the selected item, update the title, and close the drawer
-        drawerListView.setItemChecked(position, true);
-        drawerLayout.closeDrawer(drawerListView);
-
-        // Insert Fragment.
-        Fragment fragment = null;
-        Class fragmentClass;
-
-        flip = false;
-
-        switch(position) {
-            case 0:
-                fragmentClass = ProfileFragment.class;
-                break;
-            case 1:
-                fragmentClass = MyRoomFragment.class;
-                break;
-            case 2:
-                fragmentClass = MyRoomFragment.class;
-                break;
-            case 3:
-                fragmentClass = VisitFragment.class;
-                break;
-            default:
-                fragmentClass = PolicyFragment.class;
+        public int getCount() {
+            return tabItems.length;
         }
 
-        try {
-            fragment = (Fragment) fragmentClass.newInstance();
-        } catch (Exception e) {
-            e.printStackTrace();
+        @Override
+        public Fragment getItem(int position) {
+            switch (position) {
+                case 0:
+                    return DiscoverFragment.newInstance();
+                case 1:
+                    return DiscoverFragment.newInstance();
+                case 2:
+                    return MyRoomFragment.newInstance();
+                case 3:
+                    return DiscoverFragment.newInstance();
+                case 4:
+                    return ProfileFragment.newInstance();
+                default:
+                    return null;
+            }
         }
 
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        // Pop all back stack and call fragment.
-        fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-        fragmentManager.beginTransaction().replace(R.id.main_frame, fragment).commit();
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return tabItems[position];
+        }
+
+//        public View getTabView(int position) {
+//            View v = LayoutInflater.from(getApplicationContext()).inflate(R.layout.tab, null);
+//            TextView tv = (TextView) v.findViewById(R.id.text1);
+//            tv.setText(tabItems[position]);
+////            ImageView img = (ImageView) v.findViewById(R.id.icon);
+////            img.setImageResource(tabIcons[position]);
+//            tab.setIcon
+//            return v;
+//        }
     }
 
     @Override
     public void setTitle(CharSequence title) {
-        actionBarTitle = title;
-        getSupportActionBar().setTitle(actionBarTitle);
+        toolBarTitle = title;
+        toolbarTextView.setText(toolBarTitle);
     }
 
-
-    @Override
-    protected void onPostCreate(Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
-        // Sync the toggle state after onRestoreInstanceState has occurred.
-        drawerToggle.syncState();
-    }
-
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        drawerToggle.onConfigurationChanged(newConfig);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Pass the event to ActionBarDrawerToggle, if it returns
-        // true, then it has handled the app icon touch event
-        if (drawerToggle.onOptionsItemSelected(item)) {
-            return true;
-        }
-        // Handle your other action bar items...
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    public void setBottomButton(boolean visible, CharSequence text) {
-
-        int visibility = visible ?  View.VISIBLE : View.INVISIBLE;
-        bottomBar.setVisibility(visibility);
-
-        // Flip button.
-        if (flip) {
-            Animation flipRightIn = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.flip_right);
-            bottomButton.startAnimation(flipRightIn);
-        }
-        bottomButton.setText(text);
-    }
-
-    public void setFlip(boolean flipCoin) {
-        flip = flipCoin;
-    }
-
-    public void registerBottomButtonListener(View.OnClickListener listener) {
-        bottomButton.setOnClickListener(listener);
-    }
+//
 
 }

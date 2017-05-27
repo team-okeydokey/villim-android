@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#0000ff</color>
-    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorPrimary">#ED4B17</color>
+    <color name="colorPrimaryDark">#ED4B17</color>
     <color name="colorAccent">#FF4081</color>
 
     <!-- Font Colots -->
@@ -9,5 +9,12 @@
     <color name="h3">#A0A0A0</color>
 
     <!-- MainActivity -->
-    <color name="mainBackground">#D0D0D0</color>
+    <color name="main_background">#D0D0D0</color>
+
+    <!-- Discovery Fragment -->
+    <color name="rating_color">#51ACCF</color>
+
+
+    <!-- Profile Fragment -->
+    <color name="profile_list_item_value">#A0A0A0</color>
 </resources>

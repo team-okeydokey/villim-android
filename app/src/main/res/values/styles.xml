@@ -19,6 +19,12 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="ToolbarTitle">
+        <item name="android:textSize">12pt</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:color">@android:color/white</item>
+    </style>
+
     <style name="h1"> <!-- Fragment title -->
         <item name="android:textSize">12pt</item>
         <item name="android:textStyle">bold</item>
@@ -32,6 +38,24 @@
     <style name="h3">
         <item name="android:textSize">10pt</item>
         <item name="android:color">@color/h3</item>
+    </style>
+
+    <!-- Discover Fragment -->
+    <style name="customRatingBar"
+        parent="android:style/Widget.Material.RatingBar.Small">
+
+    </style>
+
+
+    <!-- Profile Fragment -->
+    <style name="profile_list_item_title">
+        <item name="android:textSize">8pt</item>
+        <item name="android:color">@color/h3</item>
+    </style>
+
+    <style name="profile_list_item_value">
+        <item name="android:textSize">6pt</item>
+        <item name="android:color">@color/profile_list_item_value</item>
     </style>
 
 </resources>

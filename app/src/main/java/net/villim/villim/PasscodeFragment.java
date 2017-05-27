@@ -34,20 +34,30 @@ public class PasscodeFragment extends Fragment {
 
         activity = ((MainActivity) getActivity());
 
-        // Set title.
-//        getActivity().setTitle(getString(R.string.passcode_title));
-
-        // Set bottom button.
-        activity.setFlip(true);
-        String bottomButtonText = getString(R.string.passcode_change_done);
-        activity.setBottomButton(true, bottomButtonText);
-        activity.registerBottomButtonListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Dismiss fragment.
-                getActivity().onBackPressed();
-            }
-        });
+        // Set bottom button text.
+//        String leftBottomButtonText = getString(R.string.passcode_change_cancel);
+//        activity.setBottomButtonText(true, leftBottomButtonText);
+//        String rightBottomButtonText = getString(R.string.passcode_change_done);
+//        activity.setBottomButtonText(false, rightBottomButtonText);
+//
+//        // Register left button listener.
+//        activity.registerBottomButtonListener(true, new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                // Dismiss fragment.
+//                getActivity().onBackPressed();
+//            }
+//        });
+//        // Register right button listener.
+//        activity.registerBottomButtonListener(false, new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                // Dismiss fragment.
+//                getActivity().onBackPressed();
+//            }
+//        });
+//
+//        activity.showBottomButtons(true, true);
 
         return passcodeView;
     }

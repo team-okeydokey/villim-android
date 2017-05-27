@@ -1,16 +1,26 @@
 <resources>
     <string name="app_name">Villim</string>
 
-    <!-- Navigation Drawer Items -->
-    <string-array name="drawer_items">
-        <item>프로필</item>
-        <item>방 찾기</item>
+    <!-- Tab Items -->
+    <string-array name="tab_items">
+        <item>숙소 찾기</item>
+        <item>찜 목록</item>
         <item>내 방</item>
-        <item>방문 신청</item>
-        <item>이용 약관</item>
+        <item>메시지</item>
+        <item>프로필</item>
     </string-array>
     <string name="drawer_open">메뉴 열기</string>
     <string name="drawer_close">메뉴 닫기</string>
+
+    <!-- Discover Fragment -->
+    <string name="key_thumbnail">key_thumbnail</string>
+    <string name="key_title">key_title</string>
+    <string name="key_review_rating">key_review_rating</string>
+    <string name="key_review_count">key_review_num</string>
+    <string name="key_price">key_price</string>
+    <string name="room_price_value" formatted="false">₩ %s</string>
+    <string name="room_price_text" formatted="false">\u0020/ 박</string>
+    <string name="room_review_count_text" formatted="false">후기 %s개</string>
 
     <!-- MyRoom Fragment -->
     <string name="myroom_title">내 방</string>
@@ -27,6 +37,7 @@
     <string name="passcode_new">비밀번호</string>
     <string name="passcode_new_confirm">비밀번호 확인</string>
     <string name="passcode_change_done">확인</string>
+    <string name="passcode_change_cancel">취소</string>
 
     <!-- Visit Fragment -->
     <string name="visit_title">방문 목록</string>
