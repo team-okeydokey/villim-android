@@ -41,7 +41,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:padding="8dp">
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp">
 
                 <android.support.v7.widget.AppCompatRatingBar
                     android:id="@+id/discover_room_review_rating"
