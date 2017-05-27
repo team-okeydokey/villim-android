@@ -80,7 +80,7 @@
                     android:maxLines="1"
                     android:textAppearance="@style/TextAppearance.AppCompat.Headline"
                     android:textColor="#444"
-                    android:textSize="15dp"
+                    android:textSize="18dp"
                     android:textStyle="bold" />
 
                 <TextView
