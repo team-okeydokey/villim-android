@@ -8,6 +8,9 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 
@@ -16,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
     private Toolbar toolBar;
     private TextView toolbarTextView;
     private String[] tabItems;
+    private int[] tabIcons;
     private CharSequence toolBarTitle;
     private TabLayout tabLayout;
     private ViewPager viewPager;
@@ -35,8 +39,10 @@ public class MainActivity extends AppCompatActivity {
         /* Bototm tab */
         viewPager = (ViewPager) findViewById(R.id.view_pager);
         tabItems = getResources().getStringArray(R.array.tab_items);
+        tabIcons = getResources().getIntArray(R.array.tab_icons);
         // Set default screen to 방 찾기.
-        viewPager.setAdapter(new TabAdapter(getSupportFragmentManager()));
+        TabAdapter tabAdapter = new TabAdapter(getSupportFragmentManager());
+        viewPager.setAdapter(tabAdapter);
         viewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
 
             @Override
@@ -48,6 +54,15 @@ public class MainActivity extends AppCompatActivity {
         });
         tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         tabLayout.setupWithViewPager(viewPager);
+
+        // Iterate over all tabs and set the custom view
+        for (int i = 0; i < tabLayout.getTabCount(); i++) {
+            TabLayout.Tab tab = tabLayout.getTabAt(i);
+            tab.setCustomView(R.layout.tab);
+//            tab.setCustomView(tabAdapter.getTabView(i));
+            tab.setIcon(R.drawable.ic_whatshot_black_24dp);
+        }
+
     }
 
     private class TabAdapter extends FragmentPagerAdapter {
@@ -83,6 +98,16 @@ public class MainActivity extends AppCompatActivity {
         public CharSequence getPageTitle(int position) {
             return tabItems[position];
         }
+
+//        public View getTabView(int position) {
+//            View v = LayoutInflater.from(getApplicationContext()).inflate(R.layout.tab, null);
+//            TextView tv = (TextView) v.findViewById(R.id.text1);
+//            tv.setText(tabItems[position]);
+////            ImageView img = (ImageView) v.findViewById(R.id.icon);
+////            img.setImageResource(tabIcons[position]);
+//            tab.setIcon
+//            return v;
+//        }
     }
 
     @Override
