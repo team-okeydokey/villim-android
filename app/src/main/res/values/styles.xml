@@ -19,6 +19,12 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="ToolbarTitle">
+        <item name="android:textSize">12pt</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:color">@android:color/white</item>
+    </style>
+
     <style name="h1"> <!-- Fragment title -->
         <item name="android:textSize">12pt</item>
         <item name="android:textStyle">bold</item>

@@ -4,20 +4,17 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.Button;
-import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 
 public class MainActivity extends AppCompatActivity {
 
     private Toolbar toolBar;
+    private TextView toolbarTextView;
     private String[] tabItems;
     private CharSequence toolBarTitle;
     private TabLayout tabLayout;
@@ -29,20 +26,23 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         toolBar = (Toolbar) findViewById(R.id.toolBar);
+        toolbarTextView = (TextView) findViewById(R.id.toolbar_title);
+        toolBarTitle = getString(R.string.app_name);
         setSupportActionBar(toolBar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        setTitle(toolBarTitle);
 
         /* Bototm tab */
         viewPager = (ViewPager) findViewById(R.id.view_pager);
         tabItems = getResources().getStringArray(R.array.tab_items);
         // Set default screen to 방 찾기.
-        toolBarTitle = tabItems[0];
         viewPager.setAdapter(new TabAdapter(getSupportFragmentManager()));
         viewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
 
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
                 toolBarTitle = tabItems[position];
-                setTitle(toolBarTitle);
+                //setTitle(toolBarTitle);
             }
 
         });
@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void setTitle(CharSequence title) {
         toolBarTitle = title;
-        getSupportActionBar().setTitle(toolBarTitle);
+        toolbarTextView.setText(toolBarTitle);
     }
 
 //

@@ -9,9 +9,18 @@
         android:id="@+id/toolBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#ff6d7fe2"
+        android:background="@color/colorPrimary"
         app:contentInsetEnd="0dp"
-        app:contentInsetStart="0dp"></android.support.v7.widget.Toolbar>
+        app:contentInsetStart="0dp">
+
+        <TextView
+            android:id="@+id/toolbar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            style="@style/ToolbarTitle"/>
+
+    </android.support.v7.widget.Toolbar>
 
 
     <android.support.v4.view.ViewPager
