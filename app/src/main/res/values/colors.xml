@@ -9,7 +9,10 @@
     <color name="h3">#A0A0A0</color>
 
     <!-- MainActivity -->
-    <color name="main_background">#D0D0D0</color>
+    <color name="main_background">#F0F1F2</color>
+
+    <!-- Search Activity -->
+    <color name="search_background">#F0F1F2</color>
 
     <!-- Discovery Fragment -->
     <color name="rating_color">#51ACCF</color>

@@ -12,6 +12,9 @@
     <string name="drawer_open">메뉴 열기</string>
     <string name="drawer_close">메뉴 닫기</string>
 
+    <!-- Search ACtivity -->
+    <string name="search_title">검색하기</string>
+
     <!-- Discover Fragment -->
     <string name="key_thumbnail">key_thumbnail</string>
     <string name="key_title">key_title</string>

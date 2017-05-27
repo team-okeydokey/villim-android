@@ -16,7 +16,7 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Toolbar toolBar;
+    private Toolbar toolbar;
     private TextView toolbarTextView;
     private String[] tabItems;
     private int[] tabIcons;
@@ -31,10 +31,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         /* Toolbar */
-        toolBar = (Toolbar) findViewById(R.id.toolBar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbarTextView = (TextView) findViewById(R.id.toolbar_title);
         toolBarTitle = getString(R.string.app_name);
-        setSupportActionBar(toolBar);
+        setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         setTitle(toolBarTitle);
 
