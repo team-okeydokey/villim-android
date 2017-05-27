@@ -1,22 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_gravity="center_vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="@dimen/discover_recycler_padding"
-    android:paddingBottom="@dimen/discover_recycler_padding">
+    android:layout_gravity="center_vertical"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/discover_recycler_padding"
+    android:paddingTop="@dimen/discover_recycler_padding">
 
     <ImageView
         android:id="@android:id/icon"
-        android:layout_centerHorizontal="true"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true" />
 
     <TextView
-        android:gravity="center"
-        android:layout_below="@android:id/icon"
         android:id="@android:id/text1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_below="@android:id/icon"
+        android:gravity="center" />
 
 </RelativeLayout>
