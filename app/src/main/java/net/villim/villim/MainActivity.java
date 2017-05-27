@@ -1,5 +1,6 @@
 package net.villim.villim;
 
+import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -8,6 +9,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -28,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        /* Toolbar */
         toolBar = (Toolbar) findViewById(R.id.toolBar);
         toolbarTextView = (TextView) findViewById(R.id.toolbar_title);
         toolBarTitle = getString(R.string.app_name);
@@ -58,9 +61,18 @@ public class MainActivity extends AppCompatActivity {
         for (int i = 0; i < tabLayout.getTabCount(); i++) {
             TabLayout.Tab tab = tabLayout.getTabAt(i);
             tab.setCustomView(R.layout.tab);
-//            tab.setCustomView(tabAdapter.getTabView(i));
             tab.setIcon(R.drawable.ic_whatshot_black_24dp);
         }
+
+        /* Search Button */
+        searchButton = (Button) findViewById(R.id.search_button);
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent = new Intent(MainActivity.this, SearchActivity.class);
+                MainActivity.this.startActivity(myIntent);
+            }
+        });
 
     }
 
