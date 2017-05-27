@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 import org.w3c.dom.Text;
 
 /**
@@ -56,6 +58,9 @@ public class DiscoverRecyclerAdapter extends RecyclerView.Adapter<DiscoverRecycl
         // - replace the contents of the view with that element
         Context context = holder.itemView.getContext();
         holder.roomTitle.setText(roomList[position].data.get(context.getString(R.string.key_title)));
+        Glide.with(context)
+                .load(R.drawable.prugio_thumbnail)
+                .into(holder.roomThumbnail);
     }
 
     // Return the size of your dataset (invoked by the layout manager)

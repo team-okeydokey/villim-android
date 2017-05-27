@@ -73,7 +73,7 @@ public class DiscoverFragment extends Fragment {
 
         DiscoverListObject obj = new DiscoverListObject(jsonItem);
 
-        DiscoverListObject[] exampleArray = {obj, obj, obj};
+        DiscoverListObject[] exampleArray = {obj, obj, obj, obj, obj, obj, obj, obj, obj};
 
         adapter = new DiscoverRecyclerAdapter(exampleArray);
         recyclerView.setAdapter(adapter);
