@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="discover_card_height">130dp</dimen>
+    <dimen name="discover_review_height">30dp</dimen>
+    <dimen name="discover_recycler_padding">10dp</dimen>
     <dimen name="profile_image_diameter">130dp</dimen>
     <dimen name="room_thumbnail_image_diameter">175dp</dimen>
     <dimen name="profile_list_header_height">60dp</dimen>

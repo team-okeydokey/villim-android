@@ -63,10 +63,11 @@ public class DiscoverFragment extends Fragment {
 
         JSONObject jsonItem = new JSONObject();
         try {
-            jsonItem.put(getString(R.string.key_thumbnail), "AAA");
-            jsonItem.put(getString(R.string.key_title), "BBB");
-            jsonItem.put(getString(R.string.key_review), "CCC");
-            jsonItem.put(getString(R.string.key_price), "DDD");
+            jsonItem.put(getString(R.string.key_thumbnail), "[HongDae]1min from Hongik Univ.Stn");
+            jsonItem.put(getString(R.string.key_title), "[HongDae]1min from Hongik Univ.Stn");
+            jsonItem.put(getString(R.string.key_review_rating), "3.5");
+            jsonItem.put(getString(R.string.key_review_count), "25");
+            jsonItem.put(getString(R.string.key_price), "102,000");
         } catch (JSONException e) {
 
         }

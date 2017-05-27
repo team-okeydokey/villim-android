@@ -40,6 +40,12 @@
         <item name="android:color">@color/h3</item>
     </style>
 
+    <!-- Discover Fragment -->
+    <style name="customRatingBar"
+        parent="android:style/Widget.Material.RatingBar.Small">
+
+    </style>
+
 
     <!-- Profile Fragment -->
     <style name="profile_list_item_title">
