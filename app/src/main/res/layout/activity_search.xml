@@ -37,6 +37,7 @@
         android:padding="@dimen/search_activity_padding">
 
         <EditText
+            android:id="@+id/search_field"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableLeft="@drawable/ic_search_black_48dp"
@@ -44,11 +45,17 @@
             android:hint="@string/search_hint"
             android:maxLines="1"
             android:textColorHint="@color/search_hint"
-            android:textSize="12pt" />
+            android:textSize="25sp" />
 
-        <TextView
+        <!-- Search suggestions -->
+        <android.support.v7.widget.ListViewCompat
+            android:id="@+id/search_popular_locations_listview"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/search_field"
+            android:layout_marginBottom="@dimen/search_activity_padding"
+            android:layout_marginTop="@dimen/search_activity_padding"
+            android:dividerHeight="20dp"></android.support.v7.widget.ListViewCompat>
 
     </RelativeLayout>
 
