@@ -5,7 +5,7 @@
 
 
     <!-- Discover Activity -->
-    <dimen name="discover_card_height">120dp</dimen>
+    <dimen name="discover_card_height">110dp</dimen>
     <dimen name="discover_review_height">30dp</dimen>
     <dimen name="discover_recycler_padding">10dp</dimen>
 

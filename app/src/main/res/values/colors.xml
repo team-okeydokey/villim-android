@@ -13,6 +13,8 @@
 
     <!-- Search Activity -->
     <color name="search_background">#F0F1F2</color>
+    <color name="search_hint">#A7A7A8</color>
+    <color name="search_highlight">#05060B</color>
     <color name="search_bottom_bar">#2A2C32</color>
 
     <!-- Discovery Fragment -->
