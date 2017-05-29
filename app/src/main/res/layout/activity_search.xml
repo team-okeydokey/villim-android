@@ -11,7 +11,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/toolbar_height"
-        android:background="@color/colorPrimary"
+        android:background="@android:color/white"
         android:elevation="3dp"
         app:contentInsetEnd="0dp"
         app:contentInsetStart="0dp">
@@ -24,7 +24,7 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:text="@string/search_title"
-            android:textColor="@android:color/white" />
+            android:textColor="#333333" />
 
     </android.support.v7.widget.Toolbar>
 
@@ -70,22 +70,47 @@
         android:padding="@dimen/search_activity_padding">
 
         <TextView
+            android:id="@+id/select_date_start"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:text="@string/search_no_date"
-            android:textColor="@android:color/white" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
             android:background="@drawable/select_date_button"
             android:clickable="true"
             android:drawableLeft="@drawable/ic_date_range_black_24dp"
             android:gravity="center"
             android:text="@string/search_choose_date"
             android:textColor="#ffffffff" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/select_date_start"
+            android:gravity="center"
+            android:text="@string/search_from_date"
+            android:textColor="@android:color/white" />
+
+        <TextView
+            android:id="@+id/select_date_end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/search_to_date"
+            android:background="@drawable/select_date_button"
+            android:clickable="true"
+            android:drawableLeft="@drawable/ic_date_range_black_24dp"
+            android:gravity="center"
+            android:text="@string/search_choose_date"
+            android:textColor="#ffffffff" />
+
+        <TextView
+            android:id="@+id/search_to_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:text="@string/search_to_date"
+            android:textColor="@android:color/white" />
 
     </RelativeLayout>
 

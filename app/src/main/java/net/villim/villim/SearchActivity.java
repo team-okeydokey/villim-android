@@ -1,8 +1,11 @@
 package net.villim.villim;
 
+import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -14,13 +17,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.TextView;
+
+import java.util.Calendar;
 
 public class SearchActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
     private ListViewCompat popularLocationsListView;
     private VillimLocation[] popularLocations;
+    private TextView selectDateStart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +56,15 @@ public class SearchActivity extends AppCompatActivity {
                 new VillimLocation("강남 고속버스 터미널", "서초구 강남 고속버스 터미널")};
         popularLocationsListView.setAdapter(new SearchSuggestionListViewAdapter(getApplicationContext(), popularLocations));
 
+        /* Select data button */
+        selectDateStart = (TextView) findViewById(R.id.select_date_end);
+        selectDateStart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogFragment datePickerFragment = new DatePickerFragment();
+                datePickerFragment.show(getSupportFragmentManager(), "datePicker");
+            }
+        });
     }
 
     @Override
@@ -81,6 +98,26 @@ public class SearchActivity extends AppCompatActivity {
             TextView locationDetail = (TextView) convertView.findViewById(R.id.location_detail);
             locationDetail.setText(location.detail);
             return convertView;
+        }
+    }
+
+    private static class DatePickerFragment extends DialogFragment
+            implements DatePickerDialog.OnDateSetListener {
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            // Use the current date as the default date in the picker
+            final Calendar c = Calendar.getInstance();
+            int year = c.get(Calendar.YEAR);
+            int month = c.get(Calendar.MONTH);
+            int day = c.get(Calendar.DAY_OF_MONTH);
+
+            // Create a new instance of DatePickerDialog and return it
+            return new DatePickerDialog(getActivity(), this, year, month, day);
+        }
+
+        public void onDateSet(DatePicker view, int year, int month, int day) {
+            // Do something with the date chosen by the user.
         }
     }
 

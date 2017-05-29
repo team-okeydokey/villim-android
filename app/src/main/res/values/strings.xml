@@ -15,7 +15,11 @@
     <!-- Search Avtivity -->
     <string name="search_title">검색하기</string>
     <string name="search_hint">어디로 가세요?</string>
+    <string name="search_from_date">부터</string>
+    <string name="search_to_date">까지</string>
     <string name="search_choose_date">\u0020 날짜 선택하기</string>
+    <string name="search_date_between">~</string>
+    <string name="search_date_format">%d년 %d월 %d일</string>
     <string name="search_no_date">날짜 미정</string>
     <string name="search_popular_locations">인기지역</string>
 
