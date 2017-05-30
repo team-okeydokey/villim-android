@@ -25,6 +25,7 @@
     <string name="invalid_date_selected">날짜가 올바르지 않습니다.</string>
 
     <!-- Discover Fragment -->
+    <string name="key_roomid">key_roomid</string>
     <string name="key_thumbnail">key_thumbnail</string>
     <string name="key_title">key_title</string>
     <string name="key_review_rating">key_review_rating</string>

@@ -1,7 +1,9 @@
 package net.villim.villim;
 
 import android.content.Context;
+import android.content.Intent;
 import android.media.Rating;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
@@ -65,6 +68,17 @@ public class DiscoverRecyclerAdapter extends RecyclerView.Adapter<DiscoverRecycl
     public void onBindViewHolder(ViewHolder holder, int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity mainActivity = (MainActivity) v.getContext();
+                Intent intent = new Intent(mainActivity, RoomDetailActivity.class);
+                Bundle args = new Bundle();
+                args.putString(mainActivity.getString(R.string.key_roomid), "0");
+                intent.putExtras(args);
+                mainActivity.startActivity(intent);
+            }
+        });
         populateView(holder, position);
     }
 

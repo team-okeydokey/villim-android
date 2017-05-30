@@ -63,6 +63,7 @@ public class DiscoverFragment extends Fragment {
 
         JSONObject jsonItem = new JSONObject();
         try {
+            jsonItem.put(getString(R.string.key_roomid), "0");
             jsonItem.put(getString(R.string.key_thumbnail), "[HongDae]1min from Hongik Univ.Stn");
             jsonItem.put(getString(R.string.key_title), "[HongDae]1min from Hongik Univ.Stn");
             jsonItem.put(getString(R.string.key_review_rating), "3.5");

@@ -164,11 +164,6 @@ public class SearchActivity extends AppCompatActivity {
 
             buttonCode = bundle.getInt(BUTTON_CODE);
 
-            System.out.println(year);
-            System.out.println(month);
-            System.out.println(day);
-
-
             // Create a new instance of DatePickerDialog and return it
             return new DatePickerDialog(getActivity(), this, year, month, day);
         }
