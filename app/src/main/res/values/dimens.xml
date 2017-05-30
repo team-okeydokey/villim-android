@@ -11,6 +11,7 @@
 
     <!-- Search Activity -->
     <dimen name="search_activity_padding">20dp</dimen>
+    <dimen name="set_date_text_size">17sp</dimen>
 
     <!-- Proifile Fragment -->
     <dimen name="profile_image_diameter">130dp</dimen>

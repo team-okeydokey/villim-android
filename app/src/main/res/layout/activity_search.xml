@@ -29,8 +29,8 @@
     </android.support.v7.widget.Toolbar>
 
     <!-- Search field -->
-
     <RelativeLayout
+        android:id="@+id/search_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/toolbar"
@@ -62,6 +62,7 @@
 
     <!-- Bottom bar to pick dates. -->
     <RelativeLayout
+        android:id="@+id/date_select_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -79,38 +80,31 @@
             android:drawableLeft="@drawable/ic_date_range_black_24dp"
             android:gravity="center"
             android:text="@string/search_choose_date"
-            android:textColor="#ffffffff" />
+            android:textColor="#ffffffff"
+            android:textSize="@dimen/set_date_text_size" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
             android:layout_centerVertical="true"
-            android:layout_toRightOf="@id/select_date_start"
             android:gravity="center"
-            android:text="@string/search_from_date"
-            android:textColor="@android:color/white" />
+            android:text="@string/search_date_between"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/set_date_text_size" />
 
         <TextView
             android:id="@+id/select_date_end"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toLeftOf="@+id/search_to_date"
+            android:layout_alignParentRight="true"
             android:background="@drawable/select_date_button"
             android:clickable="true"
             android:drawableLeft="@drawable/ic_date_range_black_24dp"
             android:gravity="center"
             android:text="@string/search_choose_date"
-            android:textColor="#ffffffff" />
-
-        <TextView
-            android:id="@+id/search_to_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:gravity="center"
-            android:text="@string/search_to_date"
-            android:textColor="@android:color/white" />
+            android:textColor="#ffffffff"
+            android:textSize="@dimen/set_date_text_size" />
 
     </RelativeLayout>
 

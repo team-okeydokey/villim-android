@@ -3,37 +3,59 @@ package net.villim.villim;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.ListViewCompat;
 import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.Calendar;
+import java.util.Date;
 
 public class SearchActivity extends AppCompatActivity {
 
+    private final static String BUTTON_CODE = "button_code";
+    private final static String HAS_DATE = "has_date";
+    private final static String YEAR = "year";
+    private final static String MONTH = "month";
+    private final static String DAY = "day";
+    private final static int BUTTON_START = 0;
+    private final static int BUTTON_END = 1;
+
     private Toolbar toolbar;
+    private RelativeLayout searchContainer;
     private ListViewCompat popularLocationsListView;
     private VillimLocation[] popularLocations;
     private TextView selectDateStart;
+    private TextView selectDateEnd;
+    private boolean startDateSet = false;
+    private boolean endDateSet = false;
+    private Date startDate;
+    private Date endDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
+
+        /* Parse current date */
+        final Calendar c = Calendar.getInstance();
+        int curYear = c.get(Calendar.YEAR);
+        int curMonth = c.get(Calendar.MONTH);
+        int curDay = c.get(Calendar.DAY_OF_MONTH);
+        startDate = new Date(curYear, curMonth, curDay);
+        endDate = new Date(curYear, curMonth, curDay);
 
         /* Toolbar */
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -42,6 +64,9 @@ public class SearchActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(ContextCompat.getDrawable(getApplicationContext(), R.drawable.back_arrow));
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+        /* Relative layout that contains the search area */
+        searchContainer = (RelativeLayout) findViewById(R.id.search_container);
 
         /* Popular locations list */
         popularLocationsListView = (ListViewCompat) findViewById(R.id.search_popular_locations_listview);
@@ -56,12 +81,34 @@ public class SearchActivity extends AppCompatActivity {
                 new VillimLocation("강남 고속버스 터미널", "서초구 강남 고속버스 터미널")};
         popularLocationsListView.setAdapter(new SearchSuggestionListViewAdapter(getApplicationContext(), popularLocations));
 
-        /* Select data button */
-        selectDateStart = (TextView) findViewById(R.id.select_date_end);
+        /* Select date buttons */
+        selectDateStart = (TextView) findViewById(R.id.select_date_start);
         selectDateStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Bundle args = new Bundle();
+                args.putInt(BUTTON_CODE, BUTTON_START);
+                args.putBoolean(HAS_DATE, startDateSet);
+                args.putInt(YEAR, startDate.getYear());
+                args.putInt(MONTH, startDate.getMonth());
+                args.putInt(DAY, startDate.getDate());
                 DialogFragment datePickerFragment = new DatePickerFragment();
+                datePickerFragment.setArguments(args);
+                datePickerFragment.show(getSupportFragmentManager(), "datePicker");
+            }
+        });
+        selectDateEnd = (TextView) findViewById(R.id.select_date_end);
+        selectDateEnd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle args = new Bundle();
+                args.putInt(BUTTON_CODE, BUTTON_END);
+                args.putBoolean(HAS_DATE, endDateSet);
+                args.putInt(YEAR, endDate.getYear());
+                args.putInt(MONTH, endDate.getMonth());
+                args.putInt(DAY, endDate.getDate());
+                DialogFragment datePickerFragment = new DatePickerFragment();
+                datePickerFragment.setArguments(args);
                 datePickerFragment.show(getSupportFragmentManager(), "datePicker");
             }
         });
@@ -104,20 +151,76 @@ public class SearchActivity extends AppCompatActivity {
     private static class DatePickerFragment extends DialogFragment
             implements DatePickerDialog.OnDateSetListener {
 
+        private int buttonCode;
+
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             // Use the current date as the default date in the picker
-            final Calendar c = Calendar.getInstance();
-            int year = c.get(Calendar.YEAR);
-            int month = c.get(Calendar.MONTH);
-            int day = c.get(Calendar.DAY_OF_MONTH);
+            Bundle bundle = getArguments();
+
+            int year = bundle.getInt(YEAR);
+            int month = bundle.getInt(MONTH);
+            int day = bundle.getInt(DAY);
+
+            buttonCode = bundle.getInt(BUTTON_CODE);
+
+            System.out.println(year);
+            System.out.println(month);
+            System.out.println(day);
+
 
             // Create a new instance of DatePickerDialog and return it
             return new DatePickerDialog(getActivity(), this, year, month, day);
         }
 
+        @Override
         public void onDateSet(DatePicker view, int year, int month, int day) {
-            // Do something with the date chosen by the user.
+            ((SearchActivity)getActivity()).setDateText(buttonCode, year, month, day);
+        }
+    }
+
+    private void setDateText(int buttonCode, int year, int month, int day) {
+        Date newDate = new Date(year, month, day);
+        boolean dateValid;
+
+        /* Verify if valid date. */
+        if (endDateSet && buttonCode == BUTTON_START) {
+            dateValid = !newDate.after(endDate);
+        } else if (startDateSet && buttonCode == BUTTON_END){
+            dateValid = !newDate.before(startDate);
+        } else {
+            dateValid = true;
+        }
+
+        /* Set selected. */
+        if (dateValid) {
+            String dateTextTemplate = getString(R.string.search_date_format);
+            String dateText = String.format(dateTextTemplate, year, month + 1, day);
+            if (buttonCode == BUTTON_START) {
+                startDateSet = true;
+                selectDateStart.setText(dateText);
+                startDate.setYear(year);
+                startDate.setMonth(month);
+                startDate.setDate(day);
+            } else {
+                endDateSet = true;
+                selectDateEnd.setText(dateText);
+                endDate.setYear(year);
+                endDate.setMonth(month);
+                endDate.setDate(day);
+            }
+        } else {
+            Snackbar snackbar = Snackbar
+                    .make(searchContainer, getString(R.string.invalid_date_selected), Snackbar.LENGTH_SHORT);
+            View snackbarView = snackbar.getView();
+            /* Adjust snackbar height */
+            ViewGroup.LayoutParams params = snackbarView.getLayoutParams();
+            params.height = findViewById(R.id.date_select_bar).getHeight();
+            snackbarView.setLayoutParams(params);
+            /* Center text */
+            TextView snackbarTextView = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
+            snackbarTextView.setGravity(Gravity.CENTER);
+            snackbar.show();
         }
     }
 
