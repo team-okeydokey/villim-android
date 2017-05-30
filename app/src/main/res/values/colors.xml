@@ -8,8 +8,22 @@
     <color name="h2">#a0a0a0</color>
     <color name="h3">#A0A0A0</color>
 
-    <!-- MainActivity -->
-    <color name="main_background">#D0D0D0</color>
+    <!-- Main Activity -->
+    <color name="main_background">#F0F1F2</color>
+    <color name="main_toolbar_search_button">#333333</color>
+
+    <!-- Navigation Buttons -->
+    <color name="arrow_dark">#333333</color>
+    <color name="arrow_light">#FBFBFB</color>
+
+    <!-- Search Activity -->
+    <color name="search_background">#F0F1F2</color>
+    <color name="search_hint">#A7A7A8</color>
+    <color name="search_highlight">#05060B</color>
+    <color name="search_bottom_bar">#2A2C32</color>
+    <color name="search_suggestion_title">#05060b</color>
+    <color name="search_suggestion_name">#333333</color>
+    <color name="search_suggestion_detail">#585757</color>
 
     <!-- Discovery Fragment -->
     <color name="rating_color">#51ACCF</color>

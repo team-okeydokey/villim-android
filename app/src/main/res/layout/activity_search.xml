@@ -1,9 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="net.villim.villim.SearchActivity">
+    android:background="@color/search_background"
+    tools:context=".SearchActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/toolbar_height"
+        android:background="@android:color/white"
+        android:elevation="3dp"
+        app:contentInsetEnd="0dp"
+        app:contentInsetStart="0dp">
+
+        <TextView
+            android:id="@+id/toolbar_title"
+            style="@style/ToolbarTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/search_title"
+            android:textColor="#333333" />
+
+    </android.support.v7.widget.Toolbar>
+
+    <!-- Search field -->
+    <RelativeLayout
+        android:id="@+id/search_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar"
+        android:padding="@dimen/search_activity_padding">
+
+        <EditText
+            android:id="@+id/search_field"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_search_black_48dp"
+            android:drawableRight="@drawable/ic_clear_black_24dp"
+            android:hint="@string/search_hint"
+            android:maxLines="1"
+            android:textColorHint="@color/search_hint"
+            android:textSize="25sp" />
+
+        <!-- Search suggestions -->
+        <android.support.v7.widget.ListViewCompat
+            android:id="@+id/search_popular_locations_listview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/search_field"
+            android:layout_marginBottom="@dimen/search_activity_padding"
+            android:layout_marginTop="@dimen/search_activity_padding"
+            android:dividerHeight="20dp"></android.support.v7.widget.ListViewCompat>
+
+    </RelativeLayout>
+
+
+    <!-- Bottom bar to pick dates. -->
+    <RelativeLayout
+        android:id="@+id/date_select_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/search_bottom_bar"
+        android:gravity="center_vertical"
+        android:padding="@dimen/search_activity_padding">
+
+        <TextView
+            android:id="@+id/select_date_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:background="@drawable/select_date_button"
+            android:clickable="true"
+            android:drawableLeft="@drawable/ic_date_range_black_24dp"
+            android:gravity="center"
+            android:text="@string/search_choose_date"
+            android:textColor="#ffffffff"
+            android:textSize="@dimen/set_date_text_size" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:text="@string/search_date_between"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/set_date_text_size" />
+
+        <TextView
+            android:id="@+id/select_date_end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/select_date_button"
+            android:clickable="true"
+            android:drawableLeft="@drawable/ic_date_range_black_24dp"
+            android:gravity="center"
+            android:text="@string/search_choose_date"
+            android:textColor="#ffffffff"
+            android:textSize="@dimen/set_date_text_size" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

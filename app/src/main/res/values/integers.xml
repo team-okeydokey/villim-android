@@ -9,7 +9,7 @@
         <item>@drawable/ic_whatshot_black_24dp</item>
     </integer-array>
 
-    <!-- Animatino Durations -->
+    <!-- Animation Durations -->
     <integer name="fragment_transition_duration">150</integer>
     <integer name="button_flip_duration_full">150</integer>
     <integer name="button_flip_duration_half">75</integer>
