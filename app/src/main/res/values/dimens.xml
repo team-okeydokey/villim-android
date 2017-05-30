@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="toolbar_height">50dp</dimen>
+    <dimen name="toolbar_height">46dp</dimen>
     <dimen name="toolbar_search_button_size">30dp</dimen>
 
 

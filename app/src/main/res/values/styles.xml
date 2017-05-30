@@ -5,15 +5,18 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimary">@android:color/white</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/search_highlight</item>
     </style>
 
     <style name="ToolbarTitle">
         <item name="android:textSize">10pt</item>
-
         <item name="android:color">@android:color/white</item>
+    </style>
+
+    <style name="CollapsingToolbar" parent="ThemeOverlay.AppCompat.Light">
+        <item name="android:background">@android:color/white</item>
     </style>
 
     <style name="h1"> <!-- Fragment title -->

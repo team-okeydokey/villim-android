@@ -22,7 +22,7 @@
             app:contentScrim="?attr/colorPrimary"
             app:expandedTitleMarginEnd="64dp"
             app:expandedTitleMarginStart="48dp"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
 
             <ImageView
                 android:id="@+id/toolbar_image"
@@ -33,22 +33,26 @@
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
+                android:layout_height="@dimen/toolbar_height"
+                android:elevation="3dp"
+                app:contentInsetEnd="0dp"
+                app:contentInsetStart="0dp"
                 app:layout_collapseMode="pin"
-                app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+                app:popupTheme="@style/CollapsingToolbar" />
 
         </android.support.design.widget.CollapsingToolbarLayout>
 
     </android.support.design.widget.AppBarLayout>
 
     <android.support.v4.widget.NestedScrollView
-        android:id="@+id/scroll"
+        android:id="@+id/nested_scroll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipToPadding="false"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <TextView
+            android:id="@+id/text_view"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="fsalkfsamlkmaslkmdsalk
