@@ -35,6 +35,9 @@
     <string name="room_price_text" formatted="false">\u0020/ 박</string>
     <string name="room_review_count_text" formatted="false">후기 %s개</string>
 
+    <!-- Room Detail Activity -->
+    <string name="room_detail_title">방 정보</string>
+
     <!-- MyRoom Fragment -->
     <string name="myroom_title">내 방</string>
     <string name="myroom_key_expiration_date">열쇠 유효기간</string>
