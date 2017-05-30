@@ -8,8 +8,9 @@
     <color name="h2">#a0a0a0</color>
     <color name="h3">#A0A0A0</color>
 
-    <!-- MainActivity -->
+    <!-- Main Activity -->
     <color name="main_background">#F0F1F2</color>
+    <color name="main_toolbar_search_button">#333333</color>
 
     <!-- Search Activity -->
     <color name="search_background">#F0F1F2</color>

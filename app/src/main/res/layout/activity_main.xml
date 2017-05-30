@@ -12,7 +12,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/toolbar_height"
-        android:background="@color/colorPrimary"
+        android:background="@android:color/white"
         android:elevation="3dp"
         app:contentInsetEnd="0dp"
         app:contentInsetStart="0dp">
@@ -28,7 +28,7 @@
                 android:layout_height="match_parent"
                 android:layout_centerVertical="true"
                 android:src="@drawable/ic_whatshot_black_24dp"
-                android:tint="@android:color/white" />
+                android:tint="@color/colorPrimary" />
 
             <TextView
                 android:id="@+id/toolbar_title"
@@ -38,7 +38,7 @@
                 android:layout_marginLeft="@dimen/discover_recycler_padding"
                 android:layout_toRightOf="@id/toolbar_logo"
                 android:gravity="center_vertical"
-                android:textColor="@android:color/white" />
+                android:textColor="@color/colorPrimary" />
 
         </RelativeLayout>
 
