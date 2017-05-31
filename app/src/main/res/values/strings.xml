@@ -41,9 +41,9 @@
     <string name="key_review_rating">key_review_rating</string>
     <string name="key_review_count">key_review_num</string>
     <string name="key_price">key_price</string>
-    <string name="room_price_value" formatted="false">₩ %s</string>
+    <string name="room_price_value" formatted="false">₩ %d</string>
     <string name="room_price_text" formatted="false">\u0020/ 박</string>
-    <string name="room_review_count_text" formatted="false">후기 %s개</string>
+    <string name="room_review_count_text" formatted="false">후기 %d개</string>
 
     <!-- Room Detail Activity -->
     <string name="room_detail_title">방 정보</string>

@@ -22,7 +22,7 @@ import org.w3c.dom.Text;
  */
 
 public class DiscoverRecyclerAdapter extends RecyclerView.Adapter<DiscoverRecyclerAdapter.ViewHolder> {
-    private DiscoverListObject[] roomList;
+    private VillimRoom[] roomList;
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -47,7 +47,7 @@ public class DiscoverRecyclerAdapter extends RecyclerView.Adapter<DiscoverRecycl
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public DiscoverRecyclerAdapter(DiscoverListObject[] dataset) {
+    public DiscoverRecyclerAdapter(VillimRoom[] dataset) {
         roomList = dataset;
     }
 
@@ -85,18 +85,18 @@ public class DiscoverRecyclerAdapter extends RecyclerView.Adapter<DiscoverRecycl
     // Make this async.
     private void populateView(ViewHolder holder, int position) {
         Context context = holder.itemView.getContext();
-        DiscoverListObject currItem = roomList[position];
+        VillimRoom currItem = roomList[position];
         /* Room Title */
-        holder.roomTitle.setText(currItem.data.get(context.getString(R.string.key_title)));
+        holder.roomTitle.setText(currItem.roomTitle);
         /* Room Rate */
-        String price = currItem.data.get(context.getString(R.string.key_price));
+        int price = currItem.roomPrice;
         String priceText = String.format(context.getString(R.string.room_price_value, price));
         holder.roomPriceValue.setText(priceText);
         /* Room Rating Value */
-        String rating = currItem.data.get(context.getString(R.string.key_review_rating));
-        holder.roomRatingBar.setRating(Float.parseFloat(rating));
+        float rating = currItem.roomReviewRating;
+        holder.roomRatingBar.setRating(rating);
         /* Room Rating Count */
-        String count = currItem.data.get(context.getString(R.string.key_review_count));
+        int count = currItem.roomReviewCount;
         String countText = String.format(context.getString(R.string.room_review_count_text), count);
         holder.roomRatingCount.setText(countText);
         /* Room Tumbnail */

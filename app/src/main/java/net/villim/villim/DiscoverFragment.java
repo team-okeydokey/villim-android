@@ -63,19 +63,18 @@ public class DiscoverFragment extends Fragment {
 
         JSONObject jsonItem = new JSONObject();
         try {
-            jsonItem.put(getString(R.string.key_roomid), "0");
-            jsonItem.put(getString(R.string.key_thumbnail), "[HongDae]1min from Hongik Univ.Stn");
-            jsonItem.put(getString(R.string.key_title), "[HongDae]1min from Hongik Univ.Stn");
-            jsonItem.put(getString(R.string.key_review_rating), "3.5");
-            jsonItem.put(getString(R.string.key_review_count), "25");
-            jsonItem.put(getString(R.string.key_price), "102,000");
+            jsonItem.put(VillimRoom.KEY_ROOM_ID, 0);
+            jsonItem.put(VillimRoom.KEY_ROOM_TITLE, "[HongDae]1min from Hongik Univ.Stn");
+            jsonItem.put(VillimRoom.KEY_ROOM_REVIEW_RATING, 3.5);
+            jsonItem.put(VillimRoom.KEY_ROOM_REVIEW_COUNT, 25);
+            jsonItem.put(VillimRoom.KEY_ROOM_PRICE, 102000);
         } catch (JSONException e) {
 
         }
 
-        DiscoverListObject obj = new DiscoverListObject(jsonItem);
+        VillimRoom obj = new VillimRoom(jsonItem);
 
-        DiscoverListObject[] exampleArray = {obj, obj, obj, obj, obj, obj, obj, obj, obj};
+        VillimRoom[] exampleArray = {obj, obj, obj, obj, obj, obj, obj, obj, obj};
 
         adapter = new DiscoverRecyclerAdapter(exampleArray);
         recyclerView.setAdapter(adapter);
