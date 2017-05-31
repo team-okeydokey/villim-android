@@ -63,11 +63,24 @@ public class DiscoverFragment extends Fragment {
 
         JSONObject jsonItem = new JSONObject();
         try {
-            jsonItem.put(VillimRoom.KEY_ROOM_ID, 0);
-            jsonItem.put(VillimRoom.KEY_ROOM_TITLE, "[HongDae]1min from Hongik Univ.Stn");
-            jsonItem.put(VillimRoom.KEY_ROOM_REVIEW_RATING, 3.5);
-            jsonItem.put(VillimRoom.KEY_ROOM_REVIEW_COUNT, 25);
-            jsonItem.put(VillimRoom.KEY_ROOM_PRICE, 102000);
+            jsonItem.put(VillimRoom.KEY_HOUSE_ID, 0);
+            jsonItem.put(VillimRoom.KEY_HOUSE_NAME, "[HongDae]1min from Hongik Univ.Stn");
+            jsonItem.put(VillimRoom.KEY_ADDR_FULL, "[HongDae]1min from Hongik Univ.Stn");
+            jsonItem.put(VillimRoom.KEY_ADDR_SUMMARY, "강남구, 서울, 한국");
+            jsonItem.put(VillimRoom.KEY_ADDR_DIRECTION, "[HongDae]1min from Hongik Univ.Stn");
+            jsonItem.put(VillimRoom.KEY_DESCRIPTION, "상세 설명");
+            jsonItem.put(VillimRoom.KEY_NUM_GUEST, 4);
+            jsonItem.put(VillimRoom.KEY_NUM_BEDROOM, 2);
+            jsonItem.put(VillimRoom.KEY_NUM_BED, 2);
+            jsonItem.put(VillimRoom.KEY_NUM_BATHROOM, 1);
+            jsonItem.put(VillimRoom.KEY_PRICE, 102000);
+            jsonItem.put(VillimRoom.KEY_LOCK_ADDR, 192);
+            jsonItem.put(VillimRoom.KEY_LOCK_PC, 244110);
+            jsonItem.put(VillimRoom.KEY_LATITUDE, 37.5192);
+            jsonItem.put(VillimRoom.KEY_LONGITUDE, 127.0413);
+            jsonItem.put(VillimRoom.KEY_HOST_ID, 1);
+            jsonItem.put(VillimRoom.KEY_ROOM_POLICY, "Room Policy");
+            jsonItem.put(VillimRoom.KEY_REFUND_POLICY, "Refund Policy");
         } catch (JSONException e) {
 
         }

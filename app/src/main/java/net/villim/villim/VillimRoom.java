@@ -13,51 +13,81 @@ import org.json.JSONObject;
 
 public class VillimRoom implements Parcelable {
 
-    public static final String KEY_ROOM_ID = "room_id";
-    public static final String KEY_ROOM_TITLE = "room_title";
-    public static final String KEY_ROOM_PRICE = "room_price";
-    public static final String KEY_ROOM_REVIEW_RATING = "room_review_rating";
-    public static final String KEY_ROOM_REVIEW_COUNT = "room_review_count";
+    public static final String KEY_HOUSE_ID = "house_id";
+    public static final String KEY_HOUSE_NAME = "house_name";
+    public static final String KEY_ADDR_FULL = "addr_full";
+    public static final String KEY_ADDR_SUMMARY = "addr_summary";
+    public static final String KEY_ADDR_DIRECTION = "addr_direction";
+    public static final String KEY_DESCRIPTION = "description";
+    public static final String KEY_NUM_GUEST = "num_guest";
+    public static final String KEY_NUM_BEDROOM = "num_bedroom";
+    public static final String KEY_NUM_BED = "num_bed";
+    public static final String KEY_NUM_BATHROOM = "num_bathroom";
+    public static final String KEY_PRICE = "price";
+    public static final String KEY_LOCK_ADDR = "lock_addr";
+    public static final String KEY_LOCK_PC = "lock_pw";
+    public static final String KEY_HIT = "hit";
+    public static final String KEY_LATITUDE = "latitude";
+    public static final String KEY_LONGITUDE = "longitude";
+    public static final String KEY_STATUS = "status";
+    public static final String KEY_CREATED = "created";
+    public static final String KEY_MODIFIED = "modified";
+    public static final String KEY_ROOM_POLICY = "room_policy";
+    public static final String KEY_REFUND_POLICY = "refund_policy";
 
+    public static final String KEY_HOST_ID = "host_id";
     public static final String KEY_HOST_NAME = "host_name";
-    public static final String KEY_HOST_REVIEW_RATING = "host_review_rating";
-    public static final String KEY_HOST_REVIEW_COUNT = "host_review_count";
-    public static final String KEY_TAGS = "tags";
-    public static final String KEY_NUM_GUESTS = "num_guests";
-    public static final String KEY_NUM_ROOMS = "num_rooms";
-    public static final String KEY_NUM_BEDS = "num_beds";
-    public static final String KEY_NUM_BATHS = "num_baths";
 
 
-    public int roomId;
-    public String roomTitle;
-    public int roomPrice;
-    public float roomReviewRating;
-    public int roomReviewCount;
-    public String hostName;
-    public float hostReviewRating;
-    public int hostReviewCount;
-    public String[] tags;
-    public int numGuests;
-    public int numRooms;
-    public int numBeds;
-    public int numBaths;
+
+    // Raw query from server.
+    public int houseId;
+    public String houseName;
+    public String addrFull;
+    public String addrSummary;
+    public String addrDirection;
+    public String description;
+    public int numGuest;
+    public int numBedRoom;
+    public int numBed;
+    public int numBathroom;
+    public int housePrice;
+    private int lockAddr;
+    private int lockPc;
+    public double latitude;
+    public double longitude;
+    public String roomPolicy;
+    public String refundPolicy;
+    public VillimUser host;
+    String hostName;
+
+
+    public VillimReview[] reviews;
+    public int[] utilities;
 
     public VillimRoom(JSONObject jsonObject) {
         try {
-            roomId = jsonObject.getInt(KEY_ROOM_ID);
-            roomTitle = jsonObject.getString(KEY_ROOM_TITLE);
-            roomPrice = jsonObject.getInt(KEY_ROOM_PRICE);
-            roomReviewRating = Float.valueOf(jsonObject.getString(KEY_ROOM_REVIEW_RATING));
-            roomReviewCount = jsonObject.getInt(KEY_ROOM_REVIEW_COUNT);
+            houseId = jsonObject.getInt(KEY_HOUSE_ID);
+            houseName = jsonObject.getString(KEY_HOUSE_NAME);
+            addrFull = jsonObject.getString(KEY_ADDR_FULL);
+            addrSummary =  jsonObject.getString(KEY_ADDR_SUMMARY);
+            addrDirection = jsonObject.getString(KEY_ADDR_DIRECTION);
+            description = jsonObject.getString(KEY_DESCRIPTION);
+            numGuest = jsonObject.getInt(KEY_NUM_GUEST);
+            numBedRoom = jsonObject.getInt(KEY_NUM_BEDROOM);
+            numBed = jsonObject.getInt(KEY_NUM_BED);
+            numBathroom = jsonObject.getInt(KEY_NUM_BATHROOM);
+            housePrice = jsonObject.getInt(KEY_PRICE);
+            lockAddr = jsonObject.getInt(KEY_LOCK_ADDR);
+            lockPc = jsonObject.getInt(KEY_LOCK_PC);
+            latitude = jsonObject.getDouble(KEY_LATITUDE);
+            longitude = jsonObject.getDouble(KEY_LONGITUDE);
+            roomPolicy = jsonObject.getString(KEY_ROOM_POLICY);
+            refundPolicy = jsonObject.getString(KEY_REFUND_POLICY);
+
+            //host = VillimUser.getUserFromServer(jsonObject.getInt(KEY_HOST_ID));
             hostName = jsonObject.getString(KEY_HOST_NAME);
-            hostReviewRating = Float.valueOf(jsonObject.getString(KEY_HOST_REVIEW_RATING));
-            hostReviewCount = jsonObject.getInt(KEY_HOST_REVIEW_COUNT);
-            tags = JSONtoArray(jsonObject.getJSONArray(KEY_TAGS));
-            numGuests = jsonObject.getInt(KEY_NUM_GUESTS);
-            numRooms = jsonObject.getInt(KEY_NUM_ROOMS);
-            numBeds = jsonObject.getInt(KEY_NUM_BEDS);
-            numBaths = jsonObject.getInt(KEY_NUM_BATHS);
+
         } catch (JSONException e) {
 
         }
@@ -74,6 +104,8 @@ public class VillimRoom implements Parcelable {
         }
         return stringsArray;
     }
+
+
 
     @Override
     public int describeContents() {

@@ -2,7 +2,6 @@ package net.villim.villim;
 
 import android.content.Context;
 import android.content.Intent;
-import android.media.Rating;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,11 +10,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-
-import org.w3c.dom.Text;
 
 /**
  * Created by seongmin on 5/26/17.
@@ -93,16 +89,24 @@ public class DiscoverRecyclerAdapter extends RecyclerView.Adapter<DiscoverRecycl
         String priceText = String.format(context.getString(R.string.room_price_value, price));
         holder.roomPriceValue.setText(priceText);
         /* Room Rating Value */
-        float rating = currItem.roomReviewRating;
+        float rating = getAverageRating(currItem.reviews);
         holder.roomRatingBar.setRating(rating);
         /* Room Rating Count */
-        int count = currItem.roomReviewCount;
+        int count = currItem.reviews.length;
         String countText = String.format(context.getString(R.string.room_review_count_text), count);
         holder.roomRatingCount.setText(countText);
         /* Room Tumbnail */
         Glide.with(context)
                 .load(R.drawable.prugio_thumbnail)
                 .into(holder.roomThumbnail);
+    }
+
+    private float getAverageRating(VillimReview[] reviews) {
+        float total = 0;
+        for (int i = 0; i < reviews.length; i++){
+            total += reviews[i].rating;
+        }
+        return total/reviews.length;
     }
 
     // Return the size of your dataset (invoked by the layout manager)

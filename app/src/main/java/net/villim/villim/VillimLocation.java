@@ -7,6 +7,7 @@ package net.villim.villim;
 public class VillimLocation {
     public String name;
     public String detail;
+    public String address;
 
     public VillimLocation() {
     }
@@ -18,6 +19,12 @@ public class VillimLocation {
     public VillimLocation(String locationName, String locationDetail) {
         this.name = locationName;
         this.detail = locationDetail;
+    }
+
+    public static VillimLocation getLocationFromServer(int id) {
+        VillimLocation location = new VillimLocation();
+        location.address = "서울시 강남구";
+        return location;
     }
 
 }

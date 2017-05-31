@@ -77,7 +77,7 @@ public class RoomDetailActivity extends AppCompatActivity {
                 .into(hostProfilePic);
 
         /* Host Name */
-        hostName.setText();
+        hostName.setText("ㄹㄹ");
     }
 
     @Override
