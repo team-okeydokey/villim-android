@@ -9,6 +9,9 @@
     <dimen name="discover_review_height">30dp</dimen>
     <dimen name="discover_recycler_padding">10dp</dimen>
 
+    <!-- Room Detail Activity -->
+    <dimen name="host_profile_pic_size">60dp</dimen>
+
     <!-- Search Activity -->
     <dimen name="search_activity_padding">20dp</dimen>
     <dimen name="set_date_text_size">17sp</dimen>

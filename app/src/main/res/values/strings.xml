@@ -12,6 +12,16 @@
     <string name="drawer_open">메뉴 열기</string>
     <string name="drawer_close">메뉴 닫기</string>
 
+    <!-- Room info JSON Keys -->
+    <string name="key_host_name">host_name</string>
+    <string name="key_host_review_rating">host_review_rating</string>
+    <string name="key_host_review_count">key_host_review_count</string>
+    <string name="key_tags">tags</string>
+    <string name="key_num_guests">num_guests</string>
+    <string name="key_num_rooms">num_rooms</string>
+    <string name="key_num_beds">num_beds</string>
+    <string name="key_num_baths">num_baths</string>
+
     <!-- Search Avtivity -->
     <string name="search_title">검색하기</string>
     <string name="search_hint">어디로 가세요?</string>
@@ -37,6 +47,7 @@
 
     <!-- Room Detail Activity -->
     <string name="room_detail_title">방 정보</string>
+    <string name="contact_host">호스트에게 연락</string>
 
     <!-- MyRoom Fragment -->
     <string name="myroom_title">내 방</string>

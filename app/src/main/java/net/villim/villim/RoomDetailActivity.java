@@ -8,16 +8,22 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
 
 public class RoomDetailActivity extends AppCompatActivity {
 
+    private VillimRoom room;
+
     private AppBarLayout appBarLayout;
     private CollapsingToolbarLayout collapsingToolbarLayout;
     private Toolbar toolbar;
     private ImageView toolbarImage;
+
+    private ImageView hostProfilePic;
+    private TextView hostName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +32,7 @@ public class RoomDetailActivity extends AppCompatActivity {
 
         toolbarImage = (ImageView) findViewById(R.id.toolbar_image);
 
-        /* Toolbar */
+        /* Toolbar. */
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -34,7 +40,7 @@ public class RoomDetailActivity extends AppCompatActivity {
         getSupportActionBar().setHomeAsUpIndicator(ContextCompat.getDrawable(getApplicationContext(), R.drawable.back_arrow_light));
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-        /* Change back button color on collapse */
+        /* Change back button color on collapse. */
         collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
         appBarLayout = (AppBarLayout) findViewById(R.id.app_bar_layout);
         appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
@@ -51,15 +57,27 @@ public class RoomDetailActivity extends AppCompatActivity {
             }
         });
 
+        /* View elements containing room info. */
+        hostProfilePic = (ImageView) findViewById(R.id.host_profile_pic);
+        hostName = (TextView) findViewById(R.id.host_name);
         populateView();
 
     }
 
     // Make this async.
     private void populateView() {
+        /* Room picture */
         Glide.with(this)
                 .load(R.drawable.prugio_thumbnail)
                 .into(toolbarImage);
+
+        /* Host profile pic */
+        Glide.with(this)
+                .load(R.drawable.prugio_thumbnail)
+                .into(hostProfilePic);
+
+        /* Host Name */
+        hostName =
     }
 
     @Override

@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/room_detail_background"
     android:fitsSystemWindows="true"
     tools:context="net.villim.villim.RoomDetailActivity">
 
@@ -54,15 +55,193 @@
 
         <android.support.v7.widget.LinearLayoutCompat
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Host Info -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <!-- Host profile pic -->
+                <com.mikhaellopez.circularimageview.CircularImageView
+                    android:id="@+id/host_profile_pic"
+                    android:layout_width="@dimen/host_profile_pic_size"
+                    android:layout_height="@dimen/host_profile_pic_size" />
+
+                <!-- Host name -->
+                <TextView
+                    android:id="@+id/host_name"
+                    android:layout_toRightOf="@+id/host_profile_pic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <!-- Host review -->
+                <android.support.v7.widget.LinearLayoutCompat
+                    android:layout_toRightOf="@+id/host_profile_pic"
+                    android:layout_below="@+id/host_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp">
+
+                    <android.support.v7.widget.AppCompatRatingBar
+                        android:id="@+id/host_review_rating"
+                        style="@style/customRatingBar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_vertical"
+                        android:numStars="5"
+                        android:progressTint="@color/rating_color"
+                        android:stepSize="0.5" />
+
+                    <TextView
+                        android:id="@+id/host_review_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/discover_recycler_padding"
+                        android:gravity="center_vertical"
+                        android:maxLines="1"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                        android:textColor="#A8A8A8"
+                        android:textSize="10sp" />
+
+                </android.support.v7.widget.LinearLayoutCompat>
+
+                <!-- Contact host button -->
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text="@string/contact_host"/>
+
+            </RelativeLayout>
+            <!-- End host info -->
+
+            <!-- Room title & tags -->
+            <TextView
+                android:id="@+id/room_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:id="@+id/room_tags"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <!-- End room title & tags -->
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/divider_color" />
+
+            <!-- Iconographs -->
+            <android.support.v7.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="ddsdds" />
+                android:orientation="horizontal"
+                android:padding="20dp">
+
+                <!-- Number of guests -->
+                <android.support.v7.widget.LinearLayoutCompat
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_whatshot_black_24dp" />
+
+                    <TextView
+                        android:id="@+id/num_guests"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center" />
+                </android.support.v7.widget.LinearLayoutCompat>
+
+                <!-- Room type -->
+                <android.support.v7.widget.LinearLayoutCompat
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_whatshot_black_24dp" />
+
+                    <TextView
+                        android:id="@+id/num_rooms"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center" />
+                </android.support.v7.widget.LinearLayoutCompat>
+
+                <!-- Number of beds -->
+                <android.support.v7.widget.LinearLayoutCompat
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_whatshot_black_24dp" />
+
+                    <TextView
+                        android:id="@+id/num_beds"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center" />
+                </android.support.v7.widget.LinearLayoutCompat>
+
+                <!-- Number of baths -->
+                <android.support.v7.widget.LinearLayoutCompat
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_whatshot_black_24dp" />
+
+                    <TextView
+                        android:id="@+id/num_baths"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center" />
+                </android.support.v7.widget.LinearLayoutCompat>
+            </android.support.v7.widget.LinearLayoutCompat>
+            <!-- End Iconographs -->
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/divider_color" />
+
 
         </android.support.v7.widget.LinearLayoutCompat>
 
     </android.support.v4.widget.NestedScrollView>
+
+
+    <Button
+        android:id="@+id/reserve_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@color/dark_bottom_bar"
+        android:gravity="center_vertical"
+        android:text="예약하기"
+        android:textAlignment="center"
+        android:textColor="@android:color/white"></Button>
 
 </android.support.design.widget.CoordinatorLayout>
