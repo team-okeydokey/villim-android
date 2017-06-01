@@ -61,7 +61,8 @@
             <!-- Host Info -->
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:padding="@dimen/room_detail_activity_padding">
 
                 <!-- Host profile pic -->
                 <com.mikhaellopez.circularimageview.CircularImageView
@@ -69,45 +70,53 @@
                     android:layout_width="@dimen/host_profile_pic_size"
                     android:layout_height="@dimen/host_profile_pic_size" />
 
-                <!-- Host name -->
-                <TextView
-                    android:id="@+id/host_name"
+                <!-- Click area to go to host page -->
+                <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_toRightOf="@+id/host_profile_pic" />
-
-                <!-- Host review -->
-                <android.support.v7.widget.LinearLayoutCompat
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/host_name"
+                    android:layout_centerVertical="true"
                     android:layout_toRightOf="@+id/host_profile_pic"
-                    android:orientation="horizontal"
-                    android:paddingLeft="8dp"
-                    android:paddingRight="8dp">
-
-                    <android.support.v7.widget.AppCompatRatingBar
-                        android:id="@+id/host_review_rating"
-                        style="@style/customRatingBar"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center_vertical"
-                        android:numStars="5"
-                        android:progressTint="@color/rating_color"
-                        android:stepSize="0.5" />
-
+                    android:paddingLeft="8dp">
+                    <!-- Host name -->
                     <TextView
-                        android:id="@+id/host_review_count"
+                        android:id="@+id/host_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/discover_recycler_padding"
-                        android:gravity="center_vertical"
-                        android:maxLines="1"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-                        android:textColor="#A8A8A8"
-                        android:textSize="10sp" />
+                        android:layout_alignParentLeft="true" />
 
-                </android.support.v7.widget.LinearLayoutCompat>
+                    <!-- Host review -->
+                    <android.support.v7.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_below="@+id/host_name"
+                        android:orientation="horizontal">
+
+                        <android.support.v7.widget.AppCompatRatingBar
+                            android:id="@+id/host_review_rating"
+                            style="@style/customRatingBar"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center_vertical"
+                            android:numStars="5"
+                            android:progressTint="@color/rating_color"
+                            android:stepSize="0.5" />
+
+                        <TextView
+                            android:id="@+id/host_review_count"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/discover_recycler_padding"
+                            android:gravity="center_vertical"
+                            android:maxLines="1"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                            android:textColor="#A8A8A8"
+                            android:textSize="10sp" />
+
+                    </android.support.v7.widget.LinearLayoutCompat>
+
+                </RelativeLayout>
+
 
                 <!-- Contact host button -->
                 <Button
@@ -124,27 +133,28 @@
                 android:id="@+id/house_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:maxLines="2" />
+                android:maxLines="2"
+                android:paddingLeft="@dimen/room_detail_activity_padding" />
 
             <TextView
                 android:id="@+id/house_address"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:maxLines="1" />
+                android:maxLines="1"
+                android:paddingBottom="@dimen/room_detail_activity_padding"
+                android:paddingLeft="@dimen/room_detail_activity_padding" />
+
 
             <!-- End house name & address -->
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/divider_color" />
+            <include layout="@layout/category_divider" />
 
             <!-- Iconographs -->
             <android.support.v7.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:padding="20dp">
+                android:padding="@dimen/room_detail_activity_padding">
 
                 <!-- Number of guests -->
                 <android.support.v7.widget.LinearLayoutCompat
@@ -224,10 +234,7 @@
             </android.support.v7.widget.LinearLayoutCompat>
             <!-- End Iconographs -->
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/divider_color" />
+            <include layout="@layout/category_divider" />
 
             <!-- Description -->
 
@@ -235,13 +242,15 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:padding="@dimen/room_detail_activity_padding"
                 android:text="@string/description_title" />
             <!-- Description content -->
             <TextView
                 android:id="@+id/description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:maxLines="6" />
+                android:maxLines="6"
+                android:paddingLeft="@dimen/room_detail_activity_padding" />
             <!-- See more button -->
             <Button
                 android:id="@+id/description_see_more"
@@ -249,13 +258,12 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="left|bottom"
                 android:background="@android:color/transparent"
+                android:paddingBottom="@dimen/room_detail_activity_padding"
+                android:paddingLeft="@dimen/room_detail_activity_padding"
                 android:text="@string/see_more" />
             <!-- End description -->
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/divider_color" />
+            <include layout="@layout/category_divider" />>
 
             <!-- Amenities -->
 
@@ -263,29 +271,26 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/room_detail_activity_padding"
+                android:paddingTop="@dimen/room_detail_activity_padding"
                 android:text="@string/amenities_title" />
             <!-- Amenities icons -->
             <android.support.v7.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:padding="@dimen/room_detail_activity_padding">
 
             </android.support.v7.widget.LinearLayoutCompat>
             <!-- End Amenities -->
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/divider_color" />
+            <include layout="@layout/category_divider" />
 
             <!-- Reviews -->
 
             <!-- End reviews -->
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/divider_color" />
+            <include layout="@layout/category_divider" />
 
             <!-- Map -->
 
@@ -297,70 +302,69 @@
 
             <!-- End map -->
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/divider_color" />
+            <include layout="@layout/category_divider" />
 
             <!-- Room policy -->
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="@dimen/policy_category_height"
+                android:padding="@dimen/room_detail_activity_padding">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_alignParentLeft="true"
+                    android:gravity="center_vertical|left"
                     android:text="@string/house_policy" />
 
-                <Button
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_alignParentRight="true"
-                    android:background="@android:color/transparent"
+                    android:gravity="center_vertical|right"
                     android:text="@string/read_more" />
 
             </RelativeLayout>
             <!-- End room policy -->
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/divider_color" />
+            <include layout="@layout/category_divider" />
 
             <!-- Refund Policy -->
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="@dimen/policy_category_height"
+                android:padding="@dimen/room_detail_activity_padding">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_alignParentLeft="true"
+                    android:gravity="center_vertical|left"
                     android:text="@string/cancellation_policy" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_alignParentRight="true"
+                    android:gravity="center_vertical|right"
                     android:text="@string/cancellation_strict" />
             </RelativeLayout>
             <!-- End refund policy -->
 
+            <Button
+                android:id="@+id/reserve_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/dark_bottom_bar"
+                android:gravity="center_vertical"
+                android:text="예약하기"
+                android:textAlignment="center"
+                android:textColor="@android:color/white"></Button>
+
         </android.support.v7.widget.LinearLayoutCompat>
+
 
     </android.support.v4.widget.NestedScrollView>
 
-
-    <Button
-        android:id="@+id/reserve_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:background="@color/dark_bottom_bar"
-        android:gravity="center_vertical"
-        android:text="예약하기"
-        android:textAlignment="center"
-        android:textColor="@android:color/white"></Button>
 
 </android.support.design.widget.CoordinatorLayout>
