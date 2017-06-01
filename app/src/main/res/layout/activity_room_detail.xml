@@ -247,7 +247,9 @@
                 android:id="@+id/description_see_more"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="left|bottom" />
+                android:layout_gravity="left|bottom"
+                android:background="@android:color/transparent"
+                android:text="@string/see_more" />
             <!-- End description -->
 
             <View
@@ -289,11 +291,61 @@
 
             <fragment xmlns:android="http://schemas.android.com/apk/res/android"
                 android:id="@+id/map"
+                class="com.google.android.gms.maps.MapFragment"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
-                class="com.google.android.gms.maps.SupportMapFragment" />
+                android:layout_height="150dp" />
 
             <!-- End map -->
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/divider_color" />
+
+            <!-- Room policy -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentLeft="true"
+                    android:text="@string/house_policy" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
+                    android:background="@android:color/transparent"
+                    android:text="@string/read_more" />
+
+            </RelativeLayout>
+            <!-- End room policy -->
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/divider_color" />
+
+            <!-- Refund Policy -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentLeft="true"
+                    android:text="@string/cancellation_policy" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
+                    android:text="@string/cancellation_strict" />
+            </RelativeLayout>
+            <!-- End refund policy -->
 
         </android.support.v7.widget.LinearLayoutCompat>
 

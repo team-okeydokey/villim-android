@@ -1,19 +1,24 @@
 package net.villim.villim;
 
 import android.graphics.PorterDuff;
+import android.os.AsyncTask;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
@@ -47,7 +52,8 @@ public class RoomDetailActivity extends AppCompatActivity implements OnMapReadyC
     private TextView description;
     private Button descriptionSeeMore;
 
-    private SupportMapFragment mapFragment;
+    FrameLayout mapContainer;
+    MapFragment mapFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,13 +114,13 @@ public class RoomDetailActivity extends AppCompatActivity implements OnMapReadyC
         /* Review */
 
         /* Map */
-        mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+        mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
         /* Extract room info and fill view elements with data */
         house = extractRoomInfo();
-        populateView();
 
+        populateView();
     }
 
     // Extract room info.
@@ -177,6 +183,7 @@ public class RoomDetailActivity extends AppCompatActivity implements OnMapReadyC
 
         /* Map */
 
+
     }
 
     @Override
@@ -188,5 +195,24 @@ public class RoomDetailActivity extends AppCompatActivity implements OnMapReadyC
     @Override
     public void onMapReady(GoogleMap map) {
         map.addMarker(new MarkerOptions().position(new LatLng(house.latitude, house.longitude)).title("Marker"));
+        map.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(house.latitude, house.longitude)));
+        map.animateCamera( CameraUpdateFactory.zoomTo( 17.0f ) );
     }
+
+    private class PopulateHouseDetailTask extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected Void doInBackground(Void... voids) {
+            populateView();
+            return null;
+        }
+
+        protected void onProgressUpdate(Void... voids) {
+
+        }
+
+        protected void onPostExecute() {
+
+        }
+    }
+
 }
