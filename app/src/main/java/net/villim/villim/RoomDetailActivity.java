@@ -38,6 +38,8 @@ public class RoomDetailActivity extends AppCompatActivity {
     private TextView numBed;
     private TextView numBathroom;
 
+    private TextView description;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,6 +90,9 @@ public class RoomDetailActivity extends AppCompatActivity {
         numBed = (TextView) findViewById(R.id.num_bed);
         numBathroom = (TextView) findViewById(R.id.num_bathroom);
 
+        /* House description */
+        description = (TextView) findViewById(R.id.description);
+
         /* Extract room info and fill view elements with data */
         house = extractRoomInfo();
         populateView();
@@ -133,6 +138,11 @@ public class RoomDetailActivity extends AppCompatActivity {
         numBed.setText(numBedText);
         String numBathroomText = String.format(getString(R.string.num_bathroom_format, house.numBathroom));
         numBathroom.setText(numBathroomText);
+
+        /* Description */
+        description.setText(house.description);
+
+        
     }
 
     @Override

@@ -229,6 +229,27 @@
                 android:layout_height="1dp"
                 android:background="@color/divider_color" />
 
+            <!-- Description -->
+            <android.support.v7.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <!-- Description title -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/description_title"/>
+
+                <!-- Description content -->
+                <TextView
+                    android:id="@+id/description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+
+            </android.support.v7.widget.LinearLayoutCompat>
+            <!-- End description -->
+
 
         </android.support.v7.widget.LinearLayoutCompat>
 
