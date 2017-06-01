@@ -230,26 +230,63 @@
                 android:background="@color/divider_color" />
 
             <!-- Description -->
-            <android.support.v7.widget.LinearLayoutCompat
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
 
-                <!-- Description title -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/description_title"/>
-
-                <!-- Description content -->
-                <TextView
-                    android:id="@+id/description"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-
-            </android.support.v7.widget.LinearLayoutCompat>
+            <!-- Description title -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/description_title" />
+            <!-- Description content -->
+            <TextView
+                android:id="@+id/description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="6" />
+            <!-- See more button -->
+            <Button
+                android:id="@+id/description_see_more"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left|bottom" />
             <!-- End description -->
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/divider_color" />
+
+            <!-- Amenities -->
+
+            <!-- Amenities title -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/amenities_title" />
+            <!-- Amenities icons -->
+            <android.support.v7.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+            </android.support.v7.widget.LinearLayoutCompat>
+            <!-- End Amenities -->
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/divider_color" />
+
+            <!-- Reviews -->
+
+            <!-- End reviews -->
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/divider_color" />
+
+            <!-- Map -->
+            <!-- End map -->
 
         </android.support.v7.widget.LinearLayoutCompat>
 

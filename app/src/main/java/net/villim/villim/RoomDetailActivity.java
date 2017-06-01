@@ -7,13 +7,13 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-
-import org.w3c.dom.Text;
 
 
 public class RoomDetailActivity extends AppCompatActivity {
@@ -39,6 +39,7 @@ public class RoomDetailActivity extends AppCompatActivity {
     private TextView numBathroom;
 
     private TextView description;
+    private Button descriptionSeeMore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,6 +93,13 @@ public class RoomDetailActivity extends AppCompatActivity {
 
         /* House description */
         description = (TextView) findViewById(R.id.description);
+        descriptionSeeMore = (Button) findViewById(R.id.description_see_more);
+
+        /* Amenities */
+
+        /* Review */
+
+        /* Map */
 
         /* Extract room info and fill view elements with data */
         house = extractRoomInfo();
@@ -141,8 +149,24 @@ public class RoomDetailActivity extends AppCompatActivity {
 
         /* Description */
         description.setText(house.description);
+        description.post(new Runnable() {
+            @Override
+            public void run() {
+                if (description.getLineCount() > description.getMaxLines()) {
+                    descriptionSeeMore.setVisibility(View.VISIBLE);
+                } else {
+                    descriptionSeeMore.setVisibility(View.GONE);
+                }
 
-        
+            }
+        });
+
+        /* Amenities */
+
+        /* Review */
+
+        /* Map */
+
     }
 
     @Override

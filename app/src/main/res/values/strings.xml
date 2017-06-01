@@ -48,6 +48,7 @@
     <string name="num_bed_format">침대 %d개</string>
     <string name="num_bathroom_format">욕실 %d개</string>
     <string name="description_title">상세 설명</string>
+    <string name="amenities_title">시설</string>
 
     <!-- MyRoom Fragment -->
     <string name="myroom_title">내 방</string>

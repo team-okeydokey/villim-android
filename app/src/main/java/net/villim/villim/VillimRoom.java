@@ -157,7 +157,7 @@ public class VillimRoom implements Parcelable {
         addrFull = in.readString();
         addrSummary = in.readString();
         addrDirection = in.readString();
-        addrDirection = in.readString();
+        description = in.readString();
         numGuest = in.readInt();
         numBedroom = in.readInt();
         numBed = in.readInt();

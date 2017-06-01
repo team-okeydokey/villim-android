@@ -68,7 +68,8 @@ public class DiscoverFragment extends Fragment {
             jsonItem.put(VillimRoom.KEY_ADDR_FULL, "[HongDae]1min from Hongik Univ.Stn");
             jsonItem.put(VillimRoom.KEY_ADDR_SUMMARY, "강남구, 서울, 한국");
             jsonItem.put(VillimRoom.KEY_ADDR_DIRECTION, "[HongDae]1min from Hongik Univ.Stn");
-            jsonItem.put(VillimRoom.KEY_DESCRIPTION, "상세 설명");
+//            jsonItem.put(VillimRoom.KEY_DESCRIPTION, "1\n2\n3\n4\n5\n6");
+            jsonItem.put(VillimRoom.KEY_DESCRIPTION, "1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15");
             jsonItem.put(VillimRoom.KEY_NUM_GUEST, 4);
             jsonItem.put(VillimRoom.KEY_NUM_BEDROOM, 2);
             jsonItem.put(VillimRoom.KEY_NUM_BED, 2);
