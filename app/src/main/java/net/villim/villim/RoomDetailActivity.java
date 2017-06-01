@@ -13,10 +13,16 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+
 import com.bumptech.glide.Glide;
 
 
-public class RoomDetailActivity extends AppCompatActivity {
+public class RoomDetailActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private VillimRoom house;
 
@@ -40,6 +46,8 @@ public class RoomDetailActivity extends AppCompatActivity {
 
     private TextView description;
     private Button descriptionSeeMore;
+
+    private SupportMapFragment mapFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,6 +108,8 @@ public class RoomDetailActivity extends AppCompatActivity {
         /* Review */
 
         /* Map */
+        mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
 
         /* Extract room info and fill view elements with data */
         house = extractRoomInfo();
@@ -173,5 +183,10 @@ public class RoomDetailActivity extends AppCompatActivity {
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
+    }
+
+    @Override
+    public void onMapReady(GoogleMap map) {
+        map.addMarker(new MarkerOptions().position(new LatLng(house.latitude, house.longitude)).title("Marker"));
     }
 }
