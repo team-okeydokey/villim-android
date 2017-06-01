@@ -8,14 +8,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
+import org.w3c.dom.Text;
+
 
 public class RoomDetailActivity extends AppCompatActivity {
 
-    private VillimRoom room;
+    private VillimRoom house;
 
     private AppBarLayout appBarLayout;
     private CollapsingToolbarLayout collapsingToolbarLayout;
@@ -24,6 +27,16 @@ public class RoomDetailActivity extends AppCompatActivity {
 
     private ImageView hostProfilePic;
     private TextView hostName;
+    private RatingBar hostRating;
+    private TextView hostReviewCount;
+
+    private TextView houseName;
+    private TextView houseAddress;
+
+    private TextView numGuest;
+    private TextView numBedroom;
+    private TextView numBed;
+    private TextView numBathroom;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,11 +71,36 @@ public class RoomDetailActivity extends AppCompatActivity {
         });
 
         /* View elements containing room info. */
+
+        /* Host Info */
         hostProfilePic = (ImageView) findViewById(R.id.host_profile_pic);
         hostName = (TextView) findViewById(R.id.host_name);
+        hostRating = (RatingBar) findViewById(R.id.host_review_rating);
+        hostReviewCount = (TextView) findViewById(R.id.host_review_count);
+
+        /* House Name and address */
+        houseName = (TextView) findViewById(R.id.house_name);
+        houseAddress = (TextView) findViewById(R.id.house_address);
+
+        /* Icons with house info */
+        numGuest = (TextView) findViewById(R.id.num_guest);
+        numBedroom = (TextView) findViewById(R.id.num_bedroom);
+        numBed = (TextView) findViewById(R.id.num_bed);
+        numBathroom = (TextView) findViewById(R.id.num_bathroom);
+
+        /* Extract room info and fill view elements with data */
+        house = extractRoomInfo();
         populateView();
 
     }
+
+    // Extract room info.
+    private VillimRoom extractRoomInfo() {
+        Bundle args = getIntent().getExtras();
+        house = args.getParcelable(getString(R.string.key_house));
+        return house;
+    }
+
 
     // Make this async.
     private void populateView() {
@@ -76,8 +114,25 @@ public class RoomDetailActivity extends AppCompatActivity {
                 .load(R.drawable.prugio_thumbnail)
                 .into(hostProfilePic);
 
-        /* Host Name */
-        hostName.setText("ㄹㄹ");
+        /* Host name and rating */
+        hostName.setText(house.hostName);
+        hostRating.setRating(house.hostRating);
+        String countText = String.format(getString(R.string.review_count_text), house.hostReviewCount);
+        hostReviewCount.setText(countText);
+
+        /* House Name and address */
+        houseName.setText(house.houseName);
+        houseAddress.setText(house.addrSummary);
+
+        /* Icons with house info */
+        String numGuestText = String.format(getString(R.string.num_guest_format, house.numGuest));
+        numGuest.setText(numGuestText);
+        String numBedroomText = String.format(getString(R.string.num_bedroom_format, house.numBedroom));
+        numBedroom.setText(numBedroomText);
+        String numBedText = String.format(getString(R.string.num_bed_format, house.numBed));
+        numBed.setText(numBedText);
+        String numBathroomText = String.format(getString(R.string.num_bathroom_format, house.numBathroom));
+        numBathroom.setText(numBathroomText);
     }
 
     @Override

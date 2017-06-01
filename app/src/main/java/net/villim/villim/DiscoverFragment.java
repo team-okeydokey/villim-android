@@ -81,6 +81,12 @@ public class DiscoverFragment extends Fragment {
             jsonItem.put(VillimRoom.KEY_HOST_ID, 1);
             jsonItem.put(VillimRoom.KEY_ROOM_POLICY, "Room Policy");
             jsonItem.put(VillimRoom.KEY_REFUND_POLICY, "Refund Policy");
+            jsonItem.put(VillimRoom.KEY_HOST_ID, 0);
+            jsonItem.put(VillimRoom.KEY_HOST_NAME, "Kim Woobin, 김우빈");
+            jsonItem.put(VillimRoom.KEY_HOST_RATING, 4.7);
+            jsonItem.put(VillimRoom.KEY_HOST_REVIEW_COUNT, 143);
+            jsonItem.put(VillimRoom.KEY_HOUSE_RATING, 3.6);
+            jsonItem.put(VillimRoom.KEY_HOUSE_REVIEW_COUNT, 72);
         } catch (JSONException e) {
 
         }

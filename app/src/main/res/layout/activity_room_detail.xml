@@ -72,16 +72,16 @@
                 <!-- Host name -->
                 <TextView
                     android:id="@+id/host_name"
-                    android:layout_toRightOf="@+id/host_profile_pic"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/host_profile_pic" />
 
                 <!-- Host review -->
                 <android.support.v7.widget.LinearLayoutCompat
-                    android:layout_toRightOf="@+id/host_profile_pic"
-                    android:layout_below="@+id/host_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_below="@+id/host_name"
+                    android:layout_toRightOf="@+id/host_profile_pic"
                     android:orientation="horizontal"
                     android:paddingLeft="8dp"
                     android:paddingRight="8dp">
@@ -114,23 +114,25 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:text="@string/contact_host"/>
+                    android:text="@string/contact_host" />
 
             </RelativeLayout>
             <!-- End host info -->
 
-            <!-- Room title & tags -->
+            <!-- House name & address -->
             <TextView
-                android:id="@+id/room_title"
+                android:id="@+id/house_name"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:maxLines="2" />
 
             <TextView
-                android:id="@+id/room_tags"
+                android:id="@+id/house_address"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:maxLines="1" />
 
-            <!-- End room title & tags -->
+            <!-- End house name & address -->
 
             <View
                 android:layout_width="match_parent"
@@ -157,7 +159,7 @@
                         android:src="@drawable/ic_whatshot_black_24dp" />
 
                     <TextView
-                        android:id="@+id/num_guests"
+                        android:id="@+id/num_guest"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center" />
@@ -176,7 +178,7 @@
                         android:src="@drawable/ic_whatshot_black_24dp" />
 
                     <TextView
-                        android:id="@+id/num_rooms"
+                        android:id="@+id/num_bedroom"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center" />
@@ -195,7 +197,7 @@
                         android:src="@drawable/ic_whatshot_black_24dp" />
 
                     <TextView
-                        android:id="@+id/num_beds"
+                        android:id="@+id/num_bed"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center" />
@@ -214,7 +216,7 @@
                         android:src="@drawable/ic_whatshot_black_24dp" />
 
                     <TextView
-                        android:id="@+id/num_baths"
+                        android:id="@+id/num_bathroom"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center" />

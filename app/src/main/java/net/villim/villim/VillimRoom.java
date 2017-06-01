@@ -37,7 +37,10 @@ public class VillimRoom implements Parcelable {
 
     public static final String KEY_HOST_ID = "host_id";
     public static final String KEY_HOST_NAME = "host_name";
-
+    public static final String KEY_HOST_RATING = "host_rating";
+    public static final String KEY_HOST_REVIEW_COUNT = "host_review_count";
+    public static final String KEY_HOUSE_RATING = "house_rating";
+    public static final String KEY_HOUSE_REVIEW_COUNT = "house_review_count";
 
 
     // Raw query from server.
@@ -48,7 +51,7 @@ public class VillimRoom implements Parcelable {
     public String addrDirection;
     public String description;
     public int numGuest;
-    public int numBedRoom;
+    public int numBedroom;
     public int numBed;
     public int numBathroom;
     public int housePrice;
@@ -59,11 +62,16 @@ public class VillimRoom implements Parcelable {
     public String roomPolicy;
     public String refundPolicy;
     public VillimUser host;
+    int hostId;
     String hostName;
+    float hostRating;
+    int hostReviewCount;
+    float houseRating;
+    int houseReviewCount;
 
 
-    public VillimReview[] reviews;
-    public int[] utilities;
+    //public VillimReview[] reviews;
+    //public int[] utilities;
 
     public VillimRoom(JSONObject jsonObject) {
         try {
@@ -74,7 +82,7 @@ public class VillimRoom implements Parcelable {
             addrDirection = jsonObject.getString(KEY_ADDR_DIRECTION);
             description = jsonObject.getString(KEY_DESCRIPTION);
             numGuest = jsonObject.getInt(KEY_NUM_GUEST);
-            numBedRoom = jsonObject.getInt(KEY_NUM_BEDROOM);
+            numBedroom = jsonObject.getInt(KEY_NUM_BEDROOM);
             numBed = jsonObject.getInt(KEY_NUM_BED);
             numBathroom = jsonObject.getInt(KEY_NUM_BATHROOM);
             housePrice = jsonObject.getInt(KEY_PRICE);
@@ -86,7 +94,12 @@ public class VillimRoom implements Parcelable {
             refundPolicy = jsonObject.getString(KEY_REFUND_POLICY);
 
             //host = VillimUser.getUserFromServer(jsonObject.getInt(KEY_HOST_ID));
+            hostId = jsonObject.getInt(KEY_HOST_ID);
             hostName = jsonObject.getString(KEY_HOST_NAME);
+            hostRating = (float) jsonObject.getDouble(KEY_HOST_RATING);
+            hostReviewCount = jsonObject.getInt(KEY_HOST_REVIEW_COUNT);
+            houseRating = (float) jsonObject.getDouble(KEY_HOUSE_RATING);
+            houseReviewCount = jsonObject.getInt(KEY_HOUSE_REVIEW_COUNT);
 
         } catch (JSONException e) {
 
@@ -114,6 +127,64 @@ public class VillimRoom implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-
+        dest.writeInt(houseId);
+        dest.writeString(houseName);
+        dest.writeString(addrFull);
+        dest.writeString(addrSummary);
+        dest.writeString(addrDirection);
+        dest.writeString(description);
+        dest.writeInt(numGuest);
+        dest.writeInt(numBedroom);
+        dest.writeInt(numBed);
+        dest.writeInt(numBathroom);
+        dest.writeInt(lockAddr);
+        dest.writeInt(lockPc);
+        dest.writeDouble(latitude);
+        dest.writeDouble(longitude);
+        dest.writeString(roomPolicy);
+        dest.writeString(refundPolicy);
+        dest.writeInt(hostId);
+        dest.writeString(hostName);
+        dest.writeFloat(hostRating);
+        dest.writeInt(hostReviewCount);
+        dest.writeFloat(houseRating);
+        dest.writeInt(houseReviewCount);
     }
+
+    protected VillimRoom(Parcel in) {
+        houseId = in.readInt();
+        houseName = in.readString();
+        addrFull = in.readString();
+        addrSummary = in.readString();
+        addrDirection = in.readString();
+        addrDirection = in.readString();
+        numGuest = in.readInt();
+        numBedroom = in.readInt();
+        numBed = in.readInt();
+        numBathroom = in.readInt();
+        lockAddr = in.readInt();
+        lockPc = in.readInt();
+        latitude = in.readDouble();
+        longitude = in.readDouble();
+        roomPolicy = in.readString();
+        refundPolicy = in.readString();
+        hostId = in.readInt();
+        hostName = in.readString();
+        hostRating = in.readFloat();
+        hostReviewCount = in.readInt();
+        houseRating = in.readFloat();
+        houseReviewCount = in.readInt();
+    }
+
+    public static final Creator<VillimRoom> CREATOR = new Creator<VillimRoom>() {
+        @Override
+        public VillimRoom createFromParcel(Parcel in) {
+            return new VillimRoom(in);
+        }
+
+        @Override
+        public VillimRoom[] newArray(int size) {
+            return new VillimRoom[size];
+        }
+    };
 }
