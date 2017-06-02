@@ -1,5 +1,6 @@
 package net.villim.villim;
 
+import android.content.Intent;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -52,6 +53,15 @@ public class MainActivity extends AppCompatActivity {
         searchFilterLocation = (TextView) findViewById(R.id.search_filter_location);
         searchFilterDate = (TextView) findViewById(R.id.search_filter_date);
 
+        searchFilterLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent = new Intent(MainActivity.this, SearchActivity.class);
+                MainActivity.this.startActivity(myIntent);
+
+            }
+        });
+
         /* Scroll behaviors */
         appBarLayout = (AppBarLayout) findViewById(R.id.app_bar_layout);
         appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
@@ -102,8 +112,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 appBarOpen = !appBarOpen;
                 appBarLayout.setExpanded(appBarOpen);
-//                Intent myIntent = new Intent(MainActivity.this, SearchActivity.class);
-//                MainActivity.this.startActivity(myIntent);
             }
         });
 
