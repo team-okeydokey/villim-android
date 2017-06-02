@@ -78,7 +78,7 @@ public class RoomDetailActivity extends AppCompatActivity implements OnMapReadyC
 
             @Override
             public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
-                if (verticalOffset == -appBarLayout.getTotalScrollRange()) {
+                if (verticalOffset == -appBarLayout.getTotalScrollRange()) { // Completely collapsed.
                     collapsingToolbarLayout.setTitle(getString(R.string.room_detail_title));
                     toolbar.getNavigationIcon().setColorFilter(getResources().getColor(R.color.arrow_dark), PorterDuff.Mode.SRC_ATOP);
                 } else {

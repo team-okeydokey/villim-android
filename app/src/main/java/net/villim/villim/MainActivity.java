@@ -1,6 +1,7 @@
 package net.villim.villim;
 
 import android.content.Intent;
+import android.graphics.PorterDuff;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -41,13 +42,27 @@ public class MainActivity extends AppCompatActivity {
         appBarOpen = false;
 
         /* Toolbar */
-        appBarLayout = (AppBarLayout) findViewById(R.id.app_bar_layout);
+
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbarTextView = (TextView) findViewById(R.id.toolbar_title);
         toolBarTitle = getString(R.string.app_name);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         setTitle(toolBarTitle);
+
+        /* Scroll behaviors */
+        appBarLayout = (AppBarLayout) findViewById(R.id.app_bar_layout);
+        appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
+
+            @Override
+            public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
+                if (verticalOffset == 0) { // Completely open.
+                    appBarOpen = true;
+                } else if (verticalOffset == -appBarLayout.getTotalScrollRange()) { // Completely collapsed.
+                    appBarOpen = false;
+                }
+            }
+        });
 
         /* Bototm tab */
         viewPager = (ViewPager) findViewById(R.id.view_pager);
