@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -21,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     private AppBarLayout appBarLayout;
     private Toolbar toolbar;
     private TextView toolbarTextView;
+    private ImageView toolbarLogo;
     private String[] tabItems;
     private int[] tabIcons;
     private CharSequence toolBarTitle;
@@ -43,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
         /* Toolbar */
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbarTextView = (TextView) findViewById(R.id.toolbar_title);
+        toolbarLogo = (ImageView) findViewById(R.id.toolbar_logo);
         toolBarTitle = getString(R.string.app_name);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -69,10 +72,19 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
                 if (verticalOffset == 0) { // Completely open.
+                    toolbarTextView.setTextColor(getResources().getColor(android.R.color.white));
+                    toolbarLogo.setColorFilter(getResources().getColor(android.R.color.white));
+                    toolbar.setBackgroundColor(getResources().getColor(R.color.search_filter_open));
                     appBarOpen = true;
                 } else if (verticalOffset == -appBarLayout.getTotalScrollRange()) { // Completely collapsed.
+                    toolbarTextView.setTextColor(getResources().getColor(R.color.colorPrimary));
+                    toolbarLogo.setColorFilter(getResources().getColor(R.color.colorPrimary));
+                    toolbar.setBackgroundColor(getResources().getColor(android.R.color.white));
                     appBarOpen = false;
                 } else {
+                    toolbarTextView.setTextColor(getResources().getColor(android.R.color.white));
+                    toolbarLogo.setColorFilter(getResources().getColor(android.R.color.white));
+                    toolbar.setBackgroundColor(getResources().getColor(R.color.search_filter_open));
                 }
             }
         });
@@ -110,6 +122,11 @@ public class MainActivity extends AppCompatActivity {
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+//                if (appBarOpen) {
+//                    toolbar.setBackgroundColor(getResources().getColor(android.R.color.white));
+//                } else {
+//                    toolbar.setBackgroundColor(getResources().getColor(R.color.search_filter_open));
+//                }
                 appBarOpen = !appBarOpen;
                 appBarLayout.setExpanded(appBarOpen);
             }
