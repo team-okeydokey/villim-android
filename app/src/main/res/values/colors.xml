@@ -17,6 +17,7 @@
     <!-- Main Activity -->
     <color name="main_background">#F0F1F2</color>
     <color name="main_toolbar_search_button">#333333</color>
+    <color name="search_filter_open">#ED2026</color>
 
     <!-- Navigation Buttons -->
     <color name="arrow_dark">#333333</color>

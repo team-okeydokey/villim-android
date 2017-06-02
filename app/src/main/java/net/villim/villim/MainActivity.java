@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
                     appBarOpen = false;
                     searchFilters.setVisibility(View.INVISIBLE);
                 } else {
-                    searchFilters.setVisibility(View.INVISIBLE);
+//                    searchFilters.setVisibility(View.INVISIBLE);
                 }
             }
         });
