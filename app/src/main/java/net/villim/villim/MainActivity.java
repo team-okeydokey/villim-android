@@ -119,6 +119,13 @@ public class MainActivity extends AppCompatActivity {
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
                 toolBarTitle = tabItems[position];
                 //setTitle(toolBarTitle);
+                // Fold search.
+                appBarLayout.setExpanded(false);
+                if (position != 0) { // Hide search button if not in discovery fragment.
+                    searchButton.setVisibility(View.INVISIBLE);
+                } else {
+                    searchButton.setVisibility(View.VISIBLE);
+                }
             }
 
         });
