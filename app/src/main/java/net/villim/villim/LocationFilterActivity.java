@@ -1,39 +1,33 @@
 package net.villim.villim;
 
-import android.app.DatePickerDialog;
-import android.app.Dialog;
 import android.content.Context;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.DialogFragment;
+import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.ListViewCompat;
 import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
-import java.util.Calendar;
-import java.util.Date;
 
 public class LocationFilterActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
     private RelativeLayout searchContainer;
+    private EditText searchField;
     private ListViewCompat popularLocationsListView;
     private VillimLocation[] popularLocations;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_search);
+        setContentView(R.layout.activity_location_filter);
 
         /* Toolbar */
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -45,6 +39,13 @@ public class LocationFilterActivity extends AppCompatActivity {
 
         /* Relative layout that contains the search area */
         searchContainer = (RelativeLayout) findViewById(R.id.search_container);
+        searchField = (EditText) findViewById(R.id.search_field);
+        int iconSize = getResources().getDimensionPixelSize(R.dimen.location_filter_icon_size);
+        Drawable searchIcon = getResources().getDrawable(R.drawable.btn_search);
+        Drawable clearIcon = getResources().getDrawable(R.drawable.btn_delete_gray);
+        searchIcon.setBounds(0, 0, iconSize, iconSize);
+        clearIcon.setBounds(0, 0, iconSize, iconSize);
+        searchField.setCompoundDrawables(searchIcon, null, clearIcon, null);
 
         /* Popular locations list */
         popularLocationsListView = (ListViewCompat) findViewById(R.id.search_popular_locations_listview);

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="toolbar_height">46dp</dimen>
-    <dimen name="toolbar_search_button_size">30dp</dimen>
+    <dimen name="toolbar_search_button_size">24dp</dimen>
 
     <!-- Bottom Tab -->
     <dimen name="tab_icon_size">25dp</dimen>
@@ -24,6 +24,8 @@
     <!-- Search Activity -->
     <dimen name="search_activity_padding">20dp</dimen>
     <dimen name="set_date_text_size">17sp</dimen>
+    <dimen name="location_filter_icon_size">25dp</dimen>
+    <dimen name="location_filter_drawable_padding">10dp</dimen>
 
     <!-- Proifile Fragment -->
     <dimen name="profile_image_diameter">130dp</dimen>
