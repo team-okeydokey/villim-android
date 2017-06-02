@@ -2,7 +2,6 @@ package net.villim.villim;
 
 import android.content.Context;
 import android.content.Intent;
-import android.media.Rating;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,44 +10,41 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-
-import org.w3c.dom.Text;
 
 /**
  * Created by seongmin on 5/26/17.
  */
 
 public class DiscoverRecyclerAdapter extends RecyclerView.Adapter<DiscoverRecyclerAdapter.ViewHolder> {
-    private DiscoverListObject[] roomList;
+    private VillimRoom[] houseList;
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
     // you provide access to all the views for a data item in a view holder
     public static class ViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
-        public ImageView roomThumbnail;
-        public TextView roomTitle;
-        public TextView roomPriceValue;
-        public RatingBar roomRatingBar;
-        public TextView roomRatingCount;
+        public ImageView houseThumbnail;
+        public TextView houseName;
+        public TextView housePriceValue;
+        public RatingBar houseRatingBar;
+        public TextView houseRatingCount;
 
 
         public ViewHolder(View v) {
             super(v);
-            roomThumbnail = (ImageView) v.findViewById(R.id.discover_room_thumbnail);
-            roomTitle = (TextView) v.findViewById(R.id.discover_room_title);
-            roomPriceValue = (TextView) v.findViewById(R.id.discover_room_price_value);
-            roomRatingBar = (RatingBar) v.findViewById(R.id.discover_room_review_rating);
-            roomRatingCount = (TextView) v.findViewById(R.id.discover_room_review_count);
+            houseThumbnail = (ImageView) v.findViewById(R.id.discover_room_thumbnail);
+            houseName = (TextView) v.findViewById(R.id.discover_room_title);
+            housePriceValue = (TextView) v.findViewById(R.id.discover_room_price_value);
+            houseRatingBar = (RatingBar) v.findViewById(R.id.discover_room_review_rating);
+            houseRatingCount = (TextView) v.findViewById(R.id.discover_room_review_count);
         }
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public DiscoverRecyclerAdapter(DiscoverListObject[] dataset) {
-        roomList = dataset;
+    public DiscoverRecyclerAdapter(VillimRoom[] dataset) {
+        houseList = dataset;
     }
 
     // Create new views (invoked by the layout manager)
@@ -59,7 +55,19 @@ public class DiscoverRecyclerAdapter extends RecyclerView.Adapter<DiscoverRecycl
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.discover_recycler_item, parent, false);
         // set the view's size, margins, paddings and layout parameters
-        ViewHolder vh = new ViewHolder(v);
+        final ViewHolder vh = new ViewHolder(v);
+        // Set onclick listener.
+        vh.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity mainActivity = (MainActivity) v.getContext();
+                Intent intent = new Intent(mainActivity, RoomDetailActivity.class);
+                Bundle args = new Bundle();
+                args.putParcelable(mainActivity.getString(R.string.key_house), houseList[vh.getAdapterPosition()]);
+                intent.putExtras(args);
+                mainActivity.startActivity(intent);
+            }
+        });
         return vh;
     }
 
@@ -68,46 +76,39 @@ public class DiscoverRecyclerAdapter extends RecyclerView.Adapter<DiscoverRecycl
     public void onBindViewHolder(ViewHolder holder, int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MainActivity mainActivity = (MainActivity) v.getContext();
-                Intent intent = new Intent(mainActivity, RoomDetailActivity.class);
-                Bundle args = new Bundle();
-                args.putString(mainActivity.getString(R.string.key_roomid), "0");
-                intent.putExtras(args);
-                mainActivity.startActivity(intent);
-            }
-        });
         populateView(holder, position);
     }
 
     // Make this async.
     private void populateView(ViewHolder holder, int position) {
         Context context = holder.itemView.getContext();
-        DiscoverListObject currItem = roomList[position];
+        VillimRoom currItem = houseList[position];
         /* Room Title */
-        holder.roomTitle.setText(currItem.data.get(context.getString(R.string.key_title)));
+        holder.houseName.setText(currItem.houseName);
         /* Room Rate */
-        String price = currItem.data.get(context.getString(R.string.key_price));
+        int price = currItem.housePrice;
         String priceText = String.format(context.getString(R.string.room_price_value, price));
-        holder.roomPriceValue.setText(priceText);
+        holder.housePriceValue.setText(priceText);
         /* Room Rating Value */
-        String rating = currItem.data.get(context.getString(R.string.key_review_rating));
-        holder.roomRatingBar.setRating(Float.parseFloat(rating));
+        holder.houseRatingBar.setRating(currItem.houseRating);
         /* Room Rating Count */
-        String count = currItem.data.get(context.getString(R.string.key_review_count));
-        String countText = String.format(context.getString(R.string.room_review_count_text), count);
-        holder.roomRatingCount.setText(countText);
+        int count = currItem.houseReviewCount;
+        String countText = String.format(context.getString(R.string.review_count_text), count);
+        holder.houseRatingCount.setText(countText);
         /* Room Tumbnail */
         Glide.with(context)
                 .load(R.drawable.prugio_thumbnail)
-                .into(holder.roomThumbnail);
+                .into(holder.houseThumbnail);
     }
+
 
     // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
-        return roomList.length;
+        return houseList.length;
+    }
+
+    private VillimRoom getHouseAtPosition(int position) {
+        return houseList[position];
     }
 }

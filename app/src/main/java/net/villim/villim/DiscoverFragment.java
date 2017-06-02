@@ -63,19 +63,38 @@ public class DiscoverFragment extends Fragment {
 
         JSONObject jsonItem = new JSONObject();
         try {
-            jsonItem.put(getString(R.string.key_roomid), "0");
-            jsonItem.put(getString(R.string.key_thumbnail), "[HongDae]1min from Hongik Univ.Stn");
-            jsonItem.put(getString(R.string.key_title), "[HongDae]1min from Hongik Univ.Stn");
-            jsonItem.put(getString(R.string.key_review_rating), "3.5");
-            jsonItem.put(getString(R.string.key_review_count), "25");
-            jsonItem.put(getString(R.string.key_price), "102,000");
+            jsonItem.put(VillimRoom.KEY_HOUSE_ID, 0);
+            jsonItem.put(VillimRoom.KEY_HOUSE_NAME, "[HongDae]1min from Hongik Univ.Stn");
+            jsonItem.put(VillimRoom.KEY_ADDR_FULL, "[HongDae]1min from Hongik Univ.Stn");
+            jsonItem.put(VillimRoom.KEY_ADDR_SUMMARY, "강남구, 서울, 한국");
+            jsonItem.put(VillimRoom.KEY_ADDR_DIRECTION, "[HongDae]1min from Hongik Univ.Stn");
+//            jsonItem.put(VillimRoom.KEY_DESCRIPTION, "1\n2\n3\n4\n5\n6");
+            jsonItem.put(VillimRoom.KEY_DESCRIPTION, "1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15");
+            jsonItem.put(VillimRoom.KEY_NUM_GUEST, 4);
+            jsonItem.put(VillimRoom.KEY_NUM_BEDROOM, 2);
+            jsonItem.put(VillimRoom.KEY_NUM_BED, 2);
+            jsonItem.put(VillimRoom.KEY_NUM_BATHROOM, 1);
+            jsonItem.put(VillimRoom.KEY_PRICE, 102000);
+            jsonItem.put(VillimRoom.KEY_LOCK_ADDR, 192);
+            jsonItem.put(VillimRoom.KEY_LOCK_PC, 244110);
+            jsonItem.put(VillimRoom.KEY_LATITUDE, 37.5172);
+            jsonItem.put(VillimRoom.KEY_LONGITUDE, 127.0413);
+            jsonItem.put(VillimRoom.KEY_HOST_ID, 1);
+            jsonItem.put(VillimRoom.KEY_ROOM_POLICY, "Room Policy");
+            jsonItem.put(VillimRoom.KEY_REFUND_POLICY, "Refund Policy");
+            jsonItem.put(VillimRoom.KEY_HOST_ID, 0);
+            jsonItem.put(VillimRoom.KEY_HOST_NAME, "Kim Woobin, 김우빈");
+            jsonItem.put(VillimRoom.KEY_HOST_RATING, 4.7);
+            jsonItem.put(VillimRoom.KEY_HOST_REVIEW_COUNT, 143);
+            jsonItem.put(VillimRoom.KEY_HOUSE_RATING, 3.6);
+            jsonItem.put(VillimRoom.KEY_HOUSE_REVIEW_COUNT, 72);
         } catch (JSONException e) {
 
         }
 
-        DiscoverListObject obj = new DiscoverListObject(jsonItem);
+        VillimRoom obj = new VillimRoom(jsonItem);
 
-        DiscoverListObject[] exampleArray = {obj, obj, obj, obj, obj, obj, obj, obj, obj};
+        VillimRoom[] exampleArray = {obj, obj, obj, obj, obj, obj, obj, obj, obj};
 
         adapter = new DiscoverRecyclerAdapter(exampleArray);
         recyclerView.setAdapter(adapter);

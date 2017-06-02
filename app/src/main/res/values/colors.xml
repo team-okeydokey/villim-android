@@ -1,16 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#ED4B17</color>
+    <color name="colorPrimary">#ef4822</color>
     <color name="colorPrimaryDark">#ED4B17</color>
     <color name="colorAccent">#FF4081</color>
 
-    <!-- Font Colots -->
+    <!-- Font Colors -->
     <color name="h2">#a0a0a0</color>
     <color name="h3">#A0A0A0</color>
+
+    <!-- Tab Colors -->
+    <color name="tab_selected">#ff5848</color>
+    <color name="tab_unselected">#aaaaaa</color>
+
+    <color name="dark_bottom_bar">#2A2C32</color>
 
     <!-- Main Activity -->
     <color name="main_background">#F0F1F2</color>
     <color name="main_toolbar_search_button">#333333</color>
+    <color name="search_filter_open">#ED2026</color>
 
     <!-- Navigation Buttons -->
     <color name="arrow_dark">#333333</color>
@@ -20,13 +27,16 @@
     <color name="search_background">#F0F1F2</color>
     <color name="search_hint">#A7A7A8</color>
     <color name="search_highlight">#05060B</color>
-    <color name="search_bottom_bar">#2A2C32</color>
     <color name="search_suggestion_title">#05060b</color>
     <color name="search_suggestion_name">#333333</color>
     <color name="search_suggestion_detail">#585757</color>
 
     <!-- Discovery Fragment -->
     <color name="rating_color">#51ACCF</color>
+
+    <!-- Room Detail Activity -->
+    <color name="room_detail_background">#F0F1F2</color>
+    <color name="divider_color">#C7C7C7</color>
 
 
     <!-- Profile Fragment -->

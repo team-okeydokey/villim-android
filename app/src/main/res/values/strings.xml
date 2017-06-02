@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Villim</string>
+    <string name="google_maps_key">AIzaSyC0Ui9AQ7SMfnXl6QEreRtDMol4_zD1MoM</string>
 
     <!-- Tab Items -->
     <string-array name="tab_items">
@@ -12,7 +13,19 @@
     <string name="drawer_open">메뉴 열기</string>
     <string name="drawer_close">메뉴 닫기</string>
 
-    <!-- Search Avtivity -->
+    <!-- Room info JSON Keys -->
+    <string name="key_host_name">host_name</string>
+    <string name="key_host_review_rating">host_review_rating</string>
+    <string name="key_host_review_count">key_host_review_count</string>
+    <string name="key_tags">tags</string>
+    <string name="key_num_guests">num_guests</string>
+    <string name="key_num_rooms">num_rooms</string>
+    <string name="key_num_beds">num_beds</string>
+    <string name="key_num_baths">num_baths</string>
+
+    <!-- Search Activity -->
+    <string name="search_hint_location">\u0020 모든 위치</string>
+    <string name="search_hint_date">\u0020 날짜 설정</string>
     <string name="search_title">검색하기</string>
     <string name="search_hint">어디로 가세요?</string>
     <string name="search_from_date">부터</string>
@@ -25,18 +38,25 @@
     <string name="invalid_date_selected">날짜가 올바르지 않습니다.</string>
 
     <!-- Discover Fragment -->
-    <string name="key_roomid">key_roomid</string>
-    <string name="key_thumbnail">key_thumbnail</string>
-    <string name="key_title">key_title</string>
-    <string name="key_review_rating">key_review_rating</string>
-    <string name="key_review_count">key_review_num</string>
-    <string name="key_price">key_price</string>
-    <string name="room_price_value" formatted="false">₩ %s</string>
+    <string name="key_house">key_house</string>
+    <string name="room_price_value" formatted="false">₩ %d</string>
     <string name="room_price_text" formatted="false">\u0020/ 박</string>
-    <string name="room_review_count_text" formatted="false">후기 %s개</string>
+    <string name="review_count_text" formatted="false">후기 %d개</string>
 
     <!-- Room Detail Activity -->
     <string name="room_detail_title">방 정보</string>
+    <string name="contact_host">호스트에게 연락</string>
+    <string name="num_guest_format">인원 %d명</string>
+    <string name="num_bedroom_format">방 %d개</string>
+    <string name="num_bed_format">침대 %d개</string>
+    <string name="num_bathroom_format">욕실 %d개</string>
+    <string name="description_title">상세 설명</string>
+    <string name="amenities_title">시설</string>
+    <string name="see_more">+ 더보기</string>
+    <string name="read_more">읽기</string>
+    <string name="house_policy">숙소 이용규칙</string>
+    <string name="cancellation_policy">환불 정책</string>
+    <string name="cancellation_strict">엄격</string>
 
     <!-- MyRoom Fragment -->
     <string name="myroom_title">내 방</string>

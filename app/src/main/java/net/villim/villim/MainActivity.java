@@ -1,6 +1,7 @@
 package net.villim.villim;
 
 import android.content.Intent;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -11,39 +12,91 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 
 public class MainActivity extends AppCompatActivity {
 
+    private AppBarLayout appBarLayout;
     private Toolbar toolbar;
     private TextView toolbarTextView;
+    private ImageView toolbarLogo;
     private String[] tabItems;
     private int[] tabIcons;
     private CharSequence toolBarTitle;
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private Button searchButton;
+    private RelativeLayout searchFilters;
+    private TextView searchFilterLocation;
+    private TextView searchFilterDate;
+
+    private boolean appBarOpen;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        appBarOpen = false;
+
         /* Toolbar */
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbarTextView = (TextView) findViewById(R.id.toolbar_title);
+        toolbarLogo = (ImageView) findViewById(R.id.toolbar_logo);
         toolBarTitle = getString(R.string.app_name);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         setTitle(toolBarTitle);
+
+        /* Search Filters */
+        searchFilters = (RelativeLayout) findViewById(R.id.search_filters);
+        searchFilterLocation = (TextView) findViewById(R.id.search_filter_location);
+        searchFilterDate = (TextView) findViewById(R.id.search_filter_date);
+
+        searchFilterLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent = new Intent(MainActivity.this, SearchActivity.class);
+                MainActivity.this.startActivity(myIntent);
+
+            }
+        });
+
+        /* Scroll behaviors */
+        appBarLayout = (AppBarLayout) findViewById(R.id.app_bar_layout);
+        appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
+
+            @Override
+            public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
+                if (verticalOffset == 0) { // Completely open.
+                    toolbarTextView.setTextColor(getResources().getColor(android.R.color.white));
+                    toolbarLogo.setColorFilter(getResources().getColor(android.R.color.white));
+                    toolbar.setBackgroundColor(getResources().getColor(R.color.search_filter_open));
+                    appBarOpen = true;
+                } else if (verticalOffset == -appBarLayout.getTotalScrollRange()) { // Completely collapsed.
+                    toolbarTextView.setTextColor(getResources().getColor(R.color.colorPrimary));
+                    toolbarLogo.setColorFilter(getResources().getColor(R.color.colorPrimary));
+                    toolbar.setBackgroundColor(getResources().getColor(android.R.color.white));
+                    appBarOpen = false;
+                } else {
+                    toolbarTextView.setTextColor(getResources().getColor(android.R.color.white));
+                    toolbarLogo.setColorFilter(getResources().getColor(android.R.color.white));
+                    toolbar.setBackgroundColor(getResources().getColor(R.color.search_filter_open));
+                }
+            }
+        });
+
+        appBarLayout.setExpanded(false);
 
         /* Bototm tab */
         viewPager = (ViewPager) findViewById(R.id.view_pager);
         tabItems = getResources().getStringArray(R.array.tab_items);
         tabIcons = getResources().getIntArray(R.array.tab_icons);
         // Set default screen to 방 찾기.
-        TabAdapter tabAdapter = new TabAdapter(getSupportFragmentManager());
+        final TabAdapter tabAdapter = new TabAdapter(getSupportFragmentManager());
         viewPager.setAdapter(tabAdapter);
         viewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
 
@@ -69,10 +122,19 @@ public class MainActivity extends AppCompatActivity {
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent myIntent = new Intent(MainActivity.this, SearchActivity.class);
-                MainActivity.this.startActivity(myIntent);
+//                if (appBarOpen) {
+//                    toolbar.setBackgroundColor(getResources().getColor(android.R.color.white));
+//                } else {
+//                    toolbar.setBackgroundColor(getResources().getColor(R.color.search_filter_open));
+//                }
+                appBarOpen = !appBarOpen;
+                appBarLayout.setExpanded(appBarOpen);
             }
         });
+
+//        Glide.with(this)
+//                .load(R.drawable.prugio_thumbnail)
+//                .into((ImageView) findViewById(R.id.toolbar_image));
 
     }
 
@@ -127,6 +189,11 @@ public class MainActivity extends AppCompatActivity {
         toolbarTextView.setText(toolBarTitle);
     }
 
+
+    private void highlightTab(int position) {
+//        tabLayout.getTabAt(position).getIcon().setColorFilter("#abffab");
+//        ((TextView)tabLayout.getTabAt(position).getCustomView().findViewById(R.id.text1)).setTextColor("#abffab");
+    }
 //
 
 }
