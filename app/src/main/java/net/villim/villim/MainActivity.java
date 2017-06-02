@@ -74,17 +74,17 @@ public class MainActivity extends AppCompatActivity {
             public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
                 if (verticalOffset == 0) { // Completely open.
 //                    toolbarTextView.setTextColor(getResources().getColor(android.R.color.white));
-                    toolbarLogo.setColorFilter(getResources().getColor(android.R.color.white));
+                    toolbarLogo.setImageResource(R.drawable.logo_horizontal_white);
                     toolbar.setBackgroundColor(getResources().getColor(R.color.search_filter_open));
                     appBarOpen = true;
                 } else if (verticalOffset == -appBarLayout.getTotalScrollRange()) { // Completely collapsed.
 //                    toolbarTextView.setTextColor(getResources().getColor(R.color.colorPrimary));
-                    toolbarLogo.setColorFilter(getResources().getColor(R.color.colorPrimary));
+                    toolbarLogo.setImageResource(R.drawable.logo_horizontal_red);
                     toolbar.setBackgroundColor(getResources().getColor(android.R.color.white));
                     appBarOpen = false;
                 } else {
 //                    toolbarTextView.setTextColor(getResources().getColor(android.R.color.white));
-                    toolbarLogo.setColorFilter(getResources().getColor(android.R.color.white));
+                    toolbarLogo.setImageResource(R.drawable.logo_horizontal_white);
                     toolbar.setBackgroundColor(getResources().getColor(R.color.search_filter_open));
                 }
             }
