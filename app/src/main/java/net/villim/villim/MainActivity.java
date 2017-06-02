@@ -87,16 +87,19 @@ public class MainActivity extends AppCompatActivity {
 //                    toolbarTextView.setTextColor(getResources().getColor(android.R.color.white));
                     toolbarLogo.setImageResource(R.drawable.logo_horizontal_white);
                     toolbar.setBackgroundColor(getResources().getColor(R.color.search_filter_open));
+                    searchButton.setBackground(getResources().getDrawable(R.drawable.btn_up_arrow));
                     appBarOpen = true;
                 } else if (verticalOffset == -appBarLayout.getTotalScrollRange()) { // Completely collapsed.
 //                    toolbarTextView.setTextColor(getResources().getColor(R.color.colorPrimary));
                     toolbarLogo.setImageResource(R.drawable.logo_horizontal_red);
                     toolbar.setBackgroundColor(getResources().getColor(android.R.color.white));
+                    searchButton.setBackground(getResources().getDrawable(R.drawable.btn_search));
                     appBarOpen = false;
                 } else {
 //                    toolbarTextView.setTextColor(getResources().getColor(android.R.color.white));
                     toolbarLogo.setImageResource(R.drawable.logo_horizontal_white);
                     toolbar.setBackgroundColor(getResources().getColor(R.color.search_filter_open));
+                    searchButton.setBackground(getResources().getDrawable(R.drawable.btn_up_arrow));
                 }
             }
         });
