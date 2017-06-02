@@ -22,8 +22,45 @@
             android:layout_height="match_parent"
             android:fitsSystemWindows="true"
             app:contentScrim="?attr/colorPrimary"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:titleEnabled="false">
+
+
+            <RelativeLayout
+                android:id="@+id/search_filters"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/search_filter_open"
+                android:fitsSystemWindows="true"
+                android:paddingLeft="@dimen/search_filter_padding"
+                android:paddingRight="@dimen/search_filter_padding"
+                android:paddingTop="@dimen/search_filter_upper_padding"
+                app:layout_collapseMode="parallax">
+
+                <TextView
+                    android:id="@+id/search_filter_location"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/toolbar_height"
+                    android:layout_centerHorizontal="true"
+                    android:drawableLeft="@drawable/ic_whatshot_black_24dp"
+                    android:gravity="left|center_vertical"
+                    android:text="@string/search_hint_location"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/search_filter_text_size" />
+
+                <TextView
+                    android:id="@+id/search_filter_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/toolbar_height"
+                    android:layout_below="@id/search_filter_location"
+                    android:layout_centerHorizontal="true"
+                    android:drawableLeft="@drawable/ic_whatshot_black_24dp"
+                    android:gravity="left|center_vertical"
+                    android:text="@string/search_hint_date"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/search_filter_text_size" />
+
+            </RelativeLayout>
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
@@ -72,43 +109,6 @@
                     android:background="@drawable/search_button_style"></Button>
 
             </android.support.v7.widget.Toolbar>
-
-            <RelativeLayout
-                android:id="@+id/search_filters"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/search_filter_open"
-                android:fitsSystemWindows="true"
-                android:paddingLeft="@dimen/search_filter_padding"
-                android:paddingRight="@dimen/search_filter_padding"
-                android:paddingTop="@dimen/search_filter_upper_padding"
-                app:layout_collapseMode="parallax">
-
-                <TextView
-                    android:id="@+id/search_filter_location"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/toolbar_height"
-                    android:layout_centerHorizontal="true"
-                    android:textColor="@android:color/white"
-                    android:drawableLeft="@drawable/ic_whatshot_black_24dp"
-                    android:gravity="left|center_vertical"
-                    android:text="@string/search_hint_location"
-                    android:textSize="@dimen/search_filter_text_size" />
-
-                <TextView
-                    android:id="@+id/search_filter_date"
-                    android:layout_width="match_parent"
-                    android:textColor="@android:color/white"
-                    android:layout_height="@dimen/toolbar_height"
-                    android:layout_below="@id/search_filter_location"
-                    android:layout_centerHorizontal="true"
-                    android:drawableLeft="@drawable/ic_whatshot_black_24dp"
-                    android:gravity="left|center_vertical"
-                    android:text="@string/search_hint_date"
-                    android:textSize="@dimen/search_filter_text_size" />
-
-            </RelativeLayout>
-
 
         </android.support.design.widget.CollapsingToolbarLayout>
 

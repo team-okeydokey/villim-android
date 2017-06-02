@@ -67,6 +67,12 @@ public class MainActivity extends AppCompatActivity {
                     searchFilters.setVisibility(View.INVISIBLE);
                 } else {
 //                    searchFilters.setVisibility(View.INVISIBLE);
+                    int maxOffset = appBarLayout.getTotalScrollRange();
+                    int fromColor = getResources().getColor(android.R.color.white);
+                    int toColor = getResources().getColor(R.color.search_filter_open);
+                    int color = (maxOffset - verticalOffset) / maxOffset * (toColor - fromColor) + fromColor;
+                    toolbar.setBackgroundColor(color);
+                    searchFilters.setBackgroundColor(color);
                 }
             }
         });
