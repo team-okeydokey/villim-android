@@ -67,7 +67,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:background="@drawable/tab"
-            android:elevation="3dp" />
+            android:elevation="3dp"
+            android:tabStripEnabled="false"
+            app:tabIndicatorColor="@android:color/transparent" />
 
     </android.support.v4.view.ViewPager>
 </RelativeLayout>
