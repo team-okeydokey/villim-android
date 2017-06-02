@@ -56,7 +56,17 @@ public class MainActivity extends AppCompatActivity {
         searchFilters = (RelativeLayout) findViewById(R.id.search_filters);
         searchFilterLocation = (TextView) findViewById(R.id.search_filter_location);
         searchFilterDate = (TextView) findViewById(R.id.search_filter_date);
-
+        /* Set search filter icons */
+        int markerSize = getResources().getDimensionPixelSize(R.dimen.marker_icon_size);
+        int calendarWidth = getResources().getDimensionPixelSize(R.dimen.calendar_icon_width);;
+        int calendarHeight = getResources().getDimensionPixelSize(R.dimen.calendar_icon_height);;
+        Drawable markerIcon = getResources().getDrawable(R.drawable.icon_marker);
+        Drawable calendarIcon = getResources().getDrawable(R.drawable.icon_calendar);
+        markerIcon.setBounds(0, 0, markerSize, markerSize);
+        calendarIcon.setBounds(0, 0, calendarWidth,calendarHeight);
+        searchFilterLocation.setCompoundDrawables(markerIcon, null, null, null);
+        searchFilterDate.setCompoundDrawables(calendarIcon, null, null, null);
+        /* Launch filter activities */
         searchFilterLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
