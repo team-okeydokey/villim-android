@@ -48,6 +48,8 @@ public class MyRoomFragment extends Fragment {
 
         transaction.commit();
 
+
+
         return view;
     }
 
