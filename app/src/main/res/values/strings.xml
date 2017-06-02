@@ -5,9 +5,8 @@
     <!-- Tab Items -->
     <string-array name="tab_items">
         <item>숙소 찾기</item>
-        <item>찜 목록</item>
-        <item>내 방</item>
-        <item>메시지</item>
+        <item>내 열쇠</item>
+        <item>방문목록</item>
         <item>프로필</item>
     </string-array>
     <string name="drawer_open">메뉴 열기</string>

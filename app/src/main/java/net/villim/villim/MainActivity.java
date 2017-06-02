@@ -155,13 +155,13 @@ public class MainActivity extends AppCompatActivity {
                 case 0:
                     return DiscoverFragment.newInstance();
                 case 1:
-                    return WishListFragment.newInstance();
-                case 2:
                     return MyRoomFragment.newInstance();
+                case 2:
+                    return WishListFragment.newInstance();
                 case 3:
-                    return MessageFragment.newInstance();
-                case 4:
                     return ProfileFragment.newInstance();
+                case 4:
+                    return WishListFragment.newInstance();
                 default:
                     return null;
             }
