@@ -1,6 +1,7 @@
 package net.villim.villim;
 
 import android.content.Intent;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -18,6 +19,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 
 public class MainActivity extends AppCompatActivity {
 
+    private AppBarLayout appBarLayout;
     private Toolbar toolbar;
     private TextView toolbarTextView;
     private String[] tabItems;
@@ -27,12 +29,17 @@ public class MainActivity extends AppCompatActivity {
     private ViewPager viewPager;
     private Button searchButton;
 
+    private boolean appBarOpen;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        appBarOpen = false;
+
         /* Toolbar */
+        appBarLayout = (AppBarLayout) findViewById(R.id.app_bar_layout);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbarTextView = (TextView) findViewById(R.id.toolbar_title);
         toolBarTitle = getString(R.string.app_name);
@@ -53,8 +60,6 @@ public class MainActivity extends AppCompatActivity {
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
                 toolBarTitle = tabItems[position];
                 //setTitle(toolBarTitle);
-                /* Highlight the selected tab */
-
             }
 
         });
@@ -73,8 +78,10 @@ public class MainActivity extends AppCompatActivity {
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent myIntent = new Intent(MainActivity.this, SearchActivity.class);
-                MainActivity.this.startActivity(myIntent);
+                appBarOpen = !appBarOpen;
+                appBarLayout.setExpanded(appBarOpen);
+//                Intent myIntent = new Intent(MainActivity.this, SearchActivity.class);
+//                MainActivity.this.startActivity(myIntent);
             }
         });
 
