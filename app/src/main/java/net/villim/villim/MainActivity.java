@@ -1,7 +1,5 @@
 package net.villim.villim;
 
-import android.content.Intent;
-import android.graphics.PorterDuff;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -13,11 +11,8 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
-
-import com.bumptech.glide.Glide;
-import com.google.android.gms.maps.SupportMapFragment;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -31,6 +26,9 @@ public class MainActivity extends AppCompatActivity {
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private Button searchButton;
+    private RelativeLayout searchFilters;
+    private TextView searchFilterLocation;
+    private TextView searchFilterDate;
 
     private boolean appBarOpen;
 
@@ -42,13 +40,18 @@ public class MainActivity extends AppCompatActivity {
         appBarOpen = false;
 
         /* Toolbar */
-
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbarTextView = (TextView) findViewById(R.id.toolbar_title);
         toolBarTitle = getString(R.string.app_name);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         setTitle(toolBarTitle);
+
+        /* Search Filters */
+        searchFilters = (RelativeLayout) findViewById(R.id.search_filters);
+        searchFilterLocation = (TextView) findViewById(R.id.search_filter_location);
+        searchFilterDate = (TextView) findViewById(R.id.search_filter_date);
+        searchFilters.setVisibility(View.INVISIBLE);
 
         /* Scroll behaviors */
         appBarLayout = (AppBarLayout) findViewById(R.id.app_bar_layout);
@@ -58,11 +61,17 @@ public class MainActivity extends AppCompatActivity {
             public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
                 if (verticalOffset == 0) { // Completely open.
                     appBarOpen = true;
+                    searchFilters.setVisibility(View.VISIBLE);
                 } else if (verticalOffset == -appBarLayout.getTotalScrollRange()) { // Completely collapsed.
                     appBarOpen = false;
+                    searchFilters.setVisibility(View.INVISIBLE);
+                } else {
+                    searchFilters.setVisibility(View.INVISIBLE);
                 }
             }
         });
+
+        appBarLayout.setExpanded(false);
 
         /* Bototm tab */
         viewPager = (ViewPager) findViewById(R.id.view_pager);
