@@ -1,6 +1,8 @@
 package net.villim.villim;
 
 import android.content.Intent;
+import android.graphics.Paint;
+import android.graphics.drawable.Drawable;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -21,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
     private AppBarLayout appBarLayout;
     private Toolbar toolbar;
-    private TextView toolbarTextView;
+//    private TextView toolbarTextView;
     private ImageView toolbarLogo;
     private String[] tabItems;
     private int[] tabIcons;
@@ -44,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
         /* Toolbar */
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbarTextView = (TextView) findViewById(R.id.toolbar_title);
+//        toolbarTextView = (TextView) findViewById(R.id.toolbar_title);
         toolbarLogo = (ImageView) findViewById(R.id.toolbar_logo);
         toolBarTitle = getString(R.string.app_name);
         setSupportActionBar(toolbar);
@@ -55,11 +57,21 @@ public class MainActivity extends AppCompatActivity {
         searchFilters = (RelativeLayout) findViewById(R.id.search_filters);
         searchFilterLocation = (TextView) findViewById(R.id.search_filter_location);
         searchFilterDate = (TextView) findViewById(R.id.search_filter_date);
-
+        /* Set search filter icons */
+        int markerSize = getResources().getDimensionPixelSize(R.dimen.marker_icon_size);
+        int calendarWidth = getResources().getDimensionPixelSize(R.dimen.calendar_icon_width);;
+        int calendarHeight = getResources().getDimensionPixelSize(R.dimen.calendar_icon_height);;
+        Drawable markerIcon = getResources().getDrawable(R.drawable.icon_marker);
+        Drawable calendarIcon = getResources().getDrawable(R.drawable.icon_calendar);
+        markerIcon.setBounds(0, 0, markerSize, markerSize);
+        calendarIcon.setBounds(0, 0, calendarWidth,calendarHeight);
+        searchFilterLocation.setCompoundDrawables(markerIcon, null, null, null);
+        searchFilterDate.setCompoundDrawables(calendarIcon, null, null, null);
+        /* Launch filter activities */
         searchFilterLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent myIntent = new Intent(MainActivity.this, SearchActivity.class);
+                Intent myIntent = new Intent(MainActivity.this, LocationFilterActivity.class);
                 MainActivity.this.startActivity(myIntent);
 
             }
@@ -72,18 +84,18 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
                 if (verticalOffset == 0) { // Completely open.
-                    toolbarTextView.setTextColor(getResources().getColor(android.R.color.white));
-                    toolbarLogo.setColorFilter(getResources().getColor(android.R.color.white));
+//                    toolbarTextView.setTextColor(getResources().getColor(android.R.color.white));
+                    toolbarLogo.setImageResource(R.drawable.logo_horizontal_white);
                     toolbar.setBackgroundColor(getResources().getColor(R.color.search_filter_open));
                     appBarOpen = true;
                 } else if (verticalOffset == -appBarLayout.getTotalScrollRange()) { // Completely collapsed.
-                    toolbarTextView.setTextColor(getResources().getColor(R.color.colorPrimary));
-                    toolbarLogo.setColorFilter(getResources().getColor(R.color.colorPrimary));
+//                    toolbarTextView.setTextColor(getResources().getColor(R.color.colorPrimary));
+                    toolbarLogo.setImageResource(R.drawable.logo_horizontal_red);
                     toolbar.setBackgroundColor(getResources().getColor(android.R.color.white));
                     appBarOpen = false;
                 } else {
-                    toolbarTextView.setTextColor(getResources().getColor(android.R.color.white));
-                    toolbarLogo.setColorFilter(getResources().getColor(android.R.color.white));
+//                    toolbarTextView.setTextColor(getResources().getColor(android.R.color.white));
+                    toolbarLogo.setImageResource(R.drawable.logo_horizontal_white);
                     toolbar.setBackgroundColor(getResources().getColor(R.color.search_filter_open));
                 }
             }
@@ -114,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
         for (int i = 0; i < tabLayout.getTabCount(); i++) {
             TabLayout.Tab tab = tabLayout.getTabAt(i);
             tab.setCustomView(R.layout.tab);
-            tab.setIcon(R.drawable.ic_whatshot_black_24dp);
+            tab.setIcon(getTabIcon(i));
         }
 
         /* Search Button */
@@ -155,13 +167,13 @@ public class MainActivity extends AppCompatActivity {
                 case 0:
                     return DiscoverFragment.newInstance();
                 case 1:
-                    return WishListFragment.newInstance();
-                case 2:
                     return MyRoomFragment.newInstance();
+                case 2:
+                    return WishListFragment.newInstance();
                 case 3:
-                    return MessageFragment.newInstance();
-                case 4:
                     return ProfileFragment.newInstance();
+                case 4:
+                    return WishListFragment.newInstance();
                 default:
                     return null;
             }
@@ -186,9 +198,19 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void setTitle(CharSequence title) {
         toolBarTitle = title;
-        toolbarTextView.setText(toolBarTitle);
+//        toolbarTextView.setText(toolBarTitle);
     }
 
+    private Drawable getTabIcon(int i) {
+        switch (i) {
+            case 0: return getResources().getDrawable(R.drawable.icon_find_place_nor);
+            case 1: return getResources().getDrawable(R.drawable.icon_lock_nor);
+            case 2: return getResources().getDrawable(R.drawable.icon_correct_nor);
+            case 3: return getResources().getDrawable(R.drawable.icon_profile_nor);
+            default: return getResources().getDrawable(R.drawable.icon_profile_nor);
+
+        }
+    }
 
     private void highlightTab(int position) {
 //        tabLayout.getTabAt(position).getIcon().setColorFilter("#abffab");
