@@ -1,6 +1,7 @@
 package net.villim.villim;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -114,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
         for (int i = 0; i < tabLayout.getTabCount(); i++) {
             TabLayout.Tab tab = tabLayout.getTabAt(i);
             tab.setCustomView(R.layout.tab);
-            tab.setIcon(R.drawable.ic_whatshot_black_24dp);
+            tab.setIcon(getTabIcon(i));
         }
 
         /* Search Button */
@@ -189,6 +190,16 @@ public class MainActivity extends AppCompatActivity {
         toolbarTextView.setText(toolBarTitle);
     }
 
+    private Drawable getTabIcon(int i) {
+        switch (i) {
+            case 0: return getResources().getDrawable(R.drawable.icon_find_place_nor);
+            case 1: return getResources().getDrawable(R.drawable.icon_lock_nor);
+            case 2: return getResources().getDrawable(R.drawable.icon_correct_nor);
+            case 3: return getResources().getDrawable(R.drawable.icon_profile_nor);
+            default: return getResources().getDrawable(R.drawable.icon_profile_nor);
+
+        }
+    }
 
     private void highlightTab(int position) {
 //        tabLayout.getTabAt(position).getIcon().setColorFilter("#abffab");
