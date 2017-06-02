@@ -11,13 +11,15 @@
         android:id="@android:id/icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:tint="@color/tab_color_selection" />
 
     <TextView
         android:id="@android:id/text1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@android:id/icon"
-        android:gravity="center" />
+        android:gravity="center"
+        android:textColor="@color/tab_color_selection" />
 
 </RelativeLayout>

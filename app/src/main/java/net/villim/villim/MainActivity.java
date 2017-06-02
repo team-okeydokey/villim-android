@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         tabItems = getResources().getStringArray(R.array.tab_items);
         tabIcons = getResources().getIntArray(R.array.tab_icons);
         // Set default screen to 방 찾기.
-        TabAdapter tabAdapter = new TabAdapter(getSupportFragmentManager());
+        final TabAdapter tabAdapter = new TabAdapter(getSupportFragmentManager());
         viewPager.setAdapter(tabAdapter);
         viewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
 
@@ -53,6 +53,8 @@ public class MainActivity extends AppCompatActivity {
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
                 toolBarTitle = tabItems[position];
                 //setTitle(toolBarTitle);
+                /* Highlight the selected tab */
+
             }
 
         });
@@ -129,6 +131,11 @@ public class MainActivity extends AppCompatActivity {
         toolbarTextView.setText(toolBarTitle);
     }
 
+
+    private void highlightTab(int position) {
+//        tabLayout.getTabAt(position).getIcon().setColorFilter("#abffab");
+//        ((TextView)tabLayout.getTabAt(position).getCustomView().findViewById(R.id.text1)).setTextColor("#abffab");
+    }
 //
 
 }

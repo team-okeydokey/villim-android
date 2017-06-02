@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#ED4B17</color>
+    <color name="colorPrimary">#ef4822</color>
     <color name="colorPrimaryDark">#ED4B17</color>
     <color name="colorAccent">#FF4081</color>
 
-    <!-- Font Colots -->
+    <!-- Font Colors -->
     <color name="h2">#a0a0a0</color>
     <color name="h3">#A0A0A0</color>
+
+    <!-- Tab Colors -->
+    <color name="tab_selected">#ff5848</color>
+    <color name="tab_unselected">#aaaaaa</color>
 
     <color name="dark_bottom_bar">#2A2C32</color>
 
