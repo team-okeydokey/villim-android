@@ -9,23 +9,25 @@
         android:layout_width="match_parent"
         android:layout_height="5dp"
         android:layout_centerVertical="true"
-        android:background="#ff6f7fe2" />
+        android:background="@color/colorPrimary" />
 
     <Button
         android:id="@+id/bottom_button_left"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:layout_centerVertical="true"
         android:layout_toLeftOf="@+id/bottom_button_right"
         android:background="@drawable/circle" />
 
     <Button
         android:id="@+id/bottom_button_right"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:layout_margin="20dp"
+        android:layout_gravity="bottom"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:background="@drawable/circle" />
 
 </RelativeLayout>
