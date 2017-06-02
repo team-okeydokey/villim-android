@@ -23,7 +23,7 @@ import android.widget.TextView;
 import java.util.Calendar;
 import java.util.Date;
 
-public class SearchActivity extends AppCompatActivity {
+public class LocationFilterActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
     private RelativeLayout searchContainer;

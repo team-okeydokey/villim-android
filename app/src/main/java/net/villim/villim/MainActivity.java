@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
         searchFilterLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent myIntent = new Intent(MainActivity.this, SearchActivity.class);
+                Intent myIntent = new Intent(MainActivity.this, LocationFilterActivity.class);
                 MainActivity.this.startActivity(myIntent);
 
             }
