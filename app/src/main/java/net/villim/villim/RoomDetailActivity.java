@@ -40,6 +40,7 @@ public class RoomDetailActivity extends AppCompatActivity implements OnMapReadyC
     private TextView hostName;
     private RatingBar hostRating;
     private TextView hostReviewCount;
+    private Button contactHostButton;
 
     private TextView houseName;
     private TextView houseAddress;
@@ -94,6 +95,7 @@ public class RoomDetailActivity extends AppCompatActivity implements OnMapReadyC
         hostName = (TextView) findViewById(R.id.host_name);
         hostRating = (RatingBar) findViewById(R.id.host_review_rating);
         hostReviewCount = (TextView) findViewById(R.id.host_review_count);
+        contactHostButton = (Button) findViewById(R.id.contact_host_button);
 
         /* House Name and address */
         houseName = (TextView) findViewById(R.id.house_name);
