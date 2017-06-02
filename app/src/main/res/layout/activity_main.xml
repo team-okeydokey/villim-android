@@ -13,38 +13,24 @@
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:elevation="3dp">
 
         <android.support.design.widget.CollapsingToolbarLayout
             android:id="@+id/collapsing_toolbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fitsSystemWindows="true"
-            app:titleEnabled="false"
-            app:contentScrim="?attr/colorPrimary">
-
-            <android.support.v7.widget.LinearLayoutCompat
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/search_location"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fitsSystemWindows="true"
-                    android:text="@string/search_hint_location"
-                    app:layout_collapseMode="parallax" />
-
-
-            </android.support.v7.widget.LinearLayoutCompat>
+            app:contentScrim="?attr/colorPrimary"
+            app:layout_scrollFlags="snap|scroll"
+            app:titleEnabled="false">
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/toolbar_height"
                 android:background="@android:color/white"
-                android:elevation="3dp"
+                android:gravity="top"
                 app:contentInsetEnd="0dp"
                 app:contentInsetStart="0dp"
                 app:layout_collapseMode="pin"
@@ -87,6 +73,15 @@
 
             </android.support.v7.widget.Toolbar>
 
+            <TextView
+                android:id="@+id/search_location"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+
+                android:gravity="bottom"
+                android:text="@string/search_hint_location"
+                app:layout_collapseMode="parallax" />
+
 
         </android.support.design.widget.CollapsingToolbarLayout>
 
@@ -99,7 +94,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_anchor="@id/app_bar_layout"
-        app:layout_anchorGravity="bottom">
+        app:layout_anchorGravity="bottom"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <android.support.design.widget.TabLayout
             android:id="@+id/tab_layout"

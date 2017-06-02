@@ -12,8 +12,10 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.maps.SupportMapFragment;
 
 
@@ -84,6 +86,10 @@ public class MainActivity extends AppCompatActivity {
 //                MainActivity.this.startActivity(myIntent);
             }
         });
+
+//        Glide.with(this)
+//                .load(R.drawable.prugio_thumbnail)
+//                .into((ImageView) findViewById(R.id.toolbar_image));
 
     }
 
