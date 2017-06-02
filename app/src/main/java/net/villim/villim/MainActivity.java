@@ -51,7 +51,6 @@ public class MainActivity extends AppCompatActivity {
         searchFilters = (RelativeLayout) findViewById(R.id.search_filters);
         searchFilterLocation = (TextView) findViewById(R.id.search_filter_location);
         searchFilterDate = (TextView) findViewById(R.id.search_filter_date);
-        searchFilters.setVisibility(View.INVISIBLE);
 
         /* Scroll behaviors */
         appBarLayout = (AppBarLayout) findViewById(R.id.app_bar_layout);
@@ -61,18 +60,9 @@ public class MainActivity extends AppCompatActivity {
             public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
                 if (verticalOffset == 0) { // Completely open.
                     appBarOpen = true;
-                    searchFilters.setVisibility(View.VISIBLE);
                 } else if (verticalOffset == -appBarLayout.getTotalScrollRange()) { // Completely collapsed.
                     appBarOpen = false;
-                    searchFilters.setVisibility(View.INVISIBLE);
                 } else {
-//                    searchFilters.setVisibility(View.INVISIBLE);
-                    int maxOffset = appBarLayout.getTotalScrollRange();
-                    int fromColor = getResources().getColor(android.R.color.white);
-                    int toColor = getResources().getColor(R.color.search_filter_open);
-                    int color = (maxOffset - verticalOffset) / maxOffset * (toColor - fromColor) + fromColor;
-                    toolbar.setBackgroundColor(color);
-                    searchFilters.setBackgroundColor(color);
                 }
             }
         });
