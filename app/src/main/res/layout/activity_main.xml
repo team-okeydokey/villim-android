@@ -32,6 +32,7 @@
                 android:layout_height="wrap_content"
                 android:background="@color/search_filter_open"
                 android:fitsSystemWindows="true"
+                android:paddingBottom="@dimen/search_filter_padding"
                 android:paddingLeft="@dimen/search_filter_padding"
                 android:paddingRight="@dimen/search_filter_padding"
                 android:paddingTop="@dimen/search_filter_upper_padding"
@@ -39,9 +40,10 @@
 
                 <TextView
                     android:id="@+id/search_filter_location"
-                    android:layout_width="match_parent"
+                    android:layout_width="@dimen/search_filter_width"
                     android:layout_height="@dimen/toolbar_height"
                     android:layout_centerHorizontal="true"
+                    android:background="@drawable/toolbar_filter"
                     android:drawablePadding="@dimen/filter_icon_drawable_padding"
                     android:gravity="left|center_vertical"
                     android:text="@string/search_hint_location"
@@ -50,10 +52,11 @@
 
                 <TextView
                     android:id="@+id/search_filter_date"
-                    android:layout_width="match_parent"
+                    android:layout_width="@dimen/search_filter_width"
                     android:layout_height="@dimen/toolbar_height"
                     android:layout_below="@id/search_filter_location"
                     android:layout_centerHorizontal="true"
+                    android:background="@drawable/toolbar_filter"
                     android:drawablePadding="@dimen/filter_icon_drawable_padding"
                     android:gravity="left|center_vertical"
                     android:text="@string/search_hint_date"
