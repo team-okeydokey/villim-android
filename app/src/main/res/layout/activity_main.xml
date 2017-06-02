@@ -74,6 +74,8 @@
                 app:contentInsetEnd="0dp"
                 app:contentInsetStart="0dp"
                 app:layout_collapseMode="pin"
+                android:paddingLeft="@dimen/toolbar_padding"
+                android:paddingRight="@dimen/toolbar_padding"
                 app:popupTheme="@style/CollapsingToolbar">
 
 
