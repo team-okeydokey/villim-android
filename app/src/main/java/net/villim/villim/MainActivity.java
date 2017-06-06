@@ -76,6 +76,13 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+        searchFilterDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent = new Intent(MainActivity.this, DateFilterActivity.class);
+                MainActivity.this.startActivity(myIntent);
+            }
+        });
 
         /* Scroll behaviors */
         appBarLayout = (AppBarLayout) findViewById(R.id.app_bar_layout);
