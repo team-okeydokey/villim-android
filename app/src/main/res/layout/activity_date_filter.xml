@@ -6,10 +6,74 @@
     android:layout_height="match_parent"
     tools:context="net.villim.villim.DateFilterActivity">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/toolbar_height"
+        android:background="@android:color/white"
+        android:elevation="3dp"
+        app:contentInsetEnd="0dp"
+        app:contentInsetStart="0dp">
+
+        <TextView
+            android:id="@+id/toolbar_title"
+            style="@style/ToolbarTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/date_filter_title"
+            android:textColor="#333333" />
+
+    </android.support.v7.widget.Toolbar>
+
+    <!-- 시작일 / 종료일 버튼 -->
+    <RelativeLayout
+        android:id="@+id/start_end_buttons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:text="@string/date_filter_start_date" />
+
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="@string/date_filter_end_date" />
+
+    </RelativeLayout>
+
+
+    <View xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/start_end_buttons"
+        android:background="@color/divider_color" />
+
+
+    <!-- CalendarView -->
+
     <com.squareup.timessquare.CalendarPickerView
         android:id="@+id/calendar_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
+        android:layout_height="260dp"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/divider"
+        android:clipToPadding="false" />
+
+    <!-- 하단 저장하기 버튼 -->
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/date_filter_bottom_button_height"
+        android:layout_alignParentBottom="true"
+        android:background="@color/date_filter_bottom_button_color"
+        android:text="@string/date_filter_select_date" />
 
 </RelativeLayout>

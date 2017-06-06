@@ -22,10 +22,10 @@
     <string name="key_num_beds">num_beds</string>
     <string name="key_num_baths">num_baths</string>
 
-    <!-- Search Activity -->
+    <!-- Search Filter Activity -->
     <string name="search_hint_location">모든 위치</string>
     <string name="search_hint_date">날짜 설정</string>
-    <string name="search_title">검색하기</string>
+    <string name="search_filter_title">검색하기</string>
     <string name="search_hint">어디로 가세요?</string>
     <string name="search_from_date">부터</string>
     <string name="search_to_date">까지</string>
@@ -35,6 +35,12 @@
     <string name="search_no_date">날짜 미정</string>
     <string name="search_popular_locations">인기지역</string>
     <string name="invalid_date_selected">날짜가 올바르지 않습니다.</string>
+
+    <!-- Date Filter Activity -->
+    <string name="date_filter_title">날짜 선택</string>
+    <string name="date_filter_select_date">저장하기</string>
+    <string name="date_filter_start_date">시작일</string>
+    <string name="date_filter_end_date">종료일</string>
 
     <!-- Discover Fragment -->
     <string name="key_house">key_house</string>

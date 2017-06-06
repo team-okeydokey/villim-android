@@ -23,7 +23,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:gravity="center"
-            android:text="@string/search_title"
+            android:text="@string/search_filter_title"
             android:textColor="#333333" />
 
     </android.support.v7.widget.Toolbar>

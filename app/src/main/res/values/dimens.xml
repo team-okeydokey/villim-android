@@ -25,6 +25,9 @@
     <dimen name="discover_recycler_padding">10dp</dimen>
     <dimen name="discover_recycler_padding_bottom">80dp</dimen>
 
+    <!-- Date Filter Activity -->
+    <dimen name="date_filter_bottom_button_height">65dp</dimen>
+
 
     <!-- Room Detail Activity -->
     <dimen name="host_profile_pic_size">60dp</dimen>
