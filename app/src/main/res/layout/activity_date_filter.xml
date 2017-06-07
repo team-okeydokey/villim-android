@@ -44,7 +44,7 @@
             android:layout_alignParentLeft="true"
             android:lineSpacingExtra="5sp"
             android:text="@string/date_filter_start_date"
-            android:gravity="center|bottom"
+            android:gravity="bottom|left"
             android:textSize="25sp" />
 
 
@@ -54,7 +54,7 @@
             android:layout_height="match_parent"
             android:layout_alignParentRight="true"
             android:text="@string/date_filter_end_date"
-            android:gravity="bottom|center"
+            android:gravity="bottom|right"
             android:textSize="25sp" />
 
     </RelativeLayout>
