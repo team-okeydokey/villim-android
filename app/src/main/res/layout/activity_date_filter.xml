@@ -42,9 +42,9 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_alignParentLeft="true"
+            android:gravity="bottom|left"
             android:lineSpacingExtra="5sp"
             android:text="@string/date_filter_start_date"
-            android:gravity="bottom|left"
             android:textSize="25sp" />
 
 
@@ -53,8 +53,8 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_alignParentRight="true"
-            android:text="@string/date_filter_end_date"
             android:gravity="bottom|right"
+            android:text="@string/date_filter_end_date"
             android:textSize="25sp" />
 
     </RelativeLayout>
@@ -65,6 +65,8 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_below="@+id/start_end_buttons"
+        android:layout_marginLeft="@dimen/date_filter_text_padding_side"
+        android:layout_marginRight="@dimen/date_filter_text_padding_side"
         android:background="@color/divider_color" />
 
 
