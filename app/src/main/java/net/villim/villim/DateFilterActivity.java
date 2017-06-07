@@ -34,43 +34,8 @@ public class DateFilterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_date_filter);
 
         timeZone = TimeZone.getDefault();
-        selectState = STATE_SELECT_NONE;
-
-        /* Set up calendar. */
-        Calendar nextYear = Calendar.getInstance();
-        nextYear.add(Calendar.YEAR, 1);
-        final CalendarPickerView calendar = (CalendarPickerView) findViewById(R.id.calendar_view);
-        Date today = new Date();
-        calendar.init(today, nextYear.getTime())
-                .inMode(CalendarPickerView.SelectionMode.RANGE);
-
-        calendar.setOnDateSelectedListener(new CalendarPickerView.OnDateSelectedListener() {
-            @Override
-            public void onDateSelected(Date date) {
-                switch (selectState) {
-                    case STATE_SELECT_NONE:
-                        startDate = date;
-                        changeState(STATE_SELECT_NONE);
-                        break;
-                    case STATE_SELECT_END:
-                        endDate = date;
-                        changeState(STATE_SELECT_NONE);
-                        break;
-                    default:
-                        startDate = date;
-                        changeState(STATE_SELECT_END);
-                        break;
-                }
-                calendar.selectDate(startDate);
-                calendar.selectDate(endDate);
-                updateSelectedDates(calendar.getSelectedDates());
-            }
-
-            @Override
-            public void onDateUnselected(Date date) {
-                updateSelectedDates(calendar.getSelectedDates());
-            }
-        });
+        startDate = null;
+        endDate = null;
 
         /* Set up start date / end date select texts. */
         startDateTextView = (TextView) findViewById(R.id.start_date_text);
@@ -88,15 +53,63 @@ public class DateFilterActivity extends AppCompatActivity {
                 changeState(STATE_SELECT_END);
             }
         });
+
+        changeState(STATE_SELECT_START);
+
+        /* Set up calendar. */
+        Calendar nextYear = Calendar.getInstance();
+        nextYear.add(Calendar.YEAR, 1);
+        final CalendarPickerView calendar = (CalendarPickerView) findViewById(R.id.calendar_view);
+        Date today = new Date();
+        calendar.init(today, nextYear.getTime())
+                .inMode(CalendarPickerView.SelectionMode.RANGE);
+
+        calendar.setOnDateSelectedListener(new CalendarPickerView.OnDateSelectedListener() {
+            @Override
+            public void onDateSelected(Date date) {
+                switch (selectState) {
+                    case STATE_SELECT_NONE:
+//                        startDate = date;
+//                        if (endDate == null) { // First ever selection
+//                            endDate = date;
+//                        }
+//                        changeState(STATE_SELECT_END);
+                        break;
+                    case STATE_SELECT_START:
+                        startDate = date;
+                        changeState(STATE_SELECT_END);
+                        break;
+                    case STATE_SELECT_END:
+                        endDate = date;
+                        changeState(STATE_SELECT_NONE);
+                        break;
+                    default:
+//                        startDate = date;
+//                        if (endDate == null) { // First ever selection
+//                            endDate = date;
+//                        }
+//                        changeState(STATE_SELECT_END);
+                        break;
+                }
+
+
+                if (startDate != null) { calendar.selectDate(startDate); }
+                if (endDate != null) { calendar.selectDate(endDate); }
+
+                setStartAndEndDateText(startDate, endDate);
+            }
+
+            @Override
+            public void onDateUnselected(Date date) {
+                //updateSelectedDates(calendar.getSelectedDates());
+            }
+        });
     }
 
     private void updateSelectedDates(List<Date> dates) {
-        if (dates.size() > 1) {
+        if (dates.size() > 0) {
             startDate = dates.get(0);
             endDate = dates.get(dates.size() - 1);
-        } else if (dates.size() == 1) {
-            startDate = dates.get(0);
-            endDate = dates.get(0);
         } else {
             startDate = null;
             endDate = null;
@@ -105,16 +118,22 @@ public class DateFilterActivity extends AppCompatActivity {
     }
 
     private void setStartAndEndDateText(Date startDate, Date endDate) {
-        if (startDate == null && endDate == null) {
-            startDateTextView.setText(getString(R.string.date_filter_start_date));
-            endDateTextView.setText(getString(R.string.date_filter_end_date));
-        } else {
+        /* Set start date text */
+        if (startDate != null) {
             String startDateText = String.format(getString(R.string.date_filter_date_text_format), startDate.getMonth(), startDate.getDate())
                     + "\n" + getWeekday(startDate.getDay());
             startDateTextView.setText(startDateText);
+        } else {
+            startDateTextView.setText(getString(R.string.date_filter_start_date));
+        }
+
+        /* Set end date text. */
+        if (endDate != null) {
             String endDateText = String.format(getString(R.string.date_filter_date_text_format), endDate.getMonth(), endDate.getDate())
                     + "\n" + getWeekday(endDate.getDay());;
             endDateTextView.setText(endDateText);
+        } else {
+            endDateTextView.setText(getString(R.string.date_filter_end_date));
         }
     }
 
