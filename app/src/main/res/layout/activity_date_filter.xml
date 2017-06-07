@@ -32,14 +32,20 @@
         android:id="@+id/start_end_buttons"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/toolbar">
+        android:layout_below="@+id/toolbar"
+        android:paddingBottom="@dimen/date_filter_text_padding_bottom"
+        android:paddingLeft="@dimen/date_filter_text_padding_side"
+        android:paddingRight="@dimen/date_filter_text_padding_side"
+        android:paddingTop="@dimen/date_filter_text_padding_top">
 
         <TextView
             android:id="@+id/start_date_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:text="@string/date_filter_start_date" />
+            android:lineSpacingExtra="5sp"
+            android:text="@string/date_filter_start_date"
+            android:textSize="25sp" />
 
 
         <TextView
@@ -47,7 +53,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:text="@string/date_filter_end_date" />
+            android:text="@string/date_filter_end_date"
+            android:textSize="25sp" />
 
     </RelativeLayout>
 
