@@ -27,6 +27,10 @@
 
     <!-- Date Filter Activity -->
     <dimen name="date_filter_bottom_button_height">65dp</dimen>
+    <dimen name="date_filter_text_container_height">96dp</dimen>
+    <dimen name="date_filter_text_padding_top">46dp</dimen>
+    <dimen name="date_filter_text_padding_side">37dp</dimen>
+    <dimen name="date_filter_text_padding_bottom">15dp</dimen>
 
 
     <!-- Room Detail Activity -->

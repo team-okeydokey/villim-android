@@ -33,6 +33,8 @@
 
     <!-- Date Filter Activity -->
     <color name="date_filter_bottom_button_color">#2a2c32</color>
+    <color name="date_filter_state_normal">#333333</color>
+    <color name="date_filter_state_highlighted">#ff5848</color>
 
     <!-- Discovery Fragment -->
     <color name="rating_color">#51ACCF</color>

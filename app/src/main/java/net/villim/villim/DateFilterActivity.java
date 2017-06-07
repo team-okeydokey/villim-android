@@ -1,5 +1,7 @@
 package net.villim.villim;
 
+import android.graphics.Color;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -14,13 +16,14 @@ import java.util.TimeZone;
 
 public class DateFilterActivity extends AppCompatActivity {
 
-    private final static int START_DATE = 0;
-    private final static int END_DATE = 1;
+    private final static int STATE_SELECT_NONE = 0;
+    private final static int STATE_SELECT_START = 1;
+    private final static int STATE_SELECT_END = 2;
 
     private TimeZone timeZone;
     private Date startDate;
     private Date endDate;
-    int selectMode;
+    int selectState;
 
     private TextView startDateTextView;
     private TextView endDateTextView;
@@ -31,7 +34,7 @@ public class DateFilterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_date_filter);
 
         timeZone = TimeZone.getDefault();
-        selectMode = START_DATE;
+        selectState = STATE_SELECT_NONE;
 
         /* Set up calendar. */
         Calendar nextYear = Calendar.getInstance();
@@ -44,14 +47,22 @@ public class DateFilterActivity extends AppCompatActivity {
         calendar.setOnDateSelectedListener(new CalendarPickerView.OnDateSelectedListener() {
             @Override
             public void onDateSelected(Date date) {
-                switch (selectMode) {
-                    case START_DATE:
-                        ;
-                    case END_DATE:
-                        ;
+                switch (selectState) {
+                    case STATE_SELECT_NONE:
+                        startDate = date;
+                        changeState(STATE_SELECT_NONE);
+                        break;
+                    case STATE_SELECT_END:
+                        endDate = date;
+                        changeState(STATE_SELECT_NONE);
+                        break;
                     default:
-
+                        startDate = date;
+                        changeState(STATE_SELECT_END);
+                        break;
                 }
+                calendar.selectDate(startDate);
+                calendar.selectDate(endDate);
                 updateSelectedDates(calendar.getSelectedDates());
             }
 
@@ -66,7 +77,7 @@ public class DateFilterActivity extends AppCompatActivity {
         startDateTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selectMode = START_DATE;
+                changeState(STATE_SELECT_START);
             }
         });
 
@@ -74,7 +85,7 @@ public class DateFilterActivity extends AppCompatActivity {
         endDateTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selectMode = END_DATE;
+                changeState(STATE_SELECT_END);
             }
         });
     }
@@ -99,16 +110,13 @@ public class DateFilterActivity extends AppCompatActivity {
             endDateTextView.setText(getString(R.string.date_filter_end_date));
         } else {
             String startDateText = String.format(getString(R.string.date_filter_date_text_format), startDate.getMonth(), startDate.getDate())
-                    + getWeekday(startDate.getDay());
+                    + "\n" + getWeekday(startDate.getDay());
             startDateTextView.setText(startDateText);
             String endDateText = String.format(getString(R.string.date_filter_date_text_format), endDate.getMonth(), endDate.getDate())
-                    + getWeekday(endDate.getDay());;
+                    + "\n" + getWeekday(endDate.getDay());;
             endDateTextView.setText(endDateText);
         }
     }
-
-    ;
-
 
     private String getWeekday(int weekday) {
         /* Java date은 0부터 6, Calendar 클래스 constant는 1부터 7. */
@@ -129,6 +137,31 @@ public class DateFilterActivity extends AppCompatActivity {
                 return getString(R.string.saturday);
             default:
                 return getString(R.string.sunday);
+        }
+    }
+
+    private void changeState(int state) {
+        switch (state) {
+            case STATE_SELECT_NONE:
+                selectState = STATE_SELECT_NONE;
+                startDateTextView.setTextColor(getResources().getColor(R.color.date_filter_state_normal));
+                endDateTextView.setTextColor(getResources().getColor(R.color.date_filter_state_normal));
+                break;
+            case STATE_SELECT_START:
+                selectState = STATE_SELECT_START;
+                startDateTextView.setTextColor(getResources().getColor(R.color.date_filter_state_highlighted));
+                endDateTextView.setTextColor(getResources().getColor(R.color.date_filter_state_normal));
+                break;
+            case STATE_SELECT_END:
+                selectState = STATE_SELECT_END;
+                startDateTextView.setTextColor(getResources().getColor(R.color.date_filter_state_normal));
+                endDateTextView.setTextColor(getResources().getColor(R.color.date_filter_state_highlighted));
+                break;
+            default:
+                selectState = STATE_SELECT_NONE;
+                startDateTextView.setTextColor(getResources().getColor(R.color.date_filter_state_normal));
+                endDateTextView.setTextColor(getResources().getColor(R.color.date_filter_state_normal));
+                break;
         }
     }
 }
