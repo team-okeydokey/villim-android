@@ -10,7 +10,7 @@
             <solid android:color="@android:color/white" />
 
             <stroke
-                android:width="15dp"
+                android:width="@dimen/date_filter_selection_size"
                 android:color="@android:color/transparent"/>
         </shape>
     </item>

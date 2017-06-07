@@ -31,7 +31,7 @@
     <dimen name="date_filter_text_padding_top">46dp</dimen>
     <dimen name="date_filter_text_padding_side">37dp</dimen>
     <dimen name="date_filter_text_padding_bottom">15dp</dimen>
-    <dimen name="date_filter_selection_size">35dp</dimen>
+    <dimen name="date_filter_selection_size">15dp</dimen>
 
 
     <!-- Room Detail Activity -->

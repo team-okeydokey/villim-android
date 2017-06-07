@@ -1,8 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item>
+        <shape>
+            <solid android:color="@android:color/transparent"/>
+        </shape>
+    </item>
+    <item>
         <shape android:shape="oval">
-            <solid android:color="#ed2025" />
+            <solid android:color="@color/date_range_selected" />
+
+            <stroke
+                android:width="@dimen/date_filter_selection_size"
+                android:color="@android:color/transparent"/>
         </shape>
     </item>
 </layer-list>
