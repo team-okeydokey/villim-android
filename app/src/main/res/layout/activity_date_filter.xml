@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/search_background"
     tools:context="net.villim.villim.DateFilterActivity">
 
     <android.support.v7.widget.Toolbar
@@ -78,6 +79,7 @@
         android:layout_height="260dp"
         android:layout_alignParentBottom="true"
         android:layout_below="@+id/divider"
+        android:background="@color/search_background"
         android:clipToPadding="false" />
 
     <!-- 하단 저장하기 버튼 -->
