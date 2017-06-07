@@ -83,6 +83,8 @@
         android:layout_height="@dimen/date_filter_bottom_button_height"
         android:layout_alignParentBottom="true"
         android:background="@color/date_filter_bottom_button_color"
-        android:text="@string/date_filter_select_date" />
+        android:text="@string/date_filter_select_date"
+        android:textColor="#ffffff"
+        android:textSize="17sp"/>
 
 </RelativeLayout>
