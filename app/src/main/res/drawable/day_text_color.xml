@@ -4,5 +4,6 @@
     <item android:color="@color/dateTimeRangePickerStateNonSelectable" app:tsquare_state_current_month="false" />
     <item android:color="@color/dateTimeRangePickerStateToday" app:tsquare_state_today="true" />
     <item android:color="@color/dateTimeRangePickerStateNonSelectable" app:tsquare_state_selectable="false" />
+    <item android:color="@color/date_range_selected" app:tsquare_state_range_middle="true" />
     <item android:color="@color/dateTimeRangePickerStateDefault" />
 </selector>
