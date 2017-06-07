@@ -80,7 +80,12 @@
         android:layout_alignParentBottom="true"
         android:layout_below="@+id/divider"
         android:background="@color/search_background"
-        android:clipToPadding="false" />
+        android:clipToPadding="false"
+        app:tsquare_dayBackground="@drawable/day_background"
+        app:tsquare_dayTextColor="@drawable/day_text_color"
+        app:tsquare_dividerColor="@android:color/transparent"
+        app:tsquare_headerTextColor="@color/dateTimeRangePickerHeaderTextColor"
+        app:tsquare_titleTextColor="@color/dateTimeRangePickerTitleTextColor" />
 
     <!-- 하단 저장하기 버튼 -->
     <Button
