@@ -89,6 +89,7 @@
 
     <!-- 하단 저장하기 버튼 -->
     <Button
+        android:id="@+id/save_selection_button"
         android:layout_width="match_parent"
         android:layout_height="@dimen/date_filter_bottom_button_height"
         android:layout_alignParentBottom="true"

@@ -1,5 +1,6 @@
 package net.villim.villim;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
@@ -18,8 +19,13 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import java.util.Date;
+
 
 public class MainActivity extends AppCompatActivity {
+
+    private static final int LOCATION_FILTER = 0;
+    private static final int DATE_FILTER = 1;
 
     private AppBarLayout appBarLayout;
     private Toolbar toolbar;
@@ -36,6 +42,9 @@ public class MainActivity extends AppCompatActivity {
     private TextView searchFilterDate;
 
     private boolean appBarOpen;
+
+    private Date startDate;
+    private Date endDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,16 +80,18 @@ public class MainActivity extends AppCompatActivity {
         searchFilterLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent myIntent = new Intent(MainActivity.this, LocationFilterActivity.class);
-                MainActivity.this.startActivity(myIntent);
+                Intent locationFilterIntent = new Intent(MainActivity.this, LocationFilterActivity.class);
+                MainActivity.this.startActivity(locationFilterIntent);
 
             }
         });
         searchFilterDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent myIntent = new Intent(MainActivity.this, DateFilterActivity.class);
-                MainActivity.this.startActivity(myIntent);
+                Intent dateFilterIntent = new Intent(MainActivity.this, DateFilterActivity.class);
+                dateFilterIntent.putExtra(DateFilterActivity.START_DATE, startDate);
+                dateFilterIntent.putExtra(DateFilterActivity.START_DATE, endDate);
+                MainActivity.this.startActivity(dateFilterIntent);
             }
         });
 
@@ -233,6 +244,26 @@ public class MainActivity extends AppCompatActivity {
 //        tabLayout.getTabAt(position).getIcon().setColorFilter("#abffab");
 //        ((TextView)tabLayout.getTabAt(position).getCustomView().findViewById(R.id.text1)).setTextColor("#abffab");
     }
-//
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (requestCode == LOCATION_FILTER) {
+            if(resultCode == Activity.RESULT_OK){
+
+            }
+            if (resultCode == Activity.RESULT_CANCELED) {
+                //Write your code if there's no result
+            }
+        } else if (requestCode == DATE_FILTER) {
+            if(resultCode == Activity.RESULT_OK){
+                startDate = (Date) data.getSerializableExtra(DateFilterActivity.START_DATE);
+                endDate = (Date) data.getSerializableExtra(DateFilterActivity.END_DATE);
+            }
+            if (resultCode == Activity.RESULT_CANCELED) {
+                //Write your code if there's no result
+            }
+        }
+    }
 
 }
