@@ -41,6 +41,14 @@
     <string name="date_filter_select_date">저장하기</string>
     <string name="date_filter_start_date">시작일</string>
     <string name="date_filter_end_date">종료일</string>
+    <string name="date_filter_date_text_format">%1$d월 %2$d일</string>
+    <string name="monday">월요일</string>
+    <string name="tuesday">화요일</string>
+    <string name="wednesday">수요일</string>
+    <string name="thursday">목요일</string>
+    <string name="friday">금요일</string>
+    <string name="saturday">토요일</string>
+    <string name="sunday">일요일</string>
 
     <!-- Discover Fragment -->
     <string name="key_house">key_house</string>
