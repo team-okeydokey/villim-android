@@ -45,6 +45,7 @@ public class DateFilterActivity extends AppCompatActivity {
         startDate = (Date) getIntent().getSerializableExtra(START_DATE);
         endDate = (Date) getIntent().getSerializableExtra(END_DATE);
         boolean hasPresetDate = (startDate != null && endDate != null);
+        System.out.println(hasPresetDate);
 
         /* Set up start date / end date select texts. */
         startDateTextView = (TextView) findViewById(R.id.start_date_text);
@@ -115,7 +116,7 @@ public class DateFilterActivity extends AppCompatActivity {
                         break;
                 }
 
-
+                calendar.clearHighlightedDates();
                 if (startDate != null) { calendar.selectDate(startDate); }
                 if (endDate != null) { calendar.selectDate(endDate); }
 
@@ -125,6 +126,7 @@ public class DateFilterActivity extends AppCompatActivity {
                 if (startDate != null && endDate != null) {
                     saveSelectionButton.setEnabled(true);
                 }
+
             }
 
             @Override
@@ -134,6 +136,9 @@ public class DateFilterActivity extends AppCompatActivity {
         });
 
         if (hasPresetDate) {
+            System.out.println(startDate.getDate());
+            System.out.println(endDate.getDate());
+            calendar.clearHighlightedDates();
             calendar.selectDate(startDate);
             calendar.selectDate(endDate);
         }

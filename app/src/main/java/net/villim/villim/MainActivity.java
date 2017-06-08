@@ -90,8 +90,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent dateFilterIntent = new Intent(MainActivity.this, DateFilterActivity.class);
                 dateFilterIntent.putExtra(DateFilterActivity.START_DATE, startDate);
-                dateFilterIntent.putExtra(DateFilterActivity.START_DATE, endDate);
-                MainActivity.this.startActivity(dateFilterIntent);
+                dateFilterIntent.putExtra(DateFilterActivity.END_DATE, endDate);
+                MainActivity.this.startActivityForResult(dateFilterIntent, DATE_FILTER);
             }
         });
 
@@ -259,6 +259,7 @@ public class MainActivity extends AppCompatActivity {
             if(resultCode == Activity.RESULT_OK){
                 startDate = (Date) data.getSerializableExtra(DateFilterActivity.START_DATE);
                 endDate = (Date) data.getSerializableExtra(DateFilterActivity.END_DATE);
+                System.out.println(startDate != null && endDate != null);
             }
             if (resultCode == Activity.RESULT_CANCELED) {
                 //Write your code if there's no result
