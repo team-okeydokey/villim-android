@@ -136,8 +136,6 @@ public class DateFilterActivity extends AppCompatActivity {
         });
 
         if (hasPresetDate) {
-            System.out.println(startDate.getDate());
-            System.out.println(endDate.getDate());
             calendar.clearHighlightedDates();
             calendar.selectDate(startDate);
             calendar.selectDate(endDate);

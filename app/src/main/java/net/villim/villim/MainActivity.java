@@ -259,7 +259,11 @@ public class MainActivity extends AppCompatActivity {
             if(resultCode == Activity.RESULT_OK){
                 startDate = (Date) data.getSerializableExtra(DateFilterActivity.START_DATE);
                 endDate = (Date) data.getSerializableExtra(DateFilterActivity.END_DATE);
-                System.out.println(startDate != null && endDate != null);
+
+                String dateFilterText = String.format(getString(R.string.search_filter_date_format),
+                        startDate.getMonth(), startDate.getDate(),
+                        endDate.getMonth(), endDate.getDate());
+                searchFilterDate.setText(dateFilterText);
             }
             if (resultCode == Activity.RESULT_CANCELED) {
                 //Write your code if there's no result

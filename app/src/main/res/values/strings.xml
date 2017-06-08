@@ -25,6 +25,7 @@
     <!-- Search Filter Activity -->
     <string name="search_hint_location">모든 위치</string>
     <string name="search_hint_date">날짜 설정</string>
+    <string name="search_filter_date_format">%1$d월%2$d일 - %3$d월%4$d일</string>
     <string name="search_filter_title">검색하기</string>
     <string name="search_hint">어디로 가세요?</string>
     <string name="search_from_date">부터</string>
