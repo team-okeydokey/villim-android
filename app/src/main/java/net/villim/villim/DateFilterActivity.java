@@ -45,7 +45,6 @@ public class DateFilterActivity extends AppCompatActivity {
         startDate = (Date) getIntent().getSerializableExtra(START_DATE);
         endDate = (Date) getIntent().getSerializableExtra(END_DATE);
         boolean hasPresetDate = (startDate != null && endDate != null);
-        System.out.println(hasPresetDate);
 
         /* Set up start date / end date select texts. */
         startDateTextView = (TextView) findViewById(R.id.start_date_text);

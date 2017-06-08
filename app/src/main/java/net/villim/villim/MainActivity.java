@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent locationFilterIntent = new Intent(MainActivity.this, LocationFilterActivity.class);
-                MainActivity.this.startActivity(locationFilterIntent);
+                MainActivity.this.startActivityForResult(locationFilterIntent, LOCATION_FILTER);
 
             }
         });
@@ -250,7 +250,9 @@ public class MainActivity extends AppCompatActivity {
 
         if (requestCode == LOCATION_FILTER) {
             if(resultCode == Activity.RESULT_OK){
-
+                VillimLocation location = data.getParcelableExtra(LocationFilterActivity.LOCATION);
+                System.out.println(location.addrSummary);
+                searchFilterLocation.setText(location.addrSummary);
             }
             if (resultCode == Activity.RESULT_CANCELED) {
                 //Write your code if there's no result
