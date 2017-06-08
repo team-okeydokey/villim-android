@@ -46,6 +46,7 @@
                     android:background="@drawable/toolbar_filter"
                     android:drawablePadding="@dimen/filter_icon_drawable_padding"
                     android:gravity="left|center_vertical"
+                    android:maxLines="1"
                     android:text="@string/search_hint_location"
                     android:textColor="@android:color/white"
                     android:textSize="@dimen/search_filter_text_size" />
@@ -59,6 +60,7 @@
                     android:background="@drawable/toolbar_filter"
                     android:drawablePadding="@dimen/filter_icon_drawable_padding"
                     android:gravity="left|center_vertical"
+                    android:maxLines="1"
                     android:text="@string/search_hint_date"
                     android:textColor="@android:color/white"
                     android:textSize="@dimen/search_filter_text_size" />
@@ -71,11 +73,11 @@
                 android:layout_height="@dimen/toolbar_height"
                 android:background="@android:color/white"
                 android:gravity="top"
+                android:paddingLeft="@dimen/toolbar_padding"
+                android:paddingRight="@dimen/toolbar_padding"
                 app:contentInsetEnd="0dp"
                 app:contentInsetStart="0dp"
                 app:layout_collapseMode="pin"
-                android:paddingLeft="@dimen/toolbar_padding"
-                android:paddingRight="@dimen/toolbar_padding"
                 app:popupTheme="@style/CollapsingToolbar">
 
 
