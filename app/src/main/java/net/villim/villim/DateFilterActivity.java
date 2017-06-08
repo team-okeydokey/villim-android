@@ -139,6 +139,7 @@ public class DateFilterActivity extends AppCompatActivity {
             calendar.clearHighlightedDates();
             calendar.selectDate(startDate);
             calendar.selectDate(endDate);
+            setStartAndEndDateText(startDate, endDate);
         }
     }
 
