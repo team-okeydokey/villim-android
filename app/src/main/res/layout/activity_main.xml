@@ -107,13 +107,13 @@
     </android.support.design.widget.AppBarLayout>
 
 
-    <android.support.v4.view.ViewPager
+    <net.villim.villim.UnSwipeableViewpager
         android:id="@+id/view_pager"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_anchor="@id/app_bar_layout"
         app:layout_anchorGravity="bottom"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"></android.support.v4.view.ViewPager>
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"></net.villim.villim.UnSwipeableViewpager>
 
     <android.support.design.widget.TabLayout
         android:id="@+id/tab_layout"

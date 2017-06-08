@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
     private int[] tabIcons;
     private CharSequence toolBarTitle;
     private TabLayout tabLayout;
-    private ViewPager viewPager;
+    private UnSwipeableViewpager viewPager;
     private Button searchButton;
     private RelativeLayout searchFilters;
     private TextView searchFilterLocation;
@@ -125,11 +125,12 @@ public class MainActivity extends AppCompatActivity {
         appBarLayout.setExpanded(false);
 
         /* Bototm tab */
-        viewPager = (ViewPager) findViewById(R.id.view_pager);
+        viewPager = (UnSwipeableViewpager) findViewById(R.id.view_pager);
         tabItems = getResources().getStringArray(R.array.tab_items);
         tabIcons = getResources().getIntArray(R.array.tab_icons);
         // Set default screen to 방 찾기.
         final TabAdapter tabAdapter = new TabAdapter(getSupportFragmentManager());
+        viewPager.setPagingEnabled(false);
         viewPager.setAdapter(tabAdapter);
         viewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
 
