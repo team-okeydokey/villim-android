@@ -121,12 +121,16 @@ public class MainActivity extends AppCompatActivity {
                     searchButton.setBackground(getResources().getDrawable(R.drawable.btn_search));
                     appBarOpen = false;
                 } else {
+                    int toolBarColor = getToolbarColorFromOffset(
+                            verticalOffset, -appBarLayout.getTotalScrollRange(), 0,
+                            toolBarCollpasedColor, toolBarOpenColor);
 //                    toolbarTextView.setTextColor(getResources().getColor(android.R.color.white));
                     toolbarLogo.setImageResource(R.drawable.logo_horizontal_white);
 //                    toolbar.setBackgroundColor(getResources().getColor(R.color.search_filter_open));
-                    toolbar.setBackgroundColor(getToolbarColorFromOffset(
-                            verticalOffset, -appBarLayout.getTotalScrollRange(), 0,
-                            toolBarCollpasedColor, toolBarOpenColor));
+                    toolbar.setBackgroundColor(toolBarColor);
+                    searchFilters.setBackgroundColor(toolBarColor);
+                    searchFilterLocation.setBackgroundColor(toolBarColor);
+                    searchFilterDate.setBackgroundColor(toolBarColor);
                     searchButton.setBackground(getResources().getDrawable(R.drawable.btn_up_arrow));
                 }
             }

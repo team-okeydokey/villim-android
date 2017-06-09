@@ -35,6 +35,7 @@
 
 
     <!-- Room Detail Activity -->
+    <dimen name="house_picture_height">200dp</dimen>
     <dimen name="host_profile_pic_size">60dp</dimen>
     <dimen name="room_detail_activity_padding">10dp</dimen>
     <dimen name="policy_category_height">60dp</dimen>
