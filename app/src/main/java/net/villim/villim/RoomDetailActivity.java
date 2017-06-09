@@ -8,7 +8,9 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
@@ -28,6 +30,8 @@ import com.bumptech.glide.Glide;
 
 
 public class RoomDetailActivity extends AppCompatActivity implements OnMapReadyCallback {
+
+    private final static int MAX_AMENITY_ICONS = 6;
 
     private VillimRoom house;
 
@@ -52,6 +56,8 @@ public class RoomDetailActivity extends AppCompatActivity implements OnMapReadyC
 
     private TextView description;
     private Button descriptionSeeMore;
+
+    private LinearLayoutCompat amenityIcons;
 
     FrameLayout mapContainer;
     MapFragment mapFragment;
@@ -112,6 +118,7 @@ public class RoomDetailActivity extends AppCompatActivity implements OnMapReadyC
         descriptionSeeMore = (Button) findViewById(R.id.description_see_more);
 
         /* Amenities */
+        amenityIcons = (LinearLayoutCompat) findViewById(R.id.amenity_icons);
 
         /* Review */
 
@@ -180,6 +187,7 @@ public class RoomDetailActivity extends AppCompatActivity implements OnMapReadyC
         });
 
         /* Amenities */
+        addAmenityIcons();
 
         /* Review */
 
@@ -198,7 +206,7 @@ public class RoomDetailActivity extends AppCompatActivity implements OnMapReadyC
     public void onMapReady(GoogleMap map) {
         map.addMarker(new MarkerOptions().position(new LatLng(house.latitude, house.longitude)).title("Marker"));
         map.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(house.latitude, house.longitude)));
-        map.animateCamera( CameraUpdateFactory.zoomTo( 17.0f ) );
+        map.animateCamera(CameraUpdateFactory.zoomTo(17.0f));
     }
 
     private class PopulateHouseDetailTask extends AsyncTask<Void, Void, Void> {
@@ -215,6 +223,44 @@ public class RoomDetailActivity extends AppCompatActivity implements OnMapReadyC
         protected void onPostExecute() {
 
         }
+    }
+
+    private void addAmenityIcons() {
+        int[] amenityIds = house.amenityIds;
+
+        /* Displayed icons should be one less than MAX_AMENITY_ICONS if there are more amenities
+           than MAX_AMENITY_ICONS, to make room for the "see more" button. */
+        int numIcons = amenityIds.length > MAX_AMENITY_ICONS ? MAX_AMENITY_ICONS - 1 : amenityIds.length;
+
+        /* Add icons. */
+        for (int i = 0; i < numIcons; ++i) {
+            ImageView iconView = new ImageView(this);
+            iconView.setImageResource(VillimAmenity.getAmenityDrawableResourceId(amenityIds[i]));
+            LinearLayoutCompat.LayoutParams params = new LinearLayoutCompat.LayoutParams(
+                    (int) getResources().getDimension(R.dimen.amenity_icon_width),
+                    (int) getResources().getDimension(R.dimen.amenity_icon_height),
+                    1.0f
+            );
+            iconView.setLayoutParams(params);
+            amenityIcons.addView(iconView);
+        }
+
+        /* Add "see more" button, if applicable. */
+        if (amenityIds.length > MAX_AMENITY_ICONS) {
+            TextView seeMoreTextView = new TextView(this);
+            LinearLayoutCompat.LayoutParams params = new LinearLayoutCompat.LayoutParams(
+                    (int) getResources().getDimension(R.dimen.amenity_icon_width),
+                    (int) getResources().getDimension(R.dimen.amenity_icon_height),
+                    1.0f
+            );
+            seeMoreTextView.setLayoutParams(params);
+            String seeMoreText = String.format(getString(R.string.amenities_see_more_format), amenityIds.length-numIcons);
+            seeMoreTextView.setText(seeMoreText);
+            seeMoreTextView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+            seeMoreTextView.setGravity(Gravity.CENTER_VERTICAL);
+            amenityIcons.addView(seeMoreTextView);
+        }
+
     }
 
 }

@@ -72,6 +72,7 @@
     <string name="house_policy">숙소 이용규칙</string>
     <string name="cancellation_policy">환불 정책</string>
     <string name="cancellation_strict">엄격</string>
+    <string name="amenities_see_more_format">+%d개</string>
 
     <!-- Amenities -->
     <string name="amenity_bedsheet">침대시트</string>
