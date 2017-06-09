@@ -2,6 +2,7 @@ package net.villim.villim;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.support.design.widget.AppBarLayout;
@@ -46,6 +47,9 @@ public class MainActivity extends AppCompatActivity {
     private Date startDate;
     private Date endDate;
 
+    private int toolBarCollpasedColor;
+    private int toolBarOpenColor;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +65,9 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         setTitle(toolBarTitle);
+
+        toolBarOpenColor = getResources().getColor(R.color.search_filter_open);
+        toolBarCollpasedColor = getResources().getColor(android.R.color.white);
 
         /* Search Filters */
         searchFilters = (RelativeLayout) findViewById(R.id.search_filters);
@@ -116,7 +123,10 @@ public class MainActivity extends AppCompatActivity {
                 } else {
 //                    toolbarTextView.setTextColor(getResources().getColor(android.R.color.white));
                     toolbarLogo.setImageResource(R.drawable.logo_horizontal_white);
-                    toolbar.setBackgroundColor(getResources().getColor(R.color.search_filter_open));
+//                    toolbar.setBackgroundColor(getResources().getColor(R.color.search_filter_open));
+                    toolbar.setBackgroundColor(getToolbarColorFromOffset(
+                            verticalOffset, -appBarLayout.getTotalScrollRange(), 0,
+                            toolBarCollpasedColor, toolBarOpenColor));
                     searchButton.setBackground(getResources().getDrawable(R.drawable.btn_up_arrow));
                 }
             }
@@ -272,6 +282,19 @@ public class MainActivity extends AppCompatActivity {
                 //Write your code if there's no result
             }
         }
+    }
+
+    private int getToolbarColorFromOffset(int curVal, int minVal, int maxVal, int initialColor, int finalColor) {
+        float maxDiff = maxVal - minVal;
+        float curDiff = curVal - minVal;
+
+        float progress = curDiff / maxDiff;
+
+        int r = (int)((Color.red(finalColor) - Color.red(initialColor)) * progress) + Color.red(initialColor);
+        int g = (int)((Color.green(finalColor) - Color.green(initialColor)) * progress) + Color.green(initialColor);
+        int b = (int)((Color.blue(finalColor) - Color.blue(initialColor)) * progress) + Color.blue(initialColor);
+
+        return Color.rgb(r, g, b);
     }
 
 }
