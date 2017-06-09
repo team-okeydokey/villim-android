@@ -66,6 +66,7 @@
     <string name="num_bathroom_format">욕실 %d개</string>
     <string name="description_title">상세 설명</string>
     <string name="amenities_title">시설</string>
+    <string name="reviews_title">리뷰</string>
     <string name="see_more">+ 더보기</string>
     <string name="read_more">읽기</string>
     <string name="price_policy">가격 정책</string>

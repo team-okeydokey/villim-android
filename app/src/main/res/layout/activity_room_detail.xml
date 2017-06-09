@@ -316,6 +316,81 @@
 
             <!-- Reviews -->
 
+            <!-- Reviews title -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/room_detail_activity_padding"
+                android:paddingTop="@dimen/room_detail_activity_padding"
+                android:text="@string/reviews_title" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <!-- Reviewer profile pic -->
+                <ImageView
+                    android:id="@+id/reviewer_profile_pic"
+                    android:layout_width="@dimen/reviewer_profile_pic_size"
+                    android:layout_height="@dimen/reviewer_profile_pic_size"
+                    android:layout_alignParentTop="true" />
+
+                <!-- Everything else -->
+                <android.support.v7.widget.LinearLayoutCompat
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentTop="true"
+                    android:layout_toRightOf="@id/reviewer_profile_pic">
+
+                    <!-- Reviewer name & rating -->
+                    <android.support.v7.widget.LinearLayoutCompat
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <!-- Reviewer name -->
+                        <TextView
+                            android:id="@+id/reviewer_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <!-- Reviewer rating -->
+                        <android.support.v7.widget.AppCompatRatingBar
+                            android:id="@+id/reviewer_rating"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent" />
+
+                    </android.support.v7.widget.LinearLayoutCompat>
+
+                    <!-- Review content -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:maxLines="3" />
+
+                    <!-- See more & house rating -->
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <!-- See more -->
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <!-- Home rating -->
+                        <android.support.v7.widget.AppCompatRatingBar
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentRight="true" />
+
+
+                    </RelativeLayout>
+
+                </android.support.v7.widget.LinearLayoutCompat>
+
+
+            </RelativeLayout>
+
             <!-- End reviews -->
 
             <include layout="@layout/category_divider" />
