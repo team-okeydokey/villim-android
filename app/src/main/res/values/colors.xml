@@ -4,6 +4,9 @@
     <color name="colorPrimaryDark">#ed2025</color>
     <color name="colorAccent">#FF4081</color>
 
+    <!-- Splash screen -->
+    <color name="splash_screen">#E31313</color>
+
     <!-- Font Colors -->
     <color name="h2">#a0a0a0</color>
     <color name="h3">#A0A0A0</color>
