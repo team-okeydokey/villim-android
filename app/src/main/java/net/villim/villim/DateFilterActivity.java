@@ -2,8 +2,6 @@ package net.villim.villim;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Color;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -12,6 +10,7 @@ import android.widget.TextView;
 
 import com.squareup.timessquare.CalendarPickerView;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -74,7 +73,7 @@ public class DateFilterActivity extends AppCompatActivity {
                 Intent returnIntent = new Intent();
                 returnIntent.putExtra(START_DATE, startDate);
                 returnIntent.putExtra(END_DATE, endDate);
-                setResult(Activity.RESULT_OK,returnIntent);
+                setResult(Activity.RESULT_OK, returnIntent);
                 finish();
             }
         });
@@ -85,7 +84,7 @@ public class DateFilterActivity extends AppCompatActivity {
         final CalendarPickerView calendar = (CalendarPickerView) findViewById(R.id.calendar_view);
         Date today = new Date();
         calendar.init(today, nextYear.getTime())
-                .inMode(CalendarPickerView.SelectionMode.RANGE);
+                .inMode(CalendarPickerView.SelectionMode.MULTIPLE);
 
         calendar.setOnDateSelectedListener(new CalendarPickerView.OnDateSelectedListener() {
             @Override
@@ -115,15 +114,25 @@ public class DateFilterActivity extends AppCompatActivity {
                         break;
                 }
 
+                calendar.clearSelectedDates();
                 calendar.clearHighlightedDates();
-                if (startDate != null) { calendar.selectDate(startDate); }
-                if (endDate != null) { calendar.selectDate(endDate); }
-
+                if (startDate != null) {
+                    calendar.selectDate(startDate);
+                    System.out.println("Start date nonnull.");
+                }
+                if (endDate != null) {
+                    calendar.selectDate(endDate);
+                    System.out.println("End date nonnull.");
+                }
                 setStartAndEndDateText(startDate, endDate);
 
-                /* Set button clickable if both start date and end dates are set */
+                /* Set button clickable if both start date and end dates are set.
+                   Highlight dates from startDate to endDate */
                 if (startDate != null && endDate != null) {
                     saveSelectionButton.setEnabled(true);
+                    highlightDatesBetween(calendar, startDate, endDate);
+                    System.out.println("Both nonnull.");
+
                 }
 
             }
@@ -166,7 +175,8 @@ public class DateFilterActivity extends AppCompatActivity {
         /* Set end date text. */
         if (endDate != null) {
             String endDateText = String.format(getString(R.string.date_filter_date_text_format), endDate.getMonth(), endDate.getDate())
-                    + "\n" + getWeekday(endDate.getDay());;
+                    + "\n" + getWeekday(endDate.getDay());
+            ;
             endDateTextView.setText(endDateText);
         } else {
             endDateTextView.setText(getString(R.string.date_filter_end_date));
@@ -225,5 +235,22 @@ public class DateFilterActivity extends AppCompatActivity {
         Intent returnIntent = new Intent();
         setResult(Activity.RESULT_CANCELED, returnIntent);
         finish();
+    }
+
+    public void highlightDatesBetween(CalendarPickerView cal, Date startDate, Date endDate) {
+        ArrayList<Date> dates = new ArrayList<Date>();
+        Calendar dayAfterStartDate = Calendar.getInstance();
+        dayAfterStartDate.setTime(startDate);
+
+        Calendar dayBeforeEndDate = Calendar.getInstance();
+        dayBeforeEndDate.setTime(endDate);
+        dayBeforeEndDate.add(Calendar.DATE, -1);
+
+        while (dayAfterStartDate.before(dayBeforeEndDate) || dayAfterStartDate.equals(dayBeforeEndDate)) {
+            dates.add(dayAfterStartDate.getTime());
+            dayAfterStartDate.add(Calendar.DATE, 1);
+        }
+
+        cal.highlightDates(dates);
     }
 }
