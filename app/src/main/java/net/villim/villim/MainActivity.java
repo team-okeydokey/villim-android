@@ -125,12 +125,12 @@ public class MainActivity extends AppCompatActivity {
                             verticalOffset, -appBarLayout.getTotalScrollRange(), 0,
                             toolBarCollpasedColor, toolBarOpenColor);
 //                    toolbarTextView.setTextColor(getResources().getColor(android.R.color.white));
+                    int toolBarLogoColor = getToolbarColorFromOffset(
+                            verticalOffset, -appBarLayout.getTotalScrollRange(), 0,
+                            toolBarOpenColor, toolBarCollpasedColor);
                     toolbarLogo.setImageResource(R.drawable.logo_horizontal_white);
-//                    toolbar.setBackgroundColor(getResources().getColor(R.color.search_filter_open));
+                    toolbarLogo.setColorFilter(toolBarLogoColor);
                     toolbar.setBackgroundColor(toolBarColor);
-                    searchFilters.setBackgroundColor(toolBarColor);
-                    searchFilterLocation.setBackgroundColor(toolBarColor);
-                    searchFilterDate.setBackgroundColor(toolBarColor);
                     searchButton.setBackground(getResources().getDrawable(R.drawable.btn_up_arrow));
                 }
             }
@@ -289,6 +289,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private int getToolbarColorFromOffset(int curVal, int minVal, int maxVal, int initialColor, int finalColor) {
+        float maxDiff = maxVal - minVal;
+        float curDiff = curVal - minVal;
+
+        float progress = curDiff / maxDiff;
+
+        int r = (int)((Color.red(finalColor) - Color.red(initialColor)) * progress) + Color.red(initialColor);
+        int g = (int)((Color.green(finalColor) - Color.green(initialColor)) * progress) + Color.green(initialColor);
+        int b = (int)((Color.blue(finalColor) - Color.blue(initialColor)) * progress) + Color.blue(initialColor);
+
+        return Color.rgb(r, g, b);
+    }
+
+    private int getToolbarLogoColorFromOffset(int curVal, int minVal, int maxVal, int initialColor, int finalColor) {
         float maxDiff = maxVal - minVal;
         float curDiff = curVal - minVal;
 
