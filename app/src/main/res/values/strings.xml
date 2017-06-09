@@ -25,6 +25,7 @@
     <!-- Search Filter Activity -->
     <string name="search_hint_location">모든 위치</string>
     <string name="search_hint_date">날짜 설정</string>
+    <string name="search_filter_date_format">%1$d월%2$d일 - %3$d월%4$d일</string>
     <string name="search_filter_title">검색하기</string>
     <string name="search_hint">어디로 가세요?</string>
     <string name="search_from_date">부터</string>
@@ -65,11 +66,37 @@
     <string name="num_bathroom_format">욕실 %d개</string>
     <string name="description_title">상세 설명</string>
     <string name="amenities_title">시설</string>
+    <string name="reviews_title">후기</string>
     <string name="see_more">+ 더보기</string>
     <string name="read_more">읽기</string>
+    <string name="price_policy">가격 정책</string>
     <string name="house_policy">숙소 이용규칙</string>
     <string name="cancellation_policy">환불 정책</string>
     <string name="cancellation_strict">엄격</string>
+    <string name="amenities_see_more_format">+%d개</string>
+    <string name="reviews_see_more_format">+%d개 후기 더보기</string>
+    <string name="reviews_no_review">아직 작성된 후기가 없습니다.</string>
+
+    <!-- Amenities -->
+    <string name="amenity_bedsheet">침대시트</string>
+    <string name="amenity_wifi">무선 인터넷</string>
+    <string name="amenity_tv">TV</string>
+    <string name="amenity_cooking_utensil">취사도구식/식기</string>
+    <string name="amenity_iron">다리미</string>
+    <string name="amenity_desk">책상/작업공간</string>
+    <string name="amenity_towel">수건</string>
+    <string name="amenity_ac">에어컨</string>
+    <string name="amenity_computer">컴퓨터</string>
+    <string name="amenity_fridge">냉장고</string>
+    <string name="amenity_hair_dryer">헤어드라이기</string>
+    <string name="amenity_smoke_detector">연기 감지기</string>
+    <string name="amenity_first_aid">비품</string>
+    <string name="amenity_heat">난방</string>
+    <string name="amenity_cooking_electronics">취사 가전제품</string>
+    <string name="amenity_washer">세탁기</string>
+    <string name="amenity_closet">옷장/서랍장</string>
+    <string name="amenity_fire_extinguisher">소화기</string>
+
 
     <!-- MyRoom Fragment -->
     <string name="myroom_title">내 방</string>

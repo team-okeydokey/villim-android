@@ -1,6 +1,8 @@
 package net.villim.villim;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.support.design.widget.AppBarLayout;
@@ -18,8 +20,13 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import java.util.Date;
+
 
 public class MainActivity extends AppCompatActivity {
+
+    private static final int LOCATION_FILTER = 0;
+    private static final int DATE_FILTER = 1;
 
     private AppBarLayout appBarLayout;
     private Toolbar toolbar;
@@ -29,13 +36,19 @@ public class MainActivity extends AppCompatActivity {
     private int[] tabIcons;
     private CharSequence toolBarTitle;
     private TabLayout tabLayout;
-    private ViewPager viewPager;
+    private UnSwipeableViewpager viewPager;
     private Button searchButton;
     private RelativeLayout searchFilters;
     private TextView searchFilterLocation;
     private TextView searchFilterDate;
 
     private boolean appBarOpen;
+
+    private Date startDate;
+    private Date endDate;
+
+    private int toolBarCollpasedColor;
+    private int toolBarOpenColor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +65,9 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         setTitle(toolBarTitle);
+
+        toolBarOpenColor = getResources().getColor(R.color.search_filter_open);
+        toolBarCollpasedColor = getResources().getColor(android.R.color.white);
 
         /* Search Filters */
         searchFilters = (RelativeLayout) findViewById(R.id.search_filters);
@@ -71,16 +87,18 @@ public class MainActivity extends AppCompatActivity {
         searchFilterLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent myIntent = new Intent(MainActivity.this, LocationFilterActivity.class);
-                MainActivity.this.startActivity(myIntent);
+                Intent locationFilterIntent = new Intent(MainActivity.this, LocationFilterActivity.class);
+                MainActivity.this.startActivityForResult(locationFilterIntent, LOCATION_FILTER);
 
             }
         });
         searchFilterDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent myIntent = new Intent(MainActivity.this, DateFilterActivity.class);
-                MainActivity.this.startActivity(myIntent);
+                Intent dateFilterIntent = new Intent(MainActivity.this, DateFilterActivity.class);
+                dateFilterIntent.putExtra(DateFilterActivity.START_DATE, startDate);
+                dateFilterIntent.putExtra(DateFilterActivity.END_DATE, endDate);
+                MainActivity.this.startActivityForResult(dateFilterIntent, DATE_FILTER);
             }
         });
 
@@ -103,9 +121,16 @@ public class MainActivity extends AppCompatActivity {
                     searchButton.setBackground(getResources().getDrawable(R.drawable.btn_search));
                     appBarOpen = false;
                 } else {
+                    int toolBarColor = getToolbarColorFromOffset(
+                            verticalOffset, -appBarLayout.getTotalScrollRange(), 0,
+                            toolBarCollpasedColor, toolBarOpenColor);
 //                    toolbarTextView.setTextColor(getResources().getColor(android.R.color.white));
+                    int toolBarLogoColor = getToolbarColorFromOffset(
+                            verticalOffset, -appBarLayout.getTotalScrollRange(), 0,
+                            toolBarOpenColor, toolBarCollpasedColor);
                     toolbarLogo.setImageResource(R.drawable.logo_horizontal_white);
-                    toolbar.setBackgroundColor(getResources().getColor(R.color.search_filter_open));
+                    toolbarLogo.setColorFilter(toolBarLogoColor);
+                    toolbar.setBackgroundColor(toolBarColor);
                     searchButton.setBackground(getResources().getDrawable(R.drawable.btn_up_arrow));
                 }
             }
@@ -114,11 +139,12 @@ public class MainActivity extends AppCompatActivity {
         appBarLayout.setExpanded(false);
 
         /* Bototm tab */
-        viewPager = (ViewPager) findViewById(R.id.view_pager);
+        viewPager = (UnSwipeableViewpager) findViewById(R.id.view_pager);
         tabItems = getResources().getStringArray(R.array.tab_items);
         tabIcons = getResources().getIntArray(R.array.tab_icons);
         // Set default screen to 방 찾기.
         final TabAdapter tabAdapter = new TabAdapter(getSupportFragmentManager());
+        viewPager.setPagingEnabled(false);
         viewPager.setAdapter(tabAdapter);
         viewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
 
@@ -233,6 +259,59 @@ public class MainActivity extends AppCompatActivity {
 //        tabLayout.getTabAt(position).getIcon().setColorFilter("#abffab");
 //        ((TextView)tabLayout.getTabAt(position).getCustomView().findViewById(R.id.text1)).setTextColor("#abffab");
     }
-//
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (requestCode == LOCATION_FILTER) {
+            if(resultCode == Activity.RESULT_OK){
+                VillimLocation location = data.getParcelableExtra(LocationFilterActivity.LOCATION);
+                System.out.println(location.addrSummary);
+                searchFilterLocation.setText(location.addrSummary);
+            }
+            if (resultCode == Activity.RESULT_CANCELED) {
+                //Write your code if there's no result
+            }
+        } else if (requestCode == DATE_FILTER) {
+            if(resultCode == Activity.RESULT_OK){
+                startDate = (Date) data.getSerializableExtra(DateFilterActivity.START_DATE);
+                endDate = (Date) data.getSerializableExtra(DateFilterActivity.END_DATE);
+
+                String dateFilterText = String.format(getString(R.string.search_filter_date_format),
+                        startDate.getMonth(), startDate.getDate(),
+                        endDate.getMonth(), endDate.getDate());
+                searchFilterDate.setText(dateFilterText);
+            }
+            if (resultCode == Activity.RESULT_CANCELED) {
+                //Write your code if there's no result
+            }
+        }
+    }
+
+    private int getToolbarColorFromOffset(int curVal, int minVal, int maxVal, int initialColor, int finalColor) {
+        float maxDiff = maxVal - minVal;
+        float curDiff = curVal - minVal;
+
+        float progress = curDiff / maxDiff;
+
+        int r = (int)((Color.red(finalColor) - Color.red(initialColor)) * progress) + Color.red(initialColor);
+        int g = (int)((Color.green(finalColor) - Color.green(initialColor)) * progress) + Color.green(initialColor);
+        int b = (int)((Color.blue(finalColor) - Color.blue(initialColor)) * progress) + Color.blue(initialColor);
+
+        return Color.rgb(r, g, b);
+    }
+
+    private int getToolbarLogoColorFromOffset(int curVal, int minVal, int maxVal, int initialColor, int finalColor) {
+        float maxDiff = maxVal - minVal;
+        float curDiff = curVal - minVal;
+
+        float progress = curDiff / maxDiff;
+
+        int r = (int)((Color.red(finalColor) - Color.red(initialColor)) * progress) + Color.red(initialColor);
+        int g = (int)((Color.green(finalColor) - Color.green(initialColor)) * progress) + Color.green(initialColor);
+        int b = (int)((Color.blue(finalColor) - Color.blue(initialColor)) * progress) + Color.blue(initialColor);
+
+        return Color.rgb(r, g, b);
+    }
 
 }

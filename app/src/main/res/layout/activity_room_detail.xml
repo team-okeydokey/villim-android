@@ -28,7 +28,8 @@
             <ImageView
                 android:id="@+id/toolbar_image"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/house_picture_height"
+                android:scaleType="centerCrop"
                 app:layout_collapseMode="parallax" />
 
             <android.support.v7.widget.Toolbar
@@ -55,7 +56,7 @@
 
         <android.support.v7.widget.LinearLayoutCompat
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
             <!-- Host Info -->
@@ -264,7 +265,32 @@
                 android:text="@string/see_more" />
             <!-- End description -->
 
-            <include layout="@layout/category_divider" />>
+            <include layout="@layout/category_divider" />
+
+            <!-- Price policy -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/policy_category_height"
+                android:padding="@dimen/room_detail_activity_padding">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentLeft="true"
+                    android:gravity="center_vertical|left"
+                    android:text="@string/price_policy" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
+                    android:gravity="center_vertical|right"
+                    android:text="@string/read_more" />
+
+            </RelativeLayout>
+            <!-- End price policy -->
+
+            <include layout="@layout/category_divider" />
 
             <!-- Amenities -->
 
@@ -277,6 +303,7 @@
                 android:text="@string/amenities_title" />
             <!-- Amenities icons -->
             <android.support.v7.widget.LinearLayoutCompat
+                android:id="@+id/amenity_icons"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -288,6 +315,106 @@
             <include layout="@layout/category_divider" />
 
             <!-- Reviews -->
+
+            <!-- Reviews title -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/room_detail_activity_padding"
+                android:paddingTop="@dimen/room_detail_activity_padding"
+                android:text="@string/reviews_title" />
+
+            <RelativeLayout
+                android:id="@+id/review_body"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/room_detail_activity_padding"
+                android:paddingBottom="@dimen/room_detail_activity_padding"
+                android:paddingLeft="@dimen/reviews_padding"
+                android:paddingRight="@dimen/reviews_padding"
+                android:paddingTop="@dimen/room_detail_activity_padding">
+
+                <!-- Reviewer profile pic -->
+                <com.mikhaellopez.circularimageview.CircularImageView
+                    android:id="@+id/reviewer_profile_pic"
+                    android:layout_width="@dimen/reviewer_profile_pic_size"
+                    android:layout_height="@dimen/reviewer_profile_pic_size"
+                    android:layout_alignParentTop="true" />
+
+                <!-- Everything else -->
+                <android.support.v7.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentTop="true"
+                    android:layout_toRightOf="@id/reviewer_profile_pic"
+                    android:orientation="vertical"
+                    android:paddingLeft="@dimen/room_detail_activity_padding"
+                    android:paddingRight="@dimen/room_detail_activity_padding">
+
+                    <!-- Reviewer name & rating -->
+                    <android.support.v7.widget.LinearLayoutCompat
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <!-- Reviewer name -->
+                        <TextView
+                            android:id="@+id/reviewer_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <!-- Reviewer rating -->
+                        <android.support.v7.widget.AppCompatRatingBar
+                            android:id="@+id/reviewer_rating"
+                            style="@style/customRatingBar"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/reviews_padding"
+                            android:numStars="5"
+                            android:progressTint="@color/rating_color"
+                            android:stepSize="0.5" />
+
+                    </android.support.v7.widget.LinearLayoutCompat>
+
+                    <!-- Review content -->
+                    <TextView
+                        android:id="@+id/review_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/room_detail_activity_padding"
+                        android:maxLines="3" />
+
+                    <!-- See more & house rating -->
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/room_detail_activity_padding">
+
+                        <!-- See more -->
+                        <TextView
+                            android:id="@+id/see_more_reviews"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <!-- House rating -->
+                        <android.support.v7.widget.AppCompatRatingBar
+                            android:id="@+id/house_rating"
+                            style="@style/customRatingBar"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentRight="true"
+                            android:layout_gravity="center_vertical"
+                            android:numStars="5"
+                            android:progressTint="@color/rating_color"
+                            android:stepSize="0.5" />
+
+
+                    </RelativeLayout>
+
+                </android.support.v7.widget.LinearLayoutCompat>
+
+
+            </RelativeLayout>
 
             <!-- End reviews -->
 

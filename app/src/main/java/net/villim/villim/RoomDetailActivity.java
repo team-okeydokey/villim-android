@@ -4,23 +4,25 @@ import android.graphics.PorterDuff;
 import android.os.AsyncTask;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RatingBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -28,6 +30,8 @@ import com.bumptech.glide.Glide;
 
 
 public class RoomDetailActivity extends AppCompatActivity implements OnMapReadyCallback {
+
+    private final static int MAX_AMENITY_ICONS = 6;
 
     private VillimRoom house;
 
@@ -52,6 +56,16 @@ public class RoomDetailActivity extends AppCompatActivity implements OnMapReadyC
 
     private TextView description;
     private Button descriptionSeeMore;
+
+    private LinearLayoutCompat amenityIcons;
+
+    private RelativeLayout reviewBody;
+    private ImageView reviewerProfilePic;
+    private TextView reviewerName;
+    private RatingBar reviewerRating;
+    private TextView reviewContent;
+    private TextView seeMoreReviews;
+    private RatingBar houseRating;
 
     FrameLayout mapContainer;
     MapFragment mapFragment;
@@ -112,8 +126,16 @@ public class RoomDetailActivity extends AppCompatActivity implements OnMapReadyC
         descriptionSeeMore = (Button) findViewById(R.id.description_see_more);
 
         /* Amenities */
+        amenityIcons = (LinearLayoutCompat) findViewById(R.id.amenity_icons);
 
         /* Review */
+        reviewBody = (RelativeLayout) findViewById(R.id.review_body);
+        reviewerProfilePic = (ImageView) findViewById(R.id.reviewer_profile_pic);
+        reviewerName = (TextView) findViewById(R.id.reviewer_name);
+        reviewerRating = (RatingBar) findViewById(R.id.reviewer_rating);
+        reviewContent = (TextView) findViewById(R.id.review_content);
+        seeMoreReviews = (TextView) findViewById(R.id.see_more_reviews);
+        houseRating = (RatingBar) findViewById(R.id.house_rating);
 
         /* Map */
         mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.map);
@@ -129,6 +151,7 @@ public class RoomDetailActivity extends AppCompatActivity implements OnMapReadyC
     private VillimRoom extractRoomInfo() {
         Bundle args = getIntent().getExtras();
         house = args.getParcelable(getString(R.string.key_house));
+        house.reviews = VillimReview.getHouseReviewsFromServer(house.houseId);
         return house;
     }
 
@@ -180,8 +203,10 @@ public class RoomDetailActivity extends AppCompatActivity implements OnMapReadyC
         });
 
         /* Amenities */
+        populateAmenityIcons();
 
-        /* Review */
+        /* Reviews */
+        populateReviews();
 
         /* Map */
 
@@ -198,7 +223,7 @@ public class RoomDetailActivity extends AppCompatActivity implements OnMapReadyC
     public void onMapReady(GoogleMap map) {
         map.addMarker(new MarkerOptions().position(new LatLng(house.latitude, house.longitude)).title("Marker"));
         map.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(house.latitude, house.longitude)));
-        map.animateCamera( CameraUpdateFactory.zoomTo( 17.0f ) );
+        map.animateCamera(CameraUpdateFactory.zoomTo(17.0f));
     }
 
     private class PopulateHouseDetailTask extends AsyncTask<Void, Void, Void> {
@@ -214,6 +239,91 @@ public class RoomDetailActivity extends AppCompatActivity implements OnMapReadyC
 
         protected void onPostExecute() {
 
+        }
+    }
+
+    private void populateAmenityIcons() {
+        int[] amenityIds = house.amenityIds;
+
+        /* Displayed icons should be one less than MAX_AMENITY_ICONS if there are more amenities
+           than MAX_AMENITY_ICONS, to make room for the "see more" button. */
+        int numIcons = amenityIds.length > MAX_AMENITY_ICONS ? MAX_AMENITY_ICONS - 1 : amenityIds.length;
+
+        /* Add icons. */
+        for (int i = 0; i < numIcons; ++i) {
+            ImageView iconView = new ImageView(this);
+            iconView.setImageResource(VillimAmenity.getAmenityDrawableResourceId(amenityIds[i]));
+            LinearLayoutCompat.LayoutParams params = new LinearLayoutCompat.LayoutParams(
+                    (int) getResources().getDimension(R.dimen.amenity_icon_width),
+                    (int) getResources().getDimension(R.dimen.amenity_icon_height),
+                    1.0f
+            );
+            iconView.setLayoutParams(params);
+            amenityIcons.addView(iconView);
+        }
+
+        /* Add "see more" button, if applicable. */
+        if (amenityIds.length > MAX_AMENITY_ICONS) {
+            TextView seeMoreTextView = new TextView(this);
+            LinearLayoutCompat.LayoutParams params = new LinearLayoutCompat.LayoutParams(
+                    (int) getResources().getDimension(R.dimen.amenity_icon_width),
+                    (int) getResources().getDimension(R.dimen.amenity_icon_height),
+                    1.0f
+            );
+            seeMoreTextView.setLayoutParams(params);
+            String seeMoreText = String.format(getString(R.string.amenities_see_more_format), amenityIds.length - numIcons);
+            seeMoreTextView.setText(seeMoreText);
+            seeMoreTextView.setTextAlignment(View.TEXT_ALIGNMENT_VIEW_END);
+            seeMoreTextView.setGravity(Gravity.CENTER_VERTICAL);
+            amenityIcons.addView(seeMoreTextView);
+        }
+
+    }
+
+    private void populateReviews() {
+        VillimReview[] reviews = house.reviews;
+
+        if (reviews == null || reviews.length == 0) {
+            /* Remove the whole review section andreplace it with "No review" textview. */
+            LinearLayoutCompat parent = (LinearLayoutCompat) reviewBody.getParent();
+            int index = parent.indexOfChild(reviewBody);
+            parent.removeView(reviewBody);
+
+            TextView noReviewTextView = new TextView(this);
+            LinearLayoutCompat.LayoutParams params = new LinearLayoutCompat.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT
+            );
+            noReviewTextView.setLayoutParams(params);
+            noReviewTextView.setText(getString(R.string.reviews_no_review));
+            noReviewTextView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+            noReviewTextView.setGravity(Gravity.CENTER_VERTICAL);
+            noReviewTextView.setPadding(0, 0, 0, (int) getResources().getDimension(R.dimen.room_detail_activity_padding));
+            parent.addView(noReviewTextView, index);
+
+        } else {
+
+            /* There is at least 1 review. Load reviewer info. */
+            VillimReview firstReview = reviews[0];
+            Glide.with(this)
+                    .load(R.drawable.prugio_thumbnail)
+                    .into(reviewerProfilePic);
+            reviewerName.setText(firstReview.reviewerName);
+            reviewerRating.setRating(firstReview.rating);
+            reviewContent.setText(firstReview.review);
+            houseRating.setRating(house.houseRating);
+
+            if (reviews.length == 1) {
+                /* Be away with "see more" if there is only one review. Also, shift house rating bar to the left. */
+                seeMoreReviews.setVisibility(View.GONE);
+                RelativeLayout.LayoutParams houseRatingParams = (RelativeLayout.LayoutParams) houseRating.getLayoutParams();
+                houseRatingParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT, RelativeLayout.TRUE);
+                houseRating.setLayoutParams(houseRatingParams);
+            } else {
+                /* Activate "see more" button with appropriate text. */
+                String seeMoreReviewsText = String.format(getString(R.string.reviews_see_more_format), reviews.length - 1);
+                seeMoreReviews.setText(seeMoreReviewsText);
+            }
         }
     }
 

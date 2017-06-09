@@ -31,12 +31,17 @@
     <dimen name="date_filter_text_padding_top">46dp</dimen>
     <dimen name="date_filter_text_padding_side">37dp</dimen>
     <dimen name="date_filter_text_padding_bottom">15dp</dimen>
-    <dimen name="date_filter_selection_size">35dp</dimen>
+    <dimen name="date_filter_selection_size">15dp</dimen>
 
 
     <!-- Room Detail Activity -->
+    <dimen name="house_picture_height">200dp</dimen>
     <dimen name="host_profile_pic_size">60dp</dimen>
     <dimen name="room_detail_activity_padding">10dp</dimen>
+    <dimen name="amenity_icon_width">25dp</dimen>
+    <dimen name="amenity_icon_height">25dp</dimen>
+    <dimen name="reviewer_profile_pic_size">40dp</dimen>
+    <dimen name="reviews_padding">25dp</dimen>
     <dimen name="policy_category_height">60dp</dimen>
 
     <!-- Search Activity -->

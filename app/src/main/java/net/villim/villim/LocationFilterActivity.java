@@ -1,6 +1,8 @@
 package net.villim.villim;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -17,6 +19,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class LocationFilterActivity extends AppCompatActivity {
+    public final static String LOCATION = "location";
 
     private Toolbar toolbar;
     private RelativeLayout searchContainer;
@@ -54,10 +57,11 @@ public class LocationFilterActivity extends AppCompatActivity {
         textView.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.search_suggestion_title));
         textView.setText(getString(R.string.search_popular_locations));
         popularLocationsListView.addHeaderView(textView);
-        popularLocations = new VillimLocation[] { new VillimLocation("강남구", "서울특별시 강남구"),
-                new VillimLocation("강남역", "서초구 강남"),
-                new VillimLocation("대한민국", "서울특별시 강남대로 서초구"),
-                new VillimLocation("강남 고속버스 터미널", "서초구 강남 고속버스 터미널")};
+        popularLocations = new VillimLocation[] {
+                new VillimLocation("강남구", "강남구", "서울특별시 강남구", "서울특별시 강남구"),
+                new VillimLocation("강남역", "강남역", "서초구 강남", "서초구 강남"),
+                new VillimLocation("대한민국", "대한민국", "서울특별시 강남대로 서초구", "서울특별시 강남대로 서초구"),
+                new VillimLocation("고속버스 터미널", "강남 고속버스 터미널", "서초구 강남 고속버스 터미널12312112121221211", "서초구 강남 고속버스 터미널")};
         popularLocationsListView.setAdapter(new SearchSuggestionListViewAdapter(getApplicationContext(), popularLocations));
     }
 
@@ -82,7 +86,7 @@ public class LocationFilterActivity extends AppCompatActivity {
                 convertView = LayoutInflater.from(getContext()).inflate(R.layout.search_suggestion_list_item, parent, false);
             }
 
-            VillimLocation location = locations[position];
+            final VillimLocation location = locations[position];
 
             /* Location Name */
             TextView locationName = (TextView) convertView.findViewById(R.id.location_name);
@@ -90,7 +94,19 @@ public class LocationFilterActivity extends AppCompatActivity {
 
             /* Location detail */
             TextView locationDetail = (TextView) convertView.findViewById(R.id.location_detail);
-            locationDetail.setText(location.detail);
+            locationDetail.setText(location.addrSummary);
+
+            /* Set touch listeners */
+            convertView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent returnIntent = new Intent();
+                    returnIntent.putExtra(LOCATION, location);
+                    setResult(Activity.RESULT_OK,returnIntent);
+                    finish();
+                }
+            });
+
             return convertView;
         }
     }

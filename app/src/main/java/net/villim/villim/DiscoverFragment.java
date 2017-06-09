@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -88,6 +89,10 @@ public class DiscoverFragment extends Fragment {
             jsonItem.put(VillimRoom.KEY_HOST_REVIEW_COUNT, 143);
             jsonItem.put(VillimRoom.KEY_HOUSE_RATING, 3.6);
             jsonItem.put(VillimRoom.KEY_HOUSE_REVIEW_COUNT, 72);
+            JSONArray amenitiesArray = new JSONArray();
+            amenitiesArray.put(1);amenitiesArray.put(2);amenitiesArray.put(3);amenitiesArray.put(4);
+            amenitiesArray.put(5);amenitiesArray.put(6);amenitiesArray.put(7);
+            jsonItem.put(VillimRoom.KEY_AMENITY_IDS, amenitiesArray);
         } catch (JSONException e) {
 
         }

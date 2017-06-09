@@ -42,6 +42,8 @@ public class VillimRoom implements Parcelable {
     public static final String KEY_HOUSE_RATING = "house_rating";
     public static final String KEY_HOUSE_REVIEW_COUNT = "house_review_count";
 
+    public static final String KEY_AMENITY_IDS = "amenity_ids";
+
 
     // Raw query from server.
     public int houseId;
@@ -68,6 +70,8 @@ public class VillimRoom implements Parcelable {
     int hostReviewCount;
     float houseRating;
     int houseReviewCount;
+    int[] amenityIds;
+    VillimReview[] reviews;
 
 
     //public VillimReview[] reviews;
@@ -101,6 +105,8 @@ public class VillimRoom implements Parcelable {
             houseRating = (float) jsonObject.getDouble(KEY_HOUSE_RATING);
             houseReviewCount = jsonObject.getInt(KEY_HOUSE_REVIEW_COUNT);
 
+            amenityIds = VillimUtil.JSONArrayToIntArray(jsonObject.getJSONArray(KEY_AMENITY_IDS));
+//            reviews = VillimReview.getHouseReviewsFromServer(houseId);
         } catch (JSONException e) {
 
         }
@@ -149,6 +155,8 @@ public class VillimRoom implements Parcelable {
         dest.writeInt(hostReviewCount);
         dest.writeFloat(houseRating);
         dest.writeInt(houseReviewCount);
+        dest.writeIntArray(amenityIds);
+//        dest.writeParcelableArray(reviews, 0);
     }
 
     protected VillimRoom(Parcel in) {
@@ -174,6 +182,8 @@ public class VillimRoom implements Parcelable {
         hostReviewCount = in.readInt();
         houseRating = in.readFloat();
         houseReviewCount = in.readInt();
+        amenityIds = in.createIntArray();
+//        reviews = in.createTypedArray(VillimReview.CREATOR);
     }
 
     public static final Creator<VillimRoom> CREATOR = new Creator<VillimRoom>() {

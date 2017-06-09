@@ -4,6 +4,9 @@
     <color name="colorPrimaryDark">#ed2025</color>
     <color name="colorAccent">#FF4081</color>
 
+    <!-- Splash screen -->
+    <color name="splash_screen">#E31313</color>
+
     <!-- Font Colors -->
     <color name="h2">#a0a0a0</color>
     <color name="h3">#A0A0A0</color>
@@ -35,14 +38,15 @@
     <color name="date_filter_bottom_button_color">#2a2c32</color>
     <color name="date_filter_state_normal">#333333</color>
     <color name="date_filter_state_highlighted">#ff5848</color>
-    <color name="dateTimeRangePickerStateDefault">@android:color/black</color>
+    <color name="dateTimeRangePickerStateDefault">#333333</color>
     <color name="dateTimeRangePickerStateNonSelectable">#B9B9B9</color>
     <color name="dateTimeRangePickerStateToday">#23b15e</color>
-    <color name="dateTimeRangePickerHeaderTextColor">@android:color/black</color>
-    <color name="dateTimeRangePickerTitleTextColor">@android:color/black</color>
+    <color name="dateTimeRangePickerHeaderTextColor">#05060b</color>
+    <color name="dateTimeRangePickerTitleTextColor">#05060b</color>
     <color name="dateTimeRangePickerRangeTextColorActive">@android:color/white</color>
     <color name="dateTimeRangePickerRangeTextColorInactive">#B9B9B9</color>
-    <color name="dateTimeRangePickerRangeMiddle">#ffffff</color>
+    <color name="date_range_middle">#ffffff</color>
+    <color name="date_range_selected">#ed2025</color>
 
     <!-- Discovery Fragment -->
     <color name="rating_color">#51ACCF</color>
