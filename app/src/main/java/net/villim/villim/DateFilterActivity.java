@@ -2,8 +2,10 @@ package net.villim.villim;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -30,6 +32,7 @@ public class DateFilterActivity extends AppCompatActivity {
     private Date endDate;
     int selectState;
 
+    private Toolbar toolbar;
     private TextView startDateTextView;
     private TextView endDateTextView;
 
@@ -44,6 +47,14 @@ public class DateFilterActivity extends AppCompatActivity {
         startDate = (Date) getIntent().getSerializableExtra(START_DATE);
         endDate = (Date) getIntent().getSerializableExtra(END_DATE);
         boolean hasPresetDate = (startDate != null && endDate != null);
+
+        /* Toolbar */
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(ContextCompat.getDrawable(getApplicationContext(), R.drawable.back_arrow_dark));
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         /* Set up start date / end date select texts. */
         startDateTextView = (TextView) findViewById(R.id.start_date_text);
@@ -233,6 +244,14 @@ public class DateFilterActivity extends AppCompatActivity {
         Intent returnIntent = new Intent();
         setResult(Activity.RESULT_CANCELED, returnIntent);
         finish();
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        Intent returnIntent = new Intent();
+        setResult(Activity.RESULT_CANCELED, returnIntent);
+        finish();
+        return true;
     }
 
     public void highlightDatesBetween(CalendarPickerView cal, Date startDate, Date endDate) {
