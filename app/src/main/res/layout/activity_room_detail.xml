@@ -330,7 +330,7 @@
                 android:layout_height="wrap_content">
 
                 <!-- Reviewer profile pic -->
-                <ImageView
+                <com.mikhaellopez.circularimageview.CircularImageView
                     android:id="@+id/reviewer_profile_pic"
                     android:layout_width="@dimen/reviewer_profile_pic_size"
                     android:layout_height="@dimen/reviewer_profile_pic_size"

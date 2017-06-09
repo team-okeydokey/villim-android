@@ -302,10 +302,15 @@ public class RoomDetailActivity extends AppCompatActivity implements OnMapReadyC
 
         } else {
 
-            /* There is at least 1 review. Load reviewer profile pic. */
+            /* There is at least 1 review. Load reviewer info. */
+            VillimReview firstReview = reviews[0];
             Glide.with(this)
                     .load(R.drawable.prugio_thumbnail)
-                    .into(toolbarImage);
+                    .into(reviewerProfilePic);
+            reviewerName.setText(firstReview.reviewerName);
+            reviewerRating.setRating(firstReview.rating);
+            reviewContent.setText(firstReview.review);
+            houseRating.setRating(house.houseRating);
 
             if (reviews.length == 1) {
                 /* Be away with "see more" if there is only one review. Also, shift house rating bar to the left. */
