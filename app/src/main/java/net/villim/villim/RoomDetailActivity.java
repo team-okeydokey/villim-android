@@ -256,7 +256,7 @@ public class RoomDetailActivity extends AppCompatActivity implements OnMapReadyC
             seeMoreTextView.setLayoutParams(params);
             String seeMoreText = String.format(getString(R.string.amenities_see_more_format), amenityIds.length-numIcons);
             seeMoreTextView.setText(seeMoreText);
-            seeMoreTextView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+            seeMoreTextView.setTextAlignment(View.TEXT_ALIGNMENT_VIEW_END);
             seeMoreTextView.setGravity(Gravity.CENTER_VERTICAL);
             amenityIcons.addView(seeMoreTextView);
         }
