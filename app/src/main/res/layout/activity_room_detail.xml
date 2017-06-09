@@ -325,6 +325,7 @@
                 android:text="@string/reviews_title" />
 
             <RelativeLayout
+                android:id="@+id/review_body"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -363,6 +364,7 @@
 
                     <!-- Review content -->
                     <TextView
+                        android:id="@+id/review_content"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:maxLines="3" />
@@ -374,11 +376,13 @@
 
                         <!-- See more -->
                         <TextView
+                            android:id="@+id/see_more_reviews"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
 
-                        <!-- Home rating -->
+                        <!-- House rating -->
                         <android.support.v7.widget.AppCompatRatingBar
+                            android:id="@+id/house_rating"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:layout_alignParentRight="true" />

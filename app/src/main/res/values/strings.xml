@@ -66,7 +66,7 @@
     <string name="num_bathroom_format">욕실 %d개</string>
     <string name="description_title">상세 설명</string>
     <string name="amenities_title">시설</string>
-    <string name="reviews_title">리뷰</string>
+    <string name="reviews_title">후기</string>
     <string name="see_more">+ 더보기</string>
     <string name="read_more">읽기</string>
     <string name="price_policy">가격 정책</string>
@@ -74,6 +74,8 @@
     <string name="cancellation_policy">환불 정책</string>
     <string name="cancellation_strict">엄격</string>
     <string name="amenities_see_more_format">+%d개</string>
+    <string name="reviews_see_more_format">+%d개 후기 더보기</string>
+    <string name="reviews_no_review">아직 작성된 후기가 없습니다.</string>
 
     <!-- Amenities -->
     <string name="amenity_bedsheet">침대시트</string>
