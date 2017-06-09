@@ -84,7 +84,7 @@ public class DateFilterActivity extends AppCompatActivity {
         final CalendarPickerView calendar = (CalendarPickerView) findViewById(R.id.calendar_view);
         Date today = new Date();
         calendar.init(today, nextYear.getTime())
-                .inMode(CalendarPickerView.SelectionMode.MULTIPLE);
+                .inMode(CalendarPickerView.SelectionMode.RANGE);
 
         calendar.setOnDateSelectedListener(new CalendarPickerView.OnDateSelectedListener() {
             @Override
@@ -118,11 +118,9 @@ public class DateFilterActivity extends AppCompatActivity {
                 calendar.clearHighlightedDates();
                 if (startDate != null) {
                     calendar.selectDate(startDate);
-                    System.out.println("Start date nonnull.");
                 }
                 if (endDate != null) {
                     calendar.selectDate(endDate);
-                    System.out.println("End date nonnull.");
                 }
                 setStartAndEndDateText(startDate, endDate);
 
@@ -241,6 +239,7 @@ public class DateFilterActivity extends AppCompatActivity {
         ArrayList<Date> dates = new ArrayList<Date>();
         Calendar dayAfterStartDate = Calendar.getInstance();
         dayAfterStartDate.setTime(startDate);
+        dayAfterStartDate.add(Calendar.DATE, 1);
 
         Calendar dayBeforeEndDate = Calendar.getInstance();
         dayBeforeEndDate.setTime(endDate);
