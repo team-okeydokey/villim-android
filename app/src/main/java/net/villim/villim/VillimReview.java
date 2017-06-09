@@ -57,7 +57,7 @@ public class VillimReview implements Parcelable {
         return review;
     }
 
-    public static VillimReview[] gerRoomReviewsFromServer(int houseId) {
+    public static VillimReview[] getHouseReviewsFromServer(int houseId) {
         VillimReview review = new VillimReview(0,0,0,0, "리뷰어 이름","첫인상으로 많은 것이 결정되고 마케팅이 신뢰를 잃어가는 요즘과 같은 시대에서는, " +
                 "앱 마켓의 별점과 리뷰가 앱 다운로드 여부를 결정하는 중요한 요인입니다. " +
                 "최근 Apptentive에서 실시한 유저 관련 조사에 따르면, 유저 92%가 새로운 앱을 다운로드할 때 별점을 고려한다는 결과가 나왔습니다. " +

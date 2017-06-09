@@ -327,7 +327,12 @@
             <RelativeLayout
                 android:id="@+id/review_body"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/room_detail_activity_padding"
+                android:paddingBottom="@dimen/room_detail_activity_padding"
+                android:paddingLeft="@dimen/reviews_padding"
+                android:paddingRight="@dimen/reviews_padding"
+                android:paddingTop="@dimen/room_detail_activity_padding">
 
                 <!-- Reviewer profile pic -->
                 <com.mikhaellopez.circularimageview.CircularImageView
@@ -338,10 +343,13 @@
 
                 <!-- Everything else -->
                 <android.support.v7.widget.LinearLayoutCompat
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_alignParentTop="true"
-                    android:layout_toRightOf="@id/reviewer_profile_pic">
+                    android:layout_toRightOf="@id/reviewer_profile_pic"
+                    android:orientation="vertical"
+                    android:paddingLeft="@dimen/room_detail_activity_padding"
+                    android:paddingRight="@dimen/room_detail_activity_padding">
 
                     <!-- Reviewer name & rating -->
                     <android.support.v7.widget.LinearLayoutCompat
@@ -357,8 +365,14 @@
                         <!-- Reviewer rating -->
                         <android.support.v7.widget.AppCompatRatingBar
                             android:id="@+id/reviewer_rating"
+                            style="@style/customRatingBar"
                             android:layout_width="wrap_content"
-                            android:layout_height="match_parent" />
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/reviews_padding"
+                            android:numStars="5"
+                            android:progressTint="@color/rating_color"
+                            android:stepSize="0.5" />
 
                     </android.support.v7.widget.LinearLayoutCompat>
 
@@ -367,12 +381,14 @@
                         android:id="@+id/review_content"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/room_detail_activity_padding"
                         android:maxLines="3" />
 
                     <!-- See more & house rating -->
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/room_detail_activity_padding">
 
                         <!-- See more -->
                         <TextView
@@ -383,9 +399,14 @@
                         <!-- House rating -->
                         <android.support.v7.widget.AppCompatRatingBar
                             android:id="@+id/house_rating"
+                            style="@style/customRatingBar"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:layout_alignParentRight="true" />
+                            android:layout_alignParentRight="true"
+                            android:layout_gravity="center_vertical"
+                            android:numStars="5"
+                            android:progressTint="@color/rating_color"
+                            android:stepSize="0.5" />
 
 
                     </RelativeLayout>

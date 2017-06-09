@@ -151,6 +151,7 @@ public class RoomDetailActivity extends AppCompatActivity implements OnMapReadyC
     private VillimRoom extractRoomInfo() {
         Bundle args = getIntent().getExtras();
         house = args.getParcelable(getString(R.string.key_house));
+        house.reviews = VillimReview.getHouseReviewsFromServer(house.houseId);
         return house;
     }
 

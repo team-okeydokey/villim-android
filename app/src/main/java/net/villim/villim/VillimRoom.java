@@ -106,7 +106,7 @@ public class VillimRoom implements Parcelable {
             houseReviewCount = jsonObject.getInt(KEY_HOUSE_REVIEW_COUNT);
 
             amenityIds = VillimUtil.JSONArrayToIntArray(jsonObject.getJSONArray(KEY_AMENITY_IDS));
-            reviews = VillimReview.gerRoomReviewsFromServer(houseId);
+//            reviews = VillimReview.getHouseReviewsFromServer(houseId);
         } catch (JSONException e) {
 
         }
