@@ -68,6 +68,7 @@
     <string name="amenities_title">시설</string>
     <string name="see_more">+ 더보기</string>
     <string name="read_more">읽기</string>
+    <string name="price_policy">가격 정책</string>
     <string name="house_policy">숙소 이용규칙</string>
     <string name="cancellation_policy">환불 정책</string>
     <string name="cancellation_strict">엄격</string>

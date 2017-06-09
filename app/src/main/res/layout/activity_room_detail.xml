@@ -265,7 +265,32 @@
                 android:text="@string/see_more" />
             <!-- End description -->
 
-            <include layout="@layout/category_divider" />>
+            <include layout="@layout/category_divider" />
+
+            <!-- Price policy -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/policy_category_height"
+                android:padding="@dimen/room_detail_activity_padding">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentLeft="true"
+                    android:gravity="center_vertical|left"
+                    android:text="@string/price_policy" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
+                    android:gravity="center_vertical|right"
+                    android:text="@string/read_more" />
+
+            </RelativeLayout>
+            <!-- End price policy -->
+
+            <include layout="@layout/category_divider" />
 
             <!-- Amenities -->
 
