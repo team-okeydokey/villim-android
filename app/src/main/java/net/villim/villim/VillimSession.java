@@ -4,13 +4,17 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
+import static net.villim.villim.VillimKeys.KEY_EMAIL;
+import static net.villim.villim.VillimKeys.KEY_ID;
+import static net.villim.villim.VillimKeys.KEY_NAME;
+import static net.villim.villim.VillimKeys.KEY_PROFILE_PIC_URL;
+
 /**
  * Created by seongmin on 6/9/17.
  */
 
 public class VillimSession {
     public final static String KEY_LOGGED_IN = "logged_in";
-    public final static String KEY_NAME = "name";
 
     private SharedPreferences prefs;
 
@@ -18,6 +22,7 @@ public class VillimSession {
         prefs = PreferenceManager.getDefaultSharedPreferences(context);
     }
 
+    /* Logged in */
     public void setLoggedIn(boolean loggedIn) {
         if (!loggedIn) {
             prefs.edit().clear().apply();
@@ -29,12 +34,45 @@ public class VillimSession {
         return  prefs.getBoolean(KEY_LOGGED_IN, false);
     }
 
-    public void setName(String usename) {
-        prefs.edit().putString(KEY_NAME, usename).apply();
+    /* Id */
+    public void setId(int id) {
+        prefs.edit().putInt(KEY_ID, id).apply();
+    }
+
+    public int getId() {
+        int id = prefs.getInt(KEY_ID,0);
+        return id;
+    }
+
+
+    /* Name */
+    public void setName(String name) {
+        prefs.edit().putString(KEY_NAME, name).apply();
     }
 
     public String getName() {
         String usename = prefs.getString(KEY_NAME,"");
         return usename;
+    }
+
+    /* Email */
+    public void setEmail(String email) {
+        prefs.edit().putString(KEY_EMAIL, email).apply();
+    }
+
+    public String getEmail() {
+        String email = prefs.getString(KEY_EMAIL,"");
+        return email;
+    }
+
+    /* Profile pic url */
+    /* Email */
+    public void setProfilePicUrl(String url) {
+        prefs.edit().putString(KEY_PROFILE_PIC_URL, url).apply();
+    }
+
+    public String getProfilePicUrl() {
+        String url = prefs.getString(KEY_PROFILE_PIC_URL,"");
+        return url;
     }
 }

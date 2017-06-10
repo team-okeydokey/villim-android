@@ -102,7 +102,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/doneButton"
+        android:layout_above="@+id/next_button"
         android:paddingBottom="@dimen/login_activity_padding"
         android:paddingLeft="@dimen/login_activity_padding"
         android:paddingRight="@dimen/login_activity_padding">

@@ -5,10 +5,10 @@ package net.villim.villim;
  */
 
 public class VillimUser {
-    private int id;
-    private String username;
-
+    public int id;
     public String name;
+    public String email;
+    public String profilePicUrl;
 
     public static VillimUser getUserFromServer(int id) {
         VillimUser user = new VillimUser();

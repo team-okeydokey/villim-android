@@ -23,7 +23,7 @@ import java.util.List;
 
 public class ProfileFragment extends Fragment {
 
-    private static final int LOGIN = 0;
+    public static final int LOGIN = 0;
 
     private VillimSession session;
 
@@ -69,7 +69,7 @@ public class ProfileFragment extends Fragment {
                         } else {
                             /* Launch login page */
                             Intent intent = new Intent(getActivity(), LoginActivity.class);
-                            startActivityForResult(intent, LOGIN);
+                            getActivity().startActivityForResult(intent, LOGIN);
                         }
                         break;
 
@@ -111,9 +111,15 @@ public class ProfileFragment extends Fragment {
         // Network operation to fetch.
 
         // Profile pic.
-        Glide.with(this)
-                .load(R.drawable.prugio_thumbnail)
-                .into(profilePicture);
+        if (session.getLoggedIn()) {
+            Glide.with(this)
+                    .load(session.getProfilePicUrl())
+                    .into(profilePicture);
+        } else {
+            Glide.with(this)
+                    .load(R.drawable.prugio_thumbnail)
+                    .into(profilePicture);
+        }
     }
 
 
@@ -149,8 +155,18 @@ public class ProfileFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         if (requestCode == LOGIN) {
+            System.out.println("Ohdasdashh");
             if (resultCode == Activity.RESULT_OK) {
+                System.out.println("Exited");
+                /* Populate user name */
+                profileName.setText(session.getName());
 
+                /* Fetch profile image and populate view */
+                Glide.with(this)
+                        .load(session.getProfilePicUrl())
+                        .into(profilePicture);
+
+                System.out.println(session.getProfilePicUrl());
             }
             if (resultCode == Activity.RESULT_CANCELED) {
                 //Write your code if there's no result

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.provider.ContactsContract;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -14,18 +15,30 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.Date;
+import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity {
 
     private static final int LOCATION_FILTER = 0;
     private static final int DATE_FILTER = 1;
+
+    /* Tab fragment indices */
+    private static final int DISCOVERY_FRAGMENT = 0;
+    private static final int MY_KEY_FRAGMENT = 1;
+    private static final int VISIT_FRAGMENT = 2;
+    private static final int PROFILE_FRAGMENT = 3;
+
+    /* We can store the fragment references becasue we are using a FragmentPagerAdapter.
+       If FragmentStatePagerAdapter is used, weak references must be used to refer to fragments. */
+    private ProfileFragment profileFragment;
 
     private AppBarLayout appBarLayout;
     private Toolbar toolbar;
@@ -206,19 +219,31 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public Fragment getItem(int position) {
             switch (position) {
-                case 0:
+                case DISCOVERY_FRAGMENT:
                     return DiscoverFragment.newInstance();
-                case 1:
+                case MY_KEY_FRAGMENT:
                     return MyRoomFragment.newInstance();
-                case 2:
+                case VISIT_FRAGMENT:
                     return WishListFragment.newInstance();
-                case 3:
+                case PROFILE_FRAGMENT:
                     return ProfileFragment.newInstance();
-                case 4:
-                    return WishListFragment.newInstance();
                 default:
                     return null;
             }
+        }
+
+        @Override
+        public Object instantiateItem(ViewGroup container, int position) {
+            Fragment createdFragment = (Fragment) super.instantiateItem(container, position);
+            // save the appropriate reference depending on position
+            switch (position) {
+                case PROFILE_FRAGMENT:
+                    profileFragment = (ProfileFragment) createdFragment;
+                    break;
+                default:
+                    break;
+            }
+            return createdFragment;
         }
 
         @Override
@@ -235,6 +260,7 @@ public class MainActivity extends AppCompatActivity {
 //            tab.setIcon
 //            return v;
 //        }
+
     }
 
     @Override
@@ -261,11 +287,20 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        System.out.println(requestCode);
 
+
+        /* Route requests to appropriate fragments */
+        if (requestCode == ProfileFragment.LOGIN && null != profileFragment) {
+            System.out.println("dasddsa");
+            profileFragment.onActivityResult(requestCode, resultCode, data);
+            return;
+        }
+
+        /* Requests to mainactivity */
         if (requestCode == LOCATION_FILTER) {
             if(resultCode == Activity.RESULT_OK){
                 VillimLocation location = data.getParcelableExtra(LocationFilterActivity.LOCATION);
-                System.out.println(location.addrSummary);
                 searchFilterLocation.setText(location.addrSummary);
             }
             if (resultCode == Activity.RESULT_CANCELED) {
