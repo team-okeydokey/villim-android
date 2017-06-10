@@ -6,6 +6,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.format.DateUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -58,20 +59,20 @@ public class DateFilterActivity extends AppCompatActivity {
 
         /* Set up start date / end date select texts. */
         startDateTextView = (TextView) findViewById(R.id.start_date_text);
-        startDateTextView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                changeState(STATE_SELECT_START);
-            }
-        });
+//        startDateTextView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                changeState(STATE_SELECT_START);
+//            }
+//        });
 
         endDateTextView = (TextView) findViewById(R.id.end_date_text);
-        endDateTextView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                changeState(STATE_SELECT_END);
-            }
-        });
+//        endDateTextView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                changeState(STATE_SELECT_END);
+//            }
+//        });
 
         changeState(STATE_SELECT_START);
 
@@ -93,8 +94,8 @@ public class DateFilterActivity extends AppCompatActivity {
         Calendar nextYear = Calendar.getInstance();
         nextYear.add(Calendar.YEAR, 1);
         final CalendarPickerView calendar = (CalendarPickerView) findViewById(R.id.calendar_view);
-        Date today = new Date();
-        calendar.init(today, nextYear.getTime())
+        Date tomorrow = new Date(System.currentTimeMillis() + DateUtils.DAY_IN_MILLIS);
+        calendar.init(tomorrow, nextYear.getTime())
                 .inMode(CalendarPickerView.SelectionMode.RANGE);
 
         calendar.setOnDateSelectedListener(new CalendarPickerView.OnDateSelectedListener() {
@@ -111,10 +112,16 @@ public class DateFilterActivity extends AppCompatActivity {
                     case STATE_SELECT_START:
                         startDate = date;
                         changeState(STATE_SELECT_END);
+                        endDate = null;
                         break;
                     case STATE_SELECT_END:
-                        endDate = date;
-                        changeState(STATE_SELECT_START);
+                        if (date.before(startDate)) {
+                            startDate = date;
+
+                        } else {
+                            endDate = date;
+                            changeState(STATE_SELECT_START);
+                        }
                         break;
                     default:
 //                        startDate = date;
