@@ -102,8 +102,11 @@ public class ProfileFragment extends Fragment {
             }
         });
 
+
         // Profile name.
+        String titleString = session.getLoggedIn() ? session.getName() : getString(R.string.profile_title);
         profileName = (TextView) profileView.findViewById(R.id.profile_name);
+        profileName.setText(titleString);
 
         // Profile pic.
         int profilePicVisibility = session.getLoggedIn() ? View.VISIBLE : View.INVISIBLE;

@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:text="dsaclkmadslkm" />
+            android:text="@string/profile_title" />
 
         <!-- Profile picture -->
         <com.mikhaellopez.circularimageview.CircularImageView
