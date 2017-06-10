@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Toolbar -->
+    <dimen name="toolbar_elevation">25dp</dimen>
     <dimen name="toolbar_height">46dp</dimen>
     <dimen name="toolbar_logo_width">132dp</dimen>
     <dimen name="toolbar_logo_height">24dp</dimen>
