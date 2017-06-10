@@ -110,8 +110,6 @@ public class ProfileFragment extends Fragment {
     private void populateView() {
         // Network operation to fetch.
 
-
-
         // Profile pic.
         if (session.getLoggedIn()) {
             Glide.with(this)
@@ -156,8 +154,15 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
+        System.out.println(session.getLoggedIn());
+        System.out.println(session.getName());
+
         if (requestCode == LOGIN) {
             if (resultCode == Activity.RESULT_OK) {
+                /* Change login text to logout text */
+                ((TextView)profileListView.getChildAt(0)
+                        .findViewById(R.id.profile_list_item_name)).setText(R.string.profile_logout);
+
                 /* Populate user name */
                 profileName.setText(session.getName());
 

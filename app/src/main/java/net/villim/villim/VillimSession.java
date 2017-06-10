@@ -27,11 +27,11 @@ public class VillimSession {
         if (!loggedIn) {
             prefs.edit().clear().apply();
         }
-        prefs.edit().putBoolean(KEY_LOGGED_IN, loggedIn);
+        prefs.edit().putBoolean(KEY_LOGGED_IN, loggedIn).apply();
     }
 
-    public Boolean getLoggedIn() {
-        return  prefs.getBoolean(KEY_LOGGED_IN, false);
+    public boolean getLoggedIn() {
+        return prefs.getBoolean(KEY_LOGGED_IN, false);
     }
 
     /* Id */
