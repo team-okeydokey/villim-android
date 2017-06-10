@@ -23,6 +23,7 @@ public class ProfileFragment extends Fragment {
     private MainActivity activity;
     private String[] profileItems;
     private ListView profileListView;
+    private TextView profileName;
     private ImageView profilePicture;
 
     public ProfileFragment() {
@@ -42,18 +43,15 @@ public class ProfileFragment extends Fragment {
 
         // Remove bottom bar.
         activity = ((MainActivity) getActivity());
-//        activity.showBottomButtons(false, false);
 
         profileListView = (ListView) profileView.findViewById(R.id.profile_listView);
         profileItems = getResources().getStringArray(R.array.profile_items);
 
-        // Add header.
-        View profileListHeader = inflater.inflate(R.layout.profile_list_header, profileListView, false);
-        profileListView.addHeaderView(profileListHeader);
+        // Profile name.
+        profileName = (TextView) profileView.findViewById(R.id.profile_name);
 
         // Profile pic.
         profilePicture = (ImageView) profileView.findViewById(R.id.profile_picture);
-        ViewCompat.setTranslationZ(profilePicture, 7);
 
         populateView();
 
@@ -65,7 +63,7 @@ public class ProfileFragment extends Fragment {
         // Network operation to fetch.
 
         // Populate info.
-        profileListView.setAdapter(new ProfileAdapter(activity, R.layout.profile_list_item, R.id.profile_list_item_title, profileItems));
+        profileListView.setAdapter(new ProfileAdapter(activity, R.layout.profile_list_item, R.id.profile_list_item_name, profileItems));
 
         // Fetch and insert room thumbnail.
         Glide.with(this)
@@ -89,8 +87,6 @@ public class ProfileFragment extends Fragment {
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             View itemView = super.getView(position, convertView, parent);
-            TextView itemValueText = (TextView) itemView.findViewById(R.id.profile_list_item_value);
-            itemValueText.setText("이름이메일전번비번");
             return itemView;
         }
     }

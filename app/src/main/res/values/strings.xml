@@ -121,11 +121,11 @@
 
     <!-- Profile Fragment -->
     <string-array name="profile_items">
-        <item>성명</item>
-        <item>이메일</item>
-        <item>전화번호</item>
-        <item>비밀번호 변경</item>
-        <item>로그아웃</item>
+        <item>로그인</item>
+        <item>프로필 보기 및 수정</item>
+        <item>FAQ</item>
+        <item>환경설정</item>
+        <item>개인정보 이용약관</item>
     </string-array>
     <string name="profile_title">프로필</string>
 
