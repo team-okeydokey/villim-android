@@ -108,6 +108,7 @@
         android:paddingRight="@dimen/login_activity_padding">
 
         <Button
+            android:id="@+id/find_password_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -117,6 +118,7 @@
             android:textSize="@dimen/login_help_button_text_size" />
 
         <Button
+            android:id="@+id/signup_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -129,7 +131,7 @@
 
     <!-- Done button -->
     <Button
-        android:id="@+id/doneButton"
+        android:id="@+id/next_button"
         android:layout_width="match_parent"
         android:layout_height="@dimen/next_button_height"
         android:layout_alignParentBottom="true"
