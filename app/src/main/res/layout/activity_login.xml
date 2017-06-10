@@ -128,7 +128,9 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/next_button_height"
         android:layout_alignParentBottom="true"
+        android:background="@drawable/next_button"
         android:text="@string/next"
-        android:textColor="@android:color/white" />
+        android:textColor="@drawable/next_button_text"
+        android:textSize="@dimen/next_button_text_size" />
 
 </RelativeLayout>

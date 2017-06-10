@@ -67,6 +67,8 @@
     <color name="login_help">#ed2025</color>
     <color name="login_form_text">#05060b</color>
     <color name="login_form_hint">#a9a9a9</color>
-
+    <color name="next_button_normal">#ed2025</color>
+    <color name="next_button_pressed">#8b0000</color>
+    <color name="next_button_pressed_text">#a9a9a9</color>
 
 </resources>
