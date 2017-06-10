@@ -88,7 +88,7 @@ public class ProfileFragment extends Fragment {
                     /* Privacy Policy */
                     case 4:
                         break;
-                        
+
                     default:
                         break;
                 }

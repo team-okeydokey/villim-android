@@ -131,4 +131,7 @@
     <string name="profile_login">로그인</string>
     <string name="profile_logout">로그아웃</string>
 
+    <!-- Login Activity -->
+    <string name="login_title">로그인</string>
+
 </resources>
