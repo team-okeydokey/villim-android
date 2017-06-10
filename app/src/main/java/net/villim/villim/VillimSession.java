@@ -25,8 +25,8 @@ public class VillimSession {
         prefs.edit().putBoolean(KEY_LOGGED_IN, loggedIn);
     }
 
-    public void getLoggedIn() {
-        return  prefs.getBoolean(KEY_LOGGED_IN,"");
+    public Boolean getLoggedIn() {
+        return  prefs.getBoolean(KEY_LOGGED_IN, false);
     }
 
     public void setName(String usename) {
