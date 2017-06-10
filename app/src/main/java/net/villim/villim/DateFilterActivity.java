@@ -1,7 +1,9 @@
 package net.villim.villim;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,7 +11,9 @@ import android.support.v7.widget.Toolbar;
 import android.text.format.DateUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.timessquare.CalendarPickerView;
 
@@ -59,20 +63,8 @@ public class DateFilterActivity extends AppCompatActivity {
 
         /* Set up start date / end date select texts. */
         startDateTextView = (TextView) findViewById(R.id.start_date_text);
-//        startDateTextView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                changeState(STATE_SELECT_START);
-//            }
-//        });
-
         endDateTextView = (TextView) findViewById(R.id.end_date_text);
-//        endDateTextView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                changeState(STATE_SELECT_END);
-//            }
-//        });
+
 
         changeState(STATE_SELECT_START);
 
@@ -97,18 +89,10 @@ public class DateFilterActivity extends AppCompatActivity {
         Date tomorrow = new Date(System.currentTimeMillis() + DateUtils.DAY_IN_MILLIS);
         calendar.init(tomorrow, nextYear.getTime())
                 .inMode(CalendarPickerView.SelectionMode.RANGE);
-
         calendar.setOnDateSelectedListener(new CalendarPickerView.OnDateSelectedListener() {
             @Override
             public void onDateSelected(Date date) {
                 switch (selectState) {
-                    case STATE_SELECT_NONE:
-//                        startDate = date;
-//                        if (endDate == null) { // First ever selection
-//                            endDate = date;
-//                        }
-//                        changeState(STATE_SELECT_END);
-                        break;
                     case STATE_SELECT_START:
                         startDate = date;
                         changeState(STATE_SELECT_END);
@@ -124,29 +108,15 @@ public class DateFilterActivity extends AppCompatActivity {
                         }
                         break;
                     default:
-//                        startDate = date;
-//                        if (endDate == null) { // First ever selection
-//                            endDate = date;
-//                        }
-//                        changeState(STATE_SELECT_END);
                         break;
                 }
 
-//                calendar.clearSelectedDates();
-//                calendar.clearHighlightedDates();
-//                if (startDate != null) {
-//                    calendar.selectDate(startDate);
-//                }
-//                if (endDate != null) {
-//                    calendar.selectDate(endDate);
-//                }
                 setStartAndEndDateText(startDate, endDate);
 
                 /* Set button clickable if both start date and end dates are set.
                    Highlight dates from startDate to endDate */
                 if (startDate != null && endDate != null) {
                     saveSelectionButton.setEnabled(true);
-//                    highlightDatesBetween(calendar, startDate, endDate);
                 }
 
             }
@@ -154,6 +124,16 @@ public class DateFilterActivity extends AppCompatActivity {
             @Override
             public void onDateUnselected(Date date) {
                 //updateSelectedDates(calendar.getSelectedDates());
+            }
+        });
+
+        calendar.setOnInvalidDateSelectedListener(new CalendarPickerView.OnInvalidDateSelectedListener() {
+            @Override
+            public void onInvalidDateSelected(Date date) {
+                CharSequence text = getString(R.string.invalid_date_selected);
+                int duration = Toast.LENGTH_SHORT;
+                Toast toast = Toast.makeText(getApplicationContext(), text, duration);
+                toast.show();
             }
         });
 
