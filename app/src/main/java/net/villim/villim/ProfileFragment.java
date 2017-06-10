@@ -110,6 +110,8 @@ public class ProfileFragment extends Fragment {
     private void populateView() {
         // Network operation to fetch.
 
+
+
         // Profile pic.
         if (session.getLoggedIn()) {
             Glide.with(this)
@@ -155,9 +157,7 @@ public class ProfileFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         if (requestCode == LOGIN) {
-            System.out.println("Ohdasdashh");
             if (resultCode == Activity.RESULT_OK) {
-                System.out.println("Exited");
                 /* Populate user name */
                 profileName.setText(session.getName());
 
@@ -165,8 +165,6 @@ public class ProfileFragment extends Fragment {
                 Glide.with(this)
                         .load(session.getProfilePicUrl())
                         .into(profilePicture);
-
-                System.out.println(session.getProfilePicUrl());
             }
             if (resultCode == Activity.RESULT_CANCELED) {
                 //Write your code if there's no result

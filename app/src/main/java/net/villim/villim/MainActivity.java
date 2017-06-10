@@ -287,12 +287,9 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        System.out.println(requestCode);
-
 
         /* Route requests to appropriate fragments */
         if (requestCode == ProfileFragment.LOGIN && null != profileFragment) {
-            System.out.println("dasddsa");
             profileFragment.onActivityResult(requestCode, resultCode, data);
             return;
         }

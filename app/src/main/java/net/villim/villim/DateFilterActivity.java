@@ -140,8 +140,6 @@ public class DateFilterActivity extends AppCompatActivity {
                 if (startDate != null && endDate != null) {
                     saveSelectionButton.setEnabled(true);
                     highlightDatesBetween(calendar, startDate, endDate);
-                    System.out.println("Both nonnull.");
-
                 }
 
             }
