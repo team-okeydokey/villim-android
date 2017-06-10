@@ -20,6 +20,8 @@ import java.util.List;
 
 public class ProfileFragment extends Fragment {
 
+    private VillimSession session;
+
     private MainActivity activity;
     private String[] profileItems;
     private ListView profileListView;
@@ -40,6 +42,9 @@ public class ProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View profileView = inflater.inflate(R.layout.fragment_profile, container, false);
+
+        // Retrieve session.
+        session = new VillimSession(getActivity().getApplicationContext());
 
         // Remove bottom bar.
         activity = ((MainActivity) getActivity());
@@ -62,10 +67,10 @@ public class ProfileFragment extends Fragment {
     private void populateView() {
         // Network operation to fetch.
 
-        // Populate info.
+        // Populate listview.
         profileListView.setAdapter(new ProfileAdapter(activity, R.layout.profile_list_item, R.id.profile_list_item_name, profileItems));
 
-        // Fetch and insert room thumbnail.
+        // Profile pic.
         Glide.with(this)
                 .load(R.drawable.prugio_thumbnail)
                 .into(profilePicture);
@@ -87,6 +92,15 @@ public class ProfileFragment extends Fragment {
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             View itemView = super.getView(position, convertView, parent);
+
+            /* If login/logout cell */
+            if (position == 0) {
+                TextView textView = (TextView) itemView.findViewById(R.id.profile_list_item_name);
+                if (session.getLoggedIn()) {
+                    textView.setText(getString(R.string.profile_logout));
+                }
+            }
+
             return itemView;
         }
     }
