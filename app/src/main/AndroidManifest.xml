@@ -9,7 +9,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-
         <activity
             android:name=".SplashActivity"
             android:theme="@style/SplashTheme">
@@ -18,7 +17,6 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity android:name=".MainActivity" />
         <activity android:name=".LocationFilterActivity" />
@@ -29,7 +27,7 @@
             android:value="@string/google_maps_key" />
 
         <activity android:name=".DateFilterActivity" />
-
+        <activity android:name=".LoginActivity"></activity>
     </application>
 
 </manifest>
