@@ -61,4 +61,12 @@
 
     <!-- Profile Fragment -->
     <color name="profile_list_item_value">#A0A0A0</color>
+
+
+    <!-- Login Activity -->
+    <color name="login_help">#ed2025</color>
+    <color name="login_form_text">#05060b</color>
+    <color name="login_form_hint">#a9a9a9</color>
+
+
 </resources>

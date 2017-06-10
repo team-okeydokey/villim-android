@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/white"
     tools:context="net.villim.villim.LoginActivity">
 
     <android.support.v7.widget.Toolbar
@@ -26,5 +27,108 @@
             android:textColor="@color/toolbar_title_color" />
 
     </android.support.v7.widget.Toolbar>
+
+    <!-- 광고 문구 -->
+    <android.support.v7.widget.LinearLayoutCompat
+        android:id="@+id/advertContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/advert_container_margin_top"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/login_activity_padding"
+        android:paddingRight="@dimen/login_activity_padding">
+
+        <TextView
+            android:id="@+id/advertTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/advert_title"
+            android:textSize="@dimen/advert_title_text_size" />
+
+        <TextView
+            android:id="@+id/advertDetail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/advert_detail"
+            android:textSize="@dimen/advert_detail_text_size" />
+
+    </android.support.v7.widget.LinearLayoutCompat>
+
+    <!-- Login form -->
+    <RelativeLayout
+        android:id="@+id/login_form_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/advertContainer"
+        android:paddingBottom="@dimen/search_filter_padding"
+        android:paddingLeft="@dimen/login_activity_padding"
+        android:paddingRight="@dimen/login_activity_padding"
+        android:paddingTop="@dimen/search_filter_upper_padding">
+
+        <EditText
+            android:id="@+id/login_form_email"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/toolbar_height"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/login_field"
+            android:drawableLeft="@drawable/ic_whatshot_black_24dp"
+            android:drawablePadding="@dimen/filter_icon_drawable_padding"
+            android:gravity="left|center_vertical"
+            android:hint="@string/email"
+            android:maxLines="1"
+            android:textColor="@color/login_form_text"
+            android:textColorHint="@color/login_form_hint"
+            android:textSize="@dimen/login_form_text_size" />
+
+        <EditText
+            android:id="@+id/login_form_password"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/toolbar_height"
+            android:layout_below="@id/login_form_email"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/login_field"
+            android:drawableLeft="@drawable/ic_whatshot_black_24dp"
+            android:drawablePadding="@dimen/filter_icon_drawable_padding"
+            android:gravity="left|center_vertical"
+            android:hint="@string/password"
+            android:maxLines="1"
+            android:textColor="@color/login_form_text"
+            android:textColorHint="@color/login_form_hint"
+            android:textSize="@dimen/login_form_text_size" />
+
+    </RelativeLayout>
+
+    <!-- Find password & signup -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/doneButton">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:text="@string/find_password"
+            android:textColor="@color/login_help"
+            android:textSize="@dimen/login_help_button_text_size" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="@string/signup"
+            android:textColor="@color/login_help"
+            android:textSize="@dimen/login_help_button_text_size" />
+
+    </RelativeLayout>
+
+    <!-- Done button -->
+    <Button
+        android:id="@+id/doneButton"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/next_button_height"
+        android:layout_alignParentBottom="true"
+        android:text="@string/next"
+        android:textColor="@android:color/white" />
 
 </RelativeLayout>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Toolbar -->
-    <dimen name="toolbar_elevation">25dp</dimen>
+    <dimen name="toolbar_elevation">3dp</dimen>
     <dimen name="toolbar_height">46dp</dimen>
     <dimen name="toolbar_logo_width">132dp</dimen>
     <dimen name="toolbar_logo_height">24dp</dimen>
@@ -56,4 +56,16 @@
     <dimen name="room_thumbnail_image_diameter">175dp</dimen>
     <dimen name="profile_list_header_height">60dp</dimen>
     <dimen name="profile_list_drawable_padding">10dp</dimen>
+
+
+    <!--Login Activity -->
+    <dimen name="advert_container_margin_top">122dp</dimen>
+    <dimen name="login_help_button_height">14dp</dimen>
+    <dimen name="login_help_button_text_size">15sp</dimen>
+    <dimen name="advert_title_text_size">25sp</dimen>
+    <dimen name="advert_detail_text_size">16sp</dimen>
+    <dimen name="next_button_height">65dp</dimen>
+    <dimen name="login_form_text_size">20sp</dimen>
+    <dimen name="login_activity_padding">26dp</dimen>
+
 </resources>

@@ -133,5 +133,12 @@
 
     <!-- Login Activity -->
     <string name="login_title">로그인</string>
+    <string name="advert_title">전세계의 집이 나의 집!</string>
+    <string name="advert_detail">언제 어디서나 쉽고 빠르게 방을 빌리세요.</string>
+    <string name="email">이메일</string>
+    <string name="password">비밀번호</string>
+    <string name="find_password">비밀번호를 잊으셨나요?</string>
+    <string name="signup">회원가입</string>
+    <string name="next">다음</string>
 
 </resources>
