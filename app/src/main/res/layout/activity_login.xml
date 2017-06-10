@@ -102,22 +102,27 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/doneButton">
+        android:layout_above="@+id/doneButton"
+        android:paddingBottom="@dimen/login_activity_padding"
+        android:paddingLeft="@dimen/login_activity_padding"
+        android:paddingRight="@dimen/login_activity_padding">
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
+            android:background="@android:color/transparent"
             android:text="@string/find_password"
-            android:textColor="@color/login_help"
+            android:textColor="@drawable/login_help_button_text"
             android:textSize="@dimen/login_help_button_text_size" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
+            android:background="@android:color/transparent"
             android:text="@string/signup"
-            android:textColor="@color/login_help"
+            android:textColor="@drawable/login_help_button_text"
             android:textSize="@dimen/login_help_button_text_size" />
 
     </RelativeLayout>
