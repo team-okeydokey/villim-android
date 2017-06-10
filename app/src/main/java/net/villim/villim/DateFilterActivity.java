@@ -114,7 +114,7 @@ public class DateFilterActivity extends AppCompatActivity {
                         break;
                     case STATE_SELECT_END:
                         endDate = date;
-                        changeState(STATE_SELECT_NONE);
+                        changeState(STATE_SELECT_START);
                         break;
                     default:
 //                        startDate = date;
@@ -125,21 +125,21 @@ public class DateFilterActivity extends AppCompatActivity {
                         break;
                 }
 
-                calendar.clearSelectedDates();
-                calendar.clearHighlightedDates();
-                if (startDate != null) {
-                    calendar.selectDate(startDate);
-                }
-                if (endDate != null) {
-                    calendar.selectDate(endDate);
-                }
+//                calendar.clearSelectedDates();
+//                calendar.clearHighlightedDates();
+//                if (startDate != null) {
+//                    calendar.selectDate(startDate);
+//                }
+//                if (endDate != null) {
+//                    calendar.selectDate(endDate);
+//                }
                 setStartAndEndDateText(startDate, endDate);
 
                 /* Set button clickable if both start date and end dates are set.
                    Highlight dates from startDate to endDate */
                 if (startDate != null && endDate != null) {
                     saveSelectionButton.setEnabled(true);
-                    highlightDatesBetween(calendar, startDate, endDate);
+//                    highlightDatesBetween(calendar, startDate, endDate);
                 }
 
             }
@@ -216,23 +216,23 @@ public class DateFilterActivity extends AppCompatActivity {
         switch (state) {
             case STATE_SELECT_NONE:
                 selectState = STATE_SELECT_NONE;
-                startDateTextView.setTextColor(getResources().getColor(R.color.date_filter_state_normal));
-                endDateTextView.setTextColor(getResources().getColor(R.color.date_filter_state_normal));
+//                startDateTextView.setTextColor(getResources().getColor(R.color.date_filter_state_normal));
+//                endDateTextView.setTextColor(getResources().getColor(R.color.date_filter_state_normal));
                 break;
             case STATE_SELECT_START:
                 selectState = STATE_SELECT_START;
-                startDateTextView.setTextColor(getResources().getColor(R.color.date_filter_state_highlighted));
-                endDateTextView.setTextColor(getResources().getColor(R.color.date_filter_state_normal));
+//                startDateTextView.setTextColor(getResources().getColor(R.color.date_filter_state_highlighted));
+//                endDateTextView.setTextColor(getResources().getColor(R.color.date_filter_state_normal));
                 break;
             case STATE_SELECT_END:
                 selectState = STATE_SELECT_END;
-                startDateTextView.setTextColor(getResources().getColor(R.color.date_filter_state_normal));
-                endDateTextView.setTextColor(getResources().getColor(R.color.date_filter_state_highlighted));
+//                startDateTextView.setTextColor(getResources().getColor(R.color.date_filter_state_normal));
+//                endDateTextView.setTextColor(getResources().getColor(R.color.date_filter_state_highlighted));
                 break;
             default:
                 selectState = STATE_SELECT_NONE;
-                startDateTextView.setTextColor(getResources().getColor(R.color.date_filter_state_normal));
-                endDateTextView.setTextColor(getResources().getColor(R.color.date_filter_state_normal));
+//                startDateTextView.setTextColor(getResources().getColor(R.color.date_filter_state_normal));
+//                endDateTextView.setTextColor(getResources().getColor(R.color.date_filter_state_normal));
                 break;
         }
     }
