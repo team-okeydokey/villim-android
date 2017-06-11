@@ -13,6 +13,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -40,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
 
     private AppBarLayout appBarLayout;
     private Toolbar toolbar;
-//    private TextView toolbarTextView;
+    //    private TextView toolbarTextView;
     private ImageView toolbarLogo;
     private String[] tabItems;
     private int[] tabIcons;
@@ -85,14 +86,20 @@ public class MainActivity extends AppCompatActivity {
         searchFilterDate = (TextView) findViewById(R.id.search_filter_date);
         /* Set search filter icons */
         int markerSize = getResources().getDimensionPixelSize(R.dimen.marker_icon_size);
-        int calendarWidth = getResources().getDimensionPixelSize(R.dimen.calendar_icon_width);;
-        int calendarHeight = getResources().getDimensionPixelSize(R.dimen.calendar_icon_height);;
+        int calendarWidth = getResources().getDimensionPixelSize(R.dimen.calendar_icon_width);
+        ;
+        int calendarHeight = getResources().getDimensionPixelSize(R.dimen.calendar_icon_height);
+        ;
+        int clearSize = getResources().getDimensionPixelSize(R.dimen.clear_icon_size);
+        ;
         Drawable markerIcon = getResources().getDrawable(R.drawable.icon_marker);
         Drawable calendarIcon = getResources().getDrawable(R.drawable.icon_calendar);
+        Drawable clearIcon = getResources().getDrawable(R.drawable.btn_delete_white);
         markerIcon.setBounds(0, 0, markerSize, markerSize);
-        calendarIcon.setBounds(0, 0, calendarWidth,calendarHeight);
+        calendarIcon.setBounds(0, 0, calendarWidth, calendarHeight);
+        clearIcon.setBounds(0, 0, clearSize, clearSize);
         searchFilterLocation.setCompoundDrawables(markerIcon, null, null, null);
-        searchFilterDate.setCompoundDrawables(calendarIcon, null, null, null);
+        searchFilterDate.setCompoundDrawables(calendarIcon, null, clearIcon, null);
         /* Launch filter activities */
         searchFilterLocation.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,13 +109,33 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-        searchFilterDate.setOnClickListener(new View.OnClickListener() {
+        searchFilterDate.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onClick(View v) {
-                Intent dateFilterIntent = new Intent(MainActivity.this, DateFilterActivity.class);
-                dateFilterIntent.putExtra(DateFilterActivity.START_DATE, startDate);
-                dateFilterIntent.putExtra(DateFilterActivity.END_DATE, endDate);
-                MainActivity.this.startActivityForResult(dateFilterIntent, DATE_FILTER);
+            public boolean onTouch(View view, MotionEvent event) {
+                final int DRAWABLE_RIGHT = 2;
+                int start = searchFilterDate.getSelectionStart();
+                int end = searchFilterDate.getSelectionEnd();
+                System.out.println(event.getAction());
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        return true;
+                    case MotionEvent.ACTION_UP:
+                        System.out.println("Touched");
+                        /* When right drawable(clear button) is selected. */
+                        if (event.getRawX() >= (searchFilterDate.getRight() - searchFilterDate.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
+                            searchFilterDate.setText(getString(R.string.date_filter_title));
+                            startDate = null;
+                            endDate = null;
+                        } else {
+                            Intent dateFilterIntent = new Intent(MainActivity.this, DateFilterActivity.class);
+                            dateFilterIntent.putExtra(DateFilterActivity.START_DATE, startDate);
+                            dateFilterIntent.putExtra(DateFilterActivity.END_DATE, endDate);
+                            MainActivity.this.startActivityForResult(dateFilterIntent, DATE_FILTER);
+                        }
+                        return true;
+                    default:
+                        return false;
+                }
             }
         });
 
@@ -269,11 +296,16 @@ public class MainActivity extends AppCompatActivity {
 
     private Drawable getTabIcon(int i) {
         switch (i) {
-            case 0: return getResources().getDrawable(R.drawable.icon_find_place_nor);
-            case 1: return getResources().getDrawable(R.drawable.icon_lock_nor);
-            case 2: return getResources().getDrawable(R.drawable.icon_correct_nor);
-            case 3: return getResources().getDrawable(R.drawable.icon_profile_nor);
-            default: return getResources().getDrawable(R.drawable.icon_profile_nor);
+            case 0:
+                return getResources().getDrawable(R.drawable.icon_find_place_nor);
+            case 1:
+                return getResources().getDrawable(R.drawable.icon_lock_nor);
+            case 2:
+                return getResources().getDrawable(R.drawable.icon_correct_nor);
+            case 3:
+                return getResources().getDrawable(R.drawable.icon_profile_nor);
+            default:
+                return getResources().getDrawable(R.drawable.icon_profile_nor);
 
         }
     }
@@ -294,7 +326,7 @@ public class MainActivity extends AppCompatActivity {
 
         /* Requests to mainactivity */
         if (requestCode == LOCATION_FILTER) {
-            if(resultCode == Activity.RESULT_OK){
+            if (resultCode == Activity.RESULT_OK) {
                 VillimLocation location = data.getParcelableExtra(LocationFilterActivity.LOCATION);
                 searchFilterLocation.setText(location.addrSummary);
             }
@@ -302,7 +334,7 @@ public class MainActivity extends AppCompatActivity {
                 //Write your code if there's no result
             }
         } else if (requestCode == DATE_FILTER) {
-            if(resultCode == Activity.RESULT_OK){
+            if (resultCode == Activity.RESULT_OK) {
                 startDate = (Date) data.getSerializableExtra(DateFilterActivity.START_DATE);
                 endDate = (Date) data.getSerializableExtra(DateFilterActivity.END_DATE);
 
@@ -323,9 +355,9 @@ public class MainActivity extends AppCompatActivity {
 
         float progress = curDiff / maxDiff;
 
-        int r = (int)((Color.red(finalColor) - Color.red(initialColor)) * progress) + Color.red(initialColor);
-        int g = (int)((Color.green(finalColor) - Color.green(initialColor)) * progress) + Color.green(initialColor);
-        int b = (int)((Color.blue(finalColor) - Color.blue(initialColor)) * progress) + Color.blue(initialColor);
+        int r = (int) ((Color.red(finalColor) - Color.red(initialColor)) * progress) + Color.red(initialColor);
+        int g = (int) ((Color.green(finalColor) - Color.green(initialColor)) * progress) + Color.green(initialColor);
+        int b = (int) ((Color.blue(finalColor) - Color.blue(initialColor)) * progress) + Color.blue(initialColor);
 
         return Color.rgb(r, g, b);
     }
@@ -336,9 +368,9 @@ public class MainActivity extends AppCompatActivity {
 
         float progress = curDiff / maxDiff;
 
-        int r = (int)((Color.red(finalColor) - Color.red(initialColor)) * progress) + Color.red(initialColor);
-        int g = (int)((Color.green(finalColor) - Color.green(initialColor)) * progress) + Color.green(initialColor);
-        int b = (int)((Color.blue(finalColor) - Color.blue(initialColor)) * progress) + Color.blue(initialColor);
+        int r = (int) ((Color.red(finalColor) - Color.red(initialColor)) * progress) + Color.red(initialColor);
+        int g = (int) ((Color.green(finalColor) - Color.green(initialColor)) * progress) + Color.green(initialColor);
+        int b = (int) ((Color.blue(finalColor) - Color.blue(initialColor)) * progress) + Color.blue(initialColor);
 
         return Color.rgb(r, g, b);
     }

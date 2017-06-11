@@ -39,7 +39,7 @@
 
     <!-- Date Filter Activity -->
     <string name="date_filter_title">날짜 선택</string>
-    <string name="date_filter_select_date">저장하기</string>
+    <string name="date_filter_save_date">저장하기</string>
     <string name="date_filter_start_date">시작일</string>
     <string name="date_filter_end_date">종료일</string>
     <string name="date_filter_date_text_format">%1$d월 %2$d일</string>
