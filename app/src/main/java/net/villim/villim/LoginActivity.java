@@ -64,6 +64,13 @@ public class LoginActivity extends AppCompatActivity {
         nextButton = (Button) findViewById(R.id.next_button);
         findPasswordButton = (Button) findViewById(R.id.find_password_button);
         signupButton = (Button) findViewById(R.id.signup_button);
+        signupButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, SignupActivity.class);
+                startActivityForResult(intent, ProfileFragment.SIGNUP);
+            }
+        });
 
         /* Make call to server when next button is pressed. */
         nextButton.setOnClickListener(new View.OnClickListener() {
@@ -97,8 +104,9 @@ public class LoginActivity extends AppCompatActivity {
                         //success do whatever you want. for example -->
                         try {
                             JSONObject jsonObject = new JSONObject(response.body().string());
-                            if ((boolean)jsonObject.get(KEY_LOGIN_SUCCESS)){
-                                login((JSONObject) jsonObject.get(KEY_USER_INFO));
+                            if ((boolean) jsonObject.get(KEY_LOGIN_SUCCESS)) {
+                                VillimUser user = VillimUser.createUserFromJSONObject((JSONObject) jsonObject.get(KEY_USER_INFO));
+                                login(user);
                             }
                         } catch (JSONException e) {
                         }
@@ -122,34 +130,33 @@ public class LoginActivity extends AppCompatActivity {
         finish();
     }
 
-    private void login(JSONObject userInfo) {
+    private void login(VillimUser user) {
         /* Store session */
         VillimSession session = new VillimSession(getApplicationContext());
         session.setLoggedIn(true);
+        
+        /* Store basic info in shared preferences */
+        session.setId(user.id);
+        session.setName(user.name);
+        session.setEmail(user.email);
+        session.setProfilePicUrl(user.profilePicUrl);
 
-        /* Create user instance */
-        VillimUser user = new VillimUser();
-        try {
-            /* No need to null check here because if we dont set it, it's going to be null anyway */
-            user.id = Integer.parseInt(userInfo.get(KEY_ID).toString());
-            user.name = userInfo.get(KEY_NAME).toString();
-            user.email = userInfo.get(KEY_EMAIL).toString();
-            user.profilePicUrl = userInfo.get(KEY_PROFILE_PIC_URL).toString();
+        /* Return from activity */
+        Intent returnIntent = new Intent();
+        setResult(Activity.RESULT_OK, returnIntent);
+        finish();
+    }
 
-            /* Store basic info in shared preferences */
-            session.setId(user.id);
-            session.setName(user.name);
-            session.setEmail(user.email);
-            session.setProfilePicUrl(user.profilePicUrl);
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-            /* Return from activity */
-            Intent returnIntent = new Intent();
-            setResult(Activity.RESULT_OK, returnIntent);
-            finish();
+        if (requestCode == ProfileFragment.SIGNUP) {
+            if (resultCode == Activity.RESULT_OK) {
 
-        } catch (JSONException e) {
-
+            }
+            if (resultCode == Activity.RESULT_CANCELED) {
+                //Write your code if there's no result
+            }
         }
-
     }
 }

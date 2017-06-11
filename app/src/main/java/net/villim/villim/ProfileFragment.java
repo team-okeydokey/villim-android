@@ -26,6 +26,7 @@ import java.util.List;
 public class ProfileFragment extends Fragment {
 
     public static final int LOGIN = 100;
+    public static final int SIGNUP = 101;
 
     private VillimSession session;
 
