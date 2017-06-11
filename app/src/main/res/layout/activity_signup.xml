@@ -37,6 +37,7 @@
         android:paddingLeft="@dimen/login_activity_padding"
         android:paddingRight="@dimen/login_activity_padding"
         android:text="@string/signup_welcome"
+        android:textColor="@color/signup_welcome_text"
         android:textSize="@dimen/advert_title_text_size" />
 
 
@@ -118,6 +119,16 @@
 
     </RelativeLayout>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/next_button"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/consent_text_margin"
+        android:autoLink="web"
+        android:gravity="center_horizontal"
+        android:text="@string/consent"
+        android:textColor="@color/consent_text" />
 
     <!-- Done button -->
     <Button

@@ -10,6 +10,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.wang.avi.AVLoadingIndicatorView;
 
@@ -21,21 +22,17 @@ import java.io.IOException;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
-import okhttp3.MediaType;
-import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
-import okio.BufferedSink;
 
 import static net.villim.villim.VillimKeys.KEY_EMAIL;
-import static net.villim.villim.VillimKeys.KEY_ID;
 import static net.villim.villim.VillimKeys.KEY_LOGIN_SUCCESS;
-import static net.villim.villim.VillimKeys.KEY_NAME;
+import static net.villim.villim.VillimKeys.KEY_MESSAGE;
 import static net.villim.villim.VillimKeys.KEY_PASSWORD;
-import static net.villim.villim.VillimKeys.KEY_PROFILE_PIC_URL;
 import static net.villim.villim.VillimKeys.KEY_USER_INFO;
+
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -45,6 +42,7 @@ public class LoginActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private EditText loginFormEmail;
     private EditText loginFormPassword;
+    private TextView errorMessage;
 
     private Button nextButton;
     private Button findPasswordButton;
@@ -88,6 +86,10 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        /* Error Message */
+        errorMessage = (TextView) findViewById(R.id.error_message);
+        errorMessage.setVisibility(View.INVISIBLE);
+
         /* Bottom buttons */
         nextButton = (Button) findViewById(R.id.next_button);
         findPasswordButton = (Button) findViewById(R.id.find_password_button);
@@ -108,6 +110,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startLoadingAnimation();
+                hideErrorMessage();
 
                 OkHttpClient client = new OkHttpClient();
 
@@ -130,6 +133,7 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call call, Response response) throws IOException {
                         if (!response.isSuccessful()) {
+                            showErrorMessage(getString(R.string.server_error));
                             stopLoadingAnimation();
                             throw new IOException("Response not successful   " + response);
                         }
@@ -141,9 +145,11 @@ public class LoginActivity extends AppCompatActivity {
                                 VillimUser user = VillimUser.createUserFromJSONObject((JSONObject) jsonObject.get(KEY_USER_INFO));
                                 login(user);
                             } else {
+                                showErrorMessage(jsonObject.getString(KEY_MESSAGE));
                                 stopLoadingAnimation();
                             }
                         } catch (JSONException e) {
+                            showErrorMessage(getString(R.string.server_error));
                             stopLoadingAnimation();
                         }
                     }
@@ -210,6 +216,25 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void run() {
                 loadingIndicator.smoothToHide();
+            }
+        });
+    }
+
+    public void showErrorMessage(final String message) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                errorMessage.setText(message);
+                errorMessage.setVisibility(View.VISIBLE);
+            }
+        });
+    }
+
+    public void hideErrorMessage() {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                errorMessage.setVisibility(View.INVISIBLE);
             }
         });
     }

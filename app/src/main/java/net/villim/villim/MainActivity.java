@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.provider.ContactsContract;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -22,7 +21,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.Date;
-import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -222,7 +220,7 @@ public class MainActivity extends AppCompatActivity {
                 case DISCOVERY_FRAGMENT:
                     return DiscoverFragment.newInstance();
                 case MY_KEY_FRAGMENT:
-                    return MyRoomFragment.newInstance();
+                    return MyKeyFragment.newInstance();
                 case VISIT_FRAGMENT:
                     return WishListFragment.newInstance();
                 case PROFILE_FRAGMENT:

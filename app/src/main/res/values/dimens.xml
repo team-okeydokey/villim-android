@@ -68,7 +68,15 @@
     <dimen name="login_form_text_size">20sp</dimen>
     <dimen name="login_activity_padding">26dp</dimen>
     <dimen name="next_button_text_size">17sp</dimen>
+    <dimen name="login_error_message_text_size">14sp</dimen>
 
     <!-- Signup Activity -->
+    <dimen name="consent_text_size">11sp</dimen>
+    <dimen name="consent_text_margin">20dp</dimen>
+
+    <!-- My Key Fragment -->
+    <dimen name="my_key_room_thumbnail_size">65dp</dimen>
+    <dimen name="my_key_slider_bottom_margin">100dp</dimen>
+
 
 </resources>

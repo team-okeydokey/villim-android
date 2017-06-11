@@ -98,6 +98,17 @@
             android:textColorHint="@color/login_form_hint"
             android:textSize="@dimen/login_form_text_size" />
 
+        <TextView
+            android:id="@+id/error_message"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/toolbar_height"
+            android:layout_below="@id/login_form_password"
+            android:layout_centerHorizontal="true"
+            android:background="@android:color/transparent"
+            android:gravity="center"
+            android:textColor="@color/login_error_text"
+            android:textSize="@dimen/login_error_message_text_size"/>
+
     </RelativeLayout>
 
     <!-- Find password & signup -->
