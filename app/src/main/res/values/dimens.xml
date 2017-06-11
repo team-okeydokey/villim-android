@@ -16,6 +16,7 @@
     <dimen name="calendar_icon_height">23.3dp</dimen>
     <dimen name="clear_icon_size">25dp</dimen>
     <dimen name="filter_icon_drawable_padding">20dp</dimen>
+    <dimen name="appbar_offset">20dp</dimen>
 
     <!-- Bottom Tab -->
     <dimen name="tab_icon_size">25dp</dimen>

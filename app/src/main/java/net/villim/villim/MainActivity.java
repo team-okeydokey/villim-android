@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.TabLayout;
@@ -12,7 +13,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MotionEvent;
 import android.view.View;
@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
        If FragmentStatePagerAdapter is used, weak references must be used to refer to fragments. */
     private ProfileFragment profileFragment;
 
-    private FrameLayout container;
+    private CoordinatorLayout container;
     private AppBarLayout appBarLayout;
     private Toolbar toolbar;
     //    private TextView toolbarTextView;
@@ -382,12 +382,25 @@ public class MainActivity extends AppCompatActivity {
 
     public void hideToolbar() {
         /* Detach dependant views */
+        CoordinatorLayout.LayoutParams params =
+                (CoordinatorLayout.LayoutParams) viewPager.getLayoutParams();
+        params.setBehavior(null);
+        viewPager.requestLayout();
+
+        /* Control visibility */
         appBarLayout.setExpanded(false, false);
         appBarLayout.setVisibility(View.GONE);
     }
 
     public void showToolbar() {
         /* Reattach dependant views */
+        CoordinatorLayout.LayoutParams params =
+                (CoordinatorLayout.LayoutParams) viewPager.getLayoutParams();
+        params.setBehavior(new AppBarLayout.ScrollingViewBehavior());
+        viewPager.requestLayout();
+
+
+        /* Control visibility */
         appBarLayout.setVisibility(View.VISIBLE);
     }
 

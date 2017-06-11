@@ -8,8 +8,8 @@ import org.json.JSONObject;
 
 import static net.villim.villim.VillimKeys.KEY_EMAIL;
 import static net.villim.villim.VillimKeys.KEY_FIRSTNAME;
-import static net.villim.villim.VillimKeys.KEY_ID;
 import static net.villim.villim.VillimKeys.KEY_FULLNAME;
+import static net.villim.villim.VillimKeys.KEY_ID;
 import static net.villim.villim.VillimKeys.KEY_LASTNAME;
 import static net.villim.villim.VillimKeys.KEY_PROFILE_PIC_URL;
 
