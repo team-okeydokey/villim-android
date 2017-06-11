@@ -15,4 +15,9 @@ public class VillimKeys {
     public static final String KEY_PASSWORD = "password";
     public static final String KEY_PROFILE_PIC_URL = "profile_pic_url";
     public static final String KEY_MESSAGE = "message";
+
+    /* Signup Keys */
+    public static final String KEY_SIGNUP_SUCCESS = "login_success";
+    public static final String KEY_FIRSTNAME = "firstname";
+    public static final String KEY_LASTNAME = "lastname";
 }
