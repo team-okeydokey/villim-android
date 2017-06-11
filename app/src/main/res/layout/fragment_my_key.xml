@@ -1,9 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/myroom_root"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    android:paddingBottom="@dimen/discover_recycler_padding_bottom">
+    android:paddingTop="@dimen/appbar_offset"
+    tools:context="net.villim.villim.MyKeyFragment">
 
-</FrameLayout>
+    <!-- Top buttons -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/review_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:text="@string/write_review" />
+
+        <Button
+            android:id="@+id/change_passcode_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="@string/change_doorlock_passcode" />
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:orientation="vertical">
+
+        <com.mikhaellopez.circularimageview.CircularImageView
+            android:id="@+id/room_thumbnail"
+            android:layout_width="@dimen/my_key_room_thumbnail_size"
+            android:layout_height="@dimen/my_key_room_thumbnail_size" />
+
+        <TextView
+            android:id="@+id/house_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/valid_dates"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <com.rojoxpress.slidebutton.SlideButton
+        android:id="@+id/slide_button"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/my_key_slider_bottom_margin"
+        android:background="@drawable/back_slide_button"
+        app:thumb="@drawable/slider_thumb" />
+
+</RelativeLayout>

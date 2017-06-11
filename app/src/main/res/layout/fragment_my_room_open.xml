@@ -7,7 +7,7 @@
     android:layout_gravity="center_horizontal"
     android:orientation="vertical"
     android:paddingTop="@dimen/toolbar_height"
-    tools:context="net.villim.villim.MyRoomFragment">
+    tools:context="net.villim.villim.MyKeyFragment">
 
     <!-- Title -->
     <TextView

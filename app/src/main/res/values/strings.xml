@@ -39,7 +39,7 @@
 
     <!-- Date Filter Activity -->
     <string name="date_filter_title">날짜 선택</string>
-    <string name="date_filter_select_date">저장하기</string>
+    <string name="date_filter_save_date">저장하기</string>
     <string name="date_filter_start_date">시작일</string>
     <string name="date_filter_end_date">종료일</string>
     <string name="date_filter_date_text_format">%1$d월 %2$d일</string>
@@ -146,9 +146,21 @@
     <string name="find_password">비밀번호를 잊으셨나요?</string>
     <string name="signup">회원가입</string>
     <string name="next">다음</string>
+    <string name="server_error">서버가 불안정합니다. 잠시 후 시도해주세요.</string>
+    <string name="signup_error">회원가입 하지 못 했습니다. 디시 시도해주세요.</string>
 
     <!-- Signup Activity -->
     <string name="firstname">이름</string>
     <string name="lastname">성</string>
     <string name="signup_welcome">빌림에 오신것을 환영합니다</string>
+    <string name="consent">로그인하면 당사의 서비스 이용약관에 동의하는 것으로 간주됩니다.</string>
+    <string name="empty_field">모든 항목을 작성해주세요.</string>
+
+    <!-- My Key Fragment -->
+    <string name="my_key"></string>
+    <string name="write_review">후기 작성</string>
+    <string name="change_doorlock_passcode">도어락 비밀번호 변경</string>
+
+
+
 </resources>

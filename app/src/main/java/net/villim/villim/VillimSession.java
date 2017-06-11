@@ -5,8 +5,10 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
 import static net.villim.villim.VillimKeys.KEY_EMAIL;
+import static net.villim.villim.VillimKeys.KEY_FIRSTNAME;
+import static net.villim.villim.VillimKeys.KEY_FULLNAME;
 import static net.villim.villim.VillimKeys.KEY_ID;
-import static net.villim.villim.VillimKeys.KEY_NAME;
+import static net.villim.villim.VillimKeys.KEY_LASTNAME;
 import static net.villim.villim.VillimKeys.KEY_PROFILE_PIC_URL;
 
 /**
@@ -45,13 +47,33 @@ public class VillimSession {
     }
 
 
-    /* Name */
-    public void setName(String name) {
-        prefs.edit().putString(KEY_NAME, name).apply();
+    /* Fullname */
+    public void setFullName(String fullname) {
+        prefs.edit().putString(KEY_FULLNAME, fullname).apply();
     }
 
-    public String getName() {
-        String usename = prefs.getString(KEY_NAME,"");
+    public String getFullName() {
+        String usename = prefs.getString(KEY_FULLNAME,"");
+        return usename;
+    }
+
+    /* Firstname */
+    public void setFirstName(String fullname) {
+        prefs.edit().putString(KEY_FIRSTNAME, fullname).apply();
+    }
+
+    public String getFirstName() {
+        String usename = prefs.getString(KEY_FIRSTNAME,"");
+        return usename;
+    }
+
+    /* Lastname */
+    public void setLastName(String fullname) {
+        prefs.edit().putString(KEY_LASTNAME, fullname).apply();
+    }
+
+    public String getLastName() {
+        String usename = prefs.getString(KEY_LASTNAME,"");
         return usename;
     }
 
@@ -66,7 +88,6 @@ public class VillimSession {
     }
 
     /* Profile pic url */
-    /* Email */
     public void setProfilePicUrl(String url) {
         prefs.edit().putString(KEY_PROFILE_PIC_URL, url).apply();
     }

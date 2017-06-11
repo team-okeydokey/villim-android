@@ -37,6 +37,7 @@
         android:paddingLeft="@dimen/login_activity_padding"
         android:paddingRight="@dimen/login_activity_padding"
         android:text="@string/signup_welcome"
+        android:textColor="@color/signup_welcome_text"
         android:textSize="@dimen/advert_title_text_size" />
 
 
@@ -61,6 +62,8 @@
             android:drawablePadding="@dimen/filter_icon_drawable_padding"
             android:gravity="left|center_vertical"
             android:hint="@string/lastname"
+            android:imeOptions="actionNext"
+            android:inputType="text"
             android:maxLines="1"
             android:textColor="@color/login_form_text"
             android:textColorHint="@color/login_form_hint"
@@ -77,6 +80,8 @@
             android:drawablePadding="@dimen/filter_icon_drawable_padding"
             android:gravity="left|center_vertical"
             android:hint="@string/firstname"
+            android:imeOptions="actionNext"
+            android:inputType="text"
             android:maxLines="1"
             android:textColor="@color/login_form_text"
             android:textColorHint="@color/login_form_hint"
@@ -93,6 +98,7 @@
             android:drawablePadding="@dimen/filter_icon_drawable_padding"
             android:gravity="left|center_vertical"
             android:hint="@string/email"
+            android:imeOptions="actionNext"
             android:inputType="textEmailAddress"
             android:maxLines="1"
             android:textColor="@color/login_form_text"
@@ -110,14 +116,36 @@
             android:drawablePadding="@dimen/filter_icon_drawable_padding"
             android:gravity="left|center_vertical"
             android:hint="@string/password"
+            android:imeOptions="actionDone"
             android:inputType="textPassword"
             android:maxLines="1"
             android:textColor="@color/login_form_text"
             android:textColorHint="@color/login_form_hint"
             android:textSize="@dimen/login_form_text_size" />
 
+        <TextView
+            android:id="@+id/error_message"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/toolbar_height"
+            android:layout_below="@id/signup_form_password"
+            android:layout_centerHorizontal="true"
+            android:background="@android:color/transparent"
+            android:gravity="center"
+            android:textColor="@color/login_error_text"
+            android:textSize="@dimen/login_error_message_text_size" />
+
     </RelativeLayout>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/next_button"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/consent_text_margin"
+        android:autoLink="web"
+        android:gravity="center_horizontal"
+        android:text="@string/consent"
+        android:textColor="@color/consent_text" />
 
     <!-- Done button -->
     <Button
@@ -129,5 +157,16 @@
         android:text="@string/next"
         android:textColor="@drawable/next_button_text"
         android:textSize="@dimen/next_button_text_size" />
+
+    <com.wang.avi.AVLoadingIndicatorView
+        android:id="@+id/loading_indicator"
+        style="@style/AVLoadingIndicatorView.Large"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:visibility="gone"
+        app:indicatorColor="@color/loading_animation_color"
+        app:indicatorName="BallGridPulseIndicator" />
 
 </RelativeLayout>

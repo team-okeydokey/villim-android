@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +19,6 @@ import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 
 public class ProfileFragment extends Fragment {
@@ -105,7 +103,7 @@ public class ProfileFragment extends Fragment {
 
 
         // Profile name.
-        String titleString = session.getLoggedIn() ? session.getName() : getString(R.string.profile_title);
+        String titleString = session.getLoggedIn() ? session.getFullName() : getString(R.string.profile_title);
         profileName = (TextView) profileView.findViewById(R.id.profile_name);
         profileName.setText(titleString);
 
@@ -168,7 +166,7 @@ public class ProfileFragment extends Fragment {
         adapter.notifyDataSetChanged();
 
         /* Populate user name */
-        profileName.setText(session.getName());
+        profileName.setText(session.getFullName());
 
         /* Fetch profile image and populate view */
         if (session.getProfilePicUrl() == null) {
@@ -224,4 +222,6 @@ public class ProfileFragment extends Fragment {
             }
         }
     }
+
+
 }

@@ -72,6 +72,11 @@
     <color name="next_button_pressed_text">#a9a9a9</color>
     <color name="login_help_button_pressed_text">#8b0000</color>
     <color name="loading_animation_color">#ed2025</color>
+    <color name="login_error_text">#ed2025</color>
+
+    <!-- Signup Activity -->
+    <color name="signup_welcome_text">#05060b</color>
+    <color name="consent_text">#585757</color>
 
 
 </resources>

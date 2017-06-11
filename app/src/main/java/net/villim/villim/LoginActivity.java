@@ -2,14 +2,15 @@ package net.villim.villim;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.view.KeyEvent;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.wang.avi.AVLoadingIndicatorView;
 
@@ -21,21 +22,17 @@ import java.io.IOException;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
-import okhttp3.MediaType;
-import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
-import okio.BufferedSink;
 
 import static net.villim.villim.VillimKeys.KEY_EMAIL;
-import static net.villim.villim.VillimKeys.KEY_ID;
 import static net.villim.villim.VillimKeys.KEY_LOGIN_SUCCESS;
-import static net.villim.villim.VillimKeys.KEY_NAME;
+import static net.villim.villim.VillimKeys.KEY_MESSAGE;
 import static net.villim.villim.VillimKeys.KEY_PASSWORD;
-import static net.villim.villim.VillimKeys.KEY_PROFILE_PIC_URL;
 import static net.villim.villim.VillimKeys.KEY_USER_INFO;
+
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -45,6 +42,7 @@ public class LoginActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private EditText loginFormEmail;
     private EditText loginFormPassword;
+    private TextView errorMessage;
 
     private Button nextButton;
     private Button findPasswordButton;
@@ -68,25 +66,10 @@ public class LoginActivity extends AppCompatActivity {
         /* Login Forms */
         loginFormEmail = (EditText) findViewById(R.id.login_form_email);
         loginFormPassword = (EditText) findViewById(R.id.login_form_password);
-        loginFormEmail.setOnKeyListener(new View.OnKeyListener() {
-            public boolean onKey(View view, int keyCode, KeyEvent keyevent) {
-                //If the keyevent is a key-down event on the "enter" button
-                if ((keyevent.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
-                    loginFormPassword.requestFocus();
-                }
-                return false;
-            }
-        });
-        loginFormPassword.setOnKeyListener(new View.OnKeyListener() {
-            public boolean onKey(View view, int keyCode, KeyEvent keyevent) {
-                //If the keyevent is a key-down event on the "enter" button
-                if ((keyevent.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
-                    loginFormPassword.clearFocus();
-                    return true;
-                }
-                return false;
-            }
-        });
+
+        /* Error Message */
+        errorMessage = (TextView) findViewById(R.id.error_message);
+        errorMessage.setVisibility(View.INVISIBLE);
 
         /* Bottom buttons */
         nextButton = (Button) findViewById(R.id.next_button);
@@ -107,50 +90,66 @@ public class LoginActivity extends AppCompatActivity {
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startLoadingAnimation();
-
-                OkHttpClient client = new OkHttpClient();
-
-                RequestBody requestBody = new FormBody.Builder()
-                        .add(KEY_EMAIL, loginFormEmail.getText().toString())
-                        .add(KEY_PASSWORD, loginFormPassword.getText().toString())
-                        .build();
-
-                Request request = new Request.Builder()
-                        .url(LOGIN_URL)
-                        .post(requestBody)
-                        .build();
-
-                client.newCall(request).enqueue(new Callback() {
-                    @Override
-                    public void onFailure(Call call, IOException e) {
-                        //something went wrong
-                    }
-
-                    @Override
-                    public void onResponse(Call call, Response response) throws IOException {
-                        if (!response.isSuccessful()) {
-                            stopLoadingAnimation();
-                            throw new IOException("Response not successful   " + response);
-                        }
-                        //success do whatever you want. for example -->
-                        try {
-                            /* 주의: response.body().string()은 한 번 부를 수 있음 */
-                            JSONObject jsonObject = new JSONObject(response.body().string());
-                            if (jsonObject.getBoolean(KEY_LOGIN_SUCCESS)) {
-                                VillimUser user = VillimUser.createUserFromJSONObject((JSONObject) jsonObject.get(KEY_USER_INFO));
-                                login(user);
-                            } else {
-                                stopLoadingAnimation();
-                            }
-                        } catch (JSONException e) {
-                            stopLoadingAnimation();
-                        }
-                    }
-                });
+                boolean allFieldsFilledOut =
+                        !TextUtils.isEmpty(loginFormEmail.getText().toString().trim()) &&
+                        !TextUtils.isEmpty(loginFormPassword.getText());
+                boolean validInput = allFieldsFilledOut;
+                if (validInput) {
+                    sendRequest();
+                } else {
+                    showErrorMessage(getString(R.string.empty_field));
+                }
             }
         });
 
+    }
+
+    private void sendRequest() {
+        startLoadingAnimation();
+        hideErrorMessage();
+
+        OkHttpClient client = new OkHttpClient();
+
+        RequestBody requestBody = new FormBody.Builder()
+                .add(KEY_EMAIL, loginFormEmail.getText().toString().trim())
+                .add(KEY_PASSWORD, loginFormPassword.getText().toString())
+                .build();
+
+        Request request = new Request.Builder()
+                .url(LOGIN_URL)
+                .post(requestBody)
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                //something went wrong
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (!response.isSuccessful()) {
+                    showErrorMessage(getString(R.string.server_error));
+                    stopLoadingAnimation();
+                    throw new IOException("Response not successful   " + response);
+                }
+                //success do whatever you want. for example -->
+                try {
+                            /* 주의: response.body().string()은 한 번 부를 수 있음 */
+                    JSONObject jsonObject = new JSONObject(response.body().string());
+                    if (jsonObject.getBoolean(KEY_LOGIN_SUCCESS)) {
+                        VillimUser user = VillimUser.createUserFromJSONObject((JSONObject) jsonObject.get(KEY_USER_INFO));
+                        login(user);
+                    } else {
+                        showErrorMessage(jsonObject.getString(KEY_MESSAGE));
+                        stopLoadingAnimation();
+                    }
+                } catch (JSONException e) {
+                    showErrorMessage(getString(R.string.server_error));
+                    stopLoadingAnimation();
+                }
+            }
+        });
     }
 
     @Override
@@ -173,7 +172,9 @@ public class LoginActivity extends AppCompatActivity {
 
         /* Store basic info in shared preferences */
         session.setId(user.id);
-        session.setName(user.name);
+        session.setFullName(user.fullname);
+        session.setFirstName(user.firstname);
+        session.setLastName(user.lastname);
         session.setEmail(user.email);
         session.setProfilePicUrl(user.profilePicUrl);
 
@@ -188,10 +189,11 @@ public class LoginActivity extends AppCompatActivity {
 
         if (requestCode == ProfileFragment.SIGNUP) {
             if (resultCode == Activity.RESULT_OK) {
-
+                VillimUser user = data.getParcelableExtra(VillimKeys.KEY_USER);
+                login(user);
             }
             if (resultCode == Activity.RESULT_CANCELED) {
-                //Write your code if there's no result
+                
             }
         }
     }
@@ -210,6 +212,25 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void run() {
                 loadingIndicator.smoothToHide();
+            }
+        });
+    }
+
+    public void showErrorMessage(final String message) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                errorMessage.setText(message);
+                errorMessage.setVisibility(View.VISIBLE);
+            }
+        });
+    }
+
+    public void hideErrorMessage() {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                errorMessage.setVisibility(View.INVISIBLE);
             }
         });
     }
