@@ -5,8 +5,8 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
 import static net.villim.villim.VillimKeys.KEY_EMAIL;
+import static net.villim.villim.VillimKeys.KEY_FULLNAME;
 import static net.villim.villim.VillimKeys.KEY_ID;
-import static net.villim.villim.VillimKeys.KEY_NAME;
 import static net.villim.villim.VillimKeys.KEY_PROFILE_PIC_URL;
 
 /**
@@ -46,12 +46,12 @@ public class VillimSession {
 
 
     /* Name */
-    public void setName(String name) {
-        prefs.edit().putString(KEY_NAME, name).apply();
+    public void setFullName(String fullname) {
+        prefs.edit().putString(KEY_FULLNAME, fullname).apply();
     }
 
-    public String getName() {
-        String usename = prefs.getString(KEY_NAME,"");
+    public String getFullName() {
+        String usename = prefs.getString(KEY_FULLNAME,"");
         return usename;
     }
 

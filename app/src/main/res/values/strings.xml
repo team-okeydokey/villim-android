@@ -154,11 +154,13 @@
     <string name="lastname">성</string>
     <string name="signup_welcome">빌림에 오신것을 환영합니다</string>
     <string name="consent">로그인하면 당사의 서비스 이용약관에 동의하는 것으로 간주됩니다.</string>
+    <string name="empty_field">모든 항목을 작성해주세요.</string>
 
     <!-- My Key Fragment -->
     <string name="my_key"></string>
     <string name="write_review">후기 작성</string>
     <string name="change_doorlock_passcode">도어락 비밀번호 변경</string>
+
 
 
 </resources>

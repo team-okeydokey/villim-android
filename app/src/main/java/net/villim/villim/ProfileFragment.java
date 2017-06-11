@@ -105,7 +105,7 @@ public class ProfileFragment extends Fragment {
 
 
         // Profile name.
-        String titleString = session.getLoggedIn() ? session.getName() : getString(R.string.profile_title);
+        String titleString = session.getLoggedIn() ? session.getFullName() : getString(R.string.profile_title);
         profileName = (TextView) profileView.findViewById(R.id.profile_name);
         profileName.setText(titleString);
 
@@ -168,7 +168,7 @@ public class ProfileFragment extends Fragment {
         adapter.notifyDataSetChanged();
 
         /* Populate user name */
-        profileName.setText(session.getName());
+        profileName.setText(session.getFullName());
 
         /* Fetch profile image and populate view */
         if (session.getProfilePicUrl() == null) {

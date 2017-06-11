@@ -15,7 +15,7 @@ public class VillimKeys {
     public static final String KEY_LOGIN_SUCCESS = "login_success";
     public static final String KEY_USER_INFO = "user_info";
     public static final String KEY_ID = "id";
-    public static final String KEY_NAME = "name";
+    public static final String KEY_FULLNAME = "name";
     public static final String KEY_EMAIL = "email";
     public static final String KEY_PASSWORD = "password";
     public static final String KEY_PROFILE_PIC_URL = "profile_pic_url";

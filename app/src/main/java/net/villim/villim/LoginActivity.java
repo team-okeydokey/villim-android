@@ -179,7 +179,7 @@ public class LoginActivity extends AppCompatActivity {
 
         /* Store basic info in shared preferences */
         session.setId(user.id);
-        session.setName(user.name);
+        session.setFullName(user.fullname);
         session.setEmail(user.email);
         session.setProfilePicUrl(user.profilePicUrl);
 
