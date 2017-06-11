@@ -174,6 +174,8 @@ public class LoginActivity extends AppCompatActivity {
         /* Store basic info in shared preferences */
         session.setId(user.id);
         session.setFullName(user.fullname);
+        session.setFirstName(user.firstname);
+        session.setLastName(user.lastname);
         session.setEmail(user.email);
         session.setProfilePicUrl(user.profilePicUrl);
 

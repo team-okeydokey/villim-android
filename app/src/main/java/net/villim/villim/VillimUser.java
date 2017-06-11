@@ -7,8 +7,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import static net.villim.villim.VillimKeys.KEY_EMAIL;
+import static net.villim.villim.VillimKeys.KEY_FIRSTNAME;
 import static net.villim.villim.VillimKeys.KEY_ID;
 import static net.villim.villim.VillimKeys.KEY_FULLNAME;
+import static net.villim.villim.VillimKeys.KEY_LASTNAME;
 import static net.villim.villim.VillimKeys.KEY_PROFILE_PIC_URL;
 
 /**
@@ -18,12 +20,16 @@ import static net.villim.villim.VillimKeys.KEY_PROFILE_PIC_URL;
 public class VillimUser implements Parcelable {
     public int id;
     public String fullname;
+    public String firstname;
+    public String lastname;
     public String email;
     public String profilePicUrl;
 
     protected VillimUser(Parcel in) {
         id = in.readInt();
         fullname = in.readString();
+        firstname = in.readString();
+        lastname = in.readString();
         email = in.readString();
         profilePicUrl = in.readString();
     }
@@ -58,6 +64,8 @@ public class VillimUser implements Parcelable {
         try {
             user.id = userInfo.getInt(KEY_ID);
             user.fullname = userInfo.get(KEY_FULLNAME).toString();
+            user.firstname = userInfo.get(KEY_FIRSTNAME).toString();
+            user.lastname = userInfo.get(KEY_LASTNAME).toString();
             user.email = userInfo.get(KEY_EMAIL).toString();
             user.profilePicUrl = userInfo.get(KEY_PROFILE_PIC_URL).toString();
         } catch (JSONException e) {
@@ -75,6 +83,8 @@ public class VillimUser implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(id);
         dest.writeString(fullname);
+        dest.writeString(firstname);
+        dest.writeString(lastname);
         dest.writeString(email);
         dest.writeString(profilePicUrl);
     }
