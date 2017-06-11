@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.wang.avi.AVLoadingIndicatorView;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -47,6 +49,8 @@ public class LoginActivity extends AppCompatActivity {
     private Button findPasswordButton;
     private Button signupButton;
 
+    private AVLoadingIndicatorView loadingIndicator;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,10 +80,15 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        /* Loading indicator */
+        loadingIndicator = (AVLoadingIndicatorView) findViewById(R.id.loading_indicator);
+
         /* Make call to server when next button is pressed. */
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                startLoadingAnimation();
+
                 OkHttpClient client = new OkHttpClient();
 
                 RequestBody requestBody = new FormBody.Builder()
@@ -101,6 +110,7 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call call, Response response) throws IOException {
                         if (!response.isSuccessful()) {
+                            stopLoadingAnimation();
                             throw new IOException("Response not successful   " + response);
                         }
                         //success do whatever you want. for example -->
@@ -110,8 +120,11 @@ public class LoginActivity extends AppCompatActivity {
                             if (jsonObject.getBoolean(KEY_LOGIN_SUCCESS)) {
                                 VillimUser user = VillimUser.createUserFromJSONObject((JSONObject) jsonObject.get(KEY_USER_INFO));
                                 login(user);
+                            } else {
+                                stopLoadingAnimation();
                             }
                         } catch (JSONException e) {
+                            stopLoadingAnimation();
                         }
                     }
                 });
@@ -161,5 +174,23 @@ public class LoginActivity extends AppCompatActivity {
                 //Write your code if there's no result
             }
         }
+    }
+
+    public void startLoadingAnimation() {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                loadingIndicator.smoothToShow();
+            }
+        });
+    }
+
+    public void stopLoadingAnimation() {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                loadingIndicator.smoothToHide();
+            }
+        });
     }
 }

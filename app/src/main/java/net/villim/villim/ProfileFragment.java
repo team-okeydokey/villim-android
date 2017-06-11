@@ -171,9 +171,15 @@ public class ProfileFragment extends Fragment {
         profileName.setText(session.getName());
 
         /* Fetch profile image and populate view */
-        Glide.with(this)
-                .load(session.getProfilePicUrl())
-                .into(profilePicture);
+        if (session.getProfilePicUrl() == null) {
+            Glide.with(this)
+                    .load(R.drawable.prugio_thumbnail)
+                    .into(profilePicture);
+        } else {
+            Glide.with(this)
+                    .load(session.getProfilePicUrl())
+                    .into(profilePicture);
+        }
         profilePicture.setVisibility(View.VISIBLE);
     }
 
