@@ -23,7 +23,7 @@ public class VillimKeys {
 
 
     /* Signup Keys */
-    public static final String KEY_SIGNUP_SUCCESS = "login_success";
+    public static final String KEY_SIGNUP_SUCCESS = "signup_success";
     public static final String KEY_FIRSTNAME = "firstname";
     public static final String KEY_LASTNAME = "lastname";
 }
