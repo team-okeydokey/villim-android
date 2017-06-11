@@ -66,8 +66,8 @@ public class SignupActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         /* Signup Forms */
-        signupFormLastname = (EditText) findViewById(R.id.signup_form_email);
-        signupFormFirstname = (EditText) findViewById(R.id.signup_form_password);
+        signupFormLastname = (EditText) findViewById(R.id.signup_form_lastname);
+        signupFormFirstname = (EditText) findViewById(R.id.signup_form_firstname);
         signupFormEmail = (EditText) findViewById(R.id.signup_form_email);
         signupFormPassword = (EditText) findViewById(R.id.signup_form_password);
 

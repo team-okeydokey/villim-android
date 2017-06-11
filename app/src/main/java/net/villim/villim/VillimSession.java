@@ -53,8 +53,8 @@ public class VillimSession {
     }
 
     public String getFullName() {
-        String usename = prefs.getString(KEY_FULLNAME,"");
-        return usename;
+        String fullname = prefs.getString(KEY_FULLNAME,"");
+        return fullname;
     }
 
     /* Firstname */
@@ -63,8 +63,8 @@ public class VillimSession {
     }
 
     public String getFirstName() {
-        String usename = prefs.getString(KEY_FIRSTNAME,"");
-        return usename;
+        String firstname = prefs.getString(KEY_FIRSTNAME,"");
+        return firstname;
     }
 
     /* Lastname */
@@ -73,8 +73,8 @@ public class VillimSession {
     }
 
     public String getLastName() {
-        String usename = prefs.getString(KEY_LASTNAME,"");
-        return usename;
+        String lastname = prefs.getString(KEY_LASTNAME,"");
+        return lastname;
     }
 
     /* Email */
