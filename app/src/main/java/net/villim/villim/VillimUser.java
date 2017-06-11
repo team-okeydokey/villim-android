@@ -30,7 +30,7 @@ public class VillimUser {
 
          /* No need to null check here because if we dont set it, it's going to be null anyway */
         try {
-            user.id = Integer.parseInt(userInfo.get(KEY_ID).toString());
+            user.id = userInfo.getInt(KEY_ID);
             user.name = userInfo.get(KEY_NAME).toString();
             user.email = userInfo.get(KEY_EMAIL).toString();
             user.profilePicUrl = userInfo.get(KEY_PROFILE_PIC_URL).toString();

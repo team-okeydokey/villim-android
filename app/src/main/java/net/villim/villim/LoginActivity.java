@@ -17,11 +17,14 @@ import java.io.IOException;
 
 import okhttp3.Call;
 import okhttp3.Callback;
+import okhttp3.FormBody;
+import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+import okio.BufferedSink;
 
 import static net.villim.villim.VillimKeys.KEY_EMAIL;
 import static net.villim.villim.VillimKeys.KEY_ID;
@@ -79,10 +82,9 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 OkHttpClient client = new OkHttpClient();
 
-                RequestBody requestBody = new MultipartBody.Builder()
-                        .setType(MultipartBody.FORM)
-                        .addFormDataPart(KEY_EMAIL, loginFormEmail.getText().toString())
-                        .addFormDataPart(KEY_PASSWORD, loginFormPassword.getText().toString())
+                RequestBody requestBody = new FormBody.Builder()
+                        .add(KEY_EMAIL, loginFormEmail.getText().toString())
+                        .add(KEY_PASSWORD, loginFormPassword.getText().toString())
                         .build();
 
                 Request request = new Request.Builder()
@@ -103,8 +105,9 @@ public class LoginActivity extends AppCompatActivity {
                         }
                         //success do whatever you want. for example -->
                         try {
+                            /* 주의: response.body().string()은 한 번 부를 수 있음 */
                             JSONObject jsonObject = new JSONObject(response.body().string());
-                            if ((boolean) jsonObject.get(KEY_LOGIN_SUCCESS)) {
+                            if (jsonObject.getBoolean(KEY_LOGIN_SUCCESS)) {
                                 VillimUser user = VillimUser.createUserFromJSONObject((JSONObject) jsonObject.get(KEY_USER_INFO));
                                 login(user);
                             }
