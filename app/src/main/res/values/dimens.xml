@@ -68,4 +68,7 @@
     <dimen name="login_form_text_size">20sp</dimen>
     <dimen name="login_activity_padding">26dp</dimen>
     <dimen name="next_button_text_size">17sp</dimen>
+
+    <!-- Signup Activity -->
+
 </resources>

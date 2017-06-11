@@ -33,7 +33,8 @@ import static net.villim.villim.VillimKeys.KEY_USER_INFO;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private static final String LOGIN_URL = "http://www.mocky.io/v2/593c2915100000c816c477e4";
+    //    private static final String LOGIN_URL = "http://www.mocky.io/v2/593c2915100000c816c477e4";
+    private static final String LOGIN_URL = "http://175.207.29.19/a/login";
 
     private Toolbar toolbar;
     private EditText loginFormEmail;
@@ -93,7 +94,6 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onFailure(Call call, IOException e) {
                         //something went wrong
-
                     }
 
                     @Override
@@ -134,7 +134,7 @@ public class LoginActivity extends AppCompatActivity {
         /* Store session */
         VillimSession session = new VillimSession(getApplicationContext());
         session.setLoggedIn(true);
-        
+
         /* Store basic info in shared preferences */
         session.setId(user.id);
         session.setName(user.name);
