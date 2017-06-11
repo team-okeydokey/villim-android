@@ -38,17 +38,7 @@ public class MyRoomFragment extends Fragment {
 		/* Inflate the layout for this fragment */
         View view = inflater.inflate(R.layout.fragment_my_room, container, false);
 
-        FragmentTransaction transaction = getFragmentManager()
-                .beginTransaction();
-		/*
-		 * When this container fragment is created, we fill it with our first
-		 * "real" fragment
-		 */
-        transaction.replace(R.id.myroom_root, new MyRoomOpenFragment());
-
-        transaction.commit();
-
-
+        
 
         return view;
     }
