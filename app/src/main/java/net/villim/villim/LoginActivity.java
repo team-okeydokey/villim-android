@@ -66,25 +66,6 @@ public class LoginActivity extends AppCompatActivity {
         /* Login Forms */
         loginFormEmail = (EditText) findViewById(R.id.login_form_email);
         loginFormPassword = (EditText) findViewById(R.id.login_form_password);
-        loginFormEmail.setOnKeyListener(new View.OnKeyListener() {
-            public boolean onKey(View view, int keyCode, KeyEvent keyevent) {
-                //If the keyevent is a key-down event on the "enter" button
-                if ((keyevent.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
-                    loginFormPassword.requestFocus();
-                }
-                return false;
-            }
-        });
-        loginFormPassword.setOnKeyListener(new View.OnKeyListener() {
-            public boolean onKey(View view, int keyCode, KeyEvent keyevent) {
-                //If the keyevent is a key-down event on the "enter" button
-                if ((keyevent.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
-                    loginFormPassword.clearFocus();
-                    return true;
-                }
-                return false;
-            }
-        });
 
         /* Error Message */
         errorMessage = (TextView) findViewById(R.id.error_message);
@@ -115,7 +96,7 @@ public class LoginActivity extends AppCompatActivity {
                 OkHttpClient client = new OkHttpClient();
 
                 RequestBody requestBody = new FormBody.Builder()
-                        .add(KEY_EMAIL, loginFormEmail.getText().toString())
+                        .add(KEY_EMAIL, loginFormEmail.getText().toString().trim())
                         .add(KEY_PASSWORD, loginFormPassword.getText().toString())
                         .build();
 
