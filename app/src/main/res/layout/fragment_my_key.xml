@@ -38,8 +38,9 @@
 
         <com.mikhaellopez.circularimageview.CircularImageView
             android:id="@+id/house_thumbnail"
-            android:layout_width="@dimen/my_key_room_thumbnail_size"
-            android:layout_height="@dimen/my_key_room_thumbnail_size" />
+            android:layout_width="@dimen/mykey_room_thumbnail_size"
+            android:layout_height="@dimen/mykey_room_thumbnail_size"
+            app:civ_border_width="0dp" />
 
         <TextView
             android:id="@+id/house_name"
@@ -68,10 +69,11 @@
 
     <com.rojoxpress.slidebutton.SlideButton
         android:id="@+id/slide_button"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_width="@dimen/slide_button_width"
+        android:layout_height="@dimen/slide_button_height"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="@dimen/my_key_slider_bottom_margin"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/slide_button_bottom_margin"
         android:background="@drawable/back_slide_button" />
 
     <com.wang.avi.AVLoadingIndicatorView

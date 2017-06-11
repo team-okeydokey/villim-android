@@ -77,8 +77,11 @@
     <dimen name="consent_text_margin">20dp</dimen>
 
     <!-- My Key Fragment -->
-    <dimen name="my_key_room_thumbnail_size">100dp</dimen>
-    <dimen name="my_key_slider_bottom_margin">100dp</dimen>
+    <dimen name="mykey_room_thumbnail_size">250dp</dimen>
+    <dimen name="slide_button_bottom_margin">80dp</dimen>
+    <dimen name="slide_button_width">350dp</dimen>
+    <dimen name="slide_button_height">60dp</dimen>
+    <dimen name="slide_button_radius">200dp</dimen>
 
 
 </resources>
