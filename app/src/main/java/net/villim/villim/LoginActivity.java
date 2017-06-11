@@ -194,10 +194,11 @@ public class LoginActivity extends AppCompatActivity {
 
         if (requestCode == ProfileFragment.SIGNUP) {
             if (resultCode == Activity.RESULT_OK) {
-
+                VillimUser user = data.getParcelableExtra(VillimKeys.KEY_USER);
+                login(user);
             }
             if (resultCode == Activity.RESULT_CANCELED) {
-                //Write your code if there's no result
+                showErrorMessage(getString(R.string.signup_error));
             }
         }
     }
