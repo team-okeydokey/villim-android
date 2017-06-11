@@ -9,8 +9,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.ListViewCompat;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.util.TypedValue;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -49,6 +52,41 @@ public class LocationFilterActivity extends AppCompatActivity {
         searchIcon.setBounds(0, 0, iconSize, iconSize);
         clearIcon.setBounds(0, 0, iconSize, iconSize);
         searchField.setCompoundDrawables(searchIcon, null, clearIcon, null);
+        /*  Make clear button actually clear search field */
+        searchField.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent event) {
+                final int DRAWABLE_RIGHT = 2;
+                int start=searchField.getSelectionStart();
+                int end=searchField.getSelectionEnd();
+                if(event.getAction() == MotionEvent.ACTION_UP) {
+                    if(event.getRawX() >= (searchField.getRight() - searchField.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
+                        //Do your action here
+                        searchField.setText("");
+                        return true;
+                    }
+
+                }
+                return false;
+            }
+        });
+        /* Make done button return */
+        searchField.setOnKeyListener(new View.OnKeyListener() {
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                    boolean searchFieldNonEmpty =  !TextUtils.isEmpty(searchField.getText().toString().trim());
+                    if (searchFieldNonEmpty) {
+                        Intent returnIntent = new Intent();
+                        VillimLocation location = new VillimLocation("","",searchField.getText().toString().trim(),"",0,0);
+                        returnIntent.putExtra(LOCATION, location);
+                        setResult(Activity.RESULT_OK,returnIntent);
+                        finish();
+                    }
+                    return true;
+                }
+                return false;
+            }
+        });
 
         /* Popular locations list */
         popularLocationsListView = (ListViewCompat) findViewById(R.id.search_popular_locations_listview);
