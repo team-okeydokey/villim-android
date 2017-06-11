@@ -131,7 +131,7 @@ public class SignupActivity extends AppCompatActivity {
                     stopLoadingAnimation();
                     throw new IOException("Response not successful   " + response);
                 }
-                //success do whatever you want. for example -->
+                /* Request success. */
                 try {
                     /* 주의: response.body().string()은 한 번 부를 수 있음 */
                     JSONObject jsonObject = new JSONObject(response.body().string());

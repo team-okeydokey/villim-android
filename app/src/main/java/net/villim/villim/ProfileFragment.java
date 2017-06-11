@@ -48,12 +48,10 @@ public class ProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View profileView = inflater.inflate(R.layout.fragment_profile, container, false);
+        activity = ((MainActivity) getActivity());
 
         // Retrieve session.
         session = new VillimSession(getActivity().getApplicationContext());
-
-        // Remove bottom bar.
-        activity = ((MainActivity) getActivity());
 
         /* Listview with profile items. */
         profileListView = (ListView) profileView.findViewById(R.id.profile_listView);
@@ -167,7 +165,7 @@ public class ProfileFragment extends Fragment {
 
         /* Populate user name */
         profileName.setText(session.getFullName());
-        
+
         /* Fetch profile image and populate view */
         if (session.getProfilePicUrl().isEmpty()) {
             System.out.println(session.getProfilePicUrl() );

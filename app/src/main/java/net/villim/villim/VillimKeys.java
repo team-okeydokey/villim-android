@@ -11,6 +11,9 @@ public class VillimKeys {
     /* Intent data keys */
     public static final String KEY_USER = "user";
 
+    /* My Key Activity */
+    public static final String KEY_RESERVATION_ACTIVE = "reservation_active";
+
     /* Login Keys */
     public static final String KEY_LOGIN_SUCCESS = "login_success";
     public static final String KEY_USER_INFO = "user_info";
@@ -20,7 +23,6 @@ public class VillimKeys {
     public static final String KEY_PASSWORD = "password";
     public static final String KEY_PROFILE_PIC_URL = "profile_pic_url";
     public static final String KEY_MESSAGE = "message";
-
 
     /* Signup Keys */
     public static final String KEY_SIGNUP_SUCCESS = "signup_success";

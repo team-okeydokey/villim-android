@@ -92,7 +92,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 boolean allFieldsFilledOut =
                         !TextUtils.isEmpty(loginFormEmail.getText().toString().trim()) &&
-                        !TextUtils.isEmpty(loginFormPassword.getText());
+                                !TextUtils.isEmpty(loginFormPassword.getText());
                 boolean validInput = allFieldsFilledOut;
                 if (validInput) {
                     sendRequest();
@@ -133,9 +133,9 @@ public class LoginActivity extends AppCompatActivity {
                     stopLoadingAnimation();
                     throw new IOException("Response not successful   " + response);
                 }
-                //success do whatever you want. for example -->
+                /* Request success. */
                 try {
-                            /* 주의: response.body().string()은 한 번 부를 수 있음 */
+                    /* 주의: response.body().string()은 한 번 부를 수 있음 */
                     JSONObject jsonObject = new JSONObject(response.body().string());
                     if (jsonObject.getBoolean(KEY_LOGIN_SUCCESS)) {
                         VillimUser user = VillimUser.createUserFromJSONObject((JSONObject) jsonObject.get(KEY_USER_INFO));
@@ -193,7 +193,7 @@ public class LoginActivity extends AppCompatActivity {
                 login(user);
             }
             if (resultCode == Activity.RESULT_CANCELED) {
-                
+
             }
         }
     }

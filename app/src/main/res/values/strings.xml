@@ -160,7 +160,9 @@
     <string name="my_key"></string>
     <string name="write_review">후기 작성</string>
     <string name="change_doorlock_passcode">도어락 비밀번호 변경</string>
-
+    <string name="no_reserved_room">아직 빌린 방이 없습니다.</string>
+    <string name="find_room">방 찾아보기</string>
+    <string name="open_room_error">문제가 발생했습니다. 다시 시도해 주세요.</string>
 
 
 </resources>
