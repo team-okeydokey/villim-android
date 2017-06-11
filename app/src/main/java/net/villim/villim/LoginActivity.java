@@ -6,6 +6,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
@@ -90,54 +91,66 @@ public class LoginActivity extends AppCompatActivity {
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startLoadingAnimation();
-                hideErrorMessage();
-
-                OkHttpClient client = new OkHttpClient();
-
-                RequestBody requestBody = new FormBody.Builder()
-                        .add(KEY_EMAIL, loginFormEmail.getText().toString().trim())
-                        .add(KEY_PASSWORD, loginFormPassword.getText().toString())
-                        .build();
-
-                Request request = new Request.Builder()
-                        .url(LOGIN_URL)
-                        .post(requestBody)
-                        .build();
-
-                client.newCall(request).enqueue(new Callback() {
-                    @Override
-                    public void onFailure(Call call, IOException e) {
-                        //something went wrong
-                    }
-
-                    @Override
-                    public void onResponse(Call call, Response response) throws IOException {
-                        if (!response.isSuccessful()) {
-                            showErrorMessage(getString(R.string.server_error));
-                            stopLoadingAnimation();
-                            throw new IOException("Response not successful   " + response);
-                        }
-                        //success do whatever you want. for example -->
-                        try {
-                            /* 주의: response.body().string()은 한 번 부를 수 있음 */
-                            JSONObject jsonObject = new JSONObject(response.body().string());
-                            if (jsonObject.getBoolean(KEY_LOGIN_SUCCESS)) {
-                                VillimUser user = VillimUser.createUserFromJSONObject((JSONObject) jsonObject.get(KEY_USER_INFO));
-                                login(user);
-                            } else {
-                                showErrorMessage(jsonObject.getString(KEY_MESSAGE));
-                                stopLoadingAnimation();
-                            }
-                        } catch (JSONException e) {
-                            showErrorMessage(getString(R.string.server_error));
-                            stopLoadingAnimation();
-                        }
-                    }
-                });
+                boolean allFieldsFilledOut =
+                        !TextUtils.isEmpty(loginFormEmail.getText().toString().trim()) &&
+                        !TextUtils.isEmpty(loginFormPassword.getText());
+                boolean validInput = allFieldsFilledOut;
+                if (validInput) {
+                    sendRequest();
+                } else {
+                    showErrorMessage(getString(R.string.empty_field));
+                }
             }
         });
 
+    }
+
+    private void sendRequest() {
+        startLoadingAnimation();
+        hideErrorMessage();
+
+        OkHttpClient client = new OkHttpClient();
+
+        RequestBody requestBody = new FormBody.Builder()
+                .add(KEY_EMAIL, loginFormEmail.getText().toString().trim())
+                .add(KEY_PASSWORD, loginFormPassword.getText().toString())
+                .build();
+
+        Request request = new Request.Builder()
+                .url(LOGIN_URL)
+                .post(requestBody)
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                //something went wrong
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (!response.isSuccessful()) {
+                    showErrorMessage(getString(R.string.server_error));
+                    stopLoadingAnimation();
+                    throw new IOException("Response not successful   " + response);
+                }
+                //success do whatever you want. for example -->
+                try {
+                            /* 주의: response.body().string()은 한 번 부를 수 있음 */
+                    JSONObject jsonObject = new JSONObject(response.body().string());
+                    if (jsonObject.getBoolean(KEY_LOGIN_SUCCESS)) {
+                        VillimUser user = VillimUser.createUserFromJSONObject((JSONObject) jsonObject.get(KEY_USER_INFO));
+                        login(user);
+                    } else {
+                        showErrorMessage(jsonObject.getString(KEY_MESSAGE));
+                        stopLoadingAnimation();
+                    }
+                } catch (JSONException e) {
+                    showErrorMessage(getString(R.string.server_error));
+                    stopLoadingAnimation();
+                }
+            }
+        });
     }
 
     @Override
