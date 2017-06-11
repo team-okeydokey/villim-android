@@ -72,43 +72,43 @@ public class SignupActivity extends AppCompatActivity {
         signupFormFirstname = (EditText) findViewById(R.id.signup_form_password);
         signupFormEmail = (EditText) findViewById(R.id.signup_form_email);
         signupFormPassword = (EditText) findViewById(R.id.signup_form_password);
-        signupFormLastname.setOnKeyListener(new View.OnKeyListener() {
-            public boolean onKey(View view, int keyCode, KeyEvent keyevent) {
-                //If the keyevent is a key-down event on the "enter" button
-                if ((keyevent.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
-                    signupFormFirstname.requestFocus();
-                }
-                return false;
-            }
-        });
-        signupFormFirstname.setOnKeyListener(new View.OnKeyListener() {
-            public boolean onKey(View view, int keyCode, KeyEvent keyevent) {
-                //If the keyevent is a key-down event on the "enter" button
-                if ((keyevent.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
-                    signupFormEmail.requestFocus();
-                }
-                return false;
-            }
-        });
-        signupFormEmail.setOnKeyListener(new View.OnKeyListener() {
-            public boolean onKey(View view, int keyCode, KeyEvent keyevent) {
-                //If the keyevent is a key-down event on the "enter" button
-                if ((keyevent.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
-                    signupFormPassword.requestFocus();
-                }
-                return false;
-            }
-        });
-        signupFormPassword.setOnKeyListener(new View.OnKeyListener() {
-            public boolean onKey(View view, int keyCode, KeyEvent keyevent) {
-                //If the keyevent is a key-down event on the "enter" button
-                if ((keyevent.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
-                    signupFormPassword.clearFocus();
-                    return true;
-                }
-                return false;
-            }
-        });
+//        signupFormLastname.setOnKeyListener(new View.OnKeyListener() {
+//            public boolean onKey(View view, int keyCode, KeyEvent keyevent) {
+//                //If the keyevent is a key-down event on the "enter" button
+//                if ((keyevent.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
+//                    signupFormFirstname.requestFocus();
+//                }
+//                return false;
+//            }
+//        });
+//        signupFormFirstname.setOnKeyListener(new View.OnKeyListener() {
+//            public boolean onKey(View view, int keyCode, KeyEvent keyevent) {
+//                //If the keyevent is a key-down event on the "enter" button
+//                if ((keyevent.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
+//                    signupFormEmail.requestFocus();
+//                }
+//                return false;
+//            }
+//        });
+//        signupFormEmail.setOnKeyListener(new View.OnKeyListener() {
+//            public boolean onKey(View view, int keyCode, KeyEvent keyevent) {
+//                //If the keyevent is a key-down event on the "enter" button
+//                if ((keyevent.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
+//                    signupFormPassword.requestFocus();
+//                }
+//                return false;
+//            }
+//        });
+//        signupFormPassword.setOnKeyListener(new View.OnKeyListener() {
+//            public boolean onKey(View view, int keyCode, KeyEvent keyevent) {
+//                //If the keyevent is a key-down event on the "enter" button
+//                if ((keyevent.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
+//                    signupFormPassword.clearFocus();
+//                    return true;
+//                }
+//                return false;
+//            }
+//        });
 
         /* Error Message */
         errorMessage = (TextView) findViewById(R.id.error_message);
