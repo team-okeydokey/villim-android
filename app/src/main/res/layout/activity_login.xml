@@ -128,6 +128,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:background="@android:color/transparent"
+            android:gravity="left"
             android:text="@string/find_password"
             android:textColor="@drawable/login_help_button_text"
             android:textSize="@dimen/login_help_button_text_size" />
@@ -138,6 +139,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:background="@android:color/transparent"
+            android:gravity="right"
             android:text="@string/signup"
             android:textColor="@drawable/login_help_button_text"
             android:textSize="@dimen/login_help_button_text_size" />

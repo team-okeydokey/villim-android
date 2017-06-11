@@ -18,14 +18,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:text="@string/write_review" />
+            android:background="@android:color/transparent"
+            android:gravity="left"
+            android:text="@string/write_review"
+            android:textColor="@drawable/login_help_button_text" />
 
         <Button
             android:id="@+id/change_passcode_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:text="@string/change_doorlock_passcode" />
+            android:background="@android:color/transparent"
+            android:gravity="right"
+            android:text="@string/change_doorlock_passcode"
+            android:textColor="@drawable/login_help_button_text" />
     </RelativeLayout>
 
 
