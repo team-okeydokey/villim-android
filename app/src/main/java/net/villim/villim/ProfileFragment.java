@@ -125,9 +125,16 @@ public class ProfileFragment extends Fragment {
 
         // Profile pic.
         if (session.getLoggedIn()) {
-            Glide.with(this)
-                    .load(session.getProfilePicUrl())
-                    .into(profilePicture);
+
+            if (session.getProfilePicUrl() == null) {
+                Glide.with(this)
+                        .load(R.drawable.prugio_thumbnail)
+                        .into(profilePicture);
+            } else {
+                Glide.with(this)
+                        .load(session.getProfilePicUrl())
+                        .into(profilePicture);
+            }
         }
     }
 
