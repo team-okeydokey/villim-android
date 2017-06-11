@@ -61,7 +61,7 @@ public class LocationFilterActivity extends AppCompatActivity {
                 new VillimLocation("강남구", "강남구", "서울특별시 강남구", "서울특별시 강남구"),
                 new VillimLocation("강남역", "강남역", "서초구 강남", "서초구 강남"),
                 new VillimLocation("대한민국", "대한민국", "서울특별시 강남대로 서초구", "서울특별시 강남대로 서초구"),
-                new VillimLocation("고속버스 터미널", "강남 고속버스 터미널", "서초구 강남 고속버스 터미널12312112121221211", "서초구 강남 고속버스 터미널")};
+                new VillimLocation("고속버스 터미널", "강남 고속버스 터미널", "서초구 강남 고속버스 터미널", "서초구 강남 고속버스 터미널")};
         popularLocationsListView.setAdapter(new SearchSuggestionListViewAdapter(getApplicationContext(), popularLocations));
     }
 

@@ -11,6 +11,9 @@
     <color name="h2">#a0a0a0</color>
     <color name="h3">#A0A0A0</color>
 
+    <!-- Toolbar -->
+    <color name="toolbar_title_color">#333333</color>
+
     <!-- Tab Colors -->
     <color name="tab_selected">#ff5848</color>
     <color name="tab_unselected">#aaaaaa</color>
@@ -58,4 +61,17 @@
 
     <!-- Profile Fragment -->
     <color name="profile_list_item_value">#A0A0A0</color>
+
+
+    <!-- Login Activity -->
+    <color name="login_help_button">#ed2025</color>
+    <color name="login_form_text">#05060b</color>
+    <color name="login_form_hint">#a9a9a9</color>
+    <color name="next_button_normal">#ed2025</color>
+    <color name="next_button_pressed">#8b0000</color>
+    <color name="next_button_pressed_text">#a9a9a9</color>
+    <color name="login_help_button_pressed_text">#8b0000</color>
+    <color name="loading_animation_color">#ed2025</color>
+
+
 </resources>

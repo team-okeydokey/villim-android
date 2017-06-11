@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    tools:context="net.villim.villim.LoginActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/toolbar_height"
+        android:background="@android:color/white"
+        android:elevation="@dimen/toolbar_elevation"
+        app:contentInsetEnd="0dp"
+        app:contentInsetStart="0dp">
+
+        <TextView
+            android:id="@+id/toolbar_title"
+            style="@style/ToolbarTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/signup"
+            android:textColor="@color/toolbar_title_color" />
+
+    </android.support.v7.widget.Toolbar>
+
+    <!-- 인사 문구 -->
+    <TextView
+        android:id="@+id/signup_welcome_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/advert_container_margin_top"
+        android:paddingLeft="@dimen/login_activity_padding"
+        android:paddingRight="@dimen/login_activity_padding"
+        android:text="@string/signup_welcome"
+        android:textSize="@dimen/advert_title_text_size" />
+
+
+    <!-- Login form -->
+    <RelativeLayout
+        android:id="@+id/signup_form_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/signup_welcome_text"
+        android:paddingBottom="@dimen/search_filter_padding"
+        android:paddingLeft="@dimen/login_activity_padding"
+        android:paddingRight="@dimen/login_activity_padding"
+        android:paddingTop="@dimen/search_filter_upper_padding">
+
+        <EditText
+            android:id="@+id/signup_form_lastname"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/toolbar_height"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/login_field"
+            android:drawableLeft="@drawable/ic_whatshot_black_24dp"
+            android:drawablePadding="@dimen/filter_icon_drawable_padding"
+            android:gravity="left|center_vertical"
+            android:hint="@string/lastname"
+            android:maxLines="1"
+            android:textColor="@color/login_form_text"
+            android:textColorHint="@color/login_form_hint"
+            android:textSize="@dimen/login_form_text_size" />
+
+        <EditText
+            android:id="@+id/signup_form_firstname"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/toolbar_height"
+            android:layout_below="@id/signup_form_lastname"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/login_field"
+            android:drawableLeft="@drawable/ic_whatshot_black_24dp"
+            android:drawablePadding="@dimen/filter_icon_drawable_padding"
+            android:gravity="left|center_vertical"
+            android:hint="@string/firstname"
+            android:maxLines="1"
+            android:textColor="@color/login_form_text"
+            android:textColorHint="@color/login_form_hint"
+            android:textSize="@dimen/login_form_text_size" />
+
+        <EditText
+            android:id="@+id/signup_form_email"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/toolbar_height"
+            android:layout_below="@id/signup_form_firstname"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/login_field"
+            android:drawableLeft="@drawable/ic_whatshot_black_24dp"
+            android:drawablePadding="@dimen/filter_icon_drawable_padding"
+            android:gravity="left|center_vertical"
+            android:hint="@string/email"
+            android:inputType="textEmailAddress"
+            android:maxLines="1"
+            android:textColor="@color/login_form_text"
+            android:textColorHint="@color/login_form_hint"
+            android:textSize="@dimen/login_form_text_size" />
+
+        <EditText
+            android:id="@+id/signup_form_password"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/toolbar_height"
+            android:layout_below="@id/signup_form_email"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/login_field"
+            android:drawableLeft="@drawable/ic_whatshot_black_24dp"
+            android:drawablePadding="@dimen/filter_icon_drawable_padding"
+            android:gravity="left|center_vertical"
+            android:hint="@string/password"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:textColor="@color/login_form_text"
+            android:textColorHint="@color/login_form_hint"
+            android:textSize="@dimen/login_form_text_size" />
+
+    </RelativeLayout>
+
+
+    <!-- Done button -->
+    <Button
+        android:id="@+id/next_button"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/next_button_height"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/next_button"
+        android:text="@string/next"
+        android:textColor="@drawable/next_button_text"
+        android:textSize="@dimen/next_button_text_size" />
+
+</RelativeLayout>
