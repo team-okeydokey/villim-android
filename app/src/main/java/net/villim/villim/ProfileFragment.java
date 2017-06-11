@@ -167,9 +167,10 @@ public class ProfileFragment extends Fragment {
 
         /* Populate user name */
         profileName.setText(session.getFullName());
-
+        
         /* Fetch profile image and populate view */
-        if (session.getProfilePicUrl() == null) {
+        if (session.getProfilePicUrl().isEmpty()) {
+            System.out.println(session.getProfilePicUrl() );
             Glide.with(this)
                     .load(R.drawable.prugio_thumbnail)
                     .into(profilePicture);

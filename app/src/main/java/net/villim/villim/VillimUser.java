@@ -67,7 +67,8 @@ public class VillimUser implements Parcelable {
             user.firstname = userInfo.get(KEY_FIRSTNAME).toString();
             user.lastname = userInfo.get(KEY_LASTNAME).toString();
             user.email = userInfo.get(KEY_EMAIL).toString();
-            user.profilePicUrl = userInfo.get(KEY_PROFILE_PIC_URL).toString();
+            boolean isProfilePicUrlNull = userInfo.isNull(KEY_PROFILE_PIC_URL);
+            user.profilePicUrl = isProfilePicUrlNull ? null : userInfo.get(KEY_PROFILE_PIC_URL).toString();
         } catch (JSONException e) {
 
         }
