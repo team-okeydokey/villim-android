@@ -194,7 +194,7 @@ public class LoginActivity extends AppCompatActivity {
                 login(user);
             }
             if (resultCode == Activity.RESULT_CANCELED) {
-                showErrorMessage(getString(R.string.signup_error));
+                
             }
         }
     }

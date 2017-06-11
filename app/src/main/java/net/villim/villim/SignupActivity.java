@@ -148,7 +148,7 @@ public class SignupActivity extends AppCompatActivity {
                         stopLoadingAnimation();
                     }
                 } catch (JSONException e) {
-                    showErrorMessage(getString(R.string.server_error));
+                    showErrorMessage(getString(R.string.signup_error));
                     stopLoadingAnimation();
                 }
             }
