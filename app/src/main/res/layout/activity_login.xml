@@ -151,6 +151,6 @@
         android:layout_centerVertical="true"
         android:visibility="gone"
         app:indicatorColor="@color/loading_animation_color"
-        app:indicatorName="BallTrianglePathIndicator" />
+        app:indicatorName="BallGridPulseIndicator" />
 
 </RelativeLayout>
