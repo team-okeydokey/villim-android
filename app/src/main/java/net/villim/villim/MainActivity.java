@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -17,6 +18,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -39,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
        If FragmentStatePagerAdapter is used, weak references must be used to refer to fragments. */
     private ProfileFragment profileFragment;
 
+    private FrameLayout container;
     private AppBarLayout appBarLayout;
     private Toolbar toolbar;
     //    private TextView toolbarTextView;
@@ -193,8 +196,10 @@ public class MainActivity extends AppCompatActivity {
                 appBarLayout.setExpanded(false);
                 if (position != 0) { // Hide search button if not in discovery fragment.
                     searchButton.setVisibility(View.INVISIBLE);
+                    hideToolbar();
                 } else {
                     searchButton.setVisibility(View.VISIBLE);
+                    showToolbar();
                 }
             }
 
@@ -249,7 +254,7 @@ public class MainActivity extends AppCompatActivity {
                 case MY_KEY_FRAGMENT:
                     return MyKeyFragment.newInstance();
                 case VISIT_FRAGMENT:
-                    return WishListFragment.newInstance();
+                    return VisitFragment.newInstance();
                 case PROFILE_FRAGMENT:
                     return ProfileFragment.newInstance();
                 default:
@@ -373,6 +378,17 @@ public class MainActivity extends AppCompatActivity {
         int b = (int) ((Color.blue(finalColor) - Color.blue(initialColor)) * progress) + Color.blue(initialColor);
 
         return Color.rgb(r, g, b);
+    }
+
+    public void hideToolbar() {
+        /* Detach dependant views */
+        appBarLayout.setExpanded(false, false);
+        appBarLayout.setVisibility(View.GONE);
+    }
+
+    public void showToolbar() {
+        /* Reattach dependant views */
+        appBarLayout.setVisibility(View.VISIBLE);
     }
 
 }

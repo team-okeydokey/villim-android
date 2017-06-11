@@ -31,7 +31,6 @@ import okhttp3.Response;
 import static net.villim.villim.VillimKeys.KEY_EMAIL;
 import static net.villim.villim.VillimKeys.KEY_FIRSTNAME;
 import static net.villim.villim.VillimKeys.KEY_LASTNAME;
-import static net.villim.villim.VillimKeys.KEY_LOGIN_SUCCESS;
 import static net.villim.villim.VillimKeys.KEY_MESSAGE;
 import static net.villim.villim.VillimKeys.KEY_PASSWORD;
 import static net.villim.villim.VillimKeys.KEY_SIGNUP_SUCCESS;
@@ -40,7 +39,7 @@ import static net.villim.villim.VillimKeys.KEY_USER_INFO;
 
 public class SignupActivity extends AppCompatActivity {
 
-    private static final String LOGIN_URL = "http://175.207.29.19/a/signup";
+    private static final String SIGNUP_URL = "http://175.207.29.19/a/signup";
 
     private Toolbar toolbar;
 
@@ -116,7 +115,7 @@ public class SignupActivity extends AppCompatActivity {
                 .build();
 
         Request request = new Request.Builder()
-                .url(LOGIN_URL)
+                .url(SIGNUP_URL)
                 .post(requestBody)
                 .build();
 

@@ -5,43 +5,13 @@
     android:layout_height="match_parent"
     tools:context="net.villim.villim.VisitFragment">
 
-    <!-- Title -->
     <TextView
-        android:id="@+id/room_name"
-        style="@style/h1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/room_thumbnail"
-        android:gravity="center"
-        android:text="@string/myroom_title" />
-
-    <!-- Thumbnail -->
-    <com.mikhaellopez.circularimageview.CircularImageView
-        android:id="@+id/room_thumbnail"
-        android:layout_width="@dimen/room_thumbnail_image_diameter"
-        android:layout_height="@dimen/room_thumbnail_image_diameter"
-        android:layout_above="@+id/visit_date_label"
-        android:layout_centerInParent="true"
-        android:layout_margin="20dp" />
-
-    <!-- Visit date text -->
-    <TextView
-        android:id="@+id/visit_date_label"
-        style="@style/h3"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:gravity="center"
-        android:text="@string/visit_date" />
-
-    <!-- Visit date -->
-    <TextView
-        android:id="@+id/visit_date"
-        style="@style/h3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/visit_date_label"
-        android:gravity="center" />
+        android:text="Coming Soon"
+        android:textSize="17sp"
+        android:textStyle="bold" />
 
 
 </RelativeLayout>

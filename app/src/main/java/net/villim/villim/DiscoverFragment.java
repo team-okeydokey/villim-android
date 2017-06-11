@@ -4,6 +4,7 @@ package net.villim.villim;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -51,7 +52,6 @@ public class DiscoverFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
 
 
-
         populateView();
 
         return discoverView;
@@ -90,8 +90,13 @@ public class DiscoverFragment extends Fragment {
             jsonItem.put(VillimRoom.KEY_HOUSE_RATING, 3.6);
             jsonItem.put(VillimRoom.KEY_HOUSE_REVIEW_COUNT, 72);
             JSONArray amenitiesArray = new JSONArray();
-            amenitiesArray.put(1);amenitiesArray.put(2);amenitiesArray.put(3);amenitiesArray.put(4);
-            amenitiesArray.put(5);amenitiesArray.put(6);amenitiesArray.put(7);
+            amenitiesArray.put(1);
+            amenitiesArray.put(2);
+            amenitiesArray.put(3);
+            amenitiesArray.put(4);
+            amenitiesArray.put(5);
+            amenitiesArray.put(6);
+            amenitiesArray.put(7);
             jsonItem.put(VillimRoom.KEY_AMENITY_IDS, amenitiesArray);
         } catch (JSONException e) {
 
@@ -114,7 +119,5 @@ public class DiscoverFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
     }
-
-
 
 }

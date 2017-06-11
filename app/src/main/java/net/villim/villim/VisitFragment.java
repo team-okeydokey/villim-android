@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,13 +46,6 @@ public class VisitFragment extends Fragment {
         activity = ((MainActivity) getActivity());
 //        activity.showBottomButtons(false, false);
 
-        // Room name.
-        roomName = (TextView) visitView.findViewById(R.id.room_name);
-
-        // Room duration.
-        roomThumbnail = (ImageView) visitView.findViewById(R.id.room_thumbnail);
-        visitDate = (TextView) visitView.findViewById(R.id.visit_date);
-
         populateView();
 
         return visitView;
@@ -60,17 +54,6 @@ public class VisitFragment extends Fragment {
     // Make this async.
     private void populateView() {
         // Network operation to fetch.
-
-        // Populate room name.
-        roomName.setText("프루지오 스튜디오");
-
-        // Populate room duration.
-        visitDate.setText("2017-08-12");
-
-        // Fetch and insert room thumbnail.
-        Glide.with(this)
-                .load(R.drawable.prugio_thumbnail)
-                .into(roomThumbnail);
     }
 
     @Override
