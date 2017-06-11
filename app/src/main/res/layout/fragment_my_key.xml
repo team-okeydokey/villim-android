@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:background="@android:color/transparent"
-            android:gravity="left"
+            android:gravity="left|center_vertical"
             android:text="@string/write_review"
             android:textColor="@drawable/login_help_button_text" />
 
@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:background="@android:color/transparent"
-            android:gravity="right"
+            android:gravity="right|center_vertical"
             android:text="@string/change_doorlock_passcode"
             android:textColor="@drawable/login_help_button_text" />
     </RelativeLayout>
