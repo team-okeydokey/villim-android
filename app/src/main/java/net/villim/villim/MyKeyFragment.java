@@ -245,7 +245,7 @@ public class MyKeyFragment extends Fragment {
 
         /* House thumbnail */
         Glide.with(this)
-                .load(R.drawable.prugio_thumbnail)
+                .load(R.drawable.img_default)
                 .into(houseThumbnail);
     }
 
