@@ -18,7 +18,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -64,12 +63,22 @@ public class MainActivity extends AppCompatActivity {
     private int toolBarCollpasedColor;
     private int toolBarOpenColor;
 
+    /* These variables control the visibility of clear button on filters */
+    private boolean locationSelected;
+    private boolean dateSelected;
+    private final int DRAWABLE_LEFT = 0;
+    private final int DRAWABLE_RIGHT = 2;
+    private final int HIDE = 0;
+    private final int SHOW = 255;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         appBarOpen = false;
+        locationSelected = false;
+        locationSelected = false;
 
         /* Toolbar */
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -87,60 +96,7 @@ public class MainActivity extends AppCompatActivity {
         searchFilters = (RelativeLayout) findViewById(R.id.search_filters);
         searchFilterLocation = (TextView) findViewById(R.id.search_filter_location);
         searchFilterDate = (TextView) findViewById(R.id.search_filter_date);
-        /* Set search filter icons */
-        int markerSize = getResources().getDimensionPixelSize(R.dimen.marker_icon_size);
-        int calendarWidth = getResources().getDimensionPixelSize(R.dimen.calendar_icon_width);
-        ;
-        int calendarHeight = getResources().getDimensionPixelSize(R.dimen.calendar_icon_height);
-        ;
-        int clearSize = getResources().getDimensionPixelSize(R.dimen.clear_icon_size);
-        ;
-        Drawable markerIcon = getResources().getDrawable(R.drawable.icon_marker);
-        Drawable calendarIcon = getResources().getDrawable(R.drawable.icon_calendar);
-        Drawable clearIcon = getResources().getDrawable(R.drawable.btn_delete_white);
-        markerIcon.setBounds(0, 0, markerSize, markerSize);
-        calendarIcon.setBounds(0, 0, calendarWidth, calendarHeight);
-        clearIcon.setBounds(0, 0, clearSize, clearSize);
-        searchFilterLocation.setCompoundDrawables(markerIcon, null, null, null);
-        searchFilterDate.setCompoundDrawables(calendarIcon, null, clearIcon, null);
-        /* Launch filter activities */
-        searchFilterLocation.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent locationFilterIntent = new Intent(MainActivity.this, LocationFilterActivity.class);
-                MainActivity.this.startActivityForResult(locationFilterIntent, LOCATION_FILTER);
-
-            }
-        });
-        searchFilterDate.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent event) {
-                final int DRAWABLE_RIGHT = 2;
-                int start = searchFilterDate.getSelectionStart();
-                int end = searchFilterDate.getSelectionEnd();
-                System.out.println(event.getAction());
-                switch (event.getAction()) {
-                    case MotionEvent.ACTION_DOWN:
-                        return true;
-                    case MotionEvent.ACTION_UP:
-                        System.out.println("Touched");
-                        /* When right drawable(clear button) is selected. */
-                        if (event.getRawX() >= (searchFilterDate.getRight() - searchFilterDate.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
-                            searchFilterDate.setText(getString(R.string.date_filter_title));
-                            startDate = null;
-                            endDate = null;
-                        } else {
-                            Intent dateFilterIntent = new Intent(MainActivity.this, DateFilterActivity.class);
-                            dateFilterIntent.putExtra(DateFilterActivity.START_DATE, startDate);
-                            dateFilterIntent.putExtra(DateFilterActivity.END_DATE, endDate);
-                            MainActivity.this.startActivityForResult(dateFilterIntent, DATE_FILTER);
-                        }
-                        return true;
-                    default:
-                        return false;
-                }
-            }
-        });
+        setUpSerachFilters();
 
         /* Scroll behaviors */
         appBarLayout = (AppBarLayout) findViewById(R.id.app_bar_layout);
@@ -219,20 +175,83 @@ public class MainActivity extends AppCompatActivity {
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                if (appBarOpen) {
-//                    toolbar.setBackgroundColor(getResources().getColor(android.R.color.white));
-//                } else {
-//                    toolbar.setBackgroundColor(getResources().getColor(R.color.search_filter_open));
-//                }
                 appBarOpen = !appBarOpen;
                 appBarLayout.setExpanded(appBarOpen);
             }
         });
 
-//        Glide.with(this)
-//                .load(R.drawable.prugio_thumbnail)
-//                .into((ImageView) findViewById(R.id.toolbar_image));
 
+    }
+
+    private void setUpSerachFilters() {
+        /* Set search filter icons */
+        int markerSize = getResources().getDimensionPixelSize(R.dimen.marker_icon_size);
+        int calendarWidth = getResources().getDimensionPixelSize(R.dimen.calendar_icon_width);
+        int calendarHeight = getResources().getDimensionPixelSize(R.dimen.calendar_icon_height);
+        int clearSize = getResources().getDimensionPixelSize(R.dimen.clear_icon_size);
+        Drawable markerIcon = getResources().getDrawable(R.drawable.icon_marker);
+        Drawable calendarIcon = getResources().getDrawable(R.drawable.icon_calendar);
+        Drawable clearIcon = getResources().getDrawable(R.drawable.btn_delete_white);
+        Drawable dateClearIcon = getResources().getDrawable(R.drawable.btn_delete_white);
+        markerIcon.setBounds(0, 0, markerSize, markerSize);
+        calendarIcon.setBounds(0, 0, calendarWidth, calendarHeight);
+        clearIcon.setBounds(0, 0, clearSize, clearSize);
+        dateClearIcon.setBounds(0, 0, clearSize, clearSize);
+        searchFilterLocation.setCompoundDrawables(markerIcon, null, clearIcon, null);
+        searchFilterDate.setCompoundDrawables(calendarIcon, null, dateClearIcon, null);
+        /* Launch filter activities */
+        searchFilterLocation.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent event) {
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        return true;
+                    case MotionEvent.ACTION_UP:
+                        /* When right drawable(clear button) is selected. */
+                        if (locationSelected && event.getRawX() >= (searchFilterDate.getRight() - searchFilterDate.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
+                            searchFilterLocation.setText(getString(R.string.all_locations));
+                            locationSelected = false;
+                            searchFilterLocation.getCompoundDrawables()[DRAWABLE_RIGHT].mutate().setAlpha(HIDE);
+                        } else {
+                            Intent locationFilterIntent = new Intent(MainActivity.this, LocationFilterActivity.class);
+                            MainActivity.this.startActivityForResult(locationFilterIntent, LOCATION_FILTER);
+                        }
+                        return true;
+                    default:
+                        return false;
+                }
+            }
+        });
+        searchFilterDate.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent event) {
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        return true;
+                    case MotionEvent.ACTION_UP:
+                        /* When right drawable(clear button) is selected. */
+                        if (dateSelected && event.getRawX() >= (searchFilterDate.getRight() - searchFilterDate.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
+                            searchFilterDate.setText(getString(R.string.date_filter_title));
+                            startDate = null;
+                            endDate = null;
+                            dateSelected = false;
+                            searchFilterDate.getCompoundDrawables()[DRAWABLE_RIGHT].mutate().setAlpha(HIDE);
+                        } else {
+                            Intent dateFilterIntent = new Intent(MainActivity.this, DateFilterActivity.class);
+                            dateFilterIntent.putExtra(DateFilterActivity.START_DATE, startDate);
+                            dateFilterIntent.putExtra(DateFilterActivity.END_DATE, endDate);
+                            MainActivity.this.startActivityForResult(dateFilterIntent, DATE_FILTER);
+                        }
+                        return true;
+                    default:
+                        return false;
+                }
+            }
+        });
+        /* Hide clear buttons initially. Setting one will have the same effect on both,
+           because both drawables are referencing the same clear icon object.
+           We have to call mutate() on a drawable before changing its bitmap. */
+        searchFilterLocation.getCompoundDrawables()[DRAWABLE_RIGHT].setAlpha(HIDE);
     }
 
     private class TabAdapter extends FragmentPagerAdapter {
@@ -334,6 +353,9 @@ public class MainActivity extends AppCompatActivity {
             if (resultCode == Activity.RESULT_OK) {
                 VillimLocation location = data.getParcelableExtra(LocationFilterActivity.LOCATION);
                 searchFilterLocation.setText(location.addrSummary);
+                /* Show clear button */
+                locationSelected = true;
+                searchFilterLocation.getCompoundDrawables()[DRAWABLE_RIGHT].mutate().setAlpha(SHOW);
             }
             if (resultCode == Activity.RESULT_CANCELED) {
                 //Write your code if there's no result
@@ -347,6 +369,9 @@ public class MainActivity extends AppCompatActivity {
                         startDate.getMonth(), startDate.getDate(),
                         endDate.getMonth(), endDate.getDate());
                 searchFilterDate.setText(dateFilterText);
+                /* Show clear button */
+                dateSelected = true;
+                searchFilterDate.getCompoundDrawables()[DRAWABLE_RIGHT].mutate().setAlpha(SHOW);
             }
             if (resultCode == Activity.RESULT_CANCELED) {
                 //Write your code if there's no result

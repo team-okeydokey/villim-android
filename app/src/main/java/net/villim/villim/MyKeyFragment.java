@@ -33,7 +33,7 @@ import static net.villim.villim.VillimKeys.KEY_ROOM_ID;
 
 
 public class MyKeyFragment extends Fragment {
-    private static final String MY_KEY_URL = "http://www.mocky.io/v2/593ddd3b1100006a25722b09";
+    private static final String MY_KEY_URL = "http://www.mocky.io/v2/593df3e0110000f727722b11";
 
     private MainActivity activity;
 

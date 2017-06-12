@@ -48,7 +48,7 @@
                     android:drawablePadding="@dimen/filter_icon_drawable_padding"
                     android:gravity="left|center_vertical"
                     android:maxLines="1"
-                    android:text="@string/search_hint_location"
+                    android:text="@string/all_locations"
                     android:textColor="@android:color/white"
                     android:textSize="@dimen/search_filter_text_size" />
 
