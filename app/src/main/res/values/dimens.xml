@@ -80,6 +80,7 @@
     <dimen name="login_activity_padding">26dp</dimen>
     <dimen name="next_button_text_size">17sp</dimen>
     <dimen name="login_error_message_text_size">14sp</dimen>
+    <dimen name="login_drawable_size">25dp</dimen>
 
     <!-- Signup Activity -->
     <dimen name="consent_text_size">11sp</dimen>

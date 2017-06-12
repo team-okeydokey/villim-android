@@ -49,6 +49,7 @@
             android:id="@+id/advertDetail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:text="@string/advert_detail"
             android:textSize="@dimen/advert_detail_text_size" />
 
@@ -71,7 +72,6 @@
             android:layout_height="@dimen/toolbar_height"
             android:layout_centerHorizontal="true"
             android:background="@drawable/login_field"
-            android:drawableLeft="@drawable/ic_whatshot_black_24dp"
             android:drawablePadding="@dimen/filter_icon_drawable_padding"
             android:gravity="left|center_vertical"
             android:hint="@string/email"
@@ -89,7 +89,6 @@
             android:layout_below="@id/login_form_email"
             android:layout_centerHorizontal="true"
             android:background="@drawable/login_field"
-            android:drawableLeft="@drawable/ic_whatshot_black_24dp"
             android:drawablePadding="@dimen/filter_icon_drawable_padding"
             android:gravity="left|center_vertical"
             android:hint="@string/password"

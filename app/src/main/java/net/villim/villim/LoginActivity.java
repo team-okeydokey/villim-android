@@ -2,6 +2,7 @@ package net.villim.villim;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -66,6 +67,15 @@ public class LoginActivity extends AppCompatActivity {
         /* Login Forms */
         loginFormEmail = (EditText) findViewById(R.id.login_form_email);
         loginFormPassword = (EditText) findViewById(R.id.login_form_password);
+        /* Set drawableLeft */
+        /* Set drawableLeft */
+        Drawable emailIcon =  getResources().getDrawable(R.drawable.icon_lock);
+        Drawable lockIcon =  getResources().getDrawable(R.drawable.icon_lock);
+        int iconSize = getResources().getDimensionPixelSize(R.dimen.login_drawable_size);
+        emailIcon.setBounds(0, 0, iconSize, iconSize);
+        lockIcon.setBounds(0, 0, iconSize, iconSize);
+        loginFormEmail.setCompoundDrawables(emailIcon, null, null, null);
+        loginFormPassword.setCompoundDrawables(lockIcon, null, null, null);
 
         /* Error Message */
         errorMessage = (TextView) findViewById(R.id.error_message);
