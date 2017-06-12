@@ -177,6 +177,8 @@ public class LoginActivity extends AppCompatActivity {
         session.setLastName(user.lastname);
         session.setEmail(user.email);
         session.setProfilePicUrl(user.profilePicUrl);
+        session.setStatus(user.status);
+        session.setRoomId(user.roomId);
 
         /* Return from activity */
         Intent returnIntent = new Intent();

@@ -83,6 +83,7 @@
     <dimen name="slide_button_height">60dp</dimen>
     <dimen name="slide_button_radius">200dp</dimen>
     <dimen name="slide_button_thumb_size">50dp</dimen>
+    <dimen name="mykey_button_margin">20dp</dimen>
 
 
 </resources>

@@ -18,6 +18,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
+            android:layout_margin="@dimen/mykey_button_margin"
             android:background="@android:color/transparent"
             android:gravity="left|center_vertical"
             android:text="@string/write_review"
@@ -28,6 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
+            android:layout_margin="@dimen/mykey_button_margin"
             android:background="@android:color/transparent"
             android:gravity="right|center_vertical"
             android:text="@string/change_doorlock_passcode"
@@ -80,7 +82,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="@dimen/slide_button_bottom_margin"
-        android:background="@drawable/back_slide_button"/>
+        android:background="@drawable/back_slide_button" />
 
     <com.wang.avi.AVLoadingIndicatorView
         android:id="@+id/loading_indicator"
