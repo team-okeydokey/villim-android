@@ -18,14 +18,22 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:text="@string/write_review" />
+            android:layout_margin="@dimen/mykey_button_margin"
+            android:background="@android:color/transparent"
+            android:gravity="left|center_vertical"
+            android:text="@string/write_review"
+            android:textColor="@drawable/login_help_button_text" />
 
         <Button
             android:id="@+id/change_passcode_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:text="@string/change_doorlock_passcode" />
+            android:layout_margin="@dimen/mykey_button_margin"
+            android:background="@android:color/transparent"
+            android:gravity="right|center_vertical"
+            android:text="@string/change_doorlock_passcode"
+            android:textColor="@drawable/login_help_button_text" />
     </RelativeLayout>
 
 
@@ -33,32 +41,58 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
+        android:gravity="center_horizontal"
         android:orientation="vertical">
 
         <com.mikhaellopez.circularimageview.CircularImageView
-            android:id="@+id/room_thumbnail"
-            android:layout_width="@dimen/my_key_room_thumbnail_size"
-            android:layout_height="@dimen/my_key_room_thumbnail_size" />
+            android:id="@+id/house_thumbnail"
+            android:layout_width="@dimen/mykey_room_thumbnail_size"
+            android:layout_height="@dimen/mykey_room_thumbnail_size"
+            app:civ_border_width="0dp" />
 
         <TextView
             android:id="@+id/house_name"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textAlignment="center" />
 
         <TextView
             android:id="@+id/valid_dates"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textAlignment="center" />
 
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/error_message"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/toolbar_height"
+        android:layout_above="@+id/slide_button"
+        android:layout_centerHorizontal="true"
+        android:background="@android:color/transparent"
+        android:gravity="center"
+        android:textColor="@color/login_error_text"
+        android:textSize="@dimen/login_error_message_text_size" />
+
     <com.rojoxpress.slidebutton.SlideButton
         android:id="@+id/slide_button"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_width="@dimen/slide_button_width"
+        android:layout_height="@dimen/slide_button_height"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="@dimen/my_key_slider_bottom_margin"
-        android:background="@drawable/back_slide_button"
-        app:thumb="@drawable/slider_thumb" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/slide_button_bottom_margin"
+        android:background="@drawable/back_slide_button" />
+
+    <com.wang.avi.AVLoadingIndicatorView
+        android:id="@+id/loading_indicator"
+        style="@style/AVLoadingIndicatorView.Large"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:visibility="gone"
+        app:indicatorColor="@color/loading_animation_color"
+        app:indicatorName="BallGridPulseIndicator" />
 
 </RelativeLayout>

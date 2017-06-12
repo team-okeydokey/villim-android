@@ -12,6 +12,8 @@ import static net.villim.villim.VillimKeys.KEY_FULLNAME;
 import static net.villim.villim.VillimKeys.KEY_ID;
 import static net.villim.villim.VillimKeys.KEY_LASTNAME;
 import static net.villim.villim.VillimKeys.KEY_PROFILE_PIC_URL;
+import static net.villim.villim.VillimKeys.KEY_ROOM_ID;
+import static net.villim.villim.VillimRoom.KEY_STATUS;
 
 /**
  * Created by seongmin on 5/31/17.
@@ -24,6 +26,8 @@ public class VillimUser implements Parcelable {
     public String lastname;
     public String email;
     public String profilePicUrl;
+    public int status;
+    public int roomId;
 
     protected VillimUser(Parcel in) {
         id = in.readInt();
@@ -32,6 +36,8 @@ public class VillimUser implements Parcelable {
         lastname = in.readString();
         email = in.readString();
         profilePicUrl = in.readString();
+        status = in.readInt();
+        roomId = in.readInt();
     }
 
     public static final Creator<VillimUser> CREATOR = new Creator<VillimUser>() {
@@ -67,7 +73,11 @@ public class VillimUser implements Parcelable {
             user.firstname = userInfo.get(KEY_FIRSTNAME).toString();
             user.lastname = userInfo.get(KEY_LASTNAME).toString();
             user.email = userInfo.get(KEY_EMAIL).toString();
-            user.profilePicUrl = userInfo.get(KEY_PROFILE_PIC_URL).toString();
+            boolean isProfilePicUrlNull = userInfo.isNull(KEY_PROFILE_PIC_URL);
+            user.profilePicUrl = isProfilePicUrlNull ? null : userInfo.get(KEY_PROFILE_PIC_URL).toString();
+            user.status = userInfo.getInt(KEY_STATUS);
+            boolean isRoomIdNull = userInfo.isNull(KEY_ROOM_ID);
+            user.roomId = isRoomIdNull ? -1 : userInfo.getInt(KEY_ROOM_ID);
         } catch (JSONException e) {
 
         }
@@ -87,5 +97,7 @@ public class VillimUser implements Parcelable {
         dest.writeString(lastname);
         dest.writeString(email);
         dest.writeString(profilePicUrl);
+        dest.writeInt(status);
+        dest.writeInt(roomId);
     }
 }

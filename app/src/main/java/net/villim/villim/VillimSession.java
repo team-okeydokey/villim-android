@@ -10,6 +10,8 @@ import static net.villim.villim.VillimKeys.KEY_FULLNAME;
 import static net.villim.villim.VillimKeys.KEY_ID;
 import static net.villim.villim.VillimKeys.KEY_LASTNAME;
 import static net.villim.villim.VillimKeys.KEY_PROFILE_PIC_URL;
+import static net.villim.villim.VillimKeys.KEY_ROOM_ID;
+import static net.villim.villim.VillimKeys.KEY_USER_STATUS;
 
 /**
  * Created by seongmin on 6/9/17.
@@ -53,8 +55,8 @@ public class VillimSession {
     }
 
     public String getFullName() {
-        String usename = prefs.getString(KEY_FULLNAME,"");
-        return usename;
+        String fullname = prefs.getString(KEY_FULLNAME,"");
+        return fullname;
     }
 
     /* Firstname */
@@ -63,8 +65,8 @@ public class VillimSession {
     }
 
     public String getFirstName() {
-        String usename = prefs.getString(KEY_FIRSTNAME,"");
-        return usename;
+        String firstname = prefs.getString(KEY_FIRSTNAME,"");
+        return firstname;
     }
 
     /* Lastname */
@@ -73,8 +75,8 @@ public class VillimSession {
     }
 
     public String getLastName() {
-        String usename = prefs.getString(KEY_LASTNAME,"");
-        return usename;
+        String lastname = prefs.getString(KEY_LASTNAME,"");
+        return lastname;
     }
 
     /* Email */
@@ -95,5 +97,25 @@ public class VillimSession {
     public String getProfilePicUrl() {
         String url = prefs.getString(KEY_PROFILE_PIC_URL,"");
         return url;
+    }
+
+    /* Rent status */
+    public void setStatus(int status) {
+        prefs.edit().putInt(KEY_USER_STATUS, status).apply();
+    }
+
+    public int getStatus() {
+        int status = prefs.getInt(KEY_USER_STATUS,0);
+        return status;
+    }
+
+    /* Room id */
+    public void setRoomId(int roomId) {
+        prefs.edit().putInt(KEY_ROOM_ID, roomId).apply();
+    }
+
+    public int getRoomId() {
+        int roomId = prefs.getInt(KEY_ROOM_ID,0);
+        return roomId;
     }
 }

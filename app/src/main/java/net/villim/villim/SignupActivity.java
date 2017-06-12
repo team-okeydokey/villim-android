@@ -66,8 +66,8 @@ public class SignupActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         /* Signup Forms */
-        signupFormLastname = (EditText) findViewById(R.id.signup_form_email);
-        signupFormFirstname = (EditText) findViewById(R.id.signup_form_password);
+        signupFormLastname = (EditText) findViewById(R.id.signup_form_lastname);
+        signupFormFirstname = (EditText) findViewById(R.id.signup_form_firstname);
         signupFormEmail = (EditText) findViewById(R.id.signup_form_email);
         signupFormPassword = (EditText) findViewById(R.id.signup_form_password);
 
@@ -131,7 +131,7 @@ public class SignupActivity extends AppCompatActivity {
                     stopLoadingAnimation();
                     throw new IOException("Response not successful   " + response);
                 }
-                //success do whatever you want. for example -->
+                /* Request success. */
                 try {
                     /* 주의: response.body().string()은 한 번 부를 수 있음 */
                     JSONObject jsonObject = new JSONObject(response.body().string());
