@@ -80,7 +80,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="@dimen/slide_button_bottom_margin"
-        android:background="@drawable/back_slide_button" />
+        android:background="@drawable/back_slide_button"/>
 
     <com.wang.avi.AVLoadingIndicatorView
         android:id="@+id/loading_indicator"

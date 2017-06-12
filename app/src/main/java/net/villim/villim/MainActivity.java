@@ -404,4 +404,9 @@ public class MainActivity extends AppCompatActivity {
         appBarLayout.setVisibility(View.VISIBLE);
     }
 
+    public void selectTab(int index) {
+        TabLayout.Tab tab = tabLayout.getTabAt(index);
+        tab.select();
+    }
+
 }

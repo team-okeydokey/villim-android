@@ -1,10 +1,10 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item>
         <shape android:shape="oval">
-            <solid android:color="@color/colorAccent" />
+            <solid android:color="@android:color/white" />
             <size
-                android:width="50dp"
-                android:height="50dp" />
+                android:width="@dimen/slide_button_thumb_size"
+                android:height="@dimen/slide_button_thumb_size" />
         </shape>
     </item>
 

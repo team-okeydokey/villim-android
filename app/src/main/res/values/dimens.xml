@@ -82,6 +82,7 @@
     <dimen name="slide_button_width">350dp</dimen>
     <dimen name="slide_button_height">60dp</dimen>
     <dimen name="slide_button_radius">200dp</dimen>
+    <dimen name="slide_button_thumb_size">50dp</dimen>
 
 
 </resources>
