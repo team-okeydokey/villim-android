@@ -68,7 +68,6 @@ public class LoginActivity extends AppCompatActivity {
         loginFormEmail = (EditText) findViewById(R.id.login_form_email);
         loginFormPassword = (EditText) findViewById(R.id.login_form_password);
         /* Set drawableLeft */
-        /* Set drawableLeft */
         Drawable emailIcon =  getResources().getDrawable(R.drawable.icon_lock);
         Drawable lockIcon =  getResources().getDrawable(R.drawable.icon_lock);
         int iconSize = getResources().getDimensionPixelSize(R.dimen.login_drawable_size);
