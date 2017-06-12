@@ -54,10 +54,19 @@
     <dimen name="location_filter_drawable_padding">10dp</dimen>
 
     <!-- Proifile Fragment -->
-    <dimen name="profile_image_diameter">130dp</dimen>
+    <dimen name="profile_image_diameter">80dp</dimen>
     <dimen name="room_thumbnail_image_diameter">175dp</dimen>
+    <dimen name="profile_user_info_padding_side">25dp</dimen>
+    <dimen name="profile_user_info_margin_top">40dp</dimen>
+    <dimen name="profile_name_text_size">20sp</dimen>
+    <dimen name="profile_user_info_height">130dp</dimen>
     <dimen name="profile_list_header_height">60dp</dimen>
     <dimen name="profile_list_drawable_padding">10dp</dimen>
+    <dimen name="profile_list_item_height">55dp</dimen>
+    <dimen name="profile_list_item_padding_side">25dp</dimen>
+    <dimen name="profile_list_item_text_size">15sp</dimen>
+    <dimen name="profile_list_drawable_size">25dp</dimen>
+
 
 
     <!--Login Activity -->

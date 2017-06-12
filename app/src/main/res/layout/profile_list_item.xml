@@ -3,9 +3,12 @@
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/profile_list_item_name"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:drawableLeft="@drawable/ic_whatshot_black_24dp"
+    android:layout_height="@dimen/profile_list_item_height"
     android:drawablePadding="@dimen/profile_list_drawable_padding"
-    android:gravity="center_vertical" />
+    android:gravity="center_vertical"
+    android:paddingLeft="@dimen/profile_list_item_padding_side"
+    android:paddingRight="@dimen/profile_list_item_padding_side"
+    android:textColor="@color/profile_list_item_text"
+    android:textSize="@dimen/profile_list_item_text_size" />
 
 

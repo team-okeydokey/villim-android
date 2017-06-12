@@ -4,6 +4,7 @@ package net.villim.villim;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -122,7 +123,7 @@ public class ProfileFragment extends Fragment {
         // Profile pic.
         if (session.getLoggedIn()) {
 
-            if (session.getProfilePicUrl() == null) {
+            if (session.getProfilePicUrl().isEmpty()) {
                 Glide.with(this)
                         .load(R.drawable.prugio_thumbnail)
                         .into(profilePicture);
@@ -168,9 +169,9 @@ public class ProfileFragment extends Fragment {
 
         /* Fetch profile image and populate view */
         if (session.getProfilePicUrl().isEmpty()) {
-            System.out.println(session.getProfilePicUrl() );
+            System.out.println(session.getProfilePicUrl());
             Glide.with(this)
-                    .load(R.drawable.prugio_thumbnail)
+                    .load(R.drawable.img_default)
                     .into(profilePicture);
         } else {
             Glide.with(this)
@@ -197,13 +198,42 @@ public class ProfileFragment extends Fragment {
         public View getView(int position, View convertView, ViewGroup parent) {
             View itemView = super.getView(position, convertView, parent);
 
+            TextView textView = (TextView) itemView.findViewById(R.id.profile_list_item_name);
+
             /* If login/logout cell */
             if (position == 0) {
-                TextView textView = (TextView) itemView.findViewById(R.id.profile_list_item_name);
                 if (session.getLoggedIn()) {
                     textView.setText(getString(R.string.profile_logout));
                 }
             }
+
+            /* Set drawable */
+            int iconResource;
+            boolean loggedIn = session.getLoggedIn();
+            switch (position) {
+                case 0:
+                    iconResource = R.drawable.icon_login;
+                    break;
+                case 1:
+                    iconResource = loggedIn ? R.drawable.icon_profile : R.drawable.icon_faq;
+                    break;
+                case 2:
+                    iconResource = loggedIn ? R.drawable.icon_faq : R.drawable.icon_setting;
+                    break;
+                case 3:
+                    iconResource = loggedIn ? R.drawable.icon_setting : R.drawable.icon_shield;
+                    break;
+                case 4:
+                    iconResource = loggedIn ? R.drawable.icon_shield : R.drawable.icon_shield;
+                    break;
+                default:
+                    iconResource = loggedIn ? R.drawable.icon_shield : R.drawable.icon_shield;
+                    break;
+            }
+            Drawable itemIcon =  getResources().getDrawable(iconResource);
+            int iconSize = getResources().getDimensionPixelSize(R.dimen.profile_list_drawable_size);
+            itemIcon.setBounds(0, 0, iconSize, iconSize);
+            textView.setCompoundDrawables(itemIcon, null, null, null);
 
             return itemView;
         }

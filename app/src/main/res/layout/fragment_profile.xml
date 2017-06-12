@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,7 +11,10 @@
     <RelativeLayout
         android:id="@+id/profile_header"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="@dimen/profile_user_info_height"
+        android:paddingLeft="@dimen/profile_user_info_padding_side"
+        android:paddingRight="@dimen/profile_user_info_padding_side"
+        android:layout_marginTop="@dimen/profile_user_info_margin_top">
 
 
         <!-- Profile name -->
@@ -19,8 +23,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:text="@string/profile_title" />
+            android:layout_centerVertical="true"
+            android:lineSpacingExtra="4sp"
+            android:text="@string/profile_title"
+            android:textColor="@color/profile_name"
+            android:textSize="@dimen/profile_name_text_size" />
 
         <!-- Profile picture -->
         <com.mikhaellopez.circularimageview.CircularImageView
@@ -28,7 +35,8 @@
             android:layout_width="@dimen/profile_image_diameter"
             android:layout_height="@dimen/profile_image_diameter"
             android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true" />
+            android:layout_centerVertical="true"
+            app:civ_border_width="0dp" />
 
     </RelativeLayout>
 

@@ -60,7 +60,9 @@
 
 
     <!-- Profile Fragment -->
+    <color name="profile_name">#040d14</color>
     <color name="profile_list_item_value">#A0A0A0</color>
+    <color name="profile_list_item_text">#05060b</color>
 
 
     <!-- Login Activity -->
