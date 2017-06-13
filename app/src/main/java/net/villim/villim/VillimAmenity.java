@@ -30,7 +30,7 @@ public class VillimAmenity {
             put(10, R.string.amenity_hair_dryer);
             put(11, R.string.amenity_smoke_detector);
             put(12, R.string.amenity_first_aid);
-            put(13, R.string.amenity_heat);
+            put(13, R.string.amenity_heating);
             put(14, R.string.amenity_cooking_electronics);
             put(15, R.string.amenity_washer);
             put(16, R.string.amenity_closet);
@@ -41,24 +41,24 @@ public class VillimAmenity {
     private static final Map<Integer,Integer> drawableMap = new HashMap<Integer, Integer>()
     {
         {
-            put(0, R.drawable.ic_whatshot_black_24dp);
-            put(1, R.drawable.ic_whatshot_black_24dp);
-            put(2, R.drawable.ic_whatshot_black_24dp);
+            put(0, R.drawable.icon_bed);
+            put(1, R.drawable.icon_wifi);
+            put(2, R.drawable.icon_tv);
             put(3, R.drawable.ic_whatshot_black_24dp);
-            put(4, R.drawable.ic_whatshot_black_24dp);
-            put(5, R.drawable.ic_whatshot_black_24dp);
-            put(6, R.drawable.ic_whatshot_black_24dp);
-            put(7, R.drawable.ic_whatshot_black_24dp);
+            put(4, R.drawable.icon_iron);
+            put(5, R.drawable.icon_desk);
+            put(6, R.drawable.icon_towel);
+            put(7, R.drawable.icon_air_conditionner);
             put(8, R.drawable.ic_whatshot_black_24dp);
             put(9, R.drawable.ic_whatshot_black_24dp);
-            put(10, R.drawable.ic_whatshot_black_24dp);
-            put(11, R.drawable.ic_whatshot_black_24dp);
-            put(12, R.drawable.ic_whatshot_black_24dp);
-            put(13, R.drawable.ic_whatshot_black_24dp);
+            put(10, R.drawable.icon_hairdryer);
+            put(11, R.drawable.icon_smoke);
+            put(12, R.drawable.icon_aid_kit);
+            put(13, R.drawable.icon_heating);
             put(14, R.drawable.ic_whatshot_black_24dp);
             put(15, R.drawable.ic_whatshot_black_24dp);
-            put(16, R.drawable.ic_whatshot_black_24dp);
-            put(17, R.drawable.ic_whatshot_black_24dp);
+            put(16, R.drawable.icon_closet);
+            put(17, R.drawable.icon_fire_extinguisher);
         }
     };
 

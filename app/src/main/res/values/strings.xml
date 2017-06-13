@@ -81,7 +81,7 @@
     <string name="amenity_bedsheet">침대시트</string>
     <string name="amenity_wifi">무선 인터넷</string>
     <string name="amenity_tv">TV</string>
-    <string name="amenity_cooking_utensil">취사도구식/식기</string>
+    <string name="amenity_cooking_utensil">취사도구/식기</string>
     <string name="amenity_iron">다리미</string>
     <string name="amenity_desk">책상/작업공간</string>
     <string name="amenity_towel">수건</string>
@@ -91,7 +91,7 @@
     <string name="amenity_hair_dryer">헤어드라이기</string>
     <string name="amenity_smoke_detector">연기 감지기</string>
     <string name="amenity_first_aid">비품</string>
-    <string name="amenity_heat">난방</string>
+    <string name="amenity_heating">난방</string>
     <string name="amenity_cooking_electronics">취사 가전제품</string>
     <string name="amenity_washer">세탁기</string>
     <string name="amenity_closet">옷장/서랍장</string>
