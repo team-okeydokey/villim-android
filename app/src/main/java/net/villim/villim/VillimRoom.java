@@ -23,7 +23,12 @@ public class VillimRoom implements Parcelable {
     public static final String KEY_NUM_BEDROOM = "num_bedroom";
     public static final String KEY_NUM_BED = "num_bed";
     public static final String KEY_NUM_BATHROOM = "num_bathroom";
-    public static final String KEY_PRICE = "price";
+
+    public static final String KEY_RATE_PER_NIGHT = "rate_per_night";
+    public static final String KEY_DEPOSIT = "deposit";
+    public static final String KEY_ADDITIONAL_GUEST_FEE = "additional_guest_fee";
+    public static final String KEY_CLEANING_FEE = "cleaning_fee";
+
     public static final String KEY_LOCK_ADDR = "lock_addr";
     public static final String KEY_LOCK_PC = "lock_pw";
     public static final String KEY_HIT = "hit";
@@ -56,7 +61,10 @@ public class VillimRoom implements Parcelable {
     public int numBedroom;
     public int numBed;
     public int numBathroom;
-    public int housePrice;
+    public int ratePerNight;
+    public int deposit;
+    public int additionalGuestFee;
+    public int cleaningFee;
     private int lockAddr;
     private int lockPc;
     public double latitude;
@@ -82,14 +90,17 @@ public class VillimRoom implements Parcelable {
             houseId = jsonObject.getInt(KEY_HOUSE_ID);
             houseName = jsonObject.getString(KEY_HOUSE_NAME);
             addrFull = jsonObject.getString(KEY_ADDR_FULL);
-            addrSummary =  jsonObject.getString(KEY_ADDR_SUMMARY);
+            addrSummary = jsonObject.getString(KEY_ADDR_SUMMARY);
             addrDirection = jsonObject.getString(KEY_ADDR_DIRECTION);
             description = jsonObject.getString(KEY_DESCRIPTION);
             numGuest = jsonObject.getInt(KEY_NUM_GUEST);
             numBedroom = jsonObject.getInt(KEY_NUM_BEDROOM);
             numBed = jsonObject.getInt(KEY_NUM_BED);
             numBathroom = jsonObject.getInt(KEY_NUM_BATHROOM);
-            housePrice = jsonObject.getInt(KEY_PRICE);
+            ratePerNight = jsonObject.getInt(KEY_RATE_PER_NIGHT);
+            deposit = jsonObject.getInt(KEY_DEPOSIT);
+            additionalGuestFee = jsonObject.getInt(KEY_ADDITIONAL_GUEST_FEE);
+            cleaningFee = jsonObject.getInt(KEY_CLEANING_FEE);
             lockAddr = jsonObject.getInt(KEY_LOCK_ADDR);
             lockPc = jsonObject.getInt(KEY_LOCK_PC);
             latitude = jsonObject.getDouble(KEY_LATITUDE);
@@ -114,16 +125,15 @@ public class VillimRoom implements Parcelable {
 
     private String[] JSONtoArray(JSONArray array) {
         String[] stringsArray = new String[array.length()];
-        try{
+        try {
             for (int i = 0; i < array.length(); i++) {
                 stringsArray[i] = array.getString(i);
             }
-        } catch(JSONException e) {
+        } catch (JSONException e) {
 
         }
         return stringsArray;
     }
-
 
 
     @Override
@@ -143,6 +153,10 @@ public class VillimRoom implements Parcelable {
         dest.writeInt(numBedroom);
         dest.writeInt(numBed);
         dest.writeInt(numBathroom);
+        dest.writeInt(ratePerNight);
+        dest.writeInt(deposit);
+        dest.writeInt(additionalGuestFee);
+        dest.writeInt(cleaningFee);
         dest.writeInt(lockAddr);
         dest.writeInt(lockPc);
         dest.writeDouble(latitude);
@@ -170,6 +184,10 @@ public class VillimRoom implements Parcelable {
         numBedroom = in.readInt();
         numBed = in.readInt();
         numBathroom = in.readInt();
+        ratePerNight = in.readInt();
+        deposit = in.readInt();
+        additionalGuestFee = in.readInt();
+        cleaningFee = in.readInt();
         lockAddr = in.readInt();
         lockPc = in.readInt();
         latitude = in.readDouble();

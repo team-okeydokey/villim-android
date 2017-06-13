@@ -86,7 +86,7 @@ public class DiscoverRecyclerAdapter extends RecyclerView.Adapter<DiscoverRecycl
         /* Room Title */
         holder.houseName.setText(currItem.houseName);
         /* Room Rate */
-        int price = currItem.housePrice;
+        int price = currItem.ratePerNight;
         String priceText = String.format(context.getString(R.string.room_price_value, price));
         holder.housePriceValue.setText(priceText);
         /* Room Rating Value */

@@ -74,7 +74,10 @@ public class DiscoverFragment extends Fragment {
             jsonItem.put(VillimRoom.KEY_NUM_BEDROOM, 2);
             jsonItem.put(VillimRoom.KEY_NUM_BED, 2);
             jsonItem.put(VillimRoom.KEY_NUM_BATHROOM, 1);
-            jsonItem.put(VillimRoom.KEY_PRICE, 102000);
+            jsonItem.put(VillimRoom.KEY_RATE_PER_NIGHT, 102000);
+            jsonItem.put(VillimRoom.KEY_DEPOSIT, 102000);
+            jsonItem.put(VillimRoom.KEY_ADDITIONAL_GUEST_FEE, 102000);
+            jsonItem.put(VillimRoom.KEY_CLEANING_FEE, 102000);
             jsonItem.put(VillimRoom.KEY_LOCK_ADDR, 192);
             jsonItem.put(VillimRoom.KEY_LOCK_PC, 244110);
             jsonItem.put(VillimRoom.KEY_LATITUDE, 37.5172);

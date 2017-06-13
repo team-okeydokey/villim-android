@@ -8,13 +8,12 @@
     android:orientation="vertical"
     tools:context="net.villim.villim.HouseDescriptionActivity">
 
-
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:padding="10dp"
         android:layout_height="@dimen/toolbar_height"
         android:background="#f0f1f2"
+        android:padding="10dp"
         app:contentInsetEnd="0dp"
         app:contentInsetStart="0dp">
 
@@ -27,24 +26,29 @@
 
     </android.support.v7.widget.Toolbar>
 
-    <!-- 상세 설명 -->
+    <!-- Title -->
+    <TextView
+        android:id="@+id/description_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="38dp"
+        android:gravity="left|center_vertical"
+        android:lineSpacingExtra="4sp"
+        android:text="@string/description_title"
+        android:textColor="#040d14"
+        android:textSize="20sp" />
+
+    <!-- 기본 설명 -->
     <android.support.v7.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="25dp">
-
-        <TextView
-            android:id="@+id/description_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="15dp"
-            android:layout_marginTop="38dp"
-            android:gravity="left|center_vertical"
-            android:lineSpacingExtra="4sp"
-            android:text="@string/description_title"
-            android:textColor="#040d14"
-            android:textSize="20sp" />
+        android:paddingBottom="15dp"
+        android:paddingLeft="25dp"
+        android:paddingRight="25dp"
+        android:paddingTop="16dp">
 
         <TextView
             android:id="@+id/basic_description_title"
