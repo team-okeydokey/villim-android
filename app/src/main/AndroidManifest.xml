@@ -32,7 +32,8 @@
         <activity android:name=".LoginActivity" />
         <activity android:name=".SignupActivity" />
         <activity android:name=".HouseDescriptionActivity" />
-        <activity android:name=".PricePolicyActivity"></activity>
+        <activity android:name=".PricePolicyActivity" />
+        <activity android:name=".AmenityActivity"></activity>
     </application>
 
 </manifest>
