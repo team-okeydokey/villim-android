@@ -271,7 +271,10 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/policy_category_height"
-                android:padding="@dimen/room_detail_activity_padding">
+                android:paddingBottom="20dp"
+                android:paddingLeft="@dimen/room_detail_activity_padding"
+                android:paddingRight="@dimen/room_detail_activity_padding"
+                android:paddingTop="20dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -440,7 +443,10 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/policy_category_height"
-                android:padding="@dimen/room_detail_activity_padding">
+                android:paddingBottom="20dp"
+                android:paddingLeft="@dimen/room_detail_activity_padding"
+                android:paddingRight="@dimen/room_detail_activity_padding"
+                android:paddingTop="20dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -465,7 +471,10 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/policy_category_height"
-                android:padding="@dimen/room_detail_activity_padding">
+                android:paddingBottom="20dp"
+                android:paddingLeft="@dimen/room_detail_activity_padding"
+                android:paddingRight="@dimen/room_detail_activity_padding"
+                android:paddingTop="20dp">
 
                 <TextView
                     android:layout_width="wrap_content"
