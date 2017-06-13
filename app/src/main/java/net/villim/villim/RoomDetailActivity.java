@@ -28,6 +28,8 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import static net.villim.villim.HouseDescriptionActivity.KEY_BASIC_DESCRIPTION;
+
 
 public class RoomDetailActivity extends AppCompatActivity implements OnMapReadyCallback {
 
@@ -205,6 +207,7 @@ public class RoomDetailActivity extends AppCompatActivity implements OnMapReadyC
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(RoomDetailActivity.this, HouseDescriptionActivity.class);
+                intent.putExtra(KEY_BASIC_DESCRIPTION, house.description);
                 startActivity(intent);
             }
         });

@@ -6,11 +6,15 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class HouseDescriptionActivity extends AppCompatActivity {
 
+    public static final String KEY_BASIC_DESCRIPTION = "basic_description";
+
     private Toolbar toolbar;
     private Button closeButton;
+    private TextView basicDescription;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,5 +36,9 @@ public class HouseDescriptionActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        /* 설명 텍스트 */
+        basicDescription = (TextView) findViewById(R.id.basic_description);
+        basicDescription.setText(getIntent().getStringExtra(KEY_BASIC_DESCRIPTION));
     }
 }
