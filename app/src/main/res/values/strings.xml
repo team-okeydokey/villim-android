@@ -76,6 +76,7 @@
     <string name="amenities_see_more_format">+%d개</string>
     <string name="reviews_see_more_format">+%d개 후기 더보기</string>
     <string name="reviews_no_review">아직 작성된 후기가 없습니다.</string>
+    <string name="reserve">예약하기</string>
 
     <!-- Amenities -->
     <string name="amenity_bedsheet">침대시트</string>

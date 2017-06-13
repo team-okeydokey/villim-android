@@ -497,20 +497,20 @@
             </RelativeLayout>
             <!-- End refund policy -->
 
-            <Button
-                android:id="@+id/reserve_button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/dark_bottom_bar"
-                android:gravity="center_vertical"
-                android:text="예약하기"
-                android:textAlignment="center"
-                android:textColor="@android:color/white"></Button>
-
         </android.support.v7.widget.LinearLayoutCompat>
 
 
     </android.support.v4.widget.NestedScrollView>
 
+    <Button
+        android:id="@+id/reserve_button"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/reserve_button_height"
+        android:layout_gravity="bottom"
+        android:background="@color/dark_bottom_bar"
+        android:gravity="center_vertical"
+        android:text="@string/reserve"
+        android:textAlignment="center"
+        android:textColor="@android:color/white" />
 
 </android.support.design.widget.CoordinatorLayout>
