@@ -244,7 +244,10 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/room_detail_activity_padding"
+                android:paddingBottom="10dp"
+                android:paddingLeft="@dimen/room_detail_activity_padding"
+                android:paddingRight="@dimen/room_detail_activity_padding"
+                android:paddingTop="15dp"
                 android:text="@string/description_title" />
             <!-- Description content -->
             <TextView
@@ -252,7 +255,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:maxLines="6"
-                android:paddingLeft="@dimen/room_detail_activity_padding" />
+                android:paddingLeft="@dimen/room_detail_activity_padding"
+                android:paddingRight="@dimen/room_detail_activity_padding" />
             <!-- See more button -->
             <Button
                 android:id="@+id/description_see_more"
@@ -260,8 +264,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="left|bottom"
                 android:background="@android:color/transparent"
-                android:paddingBottom="@dimen/room_detail_activity_padding"
+                android:paddingBottom="15dp"
                 android:paddingLeft="@dimen/room_detail_activity_padding"
+                android:paddingRight="@dimen/room_detail_activity_padding"
                 android:text="@string/see_more" />
             <!-- End description -->
 
