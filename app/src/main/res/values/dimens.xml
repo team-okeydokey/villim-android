@@ -23,6 +23,7 @@
 
 
     <!-- Discover Activity -->
+    <dimen name="discover_card_width">320dp</dimen>
     <dimen name="discover_card_height">110dp</dimen>
     <dimen name="discover_review_height">30dp</dimen>
     <dimen name="discover_recycler_padding">10dp</dimen>
@@ -38,7 +39,7 @@
 
 
     <!-- Room Detail Activity -->
-    <dimen name="house_picture_height">200dp</dimen>
+    <dimen name="house_picture_height">300dp</dimen>
     <dimen name="host_profile_pic_size">60dp</dimen>
     <dimen name="room_detail_activity_padding">10dp</dimen>
     <dimen name="amenity_icon_width">25dp</dimen>

@@ -1,5 +1,6 @@
 package net.villim.villim;
 
+import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -198,6 +199,13 @@ public class RoomDetailActivity extends AppCompatActivity implements OnMapReadyC
                     descriptionSeeMore.setVisibility(View.GONE);
                 }
 
+            }
+        });
+        descriptionSeeMore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(RoomDetailActivity.this, HouseDescriptionActivity.class);
+                startActivity(intent);
             }
         });
 

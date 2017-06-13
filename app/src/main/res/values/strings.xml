@@ -165,5 +165,8 @@
     <string name="find_room">방 찾아보기</string>
     <string name="open_room_error">문제가 발생했습니다. 다시 시도해 주세요.</string>
 
+    <!-- House Description Activity -->
+    <string name="basic_description">기본 설명</string>
+
 
 </resources>
