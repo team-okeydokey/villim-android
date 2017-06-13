@@ -300,7 +300,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingLeft="@dimen/room_detail_activity_padding"
-                android:paddingTop="@dimen/room_detail_activity_padding"
+                android:paddingTop="15dp"
                 android:text="@string/amenities_title" />
             <!-- Amenities icons -->
             <android.support.v7.widget.LinearLayoutCompat
@@ -308,7 +308,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:padding="@dimen/room_detail_activity_padding">
+                android:paddingBottom="15dp"
+                android:paddingLeft="17dp"
+                android:paddingRight="@dimen/room_detail_activity_padding"
+                android:paddingTop="10dp">
 
             </android.support.v7.widget.LinearLayoutCompat>
             <!-- End Amenities -->
