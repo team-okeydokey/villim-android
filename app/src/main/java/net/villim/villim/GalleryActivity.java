@@ -1,5 +1,9 @@
 package net.villim.villim;
 
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutCompat;
@@ -12,14 +16,17 @@ import android.widget.LinearLayout;
 
 import com.bumptech.glide.Glide;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static net.villim.villim.VillimKeys.KEY_HOUSE_PIC_URLS;
 
 public class GalleryActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
     private Button closeButton;
-    private HorizontalScrollView scrollview;
-    private LinearLayoutCompat linearLayout;
+    private ViewPager viewPager;
+    private GalleryPagerAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,21 +49,36 @@ public class GalleryActivity extends AppCompatActivity {
             }
         });
 
-        /* ScrollView */
-        scrollview = (HorizontalScrollView) findViewById(R.id.horizontal_scrollview);
-        linearLayout  = (LinearLayoutCompat) findViewById(R.id.linear_layout);
-
-        loadImages(getIntent().getStringArrayExtra(KEY_HOUSE_PIC_URLS));
+        /* Image gallery viewpager */
+        viewPager = (ViewPager) findViewById(R.id.view_pager);
+        List<Fragment> fragments = createImageFragments(getIntent().getStringArrayExtra(KEY_HOUSE_PIC_URLS));
+        adapter = new GalleryPagerAdapter(getSupportFragmentManager(), fragments);
+        viewPager.setAdapter(adapter);
     }
 
-    private void loadImages(String[] urls) {
-        for (int i = 0; i < urls.length; ++i) {
-            ImageView imageView = new ImageView(this);
-            linearLayout.addView(imageView);
-            Glide.with(this)
-                    .load(urls[i])
-                    .into(imageView);
+
+    private class GalleryPagerAdapter extends FragmentPagerAdapter {
+        private List<Fragment> fragments;
+        public GalleryPagerAdapter(FragmentManager fm, List<Fragment> fragments) {
+            super(fm);
+            this.fragments = fragments;
         }
+        @Override
+        public Fragment getItem(int position) {
+            return this.fragments.get(position);
+        }
+        @Override
+        public int getCount() {
+            return this.fragments.size();
+        }
+    }
+
+    private List<Fragment> createImageFragments(String[] urls) {
+        List<Fragment> fragmentList = new ArrayList<>();
+        for (int i = 0; i < urls.length; ++i) {
+            fragmentList.add(GalleryImageFragment.newInstance(urls[i]));
+        }
+        return fragmentList;
     }
 
 }
