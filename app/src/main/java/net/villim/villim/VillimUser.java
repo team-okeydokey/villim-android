@@ -13,7 +13,7 @@ import static net.villim.villim.VillimKeys.KEY_ID;
 import static net.villim.villim.VillimKeys.KEY_LASTNAME;
 import static net.villim.villim.VillimKeys.KEY_PROFILE_PIC_URL;
 import static net.villim.villim.VillimKeys.KEY_ROOM_ID;
-import static net.villim.villim.VillimRoom.KEY_STATUS;
+import static net.villim.villim.VillimKeys.KEY_STATUS;
 
 /**
  * Created by seongmin on 5/31/17.

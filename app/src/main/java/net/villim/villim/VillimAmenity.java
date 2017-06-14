@@ -85,7 +85,7 @@ public class VillimAmenity {
     }
 
     public static Drawable getAmenityDrawable(Context context, int amenityId) {
-        int resId = nameMap.get(amenityId);
+        int resId = drawableMap.get(amenityId);
         return ContextCompat.getDrawable(context, resId);
     }
 

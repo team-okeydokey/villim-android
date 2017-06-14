@@ -31,6 +31,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import static net.villim.villim.HouseDescriptionActivity.KEY_BASIC_DESCRIPTION;
 import static net.villim.villim.VillimKeys.KEY_ADDITIONAL_GUEST_FEE;
+import static net.villim.villim.VillimKeys.KEY_AMENITY_IDS;
 import static net.villim.villim.VillimKeys.KEY_CLEANING_FEE;
 import static net.villim.villim.VillimKeys.KEY_DEPOSIT;
 import static net.villim.villim.VillimKeys.KEY_RATE_PER_NIGHT;
@@ -315,6 +316,14 @@ public class RoomDetailActivity extends AppCompatActivity implements OnMapReadyC
             seeMoreTextView.setGravity(Gravity.CENTER_VERTICAL);
             seeMoreTextView.setTextColor(getResources().getColor(R.color.see_more));
             seeMoreTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP,13);
+            seeMoreTextView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(RoomDetailActivity.this, AmenityActivity.class);
+                    intent.putExtra(KEY_AMENITY_IDS, house.amenityIds);
+                    startActivity(intent);
+                }
+            });
             amenityIcons.addView(seeMoreTextView);
         }
 

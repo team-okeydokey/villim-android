@@ -72,8 +72,6 @@
     <dimen name="profile_list_item_text_size">15sp</dimen>
     <dimen name="profile_list_drawable_size">25dp</dimen>
 
-
-
     <!--Login Activity -->
     <dimen name="advert_container_margin_top">122dp</dimen>
     <dimen name="login_help_button_height">14dp</dimen>
@@ -100,6 +98,9 @@
     <dimen name="slide_button_thumb_size">50dp</dimen>
     <dimen name="mykey_button_margin_side">25dp</dimen>
     <dimen name="mykey_button_margin_top">30dp</dimen>
+
+    <!-- Amenity Activity -->
+    <dimen name="amenity_list_drawable_size">25dp</dimen>
 
 
 </resources>
