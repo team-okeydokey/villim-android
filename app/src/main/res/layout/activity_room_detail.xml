@@ -489,7 +489,7 @@
 
             <include layout="@layout/category_divider" />
 
-            <!-- Room policy -->
+            <!-- House policy -->
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/policy_category_height"
@@ -508,6 +508,7 @@
                     android:textSize="15sp" />
 
                 <TextView
+                    android:id="@+id/house_policy_read"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_alignParentRight="true"
@@ -518,7 +519,7 @@
                     android:textSize="15sp" />
 
             </RelativeLayout>
-            <!-- End room policy -->
+            <!-- End house policy -->
 
             <include layout="@layout/category_divider" />
 
@@ -541,6 +542,7 @@
                     android:textSize="15sp" />
 
                 <TextView
+                    android:id="@+id/refund_policy_read"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_alignParentRight="true"

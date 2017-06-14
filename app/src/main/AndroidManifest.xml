@@ -33,7 +33,8 @@
         <activity android:name=".SignupActivity" />
         <activity android:name=".HouseDescriptionActivity" />
         <activity android:name=".PricePolicyActivity" />
-        <activity android:name=".AmenityActivity"></activity>
+        <activity android:name=".AmenityActivity" />
+        <activity android:name=".HousePolicyActivity"></activity>
     </application>
 
 </manifest>

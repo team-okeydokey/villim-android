@@ -28,6 +28,7 @@ import static net.villim.villim.VillimKeys.KEY_HOST_RATING;
 import static net.villim.villim.VillimKeys.KEY_HOST_REVIEW_COUNT;
 import static net.villim.villim.VillimKeys.KEY_HOUSE_ID;
 import static net.villim.villim.VillimKeys.KEY_HOUSE_NAME;
+import static net.villim.villim.VillimKeys.KEY_HOUSE_POLICY;
 import static net.villim.villim.VillimKeys.KEY_HOUSE_RATING;
 import static net.villim.villim.VillimKeys.KEY_HOUSE_REVIEW_COUNT;
 import static net.villim.villim.VillimKeys.KEY_LATITUDE;
@@ -40,7 +41,6 @@ import static net.villim.villim.VillimKeys.KEY_NUM_BEDROOM;
 import static net.villim.villim.VillimKeys.KEY_NUM_GUEST;
 import static net.villim.villim.VillimKeys.KEY_RATE_PER_NIGHT;
 import static net.villim.villim.VillimKeys.KEY_REFUND_POLICY;
-import static net.villim.villim.VillimKeys.KEY_ROOM_POLICY;
 
 
 public class DiscoverFragment extends Fragment {
@@ -115,7 +115,7 @@ public class DiscoverFragment extends Fragment {
             jsonItem.put(KEY_LOCK_PC, 244110);
             jsonItem.put(KEY_LATITUDE, 37.5172);
             jsonItem.put(KEY_LONGITUDE, 127.0413);
-            jsonItem.put(KEY_ROOM_POLICY, "- 흡연금지\n" +
+            jsonItem.put(KEY_HOUSE_POLICY, "- 흡연금지\n" +
                     "- 반려동물 동반에 적합하지 않음\n" +
                     "- 파티나 이벤트 금지\n" +
                     "- 체크인은 15:00 이후입니다.\n\n" +

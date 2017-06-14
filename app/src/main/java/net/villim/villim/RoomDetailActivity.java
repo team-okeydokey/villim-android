@@ -34,6 +34,7 @@ import static net.villim.villim.VillimKeys.KEY_ADDITIONAL_GUEST_FEE;
 import static net.villim.villim.VillimKeys.KEY_AMENITY_IDS;
 import static net.villim.villim.VillimKeys.KEY_CLEANING_FEE;
 import static net.villim.villim.VillimKeys.KEY_DEPOSIT;
+import static net.villim.villim.VillimKeys.KEY_HOUSE_POLICY;
 import static net.villim.villim.VillimKeys.KEY_RATE_PER_NIGHT;
 
 
@@ -79,6 +80,9 @@ public class RoomDetailActivity extends AppCompatActivity implements OnMapReadyC
 
     FrameLayout mapContainer;
     MapFragment mapFragment;
+
+    private TextView housePolicyRead;
+    private TextView refundPolicyRead;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -156,6 +160,10 @@ public class RoomDetailActivity extends AppCompatActivity implements OnMapReadyC
 
         /* Extract room info and fill view elements with data */
         house = extractRoomInfo();
+
+        /* House & Refund Policy */
+        housePolicyRead = (TextView) findViewById(R.id.house_policy_read);
+        refundPolicyRead = (TextView) findViewById(R.id.refund_policy_read);
 
         populateView();
     }
@@ -249,7 +257,17 @@ public class RoomDetailActivity extends AppCompatActivity implements OnMapReadyC
 
         /* Map */
 
-
+        /* House & Refund Policy */
+        housePolicyRead = (TextView) findViewById(R.id.house_policy_read);
+        housePolicyRead.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(RoomDetailActivity.this, HousePolicyActivity.class);
+                intent.putExtra(KEY_HOUSE_POLICY, house.housePolicy);
+                startActivity(intent);
+            }
+        });
+//        refundPolicyRead = (TextView) findViewById(R.id.refund_policy_read);
     }
 
     @Override

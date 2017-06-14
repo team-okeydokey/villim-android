@@ -21,6 +21,7 @@ import static net.villim.villim.VillimKeys.KEY_HOST_RATING;
 import static net.villim.villim.VillimKeys.KEY_HOST_REVIEW_COUNT;
 import static net.villim.villim.VillimKeys.KEY_HOUSE_ID;
 import static net.villim.villim.VillimKeys.KEY_HOUSE_NAME;
+import static net.villim.villim.VillimKeys.KEY_HOUSE_POLICY;
 import static net.villim.villim.VillimKeys.KEY_HOUSE_RATING;
 import static net.villim.villim.VillimKeys.KEY_HOUSE_REVIEW_COUNT;
 import static net.villim.villim.VillimKeys.KEY_LATITUDE;
@@ -33,7 +34,6 @@ import static net.villim.villim.VillimKeys.KEY_NUM_BEDROOM;
 import static net.villim.villim.VillimKeys.KEY_NUM_GUEST;
 import static net.villim.villim.VillimKeys.KEY_RATE_PER_NIGHT;
 import static net.villim.villim.VillimKeys.KEY_REFUND_POLICY;
-import static net.villim.villim.VillimKeys.KEY_ROOM_POLICY;
 
 /**
  * Created by seongmin on 5/30/17.
@@ -60,7 +60,7 @@ public class VillimRoom implements Parcelable {
     private int lockPc;
     public double latitude;
     public double longitude;
-    public String roomPolicy;
+    public String housePolicy;
     public String refundPolicy;
     public VillimUser host;
     int hostId;
@@ -96,7 +96,7 @@ public class VillimRoom implements Parcelable {
             lockPc = jsonObject.getInt(KEY_LOCK_PC);
             latitude = jsonObject.getDouble(KEY_LATITUDE);
             longitude = jsonObject.getDouble(KEY_LONGITUDE);
-            roomPolicy = jsonObject.getString(KEY_ROOM_POLICY);
+            housePolicy = jsonObject.getString(KEY_HOUSE_POLICY);
             refundPolicy = jsonObject.getString(KEY_REFUND_POLICY);
 
             //host = VillimUser.getUserFromServer(jsonObject.getInt(KEY_HOST_ID));
@@ -152,7 +152,7 @@ public class VillimRoom implements Parcelable {
         dest.writeInt(lockPc);
         dest.writeDouble(latitude);
         dest.writeDouble(longitude);
-        dest.writeString(roomPolicy);
+        dest.writeString(housePolicy);
         dest.writeString(refundPolicy);
         dest.writeInt(hostId);
         dest.writeString(hostName);
@@ -183,7 +183,7 @@ public class VillimRoom implements Parcelable {
         lockPc = in.readInt();
         latitude = in.readDouble();
         longitude = in.readDouble();
-        roomPolicy = in.readString();
+        housePolicy = in.readString();
         refundPolicy = in.readString();
         hostId = in.readInt();
         hostName = in.readString();
