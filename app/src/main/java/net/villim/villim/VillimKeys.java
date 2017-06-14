@@ -59,7 +59,7 @@ public class VillimKeys {
     public static final String KEY_CREATED = "created";
     public static final String KEY_MODIFIED = "modified";
     public static final String KEY_HOUSE_POLICY = "house_policy";
-    public static final String KEY_REFUND_POLICY = "refund_policy";
+    public static final String KEY_CANCELLATION_POLICY = "refund_policy";
 
     public static final String KEY_HOST_ID = "host_id";
     public static final String KEY_HOST_NAME = "host_name";

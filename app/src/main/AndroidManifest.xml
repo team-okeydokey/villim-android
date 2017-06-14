@@ -22,7 +22,7 @@
         </activity>
         <activity android:name=".MainActivity" />
         <activity android:name=".LocationFilterActivity" />
-        <activity android:name=".RoomDetailActivity" />
+        <activity android:name=".HouseDetailActivity" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -34,7 +34,8 @@
         <activity android:name=".HouseDescriptionActivity" />
         <activity android:name=".PricePolicyActivity" />
         <activity android:name=".AmenityActivity" />
-        <activity android:name=".HousePolicyActivity"></activity>
+        <activity android:name=".HousePolicyActivity" />
+        <activity android:name=".CancellationPolicyActivity"></activity>
     </application>
 
 </manifest>

@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/room_detail_background"
     android:fitsSystemWindows="true"
-    tools:context="net.villim.villim.RoomDetailActivity">
+    tools:context="net.villim.villim.HouseDetailActivity">
 
 
     <!-- Header picture -->
@@ -523,7 +523,7 @@
 
             <include layout="@layout/category_divider" />
 
-            <!-- Refund Policy -->
+            <!-- Cancellation Policy -->
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/policy_category_height"
@@ -552,7 +552,7 @@
                     android:textColor="@color/see_more"
                     android:textSize="15sp" />
             </RelativeLayout>
-            <!-- End refund policy -->
+            <!-- End cancellation policy -->
 
         </android.support.v7.widget.LinearLayoutCompat>
 

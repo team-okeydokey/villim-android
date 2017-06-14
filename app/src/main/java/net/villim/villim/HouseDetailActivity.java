@@ -32,13 +32,14 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import static net.villim.villim.HouseDescriptionActivity.KEY_BASIC_DESCRIPTION;
 import static net.villim.villim.VillimKeys.KEY_ADDITIONAL_GUEST_FEE;
 import static net.villim.villim.VillimKeys.KEY_AMENITY_IDS;
+import static net.villim.villim.VillimKeys.KEY_CANCELLATION_POLICY;
 import static net.villim.villim.VillimKeys.KEY_CLEANING_FEE;
 import static net.villim.villim.VillimKeys.KEY_DEPOSIT;
 import static net.villim.villim.VillimKeys.KEY_HOUSE_POLICY;
 import static net.villim.villim.VillimKeys.KEY_RATE_PER_NIGHT;
 
 
-public class RoomDetailActivity extends AppCompatActivity implements OnMapReadyCallback {
+public class HouseDetailActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private final static int MAX_AMENITY_ICONS = 6;
 
@@ -230,7 +231,7 @@ public class RoomDetailActivity extends AppCompatActivity implements OnMapReadyC
         descriptionSeeMore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(RoomDetailActivity.this, HouseDescriptionActivity.class);
+                Intent intent = new Intent(HouseDetailActivity.this, HouseDescriptionActivity.class);
                 intent.putExtra(KEY_BASIC_DESCRIPTION, house.description);
                 startActivity(intent);
             }
@@ -240,7 +241,7 @@ public class RoomDetailActivity extends AppCompatActivity implements OnMapReadyC
         pricePolicyRead.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(RoomDetailActivity.this, PricePolicyActivity.class);
+                Intent intent = new Intent(HouseDetailActivity.this, PricePolicyActivity.class);
                 intent.putExtra(KEY_RATE_PER_NIGHT, house.ratePerNight);
                 intent.putExtra(KEY_DEPOSIT, house.deposit);
                 intent.putExtra(KEY_ADDITIONAL_GUEST_FEE, house.additionalGuestFee);
@@ -262,12 +263,21 @@ public class RoomDetailActivity extends AppCompatActivity implements OnMapReadyC
         housePolicyRead.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(RoomDetailActivity.this, HousePolicyActivity.class);
+                Intent intent = new Intent(HouseDetailActivity.this, HousePolicyActivity.class);
                 intent.putExtra(KEY_HOUSE_POLICY, house.housePolicy);
                 startActivity(intent);
             }
         });
-//        refundPolicyRead = (TextView) findViewById(R.id.refund_policy_read);
+
+        refundPolicyRead = (TextView) findViewById(R.id.refund_policy_read);
+        refundPolicyRead.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HouseDetailActivity.this, CancellationPolicyActivity.class);
+                intent.putExtra(KEY_CANCELLATION_POLICY, house.cancellationPolicy);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -333,11 +343,11 @@ public class RoomDetailActivity extends AppCompatActivity implements OnMapReadyC
             seeMoreTextView.setTextAlignment(View.TEXT_ALIGNMENT_VIEW_END);
             seeMoreTextView.setGravity(Gravity.CENTER_VERTICAL);
             seeMoreTextView.setTextColor(getResources().getColor(R.color.see_more));
-            seeMoreTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP,13);
+            seeMoreTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13);
             seeMoreTextView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(RoomDetailActivity.this, AmenityActivity.class);
+                    Intent intent = new Intent(HouseDetailActivity.this, AmenityActivity.class);
                     intent.putExtra(KEY_AMENITY_IDS, house.amenityIds);
                     startActivity(intent);
                 }

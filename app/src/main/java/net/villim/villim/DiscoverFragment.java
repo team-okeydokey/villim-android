@@ -19,6 +19,7 @@ import static net.villim.villim.VillimKeys.KEY_ADDR_DIRECTION;
 import static net.villim.villim.VillimKeys.KEY_ADDR_FULL;
 import static net.villim.villim.VillimKeys.KEY_ADDR_SUMMARY;
 import static net.villim.villim.VillimKeys.KEY_AMENITY_IDS;
+import static net.villim.villim.VillimKeys.KEY_CANCELLATION_POLICY;
 import static net.villim.villim.VillimKeys.KEY_CLEANING_FEE;
 import static net.villim.villim.VillimKeys.KEY_DEPOSIT;
 import static net.villim.villim.VillimKeys.KEY_DESCRIPTION;
@@ -40,7 +41,6 @@ import static net.villim.villim.VillimKeys.KEY_NUM_BED;
 import static net.villim.villim.VillimKeys.KEY_NUM_BEDROOM;
 import static net.villim.villim.VillimKeys.KEY_NUM_GUEST;
 import static net.villim.villim.VillimKeys.KEY_RATE_PER_NIGHT;
-import static net.villim.villim.VillimKeys.KEY_REFUND_POLICY;
 
 
 public class DiscoverFragment extends Fragment {
@@ -122,7 +122,7 @@ public class DiscoverFragment extends Fragment {
                     "- No smoking\n" +
                     "- Not too loud after 10pm\n" +
                     "- No shoes in room(Eastern Culture)");
-            jsonItem.put(KEY_REFUND_POLICY, "Refund Policy");
+            jsonItem.put(KEY_CANCELLATION_POLICY, "Refund Policy");
             jsonItem.put(KEY_HOST_ID, 0);
             jsonItem.put(KEY_HOST_NAME, "Kim Woobin, 김우빈");
             jsonItem.put(KEY_HOST_RATING, 4.7);

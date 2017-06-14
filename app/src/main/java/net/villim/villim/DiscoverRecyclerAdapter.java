@@ -61,7 +61,7 @@ public class DiscoverRecyclerAdapter extends RecyclerView.Adapter<DiscoverRecycl
             @Override
             public void onClick(View v) {
                 MainActivity mainActivity = (MainActivity) v.getContext();
-                Intent intent = new Intent(mainActivity, RoomDetailActivity.class);
+                Intent intent = new Intent(mainActivity, HouseDetailActivity.class);
                 Bundle args = new Bundle();
                 args.putParcelable(mainActivity.getString(R.string.key_house), houseList[vh.getAdapterPosition()]);
                 intent.putExtras(args);

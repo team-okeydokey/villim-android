@@ -33,7 +33,7 @@ import static net.villim.villim.VillimKeys.KEY_NUM_BED;
 import static net.villim.villim.VillimKeys.KEY_NUM_BEDROOM;
 import static net.villim.villim.VillimKeys.KEY_NUM_GUEST;
 import static net.villim.villim.VillimKeys.KEY_RATE_PER_NIGHT;
-import static net.villim.villim.VillimKeys.KEY_REFUND_POLICY;
+import static net.villim.villim.VillimKeys.KEY_CANCELLATION_POLICY;
 
 /**
  * Created by seongmin on 5/30/17.
@@ -61,7 +61,7 @@ public class VillimRoom implements Parcelable {
     public double latitude;
     public double longitude;
     public String housePolicy;
-    public String refundPolicy;
+    public String cancellationPolicy;
     public VillimUser host;
     int hostId;
     String hostName;
@@ -97,7 +97,7 @@ public class VillimRoom implements Parcelable {
             latitude = jsonObject.getDouble(KEY_LATITUDE);
             longitude = jsonObject.getDouble(KEY_LONGITUDE);
             housePolicy = jsonObject.getString(KEY_HOUSE_POLICY);
-            refundPolicy = jsonObject.getString(KEY_REFUND_POLICY);
+            cancellationPolicy = jsonObject.getString(KEY_CANCELLATION_POLICY);
 
             //host = VillimUser.getUserFromServer(jsonObject.getInt(KEY_HOST_ID));
             hostId = jsonObject.getInt(KEY_HOST_ID);
@@ -153,7 +153,7 @@ public class VillimRoom implements Parcelable {
         dest.writeDouble(latitude);
         dest.writeDouble(longitude);
         dest.writeString(housePolicy);
-        dest.writeString(refundPolicy);
+        dest.writeString(cancellationPolicy);
         dest.writeInt(hostId);
         dest.writeString(hostName);
         dest.writeFloat(hostRating);
@@ -184,7 +184,7 @@ public class VillimRoom implements Parcelable {
         latitude = in.readDouble();
         longitude = in.readDouble();
         housePolicy = in.readString();
-        refundPolicy = in.readString();
+        cancellationPolicy = in.readString();
         hostId = in.readInt();
         hostName = in.readString();
         hostRating = in.readFloat();
