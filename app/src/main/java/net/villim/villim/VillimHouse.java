@@ -39,7 +39,7 @@ import static net.villim.villim.VillimKeys.KEY_CANCELLATION_POLICY;
  * Created by seongmin on 5/30/17.
  */
 
-public class VillimRoom implements Parcelable {
+public class VillimHouse implements Parcelable {
 
     // Raw query from server.
     public int houseId;
@@ -76,7 +76,7 @@ public class VillimRoom implements Parcelable {
     //public VillimReview[] reviews;
     //public int[] utilities;
 
-    public VillimRoom(JSONObject jsonObject) {
+    public VillimHouse(JSONObject jsonObject) {
         try {
             houseId = jsonObject.getInt(KEY_HOUSE_ID);
             houseName = jsonObject.getString(KEY_HOUSE_NAME);
@@ -164,7 +164,7 @@ public class VillimRoom implements Parcelable {
 //        dest.writeParcelableArray(reviews, 0);
     }
 
-    protected VillimRoom(Parcel in) {
+    protected VillimHouse(Parcel in) {
         houseId = in.readInt();
         houseName = in.readString();
         addrFull = in.readString();
@@ -195,15 +195,15 @@ public class VillimRoom implements Parcelable {
 //        reviews = in.createTypedArray(VillimReview.CREATOR);
     }
 
-    public static final Creator<VillimRoom> CREATOR = new Creator<VillimRoom>() {
+    public static final Creator<VillimHouse> CREATOR = new Creator<VillimHouse>() {
         @Override
-        public VillimRoom createFromParcel(Parcel in) {
-            return new VillimRoom(in);
+        public VillimHouse createFromParcel(Parcel in) {
+            return new VillimHouse(in);
         }
 
         @Override
-        public VillimRoom[] newArray(int size) {
-            return new VillimRoom[size];
+        public VillimHouse[] newArray(int size) {
+            return new VillimHouse[size];
         }
     };
 }

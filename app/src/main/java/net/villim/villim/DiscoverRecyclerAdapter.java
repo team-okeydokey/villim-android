@@ -18,7 +18,7 @@ import com.bumptech.glide.Glide;
  */
 
 public class DiscoverRecyclerAdapter extends RecyclerView.Adapter<DiscoverRecyclerAdapter.ViewHolder> {
-    private VillimRoom[] houseList;
+    private VillimHouse[] houseList;
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -43,7 +43,7 @@ public class DiscoverRecyclerAdapter extends RecyclerView.Adapter<DiscoverRecycl
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public DiscoverRecyclerAdapter(VillimRoom[] dataset) {
+    public DiscoverRecyclerAdapter(VillimHouse[] dataset) {
         houseList = dataset;
     }
 
@@ -82,7 +82,7 @@ public class DiscoverRecyclerAdapter extends RecyclerView.Adapter<DiscoverRecycl
     // Make this async.
     private void populateView(ViewHolder holder, int position) {
         Context context = holder.itemView.getContext();
-        VillimRoom currItem = houseList[position];
+        VillimHouse currItem = houseList[position];
         /* Room Title */
         holder.houseName.setText(currItem.houseName);
         /* Room Rate */
@@ -108,7 +108,7 @@ public class DiscoverRecyclerAdapter extends RecyclerView.Adapter<DiscoverRecycl
         return houseList.length;
     }
 
-    private VillimRoom getHouseAtPosition(int position) {
+    private VillimHouse getHouseAtPosition(int position) {
         return houseList[position];
     }
 }

@@ -43,7 +43,7 @@ public class HouseDetailActivity extends AppCompatActivity implements OnMapReady
 
     private final static int MAX_AMENITY_ICONS = 6;
 
-    private VillimRoom house;
+    private VillimHouse house;
 
     private AppBarLayout appBarLayout;
     private CollapsingToolbarLayout collapsingToolbarLayout;
@@ -170,7 +170,7 @@ public class HouseDetailActivity extends AppCompatActivity implements OnMapReady
     }
 
     // Extract room info.
-    private VillimRoom extractRoomInfo() {
+    private VillimHouse extractRoomInfo() {
         Bundle args = getIntent().getExtras();
         house = args.getParcelable(getString(R.string.key_house));
         house.reviews = VillimReview.getHouseReviewsFromServer(house.houseId);

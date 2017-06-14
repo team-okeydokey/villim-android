@@ -142,9 +142,9 @@ public class DiscoverFragment extends Fragment {
 
         }
 
-        VillimRoom obj = new VillimRoom(jsonItem);
+        VillimHouse obj = new VillimHouse(jsonItem);
 
-        VillimRoom[] exampleArray = {obj, obj, obj, obj, obj, obj, obj, obj, obj};
+        VillimHouse[] exampleArray = {obj, obj, obj, obj, obj, obj, obj, obj, obj};
 
         adapter = new DiscoverRecyclerAdapter(exampleArray);
         recyclerView.setAdapter(adapter);
