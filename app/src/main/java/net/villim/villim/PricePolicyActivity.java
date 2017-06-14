@@ -7,12 +7,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class PricePolicyActivity extends AppCompatActivity {
+import static net.villim.villim.VillimKeys.KEY_ADDITIONAL_GUEST_FEE;
+import static net.villim.villim.VillimKeys.KEY_CLEANING_FEE;
+import static net.villim.villim.VillimKeys.KEY_DEPOSIT;
+import static net.villim.villim.VillimKeys.KEY_RATE_PER_NIGHT;
 
-    public static final String KEY_BASE_PRICE = "base_price";
-    public static final String KEY_DEPOSIT = "deposit";
-    public static final String KEY_ADDITIONAL_GUEST_FEE = "additional_guest_fee";
-    public static final String KEY_CLEANING_FEE = "cleaning_fee";
+public class PricePolicyActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
     private Button closeButton;
@@ -46,7 +46,7 @@ public class PricePolicyActivity extends AppCompatActivity {
         /* 기본 가격 */
         basePrice = (TextView) findViewById(R.id.base_price_content);
         String basePriceText = String.format(getString(R.string.won_text_format),
-                getIntent().getIntExtra(KEY_BASE_PRICE, 0));
+                getIntent().getIntExtra(KEY_RATE_PER_NIGHT, 0));
         basePrice.setText(basePriceText);
 
         /* 보증금 */

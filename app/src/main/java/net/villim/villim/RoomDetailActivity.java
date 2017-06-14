@@ -30,10 +30,10 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import static net.villim.villim.HouseDescriptionActivity.KEY_BASIC_DESCRIPTION;
-import static net.villim.villim.PricePolicyActivity.KEY_ADDITIONAL_GUEST_FEE;
-import static net.villim.villim.PricePolicyActivity.KEY_BASE_PRICE;
-import static net.villim.villim.PricePolicyActivity.KEY_CLEANING_FEE;
-import static net.villim.villim.PricePolicyActivity.KEY_DEPOSIT;
+import static net.villim.villim.VillimKeys.KEY_ADDITIONAL_GUEST_FEE;
+import static net.villim.villim.VillimKeys.KEY_CLEANING_FEE;
+import static net.villim.villim.VillimKeys.KEY_DEPOSIT;
+import static net.villim.villim.VillimKeys.KEY_RATE_PER_NIGHT;
 
 
 public class RoomDetailActivity extends AppCompatActivity implements OnMapReadyCallback {
@@ -232,7 +232,7 @@ public class RoomDetailActivity extends AppCompatActivity implements OnMapReadyC
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(RoomDetailActivity.this, PricePolicyActivity.class);
-                intent.putExtra(KEY_BASE_PRICE, house.ratePerNight);
+                intent.putExtra(KEY_RATE_PER_NIGHT, house.ratePerNight);
                 intent.putExtra(KEY_DEPOSIT, house.deposit);
                 intent.putExtra(KEY_ADDITIONAL_GUEST_FEE, house.additionalGuestFee);
                 intent.putExtra(KEY_CLEANING_FEE, house.cleaningFee);
