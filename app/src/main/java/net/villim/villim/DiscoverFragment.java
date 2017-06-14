@@ -69,7 +69,12 @@ public class DiscoverFragment extends Fragment {
             jsonItem.put(VillimRoom.KEY_ADDR_SUMMARY, "강남구, 서울, 한국");
             jsonItem.put(VillimRoom.KEY_ADDR_DIRECTION, "[HongDae]1min from Hongik Univ.Stn");
 //            jsonItem.put(VillimRoom.KEY_DESCRIPTION, "1\n2\n3\n4\n5\n6");
-            jsonItem.put(VillimRoom.KEY_DESCRIPTION, "1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15");
+            jsonItem.put(VillimRoom.KEY_DESCRIPTION, "- 강남역 1번 출구 바로 앞입니다\n" +
+                    "- 호텔 수준의 침구류, 매 예약마다 깨끗이 세탁 (퀸 사이즈)\n" +
+                    "- 신축 깨끗한 오피스텔, 좋은 전망\n" +
+                    "- 요리용 주방 도구 풀세트\n" +
+                    "- 무선 wifi 제공\n" +
+                    "- 세탁기 & 건조기");
             jsonItem.put(VillimRoom.KEY_NUM_GUEST, 4);
             jsonItem.put(VillimRoom.KEY_NUM_BEDROOM, 2);
             jsonItem.put(VillimRoom.KEY_NUM_BED, 2);
