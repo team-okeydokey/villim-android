@@ -201,7 +201,7 @@ public class RoomDetailActivity extends AppCompatActivity implements OnMapReadyC
         numBathroom.setText(numBathroomText);
 
         /* Description */
-        description.setText(house.description);
+        description.setText(house.description.trim());
         description.post(new Runnable() {
             @Override
             public void run() {
@@ -209,6 +209,11 @@ public class RoomDetailActivity extends AppCompatActivity implements OnMapReadyC
                     descriptionSeeMore.setVisibility(View.VISIBLE);
                 } else {
                     descriptionSeeMore.setVisibility(View.GONE);
+                    description.setPadding(
+                            description.getPaddingLeft(),
+                            description.getPaddingTop(),
+                            description.getPaddingRight(),
+                            getResources().getDimensionPixelSize(R.dimen.description_see_more_bottom_padding));
                 }
 
             }
