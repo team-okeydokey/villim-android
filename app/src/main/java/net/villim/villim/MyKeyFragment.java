@@ -76,6 +76,7 @@ public class MyKeyFragment extends Fragment {
         /* Slide Button */
         slideButton = (SlideButton) myKeyView.findViewById(R.id.slide_button);
         slideButton.setClickable(false);
+        slideButton.setEnabled(false);
 
         /* Error Message */
         errorMessage = (TextView) myKeyView.findViewById(R.id.error_message);
@@ -224,6 +225,7 @@ public class MyKeyFragment extends Fragment {
             }
         });
         slideButton.setClickable(true);
+        slideButton.setEnabled(true);
     }
 
     public void displayNoRoom() {
@@ -247,6 +249,7 @@ public class MyKeyFragment extends Fragment {
         });
         slideButton.setSlideButtonListener(null);
         slideButton.setClickable(true);
+        slideButton.setEnabled(true);
 
         /* House thumbnail */
         Glide.with(this)
