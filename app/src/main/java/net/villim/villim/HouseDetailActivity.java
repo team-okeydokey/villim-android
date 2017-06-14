@@ -39,6 +39,7 @@ import static net.villim.villim.VillimKeys.KEY_DEPOSIT;
 import static net.villim.villim.VillimKeys.KEY_HOST_ID;
 import static net.villim.villim.VillimKeys.KEY_HOST_NAME;
 import static net.villim.villim.VillimKeys.KEY_HOST_PROFILE_PIC_URL;
+import static net.villim.villim.VillimKeys.KEY_HOUSE_PIC_URLS;
 import static net.villim.villim.VillimKeys.KEY_HOUSE_POLICY;
 import static net.villim.villim.VillimKeys.KEY_LATITUDE;
 import static net.villim.villim.VillimKeys.KEY_LONGITUDE;
@@ -187,7 +188,17 @@ public class HouseDetailActivity extends AppCompatActivity implements OnMapReady
 
     // Make this async.
     private void populateView() {
-        /* Room picture */
+        /* House picture */
+        if (house.housePicUrls.length > 0) {
+            toolbarImage.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(HouseDetailActivity.this, GalleryActivity.class);
+                    intent.putExtra(KEY_HOUSE_PIC_URLS, house.housePicUrls);
+                    startActivity(intent);
+                }
+            });
+        }
         Glide.with(this)
                 .load(R.drawable.prugio_thumbnail)
                 .into(toolbarImage);

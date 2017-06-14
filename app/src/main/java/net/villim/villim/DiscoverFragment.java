@@ -30,6 +30,7 @@ import static net.villim.villim.VillimKeys.KEY_HOST_RATING;
 import static net.villim.villim.VillimKeys.KEY_HOST_REVIEW_COUNT;
 import static net.villim.villim.VillimKeys.KEY_HOUSE_ID;
 import static net.villim.villim.VillimKeys.KEY_HOUSE_NAME;
+import static net.villim.villim.VillimKeys.KEY_HOUSE_PIC_URLS;
 import static net.villim.villim.VillimKeys.KEY_HOUSE_POLICY;
 import static net.villim.villim.VillimKeys.KEY_HOUSE_RATING;
 import static net.villim.villim.VillimKeys.KEY_HOUSE_REVIEW_COUNT;
@@ -140,6 +141,13 @@ public class DiscoverFragment extends Fragment {
             amenitiesArray.put(6);
             amenitiesArray.put(7);
             jsonItem.put(KEY_AMENITY_IDS, amenitiesArray);
+            JSONArray housePicUrlsArray = new JSONArray();
+            housePicUrlsArray.put("https://cdn.houseplans.com/product/o2d2ui14afb1sov3cnslpummre/w560x373.jpg?v=15");
+            housePicUrlsArray.put("https://s-media-cache-ak0.pinimg.com/736x/7f/be/50/7fbe50ec634c65709d7fe6ac267c4e6f.jpg");
+            housePicUrlsArray.put("http://hookedonhouses.net/wp-content/uploads/2009/01/Father-of-the-Bride-Lookalike-house.jpg");
+            housePicUrlsArray.put("https://s-media-cache-ak0.pinimg.com/736x/86/8d/59/868d596b9cb5083257f43912989efca5.jpg");
+            housePicUrlsArray.put("http://images.all-free-download.com/images/graphiclarge/green_house_icon_312519.jpg");
+            jsonItem.put(KEY_HOUSE_PIC_URLS, housePicUrlsArray);
         } catch (JSONException e) {
 
         }

@@ -23,4 +23,19 @@ public class VillimUtil {
         return numbers;
     }
 
+    public static String[] JSONArrayToStringArray(JSONArray array) {
+        // Deal with the case of a non-array value.
+        if (array == null) { /*...*/ }
+
+        // Create an int array to accomodate the numbers.
+        String[] strings = new String[array.length()];
+
+        // Extract numbers from JSON array.
+        for (int i = 0; i < array.length(); ++i) {
+            strings[i] = array.optString(i);
+        }
+
+        return strings;
+    }
+
 }

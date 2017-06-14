@@ -82,5 +82,6 @@ public class VillimKeys {
     public static final String KEY_HOUSE_REVIEW_COUNT = "house_review_count";
 
     public static final String KEY_AMENITY_IDS = "amenity_ids";
+    public static final String KEY_HOUSE_PIC_URLS = "house_pic_urls";
 
 }
