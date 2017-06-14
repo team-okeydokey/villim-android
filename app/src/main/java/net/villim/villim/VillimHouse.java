@@ -12,11 +12,13 @@ import static net.villim.villim.VillimKeys.KEY_ADDR_DIRECTION;
 import static net.villim.villim.VillimKeys.KEY_ADDR_FULL;
 import static net.villim.villim.VillimKeys.KEY_ADDR_SUMMARY;
 import static net.villim.villim.VillimKeys.KEY_AMENITY_IDS;
+import static net.villim.villim.VillimKeys.KEY_CANCELLATION_POLICY;
 import static net.villim.villim.VillimKeys.KEY_CLEANING_FEE;
 import static net.villim.villim.VillimKeys.KEY_DEPOSIT;
 import static net.villim.villim.VillimKeys.KEY_DESCRIPTION;
 import static net.villim.villim.VillimKeys.KEY_HOST_ID;
 import static net.villim.villim.VillimKeys.KEY_HOST_NAME;
+import static net.villim.villim.VillimKeys.KEY_HOST_PROFILE_PIC_URL;
 import static net.villim.villim.VillimKeys.KEY_HOST_RATING;
 import static net.villim.villim.VillimKeys.KEY_HOST_REVIEW_COUNT;
 import static net.villim.villim.VillimKeys.KEY_HOUSE_ID;
@@ -33,7 +35,6 @@ import static net.villim.villim.VillimKeys.KEY_NUM_BED;
 import static net.villim.villim.VillimKeys.KEY_NUM_BEDROOM;
 import static net.villim.villim.VillimKeys.KEY_NUM_GUEST;
 import static net.villim.villim.VillimKeys.KEY_RATE_PER_NIGHT;
-import static net.villim.villim.VillimKeys.KEY_CANCELLATION_POLICY;
 
 /**
  * Created by seongmin on 5/30/17.
@@ -67,6 +68,7 @@ public class VillimHouse implements Parcelable {
     String hostName;
     float hostRating;
     int hostReviewCount;
+    String hostProfilePicUrl;
     float houseRating;
     int houseReviewCount;
     int[] amenityIds;
@@ -104,6 +106,7 @@ public class VillimHouse implements Parcelable {
             hostName = jsonObject.getString(KEY_HOST_NAME);
             hostRating = (float) jsonObject.getDouble(KEY_HOST_RATING);
             hostReviewCount = jsonObject.getInt(KEY_HOST_REVIEW_COUNT);
+            hostProfilePicUrl = jsonObject.getString(KEY_HOST_PROFILE_PIC_URL);
             houseRating = (float) jsonObject.getDouble(KEY_HOUSE_RATING);
             houseReviewCount = jsonObject.getInt(KEY_HOUSE_REVIEW_COUNT);
 
@@ -158,6 +161,7 @@ public class VillimHouse implements Parcelable {
         dest.writeString(hostName);
         dest.writeFloat(hostRating);
         dest.writeInt(hostReviewCount);
+        dest.writeString(hostProfilePicUrl);
         dest.writeFloat(houseRating);
         dest.writeInt(houseReviewCount);
         dest.writeIntArray(amenityIds);
@@ -189,6 +193,7 @@ public class VillimHouse implements Parcelable {
         hostName = in.readString();
         hostRating = in.readFloat();
         hostReviewCount = in.readInt();
+        hostProfilePicUrl = in.readString();
         houseRating = in.readFloat();
         houseReviewCount = in.readInt();
         amenityIds = in.createIntArray();

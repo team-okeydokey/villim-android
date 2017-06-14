@@ -36,7 +36,8 @@
         <activity android:name=".AmenityActivity" />
         <activity android:name=".HousePolicyActivity" />
         <activity android:name=".CancellationPolicyActivity" />
-        <activity android:name=".FullScreenMapActivity"></activity>
+        <activity android:name=".FullScreenMapActivity" />
+        <activity android:name=".HostProfileActivity"></activity>
     </application>
 
 </manifest>

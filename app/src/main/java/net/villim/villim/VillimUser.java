@@ -6,6 +6,7 @@ import android.os.Parcelable;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import static net.villim.villim.VillimKeys.KEY_ABOUT;
 import static net.villim.villim.VillimKeys.KEY_EMAIL;
 import static net.villim.villim.VillimKeys.KEY_FIRSTNAME;
 import static net.villim.villim.VillimKeys.KEY_FULLNAME;
@@ -26,6 +27,7 @@ public class VillimUser implements Parcelable {
     public String lastname;
     public String email;
     public String profilePicUrl;
+    public String about;
     public int status;
     public int roomId;
 
@@ -36,6 +38,7 @@ public class VillimUser implements Parcelable {
         lastname = in.readString();
         email = in.readString();
         profilePicUrl = in.readString();
+        about = in.readString();
         status = in.readInt();
         roomId = in.readInt();
     }
@@ -75,6 +78,7 @@ public class VillimUser implements Parcelable {
             user.email = userInfo.get(KEY_EMAIL).toString();
             boolean isProfilePicUrlNull = userInfo.isNull(KEY_PROFILE_PIC_URL);
             user.profilePicUrl = isProfilePicUrlNull ? null : userInfo.get(KEY_PROFILE_PIC_URL).toString();
+            user.about = userInfo.getString(KEY_ABOUT);
             user.status = userInfo.getInt(KEY_STATUS);
             boolean isRoomIdNull = userInfo.isNull(KEY_ROOM_ID);
             user.roomId = isRoomIdNull ? -1 : userInfo.getInt(KEY_ROOM_ID);
@@ -97,6 +101,7 @@ public class VillimUser implements Parcelable {
         dest.writeString(lastname);
         dest.writeString(email);
         dest.writeString(profilePicUrl);
+        dest.writeString(about);
         dest.writeInt(status);
         dest.writeInt(roomId);
     }

@@ -5,6 +5,17 @@ package net.villim.villim;
  */
 
 public class VillimKeys {
+
+    /* Server constants */
+    public static final String SERVER_SCHEME = "http";
+    public static final String SERVER_HOST = "175.207.29.19";
+
+
+    /* Request success codes */
+    public static final String KEY_QUERY_SUCCESS = "query_success";
+
+
+
     /* Activity request codes */
 
 
@@ -22,6 +33,7 @@ public class VillimKeys {
     public static final String KEY_EMAIL = "email";
     public static final String KEY_PASSWORD = "password";
     public static final String KEY_PROFILE_PIC_URL = "profile_pic_url";
+    public static final String KEY_ABOUT = "about";
     public static final String KEY_USER_STATUS = "user_status";
     public static final String KEY_ROOM_ID = "room_id";
 
@@ -65,6 +77,7 @@ public class VillimKeys {
     public static final String KEY_HOST_NAME = "host_name";
     public static final String KEY_HOST_RATING = "host_rating";
     public static final String KEY_HOST_REVIEW_COUNT = "host_review_count";
+    public static final String KEY_HOST_PROFILE_PIC_URL = "host_profile_pic_url";
     public static final String KEY_HOUSE_RATING = "house_rating";
     public static final String KEY_HOUSE_REVIEW_COUNT = "house_review_count";
 

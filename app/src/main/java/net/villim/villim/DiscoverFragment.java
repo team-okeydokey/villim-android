@@ -25,6 +25,7 @@ import static net.villim.villim.VillimKeys.KEY_DEPOSIT;
 import static net.villim.villim.VillimKeys.KEY_DESCRIPTION;
 import static net.villim.villim.VillimKeys.KEY_HOST_ID;
 import static net.villim.villim.VillimKeys.KEY_HOST_NAME;
+import static net.villim.villim.VillimKeys.KEY_HOST_PROFILE_PIC_URL;
 import static net.villim.villim.VillimKeys.KEY_HOST_RATING;
 import static net.villim.villim.VillimKeys.KEY_HOST_REVIEW_COUNT;
 import static net.villim.villim.VillimKeys.KEY_HOUSE_ID;
@@ -127,6 +128,7 @@ public class DiscoverFragment extends Fragment {
             jsonItem.put(KEY_HOST_NAME, "Kim Woobin, 김우빈");
             jsonItem.put(KEY_HOST_RATING, 4.7);
             jsonItem.put(KEY_HOST_REVIEW_COUNT, 143);
+            jsonItem.put(KEY_HOST_PROFILE_PIC_URL, "http://blogs.agu.org/georneys/files/2012/12/IMG_7273-1024x682.jpg");
             jsonItem.put(KEY_HOUSE_RATING, 3.6);
             jsonItem.put(KEY_HOUSE_REVIEW_COUNT, 72);
             JSONArray amenitiesArray = new JSONArray();

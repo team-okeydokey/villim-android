@@ -15,7 +15,6 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.RelativeLayout;
@@ -32,10 +31,14 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import static net.villim.villim.HouseDescriptionActivity.KEY_BASIC_DESCRIPTION;
 import static net.villim.villim.VillimKeys.KEY_ADDITIONAL_GUEST_FEE;
 import static net.villim.villim.VillimKeys.KEY_ADDR_DIRECTION;
+import static net.villim.villim.VillimKeys.KEY_ADDR_SUMMARY;
 import static net.villim.villim.VillimKeys.KEY_AMENITY_IDS;
 import static net.villim.villim.VillimKeys.KEY_CANCELLATION_POLICY;
 import static net.villim.villim.VillimKeys.KEY_CLEANING_FEE;
 import static net.villim.villim.VillimKeys.KEY_DEPOSIT;
+import static net.villim.villim.VillimKeys.KEY_HOST_ID;
+import static net.villim.villim.VillimKeys.KEY_HOST_NAME;
+import static net.villim.villim.VillimKeys.KEY_HOST_PROFILE_PIC_URL;
 import static net.villim.villim.VillimKeys.KEY_HOUSE_POLICY;
 import static net.villim.villim.VillimKeys.KEY_LATITUDE;
 import static net.villim.villim.VillimKeys.KEY_LONGITUDE;
@@ -53,6 +56,7 @@ public class HouseDetailActivity extends AppCompatActivity implements OnMapReady
     private Toolbar toolbar;
     private ImageView toolbarImage;
 
+    private RelativeLayout hostInfo;
     private ImageView hostProfilePic;
     private TextView hostName;
     private RatingBar hostRating;
@@ -122,6 +126,7 @@ public class HouseDetailActivity extends AppCompatActivity implements OnMapReady
         /* View elements containing room info. */
 
         /* Host Info */
+        hostInfo = (RelativeLayout) findViewById(R.id.host_info);
         hostProfilePic = (ImageView) findViewById(R.id.host_profile_pic);
         hostName = (TextView) findViewById(R.id.host_name);
         hostRating = (RatingBar) findViewById(R.id.host_review_rating);
@@ -186,6 +191,19 @@ public class HouseDetailActivity extends AppCompatActivity implements OnMapReady
         Glide.with(this)
                 .load(R.drawable.prugio_thumbnail)
                 .into(toolbarImage);
+
+        /* Add callback to post profile activity */
+        hostInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HouseDetailActivity.this, HostProfileActivity.class);
+                intent.putExtra(KEY_HOST_ID, house.hostId);
+                intent.putExtra(KEY_HOST_NAME, house.hostName);
+                intent.putExtra(KEY_ADDR_SUMMARY, house.addrSummary);
+                intent.putExtra(KEY_HOST_PROFILE_PIC_URL, house.hostProfilePicUrl);
+                startActivity(intent);
+            }
+        });
 
         /* Host profile pic */
         Glide.with(this)
