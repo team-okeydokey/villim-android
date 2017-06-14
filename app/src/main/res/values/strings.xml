@@ -165,6 +165,7 @@
     <string name="open_doorlock">도어락 잠금 해제</string>
     <string name="find_room">방 찾아보기</string>
     <string name="open_room_error">문제가 발생했습니다. 다시 시도해 주세요.</string>
+    <string name="cant_connect_to_server">서버에 연결할 수 없습니다</string>
 
     <!-- House Description Activity -->
     <string name="basic_description">기본 설명</string>

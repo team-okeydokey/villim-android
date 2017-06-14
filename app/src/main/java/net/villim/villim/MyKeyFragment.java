@@ -75,6 +75,7 @@ public class MyKeyFragment extends Fragment {
 
         /* Slide Button */
         slideButton = (SlideButton) myKeyView.findViewById(R.id.slide_button);
+        slideButton.setClickable(false);
 
         /* Error Message */
         errorMessage = (TextView) myKeyView.findViewById(R.id.error_message);
@@ -111,7 +112,9 @@ public class MyKeyFragment extends Fragment {
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-                //something went wrong
+                // Something went wrong.
+                showErrorMessage(getString(R.string.cant_connect_to_server));
+                stopLoadingAnimation();
             }
 
             @Override
@@ -220,6 +223,7 @@ public class MyKeyFragment extends Fragment {
                 sendRoomOpenRequest();
             }
         });
+        slideButton.setClickable(true);
     }
 
     public void displayNoRoom() {
@@ -242,6 +246,7 @@ public class MyKeyFragment extends Fragment {
             }
         });
         slideButton.setSlideButtonListener(null);
+        slideButton.setClickable(true);
 
         /* House thumbnail */
         Glide.with(this)
