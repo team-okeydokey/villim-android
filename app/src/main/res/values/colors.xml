@@ -80,5 +80,8 @@
     <color name="signup_welcome_text">#05060b</color>
     <color name="consent_text">#585757</color>
 
+    <!-- Room detail Activity -->
+    <color name="see_more">#de2025</color>
+
 
 </resources>

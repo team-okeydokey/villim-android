@@ -329,7 +329,7 @@
                     android:gravity="center_vertical|right"
                     android:lineSpacingExtra="3sp"
                     android:text="@string/read_more"
-                    android:textColor="#de2025"
+                    android:textColor="@color/see_more"
                     android:textSize="15sp" />
 
             </RelativeLayout>
@@ -349,6 +349,7 @@
                 android:text="@string/amenities_title"
                 android:textColor="#05060b"
                 android:textSize="15sp" />
+
             <!-- Amenities icons -->
             <android.support.v7.widget.LinearLayoutCompat
                 android:id="@+id/amenity_icons"
@@ -449,7 +450,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:lineSpacingExtra="3sp"
-                            android:textColor="#de2025"
+                            android:textColor="@color/see_more"
                             android:textSize="13sp" />
 
                         <!-- House rating -->
@@ -513,7 +514,7 @@
                     android:gravity="center_vertical|right"
                     android:lineSpacingExtra="3sp"
                     android:text="@string/read_more"
-                    android:textColor="#de2025"
+                    android:textColor="@color/see_more"
                     android:textSize="15sp" />
 
             </RelativeLayout>
@@ -546,7 +547,7 @@
                     android:gravity="center_vertical|right"
                     android:lineSpacingExtra="3sp"
                     android:text="@string/cancellation_strict"
-                    android:textColor="#de2025"
+                    android:textColor="@color/see_more"
                     android:textSize="15sp" />
             </RelativeLayout>
             <!-- End refund policy -->

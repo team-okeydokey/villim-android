@@ -10,6 +10,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.Toolbar;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -307,6 +308,8 @@ public class RoomDetailActivity extends AppCompatActivity implements OnMapReadyC
             seeMoreTextView.setText(seeMoreText);
             seeMoreTextView.setTextAlignment(View.TEXT_ALIGNMENT_VIEW_END);
             seeMoreTextView.setGravity(Gravity.CENTER_VERTICAL);
+            seeMoreTextView.setTextColor(getResources().getColor(R.color.see_more));
+            seeMoreTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP,13);
             amenityIcons.addView(seeMoreTextView);
         }
 
