@@ -187,4 +187,13 @@
     <!-- Fullscreen map activity -->
     <string name="direction_format">오시는 길\n(마커를 클릭하면 화면 하단에 구글 맵 툴바가 나타납니다)\n%s</string>
 
+    <!-- View Review Activity -->
+    <string name="review">후기</string>
+    <string name="review_count_format">후기 %d개</string>
+    <string name="accuracy">정확성</string>
+    <string name="communication">의사소통</string>
+    <string name="cleanliness">청결도</string>
+    <string name="location">위치</string>
+    <string name="checkin">체크인</string>
+    <string name="value">가치</string>
 </resources>

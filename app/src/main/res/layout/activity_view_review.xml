@@ -25,4 +25,174 @@
 
     </android.support.v7.widget.Toolbar>
 
+    <!-- 후기 종합 -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/review_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:lineSpacingExtra="4sp"
+            android:text="@string/review"
+            android:textColor="#040d14"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/review_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/review_title"
+            android:textColor="#05060b"
+            android:textSize="15sp" />
+
+        <android.support.v7.widget.AppCompatRatingBar
+            android:id="@+id/overall_ratingbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/review_title" />
+
+        <!-- 정확성 -->
+        <LinearLayout
+            android:id="@+id/accuracy_review"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/overall_ratingbar">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:lineSpacingExtra="7sp"
+                android:text="@string/accuracy"
+                android:textColor="#585757"
+                android:textSize="13sp" />
+
+            <android.support.v7.widget.AppCompatRatingBar
+                android:id="@+id/accuracy_ratingbar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <!-- 의사소통 -->
+        <LinearLayout
+            android:id="@+id/communication_review"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/accuracy_review">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:lineSpacingExtra="7sp"
+                android:text="@string/communication"
+                android:textColor="#585757"
+                android:textSize="13sp" />
+
+            <android.support.v7.widget.AppCompatRatingBar
+                android:id="@+id/communication_ratingbar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <!-- 청결도 -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/communication_review">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:lineSpacingExtra="7sp"
+                android:text="@string/cleanliness"
+                android:textColor="#585757"
+                android:textSize="13sp" />
+
+            <android.support.v7.widget.AppCompatRatingBar
+                android:id="@+id/cleanliness_ratingbar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <!-- 위치 -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/overall_ratingbar">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:lineSpacingExtra="7sp"
+                android:text="@string/location"
+                android:textColor="#585757"
+                android:textSize="13sp" />
+
+            <android.support.v7.widget.AppCompatRatingBar
+                android:id="@+id/location_ratingbar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <!-- 체크인 -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/accuracy_review">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:lineSpacingExtra="7sp"
+                android:text="@string/checkin"
+                android:textColor="#585757"
+                android:textSize="13sp" />
+
+            <android.support.v7.widget.AppCompatRatingBar
+                android:id="@+id/checkin_ratingbar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <!-- 가치 -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/communication_review">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:lineSpacingExtra="7sp"
+                android:text="@string/value"
+                android:textColor="#585757"
+                android:textSize="13sp" />
+
+            <android.support.v7.widget.AppCompatRatingBar
+                android:id="@+id/value_ratingbar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+    <include layout="@layout/category_divider" />
+
+    <!-- 후기 리스트 -->
+
+    <ListView
+        android:id="@+id/review_listview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
 </RelativeLayout>
