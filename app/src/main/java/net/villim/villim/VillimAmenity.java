@@ -44,7 +44,7 @@ public class VillimAmenity {
             put(0, R.drawable.icon_bed);
             put(1, R.drawable.icon_wifi);
             put(2, R.drawable.icon_tv);
-            put(3, R.drawable.ic_whatshot_black_24dp);
+            put(3, R.drawable.icon_breakfast);
             put(4, R.drawable.icon_iron);
             put(5, R.drawable.icon_desk);
             put(6, R.drawable.icon_towel);
