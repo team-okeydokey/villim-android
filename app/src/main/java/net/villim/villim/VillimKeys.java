@@ -84,4 +84,21 @@ public class VillimKeys {
     public static final String KEY_AMENITY_IDS = "amenity_ids";
     public static final String KEY_HOUSE_PIC_URLS = "house_pic_urls";
 
+    /* Review info keys */
+    public static final String KEY_REVIEWS = "reviews";
+    public static final String KEY_REVIEW_RATING = "review_rating";
+    public static final String KEY_REVIEW_COUNT = "review_count";
+    public static final String KEY_REVIEWER_ID = "reviewer_id";
+    public static final String KEY_RESERVATION_ID = "reservation_id";
+    public static final String KEY_REVIEWER_NAME = "reviewer_name";
+    public static final String KEY_REVIEW_CONTENT = "review_content";
+    public static final String KEY_REVIEWER_PROFILE_URL = "reviewer_profile_url";
+    public static final String KEY_RATING_OVERALL = "rating_overall";
+    public static final String KEY_RATING_ACCURACY = "rating_accuracy";
+    public static final String KEY_RATING_COMMUNICATION = "rating_communication";
+    public static final String KEY_RATING_CLEANLINESS = "rating_cleanliness";
+    public static final String KEY_RATING_LOCATION = "rating_location";
+    public static final String KEY_RATING_CHECKIN = "rating_checkin";
+    public static final String KEY_RATING_VALUE = "rating_value";
+
 }
