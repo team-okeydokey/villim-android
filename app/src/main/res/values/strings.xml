@@ -184,4 +184,7 @@
     <!-- Amenity Activity -->
     <string name='amenity'>편의시설</string>
 
+    <!-- Fullscreen map activity -->
+    <string name="direction_format">오시는 길\n(마커를 클릭하면 화면 하단에 구글 맵 툴바가 나타납니다)\n%s</string>
+
 </resources>

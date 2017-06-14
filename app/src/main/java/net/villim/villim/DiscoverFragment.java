@@ -95,7 +95,7 @@ public class DiscoverFragment extends Fragment {
             jsonItem.put(KEY_HOUSE_NAME, "[HongDae]1min from Hongik Univ.Stn");
             jsonItem.put(KEY_ADDR_FULL, "[HongDae]1min from Hongik Univ.Stn");
             jsonItem.put(KEY_ADDR_SUMMARY, "강남구, 서울, 한국");
-            jsonItem.put(KEY_ADDR_DIRECTION, "[HongDae]1min from Hongik Univ.Stn");
+            jsonItem.put(KEY_ADDR_DIRECTION, "강남구청역 4번 출구로 나와서 내리막길로 5분 걸어오세요.");
             jsonItem.put(KEY_DESCRIPTION, "- 강남역 1번 출구 바로 앞입니다\n" +
                     "- 호텔 수준의 침구류, 매 예약마다 깨끗이 세탁 (퀸 사이즈)\n" +
                     "- 신축 깨끗한 오피스텔, 좋은 전망\n" +

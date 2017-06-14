@@ -169,7 +169,6 @@ public class ProfileFragment extends Fragment {
 
         /* Fetch profile image and populate view */
         if (session.getProfilePicUrl().isEmpty()) {
-            System.out.println(session.getProfilePicUrl());
             Glide.with(this)
                     .load(R.drawable.img_default)
                     .into(profilePicture);

@@ -31,11 +31,14 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import static net.villim.villim.HouseDescriptionActivity.KEY_BASIC_DESCRIPTION;
 import static net.villim.villim.VillimKeys.KEY_ADDITIONAL_GUEST_FEE;
+import static net.villim.villim.VillimKeys.KEY_ADDR_DIRECTION;
 import static net.villim.villim.VillimKeys.KEY_AMENITY_IDS;
 import static net.villim.villim.VillimKeys.KEY_CANCELLATION_POLICY;
 import static net.villim.villim.VillimKeys.KEY_CLEANING_FEE;
 import static net.villim.villim.VillimKeys.KEY_DEPOSIT;
 import static net.villim.villim.VillimKeys.KEY_HOUSE_POLICY;
+import static net.villim.villim.VillimKeys.KEY_LATITUDE;
+import static net.villim.villim.VillimKeys.KEY_LONGITUDE;
 import static net.villim.villim.VillimKeys.KEY_RATE_PER_NIGHT;
 
 
@@ -79,8 +82,7 @@ public class HouseDetailActivity extends AppCompatActivity implements OnMapReady
     private TextView seeMoreReviews;
     private RatingBar houseRating;
 
-    FrameLayout mapContainer;
-    MapFragment mapFragment;
+    private MapFragment mapFragment;
 
     private TextView housePolicyRead;
     private TextView refundPolicyRead;
@@ -88,7 +90,7 @@ public class HouseDetailActivity extends AppCompatActivity implements OnMapReady
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_room_detail);
+        setContentView(R.layout.activity_house_detail);
 
         toolbarImage = (ImageView) findViewById(R.id.toolbar_image);
 
@@ -288,9 +290,20 @@ public class HouseDetailActivity extends AppCompatActivity implements OnMapReady
 
     @Override
     public void onMapReady(GoogleMap map) {
-        map.addMarker(new MarkerOptions().position(new LatLng(house.latitude, house.longitude)).title("Marker"));
+        map.addMarker(new MarkerOptions().position(new LatLng(house.latitude, house.longitude)));
         map.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(house.latitude, house.longitude)));
         map.animateCamera(CameraUpdateFactory.zoomTo(17.0f));
+
+        map.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+            @Override
+            public void onMapClick(LatLng latLng) {
+                Intent intent = new Intent(HouseDetailActivity.this, FullScreenMapActivity.class);
+                intent.putExtra(KEY_LATITUDE, house.latitude);
+                intent.putExtra(KEY_LONGITUDE, house.longitude);
+                intent.putExtra(KEY_ADDR_DIRECTION, house.addrDirection);
+                startActivity(intent);
+            }
+        });
     }
 
     private class PopulateHouseDetailTask extends AsyncTask<Void, Void, Void> {

@@ -38,7 +38,7 @@
     <dimen name="date_filter_selection_size">15dp</dimen>
 
 
-    <!-- Room Detail Activity -->
+    <!-- House Detail Activity -->
     <dimen name="house_picture_height">300dp</dimen>
     <dimen name="host_profile_pic_size">40dp</dimen>
     <dimen name="room_detail_activity_padding">25dp</dimen>
@@ -101,6 +101,9 @@
 
     <!-- Amenity Activity -->
     <dimen name="amenity_list_drawable_size">25dp</dimen>
+
+    <!-- Fullscreen Map Activity -->
+    <dimen name="direction_text_height">85dp</dimen>
 
 
 </resources>

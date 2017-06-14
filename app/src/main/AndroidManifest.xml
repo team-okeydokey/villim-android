@@ -35,7 +35,8 @@
         <activity android:name=".PricePolicyActivity" />
         <activity android:name=".AmenityActivity" />
         <activity android:name=".HousePolicyActivity" />
-        <activity android:name=".CancellationPolicyActivity"></activity>
+        <activity android:name=".CancellationPolicyActivity" />
+        <activity android:name=".FullScreenMapActivity"></activity>
     </application>
 
 </manifest>
