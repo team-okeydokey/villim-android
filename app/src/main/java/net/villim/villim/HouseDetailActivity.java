@@ -39,6 +39,7 @@ import static net.villim.villim.VillimKeys.KEY_DEPOSIT;
 import static net.villim.villim.VillimKeys.KEY_HOST_ID;
 import static net.villim.villim.VillimKeys.KEY_HOST_NAME;
 import static net.villim.villim.VillimKeys.KEY_HOST_PROFILE_PIC_URL;
+import static net.villim.villim.VillimKeys.KEY_HOUSE_ID;
 import static net.villim.villim.VillimKeys.KEY_HOUSE_PIC_URLS;
 import static net.villim.villim.VillimKeys.KEY_HOUSE_POLICY;
 import static net.villim.villim.VillimKeys.KEY_LATITUDE;
@@ -442,6 +443,14 @@ public class HouseDetailActivity extends AppCompatActivity implements OnMapReady
                 /* Activate "see more" button with appropriate text. */
                 String seeMoreReviewsText = String.format(getString(R.string.reviews_see_more_format), reviews.length - 1);
                 seeMoreReviews.setText(seeMoreReviewsText);
+                seeMoreReviews.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(HouseDetailActivity.this, ViewReviewActivity.class);
+                        intent.putExtra(KEY_HOUSE_ID, house.houseId);
+                        startActivity(intent);
+                    }
+                });
             }
         }
     }

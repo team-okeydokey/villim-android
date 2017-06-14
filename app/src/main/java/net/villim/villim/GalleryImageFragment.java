@@ -14,7 +14,7 @@ import com.bumptech.glide.Glide;
 public class GalleryImageFragment extends Fragment {
 
     public static final String PICTURE_URL = "picture_url";
-    
+
     public GalleryImageFragment() {
         // Required empty public constructor
     }
