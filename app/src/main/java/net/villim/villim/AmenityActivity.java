@@ -8,12 +8,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 import static net.villim.villim.VillimKeys.KEY_AMENITY_IDS;
 
@@ -21,6 +20,7 @@ public class AmenityActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
     private ListView amenityListView;
+    private Button closeButton;
 
     private int[] amenityIds;
 
@@ -37,6 +37,15 @@ public class AmenityActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         getSupportActionBar().setDisplayShowHomeEnabled(false);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+        /* Back button */
+        closeButton = (Button) findViewById(R.id.close_button);
+        closeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         /* ListView */
         amenityIds = getIntent().getIntArrayExtra(KEY_AMENITY_IDS);
