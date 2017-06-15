@@ -219,6 +219,15 @@
 
     <!-- ReservationResult Activity -->
     <string name="date_string_format">"%1$04d-%2$02d-%3$02d"</string>
+    <string name="reservation_success">빌림 요청 완료</string>
+    <string name="reservation_success_instruction_format">빌림요청이 완료되었습니다.\n곧 빌림에서 6시간 이내에 연락이 갈 예정입니다.</string>
+    <string name="reservation_code">예약번호</string>
+    <string name="reservation_guest">예약자</string>
+    <string name="reservation_date">예약 일자</string>
+    <string name="reservation_status">예약 상태</string>
 
+    <string name="reservation_status_waiting">대기중</string>
+    <string name="reservation_status_confirmed">예약 완료</string>
+    <string name="reservation_status_active">거주중</string>
 
 </resources>

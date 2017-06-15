@@ -262,6 +262,7 @@ public class ReservationActivity extends AppCompatActivity {
                         stopLoadingAnimation();
                         hideErrorMessage();
                         startActivity(intent);
+                        finish();
                     } else {
                         showErrorMessage(jsonObject.getString(KEY_MESSAGE));
                         stopLoadingAnimation();

@@ -1,5 +1,6 @@
 package net.villim.villim;
 
+import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -23,6 +24,10 @@ import static net.villim.villim.VillimKeys.KEY_START_DATE;
  */
 
 public class VillimReservation implements Parcelable {
+    public static final int WAITING = 0;
+    public static final int CONFIRMED = 1;
+    public static final int ACTIVE = 2;
+
     public int reservationId;
     public int houseId;
     public int hostId;
@@ -94,5 +99,18 @@ public class VillimReservation implements Parcelable {
         dest.writeString(reservationTime);
         dest.writeInt(reservationStatus);
         dest.writeString(reservationCode);
+    }
+
+    public static String stringFromReservationStatus(Context context, int status) {
+        switch (status) {
+            case WAITING:
+                return context.getString(R.string.reservation_status_waiting);
+            case CONFIRMED:
+                return context.getString(R.string.reservation_status_confirmed);
+            case ACTIVE:
+                return context.getString(R.string.reservation_status_active);
+            default:
+                return context.getString(R.string.reservation_status_waiting);
+        }
     }
 }
