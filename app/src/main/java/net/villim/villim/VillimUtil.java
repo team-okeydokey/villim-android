@@ -57,6 +57,10 @@ public class VillimUtil {
         return date;
     }
 
+    public static String dateStringFromDate(Context context, Date date) {
+        return String.format(context.getString(R.string.date_string_format), date.getYear(), date.getMonth()+1, date.getDate());
+    }
+
     public static int daysBetween(Date one, Date two) { long difference = (one.getTime()-two.getTime())/86400000; return (int) Math.abs(difference); }
 
 

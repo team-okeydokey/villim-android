@@ -161,7 +161,7 @@ public class CalendarActivity extends AppCompatActivity {
     private void setStartAndEndDateText(Date startDate, Date endDate) {
         /* Set start date text */
         if (startDate != null) {
-            String startDateText = String.format(getString(R.string.date_filter_date_text_format), startDate.getMonth(), startDate.getDate())
+            String startDateText = String.format(getString(R.string.date_filter_date_text_format), startDate.getMonth() + 1, startDate.getDate())
                     + "\n" + VillimUtil.getWeekday(this, startDate.getDay());
             startDateTextView.setText(startDateText);
         } else {
@@ -170,7 +170,7 @@ public class CalendarActivity extends AppCompatActivity {
 
         /* Set end date text. */
         if (endDate != null) {
-            String endDateText = String.format(getString(R.string.date_filter_date_text_format), endDate.getMonth(), endDate.getDate())
+            String endDateText = String.format(getString(R.string.date_filter_date_text_format), endDate.getMonth() + 1, endDate.getDate())
                     + "\n" + VillimUtil.getWeekday(this, endDate.getDay());
             endDateTextView.setText(endDateText);
         } else {

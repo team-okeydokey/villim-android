@@ -368,8 +368,8 @@ public class MainActivity extends AppCompatActivity {
                 endDate = (Date) data.getSerializableExtra(CalendarActivity.END_DATE);
 
                 String dateFilterText = String.format(getString(R.string.search_filter_date_format),
-                        startDate.getMonth(), startDate.getDate(),
-                        endDate.getMonth(), endDate.getDate());
+                        startDate.getMonth() + 1, startDate.getDate(),
+                        endDate.getMonth() + 1, endDate.getDate());
                 searchFilterDate.setText(dateFilterText);
                 /* Show clear button */
                 dateSelected = true;

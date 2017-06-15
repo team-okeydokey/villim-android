@@ -40,7 +40,8 @@
         <activity android:name=".HostProfileActivity" />
         <activity android:name=".GalleryActivity" />
         <activity android:name=".ViewReviewActivity" />
-        <activity android:name=".ReservationActivity"></activity>
+        <activity android:name=".ReservationActivity" />
+        <activity android:name=".ReservationSuccessActivity"></activity>
     </application>
 
 </manifest>

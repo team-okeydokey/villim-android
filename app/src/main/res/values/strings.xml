@@ -215,7 +215,10 @@
     <string name="not_selected">미정</string>
     <string name="num_nights_format">%d일</string>
     <string name="overview_info_format">인원 %1$d명, 방 %2$d개, 침대 %3$d개, 욕실 %4$d개</string>
+    <string name="must_select_date">시작일과 종료일을 선택해주세요.</string>
 
+    <!-- ReservationResult Activity -->
+    <string name="date_string_format">"%1$04d-%2$02d-%3$02d"</string>
 
 
 </resources>

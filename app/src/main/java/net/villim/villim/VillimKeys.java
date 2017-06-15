@@ -101,4 +101,20 @@ public class VillimKeys {
     public static final String KEY_RATING_CHECKIN = "rating_checkin";
     public static final String KEY_RATING_VALUE = "rating_value";
 
+    /* Reservation keys */
+    public static final String KEY_RESERVATION_SUCCESS = "reservation_success";
+    public static final String KEY_RESERVATION_INFO = "reservation_info";
+    public static final String KEY_GUEST_ID = "guest_id";
+    public static final String KEY_START_DATE = "start_date";
+    public static final String KEY_END_DATE = "end_date";
+    public static final String KEY_RESERVATION_TIME = "reservation_time";
+    public static final String KEY_RESERVATION_STATUS = "reservation_status";
+    public static final String KEY_RESERVATION_CODE = "reservation_code";
+
 }
+
+
+
+
+
+
