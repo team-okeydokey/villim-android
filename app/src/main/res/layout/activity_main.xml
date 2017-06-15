@@ -86,7 +86,7 @@
                     android:id="@+id/toolbar_logo"
                     android:layout_width="@dimen/toolbar_logo_width"
                     android:layout_height="@dimen/toolbar_logo_height"
-                    android:layout_gravity='center'
+                    android:layout_gravity='left|center_vertical'
                     android:src="@drawable/logo_horizontal_red" />
 
 

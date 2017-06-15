@@ -23,6 +23,7 @@
 
 
     <!-- Discover Activity -->
+    <dimen name="discover_card_width">320dp</dimen>
     <dimen name="discover_card_height">110dp</dimen>
     <dimen name="discover_review_height">30dp</dimen>
     <dimen name="discover_recycler_padding">10dp</dimen>
@@ -37,15 +38,19 @@
     <dimen name="date_filter_selection_size">15dp</dimen>
 
 
-    <!-- Room Detail Activity -->
-    <dimen name="house_picture_height">200dp</dimen>
-    <dimen name="host_profile_pic_size">60dp</dimen>
-    <dimen name="room_detail_activity_padding">10dp</dimen>
+    <!-- House Detail Activity -->
+    <dimen name="house_picture_height">300dp</dimen>
+    <dimen name="host_profile_pic_size">40dp</dimen>
+    <dimen name="room_detail_activity_padding">25dp</dimen>
     <dimen name="amenity_icon_width">25dp</dimen>
     <dimen name="amenity_icon_height">25dp</dimen>
+    <dimen name="house_info_icon_width">40dp</dimen>
+    <dimen name="house_info_icon_height">40dp</dimen>
     <dimen name="reviewer_profile_pic_size">40dp</dimen>
-    <dimen name="reviews_padding">25dp</dimen>
+    <dimen name="reviews_padding">20dp</dimen>
     <dimen name="policy_category_height">60dp</dimen>
+    <dimen name="reserve_button_height">65dp</dimen>
+    <dimen name="description_see_more_bottom_padding">15dp</dimen>
 
     <!-- Search Activity -->
     <dimen name="search_activity_padding">20dp</dimen>
@@ -54,11 +59,18 @@
     <dimen name="location_filter_drawable_padding">10dp</dimen>
 
     <!-- Proifile Fragment -->
-    <dimen name="profile_image_diameter">130dp</dimen>
+    <dimen name="profile_image_diameter">80dp</dimen>
     <dimen name="room_thumbnail_image_diameter">175dp</dimen>
+    <dimen name="profile_user_info_padding_side">25dp</dimen>
+    <dimen name="profile_user_info_margin_top">40dp</dimen>
+    <dimen name="profile_name_text_size">20sp</dimen>
+    <dimen name="profile_user_info_height">130dp</dimen>
     <dimen name="profile_list_header_height">60dp</dimen>
     <dimen name="profile_list_drawable_padding">10dp</dimen>
-
+    <dimen name="profile_list_item_height">55dp</dimen>
+    <dimen name="profile_list_item_padding_side">25dp</dimen>
+    <dimen name="profile_list_item_text_size">15sp</dimen>
+    <dimen name="profile_list_drawable_size">25dp</dimen>
 
     <!--Login Activity -->
     <dimen name="advert_container_margin_top">122dp</dimen>
@@ -71,19 +83,27 @@
     <dimen name="login_activity_padding">26dp</dimen>
     <dimen name="next_button_text_size">17sp</dimen>
     <dimen name="login_error_message_text_size">14sp</dimen>
+    <dimen name="login_drawable_size">25dp</dimen>
 
     <!-- Signup Activity -->
     <dimen name="consent_text_size">11sp</dimen>
     <dimen name="consent_text_margin">20dp</dimen>
 
     <!-- My Key Fragment -->
-    <dimen name="mykey_room_thumbnail_size">250dp</dimen>
+    <dimen name="mykey_room_thumbnail_size">200dp</dimen>
     <dimen name="slide_button_bottom_margin">80dp</dimen>
     <dimen name="slide_button_width">350dp</dimen>
     <dimen name="slide_button_height">60dp</dimen>
     <dimen name="slide_button_radius">200dp</dimen>
     <dimen name="slide_button_thumb_size">50dp</dimen>
-    <dimen name="mykey_button_margin">20dp</dimen>
+    <dimen name="mykey_button_margin_side">25dp</dimen>
+    <dimen name="mykey_button_margin_top">30dp</dimen>
+
+    <!-- Amenity Activity -->
+    <dimen name="amenity_list_drawable_size">25dp</dimen>
+
+    <!-- Fullscreen Map Activity -->
+    <dimen name="direction_text_height">85dp</dimen>
 
 
 </resources>

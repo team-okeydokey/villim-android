@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.rojoxpress.slidebutton.SlideButton;
@@ -33,7 +32,8 @@ import static net.villim.villim.VillimKeys.KEY_ROOM_ID;
 
 
 public class MyKeyFragment extends Fragment {
-    private static final String MY_KEY_URL = "http://www.mocky.io/v2/593df3e0110000f727722b11";
+    private static final String MY_ROOM_URL = "http://www.mocky.io/v2/593df3e0110000f727722b11";
+    private static final String OPEN_DOORLOCK_URL = "http://www.mocky.io/v2/593df3e0110000f727722b11";
 
     private MainActivity activity;
 
@@ -75,6 +75,8 @@ public class MyKeyFragment extends Fragment {
 
         /* Slide Button */
         slideButton = (SlideButton) myKeyView.findViewById(R.id.slide_button);
+        slideButton.setClickable(false);
+        slideButton.setEnabled(false);
 
         /* Error Message */
         errorMessage = (TextView) myKeyView.findViewById(R.id.error_message);
@@ -104,14 +106,16 @@ public class MyKeyFragment extends Fragment {
                 .build();
 
         Request request = new Request.Builder()
-                .url(MY_KEY_URL)
+                .url(MY_ROOM_URL)
                 .post(requestBody)
                 .build();
 
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-                //something went wrong
+                // Something went wrong.
+                showErrorMessage(getString(R.string.cant_connect_to_server));
+                stopLoadingAnimation();
             }
 
             @Override
@@ -161,14 +165,16 @@ public class MyKeyFragment extends Fragment {
                 .build();
 
         Request request = new Request.Builder()
-                .url(MY_KEY_URL)
+                .url(OPEN_DOORLOCK_URL)
                 .post(requestBody)
                 .build();
 
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-                //something went wrong
+                // Something went wrong.
+                showErrorMessage(getString(R.string.cant_connect_to_server));
+                stopLoadingAnimation();
             }
 
             @Override
@@ -220,6 +226,8 @@ public class MyKeyFragment extends Fragment {
                 sendRoomOpenRequest();
             }
         });
+        slideButton.setClickable(true);
+        slideButton.setEnabled(true);
     }
 
     public void displayNoRoom() {
@@ -242,10 +250,12 @@ public class MyKeyFragment extends Fragment {
             }
         });
         slideButton.setSlideButtonListener(null);
+        slideButton.setClickable(true);
+        slideButton.setEnabled(true);
 
         /* House thumbnail */
         Glide.with(this)
-                .load(R.drawable.prugio_thumbnail)
+                .load(R.drawable.img_default)
                 .into(houseThumbnail);
     }
 

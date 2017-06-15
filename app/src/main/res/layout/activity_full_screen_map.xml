@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="net.villim.villim.FullScreenMapActivity">
+
+    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/map"
+        class="com.google.android.gms.maps.MapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/toolbar_height"
+        android:background="#17181c"
+        android:padding="10dp"
+        app:contentInsetEnd="0dp"
+        app:contentInsetStart="0dp">
+
+        <Button
+            android:id="@+id/close_button"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="right|center_vertical"
+            android:background="@drawable/btn_close_white" />
+
+    </android.support.v7.widget.Toolbar>
+
+    <TextView
+        android:id="@+id/direction_text"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/direction_text_height"
+        android:layout_alignParentBottom="true"
+        android:background="#17181c"
+        android:letterSpacing="-0.01"
+        android:lineSpacingExtra="6sp"
+        android:padding="10dp"
+        android:textColor="#ffffff"
+        android:textSize="14sp" />
+
+</RelativeLayout>

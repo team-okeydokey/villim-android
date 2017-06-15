@@ -2,6 +2,7 @@ package net.villim.villim;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -71,6 +72,18 @@ public class SignupActivity extends AppCompatActivity {
         signupFormEmail = (EditText) findViewById(R.id.signup_form_email);
         signupFormPassword = (EditText) findViewById(R.id.signup_form_password);
 
+        Drawable personIcon =  getResources().getDrawable(R.drawable.icon_profile);
+        Drawable emailIcon =  getResources().getDrawable(R.drawable.icon_lock);
+        Drawable lockIcon =  getResources().getDrawable(R.drawable.icon_lock);
+        int iconSize = getResources().getDimensionPixelSize(R.dimen.login_drawable_size);
+        personIcon.setBounds(0, 0, iconSize, iconSize);
+        emailIcon.setBounds(0, 0, iconSize, iconSize);
+        lockIcon.setBounds(0, 0, iconSize, iconSize);
+        signupFormLastname.setCompoundDrawables(personIcon, null, null, null);
+        signupFormFirstname.setCompoundDrawables(personIcon, null, null, null);
+        signupFormEmail.setCompoundDrawables(emailIcon, null, null, null);
+        signupFormPassword.setCompoundDrawables(lockIcon, null, null, null);
+
         /* Error Message */
         errorMessage = (TextView) findViewById(R.id.error_message);
         errorMessage.setVisibility(View.INVISIBLE);
@@ -121,7 +134,9 @@ public class SignupActivity extends AppCompatActivity {
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-                //something went wrong
+                // Something went wrong.
+                showErrorMessage(getString(R.string.cant_connect_to_server));
+                stopLoadingAnimation();
             }
 
             @Override

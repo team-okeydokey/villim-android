@@ -76,12 +76,13 @@
     <string name="amenities_see_more_format">+%d개</string>
     <string name="reviews_see_more_format">+%d개 후기 더보기</string>
     <string name="reviews_no_review">아직 작성된 후기가 없습니다.</string>
+    <string name="reserve">예약하기</string>
 
     <!-- Amenities -->
     <string name="amenity_bedsheet">침대시트</string>
     <string name="amenity_wifi">무선 인터넷</string>
     <string name="amenity_tv">TV</string>
-    <string name="amenity_cooking_utensil">취사도구식/식기</string>
+    <string name="amenity_cooking_utensil">취사도구/식기</string>
     <string name="amenity_iron">다리미</string>
     <string name="amenity_desk">책상/작업공간</string>
     <string name="amenity_towel">수건</string>
@@ -91,7 +92,7 @@
     <string name="amenity_hair_dryer">헤어드라이기</string>
     <string name="amenity_smoke_detector">연기 감지기</string>
     <string name="amenity_first_aid">비품</string>
-    <string name="amenity_heat">난방</string>
+    <string name="amenity_heating">난방</string>
     <string name="amenity_cooking_electronics">취사 가전제품</string>
     <string name="amenity_washer">세탁기</string>
     <string name="amenity_closet">옷장/서랍장</string>
@@ -164,6 +165,36 @@
     <string name="open_doorlock">도어락 잠금 해제</string>
     <string name="find_room">방 찾아보기</string>
     <string name="open_room_error">문제가 발생했습니다. 다시 시도해 주세요.</string>
+    <string name="cant_connect_to_server">서버에 연결할 수 없습니다</string>
 
+    <!-- House Description Activity -->
+    <string name="basic_description">기본 설명</string>
 
+    <!-- Price Policy -->
+    <string name="base_monthly_price">기본 가격: 월단위</string>
+    <string name="deposit">보증금</string>
+    <string name="additional_guest_fee">추가 인원 요금</string>
+    <string name="cleaning_Fee">청소비</string>
+    <string name="won_text_format">%d원</string>
+    <string name="won_symbol_format">₩ %d</string>
+    <string name="no_deposit">보증금 없음</string>
+    <string name="no_additional_fee">추가요금 없음</string>
+    <string name="cant_query">불러올 수 없음</string>
+
+    <!-- Amenity Activity -->
+    <string name='amenity'>편의시설</string>
+
+    <!-- Fullscreen map activity -->
+    <string name="direction_format">오시는 길\n(마커를 클릭하면 화면 하단에 구글 맵 툴바가 나타납니다)\n%s</string>
+
+    <!-- View Review Activity -->
+    <string name="review">후기</string>
+    <string name="review_count_format">후기 %d개</string>
+    <string name="accuracy">정확성</string>
+    <string name="communication">의사소통</string>
+    <string name="cleanliness">청결도</string>
+    <string name="location">위치</string>
+    <string name="checkin">체크인</string>
+    <string name="value">가치</string>
+    <string name="review_date_format">%1$d년 %2$d월</string>
 </resources>

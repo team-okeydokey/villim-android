@@ -1,5 +1,6 @@
 package net.villim.villim;
 
+import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -9,11 +10,11 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.Toolbar;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.RelativeLayout;
@@ -27,18 +28,37 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import static net.villim.villim.HouseDescriptionActivity.KEY_BASIC_DESCRIPTION;
+import static net.villim.villim.VillimKeys.KEY_ADDITIONAL_GUEST_FEE;
+import static net.villim.villim.VillimKeys.KEY_ADDR_DIRECTION;
+import static net.villim.villim.VillimKeys.KEY_ADDR_SUMMARY;
+import static net.villim.villim.VillimKeys.KEY_AMENITY_IDS;
+import static net.villim.villim.VillimKeys.KEY_CANCELLATION_POLICY;
+import static net.villim.villim.VillimKeys.KEY_CLEANING_FEE;
+import static net.villim.villim.VillimKeys.KEY_DEPOSIT;
+import static net.villim.villim.VillimKeys.KEY_HOST_ID;
+import static net.villim.villim.VillimKeys.KEY_HOST_NAME;
+import static net.villim.villim.VillimKeys.KEY_HOST_PROFILE_PIC_URL;
+import static net.villim.villim.VillimKeys.KEY_HOUSE_ID;
+import static net.villim.villim.VillimKeys.KEY_HOUSE_PIC_URLS;
+import static net.villim.villim.VillimKeys.KEY_HOUSE_POLICY;
+import static net.villim.villim.VillimKeys.KEY_LATITUDE;
+import static net.villim.villim.VillimKeys.KEY_LONGITUDE;
+import static net.villim.villim.VillimKeys.KEY_RATE_PER_NIGHT;
 
-public class RoomDetailActivity extends AppCompatActivity implements OnMapReadyCallback {
+
+public class HouseDetailActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private final static int MAX_AMENITY_ICONS = 6;
 
-    private VillimRoom house;
+    private VillimHouse house;
 
     private AppBarLayout appBarLayout;
     private CollapsingToolbarLayout collapsingToolbarLayout;
     private Toolbar toolbar;
     private ImageView toolbarImage;
 
+    private RelativeLayout hostInfo;
     private ImageView hostProfilePic;
     private TextView hostName;
     private RatingBar hostRating;
@@ -56,6 +76,8 @@ public class RoomDetailActivity extends AppCompatActivity implements OnMapReadyC
     private TextView description;
     private Button descriptionSeeMore;
 
+    private TextView pricePolicyRead;
+
     private LinearLayoutCompat amenityIcons;
 
     private RelativeLayout reviewBody;
@@ -66,13 +88,15 @@ public class RoomDetailActivity extends AppCompatActivity implements OnMapReadyC
     private TextView seeMoreReviews;
     private RatingBar houseRating;
 
-    FrameLayout mapContainer;
-    MapFragment mapFragment;
+    private MapFragment mapFragment;
+
+    private TextView housePolicyRead;
+    private TextView refundPolicyRead;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_room_detail);
+        setContentView(R.layout.activity_house_detail);
 
         toolbarImage = (ImageView) findViewById(R.id.toolbar_image);
 
@@ -104,6 +128,7 @@ public class RoomDetailActivity extends AppCompatActivity implements OnMapReadyC
         /* View elements containing room info. */
 
         /* Host Info */
+        hostInfo = (RelativeLayout) findViewById(R.id.host_info);
         hostProfilePic = (ImageView) findViewById(R.id.host_profile_pic);
         hostName = (TextView) findViewById(R.id.host_name);
         hostRating = (RatingBar) findViewById(R.id.host_review_rating);
@@ -124,6 +149,9 @@ public class RoomDetailActivity extends AppCompatActivity implements OnMapReadyC
         description = (TextView) findViewById(R.id.description);
         descriptionSeeMore = (Button) findViewById(R.id.description_see_more);
 
+        /* Price Policy */
+        pricePolicyRead = (TextView) findViewById(R.id.price_policy_read);
+
         /* Amenities */
         amenityIcons = (LinearLayoutCompat) findViewById(R.id.amenity_icons);
 
@@ -143,11 +171,15 @@ public class RoomDetailActivity extends AppCompatActivity implements OnMapReadyC
         /* Extract room info and fill view elements with data */
         house = extractRoomInfo();
 
+        /* House & Refund Policy */
+        housePolicyRead = (TextView) findViewById(R.id.house_policy_read);
+        refundPolicyRead = (TextView) findViewById(R.id.refund_policy_read);
+
         populateView();
     }
 
     // Extract room info.
-    private VillimRoom extractRoomInfo() {
+    private VillimHouse extractRoomInfo() {
         Bundle args = getIntent().getExtras();
         house = args.getParcelable(getString(R.string.key_house));
         house.reviews = VillimReview.getHouseReviewsFromServer(house.houseId);
@@ -157,10 +189,33 @@ public class RoomDetailActivity extends AppCompatActivity implements OnMapReadyC
 
     // Make this async.
     private void populateView() {
-        /* Room picture */
+        /* House picture */
+        if (house.housePicUrls.length > 0) {
+            toolbarImage.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(HouseDetailActivity.this, GalleryActivity.class);
+                    intent.putExtra(KEY_HOUSE_PIC_URLS, house.housePicUrls);
+                    startActivity(intent);
+                }
+            });
+        }
         Glide.with(this)
                 .load(R.drawable.prugio_thumbnail)
                 .into(toolbarImage);
+
+        /* Add callback to post profile activity */
+        hostInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HouseDetailActivity.this, HostProfileActivity.class);
+                intent.putExtra(KEY_HOST_ID, house.hostId);
+                intent.putExtra(KEY_HOST_NAME, house.hostName);
+                intent.putExtra(KEY_ADDR_SUMMARY, house.addrSummary);
+                intent.putExtra(KEY_HOST_PROFILE_PIC_URL, house.hostProfilePicUrl);
+                startActivity(intent);
+            }
+        });
 
         /* Host profile pic */
         Glide.with(this)
@@ -188,7 +243,7 @@ public class RoomDetailActivity extends AppCompatActivity implements OnMapReadyC
         numBathroom.setText(numBathroomText);
 
         /* Description */
-        description.setText(house.description);
+        description.setText(house.description.trim());
         description.post(new Runnable() {
             @Override
             public void run() {
@@ -196,8 +251,34 @@ public class RoomDetailActivity extends AppCompatActivity implements OnMapReadyC
                     descriptionSeeMore.setVisibility(View.VISIBLE);
                 } else {
                     descriptionSeeMore.setVisibility(View.GONE);
+                    description.setPadding(
+                            description.getPaddingLeft(),
+                            description.getPaddingTop(),
+                            description.getPaddingRight(),
+                            getResources().getDimensionPixelSize(R.dimen.description_see_more_bottom_padding));
                 }
 
+            }
+        });
+        descriptionSeeMore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HouseDetailActivity.this, HouseDescriptionActivity.class);
+                intent.putExtra(KEY_BASIC_DESCRIPTION, house.description);
+                startActivity(intent);
+            }
+        });
+
+        /* Price Policy */
+        pricePolicyRead.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HouseDetailActivity.this, PricePolicyActivity.class);
+                intent.putExtra(KEY_RATE_PER_NIGHT, house.ratePerNight);
+                intent.putExtra(KEY_DEPOSIT, house.deposit);
+                intent.putExtra(KEY_ADDITIONAL_GUEST_FEE, house.additionalGuestFee);
+                intent.putExtra(KEY_CLEANING_FEE, house.cleaningFee);
+                startActivity(intent);
             }
         });
 
@@ -209,7 +290,26 @@ public class RoomDetailActivity extends AppCompatActivity implements OnMapReadyC
 
         /* Map */
 
+        /* House & Refund Policy */
+        housePolicyRead = (TextView) findViewById(R.id.house_policy_read);
+        housePolicyRead.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HouseDetailActivity.this, HousePolicyActivity.class);
+                intent.putExtra(KEY_HOUSE_POLICY, house.housePolicy);
+                startActivity(intent);
+            }
+        });
 
+        refundPolicyRead = (TextView) findViewById(R.id.refund_policy_read);
+        refundPolicyRead.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HouseDetailActivity.this, CancellationPolicyActivity.class);
+                intent.putExtra(KEY_CANCELLATION_POLICY, house.cancellationPolicy);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -220,9 +320,20 @@ public class RoomDetailActivity extends AppCompatActivity implements OnMapReadyC
 
     @Override
     public void onMapReady(GoogleMap map) {
-        map.addMarker(new MarkerOptions().position(new LatLng(house.latitude, house.longitude)).title("Marker"));
+        map.addMarker(new MarkerOptions().position(new LatLng(house.latitude, house.longitude)));
         map.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(house.latitude, house.longitude)));
         map.animateCamera(CameraUpdateFactory.zoomTo(17.0f));
+
+        map.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+            @Override
+            public void onMapClick(LatLng latLng) {
+                Intent intent = new Intent(HouseDetailActivity.this, FullScreenMapActivity.class);
+                intent.putExtra(KEY_LATITUDE, house.latitude);
+                intent.putExtra(KEY_LONGITUDE, house.longitude);
+                intent.putExtra(KEY_ADDR_DIRECTION, house.addrDirection);
+                startActivity(intent);
+            }
+        });
     }
 
     private class PopulateHouseDetailTask extends AsyncTask<Void, Void, Void> {
@@ -274,6 +385,16 @@ public class RoomDetailActivity extends AppCompatActivity implements OnMapReadyC
             seeMoreTextView.setText(seeMoreText);
             seeMoreTextView.setTextAlignment(View.TEXT_ALIGNMENT_VIEW_END);
             seeMoreTextView.setGravity(Gravity.CENTER_VERTICAL);
+            seeMoreTextView.setTextColor(getResources().getColor(R.color.see_more));
+            seeMoreTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13);
+            seeMoreTextView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(HouseDetailActivity.this, AmenityActivity.class);
+                    intent.putExtra(KEY_AMENITY_IDS, house.amenityIds);
+                    startActivity(intent);
+                }
+            });
             amenityIcons.addView(seeMoreTextView);
         }
 
@@ -308,8 +429,8 @@ public class RoomDetailActivity extends AppCompatActivity implements OnMapReadyC
                     .load(R.drawable.prugio_thumbnail)
                     .into(reviewerProfilePic);
             reviewerName.setText(firstReview.reviewerName);
-            reviewerRating.setRating(firstReview.rating);
-            reviewContent.setText(firstReview.review);
+            reviewerRating.setRating(firstReview.overAllRating);
+            reviewContent.setText(firstReview.reviewContent);
             houseRating.setRating(house.houseRating);
 
             if (reviews.length == 1) {
@@ -322,6 +443,14 @@ public class RoomDetailActivity extends AppCompatActivity implements OnMapReadyC
                 /* Activate "see more" button with appropriate text. */
                 String seeMoreReviewsText = String.format(getString(R.string.reviews_see_more_format), reviews.length - 1);
                 seeMoreReviews.setText(seeMoreReviewsText);
+                seeMoreReviews.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(HouseDetailActivity.this, ViewReviewActivity.class);
+                        intent.putExtra(KEY_HOUSE_ID, house.houseId);
+                        startActivity(intent);
+                    }
+                });
             }
         }
     }

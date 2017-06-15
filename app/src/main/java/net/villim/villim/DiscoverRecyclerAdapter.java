@@ -18,7 +18,7 @@ import com.bumptech.glide.Glide;
  */
 
 public class DiscoverRecyclerAdapter extends RecyclerView.Adapter<DiscoverRecyclerAdapter.ViewHolder> {
-    private VillimRoom[] houseList;
+    private VillimHouse[] houseList;
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -43,7 +43,7 @@ public class DiscoverRecyclerAdapter extends RecyclerView.Adapter<DiscoverRecycl
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public DiscoverRecyclerAdapter(VillimRoom[] dataset) {
+    public DiscoverRecyclerAdapter(VillimHouse[] dataset) {
         houseList = dataset;
     }
 
@@ -61,7 +61,7 @@ public class DiscoverRecyclerAdapter extends RecyclerView.Adapter<DiscoverRecycl
             @Override
             public void onClick(View v) {
                 MainActivity mainActivity = (MainActivity) v.getContext();
-                Intent intent = new Intent(mainActivity, RoomDetailActivity.class);
+                Intent intent = new Intent(mainActivity, HouseDetailActivity.class);
                 Bundle args = new Bundle();
                 args.putParcelable(mainActivity.getString(R.string.key_house), houseList[vh.getAdapterPosition()]);
                 intent.putExtras(args);
@@ -82,11 +82,11 @@ public class DiscoverRecyclerAdapter extends RecyclerView.Adapter<DiscoverRecycl
     // Make this async.
     private void populateView(ViewHolder holder, int position) {
         Context context = holder.itemView.getContext();
-        VillimRoom currItem = houseList[position];
+        VillimHouse currItem = houseList[position];
         /* Room Title */
         holder.houseName.setText(currItem.houseName);
         /* Room Rate */
-        int price = currItem.housePrice;
+        int price = currItem.ratePerNight;
         String priceText = String.format(context.getString(R.string.room_price_value, price));
         holder.housePriceValue.setText(priceText);
         /* Room Rating Value */
@@ -108,7 +108,7 @@ public class DiscoverRecyclerAdapter extends RecyclerView.Adapter<DiscoverRecycl
         return houseList.length;
     }
 
-    private VillimRoom getHouseAtPosition(int position) {
+    private VillimHouse getHouseAtPosition(int position) {
         return houseList[position];
     }
 }
