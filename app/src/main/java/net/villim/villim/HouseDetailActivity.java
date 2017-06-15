@@ -2,7 +2,6 @@ package net.villim.villim;
 
 import android.content.Intent;
 import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
@@ -31,8 +30,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.Date;
 
-import static net.villim.villim.DateFilterActivity.END_DATE;
-import static net.villim.villim.DateFilterActivity.START_DATE;
+import static net.villim.villim.CalendarActivity.END_DATE;
+import static net.villim.villim.CalendarActivity.START_DATE;
 import static net.villim.villim.HouseDescriptionActivity.KEY_BASIC_DESCRIPTION;
 import static net.villim.villim.MainActivity.DATE_SELECTED;
 import static net.villim.villim.VillimKeys.KEY_ADDITIONAL_GUEST_FEE;
@@ -204,8 +203,8 @@ public class HouseDetailActivity extends AppCompatActivity implements OnMapReady
         house.reviews = VillimReview.getHouseReviewsFromServer(house.houseId);
         dateSelected = args.getBoolean(DATE_SELECTED, false);
         if (dateSelected) {
-            startDate = (Date) args.getSerializable(DateFilterActivity.START_DATE);
-            endDate = (Date) args.getSerializable(DateFilterActivity.END_DATE);
+            startDate = (Date) args.getSerializable(CalendarActivity.START_DATE);
+            endDate = (Date) args.getSerializable(CalendarActivity.END_DATE);
         }
     }
 
@@ -337,7 +336,7 @@ public class HouseDetailActivity extends AppCompatActivity implements OnMapReady
         /* Bottom Button */
         int numberOfNights;
         if (dateSelected) {
-            numberOfNights = (int) VillimUtil.daysBetween(startDate, endDate);
+            numberOfNights = VillimUtil.daysBetween(startDate, endDate);
         } else {
             /* 선택된 날짜가 없을 떈 30일로 계산 */
             numberOfNights = 30;
@@ -352,7 +351,7 @@ public class HouseDetailActivity extends AppCompatActivity implements OnMapReady
         reserveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(HouseDetailActivity.this, ReserveActivity.class);
+                Intent intent = new Intent(HouseDetailActivity.this, ReservationActivity.class);
                 intent.putExtra(getString(R.string.key_house), house);
                 intent.putExtra(DATE_SELECTED, dateSelected);
                 if (dateSelected) {

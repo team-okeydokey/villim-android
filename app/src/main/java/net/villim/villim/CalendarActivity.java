@@ -20,7 +20,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
 
-public class DateFilterActivity extends AppCompatActivity {
+public class CalendarActivity extends AppCompatActivity {
 
     public final static String START_DATE = "start_date";
     public final static String END_DATE = "end_date";
@@ -43,7 +43,7 @@ public class DateFilterActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_date_filter);
+        setContentView(R.layout.activity_calendar);
 
         timeZone = TimeZone.getDefault();
         startDate = (Date) getIntent().getSerializableExtra(START_DATE);
@@ -162,7 +162,7 @@ public class DateFilterActivity extends AppCompatActivity {
         /* Set start date text */
         if (startDate != null) {
             String startDateText = String.format(getString(R.string.date_filter_date_text_format), startDate.getMonth(), startDate.getDate())
-                    + "\n" + getWeekday(startDate.getDay());
+                    + "\n" + VillimUtil.getWeekday(this, startDate.getDay());
             startDateTextView.setText(startDateText);
         } else {
             startDateTextView.setText(getString(R.string.date_filter_start_date));
@@ -171,35 +171,13 @@ public class DateFilterActivity extends AppCompatActivity {
         /* Set end date text. */
         if (endDate != null) {
             String endDateText = String.format(getString(R.string.date_filter_date_text_format), endDate.getMonth(), endDate.getDate())
-                    + "\n" + getWeekday(endDate.getDay());
-            ;
+                    + "\n" + VillimUtil.getWeekday(this, endDate.getDay());
             endDateTextView.setText(endDateText);
         } else {
             endDateTextView.setText(getString(R.string.date_filter_end_date));
         }
     }
 
-    private String getWeekday(int weekday) {
-        /* Java date은 0부터 6, Calendar 클래스 constant는 1부터 7. */
-        switch (weekday + 1) {
-            case Calendar.SUNDAY:
-                return getString(R.string.sunday);
-            case Calendar.MONDAY:
-                return getString(R.string.monday);
-            case Calendar.TUESDAY:
-                return getString(R.string.tuesday);
-            case Calendar.WEDNESDAY:
-                return getString(R.string.wednesday);
-            case Calendar.THURSDAY:
-                return getString(R.string.thursday);
-            case Calendar.FRIDAY:
-                return getString(R.string.friday);
-            case Calendar.SATURDAY:
-                return getString(R.string.saturday);
-            default:
-                return getString(R.string.sunday);
-        }
-    }
 
     private void changeState(int state) {
         switch (state) {

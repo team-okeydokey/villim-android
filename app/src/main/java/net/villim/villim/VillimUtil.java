@@ -1,10 +1,13 @@
 package net.villim.villim;
 
+import android.content.Context;
+
 import org.json.JSONArray;
 
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -54,6 +57,28 @@ public class VillimUtil {
         return date;
     }
 
-    public static long daysBetween(Date one, Date two) { long difference = (one.getTime()-two.getTime())/86400000; return Math.abs(difference); }
+    public static int daysBetween(Date one, Date two) { long difference = (one.getTime()-two.getTime())/86400000; return (int) Math.abs(difference); }
 
+
+    public static String getWeekday(Context context, int weekday) {
+        /* Java date은 0부터 6, Calendar 클래스 constant는 1부터 7. */
+        switch (weekday + 1) {
+            case Calendar.SUNDAY:
+                return context.getString(R.string.sunday);
+            case Calendar.MONDAY:
+                return context.getString(R.string.monday);
+            case Calendar.TUESDAY:
+                return context.getString(R.string.tuesday);
+            case Calendar.WEDNESDAY:
+                return context.getString(R.string.wednesday);
+            case Calendar.THURSDAY:
+                return context.getString(R.string.thursday);
+            case Calendar.FRIDAY:
+                return context.getString(R.string.friday);
+            case Calendar.SATURDAY:
+                return context.getString(R.string.saturday);
+            default:
+                return context.getString(R.string.sunday);
+        }
+    }
 }

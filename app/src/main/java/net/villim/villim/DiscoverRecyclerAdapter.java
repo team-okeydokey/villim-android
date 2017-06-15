@@ -13,8 +13,8 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
-import static net.villim.villim.DateFilterActivity.END_DATE;
-import static net.villim.villim.DateFilterActivity.START_DATE;
+import static net.villim.villim.CalendarActivity.END_DATE;
+import static net.villim.villim.CalendarActivity.START_DATE;
 import static net.villim.villim.MainActivity.DATE_SELECTED;
 
 /**

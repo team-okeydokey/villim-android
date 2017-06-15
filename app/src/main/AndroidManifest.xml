@@ -28,7 +28,7 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity android:name=".DateFilterActivity" />
+        <activity android:name=".CalendarActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".SignupActivity" />
         <activity android:name=".HouseDescriptionActivity" />
@@ -40,7 +40,7 @@
         <activity android:name=".HostProfileActivity" />
         <activity android:name=".GalleryActivity" />
         <activity android:name=".ViewReviewActivity" />
-        <activity android:name=".ReserveActivity"></activity>
+        <activity android:name=".ReservationActivity"></activity>
     </application>
 
 </manifest>

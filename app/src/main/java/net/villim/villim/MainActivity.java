@@ -239,9 +239,9 @@ public class MainActivity extends AppCompatActivity {
                             dateSelected = false;
                             searchFilterDate.getCompoundDrawables()[DRAWABLE_RIGHT].mutate().setAlpha(HIDE);
                         } else {
-                            Intent dateFilterIntent = new Intent(MainActivity.this, DateFilterActivity.class);
-                            dateFilterIntent.putExtra(DateFilterActivity.START_DATE, startDate);
-                            dateFilterIntent.putExtra(DateFilterActivity.END_DATE, endDate);
+                            Intent dateFilterIntent = new Intent(MainActivity.this, CalendarActivity.class);
+                            dateFilterIntent.putExtra(CalendarActivity.START_DATE, startDate);
+                            dateFilterIntent.putExtra(CalendarActivity.END_DATE, endDate);
                             MainActivity.this.startActivityForResult(dateFilterIntent, DATE_FILTER);
                         }
                         return true;
@@ -364,8 +364,8 @@ public class MainActivity extends AppCompatActivity {
             }
         } else if (requestCode == DATE_FILTER) {
             if (resultCode == Activity.RESULT_OK) {
-                startDate = (Date) data.getSerializableExtra(DateFilterActivity.START_DATE);
-                endDate = (Date) data.getSerializableExtra(DateFilterActivity.END_DATE);
+                startDate = (Date) data.getSerializableExtra(CalendarActivity.START_DATE);
+                endDate = (Date) data.getSerializableExtra(CalendarActivity.END_DATE);
 
                 String dateFilterText = String.format(getString(R.string.search_filter_date_format),
                         startDate.getMonth(), startDate.getDate(),

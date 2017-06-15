@@ -200,4 +200,22 @@
     <string name="checkin">체크인</string>
     <string name="value">가치</string>
     <string name="review_date_format">%1$d년 %2$d월</string>
+
+    <!-- Reservation Activity -->
+    <string name="villim_reserve">빌림요청</string>
+    <string name="villim_reserve_do">빌림요청하기</string>
+    <string name="overview_title_format_hasdate">%1$s에서 %2$d박</string>
+    <string name="overview_title_format_nodate">%s</string>
+    <string name="host">호스트</string>
+    <string name="duration">기간</string>
+    <string name="number_of_nights">숙박일 수</string>
+    <string name="price">금액</string>
+    <string name="select_start_Date">시작일 선택</string>
+    <string name="select_end_date">종료일 선택</string>
+    <string name="not_selected">미정</string>
+    <string name="num_nights_format">%d일</string>
+    <string name="overview_info_format">인원 %1$d명, 방 %2$d개, 침대 %3$d개, 욕실 %4$d개</string>
+
+
+
 </resources>
