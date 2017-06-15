@@ -51,7 +51,6 @@ public class VillimUtil {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        System.out.println(date.toString());
         return date;
     }
 

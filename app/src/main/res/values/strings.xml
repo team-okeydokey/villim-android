@@ -50,6 +50,7 @@
     <string name="friday">금요일</string>
     <string name="saturday">토요일</string>
     <string name="sunday">일요일</string>
+    <string name="select_different_dates">시작일과 종료일이 같을 수 없습니다.</string>
 
     <!-- Discover Fragment -->
     <string name="key_house">key_house</string>

@@ -71,11 +71,16 @@ public class DateFilterActivity extends AppCompatActivity {
         saveSelectionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent returnIntent = new Intent();
-                returnIntent.putExtra(START_DATE, startDate);
-                returnIntent.putExtra(END_DATE, endDate);
-                setResult(Activity.RESULT_OK, returnIntent);
-                finish();
+                if (startDate.equals(endDate)){
+                    Toast.makeText(getApplicationContext(), R.string.select_different_dates, Toast.LENGTH_LONG).show();
+                } else {
+                    Intent returnIntent = new Intent();
+                    returnIntent.putExtra(START_DATE, startDate);
+                    returnIntent.putExtra(END_DATE, endDate);
+                    setResult(Activity.RESULT_OK, returnIntent);
+                    finish();
+                }
+
             }
         });
 
