@@ -4,8 +4,11 @@ package net.villim.villim;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.Date;
 
 import static net.villim.villim.VillimKeys.KEY_HOST_ID;
 import static net.villim.villim.VillimKeys.KEY_HOUSE_ID;
@@ -19,8 +22,9 @@ import static net.villim.villim.VillimKeys.KEY_RATING_VALUE;
 import static net.villim.villim.VillimKeys.KEY_RESERVATION_ID;
 import static net.villim.villim.VillimKeys.KEY_REVIEWER_ID;
 import static net.villim.villim.VillimKeys.KEY_REVIEWER_NAME;
-import static net.villim.villim.VillimKeys.KEY_REVIEWER_PROFILE_URL;
+import static net.villim.villim.VillimKeys.KEY_REVIEWER_PROFILE_PIC_URL;
 import static net.villim.villim.VillimKeys.KEY_REVIEW_CONTENT;
+import static net.villim.villim.VillimKeys.KEY_REVIEW_DATE;
 
 public class VillimReview implements Parcelable {
     /* Id는 db속의 id. Username 아님. */
@@ -31,6 +35,7 @@ public class VillimReview implements Parcelable {
     public String reviewerName;
     public String reviewContent;
     public String reviewerProfilePicUrl;
+    public Date reviewDate;
     public float overAllRating;
     public float accuracyRating;
     public float communicationRating;
@@ -62,6 +67,7 @@ public class VillimReview implements Parcelable {
         reviewerName = in.readString();
         reviewContent = in.readString();
         reviewerProfilePicUrl = in.readString();
+        reviewDate = (Date) in.readSerializable();
         overAllRating = in.readFloat();
         accuracyRating = in.readFloat();
         communicationRating = in.readFloat();
@@ -96,8 +102,9 @@ public class VillimReview implements Parcelable {
             review.reservationId = reviewInfo.getInt(KEY_RESERVATION_ID);
             review.reviewerName = reviewInfo.getString(KEY_REVIEWER_NAME);
             review.reviewContent = reviewInfo.getString(KEY_REVIEW_CONTENT);
-            boolean isReviewerProfilePicUrlNull = reviewInfo.isNull(KEY_REVIEWER_PROFILE_URL);
-            review.reviewerProfilePicUrl = isReviewerProfilePicUrlNull ? null : reviewInfo.getString(KEY_REVIEWER_PROFILE_URL);
+            boolean isReviewerProfilePicUrlNull = reviewInfo.isNull(KEY_REVIEWER_PROFILE_PIC_URL);
+            review.reviewerProfilePicUrl = isReviewerProfilePicUrlNull ? null : reviewInfo.getString(KEY_REVIEWER_PROFILE_PIC_URL);
+            review.reviewDate = VillimUtil.dateFromDateString(reviewInfo.getString(KEY_REVIEW_DATE));
             review.overAllRating = (float) reviewInfo.getDouble(KEY_RATING_OVERALL);
             review.accuracyRating = (float) reviewInfo.getDouble(KEY_RATING_ACCURACY);
             review.communicationRating = (float) reviewInfo.getDouble(KEY_RATING_COMMUNICATION);
@@ -109,6 +116,22 @@ public class VillimReview implements Parcelable {
 
         }
         return review;
+    }
+
+    public static VillimReview[] reviewArrayFromJsonArray(JSONArray jsonArray) {
+
+        VillimReview[] reviews = new VillimReview[jsonArray.length()];
+
+        try {
+            for (int i = 0; i < jsonArray.length(); ++i) {
+                VillimReview review = createReviewFromJSONObject(jsonArray.getJSONObject(i));
+                reviews[i] = review;
+            }
+
+        } catch (JSONException e) {
+
+        }
+        return reviews;
     }
 
     public static VillimReview[] getHouseReviewsFromServer(int houseId) {
@@ -134,6 +157,7 @@ public class VillimReview implements Parcelable {
         dest.writeString(reviewerName);
         dest.writeString(reviewContent);
         dest.writeString(reviewerProfilePicUrl);
+        dest.writeSerializable(reviewDate);
         dest.writeFloat(overAllRating);
         dest.writeFloat(accuracyRating);
         dest.writeFloat(communicationRating);

@@ -86,13 +86,13 @@ public class VillimKeys {
 
     /* Review info keys */
     public static final String KEY_REVIEWS = "reviews";
-    public static final String KEY_REVIEW_RATING = "review_rating";
     public static final String KEY_REVIEW_COUNT = "review_count";
     public static final String KEY_REVIEWER_ID = "reviewer_id";
     public static final String KEY_RESERVATION_ID = "reservation_id";
     public static final String KEY_REVIEWER_NAME = "reviewer_name";
     public static final String KEY_REVIEW_CONTENT = "review_content";
-    public static final String KEY_REVIEWER_PROFILE_URL = "reviewer_profile_url";
+    public static final String KEY_REVIEWER_PROFILE_PIC_URL = "reviewer_profile_pic_url";
+    public static final String KEY_REVIEW_DATE = "review_date";
     public static final String KEY_RATING_OVERALL = "rating_overall";
     public static final String KEY_RATING_ACCURACY = "rating_accuracy";
     public static final String KEY_RATING_COMMUNICATION = "rating_communication";

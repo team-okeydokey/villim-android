@@ -196,4 +196,5 @@
     <string name="location">위치</string>
     <string name="checkin">체크인</string>
     <string name="value">가치</string>
+    <string name="review_date_format">%1$d년 %2$d월</string>
 </resources>

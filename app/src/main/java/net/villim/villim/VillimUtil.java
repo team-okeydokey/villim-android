@@ -2,6 +2,11 @@ package net.villim.villim;
 
 import org.json.JSONArray;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * Created by seongmin on 6/9/17.
  */
@@ -36,6 +41,18 @@ public class VillimUtil {
         }
 
         return strings;
+    }
+
+    public static Date dateFromDateString(String dateString) {
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = new Date();
+        try {
+            date = df.parse(dateString);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        System.out.println(date.toString());
+        return date;
     }
 
 }

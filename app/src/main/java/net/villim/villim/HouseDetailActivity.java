@@ -429,8 +429,8 @@ public class HouseDetailActivity extends AppCompatActivity implements OnMapReady
                     .load(R.drawable.prugio_thumbnail)
                     .into(reviewerProfilePic);
             reviewerName.setText(firstReview.reviewerName);
-            reviewerRating.setRating(firstReview.rating);
-            reviewContent.setText(firstReview.review);
+            reviewerRating.setRating(firstReview.overAllRating);
+            reviewContent.setText(firstReview.reviewContent);
             houseRating.setRating(house.houseRating);
 
             if (reviews.length == 1) {
