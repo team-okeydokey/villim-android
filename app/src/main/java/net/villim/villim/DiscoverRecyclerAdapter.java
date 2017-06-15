@@ -13,6 +13,10 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
+import static net.villim.villim.DateFilterActivity.END_DATE;
+import static net.villim.villim.DateFilterActivity.START_DATE;
+import static net.villim.villim.MainActivity.DATE_SELECTED;
+
 /**
  * Created by seongmin on 5/26/17.
  */
@@ -64,6 +68,11 @@ public class DiscoverRecyclerAdapter extends RecyclerView.Adapter<DiscoverRecycl
                 Intent intent = new Intent(mainActivity, HouseDetailActivity.class);
                 Bundle args = new Bundle();
                 args.putParcelable(mainActivity.getString(R.string.key_house), houseList[vh.getAdapterPosition()]);
+                args.putBoolean(DATE_SELECTED, mainActivity.getDateSelected());
+                if (mainActivity.getDateSelected()) {
+                    args.putSerializable(START_DATE, mainActivity.getStartDate());
+                    args.putSerializable(END_DATE, mainActivity.getEndDate());
+                }
                 intent.putExtras(args);
                 mainActivity.startActivity(intent);
             }

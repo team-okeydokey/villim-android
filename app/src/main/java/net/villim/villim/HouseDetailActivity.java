@@ -2,6 +2,7 @@ package net.villim.villim;
 
 import android.content.Intent;
 import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
@@ -28,7 +29,10 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.Date;
+
 import static net.villim.villim.HouseDescriptionActivity.KEY_BASIC_DESCRIPTION;
+import static net.villim.villim.MainActivity.DATE_SELECTED;
 import static net.villim.villim.VillimKeys.KEY_ADDITIONAL_GUEST_FEE;
 import static net.villim.villim.VillimKeys.KEY_ADDR_DIRECTION;
 import static net.villim.villim.VillimKeys.KEY_ADDR_SUMMARY;
@@ -93,10 +97,20 @@ public class HouseDetailActivity extends AppCompatActivity implements OnMapReady
     private TextView housePolicyRead;
     private TextView refundPolicyRead;
 
+    private TextView reserveButtonPrice;
+    private ImageView coinImageView;
+
+    private boolean dateSelected;
+    private Date startDate;
+    private Date endDate;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_house_detail);
+
+        /* Extract room info and fill view elements with data */
+        extractRoomInfo();
 
         toolbarImage = (ImageView) findViewById(R.id.toolbar_image);
 
@@ -168,22 +182,27 @@ public class HouseDetailActivity extends AppCompatActivity implements OnMapReady
         mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        /* Extract room info and fill view elements with data */
-        house = extractRoomInfo();
-
         /* House & Refund Policy */
         housePolicyRead = (TextView) findViewById(R.id.house_policy_read);
         refundPolicyRead = (TextView) findViewById(R.id.refund_policy_read);
+
+        /* Bottom Button */
+        reserveButtonPrice = (TextView) findViewById(R.id.reserve_button_price);
+        coinImageView = (ImageView) findViewById(R.id.coin_image);
 
         populateView();
     }
 
     // Extract room info.
-    private VillimHouse extractRoomInfo() {
+    private void extractRoomInfo() {
         Bundle args = getIntent().getExtras();
         house = args.getParcelable(getString(R.string.key_house));
         house.reviews = VillimReview.getHouseReviewsFromServer(house.houseId);
-        return house;
+        dateSelected = args.getBoolean(DATE_SELECTED, false);
+        if (dateSelected) {
+            startDate = (Date) args.getSerializable(DateFilterActivity.START_DATE);
+            endDate = (Date) args.getSerializable(DateFilterActivity.END_DATE);
+        }
     }
 
 
@@ -310,6 +329,21 @@ public class HouseDetailActivity extends AppCompatActivity implements OnMapReady
                 startActivity(intent);
             }
         });
+
+        /* Bottom Button */
+        int numberOfNights;
+        if (dateSelected) {
+            numberOfNights = (int) VillimUtil.daysBetween(startDate, endDate);
+        } else {
+            /* 선택된 날짜가 없을 떈 30일로 계산 */
+            numberOfNights = 30;
+        }
+        int price = numberOfNights * house.ratePerNight;
+        String priceText = String.format(getString(R.string.price_text_format), price, numberOfNights);
+        reserveButtonPrice.setText(priceText);
+
+        /* Set drawable to bottom button. */
+        Glide.with(this).load(R.drawable.icon_money).into(coinImageView);
     }
 
     @Override
@@ -454,5 +488,6 @@ public class HouseDetailActivity extends AppCompatActivity implements OnMapReady
             }
         }
     }
+
 
 }

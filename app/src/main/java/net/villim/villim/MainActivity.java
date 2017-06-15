@@ -30,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
     private static final int LOCATION_FILTER = 0;
     private static final int DATE_FILTER = 1;
 
+    public final static String DATE_SELECTED = "date_selected";
+
     /* Tab fragment indices */
     private static final int DISCOVERY_FRAGMENT = 0;
     private static final int MY_KEY_FRAGMENT = 1;
@@ -433,5 +435,18 @@ public class MainActivity extends AppCompatActivity {
         TabLayout.Tab tab = tabLayout.getTabAt(index);
         tab.select();
     }
+
+    public boolean getDateSelected() {
+        return dateSelected;
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public Date getEndDate() {
+        return  endDate;
+    }
+
 
 }

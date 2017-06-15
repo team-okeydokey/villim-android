@@ -51,6 +51,7 @@
     <dimen name="policy_category_height">60dp</dimen>
     <dimen name="reserve_button_height">65dp</dimen>
     <dimen name="description_see_more_bottom_padding">15dp</dimen>
+    <dimen name="coin_icon_size">20dp</dimen>
 
     <!-- Search Activity -->
     <dimen name="search_activity_padding">20dp</dimen>
