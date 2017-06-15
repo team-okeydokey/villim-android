@@ -31,6 +31,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.Date;
 
+import static net.villim.villim.DateFilterActivity.END_DATE;
+import static net.villim.villim.DateFilterActivity.START_DATE;
 import static net.villim.villim.HouseDescriptionActivity.KEY_BASIC_DESCRIPTION;
 import static net.villim.villim.MainActivity.DATE_SELECTED;
 import static net.villim.villim.VillimKeys.KEY_ADDITIONAL_GUEST_FEE;
@@ -97,6 +99,7 @@ public class HouseDetailActivity extends AppCompatActivity implements OnMapReady
     private TextView housePolicyRead;
     private TextView refundPolicyRead;
 
+    private LinearLayoutCompat reserveButton;
     private TextView reserveButtonPrice;
     private ImageView coinImageView;
 
@@ -187,6 +190,7 @@ public class HouseDetailActivity extends AppCompatActivity implements OnMapReady
         refundPolicyRead = (TextView) findViewById(R.id.refund_policy_read);
 
         /* Bottom Button */
+        reserveButton = (LinearLayoutCompat) findViewById(R.id.reserve_button);
         reserveButtonPrice = (TextView) findViewById(R.id.reserve_button_price);
         coinImageView = (ImageView) findViewById(R.id.coin_image);
 
@@ -344,6 +348,20 @@ public class HouseDetailActivity extends AppCompatActivity implements OnMapReady
 
         /* Set drawable to bottom button. */
         Glide.with(this).load(R.drawable.icon_money).into(coinImageView);
+
+        reserveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HouseDetailActivity.this, ReserveActivity.class);
+                intent.putExtra(getString(R.string.key_house), house);
+                intent.putExtra(DATE_SELECTED, dateSelected);
+                if (dateSelected) {
+                    intent.putExtra(START_DATE, startDate);
+                    intent.putExtra(END_DATE, endDate);
+                }
+                startActivity(intent);
+            }
+        });
     }
 
     @Override

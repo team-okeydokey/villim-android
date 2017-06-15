@@ -39,7 +39,8 @@
         <activity android:name=".FullScreenMapActivity" />
         <activity android:name=".HostProfileActivity" />
         <activity android:name=".GalleryActivity" />
-        <activity android:name=".ViewReviewActivity"></activity>
+        <activity android:name=".ViewReviewActivity" />
+        <activity android:name=".ReserveActivity"></activity>
     </application>
 
 </manifest>
