@@ -231,4 +231,10 @@
     <string name="reservation_status_confirmed">예약 완료</string>
     <string name="reservation_status_active">거주중</string>
 
+    <!-- Visit detail activity -->
+    <string name="my_visit_list">내 방문목록</string>
+    <string name="villim_request">빌림 요청</string>
+    <string name="show_location">위치 보기</string>
+    <string name="cancel_visit">방문 취소신청</string>
+
 </resources>

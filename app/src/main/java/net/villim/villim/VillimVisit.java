@@ -68,15 +68,10 @@ public class VillimVisit implements Parcelable {
     public static VillimVisit createVisitFromJSONObject(JSONObject userInfo) {
         /* Create user instance */
         VillimVisit visit = new VillimVisit();
-
-        try {
-            visit.visitId = userInfo.getInt(KEY_VISIT_ID);
-            visit.houseId = userInfo.getInt(KEY_HOUSE_ID);
-            visit.visitorId = userInfo.getInt(KEY_VISITOR_ID);
-            visit.visitTime = userInfo.getString(KEY_VISIT_TIME);
-        } catch (JSONException e) {
-
-        }
+        visit.visitId = userInfo.optInt(KEY_VISIT_ID);
+        visit.houseId = userInfo.optInt(KEY_HOUSE_ID);
+        visit.visitorId = userInfo.optInt(KEY_VISITOR_ID);
+        visit.visitTime = userInfo.optString(KEY_VISIT_TIME);
         return visit;
     }
 

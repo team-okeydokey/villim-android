@@ -134,7 +134,7 @@ public class VisitFragment extends Fragment {
         URL url = new HttpUrl.Builder()
                 .scheme("http")
                 .host("www.mocky.io")
-                .addPathSegments("v2/5943fe7a120000a60afcb537")
+                .addPathSegments("v2/59442bc2120000f60efcb5a4")
                 .build().url();
 
         Request request = new Request.Builder()

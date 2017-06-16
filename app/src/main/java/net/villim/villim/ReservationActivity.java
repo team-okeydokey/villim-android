@@ -230,8 +230,6 @@ public class ReservationActivity extends AppCompatActivity {
 
         OkHttpClient client = new OkHttpClient();
 
-        System.out.println(VillimUtil.dateStringFromDate(this, startDate));
-
         RequestBody requestBody = new FormBody.Builder()
                 .add(KEY_ROOM_ID, Integer.toString(house.houseId))
                 .add(KEY_START_DATE, VillimUtil.dateStringFromDate(this, startDate))

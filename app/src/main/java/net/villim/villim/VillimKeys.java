@@ -125,6 +125,7 @@ public class VillimKeys {
     public static final String KEY_VISIT_ID = "visit_id";
     public static final String KEY_VISITOR_ID = "visitor_id";
     public static final String KEY_VISIT_TIME = "visit_time";
+    public static final String KEY_VISIT_INFO = "visit_info";
 
 }
 

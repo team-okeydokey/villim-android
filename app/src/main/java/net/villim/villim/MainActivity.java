@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
     private String[] tabItems;
     private int[] tabIcons;
     private CharSequence toolBarTitle;
-    private TabLayout tabLayout;
+    private static TabLayout tabLayout;
     private UnSwipeableViewpager viewPager;
     private Button searchButton;
     private RelativeLayout searchFilters;
@@ -431,7 +431,7 @@ public class MainActivity extends AppCompatActivity {
         appBarLayout.setVisibility(View.VISIBLE);
     }
 
-    public void selectTab(int index) {
+    public static void selectTab(int index) {
         TabLayout.Tab tab = tabLayout.getTabAt(index);
         tab.select();
     }

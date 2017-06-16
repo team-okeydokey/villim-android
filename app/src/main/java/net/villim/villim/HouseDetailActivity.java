@@ -425,8 +425,6 @@ public class HouseDetailActivity extends AppCompatActivity implements OnMapReady
 
         /* Map */
         if (map != null && !markerPlaced) {
-            System.out.println(house.latitude);
-            System.out.println(house.longitude);
             map.addMarker(new MarkerOptions().position(new LatLng(house.latitude, house.longitude)));
             map.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(house.latitude, house.longitude)));
             map.animateCamera(CameraUpdateFactory.zoomTo(17.0f));
