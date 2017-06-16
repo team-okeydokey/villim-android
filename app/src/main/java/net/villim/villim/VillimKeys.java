@@ -80,7 +80,7 @@ public class VillimKeys {
     public static final String KEY_HOST_PROFILE_PIC_URL = "host_profile_pic_url";
     public static final String KEY_HOUSE_RATING = "house_rating";
     public static final String KEY_HOUSE_REVIEW_COUNT = "house_review_count";
-
+    public static final String KEY_HOUSE_THUMBNAIL_URL = "house_thumbnail_url";
     public static final String KEY_AMENITY_IDS = "amenity_ids";
     public static final String KEY_HOUSE_PIC_URLS = "house_pic_urls";
 
@@ -110,6 +110,12 @@ public class VillimKeys {
     public static final String KEY_RESERVATION_TIME = "reservation_time";
     public static final String KEY_RESERVATION_STATUS = "reservation_status";
     public static final String KEY_RESERVATION_CODE = "reservation_code";
+
+    /* Featured list */
+    public static final String KEY_HOUSES = "houses";
+
+    /* Visit list */
+
 
 }
 

@@ -191,7 +191,6 @@ public class ViewReviewActivity extends AppCompatActivity {
             reviewCount.setText(String.format(getString(R.string.review_count_format), reviewsArray.length()));
 
             VillimReview[] reviews = VillimReview.reviewArrayFromJsonArray(reviewsArray);
-            setUpListViewWithReviewArray(reviews);
             ReviewAdapter adapter = new ReviewAdapter(this, reviews);
             reviewListView.setAdapter(adapter);
 
@@ -200,9 +199,6 @@ public class ViewReviewActivity extends AppCompatActivity {
         }
     }
 
-    private void setUpListViewWithReviewArray(VillimReview[] reviews) {
-
-    }
 
     private class ReviewAdapter extends BaseAdapter {
 

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -12,10 +13,21 @@
         android:layout_centerInParent="true"
         android:layout_marginTop="30dp"
         android:clipToPadding="false"
-        android:paddingBottom="@dimen/discover_recycler_padding_bottom"
+        android:paddingBottom="40dp"
         android:paddingLeft="@dimen/discover_recycler_padding"
         android:paddingRight="@dimen/discover_recycler_padding"
         android:paddingTop="@dimen/appbar_offset" />
+
+    <com.wang.avi.AVLoadingIndicatorView
+        android:id="@+id/loading_indicator"
+        style="@style/AVLoadingIndicatorView.Large"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:visibility="gone"
+        app:indicatorColor="@color/loading_animation_color"
+        app:indicatorName="BallGridPulseIndicator" />
 
 
 </RelativeLayout>

@@ -106,7 +106,7 @@ public class DiscoverRecyclerAdapter extends RecyclerView.Adapter<DiscoverRecycl
         holder.houseRatingCount.setText(countText);
         /* Room Tumbnail */
         Glide.with(context)
-                .load(R.drawable.prugio_thumbnail)
+                .load(currItem.houseThumbnailUrl)
                 .into(holder.houseThumbnail);
     }
 

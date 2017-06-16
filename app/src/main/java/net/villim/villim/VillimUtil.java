@@ -18,7 +18,7 @@ public class VillimUtil {
 
     public static int[] JSONArrayToIntArray(JSONArray array) {
         // Deal with the case of a non-array value.
-        if (array == null) { /*...*/ }
+        if (array == null) { return new int[0]; }
 
         // Create an int array to accomodate the numbers.
         int[] numbers = new int[array.length()];
@@ -33,7 +33,7 @@ public class VillimUtil {
 
     public static String[] JSONArrayToStringArray(JSONArray array) {
         // Deal with the case of a non-array value.
-        if (array == null) { /*...*/ }
+        if (array == null) { return new String[0]; }
 
         // Create an int array to accomodate the numbers.
         String[] strings = new String[array.length()];

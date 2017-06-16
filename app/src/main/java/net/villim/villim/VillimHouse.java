@@ -27,6 +27,7 @@ import static net.villim.villim.VillimKeys.KEY_HOUSE_PIC_URLS;
 import static net.villim.villim.VillimKeys.KEY_HOUSE_POLICY;
 import static net.villim.villim.VillimKeys.KEY_HOUSE_RATING;
 import static net.villim.villim.VillimKeys.KEY_HOUSE_REVIEW_COUNT;
+import static net.villim.villim.VillimKeys.KEY_HOUSE_THUMBNAIL_URL;
 import static net.villim.villim.VillimKeys.KEY_LATITUDE;
 import static net.villim.villim.VillimKeys.KEY_LOCK_ADDR;
 import static net.villim.villim.VillimKeys.KEY_LOCK_PC;
@@ -73,12 +74,17 @@ public class VillimHouse implements Parcelable {
     float houseRating;
     int houseReviewCount;
     int[] amenityIds;
+    String houseThumbnailUrl;
     String[] housePicUrls;
     VillimReview[] reviews;
 
 
     //public VillimReview[] reviews;
     //public int[] utilities;
+
+    public VillimHouse() {
+
+    }
 
     public VillimHouse(JSONObject jsonObject) {
         try {
@@ -132,6 +138,67 @@ public class VillimHouse implements Parcelable {
         return stringsArray;
     }
 
+    public static VillimHouse createHouseFromJSONObject(JSONObject jsonObject) {
+        /* Create user instance */
+        VillimHouse house = new VillimHouse();
+
+         /* No need to null check here because if we dont set it, it's going to be null anyway */
+        house.houseId = jsonObject.optInt(KEY_HOUSE_ID);
+        house.houseName = jsonObject.optString(KEY_HOUSE_NAME);
+        house.addrFull = jsonObject.optString(KEY_ADDR_FULL);
+        house.addrSummary = jsonObject.optString(KEY_ADDR_SUMMARY);
+        house.addrDirection = jsonObject.optString(KEY_ADDR_DIRECTION);
+        house.description = jsonObject.optString(KEY_DESCRIPTION);
+        house.numGuest = jsonObject.optInt(KEY_NUM_GUEST);
+        house.numBedroom = jsonObject.optInt(KEY_NUM_BEDROOM);
+        house.numBed = jsonObject.optInt(KEY_NUM_BED);
+        house.numBathroom = jsonObject.optInt(KEY_NUM_BATHROOM);
+        house.ratePerNight = jsonObject.optInt(KEY_RATE_PER_NIGHT);
+        house.deposit = jsonObject.optInt(KEY_DEPOSIT);
+        house.additionalGuestFee = jsonObject.optInt(KEY_ADDITIONAL_GUEST_FEE);
+        house.cleaningFee = jsonObject.optInt(KEY_CLEANING_FEE);
+        house.lockAddr = jsonObject.optInt(KEY_LOCK_ADDR);
+        house.lockPc = jsonObject.optInt(KEY_LOCK_PC);
+        house.latitude = jsonObject.optDouble(KEY_LATITUDE);
+        house.longitude = jsonObject.optDouble(KEY_LONGITUDE);
+        house.housePolicy = jsonObject.optString(KEY_HOUSE_POLICY);
+        house.cancellationPolicy = jsonObject.optString(KEY_CANCELLATION_POLICY);
+
+        //host = VillimUser.getUserFromServer(jsonObject.getInt(KEY_HOST_ID));
+        house.hostId = jsonObject.optInt(KEY_HOST_ID);
+        house.hostName = jsonObject.optString(KEY_HOST_NAME);
+        house.hostRating = (float) jsonObject.optDouble(KEY_HOST_RATING);
+        house.hostReviewCount = jsonObject.optInt(KEY_HOST_REVIEW_COUNT);
+        house.hostProfilePicUrl = jsonObject.optString(KEY_HOST_PROFILE_PIC_URL);
+        house.houseRating = (float) jsonObject.optDouble(KEY_HOUSE_RATING);
+        house.houseReviewCount = jsonObject.optInt(KEY_HOUSE_REVIEW_COUNT);
+
+        house.houseThumbnailUrl = jsonObject.optString(KEY_HOUSE_THUMBNAIL_URL);
+        house.amenityIds = VillimUtil.JSONArrayToIntArray(jsonObject.optJSONArray(KEY_AMENITY_IDS));
+        house.housePicUrls = VillimUtil.JSONArrayToStringArray(jsonObject.optJSONArray(KEY_HOUSE_PIC_URLS));
+        return house;
+    }
+
+    public static VillimHouse[] houseArrayFromJsonArray(JSONArray jsonArray) {
+
+        if (jsonArray == null) {
+            return new VillimHouse[0];
+        }
+
+        VillimHouse[] houses = new VillimHouse[jsonArray.length()];
+
+        try {
+            for (int i = 0; i < jsonArray.length(); ++i) {
+                VillimHouse review = createHouseFromJSONObject(jsonArray.getJSONObject(i));
+                houses[i] = review;
+            }
+
+        } catch (JSONException e) {
+
+        }
+        return houses;
+    }
+
 
     @Override
     public int describeContents() {
@@ -167,6 +234,7 @@ public class VillimHouse implements Parcelable {
         dest.writeString(hostProfilePicUrl);
         dest.writeFloat(houseRating);
         dest.writeInt(houseReviewCount);
+        dest.writeString(houseThumbnailUrl);
         dest.writeIntArray(amenityIds);
         dest.writeStringArray(housePicUrls);
 //        dest.writeParcelableArray(reviews, 0);
@@ -200,6 +268,7 @@ public class VillimHouse implements Parcelable {
         hostProfilePicUrl = in.readString();
         houseRating = in.readFloat();
         houseReviewCount = in.readInt();
+        houseThumbnailUrl = in.readString();
         amenityIds = in.createIntArray();
         housePicUrls = in.createStringArray();
 //        reviews = in.createTypedArray(VillimReview.CREATOR);
