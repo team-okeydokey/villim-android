@@ -6,6 +6,7 @@ import android.support.v4.content.res.ResourcesCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -46,6 +47,8 @@ public class MyKeyFragment extends Fragment {
     private TextView validDates;
     private TextView errorMessage;
     private SlideButton slideButton;
+    private Button reviewButton;
+    private Button changePasscodeButton;
 
     private AVLoadingIndicatorView loadingIndicator;
 
@@ -81,6 +84,10 @@ public class MyKeyFragment extends Fragment {
         slideButton = (SlideButton) myKeyView.findViewById(R.id.slide_button);
         slideButton.setClickable(false);
         slideButton.setEnabled(false);
+
+        /* Top buttons */
+        reviewButton = (Button) myKeyView.findViewById(R.id.review_button);
+        changePasscodeButton = (Button) myKeyView.findViewById(R.id.change_passcode_button);
 
         /* Error Message */
         errorMessage = (TextView) myKeyView.findViewById(R.id.error_message);
@@ -268,6 +275,15 @@ public class MyKeyFragment extends Fragment {
         slideButton.setSlideButtonListener(null);
         slideButton.setClickable(true);
         slideButton.setEnabled(true);
+
+        /* Top buttons */
+        reviewButton.setEnabled(false);
+        reviewButton.setClickable(false);
+        reviewButton.setTextColor(getResources().getColor(R.color.text_button_inactive));
+
+        changePasscodeButton.setEnabled(false);
+        changePasscodeButton.setClickable(false);
+        changePasscodeButton.setTextColor(getResources().getColor(R.color.text_button_inactive));
 
         /* House thumbnail */
         Glide.with(this)

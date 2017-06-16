@@ -83,5 +83,7 @@
     <!-- Room detail Activity -->
     <color name="see_more">#de2025</color>
 
+    <!-- My Key Fragment -->
+    <color name="text_button_inactive">#aaaaaa</color>
 
 </resources>
