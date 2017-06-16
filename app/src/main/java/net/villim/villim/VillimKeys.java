@@ -10,6 +10,9 @@ public class VillimKeys {
     public static final String SERVER_SCHEME = "http";
     public static final String SERVER_HOST = "175.207.29.19";
 
+    /* URLS */
+    public static final String LOGIN_URL = "http://175.207.29.19/a/login";
+    public static final String DOORLOCK_CHANGE_URL = "http://175.207.29.19/a/login";
 
     /* Request success codes */
     public static final String KEY_QUERY_SUCCESS = "query_success";
@@ -126,6 +129,11 @@ public class VillimKeys {
     public static final String KEY_VISITOR_ID = "visitor_id";
     public static final String KEY_VISIT_TIME = "visit_time";
     public static final String KEY_VISIT_INFO = "visit_info";
+
+    /* DoorlockPAsscodeActivity */
+    public static final String KEY_CHANGE_SUCCESS = "change_success";
+    public static final String KEY_PASSCODE = "passcode";
+    public static final String KEY_PASSCODE_CONFIRM = "passcode_confirm";
 
 }
 

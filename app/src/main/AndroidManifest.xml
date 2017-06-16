@@ -78,7 +78,8 @@
             android:name=".ReservationSuccessActivity"
             android:screenOrientation="portrait" />
         <activity android:name=".VisitDetailActivity" />
-        <activity android:name=".DoorLockPasscodeActivity"></activity>
+        <activity android:name=".DoorLockChangeActivity" />
+        <activity android:name=".DoorlockChangeSuccessActivity"></activity>
     </application>
 
 </manifest>
