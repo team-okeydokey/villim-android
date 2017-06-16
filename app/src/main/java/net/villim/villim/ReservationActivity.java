@@ -74,6 +74,7 @@ public class ReservationActivity extends AppCompatActivity {
     private TextView errorMessage;
 
 
+    private VillimSession session;
     private VillimHouse house;
     private boolean dateSelected;
     private Date startDate;
@@ -84,6 +85,8 @@ public class ReservationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reservation);
+
+        session = new VillimSession(this);
 
         /* Extract info */
         house = getIntent().getParcelableExtra(getString(R.string.key_house));
@@ -167,12 +170,16 @@ public class ReservationActivity extends AppCompatActivity {
         reserveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (dateSelected){
-                    sendReservationRequest();
+                if (session.getLoggedIn()) {
+                    if (dateSelected){
+                        sendReservationRequest();
+                    } else {
+                        Toast.makeText(getApplicationContext(), R.string.must_select_date, Toast.LENGTH_LONG).show();
+                    }
                 } else {
-                    Toast.makeText(getApplicationContext(), R.string.must_select_date, Toast.LENGTH_LONG).show();
+                    Intent loginIntent = new Intent(ReservationActivity.this, LoginActivity.class);
+                    startActivity(loginIntent);
                 }
-
             }
         });
     }
