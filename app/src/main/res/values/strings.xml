@@ -20,7 +20,8 @@
     <string name="key_num_guests">num_guests</string>
     <string name="key_num_rooms">num_rooms</string>
     <string name="key_num_beds">num_beds</string>
-    <string name="key_num_baths">num_baths</string>
+    <string name="key_num_baths">num_baths</string>\
+    <string name="key_visit">visit</string>
 
     <!-- Search Filter Activity -->
     <string name="all_locations">모든 위치</string>

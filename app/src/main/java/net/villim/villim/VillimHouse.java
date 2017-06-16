@@ -188,8 +188,8 @@ public class VillimHouse implements Parcelable {
 
         try {
             for (int i = 0; i < jsonArray.length(); ++i) {
-                VillimHouse review = createHouseFromJSONObject(jsonArray.getJSONObject(i));
-                houses[i] = review;
+                VillimHouse house = createHouseFromJSONObject(jsonArray.getJSONObject(i));
+                houses[i] = house;
             }
 
         } catch (JSONException e) {

@@ -61,6 +61,7 @@ import static net.villim.villim.VillimKeys.KEY_NUM_BEDROOM;
 import static net.villim.villim.VillimKeys.KEY_NUM_GUEST;
 import static net.villim.villim.VillimKeys.KEY_QUERY_SUCCESS;
 import static net.villim.villim.VillimKeys.KEY_RATE_PER_NIGHT;
+import static net.villim.villim.VillimKeys.KEY_VISITS;
 
 
 public class VisitFragment extends Fragment {
@@ -115,10 +116,11 @@ public class VisitFragment extends Fragment {
     private void populateView(JSONObject jsonObject) {
         // Network operation to fetch.
         try {
-            JSONArray houseArray = jsonObject.getJSONArray(KEY_HOUSES);
-            VillimHouse[] houses = VillimHouse.houseArrayFromJsonArray(houseArray);
+            JSONArray visitArray = jsonObject.getJSONArray(KEY_VISITS);
+            VillimVisit[] visits = VillimVisit.visitArrayFromJsonArray(visitArray);
+            VillimHouse[] houses = VillimHouse.houseArrayFromJsonArray(visitArray);
 
-            adapter = new DiscoverRecyclerAdapter(houses);
+            adapter = new VisitRecyclerAdapter(visits, houses);
             recyclerView.setAdapter(adapter);
         } catch (JSONException e) {
         }

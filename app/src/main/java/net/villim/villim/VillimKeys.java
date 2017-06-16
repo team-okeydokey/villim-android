@@ -121,7 +121,10 @@ public class VillimKeys {
     public static final String KEY_HOUSES = "houses";
 
     /* Visit list */
-
+    public static final String KEY_VISITS = "visits";
+    public static final String KEY_VISIT_ID = "visit_id";
+    public static final String KEY_VISITOR_ID = "visitor_id";
+    public static final String KEY_VISIT_TIME = "visit_time";
 
 }
 
