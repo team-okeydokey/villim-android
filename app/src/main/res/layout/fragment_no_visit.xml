@@ -44,6 +44,6 @@
         android:lineSpacingExtra="6.9sp"
         android:text="@string/find_room"
         android:textColor="#ffffff"
-        android:textSize="16.8sp" />
+        android:textSize="19.8sp" />
 
 </RelativeLayout>
