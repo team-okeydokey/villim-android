@@ -3,16 +3,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="@dimen/appbar_offset"
     tools:context="net.villim.villim.VisitFragment">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/discover_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_centerInParent="true"
-        android:text="Coming Soon"
-        android:textSize="17sp"
-        android:textStyle="bold" />
+        android:layout_marginTop="30dp"
+        android:clipToPadding="false"
+        android:paddingBottom="@dimen/discover_recycler_padding_bottom"
+        android:paddingLeft="@dimen/discover_recycler_padding"
+        android:paddingRight="@dimen/discover_recycler_padding"
+        android:paddingTop="@dimen/appbar_offset" />
 
 
 </RelativeLayout>
