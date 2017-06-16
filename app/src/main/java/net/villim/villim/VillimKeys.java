@@ -7,12 +7,23 @@ package net.villim.villim;
 public class VillimKeys {
 
     /* Server constants */
+//    public static final String SERVER_SCHEME = "http";
+//    public static final String SERVER_HOST = "175.207.29.19";
     public static final String SERVER_SCHEME = "http";
-    public static final String SERVER_HOST = "175.207.29.19";
+    public static final String SERVER_HOST = "www.mocky.io";
 
     /* URLS */
     public static final String LOGIN_URL = "http://175.207.29.19/a/login";
+    public static final String SIGNUP_URL = "http://175.207.29.19/a/signup";
     public static final String DOORLOCK_CHANGE_URL = "http://175.207.29.19/a/login";
+    public static final String MY_ROOM_URL = "http://www.mocky.io/v2/593df3e0110000f727722b11";
+    public static final String OPEN_DOORLOCK_URL = "http://www.mocky.io/v2/593df3e0110000f727722b11";
+    public static final String RESERVE_URL = "http://www.mocky.io/v2/5942f90b120000ff12ddc665";
+    public static final String FEATURED_HOUSES_URL = "v2/5944039a120000380bfcb53f";
+    public static final String HOST_INFO_URL = "v2/594175a00f0000770ec63237";
+    public static final String HOUSE_INFO_URL = "v2/59441d55120000930dfcb57e";
+    public static final String HOUSE_REVIEW_URL = "v2/5941d5200f00002e16c632c4";
+    public static final String VISIT_INFO_URL = "v2/59442d6c1200002f0ffcb5a5";
 
     /* Request success codes */
     public static final String KEY_QUERY_SUCCESS = "query_success";

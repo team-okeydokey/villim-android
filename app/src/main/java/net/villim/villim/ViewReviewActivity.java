@@ -38,6 +38,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
+import static net.villim.villim.VillimKeys.HOUSE_REVIEW_URL;
 import static net.villim.villim.VillimKeys.KEY_HOUSE_ID;
 import static net.villim.villim.VillimKeys.KEY_MESSAGE;
 import static net.villim.villim.VillimKeys.KEY_QUERY_SUCCESS;
@@ -50,6 +51,8 @@ import static net.villim.villim.VillimKeys.KEY_RATING_OVERALL;
 import static net.villim.villim.VillimKeys.KEY_RATING_VALUE;
 import static net.villim.villim.VillimKeys.KEY_REVIEWS;
 import static net.villim.villim.VillimKeys.KEY_REVIEW_COUNT;
+import static net.villim.villim.VillimKeys.SERVER_HOST;
+import static net.villim.villim.VillimKeys.SERVER_SCHEME;
 
 public class ViewReviewActivity extends AppCompatActivity {
 
@@ -132,9 +135,9 @@ public class ViewReviewActivity extends AppCompatActivity {
 //                .build().url();
 
         URL url = new HttpUrl.Builder()
-                .scheme("http")
-                .host("www.mocky.io")
-                .addPathSegments("v2/5941d5200f00002e16c632c4")
+                .scheme(SERVER_SCHEME)
+                .host(SERVER_HOST)
+                .addPathSegments(HOUSE_REVIEW_URL)
                 .addQueryParameter(KEY_HOUSE_ID, Integer.toString(getIntent().getIntExtra(KEY_HOUSE_ID, 0)))
                 .build().url();
 

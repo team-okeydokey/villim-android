@@ -40,10 +40,9 @@ import static net.villim.villim.VillimKeys.KEY_PASSWORD;
 import static net.villim.villim.VillimKeys.KEY_SIGNUP_SUCCESS;
 import static net.villim.villim.VillimKeys.KEY_USER;
 import static net.villim.villim.VillimKeys.KEY_USER_INFO;
+import static net.villim.villim.VillimKeys.SIGNUP_URL;
 
 public class SignupActivity extends AppCompatActivity {
-
-    private static final String SIGNUP_URL = "http://175.207.29.19/a/signup";
 
     private Toolbar toolbar;
 

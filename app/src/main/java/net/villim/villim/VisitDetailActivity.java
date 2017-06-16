@@ -44,10 +44,11 @@ import static net.villim.villim.VillimKeys.KEY_RESERVATION_ACTIVE;
 import static net.villim.villim.VillimKeys.KEY_ROOM_ID;
 import static net.villim.villim.VillimKeys.KEY_VISIT_ID;
 import static net.villim.villim.VillimKeys.KEY_VISIT_INFO;
+import static net.villim.villim.VillimKeys.SERVER_HOST;
+import static net.villim.villim.VillimKeys.SERVER_SCHEME;
+import static net.villim.villim.VillimKeys.VISIT_INFO_URL;
 
 public class VisitDetailActivity extends AppCompatActivity {
-
-    private static final String MY_ROOM_URL = "http://www.mocky.io/v2/593df3e0110000f727722b11";
 
     private Toolbar toolbar;
 
@@ -121,9 +122,9 @@ public class VisitDetailActivity extends AppCompatActivity {
 
 
         URL url = new HttpUrl.Builder()
-                .scheme("http")
-                .host("www.mocky.io")
-                .addPathSegments("v2/59442d6c1200002f0ffcb5a5")
+                .scheme(SERVER_SCHEME)
+                .host(SERVER_HOST)
+                .addPathSegments(VISIT_INFO_URL)
                 .addQueryParameter(KEY_VISIT_ID, Integer.toString(visit.visitId))
                 .build().url();
 

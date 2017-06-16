@@ -52,6 +52,7 @@ import static net.villim.villim.CalendarActivity.END_DATE;
 import static net.villim.villim.CalendarActivity.START_DATE;
 import static net.villim.villim.HouseDescriptionActivity.KEY_BASIC_DESCRIPTION;
 import static net.villim.villim.MainActivity.DATE_SELECTED;
+import static net.villim.villim.VillimKeys.HOUSE_INFO_URL;
 import static net.villim.villim.VillimKeys.KEY_ABOUT;
 import static net.villim.villim.VillimKeys.KEY_ADDITIONAL_GUEST_FEE;
 import static net.villim.villim.VillimKeys.KEY_ADDR_DIRECTION;
@@ -76,6 +77,8 @@ import static net.villim.villim.VillimKeys.KEY_REVIEW_LAST_CONTENT;
 import static net.villim.villim.VillimKeys.KEY_REVIEW_LAST_PROFILE_PIC_URL;
 import static net.villim.villim.VillimKeys.KEY_REVIEW_LAST_RATING;
 import static net.villim.villim.VillimKeys.KEY_REVIEW_LAST_REVIEWER;
+import static net.villim.villim.VillimKeys.SERVER_HOST;
+import static net.villim.villim.VillimKeys.SERVER_SCHEME;
 
 
 public class HouseDetailActivity extends AppCompatActivity implements OnMapReadyCallback {
@@ -270,9 +273,9 @@ public class HouseDetailActivity extends AppCompatActivity implements OnMapReady
 //                .build().url();
 
         URL url = new HttpUrl.Builder()
-                .scheme("http")
-                .host("www.mocky.io")
-                .addPathSegments("v2/59441d55120000930dfcb57e")
+                .scheme(SERVER_SCHEME)
+                .host(SERVER_HOST)
+                .addPathSegments(HOUSE_INFO_URL)
                 .addQueryParameter(KEY_HOUSE_ID, Integer.toString(house.houseId))
                 .build().url();
 

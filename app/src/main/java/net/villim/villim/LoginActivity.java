@@ -37,12 +37,10 @@ import static net.villim.villim.VillimKeys.KEY_LOGIN_SUCCESS;
 import static net.villim.villim.VillimKeys.KEY_MESSAGE;
 import static net.villim.villim.VillimKeys.KEY_PASSWORD;
 import static net.villim.villim.VillimKeys.KEY_USER_INFO;
+import static net.villim.villim.VillimKeys.LOGIN_URL;
 
 
 public class LoginActivity extends AppCompatActivity {
-
-    //    private static final String LOGIN_URL = "http://www.mocky.io/v2/593c2915100000c816c477e4";
-    private static final String LOGIN_URL = "http://175.207.29.19/a/login";
 
     private Toolbar toolbar;
     private EditText loginFormEmail;

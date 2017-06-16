@@ -29,6 +29,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
+import static net.villim.villim.VillimKeys.HOST_INFO_URL;
 import static net.villim.villim.VillimKeys.KEY_ABOUT;
 import static net.villim.villim.VillimKeys.KEY_ADDR_SUMMARY;
 import static net.villim.villim.VillimKeys.KEY_HOST_ID;
@@ -36,6 +37,8 @@ import static net.villim.villim.VillimKeys.KEY_HOST_NAME;
 import static net.villim.villim.VillimKeys.KEY_HOST_PROFILE_PIC_URL;
 import static net.villim.villim.VillimKeys.KEY_MESSAGE;
 import static net.villim.villim.VillimKeys.KEY_QUERY_SUCCESS;
+import static net.villim.villim.VillimKeys.SERVER_HOST;
+import static net.villim.villim.VillimKeys.SERVER_SCHEME;
 
 
 public class HostProfileActivity extends AppCompatActivity {
@@ -108,18 +111,10 @@ public class HostProfileActivity extends AppCompatActivity {
                 .cookieJar(cookieJar)
                 .build();
 
-
-//        URL url = new HttpUrl.Builder()
-//                .scheme(SERVER_SCHEME)
-//                .host(SERVER_HOST)
-//                .addPathSegments("a/host-info")
-//                .addQueryParameter(KEY_HOST_ID, getIntent().getStringExtra(KEY_HOST_ID))
-//                .build().url();
-
                 URL url = new HttpUrl.Builder()
-                .scheme("http")
-                .host("www.mocky.io")
-                .addPathSegments("v2/594175a00f0000770ec63237")
+                .scheme(SERVER_SCHEME)
+                .host(SERVER_HOST)
+                .addPathSegments(HOST_INFO_URL)
                 .addQueryParameter(KEY_HOST_ID, Integer.toString(getIntent().getIntExtra(KEY_HOST_ID, 0)))
                 .build().url();
 
