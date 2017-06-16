@@ -76,8 +76,6 @@ public class VillimHouse implements Parcelable {
     int[] amenityIds;
     String houseThumbnailUrl;
     String[] housePicUrls;
-    VillimReview[] reviews;
-
 
     //public VillimReview[] reviews;
     //public int[] utilities;
@@ -176,6 +174,7 @@ public class VillimHouse implements Parcelable {
         house.houseThumbnailUrl = jsonObject.optString(KEY_HOUSE_THUMBNAIL_URL);
         house.amenityIds = VillimUtil.JSONArrayToIntArray(jsonObject.optJSONArray(KEY_AMENITY_IDS));
         house.housePicUrls = VillimUtil.JSONArrayToStringArray(jsonObject.optJSONArray(KEY_HOUSE_PIC_URLS));
+
         return house;
     }
 

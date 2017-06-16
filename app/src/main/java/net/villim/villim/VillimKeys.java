@@ -45,7 +45,8 @@ public class VillimKeys {
     public static final String KEY_FIRSTNAME = "firstname";
     public static final String KEY_LASTNAME = "lastname";
 
-    /* Room Info */
+    /* House Info */
+    public static final String KEY_HOUSE_INFO = "house_info";
     public static final String KEY_HOUSE_ID = "house_id";
     public static final String KEY_HOUSE_NAME = "house_name";
     public static final String KEY_ADDR_FULL = "addr_full";
@@ -83,6 +84,11 @@ public class VillimKeys {
     public static final String KEY_HOUSE_THUMBNAIL_URL = "house_thumbnail_url";
     public static final String KEY_AMENITY_IDS = "amenity_ids";
     public static final String KEY_HOUSE_PIC_URLS = "house_pic_urls";
+
+    public static final String KEY_REVIEW_LAST_CONTENT = "review_last_content";
+    public static final String KEY_REVIEW_LAST_REVIEWER = "review_last_reviewer";
+    public static final String KEY_REVIEW_LAST_RATING = "review_last_rating";
+    public static final String KEY_REVIEW_LAST_PROFILE_PIC_URL = "review_last_profile_pic_url";
 
     /* Review info keys */
     public static final String KEY_REVIEWS = "reviews";

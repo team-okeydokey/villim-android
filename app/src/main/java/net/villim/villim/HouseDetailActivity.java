@@ -19,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -27,13 +28,27 @@ import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.wang.avi.AVLoadingIndicatorView;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.net.URL;
 import java.util.Date;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.HttpUrl;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 import static net.villim.villim.CalendarActivity.END_DATE;
 import static net.villim.villim.CalendarActivity.START_DATE;
 import static net.villim.villim.HouseDescriptionActivity.KEY_BASIC_DESCRIPTION;
 import static net.villim.villim.MainActivity.DATE_SELECTED;
+import static net.villim.villim.VillimKeys.KEY_ABOUT;
 import static net.villim.villim.VillimKeys.KEY_ADDITIONAL_GUEST_FEE;
 import static net.villim.villim.VillimKeys.KEY_ADDR_DIRECTION;
 import static net.villim.villim.VillimKeys.KEY_ADDR_SUMMARY;
@@ -45,11 +60,18 @@ import static net.villim.villim.VillimKeys.KEY_HOST_ID;
 import static net.villim.villim.VillimKeys.KEY_HOST_NAME;
 import static net.villim.villim.VillimKeys.KEY_HOST_PROFILE_PIC_URL;
 import static net.villim.villim.VillimKeys.KEY_HOUSE_ID;
+import static net.villim.villim.VillimKeys.KEY_HOUSE_INFO;
 import static net.villim.villim.VillimKeys.KEY_HOUSE_PIC_URLS;
 import static net.villim.villim.VillimKeys.KEY_HOUSE_POLICY;
 import static net.villim.villim.VillimKeys.KEY_LATITUDE;
 import static net.villim.villim.VillimKeys.KEY_LONGITUDE;
+import static net.villim.villim.VillimKeys.KEY_MESSAGE;
+import static net.villim.villim.VillimKeys.KEY_QUERY_SUCCESS;
 import static net.villim.villim.VillimKeys.KEY_RATE_PER_NIGHT;
+import static net.villim.villim.VillimKeys.KEY_REVIEW_LAST_CONTENT;
+import static net.villim.villim.VillimKeys.KEY_REVIEW_LAST_PROFILE_PIC_URL;
+import static net.villim.villim.VillimKeys.KEY_REVIEW_LAST_RATING;
+import static net.villim.villim.VillimKeys.KEY_REVIEW_LAST_REVIEWER;
 
 
 public class HouseDetailActivity extends AppCompatActivity implements OnMapReadyCallback {
@@ -102,14 +124,29 @@ public class HouseDetailActivity extends AppCompatActivity implements OnMapReady
     private TextView reserveButtonPrice;
     private ImageView coinImageView;
 
+    private AVLoadingIndicatorView loadingIndicator;
+
     private boolean dateSelected;
     private Date startDate;
     private Date endDate;
+
+    private String lastReviewContent;
+    private String lastReviewReviewer;
+    private String lastReviewProfilePictureUrl;
+    private float lastReviewRating;
+
+    private GoogleMap map;
+    /* We set these variables because we don't know which will occur first. */
+    private boolean markerPlaced;
+    private boolean dataDownloaded;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_house_detail);
+
+        markerPlaced = false;
+        dataDownloaded = false;
 
         /* Extract room info and fill view elements with data */
         extractRoomInfo();
@@ -193,19 +230,95 @@ public class HouseDetailActivity extends AppCompatActivity implements OnMapReady
         reserveButtonPrice = (TextView) findViewById(R.id.reserve_button_price);
         coinImageView = (ImageView) findViewById(R.id.coin_image);
 
-        populateView();
+        /* Loading indicator */
+        loadingIndicator = (AVLoadingIndicatorView) findViewById(R.id.loading_indicator);
+
+        sendHouseInfoRequest();
     }
 
     // Extract room info.
     private void extractRoomInfo() {
         Bundle args = getIntent().getExtras();
         house = args.getParcelable(getString(R.string.key_house));
-        house.reviews = VillimReview.getHouseReviewsFromServer(house.houseId);
         dateSelected = args.getBoolean(DATE_SELECTED, false);
         if (dateSelected) {
             startDate = (Date) args.getSerializable(CalendarActivity.START_DATE);
             endDate = (Date) args.getSerializable(CalendarActivity.END_DATE);
         }
+    }
+
+    public void sendHouseInfoRequest() {
+        startLoadingAnimation();
+
+        OkHttpClient client = new OkHttpClient();
+
+//        URL url = new HttpUrl.Builder()
+//                .scheme(SERVER_SCHEME)
+//                .host(SERVER_HOST)
+//                .addPathSegments("a/host-info")
+//                .addQueryParameter(KEY_HOST_ID, getIntent().getStringExtra(KEY_HOST_ID))
+//                .build().url();
+
+        URL url = new HttpUrl.Builder()
+                .scheme("http")
+                .host("www.mocky.io")
+                .addPathSegments("v2/594409e3120000bc0bfcb54c")
+                .addQueryParameter(KEY_HOUSE_ID, Integer.toString(house.houseId))
+                .build().url();
+
+        Request request = new Request.Builder()
+                .url(url)
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                // Something went wrong.
+                showErrorMessage(getString(R.string.cant_connect_to_server));
+                stopLoadingAnimation();
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (!response.isSuccessful()) {
+                    showErrorMessage(getString(R.string.server_error));
+                    stopLoadingAnimation();
+                    throw new IOException("Response not successful   " + response);
+                }
+                /* Request success. */
+                try {
+                    /* 주의: response.body().string()은 한 번 부를 수 있음 */
+                    final JSONObject jsonObject = new JSONObject(response.body().string());
+                    if (jsonObject.getBoolean(KEY_QUERY_SUCCESS)) {
+                        /* Set host picture */
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                try {
+                                    house = VillimHouse.createHouseFromJSONObject(jsonObject.getJSONObject(KEY_HOUSE_INFO));
+                                    dataDownloaded = true;
+                                    lastReviewContent = jsonObject.getJSONObject(KEY_HOUSE_INFO).getString(KEY_REVIEW_LAST_CONTENT);
+                                    lastReviewReviewer = jsonObject.getJSONObject(KEY_HOUSE_INFO).getString(KEY_REVIEW_LAST_REVIEWER);
+                                    lastReviewProfilePictureUrl = jsonObject.getJSONObject(KEY_HOUSE_INFO).getString(KEY_REVIEW_LAST_PROFILE_PIC_URL);
+                                    lastReviewRating = (float) jsonObject.getJSONObject(KEY_HOUSE_INFO).getDouble(KEY_REVIEW_LAST_RATING);
+                                    populateView();
+                                } catch (JSONException e) {
+                                    showErrorMessage(getString(R.string.server_error));
+                                    stopLoadingAnimation();
+                                }
+                            }
+                        });
+
+                    } else {
+                        showErrorMessage(jsonObject.getString(KEY_MESSAGE));
+                    }
+                    stopLoadingAnimation();
+                } catch (JSONException e) {
+                    showErrorMessage(getString(R.string.server_error));
+                    stopLoadingAnimation();
+                }
+            }
+        });
     }
 
 
@@ -223,7 +336,7 @@ public class HouseDetailActivity extends AppCompatActivity implements OnMapReady
             });
         }
         Glide.with(this)
-                .load(R.drawable.prugio_thumbnail)
+                .load(house.houseThumbnailUrl)
                 .into(toolbarImage);
 
         /* Add callback to post profile activity */
@@ -311,6 +424,23 @@ public class HouseDetailActivity extends AppCompatActivity implements OnMapReady
         populateReviews();
 
         /* Map */
+        if (map != null && !markerPlaced) {
+            System.out.println("Outside of interface");
+            map.addMarker(new MarkerOptions().position(new LatLng(house.latitude, house.longitude)));
+            map.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(house.latitude, house.longitude)));
+            map.animateCamera(CameraUpdateFactory.zoomTo(17.0f));
+
+            map.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+                @Override
+                public void onMapClick(LatLng latLng) {
+                    Intent intent = new Intent(HouseDetailActivity.this, FullScreenMapActivity.class);
+                    intent.putExtra(KEY_LATITUDE, house.latitude);
+                    intent.putExtra(KEY_LONGITUDE, house.longitude);
+                    intent.putExtra(KEY_ADDR_DIRECTION, house.addrDirection);
+                    startActivity(intent);
+                }
+            });
+        }
 
         /* House & Refund Policy */
         housePolicyRead = (TextView) findViewById(R.id.house_policy_read);
@@ -370,21 +500,26 @@ public class HouseDetailActivity extends AppCompatActivity implements OnMapReady
     }
 
     @Override
-    public void onMapReady(GoogleMap map) {
-        map.addMarker(new MarkerOptions().position(new LatLng(house.latitude, house.longitude)));
-        map.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(house.latitude, house.longitude)));
-        map.animateCamera(CameraUpdateFactory.zoomTo(17.0f));
+    public void onMapReady(GoogleMap googleMap) {
+        map = googleMap;
+        if (dataDownloaded) {
+            System.out.println("Inside interface");
+            markerPlaced = true;
+            map.addMarker(new MarkerOptions().position(new LatLng(house.latitude, house.longitude)));
+            map.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(house.latitude, house.longitude)));
+            map.animateCamera(CameraUpdateFactory.zoomTo(17.0f));
 
-        map.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
-            @Override
-            public void onMapClick(LatLng latLng) {
-                Intent intent = new Intent(HouseDetailActivity.this, FullScreenMapActivity.class);
-                intent.putExtra(KEY_LATITUDE, house.latitude);
-                intent.putExtra(KEY_LONGITUDE, house.longitude);
-                intent.putExtra(KEY_ADDR_DIRECTION, house.addrDirection);
-                startActivity(intent);
-            }
-        });
+            map.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+                @Override
+                public void onMapClick(LatLng latLng) {
+                    Intent intent = new Intent(HouseDetailActivity.this, FullScreenMapActivity.class);
+                    intent.putExtra(KEY_LATITUDE, house.latitude);
+                    intent.putExtra(KEY_LONGITUDE, house.longitude);
+                    intent.putExtra(KEY_ADDR_DIRECTION, house.addrDirection);
+                    startActivity(intent);
+                }
+            });
+        }
     }
 
     private class PopulateHouseDetailTask extends AsyncTask<Void, Void, Void> {
@@ -452,9 +587,9 @@ public class HouseDetailActivity extends AppCompatActivity implements OnMapReady
     }
 
     private void populateReviews() {
-        VillimReview[] reviews = house.reviews;
 
-        if (reviews == null || reviews.length == 0) {
+
+        if (house.houseReviewCount == 0) {
             /* Remove the whole review section andreplace it with "No review" textview. */
             LinearLayoutCompat parent = (LinearLayoutCompat) reviewBody.getParent();
             int index = parent.indexOfChild(reviewBody);
@@ -475,16 +610,15 @@ public class HouseDetailActivity extends AppCompatActivity implements OnMapReady
         } else {
 
             /* There is at least 1 review. Load reviewer info. */
-            VillimReview firstReview = reviews[0];
             Glide.with(this)
                     .load(R.drawable.prugio_thumbnail)
                     .into(reviewerProfilePic);
-            reviewerName.setText(firstReview.reviewerName);
-            reviewerRating.setRating(firstReview.overAllRating);
-            reviewContent.setText(firstReview.reviewContent);
+            reviewerName.setText(lastReviewReviewer);
+            reviewerRating.setRating(lastReviewRating);
+            reviewContent.setText(lastReviewContent);
             houseRating.setRating(house.houseRating);
 
-            if (reviews.length == 1) {
+            if (house.houseReviewCount == 1) {
                 /* Be away with "see more" if there is only one review. Also, shift house rating bar to the left. */
                 seeMoreReviews.setVisibility(View.GONE);
                 RelativeLayout.LayoutParams houseRatingParams = (RelativeLayout.LayoutParams) houseRating.getLayoutParams();
@@ -492,7 +626,7 @@ public class HouseDetailActivity extends AppCompatActivity implements OnMapReady
                 houseRating.setLayoutParams(houseRatingParams);
             } else {
                 /* Activate "see more" button with appropriate text. */
-                String seeMoreReviewsText = String.format(getString(R.string.reviews_see_more_format), reviews.length - 1);
+                String seeMoreReviewsText = String.format(getString(R.string.reviews_see_more_format), house.houseReviewCount - 1);
                 seeMoreReviews.setText(seeMoreReviewsText);
                 seeMoreReviews.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -506,5 +640,32 @@ public class HouseDetailActivity extends AppCompatActivity implements OnMapReady
         }
     }
 
+    public void startLoadingAnimation() {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                loadingIndicator.smoothToShow();
+            }
+        });
+    }
+
+    public void stopLoadingAnimation() {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                loadingIndicator.smoothToHide();
+            }
+        });
+    }
+
+    public void showErrorMessage(final String message) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(getApplicationContext(), message,
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 
 }
