@@ -206,8 +206,13 @@ public class VisitFragment extends Fragment {
     }
 
     public void showErrorMessage(final String message) {
-        Toast.makeText(getActivity(), message,
-                Toast.LENGTH_LONG).show();;
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(getActivity(), message,
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
 }

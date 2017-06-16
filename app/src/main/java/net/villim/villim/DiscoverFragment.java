@@ -9,10 +9,23 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+
+import com.wang.avi.AVLoadingIndicatorView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.IOException;
+import java.net.URL;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.HttpUrl;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 import static net.villim.villim.VillimKeys.KEY_ADDITIONAL_GUEST_FEE;
 import static net.villim.villim.VillimKeys.KEY_ADDR_DIRECTION;
@@ -28,6 +41,7 @@ import static net.villim.villim.VillimKeys.KEY_HOST_NAME;
 import static net.villim.villim.VillimKeys.KEY_HOST_PROFILE_PIC_URL;
 import static net.villim.villim.VillimKeys.KEY_HOST_RATING;
 import static net.villim.villim.VillimKeys.KEY_HOST_REVIEW_COUNT;
+import static net.villim.villim.VillimKeys.KEY_HOUSES;
 import static net.villim.villim.VillimKeys.KEY_HOUSE_ID;
 import static net.villim.villim.VillimKeys.KEY_HOUSE_NAME;
 import static net.villim.villim.VillimKeys.KEY_HOUSE_PIC_URLS;
@@ -38,10 +52,12 @@ import static net.villim.villim.VillimKeys.KEY_LATITUDE;
 import static net.villim.villim.VillimKeys.KEY_LOCK_ADDR;
 import static net.villim.villim.VillimKeys.KEY_LOCK_PC;
 import static net.villim.villim.VillimKeys.KEY_LONGITUDE;
+import static net.villim.villim.VillimKeys.KEY_MESSAGE;
 import static net.villim.villim.VillimKeys.KEY_NUM_BATHROOM;
 import static net.villim.villim.VillimKeys.KEY_NUM_BED;
 import static net.villim.villim.VillimKeys.KEY_NUM_BEDROOM;
 import static net.villim.villim.VillimKeys.KEY_NUM_GUEST;
+import static net.villim.villim.VillimKeys.KEY_QUERY_SUCCESS;
 import static net.villim.villim.VillimKeys.KEY_RATE_PER_NIGHT;
 
 
@@ -51,6 +67,8 @@ public class DiscoverFragment extends Fragment {
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private RecyclerView.Adapter adapter;
+
+    private AVLoadingIndicatorView loadingIndicator;
 
     public DiscoverFragment() {
         // Required empty public constructor
@@ -81,14 +99,69 @@ public class DiscoverFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
 
 
-        populateView();
+        /* Loading indicator */
+        loadingIndicator = (AVLoadingIndicatorView) discoverView.findViewById(R.id.loading_indicator);
+
+        sendFeaturedtHousesRequest();
 
         return discoverView;
     }
 
+    private void sendFeaturedtHousesRequest() {
+        startLoadingAnimation();
+
+        OkHttpClient client = new OkHttpClient();
+
+        URL url = new HttpUrl.Builder()
+                .scheme("http")
+                .host("www.mocky.io")
+                .addPathSegments("v2/5944039a120000380bfcb53f")
+                .build().url();
+
+        Request request = new Request.Builder()
+                .url(url)
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                // Something went wrong.
+                showErrorMessage(getString(R.string.cant_connect_to_server));
+                stopLoadingAnimation();
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (!response.isSuccessful()) {
+                    showErrorMessage(getString(R.string.server_error));
+                    stopLoadingAnimation();
+                    throw new IOException("Response not successful   " + response);
+                }
+                /* Request success. */
+                try {
+                    /* 주의: response.body().string()은 한 번 부를 수 있음 */
+                    final JSONObject jsonObject = new JSONObject(response.body().string());
+                    if (jsonObject.getBoolean(KEY_QUERY_SUCCESS)) {
+                        getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                populateView(jsonObject);
+                            }
+                        });
+                    } else {
+                        showErrorMessage(jsonObject.getString(KEY_MESSAGE));
+                    }
+                    stopLoadingAnimation();
+                } catch (JSONException e) {
+                    showErrorMessage(getString(R.string.server_error));
+                    stopLoadingAnimation();
+                }
+            }
+        });
+    }
+
     // Make this async.
-    private void populateView() {
-        // Network operation to fetch.
+    private void populateView(JSONObject jsonObject) {
 
 
         JSONObject jsonItem = new JSONObject();
@@ -152,12 +225,16 @@ public class DiscoverFragment extends Fragment {
 
         }
 
-        VillimHouse obj = new VillimHouse(jsonItem);
 
-        VillimHouse[] exampleArray = {obj, obj, obj, obj, obj, obj, obj, obj, obj};
+        try {
+            JSONArray houseArray = jsonObject.getJSONArray(KEY_HOUSES);
+            VillimHouse[] houses = VillimHouse.houseArrayFromJsonArray(houseArray);
 
-        adapter = new DiscoverRecyclerAdapter(exampleArray);
-        recyclerView.setAdapter(adapter);
+            adapter = new DiscoverRecyclerAdapter(houses);
+            recyclerView.setAdapter(adapter);
+        } catch (JSONException e) {
+        }
+
     }
 
     @Override
@@ -168,6 +245,34 @@ public class DiscoverFragment extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
+    }
+
+    public void startLoadingAnimation() {
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                loadingIndicator.smoothToShow();
+            }
+        });
+    }
+
+    public void stopLoadingAnimation() {
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                loadingIndicator.smoothToHide();
+            }
+        });
+    }
+
+    public void showErrorMessage(final String message) {
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(getActivity(), message,
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
 }
