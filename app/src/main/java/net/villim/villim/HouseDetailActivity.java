@@ -354,7 +354,7 @@ public class HouseDetailActivity extends AppCompatActivity implements OnMapReady
 
         /* Host profile pic */
         Glide.with(this)
-                .load(R.drawable.prugio_thumbnail)
+                .load(house.hostProfilePicUrl)
                 .into(hostProfilePic);
 
         /* Host name and rating */
@@ -611,7 +611,7 @@ public class HouseDetailActivity extends AppCompatActivity implements OnMapReady
 
             /* There is at least 1 review. Load reviewer info. */
             Glide.with(this)
-                    .load(R.drawable.prugio_thumbnail)
+                    .load(lastReviewProfilePictureUrl)
                     .into(reviewerProfilePic);
             reviewerName.setText(lastReviewReviewer);
             reviewerRating.setRating(lastReviewRating);
