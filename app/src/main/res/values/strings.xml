@@ -231,6 +231,9 @@
     <string name="reservation_status_confirmed">예약 완료</string>
     <string name="reservation_status_active">거주중</string>
 
+    <!-- Visit Fragment -->
+    <string name="no_visit_list">방문 신청한 방이 없습니다.</string>
+
     <!-- Visit detail activity -->
     <string name="my_visit_list">내 방문목록</string>
     <string name="villim_request">빌림 요청</string>

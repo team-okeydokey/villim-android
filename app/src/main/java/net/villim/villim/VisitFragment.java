@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -144,10 +145,26 @@ public class VisitFragment extends Fragment {
     public void showNoVisitScreen() {
         relativeLayout.removeAllViews();
         LayoutInflater inflater = LayoutInflater.from(getActivity().getApplicationContext());
-        RelativeLayout layout = (RelativeLayout) inflater.inflate(R.layout.fragment_my_key, null, false);
+        RelativeLayout layout = (RelativeLayout) inflater.inflate(R.layout.fragment_no_visit, null, false);
+
+        /* Set default thumbnail */
+        ImageView houseThumbnail = (ImageView) layout.findViewById(R.id.house_thumbnail);
+        Glide.with(this).load(R.drawable.img_default).into(houseThumbnail);
+
+        /* Set no visit text */
+        TextView noVisitTextView = (TextView) layout.findViewById(R.id.house_name);
+        noVisitTextView.setText(getString(R.string.no_visit_list));
+
+        /* Set OnclikcListener to button */
+        Button bottomButton = (Button) layout.findViewById(R.id.bottom_button);
+        bottomButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity.selectTab(0);
+            }
+        });
 
         relativeLayout.addView(layout);
-
     }
 
     private void sendVisitListRequest() {
