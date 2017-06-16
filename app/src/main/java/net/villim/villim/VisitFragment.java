@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -68,11 +69,14 @@ public class VisitFragment extends Fragment {
 
     private MainActivity activity;
 
+    private RelativeLayout relativeLayout;
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private RecyclerView.Adapter adapter;
 
     private AVLoadingIndicatorView loadingIndicator;
+
+    private VillimSession session;
 
     public VisitFragment() {
         // Required empty public constructor
@@ -94,10 +98,12 @@ public class VisitFragment extends Fragment {
         // Inflate the layout for this fragment
         View visitView = inflater.inflate(R.layout.fragment_visit, container, false);
 
-        // Remove bottom bar.
         activity = ((MainActivity) getActivity());
 //        activity.showBottomButtons(false, false);
 
+        session = new VillimSession(getActivity().getApplicationContext());
+
+        relativeLayout = (RelativeLayout) visitView.findViewById(R.id.root_view);
         recyclerView = (RecyclerView) visitView.findViewById(R.id.discover_recycler_view);
         layoutManager = new LinearLayoutManager(activity);
 
@@ -107,7 +113,11 @@ public class VisitFragment extends Fragment {
         /* Loading indicator */
         loadingIndicator = (AVLoadingIndicatorView) visitView.findViewById(R.id.loading_indicator);
 
-        sendVisitListRequest();
+        if (session.getLoggedIn()) {
+            sendVisitListRequest();
+        } else {
+            showNoVisitScreen();
+        }
 
         return visitView;
     }
@@ -120,10 +130,24 @@ public class VisitFragment extends Fragment {
             VillimVisit[] visits = VillimVisit.visitArrayFromJsonArray(visitArray);
             VillimHouse[] houses = VillimHouse.houseArrayFromJsonArray(visitArray);
 
-            adapter = new VisitRecyclerAdapter(visits, houses);
-            recyclerView.setAdapter(adapter);
+            if (visits.length == 0) {
+                showNoVisitScreen();
+            } else {
+                adapter = new VisitRecyclerAdapter(visits, houses);
+                recyclerView.setAdapter(adapter);
+            }
+
         } catch (JSONException e) {
         }
+    }
+
+    public void showNoVisitScreen() {
+        relativeLayout.removeAllViews();
+        LayoutInflater inflater = LayoutInflater.from(getActivity().getApplicationContext());
+        RelativeLayout layout = (RelativeLayout) inflater.inflate(R.layout.fragment_my_key, null, false);
+
+        relativeLayout.addView(layout);
+
     }
 
     private void sendVisitListRequest() {
