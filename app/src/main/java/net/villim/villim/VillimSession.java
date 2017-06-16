@@ -118,4 +118,8 @@ public class VillimSession {
         int roomId = prefs.getInt(KEY_ROOM_ID,0);
         return roomId;
     }
+
+    public void updateUserSession(VillimUser user) {
+
+    }
 }
