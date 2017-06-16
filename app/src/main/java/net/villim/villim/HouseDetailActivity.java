@@ -262,7 +262,7 @@ public class HouseDetailActivity extends AppCompatActivity implements OnMapReady
         URL url = new HttpUrl.Builder()
                 .scheme("http")
                 .host("www.mocky.io")
-                .addPathSegments("v2/594409e3120000bc0bfcb54c")
+                .addPathSegments("v2/59441d55120000930dfcb57e")
                 .addQueryParameter(KEY_HOUSE_ID, Integer.toString(house.houseId))
                 .build().url();
 
@@ -425,7 +425,8 @@ public class HouseDetailActivity extends AppCompatActivity implements OnMapReady
 
         /* Map */
         if (map != null && !markerPlaced) {
-            System.out.println("Outside of interface");
+            System.out.println(house.latitude);
+            System.out.println(house.longitude);
             map.addMarker(new MarkerOptions().position(new LatLng(house.latitude, house.longitude)));
             map.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(house.latitude, house.longitude)));
             map.animateCamera(CameraUpdateFactory.zoomTo(17.0f));
@@ -503,7 +504,6 @@ public class HouseDetailActivity extends AppCompatActivity implements OnMapReady
     public void onMapReady(GoogleMap googleMap) {
         map = googleMap;
         if (dataDownloaded) {
-            System.out.println("Inside interface");
             markerPlaced = true;
             map.addMarker(new MarkerOptions().position(new LatLng(house.latitude, house.longitude)));
             map.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(house.latitude, house.longitude)));
