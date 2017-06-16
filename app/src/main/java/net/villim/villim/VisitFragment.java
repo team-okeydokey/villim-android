@@ -15,6 +15,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.franmontiel.persistentcookiejar.ClearableCookieJar;
+import com.franmontiel.persistentcookiejar.PersistentCookieJar;
+import com.franmontiel.persistentcookiejar.cache.SetCookieCache;
+import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
 import com.wang.avi.AVLoadingIndicatorView;
 
 import org.json.JSONArray;
@@ -170,7 +174,13 @@ public class VisitFragment extends Fragment {
     private void sendVisitListRequest() {
         startLoadingAnimation();
 
-        OkHttpClient client = new OkHttpClient();
+        ClearableCookieJar cookieJar =
+                new PersistentCookieJar(new SetCookieCache(), new SharedPrefsCookiePersistor(getActivity().getApplicationContext()));
+
+        OkHttpClient client = new OkHttpClient.Builder()
+                .cookieJar(cookieJar)
+                .build();
+
 
         URL url = new HttpUrl.Builder()
                 .scheme("http")

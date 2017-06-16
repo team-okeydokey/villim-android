@@ -10,6 +10,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.franmontiel.persistentcookiejar.ClearableCookieJar;
+import com.franmontiel.persistentcookiejar.PersistentCookieJar;
+import com.franmontiel.persistentcookiejar.cache.SetCookieCache;
+import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
 import com.wang.avi.AVLoadingIndicatorView;
 
 import org.json.JSONException;
@@ -97,7 +101,13 @@ public class HostProfileActivity extends AppCompatActivity {
         startLoadingAnimation();
         hideErrorMessage();
 
-        OkHttpClient client = new OkHttpClient();
+        ClearableCookieJar cookieJar =
+                new PersistentCookieJar(new SetCookieCache(), new SharedPrefsCookiePersistor(getApplicationContext()));
+
+        OkHttpClient client = new OkHttpClient.Builder()
+                .cookieJar(cookieJar)
+                .build();
+
 
 //        URL url = new HttpUrl.Builder()
 //                .scheme(SERVER_SCHEME)

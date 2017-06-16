@@ -10,6 +10,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.franmontiel.persistentcookiejar.ClearableCookieJar;
+import com.franmontiel.persistentcookiejar.PersistentCookieJar;
+import com.franmontiel.persistentcookiejar.cache.SetCookieCache;
+import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
 import com.rojoxpress.slidebutton.SlideButton;
 import com.wang.avi.AVLoadingIndicatorView;
 
@@ -99,7 +103,13 @@ public class MyKeyFragment extends Fragment {
         startLoadingAnimation();
         hideErrorMessage();
 
-        OkHttpClient client = new OkHttpClient();
+        ClearableCookieJar cookieJar =
+                new PersistentCookieJar(new SetCookieCache(), new SharedPrefsCookiePersistor(getActivity().getApplicationContext()));
+
+        OkHttpClient client = new OkHttpClient.Builder()
+                .cookieJar(cookieJar)
+                .build();
+
 
         RequestBody requestBody = new FormBody.Builder()
                 .add(KEY_ID, Integer.toString(session.getId()))
@@ -157,7 +167,13 @@ public class MyKeyFragment extends Fragment {
         startLoadingAnimation();
         hideErrorMessage();
 
-        OkHttpClient client = new OkHttpClient();
+        ClearableCookieJar cookieJar =
+                new PersistentCookieJar(new SetCookieCache(), new SharedPrefsCookiePersistor(getActivity().getApplicationContext()));
+
+        OkHttpClient client = new OkHttpClient.Builder()
+                .cookieJar(cookieJar)
+                .build();
+
 
         RequestBody requestBody = new FormBody.Builder()
                 .add(KEY_ID, Integer.toString(session.getId()))

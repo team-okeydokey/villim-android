@@ -13,6 +13,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.franmontiel.persistentcookiejar.PersistentCookieJar;
+import com.franmontiel.persistentcookiejar.cache.SetCookieCache;
+import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
 import com.wang.avi.AVLoadingIndicatorView;
 
 import org.json.JSONException;
@@ -22,6 +25,7 @@ import java.io.IOException;
 
 import okhttp3.Call;
 import okhttp3.Callback;
+import okhttp3.CookieJar;
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -117,7 +121,10 @@ public class LoginActivity extends AppCompatActivity {
         startLoadingAnimation();
         hideErrorMessage();
 
-        OkHttpClient client = new OkHttpClient();
+        CookieJar cookieJar =
+                new PersistentCookieJar(new SetCookieCache(), new SharedPrefsCookiePersistor(getApplicationContext()));
+
+        OkHttpClient client = new OkHttpClient.Builder().cookieJar(cookieJar).build();
 
         RequestBody requestBody = new FormBody.Builder()
                 .add(KEY_EMAIL, loginFormEmail.getText().toString().trim())

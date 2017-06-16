@@ -15,6 +15,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.franmontiel.persistentcookiejar.ClearableCookieJar;
+import com.franmontiel.persistentcookiejar.PersistentCookieJar;
+import com.franmontiel.persistentcookiejar.cache.SetCookieCache;
+import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
 import com.wang.avi.AVLoadingIndicatorView;
 
 import org.json.JSONException;
@@ -228,7 +232,12 @@ public class ReservationActivity extends AppCompatActivity {
         startLoadingAnimation();
         hideErrorMessage();
 
-        OkHttpClient client = new OkHttpClient();
+        ClearableCookieJar cookieJar =
+                new PersistentCookieJar(new SetCookieCache(), new SharedPrefsCookiePersistor(getApplicationContext()));
+
+        OkHttpClient client = new OkHttpClient.Builder()
+                .cookieJar(cookieJar)
+                .build();
 
         RequestBody requestBody = new FormBody.Builder()
                 .add(KEY_ROOM_ID, Integer.toString(house.houseId))
