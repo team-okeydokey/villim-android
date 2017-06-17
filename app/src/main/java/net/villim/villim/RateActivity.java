@@ -20,7 +20,6 @@ public class RateActivity extends AppCompatActivity {
     public static final String VALUE = "value";
 
     private Toolbar toolbar;
-    private RatingBar overAllRatingBar;
     private RatingBar accuracyRatingBar;
     private RatingBar communicationRatingBar;
     private RatingBar cleanlinessRatingBar;
@@ -43,13 +42,20 @@ public class RateActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         /* Rating bars */
-        overAllRatingBar = (RatingBar) findViewById(R.id.overall_ratingbar);
         accuracyRatingBar = (RatingBar) findViewById(R.id.accuracy_ratingbar);
         communicationRatingBar = (RatingBar) findViewById(R.id.communication_ratingbar);
         cleanlinessRatingBar = (RatingBar) findViewById(R.id.cleanliness_ratingbar);
         locationRatingBar = (RatingBar) findViewById(R.id.location_ratingbar);
         checkinRatingBar = (RatingBar) findViewById(R.id.checkin_ratingbar);
         valueRatingBar = (RatingBar) findViewById(R.id.value_ratingbar);
+
+        /* Set Ratings */
+        accuracyRatingBar.setRating(getIntent().getFloatExtra(ACCURACY,0));
+        communicationRatingBar.setRating(getIntent().getFloatExtra(COMMUNICATION,0));
+        cleanlinessRatingBar.setRating(getIntent().getFloatExtra(CLEANLINESS,0));
+        locationRatingBar.setRating(getIntent().getFloatExtra(LOCATION,0));
+        checkinRatingBar.setRating(getIntent().getFloatExtra(CHECKIN,0));
+        valueRatingBar.setRating(getIntent().getFloatExtra(VALUE,0));
 
         /* Bottom button */
         applyButton = (Button) findViewById(R.id.apply_button);

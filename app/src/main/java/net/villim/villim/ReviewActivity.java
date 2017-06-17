@@ -100,6 +100,12 @@ public class ReviewActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent ratingIntent = new Intent(ReviewActivity.this, RateActivity.class);
+                ratingIntent.putExtra(ACCURACY, accuracyRating);
+                ratingIntent.putExtra(LOCATION, locationRating);
+                ratingIntent.putExtra(COMMUNICATION, communicationRating);
+                ratingIntent.putExtra(CHECKIN, checkinRating);
+                ratingIntent.putExtra(CLEANLINESS, cleanlinessRating);
+                ratingIntent.putExtra(VALUE, valueRating);
                 startActivityForResult(ratingIntent, RATE);
             }
         });
