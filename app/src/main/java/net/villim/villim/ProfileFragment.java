@@ -82,15 +82,20 @@ public class ProfileFragment extends Fragment implements LogoutDialog.LogoutDial
                         }
                         break;
 
-                    /* Profile view & edit */
+                    /* Profile view & edit or FAQ */
                     case 1:
                         break;
 
-                    /* FAQ */
+                    /* FAQ or Settings */
                     case 2:
-                        break;
+                        if (session.getLoggedIn()) {
 
-                    /* Settings */
+                        } else {
+                            Intent intent = new Intent(getActivity(), SettingsActivity.class);
+                            getActivity().startActivity(intent);
+                        }
+                        break;
+                    /* Settings or Privacy Policy*/
                     case 3:
                         break;
 

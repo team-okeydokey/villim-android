@@ -278,4 +278,11 @@
 
     <!-- Logout dialog -->
     <string name="logout_confirm_format">정말로 %s님 아이디를 로그아웃 하시겠어요?</string>
+
+    <!-- Settings Activity -->
+    <string name="settings">환경 설정</string>
+    <string name="push_notifications">푸쉬 알림</string>
+    <string name="currency">통화</string>
+    <string name="language">언어</string>
+    <string name="version_info">버전 정보</string>
 </resources>
