@@ -65,7 +65,6 @@ public class LogoutDialog extends DialogFragment {
             @Override
             public void onClick(View v) {
                 listener.onDialogPositiveClick(LogoutDialog.this);
-                dismiss();
             }
         });
 

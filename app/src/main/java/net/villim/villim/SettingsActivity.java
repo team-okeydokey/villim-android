@@ -1,6 +1,7 @@
 package net.villim.villim;
 
 import android.app.Activity;
+import android.app.DialogFragment;
 import android.content.Intent;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -14,7 +15,9 @@ import android.widget.TextView;
 
 import static net.villim.villim.VillimKeys.APP_VERSION;
 
-public class SettingsActivity extends AppCompatActivity {
+public class SettingsActivity extends AppCompatActivity
+        implements LanguagePreferenceDialog.LanguagePreferenceDialogListener,
+        CurrencyPreferenceDialog.currencyPreferenceDialogListener {
 
     private VillimSession session;
 
@@ -49,11 +52,27 @@ public class SettingsActivity extends AppCompatActivity {
         pushSwitch.setChecked(session.getPushPref());
 
         /* Currency */
+        currencyItem = (RelativeLayout) findViewById(R.id.currency_item);
+        currencyItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogFragment currencyDialog = new CurrencyPreferenceDialog();
+                currencyDialog.show(getFragmentManager(), "");
+            }
+        });
         currencyTextView = (TextView) findViewById(R.id.currency_textview);
         String currencyString = VillimUtil.currencyStringFromInt(this, session.getCurrencyPref(), true);
         currencyTextView.setText(currencyString);
 
         /* Language */
+        languageItem = (RelativeLayout) findViewById(R.id.language_item);
+        languageItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogFragment languageDialog = new LanguagePreferenceDialog();
+                languageDialog.show(getFragmentManager(), "");
+            }
+        });
         languageTextView = (TextView) findViewById(R.id.language_textview);
         languageTextView.setText(VillimUtil.languageStringFromInt(this, session.getLanguagePref()));
 
@@ -68,4 +87,21 @@ public class SettingsActivity extends AppCompatActivity {
         onBackPressed();
         return true;
     }
+
+    /* Currency choose dialog */
+    @Override
+    public void onCurrencyPicked(DialogFragment dialog, int code) {
+        session.setCurrencyPref(code);
+        currencyTextView.setText(VillimUtil.currencyStringFromInt(this, session.getCurrencyPref(), true));
+        dialog.dismiss();
+    }
+
+    /* Language choose dialog */
+    @Override
+    public void onLanguagePicked(DialogFragment dialog, int code) {
+        session.setLanguagePref(code);
+        languageTextView.setText(VillimUtil.languageStringFromInt(this, session.getLanguagePref()));
+        dialog.dismiss();
+    }
+
 }

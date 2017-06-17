@@ -287,7 +287,7 @@
     <string name="version_info">버전 정보</string>
     <string-array name="currencies_full">
         <item>KRW (₩)</item>
-        <item>English</item>
+        <item>USD ($)</item>
     </string-array>
     <string-array name="currencies_short">
         <item>₩</item>

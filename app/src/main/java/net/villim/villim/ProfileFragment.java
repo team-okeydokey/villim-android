@@ -91,12 +91,16 @@ public class ProfileFragment extends Fragment implements LogoutDialog.LogoutDial
                         if (session.getLoggedIn()) {
 
                         } else {
-                            Intent intent = new Intent(getActivity(), SettingsActivity.class);
-                            getActivity().startActivity(intent);
+                            launchSettingsActivity();
                         }
                         break;
                     /* Settings or Privacy Policy*/
                     case 3:
+                        if (session.getLoggedIn()) {
+                            launchSettingsActivity();
+                        } else {
+
+                        }
                         break;
 
                     /* Privacy Policy */
@@ -123,6 +127,11 @@ public class ProfileFragment extends Fragment implements LogoutDialog.LogoutDial
         populateView();
 
         return profileView;
+    }
+
+    private void launchSettingsActivity() {
+        Intent intent = new Intent(getActivity(), SettingsActivity.class);
+        getActivity().startActivity(intent);
     }
 
     // Make this async.
@@ -188,7 +197,6 @@ public class ProfileFragment extends Fragment implements LogoutDialog.LogoutDial
         }
         profilePicture.setVisibility(View.VISIBLE);
     }
-
 
     // Used to populate profile info list layout.
     private class ProfileAdapter extends ArrayAdapter<String> {
@@ -263,6 +271,7 @@ public class ProfileFragment extends Fragment implements LogoutDialog.LogoutDial
 
     /* Logout dialog */
     public void onDialogPositiveClick(DialogFragment dialog) {
+        dialog.dismiss();
         logout();
     }
 
