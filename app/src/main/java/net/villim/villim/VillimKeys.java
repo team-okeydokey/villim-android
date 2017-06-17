@@ -25,7 +25,7 @@ public class VillimKeys {
     public static final String HOST_INFO_URL = "v2/594175a00f0000770ec63237";
     public static final String HOUSE_INFO_URL = "v2/59441d55120000930dfcb57e";
     public static final String HOUSE_REVIEW_URL = "v2/5941d5200f00002e16c632c4";
-    public static final String VISIT_INFO_URL = "v2/59442d6c1200002f0ffcb5a5";
+    public static final String VISIT_INFO_URL = "v2/5945b61113000067145b6fc6";
     public static final String POST_REVIEW_URL = "v2/59454496130000800b5b6f82";
     public static final String FIND_PASSWORD_URL = "v2/59454496130000800b5b6f82";
 

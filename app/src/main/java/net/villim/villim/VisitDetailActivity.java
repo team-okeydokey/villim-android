@@ -204,7 +204,6 @@ public class VisitDetailActivity extends AppCompatActivity {
     }
 
     public void displayRoomInfo() {
-        
         /* Top buttons */
         locationButton.setEnabled(true);
         locationButton.setClickable(true);
@@ -230,7 +229,6 @@ public class VisitDetailActivity extends AppCompatActivity {
     }
 
     public void displayNoRoom() {
-
          /* Top buttons */
         locationButton.setEnabled(false);
         locationButton.setClickable(false);

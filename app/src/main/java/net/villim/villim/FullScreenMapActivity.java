@@ -52,7 +52,7 @@ public class FullScreenMapActivity extends AppCompatActivity implements OnMapRea
         /* Coordinates */
         latitude = getIntent().getDoubleExtra(KEY_LATITUDE, 0);
         longitude = getIntent().getDoubleExtra(KEY_LONGITUDE, 0);
-
+        System.out.println(latitude);System.out.println(longitude);
         /* Back button */
         closeButton = (Button) findViewById(R.id.close_button);
         closeButton.setOnClickListener(new View.OnClickListener() {
