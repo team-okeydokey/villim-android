@@ -2,6 +2,7 @@ package net.villim.villim;
 
 
 import android.app.Activity;
+import android.app.DialogFragment;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -22,7 +23,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 
-public class ProfileFragment extends Fragment {
+public class ProfileFragment extends Fragment implements LogoutDialog.LogoutDialogListener {
 
     public static final int LOGIN = 100;
     public static final int SIGNUP = 101;
@@ -70,7 +71,10 @@ public class ProfileFragment extends Fragment {
                     case 0:
                         if (session.getLoggedIn()) {
                             /* Log out */
-                            logout();
+                            LogoutDialog dialog = LogoutDialog.newInstance(
+                                    ProfileFragment.this, session.getFullName());
+                            dialog.show(getActivity().getFragmentManager(), "LogoutFragment");
+
                         } else {
                             /* Launch login page */
                             Intent intent = new Intent(getActivity(), LoginActivity.class);
@@ -202,7 +206,7 @@ public class ProfileFragment extends Fragment {
             /* If login/logout cell */
             if (position == 0) {
                 if (session.getLoggedIn()) {
-                    textView.setText(getString(R.string.profile_logout));
+                    textView.setText(getString(R.string.logout));
                 }
             }
 
@@ -251,5 +255,14 @@ public class ProfileFragment extends Fragment {
         }
     }
 
+
+    /* Logout dialog */
+    public void onDialogPositiveClick(DialogFragment dialog) {
+        logout();
+    }
+
+    public void onDialogNegativeClick(DialogFragment dialog) {
+
+    }
 
 }

@@ -139,11 +139,10 @@
         <item>개인정보 이용약관</item>
     </string-array>
     <string name="profile_title">프로필</string>
-    <string name="profile_login">로그인</string>
-    <string name="profile_logout">로그아웃</string>
+    <string name="login">로그인</string>
+    <string name="logout">로그아웃</string>
 
     <!-- Login Activity -->
-    <string name="login">로그인</string>
     <string name="advert_title">전세계의 집이 나의 집!</string>
     <string name="advert_detail">언제 어디서나 쉽고 빠르게 방을 빌리세요.</string>
     <string name="email">이메일</string>
@@ -276,4 +275,7 @@
     <string name="password_reset_link_sent">비밀번호를 재설정할 수 있는 링크가 포함된 Villim 메시지가 발송되었습니다.</string>
     <string name="send_again">재전송</string>
     <string name="send_again_complete">링크가 재전송되었습니다.</string>
+
+    <!-- Logout dialog -->
+    <string name="logout_confirm_format">정말로 %s님 아이디를 로그아웃 하시겠어요?</string>
 </resources>
