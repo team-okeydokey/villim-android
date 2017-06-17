@@ -1,5 +1,6 @@
 package net.villim.villim;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
@@ -38,6 +39,8 @@ import static net.villim.villim.VillimKeys.KEY_PASSCODE;
 import static net.villim.villim.VillimKeys.KEY_PASSCODE_CONFIRM;
 
 public class ChangePasscodeActivity extends AppCompatActivity {
+
+    private static final int PASSCODE_CHANGE_SUCCESS = 0;
 
     private Toolbar toolbar;
     private EditText newPasscodeForm;
@@ -154,8 +157,8 @@ public class ChangePasscodeActivity extends AppCompatActivity {
                     /* 주의: response.body().string()은 한 번 부를 수 있음 */
                     JSONObject jsonObject = new JSONObject(response.body().string());
                     if (jsonObject.getBoolean(KEY_CHANGE_SUCCESS)) {
-                        Intent intent = new Intent(ChangePasscodeActivity.this, PasscodeChangeSuccessActivity.class);
-                        startActivity(intent);
+                        Intent intent = new Intent(ChangePasscodeActivity.this, ChangePasscodeSuccessActivity.class);
+                        startActivityForResult(intent, PASSCODE_CHANGE_SUCCESS);
                         finish();
                     } else {
                         showErrorMessage(jsonObject.getString(KEY_MESSAGE));
@@ -167,6 +170,21 @@ public class ChangePasscodeActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        /* Requests to reservation activity */
+        if (requestCode == PASSCODE_CHANGE_SUCCESS) {
+            if (resultCode == Activity.RESULT_OK) {
+                finish();
+            }
+            if (resultCode == Activity.RESULT_CANCELED) {
+                //Write your code if there's no result
+                finish();
+            }
+        }
     }
 
     @Override
