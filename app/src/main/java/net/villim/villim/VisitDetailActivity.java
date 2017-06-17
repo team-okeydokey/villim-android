@@ -204,6 +204,15 @@ public class VisitDetailActivity extends AppCompatActivity {
     }
 
     public void displayRoomInfo() {
+        
+        /* Top buttons */
+        locationButton.setEnabled(true);
+        locationButton.setClickable(true);
+        locationButton.setTextColor(getResources().getColorStateList(R.color.red_text_button));
+        cancelVisitButton.setEnabled(true);
+        cancelVisitButton.setClickable(true);
+        cancelVisitButton.setTextColor(getResources().getColorStateList(R.color.red_text_button));
+
         /* Set up slide button */
         bottomButton.setText(getString(R.string.villim_request));
         bottomButton.setOnClickListener(null);
@@ -221,6 +230,14 @@ public class VisitDetailActivity extends AppCompatActivity {
     }
 
     public void displayNoRoom() {
+
+         /* Top buttons */
+        locationButton.setEnabled(false);
+        locationButton.setClickable(false);
+        locationButton.setTextColor(getResources().getColorStateList(R.color.text_button_inactive));
+        cancelVisitButton.setEnabled(false);
+        cancelVisitButton.setClickable(false);
+        cancelVisitButton.setTextColor(getResources().getColorStateList(R.color.text_button_inactive));
 
         /* House thumbnail */
         Glide.with(this)

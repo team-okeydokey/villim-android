@@ -29,24 +29,19 @@ import java.util.Date;
 
 import okhttp3.Call;
 import okhttp3.Callback;
-import okhttp3.FormBody;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import okhttp3.RequestBody;
 import okhttp3.Response;
 
 import static net.villim.villim.VillimKeys.KEY_END_DATE;
 import static net.villim.villim.VillimKeys.KEY_HOUSE_ID;
 import static net.villim.villim.VillimKeys.KEY_HOUSE_NAME;
 import static net.villim.villim.VillimKeys.KEY_HOUSE_THUMBNAIL_URL;
-import static net.villim.villim.VillimKeys.KEY_ID;
 import static net.villim.villim.VillimKeys.KEY_MESSAGE;
 import static net.villim.villim.VillimKeys.KEY_OPEN_AUTHORIZED;
 import static net.villim.villim.VillimKeys.KEY_OPEN_SUCESS;
 import static net.villim.villim.VillimKeys.KEY_QUERY_SUCCESS;
-import static net.villim.villim.VillimKeys.KEY_RESERVATION_ACTIVE;
-import static net.villim.villim.VillimKeys.KEY_ROOM_ID;
 import static net.villim.villim.VillimKeys.KEY_START_DATE;
 import static net.villim.villim.VillimKeys.MY_HOUSE_URL;
 import static net.villim.villim.VillimKeys.OPEN_DOORLOCK_URL;
@@ -142,15 +137,12 @@ public class MyKeyFragment extends Fragment {
         populateView();
         if (session.getLoggedIn()) {
             sendMyHouseRequest();
-        } else {
-            displayNoRoom();
         }
-
         return myKeyView;
     }
 
     private void populateView() {
-//        displayNoRoom();
+        displayNoRoom();
     }
 
     private void sendMyHouseRequest() {
@@ -329,8 +321,10 @@ public class MyKeyFragment extends Fragment {
         /* Top two buttons */
         reviewButton.setEnabled(true);
         reviewButton.setClickable(true);
+        reviewButton.setTextColor(getResources().getColorStateList(R.color.red_text_button));
         changePasscodeButton.setEnabled(true);
         changePasscodeButton.setClickable(true);
+        changePasscodeButton.setTextColor(getResources().getColorStateList(R.color.red_text_button));
 
         /* House Name */
         houseNameTextView.setText(houseName);

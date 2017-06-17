@@ -86,11 +86,21 @@
         <activity
             android:name=".ChangePasscodeSuccessActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".ReviewActivity" />
-        <activity android:name=".RateActivity" />
-        <activity android:name=".FindPasswordActivity" />
-        <activity android:name=".FindPasswordSuccessActivity" />
-        <activity android:name=".SettingsActivity"></activity>
+        <activity
+            android:name=".ReviewActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".RateActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".FindPasswordActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".FindPasswordSuccessActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".SettingsActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
