@@ -108,7 +108,7 @@ public class MyKeyFragment extends Fragment {
         changePasscodeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent doorlockIntent = new Intent(activity, DoorLockChangeActivity.class);
+                Intent doorlockIntent = new Intent(activity, ChangePasscodeActivity.class);
                 activity.startActivity(doorlockIntent);
             }
         });

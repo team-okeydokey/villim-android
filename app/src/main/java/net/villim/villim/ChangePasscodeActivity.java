@@ -37,7 +37,7 @@ import static net.villim.villim.VillimKeys.KEY_MESSAGE;
 import static net.villim.villim.VillimKeys.KEY_PASSCODE;
 import static net.villim.villim.VillimKeys.KEY_PASSCODE_CONFIRM;
 
-public class DoorLockChangeActivity extends AppCompatActivity {
+public class ChangePasscodeActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
     private EditText newPasscodeForm;
@@ -52,7 +52,7 @@ public class DoorLockChangeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_door_lock_change);
+        setContentView(R.layout.activity_change_passcode);
 
         /* Toolbar */
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -154,7 +154,7 @@ public class DoorLockChangeActivity extends AppCompatActivity {
                     /* 주의: response.body().string()은 한 번 부를 수 있음 */
                     JSONObject jsonObject = new JSONObject(response.body().string());
                     if (jsonObject.getBoolean(KEY_CHANGE_SUCCESS)) {
-                        Intent intent = new Intent(DoorLockChangeActivity.this, DoorlockChangeSuccessActivity.class);
+                        Intent intent = new Intent(ChangePasscodeActivity.this, DoorlockChangeSuccessActivity.class);
                         startActivity(intent);
                         finish();
                     } else {
