@@ -49,7 +49,7 @@ public class VillimAmenity {
             put(5, R.drawable.icon_desk);
             put(6, R.drawable.icon_towel);
             put(7, R.drawable.icon_air_conditionner);
-            put(8, R.drawable.ic_whatshot_black_24dp);
+            put(8, R.drawable.icon_computer);
             put(9, R.drawable.icon_fridge);
             put(10, R.drawable.icon_hairdryer);
             put(11, R.drawable.icon_smoke);
