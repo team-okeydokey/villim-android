@@ -4,12 +4,15 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
+import static net.villim.villim.VillimKeys.KEY_CURRENCY_PREFERENCE;
 import static net.villim.villim.VillimKeys.KEY_EMAIL;
 import static net.villim.villim.VillimKeys.KEY_FIRSTNAME;
 import static net.villim.villim.VillimKeys.KEY_FULLNAME;
 import static net.villim.villim.VillimKeys.KEY_ID;
+import static net.villim.villim.VillimKeys.KEY_LANGUAGE_PREFERENCE;
 import static net.villim.villim.VillimKeys.KEY_LASTNAME;
 import static net.villim.villim.VillimKeys.KEY_PROFILE_PIC_URL;
+import static net.villim.villim.VillimKeys.KEY_PUSH_PREFERENCE;
 import static net.villim.villim.VillimKeys.KEY_ROOM_ID;
 import static net.villim.villim.VillimKeys.KEY_USER_STATUS;
 
@@ -118,6 +121,37 @@ public class VillimSession {
         int roomId = prefs.getInt(KEY_ROOM_ID,0);
         return roomId;
     }
+
+    /* Push Notifications */
+    public void setPushPref(boolean pushPref) {
+        prefs.edit().putBoolean(KEY_PUSH_PREFERENCE, pushPref).apply();
+    }
+
+    public boolean getPushPref() {
+        boolean pushPref = prefs.getBoolean(KEY_PUSH_PREFERENCE, true);
+        return pushPref;
+    }
+
+    /* Currency */
+    public void setCurrencyPref(int currencyPref) {
+        prefs.edit().putInt(KEY_CURRENCY_PREFERENCE, currencyPref).apply();
+    }
+
+    public int getCurrencyPref() {
+        int currencyPref = prefs.getInt(KEY_CURRENCY_PREFERENCE,0);
+        return currencyPref;
+    }
+
+    /* Language */
+    public void setLanguagePref(int languagePref) {
+        prefs.edit().putInt(KEY_LANGUAGE_PREFERENCE, languagePref).apply();
+    }
+
+    public int getLanguagePref() {
+        int languagePref = prefs.getInt(KEY_LANGUAGE_PREFERENCE,0);
+        return languagePref;
+    }
+
 
     public void updateUserSession(VillimUser user) {
 

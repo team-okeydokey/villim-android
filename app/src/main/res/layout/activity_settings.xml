@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="#f0f1f2"
     tools:context="net.villim.villim.SettingsActivity">
 
     <android.support.v7.widget.Toolbar
@@ -39,6 +40,7 @@
             android:id="@+id/push_notification_item"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:clickable="true"
             android:paddingBottom="20dp"
             android:paddingLeft="25dp"
             android:paddingRight="25dp"
@@ -53,8 +55,8 @@
                 android:textColor="#05060b"
                 android:textSize="16sp" />
 
-            <ToggleButton
-                android:id="@+id/push_notification_toggle_button"
+            <Switch
+                android:id="@+id/push_switch"
                 android:layout_width="40dp"
                 android:layout_height="25dp"
                 android:layout_alignParentRight="true" />
@@ -67,6 +69,7 @@
             android:id="@+id/currency_item"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:clickable="true"
             android:paddingBottom="20dp"
             android:paddingLeft="25dp"
             android:paddingRight="25dp"
@@ -99,6 +102,7 @@
             android:id="@+id/language_item"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:clickable="true"
             android:paddingBottom="20dp"
             android:paddingLeft="25dp"
             android:paddingRight="25dp"
@@ -131,6 +135,7 @@
             android:id="@+id/version_info_item"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:clickable="true"
             android:paddingBottom="20dp"
             android:paddingLeft="25dp"
             android:paddingRight="25dp"

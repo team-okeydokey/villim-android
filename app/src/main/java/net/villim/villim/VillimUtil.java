@@ -85,4 +85,25 @@ public class VillimUtil {
                 return context.getString(R.string.sunday);
         }
     }
+
+    public static String currencyStringFromInt(Context context, int code, boolean full) {
+        int arrayResourceId = full ? R.array.currencies_full : R.array.currencies_short;
+        String[] array = context.getResources().getStringArray(arrayResourceId);
+        /* Default to 0 in case of error. */
+        if (code >= array.length) {
+            return array[0];
+        } else {
+            return array[code];
+        }
+    }
+
+    public static String languageStringFromInt(Context context, int code) {
+        String[] array = context.getResources().getStringArray(R.array.languages);
+        /* Default to 0 in case of error. */
+        if (code >= array.length) {
+            return array[0];
+        } else {
+            return array[code];
+        }
+    }
 }

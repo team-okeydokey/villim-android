@@ -285,4 +285,16 @@
     <string name="currency">통화</string>
     <string name="language">언어</string>
     <string name="version_info">버전 정보</string>
+    <string-array name="currencies_full">
+        <item>KRW (₩)</item>
+        <item>English</item>
+    </string-array>
+    <string-array name="currencies_short">
+        <item>₩</item>
+        <item>$</item>
+    </string-array>
+    <string-array name="languages">
+        <item>한국어</item>
+        <item>English</item>
+    </string-array>
 </resources>

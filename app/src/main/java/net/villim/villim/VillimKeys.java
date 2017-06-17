@@ -5,6 +5,8 @@ package net.villim.villim;
  */
 
 public class VillimKeys {
+    /* Versio Info */
+    public static final String APP_VERSION = "0.7.1";
 
     /* Server constants */
 //    public static final String SERVER_SCHEME = "http";
@@ -50,6 +52,9 @@ public class VillimKeys {
     public static final String KEY_ABOUT = "about";
     public static final String KEY_USER_STATUS = "user_status";
     public static final String KEY_ROOM_ID = "room_id";
+    public static final String KEY_PUSH_PREFERENCE = "push_preference";
+    public static final String KEY_CURRENCY_PREFERENCE = "currency_preference";
+    public static final String KEY_LANGUAGE_PREFERENCE = "language_preference";
 
     /* Login Keys */
     public static final String KEY_MESSAGE = "message";
