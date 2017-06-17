@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
     /* We can store the fragment references becasue we are using a FragmentPagerAdapter.
        If FragmentStatePagerAdapter is used, weak references must be used to refer to fragments. */
     private ProfileFragment profileFragment;
+    private VisitFragment visitFragment;
 
     private CoordinatorLayout container;
     private AppBarLayout appBarLayout;
@@ -291,6 +292,9 @@ public class MainActivity extends AppCompatActivity {
                 case PROFILE_FRAGMENT:
                     profileFragment = (ProfileFragment) createdFragment;
                     break;
+                case VISIT_FRAGMENT:
+                    visitFragment = (VisitFragment) createdFragment;
+                    break;
                 default:
                     break;
             }
@@ -347,6 +351,9 @@ public class MainActivity extends AppCompatActivity {
         /* Route requests to appropriate fragments */
         if (requestCode == ProfileFragment.LOGIN && null != profileFragment) {
             profileFragment.onActivityResult(requestCode, resultCode, data);
+            return;
+        } else if (requestCode == VisitFragment.VISIT_DETAIL && null != visitFragment) {
+            visitFragment.onActivityResult(requestCode, resultCode, data);
             return;
         }
 

@@ -28,6 +28,7 @@ public class VillimKeys {
     public static final String VISIT_INFO_URL = "v2/5945b61113000067145b6fc6";
     public static final String POST_REVIEW_URL = "v2/59454496130000800b5b6f82";
     public static final String FIND_PASSWORD_URL = "v2/59454496130000800b5b6f82";
+    public static final String CANCEL_VISIT_URL = "v2/5945baec13000005155b6fcc";
 
     /* Request success codes */
     public static final String KEY_QUERY_SUCCESS = "query_success";
@@ -157,6 +158,9 @@ public class VillimKeys {
 
     /* Review Activity */
     public static final String KEY_POST_SUCCESS = "post_success";
+
+    /* Visit Detail Activity */
+    public static final String KEY_CANCEL_SUCCESS = "cancel_success";
 
 }
 

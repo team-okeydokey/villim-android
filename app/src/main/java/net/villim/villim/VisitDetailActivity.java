@@ -1,6 +1,7 @@
 package net.villim.villim;
 
 import android.app.Activity;
+import android.app.DialogFragment;
 import android.content.Intent;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.res.ResourcesCompat;
@@ -37,8 +38,10 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
+import static net.villim.villim.VillimKeys.CANCEL_VISIT_URL;
 import static net.villim.villim.VillimKeys.KEY_ADDR_DIRECTION;
 import static net.villim.villim.VillimKeys.KEY_ADDR_SUMMARY;
+import static net.villim.villim.VillimKeys.KEY_CANCEL_SUCCESS;
 import static net.villim.villim.VillimKeys.KEY_HOUSE_NAME;
 import static net.villim.villim.VillimKeys.KEY_HOUSE_THUMBNAIL_URL;
 import static net.villim.villim.VillimKeys.KEY_ID;
@@ -54,7 +57,7 @@ import static net.villim.villim.VillimKeys.SERVER_HOST;
 import static net.villim.villim.VillimKeys.SERVER_SCHEME;
 import static net.villim.villim.VillimKeys.VISIT_INFO_URL;
 
-public class VisitDetailActivity extends AppCompatActivity {
+public class VisitDetailActivity extends AppCompatActivity implements CancelVisitDialog.CancelVisitDialogListener{
 
     private Toolbar toolbar;
 
@@ -117,6 +120,13 @@ public class VisitDetailActivity extends AppCompatActivity {
             }
         });
         cancelVisitButton = (Button) findViewById(R.id.cancel_visit_button);
+        cancelVisitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogFragment cancelConfirmDialog = new CancelVisitDialog();
+                cancelConfirmDialog.show(getFragmentManager(), "");
+            }
+        });
 
         /* Bottom Button */
         bottomButton = (Button) findViewById(R.id.bottom_button);
@@ -193,6 +203,70 @@ public class VisitDetailActivity extends AppCompatActivity {
                         });
                     } else {
                         displayNoRoom();
+                    }
+                    stopLoadingAnimation();
+                } catch (JSONException e) {
+                    showErrorMessage(getString(R.string.open_room_error));
+                    stopLoadingAnimation();
+                }
+            }
+        });
+    }
+
+    private void sendCancelVisitRequest() {
+        startLoadingAnimation();
+        hideErrorMessage();
+
+        ClearableCookieJar cookieJar =
+                new PersistentCookieJar(new SetCookieCache(), new SharedPrefsCookiePersistor(getApplicationContext()));
+
+        OkHttpClient client = new OkHttpClient.Builder()
+                .cookieJar(cookieJar)
+                .build();
+
+        URL url = new HttpUrl.Builder()
+                .scheme(SERVER_SCHEME)
+                .host(SERVER_HOST)
+                .addPathSegments(CANCEL_VISIT_URL)
+                .build().url();
+
+        RequestBody requestBody = new FormBody.Builder()
+                .add(KEY_VISIT_ID, Integer.toString(visit.visitId))
+                .build();
+
+        Request request = new Request.Builder()
+                .url(url)
+                .post(requestBody)
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                // Something went wrong.
+                showErrorMessage(getString(R.string.cant_connect_to_server));
+                stopLoadingAnimation();
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (!response.isSuccessful()) {
+                    showErrorMessage(getString(R.string.server_error));
+                    stopLoadingAnimation();
+                    throw new IOException("Response not successful   " + response);
+                }
+                /* Request success. */
+                try {
+                    /* 주의: response.body().string()은 한 번 부를 수 있음 */
+                    JSONObject jsonObject = new JSONObject(response.body().string());
+                    if (jsonObject.getBoolean(KEY_CANCEL_SUCCESS)) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                onBackPressed();
+                            }
+                        });
+                    } else {
+                        showErrorMessage(jsonObject.getString(KEY_MESSAGE));
                     }
                     stopLoadingAnimation();
                 } catch (JSONException e) {
@@ -289,5 +363,10 @@ public class VisitDetailActivity extends AppCompatActivity {
         return true;
     }
 
+    /* Cancel Visit Dialog */
+    public void onCancelConfirm(DialogFragment dialog) {
+        dialog.dismiss();
+        sendCancelVisitRequest();
+    }
 
 }

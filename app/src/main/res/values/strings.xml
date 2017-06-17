@@ -240,6 +240,7 @@
     <string name="villim_request">빌림 요청</string>
     <string name="show_location">위치 보기</string>
     <string name="cancel_visit">방문 취소신청</string>
+    <string name="cancel_visit_confirm">정말 방문을 취소 하시겠습니까?</string>
 
     <!-- Change passcode activity -->
     <string name="configure_doorlock">도어락 설정</string>

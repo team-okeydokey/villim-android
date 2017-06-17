@@ -70,7 +70,7 @@ public class VisitRecyclerAdapter extends RecyclerView.Adapter<VisitRecyclerAdap
                 MainActivity mainActivity = (MainActivity) v.getContext();
                 Intent intent = new Intent(mainActivity, VisitDetailActivity.class);
                 intent.putExtra(mainActivity.getString(R.string.key_visit), visitList[vh.getAdapterPosition()]);
-                mainActivity.startActivity(intent);
+                mainActivity.startActivityForResult(intent, VisitFragment.VISIT_DETAIL);
             }
         });
         return vh;

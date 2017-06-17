@@ -1,6 +1,8 @@
 package net.villim.villim;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -71,6 +73,8 @@ import static net.villim.villim.VillimKeys.KEY_VISITS;
 
 
 public class VisitFragment extends Fragment {
+
+    public static final int VISIT_DETAIL = 200;
 
     private MainActivity activity;
 
@@ -266,6 +270,14 @@ public class VisitFragment extends Fragment {
                         Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (requestCode == VISIT_DETAIL) {
+            sendVisitListRequest();
+        }
     }
 
 }
