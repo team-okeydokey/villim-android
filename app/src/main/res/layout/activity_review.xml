@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:focusableInTouchMode="true"
     tools:context="net.villim.villim.ReviewActivity">
 
     <android.support.v7.widget.Toolbar
@@ -26,5 +27,82 @@
             android:textColor="@color/toolbar_title_color" />
 
     </android.support.v7.widget.Toolbar>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/next_button"
+        android:orientation="vertical"
+        android:layout_below="@+id/toolbar">
+
+        <!-- Rating -->
+        <RelativeLayout
+            android:id="@+id/review_rating_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="20dp"
+            android:paddingLeft="25dp"
+            android:paddingRight="25dp"
+            android:paddingTop="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:text="@string/rating"
+                android:textColor="#05060b"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:gravity="end"
+                android:lineSpacingExtra="2sp"
+                android:text="@string/rate_rating"
+                android:textColor="#de2025"
+                android:textSize="16sp" />
+        </RelativeLayout>
+
+        <include layout="@layout/category_divider" />
+
+        <!-- Review content -->
+        <TextView
+            android:id="@+id/review_content_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="20dp"
+            android:paddingLeft="25dp"
+            android:paddingRight="25dp"
+            android:paddingTop="20sp"
+            android:text="@string/review"
+            android:textColor="#05060b"
+            android:textSize="16sp" />
+
+        <EditText
+            android:gravity="left|top"
+            android:id="@+id/review_content_field"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="@string/review_content_field_hint"
+            android:lineSpacingExtra="5sp"
+            android:paddingLeft="25dp"
+            android:paddingRight="25dp"
+            android:textColor="#aaaaaa"
+            android:textSize="13sp" />
+    </LinearLayout>
+
+
+    <!-- Done button -->
+    <Button
+        android:id="@+id/next_button"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/next_button_height"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/next_button"
+        android:gravity="center"
+        android:text="@string/submit"
+        android:textColor="@drawable/next_button_text"
+        android:textSize="@dimen/next_button_text_size" />
 
 </RelativeLayout>

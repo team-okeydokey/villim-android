@@ -257,5 +257,9 @@
     <string name="passcode_change_complete_instructions">이제부터 변경된 비밀번호로\n도어락 잠금해제를 할 수 있습니다.</string>
 
     <!-- Review Activity -->
+    <string name="rating">별점</string>
+    <string name="rate_rating">별점주기</string>
+    <string name="review_content_field_hint">400자 이내로 작성해주세요.</string>
+    <string name="submit">등록</string>
 
 </resources>

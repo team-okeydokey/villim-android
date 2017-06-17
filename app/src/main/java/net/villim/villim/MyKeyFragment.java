@@ -322,6 +322,12 @@ public class MyKeyFragment extends Fragment {
         slideButton.setClickable(true);
         slideButton.setEnabled(true);
 
+        /* Top two buttons */
+        reviewButton.setEnabled(true);
+        reviewButton.setClickable(true);
+        changePasscodeButton.setEnabled(true);
+        changePasscodeButton.setClickable(true);
+
         /* House Name */
         houseNameTextView.setText(houseName);
 
