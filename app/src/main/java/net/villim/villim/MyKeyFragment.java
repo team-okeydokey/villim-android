@@ -37,6 +37,7 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 import static net.villim.villim.VillimKeys.KEY_END_DATE;
+import static net.villim.villim.VillimKeys.KEY_HOUSE_ID;
 import static net.villim.villim.VillimKeys.KEY_HOUSE_NAME;
 import static net.villim.villim.VillimKeys.KEY_HOUSE_THUMBNAIL_URL;
 import static net.villim.villim.VillimKeys.KEY_ID;
@@ -69,6 +70,7 @@ public class MyKeyFragment extends Fragment {
 
     private VillimSession session;
 
+    private int houseId;
     private String houseName;
     private String houseThumbnailUrl;
     private Date startDate;
@@ -111,6 +113,7 @@ public class MyKeyFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent reviewIntent = new Intent(activity, ReviewActivity.class);
+                reviewIntent.putExtra(KEY_HOUSE_ID, houseId);
                 activity.startActivity(reviewIntent);
             }
         });
@@ -205,6 +208,7 @@ public class MyKeyFragment extends Fragment {
                     JSONObject jsonObject = new JSONObject(response.body().string());
                     if (jsonObject.getBoolean(KEY_QUERY_SUCCESS)) {
 
+                        houseId = jsonObject.optInt(KEY_HOUSE_ID);
                         houseName = jsonObject.optString(KEY_HOUSE_NAME);
                         startDate = VillimUtil.dateFromDateString(jsonObject.optString(KEY_START_DATE));
                         endDate = VillimUtil.dateFromDateString(jsonObject.optString(KEY_END_DATE));

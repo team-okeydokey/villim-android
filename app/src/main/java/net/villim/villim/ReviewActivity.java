@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -41,6 +42,7 @@ import static net.villim.villim.RateActivity.COMMUNICATION;
 import static net.villim.villim.RateActivity.LOCATION;
 import static net.villim.villim.RateActivity.RATE;
 import static net.villim.villim.RateActivity.VALUE;
+import static net.villim.villim.VillimKeys.KEY_HOUSE_ID;
 import static net.villim.villim.VillimKeys.KEY_MESSAGE;
 import static net.villim.villim.VillimKeys.KEY_RATING_ACCURACY;
 import static net.villim.villim.VillimKeys.KEY_RATING_CHECKIN;
@@ -48,6 +50,8 @@ import static net.villim.villim.VillimKeys.KEY_RATING_CLEANLINESS;
 import static net.villim.villim.VillimKeys.KEY_RATING_COMMUNICATION;
 import static net.villim.villim.VillimKeys.KEY_RATING_LOCATION;
 import static net.villim.villim.VillimKeys.KEY_RATING_VALUE;
+import static net.villim.villim.VillimKeys.KEY_REVIEW_CONTENT;
+import static net.villim.villim.VillimKeys.KEY_ROOM_ID;
 import static net.villim.villim.VillimKeys.POST_REVIEW_URL;
 import static net.villim.villim.VillimKeys.SERVER_HOST;
 import static net.villim.villim.VillimKeys.SERVER_SCHEME;
@@ -58,12 +62,13 @@ public class ReviewActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private RelativeLayout reviewRatingView;
     private RatingBar overallRatingBar;
+    private EditText reviewContent;
     private Button submitButton;
-
 
     private TextView errorMessage;
     private AVLoadingIndicatorView loadingIndicator;
 
+    private int houseId;
     private float overAllRating;
     private float accuracyRating;
     private float locationRating;
@@ -76,6 +81,8 @@ public class ReviewActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_review);
+
+        houseId = getIntent().getIntExtra(KEY_HOUSE_ID, -1);
 
         /* Toolbar */
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -96,6 +103,9 @@ public class ReviewActivity extends AppCompatActivity {
                 startActivityForResult(ratingIntent, RATE);
             }
         });
+
+        /* Review content */
+        reviewContent = (EditText) findViewById(R.id.review_content_field);
 
          /* Error Message */
         errorMessage = (TextView) findViewById(R.id.error_message);
@@ -125,6 +135,8 @@ public class ReviewActivity extends AppCompatActivity {
         OkHttpClient client = new OkHttpClient.Builder().cookieJar(cookieJar).build();
 
         RequestBody requestBody = new FormBody.Builder()
+                .add(KEY_HOUSE_ID, Integer.toString(houseId))
+                .add(KEY_REVIEW_CONTENT, reviewContent.getText().toString().trim())
                 .add(KEY_RATING_ACCURACY, Float.toString(accuracyRating))
                 .add(KEY_RATING_LOCATION, Float.toString(locationRating))
                 .add(KEY_RATING_COMMUNICATION, Float.toString(communicationRating))
