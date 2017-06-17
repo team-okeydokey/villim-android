@@ -148,7 +148,7 @@
     <string name="advert_detail">언제 어디서나 쉽고 빠르게 방을 빌리세요.</string>
     <string name="email">이메일</string>
     <string name="password">비밀번호</string>
-    <string name="find_password">비밀번호를 잊으셨나요?</string>
+    <string name="forgot_password">비밀번호를 잊으셨나요?</string>
     <string name="signup">회원가입</string>
     <string name="next">다음</string>
     <string name="server_error">서버가 불안정합니다. 잠시 후 시도해주세요.</string>
@@ -261,9 +261,14 @@
     <string name="rate_rating">별점주기</string>
     <string name="review_content_field_hint">400자 이내로 작성해주세요.</string>
     <string name="submit">등록</string>
-    <string name="review_posted">리뷰가 등록되었습니다.</string>
+    <string name="review_posted">후기가 등록되었습니다.</string>
 
     <!-- Rate Activity -->
     <string name="apply">적용</string>
+    
+    <!-- FindPasswordActivity -->
+    <string name="password_lost">비밀번호 분실</string>
+    <string name="find_password_instructions">등록 시 사용하신 이메일 주소를 입력해주세요.</string>
+    <string name="find_password">비밀번호 찾기</string>
 
 </resources>
