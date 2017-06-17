@@ -262,4 +262,7 @@
     <string name="review_content_field_hint">400자 이내로 작성해주세요.</string>
     <string name="submit">등록</string>
 
+    <!-- Rate Activity -->
+    <string name="apply">적용</string>
+
 </resources>

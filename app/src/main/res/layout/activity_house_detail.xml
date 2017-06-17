@@ -127,9 +127,10 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:layout_gravity="center_vertical"
+                                android:isIndicator="true"
                                 android:numStars="5"
                                 android:progressTint="@color/rating_color"
-                                android:stepSize="0.5" />
+                                android:stepSize="0.1" />
 
                             <TextView
                                 android:id="@+id/host_review_count"
@@ -443,9 +444,10 @@
                                 android:layout_height="match_parent"
                                 android:layout_gravity="center_vertical"
                                 android:layout_marginLeft="@dimen/reviews_padding"
+                                android:isIndicator="true"
                                 android:numStars="5"
                                 android:progressTint="@color/rating_color"
-                                android:stepSize="0.5" />
+                                android:stepSize="0.1" />
 
                         </android.support.v7.widget.LinearLayoutCompat>
 
@@ -480,9 +482,10 @@
                                 android:layout_height="match_parent"
                                 android:layout_alignParentRight="true"
                                 android:layout_gravity="center_vertical"
+                                android:isIndicator="true"
                                 android:numStars="5"
                                 android:progressTint="@color/rating_color"
-                                android:stepSize="0.5" />
+                                android:stepSize="0.1" />
 
 
                         </RelativeLayout>

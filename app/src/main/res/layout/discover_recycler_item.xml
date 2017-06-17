@@ -52,7 +52,7 @@
                     android:layout_gravity="center_vertical"
                     android:numStars="5"
                     android:progressTint="@color/rating_color"
-                    android:stepSize="0.5" />
+                    android:stepSize="0.1" />
 
                 <TextView
                     android:id="@+id/discover_room_review_count"

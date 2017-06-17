@@ -31,9 +31,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/next_button"
-        android:orientation="vertical"
-        android:layout_below="@+id/toolbar">
+        android:layout_below="@+id/toolbar"
+        android:orientation="vertical">
 
         <!-- Rating -->
         <RelativeLayout
@@ -46,17 +45,34 @@
             android:paddingTop="20dp">
 
             <TextView
+                android:id="@+id/rating_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
                 android:text="@string/rating"
                 android:textColor="#05060b"
                 android:textSize="16sp" />
+
+            <android.support.v7.widget.AppCompatRatingBar
+                android:id="@+id/overall_ratingbar"
+                style="@style/customRatingBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/rating_title"
+                android:isIndicator="true"
+                android:numStars="5"
+                android:progressTint="@color/rating_color"
+                android:stepSize="0.1" />
+
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
                 android:gravity="end"
                 android:lineSpacingExtra="2sp"
                 android:text="@string/rate_rating"
@@ -80,23 +96,23 @@
             android:textSize="16sp" />
 
         <EditText
-            android:gravity="left|top"
             android:id="@+id/review_content_field"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:gravity="left|top"
             android:hint="@string/review_content_field_hint"
             android:lineSpacingExtra="5sp"
             android:paddingLeft="25dp"
             android:paddingRight="25dp"
-            android:textColorHint="#aaaaaa"
             android:textColor="#585757"
+            android:textColorHint="#aaaaaa"
             android:textSize="13sp" />
     </LinearLayout>
 
 
-    <!-- Done button -->
+    <!-- Submit button -->
     <Button
-        android:id="@+id/next_button"
+        android:id="@+id/submit_button"
         android:layout_width="match_parent"
         android:layout_height="@dimen/next_button_height"
         android:layout_alignParentBottom="true"
