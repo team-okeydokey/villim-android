@@ -22,20 +22,30 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.Date;
 
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
+import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
+import static net.villim.villim.VillimKeys.KEY_END_DATE;
+import static net.villim.villim.VillimKeys.KEY_HOUSE_NAME;
+import static net.villim.villim.VillimKeys.KEY_HOUSE_THUMBNAIL_URL;
 import static net.villim.villim.VillimKeys.KEY_ID;
+import static net.villim.villim.VillimKeys.KEY_QUERY_SUCCESS;
 import static net.villim.villim.VillimKeys.KEY_RESERVATION_ACTIVE;
 import static net.villim.villim.VillimKeys.KEY_ROOM_ID;
-import static net.villim.villim.VillimKeys.MY_ROOM_URL;
+import static net.villim.villim.VillimKeys.KEY_START_DATE;
+import static net.villim.villim.VillimKeys.MY_HOUSE_URL;
 import static net.villim.villim.VillimKeys.OPEN_DOORLOCK_URL;
+import static net.villim.villim.VillimKeys.SERVER_HOST;
+import static net.villim.villim.VillimKeys.SERVER_SCHEME;
 
 
 public class MyKeyFragment extends Fragment {
@@ -43,7 +53,7 @@ public class MyKeyFragment extends Fragment {
     private MainActivity activity;
 
     private ImageView houseThumbnail;
-    private TextView houseName;
+    private TextView houseNameTextView;
     private TextView validDates;
     private TextView errorMessage;
     private SlideButton slideButton;
@@ -53,6 +63,11 @@ public class MyKeyFragment extends Fragment {
     private AVLoadingIndicatorView loadingIndicator;
 
     private VillimSession session;
+
+    private String houseName;
+    private String houseThumbnailUrl;
+    private Date startDate;
+    private Date endDate;
 
     public MyKeyFragment() {
         // Required empty public constructor
@@ -74,7 +89,7 @@ public class MyKeyFragment extends Fragment {
         session = new VillimSession(getActivity().getApplicationContext());
 
         /* House name & dates */
-        houseName = (TextView) myKeyView.findViewById(R.id.house_name);
+        houseNameTextView = (TextView) myKeyView.findViewById(R.id.house_name);
         validDates = (TextView) myKeyView.findViewById(R.id.valid_dates);
 
         /* House thumbnail */
@@ -97,16 +112,20 @@ public class MyKeyFragment extends Fragment {
         loadingIndicator = (AVLoadingIndicatorView) myKeyView.findViewById(R.id.loading_indicator);
 
         populateView();
-        sendRoomInfoRequest();
+        if (session.getLoggedIn()) {
+            sendMyHouseRequest();
+        } else {
+            displayNoRoom();
+        }
 
         return myKeyView;
     }
 
     private void populateView() {
-        displayNoRoom();
+//        displayNoRoom();
     }
 
-    private void sendRoomInfoRequest() {
+    private void sendMyHouseRequest() {
         startLoadingAnimation();
         hideErrorMessage();
 
@@ -117,15 +136,16 @@ public class MyKeyFragment extends Fragment {
                 .cookieJar(cookieJar)
                 .build();
 
-
-        RequestBody requestBody = new FormBody.Builder()
-                .add(KEY_ID, Integer.toString(session.getId()))
-                .build();
+        URL url = new HttpUrl.Builder()
+                .scheme(SERVER_SCHEME)
+                .host(SERVER_HOST)
+                .addPathSegments(MY_HOUSE_URL)
+                .build().url();
 
         Request request = new Request.Builder()
-                .url(MY_ROOM_URL)
-                .post(requestBody)
+                .url(url)
                 .build();
+
 
         client.newCall(request).enqueue(new Callback() {
             @Override
@@ -146,7 +166,13 @@ public class MyKeyFragment extends Fragment {
                 try {
                     /* 주의: response.body().string()은 한 번 부를 수 있음 */
                     JSONObject jsonObject = new JSONObject(response.body().string());
-                    if (jsonObject.getBoolean(KEY_RESERVATION_ACTIVE)) {
+                    if (jsonObject.getBoolean(KEY_QUERY_SUCCESS)) {
+
+                        houseName = jsonObject.optString(KEY_HOUSE_NAME);
+                        startDate = VillimUtil.dateFromDateString(jsonObject.optString(KEY_START_DATE));
+                        endDate = VillimUtil.dateFromDateString(jsonObject.optString(KEY_END_DATE));
+                        houseThumbnailUrl = jsonObject.optString(KEY_HOUSE_THUMBNAIL_URL);
+
                         getActivity().runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
@@ -164,6 +190,12 @@ public class MyKeyFragment extends Fragment {
                     stopLoadingAnimation();
                 } catch (JSONException e) {
                     showErrorMessage(getString(R.string.open_room_error));
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            displayNoRoom();
+                        }
+                    });
                     stopLoadingAnimation();
                 }
             }
@@ -251,11 +283,25 @@ public class MyKeyFragment extends Fragment {
         });
         slideButton.setClickable(true);
         slideButton.setEnabled(true);
+
+        /* House Name */
+        houseNameTextView.setText(houseName);
+
+        /* Dates */
+        String dateString = String.format(getString(R.string.stay_duration_format),
+                startDate.getYear()+1900, startDate.getMonth()+1, startDate.getDate(),
+                endDate.getYear()+1900, endDate.getMonth()+1, endDate.getDate());
+        validDates.setText(dateString);
+
+        /* House thumbnail */
+        Glide.with(this)
+                .load(houseThumbnailUrl)
+                .into(houseThumbnail);
     }
 
     public void displayNoRoom() {
         /* House name */
-        houseName.setText(getString(R.string.no_reserved_room));
+        houseNameTextView.setText(getString(R.string.no_reserved_room));
 
         /* House dates */
         validDates.setVisibility(View.INVISIBLE);
