@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="#f0f1f2"
+    android:orientation="vertical"
     tools:context="net.villim.villim.SettingsActivity">
 
     <android.support.v7.widget.Toolbar
@@ -57,9 +57,10 @@
 
             <Switch
                 android:id="@+id/push_switch"
-                android:layout_width="40dp"
+                android:layout_width="60dp"
                 android:layout_height="25dp"
-                android:layout_alignParentRight="true" />
+                android:layout_alignParentRight="true"
+                android:thumbTint="#ed2025" />
         </RelativeLayout>
 
         <include layout="@layout/category_divider" />

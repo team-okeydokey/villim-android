@@ -17,6 +17,8 @@ import com.franmontiel.persistentcookiejar.ClearableCookieJar;
 import com.franmontiel.persistentcookiejar.PersistentCookieJar;
 import com.franmontiel.persistentcookiejar.cache.SetCookieCache;
 import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.LatLng;
 import com.rojoxpress.slidebutton.SlideButton;
 import com.wang.avi.AVLoadingIndicatorView;
 
@@ -35,9 +37,13 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
+import static net.villim.villim.VillimKeys.KEY_ADDR_DIRECTION;
+import static net.villim.villim.VillimKeys.KEY_ADDR_SUMMARY;
 import static net.villim.villim.VillimKeys.KEY_HOUSE_NAME;
 import static net.villim.villim.VillimKeys.KEY_HOUSE_THUMBNAIL_URL;
 import static net.villim.villim.VillimKeys.KEY_ID;
+import static net.villim.villim.VillimKeys.KEY_LATITUDE;
+import static net.villim.villim.VillimKeys.KEY_LONGITUDE;
 import static net.villim.villim.VillimKeys.KEY_MESSAGE;
 import static net.villim.villim.VillimKeys.KEY_QUERY_SUCCESS;
 import static net.villim.villim.VillimKeys.KEY_RESERVATION_ACTIVE;
@@ -58,6 +64,9 @@ public class VisitDetailActivity extends AppCompatActivity {
     private TextView errorMessage;
     private Button bottomButton;
 
+    private Button locationButton;
+    private Button cancelVisitButton;
+
     private AVLoadingIndicatorView loadingIndicator;
 
     private VillimSession session;
@@ -65,6 +74,9 @@ public class VisitDetailActivity extends AppCompatActivity {
     private VillimVisit visit;
     private String houseName;
     private String houseThumbnailUrl;
+    private double houseLatitude;
+    private double houseLongitude;
+    private String houseAddrDirection;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,6 +103,20 @@ public class VisitDetailActivity extends AppCompatActivity {
 
         /* House thumbnail */
         houseThumbnail = (ImageView) findViewById(R.id.house_thumbnail);
+
+        /* Top buttons */
+        locationButton = (Button) findViewById(R.id.location_button);
+        locationButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(VisitDetailActivity.this, FullScreenMapActivity.class);
+                intent.putExtra(KEY_LATITUDE, houseLatitude);
+                intent.putExtra(KEY_LONGITUDE, houseLongitude);
+                intent.putExtra(KEY_ADDR_DIRECTION, houseAddrDirection);
+                startActivity(intent);
+            }
+        });
+        cancelVisitButton = (Button) findViewById(R.id.cancel_visit_button);
 
         /* Bottom Button */
         bottomButton = (Button) findViewById(R.id.bottom_button);
@@ -156,6 +182,9 @@ public class VisitDetailActivity extends AppCompatActivity {
                         visit = VillimVisit.createVisitFromJSONObject(visitInfo);
                         houseName = visitInfo.getString(KEY_HOUSE_NAME);
                         houseThumbnailUrl = visitInfo.getString(KEY_HOUSE_THUMBNAIL_URL);
+                        houseLatitude = visitInfo.getDouble(KEY_LATITUDE);
+                        houseLongitude = visitInfo.getDouble(KEY_LONGITUDE);
+                        houseAddrDirection = visitInfo.getString(KEY_ADDR_DIRECTION);
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {

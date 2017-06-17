@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.RelativeLayout;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -50,6 +51,12 @@ public class SettingsActivity extends AppCompatActivity
         /* Push notifications */
         pushSwitch = (Switch) findViewById(R.id.push_switch);
         pushSwitch.setChecked(session.getPushPref());
+        pushSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                session.setPushPref(isChecked);
+            }
+        });
 
         /* Currency */
         currencyItem = (RelativeLayout) findViewById(R.id.currency_item);
