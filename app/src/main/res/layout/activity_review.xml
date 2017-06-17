@@ -88,7 +88,8 @@
             android:lineSpacingExtra="5sp"
             android:paddingLeft="25dp"
             android:paddingRight="25dp"
-            android:textColor="#aaaaaa"
+            android:textColorHint="#aaaaaa"
+            android:textColor="#585757"
             android:textSize="13sp" />
     </LinearLayout>
 
