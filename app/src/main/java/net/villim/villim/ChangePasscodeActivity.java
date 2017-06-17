@@ -154,7 +154,7 @@ public class ChangePasscodeActivity extends AppCompatActivity {
                     /* 주의: response.body().string()은 한 번 부를 수 있음 */
                     JSONObject jsonObject = new JSONObject(response.body().string());
                     if (jsonObject.getBoolean(KEY_CHANGE_SUCCESS)) {
-                        Intent intent = new Intent(ChangePasscodeActivity.this, DoorlockChangeSuccessActivity.class);
+                        Intent intent = new Intent(ChangePasscodeActivity.this, PasscodeChangeSuccessActivity.class);
                         startActivity(intent);
                         finish();
                     } else {

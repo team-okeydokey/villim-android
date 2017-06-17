@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#ed2025</color>
-    <color name="colorPrimaryDark">#ed2025</color>
+    <color name="colorPrimaryDark">#1e1e1e</color>
     <color name="colorAccent">#FF4081</color>
 
     <!-- Splash screen -->
@@ -85,5 +85,6 @@
 
     <!-- My Key Fragment -->
     <color name="text_button_inactive">#aaaaaa</color>
+    <color name="slide_button_color">#ed2025</color>
 
 </resources>
