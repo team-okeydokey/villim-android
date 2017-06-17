@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.franmontiel.persistentcookiejar.ClearableCookieJar;
@@ -39,6 +40,9 @@ import static net.villim.villim.VillimKeys.KEY_END_DATE;
 import static net.villim.villim.VillimKeys.KEY_HOUSE_NAME;
 import static net.villim.villim.VillimKeys.KEY_HOUSE_THUMBNAIL_URL;
 import static net.villim.villim.VillimKeys.KEY_ID;
+import static net.villim.villim.VillimKeys.KEY_MESSAGE;
+import static net.villim.villim.VillimKeys.KEY_OPEN_AUTHORIZED;
+import static net.villim.villim.VillimKeys.KEY_OPEN_SUCESS;
 import static net.villim.villim.VillimKeys.KEY_QUERY_SUCCESS;
 import static net.villim.villim.VillimKeys.KEY_RESERVATION_ACTIVE;
 import static net.villim.villim.VillimKeys.KEY_ROOM_ID;
@@ -211,7 +215,7 @@ public class MyKeyFragment extends Fragment {
         });
     }
 
-    private void sendRoomOpenRequest() {
+    private void sendOpenDoorlockRequest() {
         startLoadingAnimation();
         hideErrorMessage();
 
@@ -223,14 +227,14 @@ public class MyKeyFragment extends Fragment {
                 .build();
 
 
-        RequestBody requestBody = new FormBody.Builder()
-                .add(KEY_ID, Integer.toString(session.getId()))
-                .add(KEY_ROOM_ID, Integer.toString(session.getRoomId()))
-                .build();
+        URL url = new HttpUrl.Builder()
+                .scheme(SERVER_SCHEME)
+                .host(SERVER_HOST)
+                .addPathSegments(OPEN_DOORLOCK_URL)
+                .build().url();
 
         Request request = new Request.Builder()
-                .url(OPEN_DOORLOCK_URL)
-                .post(requestBody)
+                .url(url)
                 .build();
 
         client.newCall(request).enqueue(new Callback() {
@@ -252,20 +256,21 @@ public class MyKeyFragment extends Fragment {
                 try {
                     /* 주의: response.body().string()은 한 번 부를 수 있음 */
                     JSONObject jsonObject = new JSONObject(response.body().string());
-                    if (jsonObject.getBoolean(KEY_RESERVATION_ACTIVE)) {
-                        getActivity().runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                displayRoomInfo();
-                            }
-                        });
+                    if (jsonObject.getBoolean(KEY_OPEN_AUTHORIZED)) {
+                        if (jsonObject.getBoolean(KEY_OPEN_SUCESS)) {
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(getActivity().getApplicationContext(), getString(R.string.doorlock_open_success),
+                                            Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        } else {
+                            showErrorMessage(jsonObject.getString(KEY_MESSAGE));
+                        }
+
                     } else {
-                        getActivity().runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                displayNoRoom();
-                            }
-                        });
+                        showErrorMessage(jsonObject.getString(KEY_MESSAGE));
                     }
                     stopLoadingAnimation();
                 } catch (JSONException e) {
@@ -287,7 +292,7 @@ public class MyKeyFragment extends Fragment {
         slideButton.setSlideButtonListener(new SlideButton.SlideButtonListener() {
             @Override
             public void onSlide() {
-                sendRoomOpenRequest();
+                sendOpenDoorlockRequest();
             }
         });
         slideButton.setClickable(true);
@@ -298,8 +303,8 @@ public class MyKeyFragment extends Fragment {
 
         /* Dates */
         String dateString = String.format(getString(R.string.stay_duration_format),
-                startDate.getYear()+1900, startDate.getMonth()+1, startDate.getDate(),
-                endDate.getYear()+1900, endDate.getMonth()+1, endDate.getDate());
+                startDate.getYear() + 1900, startDate.getMonth() + 1, startDate.getDate(),
+                endDate.getYear() + 1900, endDate.getMonth() + 1, endDate.getDate());
         validDates.setText(dateString);
 
         /* House thumbnail */

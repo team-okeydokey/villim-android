@@ -17,7 +17,7 @@ public class VillimKeys {
     public static final String SIGNUP_URL = "http://175.207.29.19/a/signup";
     public static final String CHANGE_PASSCODE_URL = "http://www.mocky.io/v2/594478881200005716fcb615";
     public static final String MY_HOUSE_URL = "v2/594470cc120000a015fcb60f";
-    public static final String OPEN_DOORLOCK_URL = "http://www.mocky.io/v2/593df3e0110000f727722b11";
+    public static final String OPEN_DOORLOCK_URL = "v2/5944895a120000f117fcb61b";
     public static final String RESERVE_URL = "http://www.mocky.io/v2/5942f90b120000ff12ddc665";
     public static final String FEATURED_HOUSES_URL = "v2/5944039a120000380bfcb53f";
     public static final String HOST_INFO_URL = "v2/594175a00f0000770ec63237";
@@ -143,6 +143,10 @@ public class VillimKeys {
     public static final String KEY_CHANGE_SUCCESS = "change_success";
     public static final String KEY_PASSCODE = "passcode";
     public static final String KEY_PASSCODE_CONFIRM = "passcode_confirm";
+
+    /* Doorlock Open */
+    public static final String KEY_OPEN_AUTHORIZED = "open_authorized";
+    public static final String KEY_OPEN_SUCESS = "open_success";
 
 }
 

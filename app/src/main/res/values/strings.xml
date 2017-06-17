@@ -171,6 +171,7 @@
     <string name="open_room_error">문제가 발생했습니다. 다시 시도해 주세요.</string>
     <string name="cant_connect_to_server">서버에 연결할 수 없습니다</string>
     <string name="stay_duration_format">유효기간  %1$d.%2$d.%3$d - %4$d.%5$d.%6$d</string>
+    <string name="doorlock_open_success">도어락을 열었습니다.</string>
 
     <!-- House Description Activity -->
     <string name="basic_description">기본 설명</string>
