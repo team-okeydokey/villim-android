@@ -24,6 +24,7 @@ public class VillimKeys {
     public static final String HOUSE_INFO_URL = "v2/59441d55120000930dfcb57e";
     public static final String HOUSE_REVIEW_URL = "v2/5941d5200f00002e16c632c4";
     public static final String VISIT_INFO_URL = "v2/59442d6c1200002f0ffcb5a5";
+    public static final String POST_REVIEW_URL = "v2/59454496130000800b5b6f82";
 
     /* Request success codes */
     public static final String KEY_QUERY_SUCCESS = "query_success";
@@ -147,6 +148,9 @@ public class VillimKeys {
     /* Doorlock Open */
     public static final String KEY_OPEN_AUTHORIZED = "open_authorized";
     public static final String KEY_OPEN_SUCESS = "open_success";
+
+    /* Review Activity */
+    public static final String KEY_POST_SUCCESS = "post_success";
 
 }
 

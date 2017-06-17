@@ -106,7 +106,7 @@ public class LoginActivity extends AppCompatActivity {
                                 !TextUtils.isEmpty(loginFormPassword.getText());
                 boolean validInput = allFieldsFilledOut;
                 if (validInput) {
-                    sendRequest();
+                    sendLoginRequest();
                 } else {
                     showErrorMessage(getString(R.string.empty_field));
                 }
@@ -115,7 +115,7 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    private void sendRequest() {
+    private void sendLoginRequest() {
         startLoadingAnimation();
         hideErrorMessage();
 
