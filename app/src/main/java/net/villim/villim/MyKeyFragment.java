@@ -105,9 +105,19 @@ public class MyKeyFragment extends Fragment {
         slideButton.setClickable(false);
         slideButton.setEnabled(false);
 
-        /* Top buttons */
+        /* Review button */
         reviewButton = (Button) myKeyView.findViewById(R.id.review_button);
+        reviewButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent reviewIntent = new Intent(activity, ReviewActivity.class);
+                activity.startActivity(reviewIntent);
+            }
+        });
+        reviewButton.setEnabled(false);
+        reviewButton.setClickable(false);
 
+        /* Change passcode button */
         changePasscodeButton = (Button) myKeyView.findViewById(R.id.change_passcode_button);
         changePasscodeButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -116,6 +126,8 @@ public class MyKeyFragment extends Fragment {
                 activity.startActivity(doorlockIntent);
             }
         });
+        changePasscodeButton.setEnabled(false);
+        changePasscodeButton.setClickable(false);
 
         /* Error Message */
         errorMessage = (TextView) myKeyView.findViewById(R.id.error_message);
@@ -166,6 +178,12 @@ public class MyKeyFragment extends Fragment {
                 // Something went wrong.
                 showErrorMessage(getString(R.string.cant_connect_to_server));
                 stopLoadingAnimation();
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        displayNoRoom();
+                    }
+                });
             }
 
             @Override
@@ -173,6 +191,12 @@ public class MyKeyFragment extends Fragment {
                 if (!response.isSuccessful()) {
                     showErrorMessage(getString(R.string.server_error));
                     stopLoadingAnimation();
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            displayNoRoom();
+                        }
+                    });
                     throw new IOException("Response not successful   " + response);
                 }
                 /* Request success. */

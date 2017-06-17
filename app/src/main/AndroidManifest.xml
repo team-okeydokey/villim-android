@@ -86,6 +86,7 @@
         <activity
             android:name=".PasscodeChangeSuccessActivity"
             android:screenOrientation="portrait" />
+        <activity android:name=".ReviewActivity"></activity>
     </application>
 
 </manifest>
