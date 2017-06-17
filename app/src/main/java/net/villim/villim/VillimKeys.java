@@ -15,7 +15,7 @@ public class VillimKeys {
     /* URLS */
     public static final String LOGIN_URL = "http://175.207.29.19/a/login";
     public static final String SIGNUP_URL = "http://175.207.29.19/a/signup";
-    public static final String DOORLOCK_CHANGE_URL = "http://175.207.29.19/a/login";
+    public static final String CHANGE_PASSCODE_URL = "http://www.mocky.io/v2/594478881200005716fcb615";
     public static final String MY_HOUSE_URL = "v2/594470cc120000a015fcb60f";
     public static final String OPEN_DOORLOCK_URL = "http://www.mocky.io/v2/593df3e0110000f727722b11";
     public static final String RESERVE_URL = "http://www.mocky.io/v2/5942f90b120000ff12ddc665";

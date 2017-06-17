@@ -31,7 +31,7 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-import static net.villim.villim.VillimKeys.DOORLOCK_CHANGE_URL;
+import static net.villim.villim.VillimKeys.CHANGE_PASSCODE_URL;
 import static net.villim.villim.VillimKeys.KEY_CHANGE_SUCCESS;
 import static net.villim.villim.VillimKeys.KEY_MESSAGE;
 import static net.villim.villim.VillimKeys.KEY_PASSCODE;
@@ -88,23 +88,34 @@ public class DoorLockChangeActivity extends AppCompatActivity {
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boolean allFieldsFilledOut =
-                        !TextUtils.isEmpty(newPasscodeForm.getText().toString().trim()) &&
-                                !TextUtils.isEmpty(newPasscodeConfirmForm.getText().toString().trim());
-                boolean same = newPasscodeForm.getText().toString().trim() == newPasscodeForm.getText().toString().trim();
-                boolean validInput = allFieldsFilledOut && same;
+                String passcode = newPasscodeForm.getText().toString().trim();
+                String passcodeConfirm = newPasscodeConfirmForm.getText().toString().trim();
+                boolean allFieldsFilledOut = !TextUtils.isEmpty(passcode) && !TextUtils.isEmpty(passcodeConfirm);
+                boolean same = passcode.equals(passcodeConfirm);
+                boolean tooLong = (passcode.length() > 12) && (passcodeConfirm.length() > 12);
+                boolean tooShort = (passcode.length() < 4) && (passcodeConfirm.length() < 4);
+                boolean allDigits = passcode.matches("[0-9]+") && passcodeConfirm.matches("[0-9]+");
+                boolean validInput = allFieldsFilledOut && same && !tooLong && !tooShort && allDigits;
                 if (validInput) {
-                    sendRequest();
+                    sendPasscodeChangeRequest();
                 } else if (!allFieldsFilledOut) {
                     showErrorMessage(getString(R.string.empty_field));
-                } else if (same) {
+                } else if (!same) {
                     showErrorMessage(getString(R.string.passcode_different));
+                } else if (tooLong) {
+                    showErrorMessage(getString(R.string.passcode_too_long));
+                } else if (tooShort) {
+                    showErrorMessage(getString(R.string.passcode_too_short));
+                } else if (!allDigits) {
+                    showErrorMessage(getString(R.string.passcode_non_digit));
+                } else {
+                    showErrorMessage(getString(R.string.open_room_error));
                 }
             }
         });
     }
 
-    private void sendRequest() {
+    private void sendPasscodeChangeRequest() {
         startLoadingAnimation();
         hideErrorMessage();
 
@@ -119,7 +130,7 @@ public class DoorLockChangeActivity extends AppCompatActivity {
                 .build();
 
         Request request = new Request.Builder()
-                .url(DOORLOCK_CHANGE_URL)
+                .url(CHANGE_PASSCODE_URL)
                 .post(requestBody)
                 .build();
 

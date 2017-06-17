@@ -1,5 +1,6 @@
 package net.villim.villim;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.res.ResourcesCompat;
@@ -102,7 +103,15 @@ public class MyKeyFragment extends Fragment {
 
         /* Top buttons */
         reviewButton = (Button) myKeyView.findViewById(R.id.review_button);
+
         changePasscodeButton = (Button) myKeyView.findViewById(R.id.change_passcode_button);
+        changePasscodeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent doorlockIntent = new Intent(activity, DoorLockChangeActivity.class);
+                activity.startActivity(doorlockIntent);
+            }
+        });
 
         /* Error Message */
         errorMessage = (TextView) myKeyView.findViewById(R.id.error_message);

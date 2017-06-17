@@ -244,5 +244,11 @@
     <!-- Doorlock Passcode Activity -->
     <string name="configure_doorlock">도어락 설정</string>
     <string name="passcode_different">두 비밀번호가 일치하지 않습니다.</string>
+    <string name="passcode_non_digit">숫자 비밀번호만 설정할 수 있습니다.</string>
+    <string name="passcode_too_short">비밀번호가 너무 짧습니다.</string>
+    <string name="passcode_too_long">비밀번호가 너무 깁니다.</string>
+    <string name="confirm">확인</string>
+    <string name="passcode_hint">비밀번호 (4~12자)</string>
+    <string name="passcode_confirm_hint">비밀번호 확인 (4~12자)</string>
 
 </resources>
