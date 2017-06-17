@@ -265,10 +265,15 @@
 
     <!-- Rate Activity -->
     <string name="apply">적용</string>
-    
+
     <!-- FindPasswordActivity -->
     <string name="password_lost">비밀번호 분실</string>
     <string name="find_password_instructions">등록 시 사용하신 이메일 주소를 입력해주세요.</string>
     <string name="find_password">비밀번호 찾기</string>
 
+    <!-- FindPasscodeSuccessActivity -->
+    <string name="message_sent">메시지가 전송되었습니다.</string>
+    <string name="password_reset_link_sent">비밀번호를 재설정할 수 있는 링크가 포함된 Villim 메시지가 발송되었습니다.</string>
+    <string name="send_again">재전송</string>
+    <string name="send_again_complete">링크가 재전송되었습니다.</string>
 </resources>

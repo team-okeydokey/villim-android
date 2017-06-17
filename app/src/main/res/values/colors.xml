@@ -87,4 +87,8 @@
     <color name="text_button_inactive">#aaaaaa</color>
     <color name="slide_button_color">#ed2025</color>
 
+    <!-- Find password success activity -->
+    <color name="send_again_button_pressed">#000000</color>
+    <color name="send_again_button_normal">#2a2c32</color>
+    
 </resources>

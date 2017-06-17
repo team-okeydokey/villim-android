@@ -43,14 +43,14 @@ import static net.villim.villim.VillimKeys.SERVER_SCHEME;
 
 public class FindPasswordActivity extends AppCompatActivity {
 
-    private static final int PASSWORD_CHANGE_SUCCESS = 0;
+    private static final int FIND_PASSWORD_SUCCESS = 0;
 
     private Toolbar toolbar;
     private EditText emailForm;
-    private TextView errorMessage;
 
     private Button nextButton;
 
+    private TextView errorMessage;
     private AVLoadingIndicatorView loadingIndicator;
 
     @Override
@@ -145,13 +145,13 @@ public class FindPasswordActivity extends AppCompatActivity {
                     /* 주의: response.body().string()은 한 번 부를 수 있음 */
                     JSONObject jsonObject = new JSONObject(response.body().string());
                     if (jsonObject.getBoolean(KEY_POST_SUCCESS)) {
-                        Intent intent = new Intent(FindPasswordActivity.this, ChangePasscodeSuccessActivity.class);
-                        startActivity(intent);
-                        finish();
+                        Intent intent = new Intent(FindPasswordActivity.this, FindPasswordSuccessActivity.class);
+                        intent.putExtra(KEY_EMAIL, emailForm.getText().toString().trim());
+                        startActivityForResult(intent, FIND_PASSWORD_SUCCESS);
                     } else {
                         showErrorMessage(jsonObject.getString(KEY_MESSAGE));
-                        stopLoadingAnimation();
                     }
+                    stopLoadingAnimation();
                 } catch (JSONException e) {
                     showErrorMessage(getString(R.string.server_error));
                     stopLoadingAnimation();
@@ -164,13 +164,12 @@ public class FindPasswordActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         /* Requests to reservation activity */
-        if (requestCode == PASSWORD_CHANGE_SUCCESS) {
+        if (requestCode == FIND_PASSWORD_SUCCESS) {
             if (resultCode == Activity.RESULT_OK) {
                 finish();
             }
             if (resultCode == Activity.RESULT_CANCELED) {
                 //Write your code if there's no result
-                finish();
             }
         }
     }

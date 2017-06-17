@@ -76,7 +76,7 @@ public class SignupActivity extends AppCompatActivity {
         signupFormPassword = (EditText) findViewById(R.id.signup_form_password);
 
         Drawable personIcon =  getResources().getDrawable(R.drawable.icon_profile);
-        Drawable emailIcon =  getResources().getDrawable(R.drawable.icon_lock);
+        Drawable emailIcon =  getResources().getDrawable(R.drawable.icon_email);
         Drawable lockIcon =  getResources().getDrawable(R.drawable.icon_lock);
         int iconSize = getResources().getDimensionPixelSize(R.dimen.login_drawable_size);
         personIcon.setBounds(0, 0, iconSize, iconSize);
