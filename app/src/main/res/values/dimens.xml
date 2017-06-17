@@ -10,7 +10,7 @@
     <dimen name="search_filter_upper_padding">46dp</dimen>
     <dimen name="search_filter_padding">25dp</dimen>
     <dimen name="search_filter_text_size">20sp</dimen>
-    <dimen name="search_filter_width">310dp</dimen>
+    <dimen name="search_filter_width">350dp</dimen>
     <dimen name="marker_icon_size">25dp</dimen>
     <dimen name="calendar_icon_width">25dp</dimen>
     <dimen name="calendar_icon_height">23.3dp</dimen>
