@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class ReservationSuccessActivity extends AppCompatActivity {
+public class ReservationSuccessActivity extends VillimActivity {
 
     public static final String RESERVATION = "reservation";
 

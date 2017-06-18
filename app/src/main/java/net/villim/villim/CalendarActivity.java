@@ -20,7 +20,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
 
-public class CalendarActivity extends AppCompatActivity {
+public class CalendarActivity extends VillimActivity {
 
     public final static String START_DATE = "start_date";
     public final static String END_DATE = "end_date";

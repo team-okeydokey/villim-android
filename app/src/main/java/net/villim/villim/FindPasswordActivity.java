@@ -41,7 +41,7 @@ import static net.villim.villim.VillimKeys.KEY_MESSAGE;
 import static net.villim.villim.VillimKeys.SERVER_HOST;
 import static net.villim.villim.VillimKeys.SERVER_SCHEME;
 
-public class FindPasswordActivity extends AppCompatActivity {
+public class FindPasswordActivity extends VillimActivity {
 
     private static final int FIND_PASSWORD_SUCCESS = 0;
 

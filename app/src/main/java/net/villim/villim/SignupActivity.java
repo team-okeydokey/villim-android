@@ -46,7 +46,7 @@ import static net.villim.villim.VillimKeys.TERMS_OF_SERVICE_URL;
 import static net.villim.villim.WebViewActivity.TITLE;
 import static net.villim.villim.WebViewActivity.URL;
 
-public class SignupActivity extends AppCompatActivity {
+public class SignupActivity extends VillimActivity {
 
     private Toolbar toolbar;
 

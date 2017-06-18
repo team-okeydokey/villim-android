@@ -20,7 +20,7 @@ import static net.villim.villim.VillimKeys.KEY_MESSAGE;
 import static net.villim.villim.VillimKeys.KEY_QUERY_SUCCESS;
 import static net.villim.villim.VillimKeys.KEY_USER_INFO;
 
-public class SplashActivity extends AppCompatActivity {
+public class SplashActivity extends VillimActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

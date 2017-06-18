@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class HouseDescriptionActivity extends AppCompatActivity {
+public class HouseDescriptionActivity extends VillimActivity {
 
     public static final String KEY_BASIC_DESCRIPTION = "basic_description";
 

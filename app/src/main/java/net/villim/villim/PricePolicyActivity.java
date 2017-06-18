@@ -12,7 +12,7 @@ import static net.villim.villim.VillimKeys.KEY_CLEANING_FEE;
 import static net.villim.villim.VillimKeys.KEY_DEPOSIT;
 import static net.villim.villim.VillimKeys.KEY_RATE_PER_NIGHT;
 
-public class PricePolicyActivity extends AppCompatActivity {
+public class PricePolicyActivity extends VillimActivity {
 
     private Toolbar toolbar;
     private Button closeButton;

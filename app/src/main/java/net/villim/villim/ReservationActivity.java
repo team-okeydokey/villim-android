@@ -51,7 +51,7 @@ import static net.villim.villim.VillimKeys.KEY_START_DATE;
 import static net.villim.villim.VillimKeys.KEY_USER_INFO;
 import static net.villim.villim.VillimKeys.RESERVE_URL;
 
-public class ReservationActivity extends AppCompatActivity {
+public class ReservationActivity extends VillimActivity {
 
     private static final int CALENDAR = 0;
 

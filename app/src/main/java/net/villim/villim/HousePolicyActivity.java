@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import static net.villim.villim.VillimKeys.KEY_HOUSE_POLICY;
 
-public class HousePolicyActivity extends AppCompatActivity {
+public class HousePolicyActivity extends VillimActivity {
 
     private Toolbar toolbar;
     private Button closeButton;

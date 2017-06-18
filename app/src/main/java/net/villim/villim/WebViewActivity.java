@@ -8,7 +8,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.TextView;
 
-public class WebViewActivity extends AppCompatActivity {
+public class WebViewActivity extends VillimActivity {
 
     public static final String URL = "url";
     public static final String TITLE = "title";

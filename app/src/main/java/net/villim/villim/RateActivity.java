@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.RatingBar;
 
-public class RateActivity extends AppCompatActivity {
+public class RateActivity extends VillimActivity {
     public static final int RATE = 0;
     public static final String ACCURACY = "accuracy";
     public static final String LOCATION = "location";

@@ -25,7 +25,7 @@ import android.widget.TextView;
 import java.util.Date;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends VillimActivity {
 
     private static final int LOCATION_FILTER = 0;
     private static final int DATE_FILTER = 1;

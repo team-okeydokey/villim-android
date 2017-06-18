@@ -44,7 +44,7 @@ import static net.villim.villim.VillimKeys.SERVER_HOST;
 import static net.villim.villim.VillimKeys.SERVER_SCHEME;
 
 
-public class FindPasswordSuccessActivity extends AppCompatActivity {
+public class FindPasswordSuccessActivity extends VillimActivity {
 
     private Toolbar toolbar;
 

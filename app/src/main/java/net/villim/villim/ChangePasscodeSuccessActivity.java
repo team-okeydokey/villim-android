@@ -11,7 +11,7 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 
-public class ChangePasscodeSuccessActivity extends AppCompatActivity {
+public class ChangePasscodeSuccessActivity extends VillimActivity {
 
     private Toolbar toolbar;
     private ImageView lockImageView;

@@ -54,7 +54,7 @@ import static net.villim.villim.VillimKeys.KEY_REVIEW_COUNT;
 import static net.villim.villim.VillimKeys.SERVER_HOST;
 import static net.villim.villim.VillimKeys.SERVER_SCHEME;
 
-public class ViewReviewActivity extends AppCompatActivity {
+public class ViewReviewActivity extends VillimActivity {
 
     private Toolbar toolbar;
     private Button closeButton;

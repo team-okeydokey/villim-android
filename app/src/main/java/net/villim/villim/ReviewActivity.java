@@ -57,7 +57,7 @@ import static net.villim.villim.VillimKeys.SERVER_HOST;
 import static net.villim.villim.VillimKeys.SERVER_SCHEME;
 import static net.villim.villim.VillimKeys.KEY_POST_SUCCESS;
 
-public class ReviewActivity extends AppCompatActivity {
+public class ReviewActivity extends VillimActivity {
 
     private Toolbar toolbar;
     private RelativeLayout reviewRatingView;

@@ -38,7 +38,7 @@ import static net.villim.villim.VillimKeys.KEY_MESSAGE;
 import static net.villim.villim.VillimKeys.KEY_PASSCODE;
 import static net.villim.villim.VillimKeys.KEY_PASSCODE_CONFIRM;
 
-public class ChangePasscodeActivity extends AppCompatActivity {
+public class ChangePasscodeActivity extends VillimActivity {
 
     private static final int PASSCODE_CHANGE_SUCCESS = 0;
 

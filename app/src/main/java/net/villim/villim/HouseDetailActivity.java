@@ -81,7 +81,7 @@ import static net.villim.villim.VillimKeys.SERVER_HOST;
 import static net.villim.villim.VillimKeys.SERVER_SCHEME;
 
 
-public class HouseDetailActivity extends AppCompatActivity implements OnMapReadyCallback {
+public class HouseDetailActivity extends VillimActivity implements OnMapReadyCallback {
 
     private final static int MAX_AMENITY_ICONS = 6;
 

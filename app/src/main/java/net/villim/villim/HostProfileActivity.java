@@ -41,7 +41,7 @@ import static net.villim.villim.VillimKeys.SERVER_HOST;
 import static net.villim.villim.VillimKeys.SERVER_SCHEME;
 
 
-public class HostProfileActivity extends AppCompatActivity {
+public class HostProfileActivity extends VillimActivity {
 
     private Toolbar toolbar;
     private Button closeButton;

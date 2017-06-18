@@ -40,7 +40,7 @@ import static net.villim.villim.VillimKeys.KEY_USER_INFO;
 import static net.villim.villim.VillimKeys.LOGIN_URL;
 
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends VillimActivity {
 
     private Toolbar toolbar;
     private EditText loginFormEmail;

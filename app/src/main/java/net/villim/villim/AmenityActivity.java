@@ -16,7 +16,7 @@ import java.util.ArrayList;
 
 import static net.villim.villim.VillimKeys.KEY_AMENITY_IDS;
 
-public class AmenityActivity extends AppCompatActivity {
+public class AmenityActivity extends VillimActivity {
 
     private Toolbar toolbar;
     private ListView amenityListView;

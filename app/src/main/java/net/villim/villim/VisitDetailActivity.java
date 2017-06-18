@@ -57,7 +57,7 @@ import static net.villim.villim.VillimKeys.SERVER_HOST;
 import static net.villim.villim.VillimKeys.SERVER_SCHEME;
 import static net.villim.villim.VillimKeys.VISIT_INFO_URL;
 
-public class VisitDetailActivity extends AppCompatActivity implements CancelVisitDialog.CancelVisitDialogListener{
+public class VisitDetailActivity extends VillimActivity implements CancelVisitDialog.CancelVisitDialogListener{
 
     private Toolbar toolbar;
 

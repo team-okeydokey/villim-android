@@ -16,7 +16,7 @@ import android.widget.TextView;
 
 import static net.villim.villim.VillimKeys.APP_VERSION;
 
-public class SettingsActivity extends AppCompatActivity
+public class SettingsActivity extends VillimActivity
         implements LanguagePreferenceDialog.LanguagePreferenceDialogListener,
         CurrencyPreferenceDialog.currencyPreferenceDialogListener {
 
