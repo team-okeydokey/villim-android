@@ -97,6 +97,7 @@
     <dimen name="slide_button_height">60dp</dimen>
     <dimen name="slide_button_radius">200dp</dimen>
     <dimen name="slide_button_thumb_size">54dp</dimen>
+    <dimen name="slide_button_thumb_offset">10dp</dimen>
     <dimen name="mykey_button_margin_side">25dp</dimen>
     <dimen name="mykey_button_margin_top">30dp</dimen>
 
