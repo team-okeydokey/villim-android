@@ -136,16 +136,43 @@
 
     </RelativeLayout>
 
-    <TextView
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/next_button"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="@dimen/consent_text_margin"
-        android:autoLink="web"
-        android:gravity="center_horizontal"
-        android:text="@string/consent"
-        android:textColor="@color/consent_text" />
+        android:layout_marginBottom="@dimen/consent_text_margin">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:text="@string/consent_first_half"
+            android:textColor="@color/consent_text"
+            android:textSize="11sp" />
+
+        <TextView
+            android:id="@+id/terms_of_service_link"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:autoLink="web"
+            android:gravity="center_horizontal"
+            android:text="@string/terms_of_service"
+            android:textColor="#ed2025"
+            android:textSize="11sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:maxLines="1"
+            android:text="@string/consent_second_half"
+            android:textColor="@color/consent_text"
+            android:textSize="11sp" />
+
+    </LinearLayout>
+
 
     <!-- Done button -->
     <Button

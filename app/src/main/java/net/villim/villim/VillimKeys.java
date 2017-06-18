@@ -29,6 +29,7 @@ public class VillimKeys {
     public static final String POST_REVIEW_URL = "v2/59454496130000800b5b6f82";
     public static final String FIND_PASSWORD_URL = "v2/59454496130000800b5b6f82";
     public static final String CANCEL_VISIT_URL = "v2/5945baec13000005155b6fcc";
+    public static final String TERMS_OF_SERVICE_URL = "https://www.klondikebar.com/";
 
     /* Request success codes */
     public static final String KEY_QUERY_SUCCESS = "query_success";
@@ -161,6 +162,7 @@ public class VillimKeys {
 
     /* Visit Detail Activity */
     public static final String KEY_CANCEL_SUCCESS = "cancel_success";
+
 
 }
 

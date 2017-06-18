@@ -2,6 +2,7 @@ package net.villim.villim;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
@@ -41,6 +42,9 @@ import static net.villim.villim.VillimKeys.KEY_SIGNUP_SUCCESS;
 import static net.villim.villim.VillimKeys.KEY_USER;
 import static net.villim.villim.VillimKeys.KEY_USER_INFO;
 import static net.villim.villim.VillimKeys.SIGNUP_URL;
+import static net.villim.villim.VillimKeys.TERMS_OF_SERVICE_URL;
+import static net.villim.villim.WebViewActivity.TITLE;
+import static net.villim.villim.WebViewActivity.URL;
 
 public class SignupActivity extends AppCompatActivity {
 
@@ -50,6 +54,7 @@ public class SignupActivity extends AppCompatActivity {
     private EditText signupFormFirstname;
     private EditText signupFormEmail;
     private EditText signupFormPassword;
+    private TextView termsOfServiceTextView;
     private TextView errorMessage;
 
     private Button nextButton;
@@ -86,6 +91,19 @@ public class SignupActivity extends AppCompatActivity {
         signupFormFirstname.setCompoundDrawables(personIcon, null, null, null);
         signupFormEmail.setCompoundDrawables(emailIcon, null, null, null);
         signupFormPassword.setCompoundDrawables(lockIcon, null, null, null);
+
+        /* Terms of service webview */
+        termsOfServiceTextView = (TextView) findViewById(R.id.terms_of_service_link);
+        termsOfServiceTextView.setPaintFlags(Paint.UNDERLINE_TEXT_FLAG);
+        termsOfServiceTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SignupActivity.this, WebViewActivity.class);
+                intent.putExtra(URL, TERMS_OF_SERVICE_URL);
+                intent.putExtra(TITLE, getString(R.string.terms_of_service));
+                startActivity(intent);
+            }
+        });
 
         /* Error Message */
         errorMessage = (TextView) findViewById(R.id.error_message);
