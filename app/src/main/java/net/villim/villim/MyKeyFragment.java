@@ -1,7 +1,9 @@
 package net.villim.villim;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.res.ResourcesCompat;
 import android.view.LayoutInflater;
@@ -306,12 +308,15 @@ public class MyKeyFragment extends Fragment {
         slideButton.setText(getString(R.string.open_doorlock));
         slideButton.setThumb(ResourcesCompat.getDrawable(getResources(),
                 R.drawable.slider_thumb_active, null));
-        slideButton.setThumbOffset(2);
+        slideButton.setThumbOffset(0);
         slideButton.setOnClickListener(null);
         slideButton.setOnSlideChangeListener(null);
         slideButton.setSlideButtonListener(new SlideButton.SlideButtonListener() {
             @Override
             public void onSlide() {
+                // vibrate the device
+                Vibrator vibrator = (Vibrator) getActivity().getSystemService(Context.VIBRATOR_SERVICE);
+                vibrator.vibrate(100);
                 sendOpenDoorlockRequest();
             }
         });
