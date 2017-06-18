@@ -70,50 +70,27 @@ public class ProfileFragment extends Fragment implements LogoutDialog.LogoutDial
         profileListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                switch (position) {
-                    /* Login & logout */
-                    case 0:
-                        if (session.getLoggedIn()) {
-                            /* Log out */
-                            LogoutDialog dialog = LogoutDialog.newInstance(
-                                    ProfileFragment.this, session.getFullName());
-                            dialog.show(getActivity().getFragmentManager(), "LogoutFragment");
 
-                        } else {
-                            /* Launch login page */
-                            Intent intent = new Intent(getActivity(), LoginActivity.class);
-                            getActivity().startActivityForResult(intent, LOGIN);
-                        }
-                        break;
+                String title = (String) parent.getItemAtPosition(position);
 
-                    /* Profile view & edit or FAQ */
-                    case 1:
-                        break;
+                if (title.equals(getString(R.string.login))) {
+                    /* Launch login page */
+                    Intent intent = new Intent(getActivity(), LoginActivity.class);
+                    getActivity().startActivityForResult(intent, LOGIN);
+                } else if (title.equals(getString(R.string.logout))) {
+                     /* Log out */
+                    LogoutDialog dialog = LogoutDialog.newInstance(
+                            ProfileFragment.this, session.getFullName());
+                    dialog.show(getActivity().getFragmentManager(), "LogoutFragment");
 
-                    /* FAQ or Settings */
-                    case 2:
-                        if (session.getLoggedIn()) {
+                } else if (title.equals(getString(R.string.profile))) {
 
-                        } else {
-                            launchSettingsActivity();
-                        }
-                        break;
-                    /* Settings or Privacy Policy */
-                    case 3:
-                        if (session.getLoggedIn()) {
-                            launchSettingsActivity();
-                        } else {
-                            launchTermsOfServiceActivity();
-                        }
-                        break;
+                } else if (title.equals(getString(R.string.faq))) {
 
-                    /* Privacy Policy */
-                    case 4:
-                        launchTermsOfServiceActivity();
-                        break;
-
-                    default:
-                        break;
+                } else if (title.equals(getString(R.string.settings))) {
+                    launchSettingsActivity();
+                } else if (title.equals(getString(R.string.privacy_policy))) {
+                    launchPrivacyPolicyWebview();
                 }
             }
         });
@@ -139,7 +116,7 @@ public class ProfileFragment extends Fragment implements LogoutDialog.LogoutDial
         getActivity().startActivity(intent);
     }
 
-    private void launchTermsOfServiceActivity() {
+    private void launchPrivacyPolicyWebview() {
         Intent intent = new Intent(getActivity(), WebViewActivity.class);
         intent.putExtra(URL, TERMS_OF_SERVICE_URL);
         intent.putExtra(TITLE, getString(R.string.privacy_policy));
