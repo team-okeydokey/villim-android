@@ -308,7 +308,7 @@ public class MyKeyFragment extends Fragment {
         slideButton.setText(getString(R.string.open_doorlock));
         slideButton.setThumb(ResourcesCompat.getDrawable(getResources(),
                 R.drawable.slider_thumb_active, null));
-        slideButton.setThumbOffset(35);
+        slideButton.setThumbOffset(35); // Magic number that i found.
         slideButton.setOnClickListener(null);
         slideButton.setOnSlideChangeListener(null);
         slideButton.setSlideButtonListener(new SlideButton.SlideButtonListener() {
