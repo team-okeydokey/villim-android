@@ -22,6 +22,10 @@ import com.bumptech.glide.Glide;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import static net.villim.villim.VillimKeys.TERMS_OF_SERVICE_URL;
+import static net.villim.villim.WebViewActivity.TITLE;
+import static net.villim.villim.WebViewActivity.URL;
+
 
 public class ProfileFragment extends Fragment implements LogoutDialog.LogoutDialogListener {
 
@@ -94,17 +98,18 @@ public class ProfileFragment extends Fragment implements LogoutDialog.LogoutDial
                             launchSettingsActivity();
                         }
                         break;
-                    /* Settings or Privacy Policy*/
+                    /* Settings or Privacy Policy */
                     case 3:
                         if (session.getLoggedIn()) {
                             launchSettingsActivity();
                         } else {
-
+                            launchTermsOfServiceActivity();
                         }
                         break;
 
                     /* Privacy Policy */
                     case 4:
+                        launchTermsOfServiceActivity();
                         break;
 
                     default:
@@ -131,6 +136,13 @@ public class ProfileFragment extends Fragment implements LogoutDialog.LogoutDial
 
     private void launchSettingsActivity() {
         Intent intent = new Intent(getActivity(), SettingsActivity.class);
+        getActivity().startActivity(intent);
+    }
+
+    private void launchTermsOfServiceActivity() {
+        Intent intent = new Intent(getActivity(), WebViewActivity.class);
+        intent.putExtra(URL, TERMS_OF_SERVICE_URL);
+        intent.putExtra(TITLE, getString(R.string.terms_of_service));
         getActivity().startActivity(intent);
     }
 
