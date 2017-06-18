@@ -2,6 +2,7 @@ package net.villim.villim;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.support.v4.app.Fragment;
@@ -306,8 +307,11 @@ public class MyKeyFragment extends Fragment {
     public void displayRoomInfo() {
         /* Set up slide button */
         slideButton.setText(getString(R.string.open_doorlock));
-        slideButton.setThumb(ResourcesCompat.getDrawable(getResources(),
-                R.drawable.slider_thumb_active, null));
+        Drawable sliderThumb = ResourcesCompat.getDrawable(getResources(),
+                R.drawable.slider_thumb_active, null);
+        int thumbSize = getResources().getDimensionPixelSize(R.dimen.slide_button_thumb_size);
+        sliderThumb.setBounds(0,0,thumbSize,thumbSize);
+        slideButton.setThumb(sliderThumb);
         slideButton.setThumbOffset(35); // Magic number that i found.
         slideButton.setOnClickListener(null);
         slideButton.setOnSlideChangeListener(null);

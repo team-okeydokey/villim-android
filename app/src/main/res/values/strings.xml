@@ -141,6 +141,7 @@
     <string name="profile_title">프로필</string>
     <string name="login">로그인</string>
     <string name="logout">로그아웃</string>
+    <string name="privacy_policy">개인정보 이용약관</string>
 
     <!-- Login Activity -->
     <string name="advert_title">전세계의 집이 나의 집!</string>

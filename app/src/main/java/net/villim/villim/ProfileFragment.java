@@ -142,7 +142,7 @@ public class ProfileFragment extends Fragment implements LogoutDialog.LogoutDial
     private void launchTermsOfServiceActivity() {
         Intent intent = new Intent(getActivity(), WebViewActivity.class);
         intent.putExtra(URL, TERMS_OF_SERVICE_URL);
-        intent.putExtra(TITLE, getString(R.string.terms_of_service));
+        intent.putExtra(TITLE, getString(R.string.privacy_policy));
         getActivity().startActivity(intent);
     }
 
