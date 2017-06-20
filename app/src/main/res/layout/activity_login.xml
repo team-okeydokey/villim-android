@@ -40,10 +40,12 @@
 
         <TextView
             android:id="@+id/advertTitle"
+            fontPath="fonts/BMDOHYEON.otf"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/advert_title"
-            android:textSize="@dimen/advert_title_text_size" />
+            android:textSize="@dimen/advert_title_text_size"
+            tools:ignore="MissingPrefix" />
 
         <TextView
             android:id="@+id/advertDetail"

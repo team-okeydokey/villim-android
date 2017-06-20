@@ -10,13 +10,12 @@ import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
 public class VillimApplication extends Application {
 
-//    @Override
-//    public void onCreate() {
-//        super.onCreate();
-//        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
-//                .setDefaultFontPath("fonts/NotoSansCJKkr-Regular.otf")
-//                .setFontAttrId(R.attr.fontPath)
-//                .build()
-//        );
-//    }
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
+                .setFontAttrId(R.attr.fontPath)
+                .build()
+        );
+    }
 }
