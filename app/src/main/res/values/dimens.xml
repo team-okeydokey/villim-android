@@ -106,7 +106,7 @@
     <dimen name="amenity_list_drawable_size">25dp</dimen>
 
     <!-- Fullscreen Map Activity -->
-    <dimen name="direction_text_height">85dp</dimen>
+    <dimen name="direction_text_height">200dp</dimen>
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
