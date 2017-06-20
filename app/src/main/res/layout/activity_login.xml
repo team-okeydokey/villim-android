@@ -45,11 +45,12 @@
             android:layout_height="wrap_content"
             android:text="@string/advert_title"
             android:textSize="@dimen/advert_title_text_size"
-            tools:ignore="MissingPrefix" />
+            android:textColor="#05060b" />
 
         <TextView
             android:id="@+id/advertDetail"
             android:layout_width="match_parent"
+            fontPath="fonts/NotoSansCJKkr-DemiLight.otf"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="@string/advert_detail"

@@ -22,6 +22,7 @@
         <item name="fontPath">fonts/NotoSansCJKkr-Medium</item>
     </style>
 
+
     <style name="CollapsingToolbar" parent="ThemeOverlay.AppCompat.Light">
         <item name="android:background">@android:color/white</item>
     </style>

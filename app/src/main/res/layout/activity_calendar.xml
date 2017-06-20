@@ -37,7 +37,8 @@
         android:layout_below="@+id/toolbar"
         android:paddingBottom="@dimen/date_filter_text_padding_bottom"
         android:paddingLeft="@dimen/date_filter_text_padding_side"
-        android:paddingRight="@dimen/date_filter_text_padding_side">
+        android:paddingRight="@dimen/date_filter_text_padding_side"
+        android:paddingTop="30dp">
 
         <TextView
             android:id="@+id/start_date_text"
@@ -75,6 +76,8 @@
     <!-- CalendarView -->
 
     <com.squareup.timessquare.CalendarPickerView
+        android:paddingLeft="@dimen/date_filter_text_padding_side"
+        android:paddingRight="@dimen/date_filter_text_padding_side"
         android:id="@+id/calendar_view"
         android:layout_width="match_parent"
         android:layout_height="260dp"
