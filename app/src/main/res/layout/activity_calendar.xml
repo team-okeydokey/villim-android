@@ -35,10 +35,10 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/date_filter_text_container_height"
         android:layout_below="@+id/toolbar"
+        android:layout_marginTop="30dp"
         android:paddingBottom="@dimen/date_filter_text_padding_bottom"
         android:paddingLeft="@dimen/date_filter_text_padding_side"
-        android:paddingRight="@dimen/date_filter_text_padding_side"
-        android:paddingTop="30dp">
+        android:paddingRight="@dimen/date_filter_text_padding_side">
 
         <TextView
             android:id="@+id/start_date_text"
@@ -46,8 +46,10 @@
             android:layout_height="match_parent"
             android:layout_alignParentLeft="true"
             android:gravity="bottom|left"
+            android:includeFontPadding="false"
             android:lineSpacingExtra="5sp"
             android:text="@string/date_filter_start_date"
+            android:textColor="#333333"
             android:textSize="25sp" />
 
 
@@ -58,6 +60,7 @@
             android:layout_alignParentRight="true"
             android:gravity="bottom|right"
             android:text="@string/date_filter_end_date"
+            android:textColor="#333333"
             android:textSize="25sp" />
 
     </RelativeLayout>
@@ -76,8 +79,6 @@
     <!-- CalendarView -->
 
     <com.squareup.timessquare.CalendarPickerView
-        android:paddingLeft="@dimen/date_filter_text_padding_side"
-        android:paddingRight="@dimen/date_filter_text_padding_side"
         android:id="@+id/calendar_view"
         android:layout_width="match_parent"
         android:layout_height="260dp"
@@ -85,6 +86,9 @@
         android:layout_below="@+id/divider"
         android:background="@color/search_background"
         android:clipToPadding="false"
+        android:paddingLeft="@dimen/calendar_padding_side"
+        android:paddingRight="@dimen/calendar_padding_side"
+        android:scrollbars="none"
         app:tsquare_dayBackground="@drawable/day_background"
         app:tsquare_dayTextColor="@drawable/day_text_color"
         app:tsquare_dividerColor="@android:color/transparent"
