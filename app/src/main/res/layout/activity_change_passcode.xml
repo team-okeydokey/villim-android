@@ -32,6 +32,7 @@
 
     <TextView
         android:id="@+id/instruction_text"
+        fontPath="fonts/NotoSansCJKkr-Medium.otf"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/advert_container_margin_top"
@@ -40,7 +41,6 @@
         android:text="@string/change_doorlock_passcode"
         android:textColor="@color/signup_welcome_text"
         android:textSize="@dimen/advert_title_text_size" />
-
 
 
     <!-- Doorlock passcode form -->
