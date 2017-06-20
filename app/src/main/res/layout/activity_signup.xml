@@ -31,6 +31,8 @@
     <!-- 인사 문구 -->
     <TextView
         android:id="@+id/signup_welcome_text"
+        android:includeFontPadding="false"
+        fontPath="fonts/NotoSansCJKkr-Medium.otf"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/advert_container_margin_top"
@@ -38,7 +40,8 @@
         android:paddingRight="@dimen/login_activity_padding"
         android:text="@string/signup_welcome"
         android:textColor="@color/signup_welcome_text"
-        android:textSize="@dimen/advert_title_text_size" />
+        android:textSize="@dimen/advert_title_text_size"
+        tools:ignore="MissingPrefix" />
 
 
     <!-- Login form -->
@@ -137,12 +140,12 @@
     </RelativeLayout>
 
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/next_button"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="@dimen/consent_text_margin">
+        android:layout_marginBottom="@dimen/consent_text_margin"
+        android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
