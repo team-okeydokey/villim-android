@@ -138,10 +138,10 @@
         <item>환경 설정</item>
         <item>개인정보 이용약관</item>
     </string-array>
-    <string name="profile_title">프로필</string>
+    <string name="profile">프로필</string>
     <string name="login">로그인</string>
     <string name="logout">로그아웃</string>
-    <string name="profile">프로필 보기 및 수정</string>
+    <string name="profile_title">프로필 보기 및 수정</string>
     <string name="settings">환경 설정</string>
     <string name="faq">FAQ</string>
     <string name="privacy_policy">개인정보 이용약관</string>
@@ -303,4 +303,20 @@
         <item>한국어</item>
         <item>English</item>
     </string-array>
+
+    <!-- Profile Edit Activity -->
+    <string name="sex">성별</string>
+    <string name="phone_number">전화번호</string>
+    <string name="add_phone_number">+전화번호 추가하기</string>
+    <string name="city_of_residency">거주 도시</string>
+    <string name="email_privacy_statement">이메일 주소는 다른 회원에게 공개되지 않습니다.</string>
+    <string name="sex_privacy_statement">이 자료는 통계 목적으로 사용되어 공개되지 않습니다.</string>
+    <string name="edit">수정</string>
+    <string name="profile_updated">프로필 정보가 업데이트 되었습니다.</string>
+    <string-array name="sex_array">
+        <item>남자</item>
+        <item>여자</item>
+        <item>비공개</item>
+    </string-array>
+
 </resources>

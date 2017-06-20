@@ -352,6 +352,9 @@ public class MainActivity extends VillimActivity {
         if (requestCode == ProfileFragment.LOGIN && null != profileFragment) {
             profileFragment.onActivityResult(requestCode, resultCode, data);
             return;
+        } else if (requestCode == ProfileFragment.PROFILE_EDIT && null != profileFragment) {
+            profileFragment.onActivityResult(requestCode, resultCode, data);
+            return;
         } else if (requestCode == VisitFragment.VISIT_DETAIL && null != visitFragment) {
             visitFragment.onActivityResult(requestCode, resultCode, data);
             return;
@@ -452,7 +455,7 @@ public class MainActivity extends VillimActivity {
     }
 
     public Date getEndDate() {
-        return  endDate;
+        return endDate;
     }
 
 

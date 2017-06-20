@@ -30,6 +30,7 @@ public class VillimKeys {
     public static final String FIND_PASSWORD_URL = "v2/59454496130000800b5b6f82";
     public static final String CANCEL_VISIT_URL = "v2/5945baec13000005155b6fcc";
     public static final String TERMS_OF_SERVICE_URL = "https://www.klondikebar.com/";
+    public static final String UPDATE_PROFILE_URL = "https://www.klondikebar.com/";
 
     /* Request success codes */
     public static final String KEY_QUERY_SUCCESS = "query_success";
@@ -46,7 +47,7 @@ public class VillimKeys {
     /* User info */
     public static final String KEY_LOGIN_SUCCESS = "login_success";
     public static final String KEY_USER_INFO = "user_info";
-    public static final String KEY_ID = "id";
+    public static final String KEY_USER_ID = "user_id";
     public static final String KEY_FULLNAME = "fullname";
     public static final String KEY_EMAIL = "email";
     public static final String KEY_PASSWORD = "password";
@@ -54,9 +55,13 @@ public class VillimKeys {
     public static final String KEY_ABOUT = "about";
     public static final String KEY_USER_STATUS = "user_status";
     public static final String KEY_ROOM_ID = "room_id";
-    public static final String KEY_PUSH_PREFERENCE = "push_preference";
+    public static final String KEY_PUSH_NOTIFICATIONS = "push_notifications";
     public static final String KEY_CURRENCY_PREFERENCE = "currency_preference";
     public static final String KEY_LANGUAGE_PREFERENCE = "language_preference";
+    public static final String KEY_SEX = "sex";
+    public static final String KEY_PHONE_NUMBER = "phone_number";
+    public static final String KEY_CITY_OF_RESIDENCE = "city_of_residence";
+    public static final String KEY_PROFILE_PIC = "profile_pic";
 
     /* Login Keys */
     public static final String KEY_MESSAGE = "message";
@@ -162,6 +167,9 @@ public class VillimKeys {
 
     /* Visit Detail Activity */
     public static final String KEY_CANCEL_SUCCESS = "cancel_success";
+
+    /* Profile Edit Activity */
+    public static final String KEY_UPDATE_SUCCESS = "update";
 
 
 }

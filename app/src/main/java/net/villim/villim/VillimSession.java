@@ -4,16 +4,19 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
+import static net.villim.villim.VillimKeys.KEY_CITY_OF_RESIDENCE;
 import static net.villim.villim.VillimKeys.KEY_CURRENCY_PREFERENCE;
 import static net.villim.villim.VillimKeys.KEY_EMAIL;
 import static net.villim.villim.VillimKeys.KEY_FIRSTNAME;
 import static net.villim.villim.VillimKeys.KEY_FULLNAME;
-import static net.villim.villim.VillimKeys.KEY_ID;
 import static net.villim.villim.VillimKeys.KEY_LANGUAGE_PREFERENCE;
 import static net.villim.villim.VillimKeys.KEY_LASTNAME;
+import static net.villim.villim.VillimKeys.KEY_PHONE_NUMBER;
 import static net.villim.villim.VillimKeys.KEY_PROFILE_PIC_URL;
-import static net.villim.villim.VillimKeys.KEY_PUSH_PREFERENCE;
+import static net.villim.villim.VillimKeys.KEY_PUSH_NOTIFICATIONS;
 import static net.villim.villim.VillimKeys.KEY_ROOM_ID;
+import static net.villim.villim.VillimKeys.KEY_SEX;
+import static net.villim.villim.VillimKeys.KEY_USER_ID;
 import static net.villim.villim.VillimKeys.KEY_USER_STATUS;
 
 /**
@@ -42,12 +45,12 @@ public class VillimSession {
     }
 
     /* Id */
-    public void setId(int id) {
-        prefs.edit().putInt(KEY_ID, id).apply();
+    public void setUserId(int id) {
+        prefs.edit().putInt(KEY_USER_ID, id).apply();
     }
 
-    public int getId() {
-        int id = prefs.getInt(KEY_ID,0);
+    public int getUserId() {
+        int id = prefs.getInt(KEY_USER_ID, 0);
         return id;
     }
 
@@ -58,7 +61,7 @@ public class VillimSession {
     }
 
     public String getFullName() {
-        String fullname = prefs.getString(KEY_FULLNAME,"");
+        String fullname = prefs.getString(KEY_FULLNAME, "");
         return fullname;
     }
 
@@ -68,7 +71,7 @@ public class VillimSession {
     }
 
     public String getFirstName() {
-        String firstname = prefs.getString(KEY_FIRSTNAME,"");
+        String firstname = prefs.getString(KEY_FIRSTNAME, "");
         return firstname;
     }
 
@@ -78,7 +81,7 @@ public class VillimSession {
     }
 
     public String getLastName() {
-        String lastname = prefs.getString(KEY_LASTNAME,"");
+        String lastname = prefs.getString(KEY_LASTNAME, "");
         return lastname;
     }
 
@@ -88,7 +91,7 @@ public class VillimSession {
     }
 
     public String getEmail() {
-        String email = prefs.getString(KEY_EMAIL,"");
+        String email = prefs.getString(KEY_EMAIL, "");
         return email;
     }
 
@@ -98,7 +101,7 @@ public class VillimSession {
     }
 
     public String getProfilePicUrl() {
-        String url = prefs.getString(KEY_PROFILE_PIC_URL,"");
+        String url = prefs.getString(KEY_PROFILE_PIC_URL, "");
         return url;
     }
 
@@ -108,7 +111,7 @@ public class VillimSession {
     }
 
     public int getStatus() {
-        int status = prefs.getInt(KEY_USER_STATUS,0);
+        int status = prefs.getInt(KEY_USER_STATUS, 0);
         return status;
     }
 
@@ -118,17 +121,17 @@ public class VillimSession {
     }
 
     public int getRoomId() {
-        int roomId = prefs.getInt(KEY_ROOM_ID,0);
+        int roomId = prefs.getInt(KEY_ROOM_ID, 0);
         return roomId;
     }
 
     /* Push Notifications */
     public void setPushPref(boolean pushPref) {
-        prefs.edit().putBoolean(KEY_PUSH_PREFERENCE, pushPref).apply();
+        prefs.edit().putBoolean(KEY_PUSH_NOTIFICATIONS, pushPref).apply();
     }
 
     public boolean getPushPref() {
-        boolean pushPref = prefs.getBoolean(KEY_PUSH_PREFERENCE, true);
+        boolean pushPref = prefs.getBoolean(KEY_PUSH_NOTIFICATIONS, true);
         return pushPref;
     }
 
@@ -138,7 +141,7 @@ public class VillimSession {
     }
 
     public int getCurrencyPref() {
-        int currencyPref = prefs.getInt(KEY_CURRENCY_PREFERENCE,0);
+        int currencyPref = prefs.getInt(KEY_CURRENCY_PREFERENCE, 0);
         return currencyPref;
     }
 
@@ -148,12 +151,55 @@ public class VillimSession {
     }
 
     public int getLanguagePref() {
-        int languagePref = prefs.getInt(KEY_LANGUAGE_PREFERENCE,0);
+        int languagePref = prefs.getInt(KEY_LANGUAGE_PREFERENCE, 0);
         return languagePref;
+    }
+
+    /* Sex */
+    public void setSex(int sex) {
+        prefs.edit().putInt(KEY_SEX, sex).apply();
+    }
+
+    public int getSex() {
+        int sex = prefs.getInt(KEY_SEX, 0);
+        return sex;
+    }
+
+    /* Phone number */
+    public void setPhoneNumber(String phoneNumber) {
+        prefs.edit().putString(KEY_PHONE_NUMBER, phoneNumber).apply();
+    }
+
+    public String getPhoneNumber() {
+        String phoneNumber = prefs.getString(KEY_PHONE_NUMBER, "");
+        return phoneNumber;
+    }
+
+    /* City of residence */
+    public void setCityOfResidence(String city) {
+        prefs.edit().putString(KEY_CITY_OF_RESIDENCE, city).apply();
+    }
+
+    public String getCityOfResidence() {
+        String city = prefs.getString(KEY_CITY_OF_RESIDENCE, "");
+        return city;
     }
 
 
     public void updateUserSession(VillimUser user) {
-
+        setUserId(user.userId);
+        setFullName(user.fullname);
+        setFirstName(user.firstname);
+        setLastName(user.lastname);
+        setEmail(user.email);
+        setProfilePicUrl(user.profilePicUrl);
+        setStatus(user.status);
+        setRoomId(user.roomId);
+        setPushPref(user.pushNotifications);
+        setCurrencyPref(user.currencyPref);
+        setLanguagePref(user.languagePref);
+        setSex(user.sex);
+        setPhoneNumber(user.phoneNumber);
+        setCityOfResidence(user.cityOfResidence);
     }
 }

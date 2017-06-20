@@ -31,6 +31,7 @@ public class ProfileFragment extends Fragment implements LogoutDialog.LogoutDial
 
     public static final int LOGIN = 100;
     public static final int SIGNUP = 101;
+    public static final int PROFILE_EDIT = 102;
 
     private VillimSession session;
 
@@ -83,8 +84,8 @@ public class ProfileFragment extends Fragment implements LogoutDialog.LogoutDial
                             ProfileFragment.this, session.getFullName());
                     dialog.show(getActivity().getFragmentManager(), "LogoutFragment");
 
-                } else if (title.equals(getString(R.string.profile))) {
-
+                } else if (title.equals(getString(R.string.profile_title))) {
+                    launchProfileEditActivity();
                 } else if (title.equals(getString(R.string.faq))) {
 
                 } else if (title.equals(getString(R.string.settings))) {
@@ -97,14 +98,10 @@ public class ProfileFragment extends Fragment implements LogoutDialog.LogoutDial
 
 
         // Profile name.
-        String titleString = session.getLoggedIn() ? session.getFullName() : getString(R.string.profile_title);
         profileName = (TextView) profileView.findViewById(R.id.profile_name);
-        profileName.setText(titleString);
 
         // Profile pic.
-        int profilePicVisibility = session.getLoggedIn() ? View.VISIBLE : View.INVISIBLE;
         profilePicture = (ImageView) profileView.findViewById(R.id.profile_picture);
-        profilePicture.setVisibility(profilePicVisibility);
 
         populateView();
 
@@ -123,16 +120,28 @@ public class ProfileFragment extends Fragment implements LogoutDialog.LogoutDial
         getActivity().startActivity(intent);
     }
 
+    private void launchProfileEditActivity() {
+        Intent intent = new Intent(getActivity(), ProfileEditActivity.class);
+        getActivity().startActivity(intent);
+    }
+
     // Make this async.
     private void populateView() {
         // Network operation to fetch.
 
-        // Profile pic.
+         /* Profile Name */
+        String titleString = session.getLoggedIn() ? session.getFullName() : getString(R.string.profile);
+        profileName.setText(titleString);
+
+        /* Profile Pic */
+        int profilePicVisibility = session.getLoggedIn() ? View.VISIBLE : View.INVISIBLE;
+        profilePicture.setVisibility(profilePicVisibility);
+
         if (session.getLoggedIn()) {
 
             if (session.getProfilePicUrl().isEmpty()) {
                 Glide.with(this)
-                        .load(R.drawable.prugio_thumbnail)
+                        .load(R.drawable.img_default)
                         .into(profilePicture);
             } else {
                 Glide.with(this)
@@ -154,7 +163,7 @@ public class ProfileFragment extends Fragment implements LogoutDialog.LogoutDial
         adapter.notifyDataSetChanged();
 
         /* Remove name */
-        profileName.setText(getString(R.string.profile_title));
+        profileName.setText(getString(R.string.profile));
 
         /* Remove profile picture. */
         profilePicture.setVisibility(View.INVISIBLE);
@@ -254,9 +263,15 @@ public class ProfileFragment extends Fragment implements LogoutDialog.LogoutDial
             if (resultCode == Activity.RESULT_CANCELED) {
                 //Write your code if there's no result
             }
+        } else if (requestCode == PROFILE_EDIT) {
+            if (resultCode == Activity.RESULT_OK) {
+               populateView();
+            }
+            if (resultCode == Activity.RESULT_CANCELED) {
+                //Write your code if there's no result
+            }
         }
     }
-
 
     /* Logout dialog */
     public void onDialogPositiveClick(DialogFragment dialog) {

@@ -44,7 +44,6 @@ import static net.villim.villim.VillimKeys.KEY_ADDR_SUMMARY;
 import static net.villim.villim.VillimKeys.KEY_CANCEL_SUCCESS;
 import static net.villim.villim.VillimKeys.KEY_HOUSE_NAME;
 import static net.villim.villim.VillimKeys.KEY_HOUSE_THUMBNAIL_URL;
-import static net.villim.villim.VillimKeys.KEY_ID;
 import static net.villim.villim.VillimKeys.KEY_LATITUDE;
 import static net.villim.villim.VillimKeys.KEY_LONGITUDE;
 import static net.villim.villim.VillimKeys.KEY_MESSAGE;

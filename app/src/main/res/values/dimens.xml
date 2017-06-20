@@ -111,4 +111,7 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
 
 
+    <!-- Profile edit page -->
+    <dimen name="profile_edit_item_title_width">70dp</dimen>
+
 </resources>

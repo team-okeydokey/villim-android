@@ -194,7 +194,7 @@ public class LoginActivity extends VillimActivity {
         session.setLoggedIn(true);
 
         /* Store basic info in shared preferences */
-        session.setId(user.id);
+        session.setUserId(user.userId);
         session.setFullName(user.fullname);
         session.setFirstName(user.firstname);
         session.setLastName(user.lastname);
