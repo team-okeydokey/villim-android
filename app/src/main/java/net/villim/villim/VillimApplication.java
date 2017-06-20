@@ -14,6 +14,7 @@ public class VillimApplication extends Application {
     public void onCreate() {
         super.onCreate();
         CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
+                .setDefaultFontPath("fonts/NotoSansCJKkr-Regular.otf")
                 .setFontAttrId(R.attr.fontPath)
                 .build()
         );
