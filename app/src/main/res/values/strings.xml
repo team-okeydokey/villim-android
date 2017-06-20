@@ -55,8 +55,7 @@
 
     <!-- Discover Fragment -->
     <string name="key_house">key_house</string>
-    <string name="room_price_value" formatted="false">₩ %d</string>
-    <string name="room_price_text" formatted="false">\u0020/ 박</string>
+    <string name="room_price_value" formatted="false">%s / 박</string>
     <string name="review_count_text" formatted="false">후기 %d개</string>
 
     <!-- Room Detail Activity -->
@@ -80,7 +79,7 @@
     <string name="reviews_no_review">아직 작성된 후기가 없습니다.</string>
     <string name="reserve">예약하기</string>
     <string name="check_availability">빌림가능확인</string>
-    <string name="price_text_format">₩ %1$d / %2$d일</string>
+    <string name="price_text_format">₩ %1$s / %2$d일</string>
 
     <!-- Amenities -->
     <string name="amenity_bedsheet">침대시트</string>

@@ -610,7 +610,9 @@
                         android:layout_height="20dp"
                         android:layout_toLeftOf="@+id/reserve_button_price" />
 
+
                     <TextView
+                        fontPath="fonts/NotoSansCJKkr-Bold.otf"
                         android:id="@+id/reserve_button_price"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
@@ -626,6 +628,7 @@
 
             <!-- Red portion -->
             <TextView
+                fontPath="fonts/NotoSansCJKkr-Medium.otf"
                 android:id="@+id/reserve_button_reserve"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"

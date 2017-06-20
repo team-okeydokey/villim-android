@@ -39,6 +39,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.net.URL;
+import java.text.NumberFormat;
 import java.util.Date;
 
 import okhttp3.Call;
@@ -484,7 +485,8 @@ public class HouseDetailActivity extends VillimActivity implements OnMapReadyCal
             numberOfNights = 30;
         }
         int price = numberOfNights * house.ratePerNight;
-        String priceText = String.format(getString(R.string.price_text_format), price, numberOfNights);
+        String priceString = NumberFormat.getIntegerInstance().format(price);
+        String priceText = String.format(getString(R.string.price_text_format), priceString, numberOfNights);
         reserveButtonPrice.setText(priceText);
 
         /* Set drawable to bottom button. */
