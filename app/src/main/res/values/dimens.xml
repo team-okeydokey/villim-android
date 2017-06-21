@@ -36,7 +36,7 @@
     <dimen name="date_filter_text_padding_side">37dp</dimen>
     <dimen name="date_filter_text_padding_bottom">15dp</dimen>
     <dimen name="date_filter_selection_size">15dp</dimen>
-    <dimen name="calendar_padding_side">27dp</dimen>
+    <dimen name="calendar_padding_side">20dp</dimen>
 
 
     <!-- House Detail Activity -->

@@ -71,8 +71,8 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_below="@+id/start_end_buttons"
-        android:layout_marginLeft="@dimen/date_filter_text_padding_side"
-        android:layout_marginRight="@dimen/date_filter_text_padding_side"
+        android:layout_marginLeft="@dimen/calendar_padding_side"
+        android:layout_marginRight="@dimen/calendar_padding_side"
         android:background="@color/divider_color" />
 
 
