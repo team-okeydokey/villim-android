@@ -44,12 +44,15 @@
                     android:layout_width="@dimen/search_filter_width"
                     android:layout_height="@dimen/toolbar_height"
                     android:layout_centerHorizontal="true"
+                    android:layout_marginTop="30dp"
                     android:background="@drawable/toolbar_filter"
                     android:drawablePadding="@dimen/filter_icon_drawable_padding"
                     android:gravity="left|center_vertical"
                     android:maxLines="1"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
                     android:text="@string/all_locations"
-                    android:textColor="@android:color/white"
+                    android:textColor="@color/search_field_color"
                     android:textSize="@dimen/search_filter_text_size" />
 
                 <TextView
@@ -58,12 +61,15 @@
                     android:layout_height="@dimen/toolbar_height"
                     android:layout_below="@id/search_filter_location"
                     android:layout_centerHorizontal="true"
+                    android:layout_marginTop="20dp"
                     android:background="@drawable/toolbar_filter"
                     android:drawablePadding="@dimen/filter_icon_drawable_padding"
                     android:gravity="left|center_vertical"
                     android:maxLines="1"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
                     android:text="@string/search_hint_date"
-                    android:textColor="@android:color/white"
+                    android:textColor="@color/search_field_color"
                     android:textSize="@dimen/search_filter_text_size" />
 
             </RelativeLayout>
@@ -84,10 +90,10 @@
                     android:id="@+id/toolbar_logo"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/toolbar_logo_height"
-                    android:adjustViewBounds="true"
                     android:layout_alignParentStart="true"
                     android:layout_centerVertical="true"
                     android:layout_gravity="left|center_vertical"
+                    android:adjustViewBounds="true"
                     android:src="@drawable/browse_logo" />
 
 

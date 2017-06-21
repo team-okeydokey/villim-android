@@ -200,6 +200,10 @@ public class MainActivity extends VillimActivity {
         calendarIcon.setBounds(0, 0, calendarWidth, calendarHeight);
         clearIcon.setBounds(0, 0, clearSize, clearSize);
         dateClearIcon.setBounds(0, 0, clearSize, clearSize);
+        markerIcon.setTint(getColor(R.color.search_field_color));
+        calendarIcon.setTint(getColor(R.color.search_field_color));
+        clearIcon.setTint(getColor(R.color.search_field_color));
+        dateClearIcon.setTint(getColor(R.color.search_field_color));
         searchFilterLocation.setCompoundDrawables(markerIcon, null, clearIcon, null);
         searchFilterDate.setCompoundDrawables(calendarIcon, null, dateClearIcon, null);
         /* Launch filter activities */

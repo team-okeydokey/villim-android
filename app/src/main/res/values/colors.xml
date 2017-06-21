@@ -24,6 +24,7 @@
     <color name="main_background">#F0F1F2</color>
     <color name="main_toolbar_search_button">#333333</color>
     <color name="search_filter_open">#1e1e1e</color>
+    <color name="search_field_color">#B3B3B3</color>
 
     <!-- Navigation Buttons -->
     <color name="arrow_dark">#333333</color>
