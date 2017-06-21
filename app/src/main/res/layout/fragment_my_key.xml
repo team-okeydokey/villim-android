@@ -93,6 +93,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="@dimen/slide_button_bottom_margin"
         android:background="@drawable/back_slide_button"
+        android:textAlignment="center"
         android:lineSpacingExtra="6.9sp"
         android:textColor="#ffffff"
         android:textSize="16.8sp" />

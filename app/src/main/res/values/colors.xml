@@ -5,7 +5,7 @@
     <color name="colorAccent">#FF4081</color>
 
     <!-- Splash screen -->
-    <color name="splash_screen">#E31313</color>
+    <color name="splash_screen">#1e1e1e</color>
 
     <!-- Font Colors -->
     <color name="h2">#a0a0a0</color>
