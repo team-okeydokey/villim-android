@@ -1,6 +1,7 @@
 package net.villim.villim;
 
 import android.content.Context;
+import android.util.DisplayMetrics;
 
 import org.json.JSONArray;
 
@@ -105,5 +106,15 @@ public class VillimUtil {
         } else {
             return array[code];
         }
+    }
+
+    public static int dpToPixel(Context context, int dp) {
+        DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
+        return Math.round(dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
+    }
+
+    public static int pixelToDp( Context context, int px) {
+        DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
+        return Math.round(px / (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
     }
 }
