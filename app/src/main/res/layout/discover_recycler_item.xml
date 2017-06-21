@@ -62,9 +62,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/discover_recycler_padding"
                     android:gravity="center_vertical"
+                    android:lineSpacingExtra="10sp"
                     android:maxLines="1"
                     android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-                    android:textColor="#A8A8A8"
+                    android:textColor="#aaaaaa"
                     android:textSize="10sp" />
 
             </android.support.v7.widget.LinearLayoutCompat>
@@ -79,7 +80,7 @@
 
                 <TextView
                     android:id="@+id/discover_room_currency_symbol"
-                    fontPath="fonts/NotoSansCJKkr-Bold.otf"
+                    fontPath="fonts/KBIZgoB.otf"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:letterSpacing="-0.0"

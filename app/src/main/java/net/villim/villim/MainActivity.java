@@ -87,7 +87,7 @@ public class MainActivity extends VillimActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
 //        toolbarTextView = (TextView) findViewById(R.id.toolbar_title);
         toolbarLogo = (ImageView) findViewById(R.id.toolbar_logo);
-        toolBarTitle = getString(R.string.app_name);
+//        toolBarTitle = getString(R.string.app_name);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         setTitle(toolBarTitle);
@@ -109,13 +109,13 @@ public class MainActivity extends VillimActivity {
             public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
                 if (verticalOffset == 0) { // Completely open.
 //                    toolbarTextView.setTextColor(getResources().getColor(android.R.color.white));
-                    toolbarLogo.setImageResource(R.drawable.logo_horizontal_white);
+                    toolbarLogo.setImageResource(R.drawable.browse_expand_logo);
                     toolbar.setBackgroundColor(getResources().getColor(R.color.search_filter_open));
                     searchButton.setBackground(getResources().getDrawable(R.drawable.btn_up_arrow));
                     appBarOpen = true;
                 } else if (verticalOffset == -appBarLayout.getTotalScrollRange()) { // Completely collapsed.
 //                    toolbarTextView.setTextColor(getResources().getColor(R.color.colorPrimary));
-                    toolbarLogo.setImageResource(R.drawable.logo_horizontal_red);
+                    toolbarLogo.setImageResource(R.drawable.browse_logo);
                     toolbar.setBackgroundColor(getResources().getColor(android.R.color.white));
                     searchButton.setBackground(getResources().getDrawable(R.drawable.btn_search));
                     appBarOpen = false;
@@ -127,8 +127,8 @@ public class MainActivity extends VillimActivity {
                     int toolBarLogoColor = getToolbarColorFromOffset(
                             verticalOffset, -appBarLayout.getTotalScrollRange(), 0,
                             toolBarOpenColor, toolBarCollpasedColor);
-                    toolbarLogo.setImageResource(R.drawable.logo_horizontal_white);
-                    toolbarLogo.setColorFilter(toolBarLogoColor);
+                    toolbarLogo.setImageResource(R.drawable.browse_expand_logo);
+//                    toolbarLogo.setColorFilter(toolBarLogoColor);
                     toolbar.setBackgroundColor(toolBarColor);
                     searchButton.setBackground(getResources().getDrawable(R.drawable.btn_up_arrow));
                 }
