@@ -18,7 +18,7 @@ import static net.villim.villim.VillimKeys.KEY_ADDR_DIRECTION;
 import static net.villim.villim.VillimKeys.KEY_LATITUDE;
 import static net.villim.villim.VillimKeys.KEY_LONGITUDE;
 
-public class FullScreenMapActivity extends AppCompatActivity implements OnMapReadyCallback {
+public class FullScreenMapActivity extends VillimActivity implements OnMapReadyCallback {
 
     private Toolbar toolbar;
     private MapFragment mapFragment;

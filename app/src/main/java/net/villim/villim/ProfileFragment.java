@@ -2,6 +2,7 @@ package net.villim.villim;
 
 
 import android.app.Activity;
+import android.app.DialogFragment;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -21,11 +22,17 @@ import com.bumptech.glide.Glide;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import static net.villim.villim.VillimKeys.FAQ_URL;
+import static net.villim.villim.VillimKeys.TERMS_OF_SERVICE_URL;
+import static net.villim.villim.WebViewActivity.TITLE;
+import static net.villim.villim.WebViewActivity.URL;
 
-public class ProfileFragment extends Fragment {
+
+public class ProfileFragment extends Fragment implements LogoutDialog.LogoutDialogListener {
 
     public static final int LOGIN = 100;
     public static final int SIGNUP = 101;
+    public static final int PROFILE_EDIT = 102;
 
     private VillimSession session;
 
@@ -65,67 +72,84 @@ public class ProfileFragment extends Fragment {
         profileListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                switch (position) {
-                    /* Login & logout */
-                    case 0:
-                        if (session.getLoggedIn()) {
-                            /* Log out */
-                            logout();
-                        } else {
-                            /* Launch login page */
-                            Intent intent = new Intent(getActivity(), LoginActivity.class);
-                            getActivity().startActivityForResult(intent, LOGIN);
-                        }
-                        break;
 
-                    /* Profile view & edit */
-                    case 1:
-                        break;
+                String title = (String) parent.getItemAtPosition(position);
 
-                    /* FAQ */
-                    case 2:
-                        break;
+                if (title.equals(getString(R.string.login))) {
+                    /* Launch login page */
+                    Intent intent = new Intent(getActivity(), LoginActivity.class);
+                    getActivity().startActivityForResult(intent, LOGIN);
+                } else if (title.equals(getString(R.string.logout))) {
+                     /* Log out */
+                    LogoutDialog dialog = LogoutDialog.newInstance(
+                            ProfileFragment.this, session.getFullName());
+                    dialog.show(getActivity().getFragmentManager(), "LogoutFragment");
 
-                    /* Settings */
-                    case 3:
-                        break;
-
-                    /* Privacy Policy */
-                    case 4:
-                        break;
-
-                    default:
-                        break;
+                } else if (title.equals(getString(R.string.profile_title))) {
+                    launchProfileEditActivity();
+                } else if (title.equals(getString(R.string.faq))) {
+                    launchFAQWebview();
+                } else if (title.equals(getString(R.string.settings))) {
+                    launchSettingsActivity();
+                } else if (title.equals(getString(R.string.privacy_policy))) {
+                    launchPrivacyPolicyWebview();
                 }
             }
         });
 
 
         // Profile name.
-        String titleString = session.getLoggedIn() ? session.getFullName() : getString(R.string.profile_title);
         profileName = (TextView) profileView.findViewById(R.id.profile_name);
-        profileName.setText(titleString);
 
         // Profile pic.
-        int profilePicVisibility = session.getLoggedIn() ? View.VISIBLE : View.INVISIBLE;
         profilePicture = (ImageView) profileView.findViewById(R.id.profile_picture);
-        profilePicture.setVisibility(profilePicVisibility);
 
         populateView();
 
         return profileView;
     }
 
+    private void launchSettingsActivity() {
+        Intent intent = new Intent(getActivity(), SettingsActivity.class);
+        getActivity().startActivity(intent);
+    }
+
+    private void launchPrivacyPolicyWebview() {
+        Intent intent = new Intent(getActivity(), WebViewActivity.class);
+        intent.putExtra(URL, TERMS_OF_SERVICE_URL);
+        intent.putExtra(TITLE, getString(R.string.privacy_policy));
+        getActivity().startActivity(intent);
+    }
+
+    private void launchFAQWebview() {
+        Intent intent = new Intent(getActivity(), WebViewActivity.class);
+        intent.putExtra(URL, FAQ_URL);
+        intent.putExtra(TITLE, getString(R.string.faq));
+        getActivity().startActivity(intent);
+    }
+
+    private void launchProfileEditActivity() {
+        Intent intent = new Intent(getActivity(), ProfileEditActivity.class);
+        getActivity().startActivity(intent);
+    }
+
     // Make this async.
     private void populateView() {
         // Network operation to fetch.
 
-        // Profile pic.
+         /* Profile Name */
+        String titleString = session.getLoggedIn() ? session.getFullName() : getString(R.string.profile);
+        profileName.setText(titleString);
+
+        /* Profile Pic */
+        int profilePicVisibility = session.getLoggedIn() ? View.VISIBLE : View.INVISIBLE;
+        profilePicture.setVisibility(profilePicVisibility);
+
         if (session.getLoggedIn()) {
 
             if (session.getProfilePicUrl().isEmpty()) {
                 Glide.with(this)
-                        .load(R.drawable.prugio_thumbnail)
+                        .load(R.drawable.img_default)
                         .into(profilePicture);
             } else {
                 Glide.with(this)
@@ -147,7 +171,7 @@ public class ProfileFragment extends Fragment {
         adapter.notifyDataSetChanged();
 
         /* Remove name */
-        profileName.setText(getString(R.string.profile_title));
+        profileName.setText(getString(R.string.profile));
 
         /* Remove profile picture. */
         profilePicture.setVisibility(View.INVISIBLE);
@@ -180,7 +204,6 @@ public class ProfileFragment extends Fragment {
         profilePicture.setVisibility(View.VISIBLE);
     }
 
-
     // Used to populate profile info list layout.
     private class ProfileAdapter extends ArrayAdapter<String> {
 
@@ -202,7 +225,7 @@ public class ProfileFragment extends Fragment {
             /* If login/logout cell */
             if (position == 0) {
                 if (session.getLoggedIn()) {
-                    textView.setText(getString(R.string.profile_logout));
+                    textView.setText(getString(R.string.logout));
                 }
             }
 
@@ -229,7 +252,7 @@ public class ProfileFragment extends Fragment {
                     iconResource = loggedIn ? R.drawable.icon_shield : R.drawable.icon_shield;
                     break;
             }
-            Drawable itemIcon =  getResources().getDrawable(iconResource);
+            Drawable itemIcon = getResources().getDrawable(iconResource);
             int iconSize = getResources().getDimensionPixelSize(R.dimen.profile_list_drawable_size);
             itemIcon.setBounds(0, 0, iconSize, iconSize);
             textView.setCompoundDrawables(itemIcon, null, null, null);
@@ -248,8 +271,24 @@ public class ProfileFragment extends Fragment {
             if (resultCode == Activity.RESULT_CANCELED) {
                 //Write your code if there's no result
             }
+        } else if (requestCode == PROFILE_EDIT) {
+            if (resultCode == Activity.RESULT_OK) {
+                populateView();
+            }
+            if (resultCode == Activity.RESULT_CANCELED) {
+                //Write your code if there's no result
+            }
         }
     }
 
+    /* Logout dialog */
+    public void onDialogPositiveClick(DialogFragment dialog) {
+        dialog.dismiss();
+        logout();
+    }
+
+    public void onDialogNegativeClick(DialogFragment dialog) {
+
+    }
 
 }

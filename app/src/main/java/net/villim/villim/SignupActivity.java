@@ -2,6 +2,7 @@ package net.villim.villim;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
@@ -13,16 +14,22 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.franmontiel.persistentcookiejar.ClearableCookieJar;
+import com.franmontiel.persistentcookiejar.PersistentCookieJar;
+import com.franmontiel.persistentcookiejar.cache.SetCookieCache;
+import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
 import com.wang.avi.AVLoadingIndicatorView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.net.URL;
 
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
+import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
@@ -36,10 +43,12 @@ import static net.villim.villim.VillimKeys.KEY_PASSWORD;
 import static net.villim.villim.VillimKeys.KEY_SIGNUP_SUCCESS;
 import static net.villim.villim.VillimKeys.KEY_USER;
 import static net.villim.villim.VillimKeys.KEY_USER_INFO;
+import static net.villim.villim.VillimKeys.SIGNUP_URL;
+import static net.villim.villim.VillimKeys.TERMS_OF_SERVICE_URL;
+import static net.villim.villim.WebViewActivity.TITLE;
+import static net.villim.villim.WebViewActivity.URL;
 
-public class SignupActivity extends AppCompatActivity {
-
-    private static final String SIGNUP_URL = "http://175.207.29.19/a/signup";
+public class SignupActivity extends VillimActivity {
 
     private Toolbar toolbar;
 
@@ -47,6 +56,7 @@ public class SignupActivity extends AppCompatActivity {
     private EditText signupFormFirstname;
     private EditText signupFormEmail;
     private EditText signupFormPassword;
+    private TextView termsOfServiceTextView;
     private TextView errorMessage;
 
     private Button nextButton;
@@ -73,7 +83,7 @@ public class SignupActivity extends AppCompatActivity {
         signupFormPassword = (EditText) findViewById(R.id.signup_form_password);
 
         Drawable personIcon =  getResources().getDrawable(R.drawable.icon_profile);
-        Drawable emailIcon =  getResources().getDrawable(R.drawable.icon_lock);
+        Drawable emailIcon =  getResources().getDrawable(R.drawable.icon_email);
         Drawable lockIcon =  getResources().getDrawable(R.drawable.icon_lock);
         int iconSize = getResources().getDimensionPixelSize(R.dimen.login_drawable_size);
         personIcon.setBounds(0, 0, iconSize, iconSize);
@@ -83,6 +93,19 @@ public class SignupActivity extends AppCompatActivity {
         signupFormFirstname.setCompoundDrawables(personIcon, null, null, null);
         signupFormEmail.setCompoundDrawables(emailIcon, null, null, null);
         signupFormPassword.setCompoundDrawables(lockIcon, null, null, null);
+
+        /* Terms of service webview */
+        termsOfServiceTextView = (TextView) findViewById(R.id.terms_of_service_link);
+        termsOfServiceTextView.setPaintFlags(Paint.UNDERLINE_TEXT_FLAG);
+        termsOfServiceTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SignupActivity.this, WebViewActivity.class);
+                intent.putExtra(URL, TERMS_OF_SERVICE_URL);
+                intent.putExtra(TITLE, getString(R.string.terms_of_service));
+                startActivity(intent);
+            }
+        });
 
         /* Error Message */
         errorMessage = (TextView) findViewById(R.id.error_message);
@@ -117,7 +140,12 @@ public class SignupActivity extends AppCompatActivity {
         startLoadingAnimation();
         hideErrorMessage();
 
-        OkHttpClient client = new OkHttpClient();
+        ClearableCookieJar cookieJar =
+                new PersistentCookieJar(new SetCookieCache(), new SharedPrefsCookiePersistor(getApplicationContext()));
+
+        OkHttpClient client = new OkHttpClient.Builder()
+                .cookieJar(cookieJar)
+                .build();
 
         RequestBody requestBody = new FormBody.Builder()
                 .add(KEY_FIRSTNAME, signupFormFirstname.getText().toString().trim())
@@ -126,8 +154,20 @@ public class SignupActivity extends AppCompatActivity {
                 .add(KEY_PASSWORD, signupFormPassword.getText().toString())
                 .build();
 
+        //        URL url = new HttpUrl.Builder()
+//                .scheme(SERVER_SCHEME)
+//                .host(SERVER_HOST)
+//                .addPathSegments(LOGIN_URL)
+//                .build().url();
+
+        URL url = new HttpUrl.Builder()
+                .scheme("http")
+                .host("175.207.29.19")
+                .addPathSegments(SIGNUP_URL)
+                .build().url();
+
         Request request = new Request.Builder()
-                .url(SIGNUP_URL)
+                .url(url)
                 .post(requestBody)
                 .build();
 

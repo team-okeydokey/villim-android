@@ -44,19 +44,19 @@ public class VillimAmenity {
             put(0, R.drawable.icon_bed);
             put(1, R.drawable.icon_wifi);
             put(2, R.drawable.icon_tv);
-            put(3, R.drawable.icon_breakfast);
+            put(3, R.drawable.icon_cutlery);
             put(4, R.drawable.icon_iron);
             put(5, R.drawable.icon_desk);
             put(6, R.drawable.icon_towel);
             put(7, R.drawable.icon_air_conditionner);
-            put(8, R.drawable.ic_whatshot_black_24dp);
-            put(9, R.drawable.ic_whatshot_black_24dp);
+            put(8, R.drawable.icon_computer);
+            put(9, R.drawable.icon_fridge);
             put(10, R.drawable.icon_hairdryer);
             put(11, R.drawable.icon_smoke);
             put(12, R.drawable.icon_aid_kit);
             put(13, R.drawable.icon_heating);
-            put(14, R.drawable.ic_whatshot_black_24dp);
-            put(15, R.drawable.ic_whatshot_black_24dp);
+            put(14, R.drawable.icon_breakfast);
+            put(15, R.drawable.icon_washing_machine);
             put(16, R.drawable.icon_closet);
             put(17, R.drawable.icon_fire_extinguisher);
         }

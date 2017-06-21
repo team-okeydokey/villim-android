@@ -13,6 +13,12 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
+import java.text.NumberFormat;
+
+import static net.villim.villim.CalendarActivity.END_DATE;
+import static net.villim.villim.CalendarActivity.START_DATE;
+import static net.villim.villim.MainActivity.DATE_SELECTED;
+
 /**
  * Created by seongmin on 5/26/17.
  */
@@ -27,7 +33,8 @@ public class DiscoverRecyclerAdapter extends RecyclerView.Adapter<DiscoverRecycl
         // each data item is just a string in this case
         public ImageView houseThumbnail;
         public TextView houseName;
-        public TextView housePriceValue;
+        public TextView currencySymbol;
+        public TextView houseRate;
         public RatingBar houseRatingBar;
         public TextView houseRatingCount;
 
@@ -36,7 +43,8 @@ public class DiscoverRecyclerAdapter extends RecyclerView.Adapter<DiscoverRecycl
             super(v);
             houseThumbnail = (ImageView) v.findViewById(R.id.discover_room_thumbnail);
             houseName = (TextView) v.findViewById(R.id.discover_room_title);
-            housePriceValue = (TextView) v.findViewById(R.id.discover_room_price_value);
+            currencySymbol = (TextView) v.findViewById(R.id.discover_room_currency_symbol);
+            houseRate = (TextView) v.findViewById(R.id.discover_room_price_value);
             houseRatingBar = (RatingBar) v.findViewById(R.id.discover_room_review_rating);
             houseRatingCount = (TextView) v.findViewById(R.id.discover_room_review_count);
         }
@@ -64,6 +72,11 @@ public class DiscoverRecyclerAdapter extends RecyclerView.Adapter<DiscoverRecycl
                 Intent intent = new Intent(mainActivity, HouseDetailActivity.class);
                 Bundle args = new Bundle();
                 args.putParcelable(mainActivity.getString(R.string.key_house), houseList[vh.getAdapterPosition()]);
+                args.putBoolean(DATE_SELECTED, mainActivity.getDateSelected());
+                if (mainActivity.getDateSelected()) {
+                    args.putSerializable(START_DATE, mainActivity.getStartDate());
+                    args.putSerializable(END_DATE, mainActivity.getEndDate());
+                }
                 intent.putExtras(args);
                 mainActivity.startActivity(intent);
             }
@@ -85,10 +98,15 @@ public class DiscoverRecyclerAdapter extends RecyclerView.Adapter<DiscoverRecycl
         VillimHouse currItem = houseList[position];
         /* Room Title */
         holder.houseName.setText(currItem.houseName);
+        /* Currency symbol */
+        VillimSession session = new VillimSession(context);
+        holder.currencySymbol.setText(
+                VillimUtil.currencyStringFromInt(context, session.getCurrencyPref(), false));
         /* Room Rate */
         int price = currItem.ratePerNight;
-        String priceText = String.format(context.getString(R.string.room_price_value, price));
-        holder.housePriceValue.setText(priceText);
+        String priceString = NumberFormat.getIntegerInstance().format(price);
+        String priceText = String.format(context.getString(R.string.room_price_value, priceString));
+        holder.houseRate.setText(priceText);
         /* Room Rating Value */
         holder.houseRatingBar.setRating(currItem.houseRating);
         /* Room Rating Count */
@@ -97,7 +115,7 @@ public class DiscoverRecyclerAdapter extends RecyclerView.Adapter<DiscoverRecycl
         holder.houseRatingCount.setText(countText);
         /* Room Tumbnail */
         Glide.with(context)
-                .load(R.drawable.prugio_thumbnail)
+                .load(currItem.houseThumbnailUrl)
                 .into(holder.houseThumbnail);
     }
 

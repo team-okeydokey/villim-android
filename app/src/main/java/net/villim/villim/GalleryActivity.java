@@ -21,7 +21,7 @@ import java.util.List;
 
 import static net.villim.villim.VillimKeys.KEY_HOUSE_PIC_URLS;
 
-public class GalleryActivity extends AppCompatActivity {
+public class GalleryActivity extends VillimActivity {
 
     private Toolbar toolbar;
     private Button closeButton;

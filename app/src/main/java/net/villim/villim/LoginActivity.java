@@ -13,32 +13,39 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.franmontiel.persistentcookiejar.PersistentCookieJar;
+import com.franmontiel.persistentcookiejar.cache.SetCookieCache;
+import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
 import com.wang.avi.AVLoadingIndicatorView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.net.URL;
 
 import okhttp3.Call;
 import okhttp3.Callback;
+import okhttp3.CookieJar;
 import okhttp3.FormBody;
+import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
+import static net.villim.villim.VillimKeys.CHANGE_PASSCODE_URL;
 import static net.villim.villim.VillimKeys.KEY_EMAIL;
 import static net.villim.villim.VillimKeys.KEY_LOGIN_SUCCESS;
 import static net.villim.villim.VillimKeys.KEY_MESSAGE;
 import static net.villim.villim.VillimKeys.KEY_PASSWORD;
 import static net.villim.villim.VillimKeys.KEY_USER_INFO;
+import static net.villim.villim.VillimKeys.LOGIN_URL;
+import static net.villim.villim.VillimKeys.SERVER_HOST;
+import static net.villim.villim.VillimKeys.SERVER_SCHEME;
 
 
-public class LoginActivity extends AppCompatActivity {
-
-    //    private static final String LOGIN_URL = "http://www.mocky.io/v2/593c2915100000c816c477e4";
-    private static final String LOGIN_URL = "http://175.207.29.19/a/login";
+public class LoginActivity extends VillimActivity {
 
     private Toolbar toolbar;
     private EditText loginFormEmail;
@@ -68,7 +75,7 @@ public class LoginActivity extends AppCompatActivity {
         loginFormEmail = (EditText) findViewById(R.id.login_form_email);
         loginFormPassword = (EditText) findViewById(R.id.login_form_password);
         /* Set drawableLeft */
-        Drawable emailIcon =  getResources().getDrawable(R.drawable.icon_lock);
+        Drawable emailIcon =  getResources().getDrawable(R.drawable.icon_email);
         Drawable lockIcon =  getResources().getDrawable(R.drawable.icon_lock);
         int iconSize = getResources().getDimensionPixelSize(R.dimen.login_drawable_size);
         emailIcon.setBounds(0, 0, iconSize, iconSize);
@@ -83,6 +90,13 @@ public class LoginActivity extends AppCompatActivity {
         /* Bottom buttons */
         nextButton = (Button) findViewById(R.id.next_button);
         findPasswordButton = (Button) findViewById(R.id.find_password_button);
+        findPasswordButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, FindPasswordActivity.class);
+                startActivity(intent);
+            }
+        });
         signupButton = (Button) findViewById(R.id.signup_button);
         signupButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -104,7 +118,7 @@ public class LoginActivity extends AppCompatActivity {
                                 !TextUtils.isEmpty(loginFormPassword.getText());
                 boolean validInput = allFieldsFilledOut;
                 if (validInput) {
-                    sendRequest();
+                    sendLoginRequest();
                 } else {
                     showErrorMessage(getString(R.string.empty_field));
                 }
@@ -113,19 +127,34 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    private void sendRequest() {
+    private void sendLoginRequest() {
         startLoadingAnimation();
         hideErrorMessage();
 
-        OkHttpClient client = new OkHttpClient();
+        CookieJar cookieJar =
+                new PersistentCookieJar(new SetCookieCache(), new SharedPrefsCookiePersistor(getApplicationContext()));
+
+        OkHttpClient client = new OkHttpClient.Builder().cookieJar(cookieJar).build();
 
         RequestBody requestBody = new FormBody.Builder()
                 .add(KEY_EMAIL, loginFormEmail.getText().toString().trim())
                 .add(KEY_PASSWORD, loginFormPassword.getText().toString())
                 .build();
 
+//        URL url = new HttpUrl.Builder()
+//                .scheme(SERVER_SCHEME)
+//                .host(SERVER_HOST)
+//                .addPathSegments(LOGIN_URL)
+//                .build().url();
+
+        URL url = new HttpUrl.Builder()
+                .scheme("http")
+                .host("175.207.29.19")
+                .addPathSegments(LOGIN_URL)
+                .build().url();
+
         Request request = new Request.Builder()
-                .url(LOGIN_URL)
+                .url(url)
                 .post(requestBody)
                 .build();
 
@@ -182,7 +211,7 @@ public class LoginActivity extends AppCompatActivity {
         session.setLoggedIn(true);
 
         /* Store basic info in shared preferences */
-        session.setId(user.id);
+        session.setUserId(user.userId);
         session.setFullName(user.fullname);
         session.setFirstName(user.firstname);
         session.setLastName(user.lastname);

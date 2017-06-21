@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f0f1f2"
+    tools:context="net.villim.villim.ReservationActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/toolbar_height"
+        android:background="@android:color/white"
+        android:elevation="@dimen/toolbar_elevation"
+        app:contentInsetEnd="0dp"
+        app:contentInsetStart="0dp">
+
+        <TextView
+            android:id="@+id/toolbar_title"
+            style="@style/ToolbarTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/villim_reserve"
+            android:textColor="@color/toolbar_title_color" />
+
+    </android.support.v7.widget.Toolbar>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar"
+        android:orientation="vertical">
+
+        <!-- Overview -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="15dp"
+            android:paddingLeft="25dp"
+            android:paddingRight="25dp"
+            android:paddingTop="20dp">
+
+            <TextView
+                android:id="@+id/overview_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:lineSpacingExtra="4sp"
+                android:textColor="#040d14"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/overview_house_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:textColor="#05060b"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/overview_house_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:lineSpacingExtra="5sp"
+                android:textColor="#585757"
+                android:textSize="13sp" />
+
+        </LinearLayout>
+        <!-- End overview -->
+
+        <include layout="@layout/category_divider" />
+
+        <!-- host info -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="16dp"
+            android:paddingLeft="25dp"
+            android:paddingRight="25dp"
+            android:paddingTop="18dp">
+
+            <!-- Host profile pic -->
+            <com.mikhaellopez.circularimageview.CircularImageView
+                android:id="@+id/host_profile_pic"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                app:civ_border="false" />
+
+            <!-- Host name -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp"
+                    android:text="@string/host"
+                    android:textColor="#05060b"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/host_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:lineSpacingExtra="5sp"
+                    android:textColor="#585757"
+                    android:textSize="13sp" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+        <!-- End host info -->
+
+        <include layout="@layout/category_divider" />
+
+        <!-- Duration -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="15dp"
+            android:paddingLeft="25dp"
+            android:paddingRight="25dp"
+            android:paddingTop="16dp">
+
+            <!-- Title -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:text="@string/duration"
+                android:textColor="#05060b"
+                android:textSize="15sp" />
+
+            <!-- 시작일 / 종료일 -->
+            <RelativeLayout
+                android:id="@+id/start_end_dates"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/start_date_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:gravity="left"
+                    android:lineSpacingExtra="5sp"
+                    android:text="@string/select_start_Date"
+                    android:textColor="#333333"
+                    android:textSize="25sp" />
+
+                <View
+                    android:layout_width="15dp"
+                    android:layout_height="2dp"
+                    android:layout_centerInParent="true"
+                    android:background="#333333" />
+
+
+                <TextView
+                    android:id="@+id/end_date_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:gravity="right"
+                    android:text="@string/select_end_date"
+                    android:textColor="#333333"
+                    android:textSize="25sp" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+        <!-- End Duration -->
+
+        <include layout="@layout/category_divider" />
+
+        <!-- Number of nights -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:paddingBottom="20dp"
+            android:paddingLeft="@dimen/room_detail_activity_padding"
+            android:paddingRight="@dimen/room_detail_activity_padding"
+            android:paddingTop="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:gravity="center_vertical|left"
+                android:text="@string/number_of_nights"
+                android:textColor="#05060b"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/number_of_nights"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:gravity="end"
+                android:lineSpacingExtra="-1sp"
+                android:text="@string/not_selected"
+                android:textColor="#de2025"
+                android:textSize="15sp" />
+        </RelativeLayout>
+        <!-- End number of nights -->
+
+        <include layout="@layout/category_divider" />
+
+        <!-- Start price -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:paddingBottom="20dp"
+            android:paddingLeft="@dimen/room_detail_activity_padding"
+            android:paddingRight="@dimen/room_detail_activity_padding"
+            android:paddingTop="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:gravity="center_vertical|left"
+                android:text="@string/price"
+                android:textColor="#05060b"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/price"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:gravity="end"
+                android:lineSpacingExtra="3sp"
+                android:text="@string/not_selected"
+                android:textColor="#de2025"
+                android:textSize="15sp"
+                tools:text="120일" />
+        </RelativeLayout>
+        <!-- End price -->
+
+        <include layout="@layout/category_divider" />
+
+        <!-- Start cancellation policy -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:paddingBottom="20dp"
+            android:paddingLeft="@dimen/room_detail_activity_padding"
+            android:paddingRight="@dimen/room_detail_activity_padding"
+            android:paddingTop="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:gravity="center_vertical|left"
+                android:text="@string/cancellation_policy"
+                android:textColor="#05060b"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/cancellation_policy"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:gravity="end"
+                android:lineSpacingExtra="3sp"
+                android:textColor="#de2025"
+                android:textSize="15sp" />
+        </RelativeLayout>
+        <!-- End cancellation policy -->
+
+        <include layout="@layout/category_divider" />
+
+    </LinearLayout>
+
+    <!-- Reserve button -->
+    <Button
+        android:id="@+id/reserve_button"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/next_button"
+        android:text="@string/villim_reserve_do"
+        android:textColor="@drawable/next_button_text"
+        android:textSize="17sp" />
+
+    <!-- Error message -->
+    <TextView
+        android:id="@+id/error_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/reserve_button"
+        android:layout_centerHorizontal="true"
+        android:background="@android:color/transparent"
+        android:gravity="center"
+        android:textColor="@color/login_error_text"
+        android:textSize="@dimen/login_error_message_text_size" />
+
+    <com.wang.avi.AVLoadingIndicatorView
+        android:id="@+id/loading_indicator"
+        style="@style/AVLoadingIndicatorView.Large"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:visibility="gone"
+        app:indicatorColor="@color/loading_animation_color"
+        app:indicatorName="BallGridPulseIndicator" />
+</RelativeLayout>

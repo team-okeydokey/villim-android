@@ -25,7 +25,7 @@
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:lineSpacingExtra="4sp"
-            android:text="@string/profile_title"
+            android:text="@string/profile"
             android:textColor="@color/profile_name"
             android:textSize="@dimen/profile_name_text_size" />
 

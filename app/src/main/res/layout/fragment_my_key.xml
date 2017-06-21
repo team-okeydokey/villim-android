@@ -23,7 +23,6 @@
             android:background="@android:color/transparent"
             android:gravity="left|center_vertical"
             android:text="@string/write_review"
-            android:textColor="@drawable/login_help_button_text"
             android:textSize="15sp" />
 
         <Button
@@ -36,7 +35,6 @@
             android:background="@android:color/transparent"
             android:gravity="right|center_vertical"
             android:text="@string/change_doorlock_passcode"
-            android:textColor="@drawable/login_help_button_text"
             android:textSize="15sp" />
     </RelativeLayout>
 
@@ -95,6 +93,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="@dimen/slide_button_bottom_margin"
         android:background="@drawable/back_slide_button"
+        android:textAlignment="center"
         android:lineSpacingExtra="6.9sp"
         android:textColor="#ffffff"
         android:textSize="16.8sp" />

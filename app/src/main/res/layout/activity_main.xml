@@ -73,8 +73,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/toolbar_height"
                 android:background="@android:color/white"
-                android:gravity="top"
-                android:paddingLeft="@dimen/toolbar_padding"
                 android:paddingRight="@dimen/toolbar_padding"
                 app:contentInsetEnd="0dp"
                 app:contentInsetStart="0dp"
@@ -84,10 +82,13 @@
 
                 <ImageView
                     android:id="@+id/toolbar_logo"
-                    android:layout_width="@dimen/toolbar_logo_width"
-                    android:layout_height="@dimen/toolbar_logo_height"
-                    android:layout_gravity='left|center_vertical'
-                    android:src="@drawable/logo_horizontal_red" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:adjustViewBounds="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="left|center_vertical"
+                    android:src="@drawable/browse_logo" />
 
 
                 <Button
@@ -96,9 +97,10 @@
                     android:layout_height="@dimen/toolbar_search_button_size"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
-                    android:layout_gravity="right"
+                    android:layout_gravity="right|center_vertical"
                     android:layout_margin="@dimen/discover_recycler_padding"
-                    android:background="@drawable/btn_search"></Button>
+                    android:background="@drawable/btn_search" />
+
 
             </android.support.v7.widget.Toolbar>
 

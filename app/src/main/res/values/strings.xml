@@ -20,7 +20,8 @@
     <string name="key_num_guests">num_guests</string>
     <string name="key_num_rooms">num_rooms</string>
     <string name="key_num_beds">num_beds</string>
-    <string name="key_num_baths">num_baths</string>
+    <string name="key_num_baths">num_baths</string>\
+    <string name="key_visit">visit</string>
 
     <!-- Search Filter Activity -->
     <string name="all_locations">모든 위치</string>
@@ -50,11 +51,11 @@
     <string name="friday">금요일</string>
     <string name="saturday">토요일</string>
     <string name="sunday">일요일</string>
+    <string name="select_different_dates">시작일과 종료일이 같을 수 없습니다.</string>
 
     <!-- Discover Fragment -->
     <string name="key_house">key_house</string>
-    <string name="room_price_value" formatted="false">₩ %d</string>
-    <string name="room_price_text" formatted="false">\u0020/ 박</string>
+    <string name="room_price_value" formatted="false">%s / 박</string>
     <string name="review_count_text" formatted="false">후기 %d개</string>
 
     <!-- Room Detail Activity -->
@@ -77,6 +78,8 @@
     <string name="reviews_see_more_format">+%d개 후기 더보기</string>
     <string name="reviews_no_review">아직 작성된 후기가 없습니다.</string>
     <string name="reserve">예약하기</string>
+    <string name="check_availability">빌림가능확인</string>
+    <string name="price_text_format">₩ %1$s / %2$d일</string>
 
     <!-- Amenities -->
     <string name="amenity_bedsheet">침대시트</string>
@@ -125,26 +128,29 @@
         <item>로그아웃</item>
         <item>프로필 보기 및 수정</item>
         <item>FAQ</item>
-        <item>환경설정</item>
+        <item>환경 설정</item>
         <item>개인정보 이용약관</item>
     </string-array>
     <string-array name="profile_items_logged_out">
         <item>로그인</item>
         <item>FAQ</item>
-        <item>환경설정</item>
+        <item>환경 설정</item>
         <item>개인정보 이용약관</item>
     </string-array>
-    <string name="profile_title">프로필</string>
-    <string name="profile_login">로그인</string>
-    <string name="profile_logout">로그아웃</string>
+    <string name="profile">프로필</string>
+    <string name="login">로그인</string>
+    <string name="logout">로그아웃</string>
+    <string name="profile_title">프로필 보기 및 수정</string>
+    <string name="settings">환경 설정</string>
+    <string name="faq">FAQ</string>
+    <string name="privacy_policy">개인정보 이용약관</string>
 
     <!-- Login Activity -->
-    <string name="login">로그인</string>
     <string name="advert_title">전세계의 집이 나의 집!</string>
     <string name="advert_detail">언제 어디서나 쉽고 빠르게 방을 빌리세요.</string>
     <string name="email">이메일</string>
     <string name="password">비밀번호</string>
-    <string name="find_password">비밀번호를 잊으셨나요?</string>
+    <string name="forgot_password">비밀번호를 잊으셨나요?</string>
     <string name="signup">회원가입</string>
     <string name="next">다음</string>
     <string name="server_error">서버가 불안정합니다. 잠시 후 시도해주세요.</string>
@@ -154,7 +160,9 @@
     <string name="firstname">이름</string>
     <string name="lastname">성</string>
     <string name="signup_welcome">빌림에 오신것을 환영합니다</string>
-    <string name="consent">로그인하면 당사의 서비스 이용약관에 동의하는 것으로 간주됩니다.</string>
+    <string name="consent_first_half">로그인하면 당사의\u0020</string>
+    <string name="terms_of_service">서비스 이용약관</string>
+    <string name="consent_second_half">에 동의하는 것으로 간주됩니다.</string>
     <string name="empty_field">모든 항목을 작성해주세요.</string>
 
     <!-- My Key Fragment -->
@@ -166,6 +174,8 @@
     <string name="find_room">방 찾아보기</string>
     <string name="open_room_error">문제가 발생했습니다. 다시 시도해 주세요.</string>
     <string name="cant_connect_to_server">서버에 연결할 수 없습니다</string>
+    <string name="stay_duration_format">유효기간  %1$d.%2$d.%3$d - %4$d.%5$d.%6$d</string>
+    <string name="doorlock_open_success">도어락을 열었습니다.</string>
 
     <!-- House Description Activity -->
     <string name="basic_description">기본 설명</string>
@@ -197,4 +207,115 @@
     <string name="checkin">체크인</string>
     <string name="value">가치</string>
     <string name="review_date_format">%1$d년 %2$d월</string>
+
+    <!-- Reservation Activity -->
+    <string name="villim_reserve">빌림요청</string>
+    <string name="villim_reserve_do">빌림요청하기</string>
+    <string name="overview_title_format_hasdate">%1$s에서 %2$d박</string>
+    <string name="overview_title_format_nodate">%s</string>
+    <string name="host">호스트</string>
+    <string name="duration">기간</string>
+    <string name="number_of_nights">숙박일 수</string>
+    <string name="price">금액</string>
+    <string name="select_start_Date">시작일 선택</string>
+    <string name="select_end_date">종료일 선택</string>
+    <string name="not_selected">미정</string>
+    <string name="num_nights_format">%d일</string>
+    <string name="overview_info_format">인원 %1$d명, 방 %2$d개, 침대 %3$d개, 욕실 %4$d개</string>
+    <string name="must_select_date">시작일과 종료일을 선택해주세요.</string>
+
+    <!-- ReservationResult Activity -->
+    <string name="date_string_format">"%1$04d-%2$02d-%3$02d"</string>
+    <string name="reservation_success">빌림 요청 완료</string>
+    <string name="reservation_success_instruction_format">빌림요청이 완료되었습니다.\n곧 빌림에서 6시간 이내에 연락이 갈 예정입니다.</string>
+    <string name="reservation_code">예약번호</string>
+    <string name="reservation_guest">예약자</string>
+    <string name="reservation_date">예약 일자</string>
+    <string name="reservation_status">예약 상태</string>
+
+    <string name="reservation_status_waiting">대기중</string>
+    <string name="reservation_status_confirmed">예약 완료</string>
+    <string name="reservation_status_active">거주중</string>
+
+    <!-- Visit Fragment -->
+    <string name="no_visit_list">방문 신청한 방이 없습니다.</string>
+
+    <!-- Visit detail activity -->
+    <string name="my_visit_list">내 방문목록</string>
+    <string name="villim_request">빌림 요청</string>
+    <string name="show_location">위치 보기</string>
+    <string name="cancel_visit">방문 취소신청</string>
+    <string name="cancel_visit_confirm">정말 방문을 취소 하시겠습니까?</string>
+
+    <!-- Change passcode activity -->
+    <string name="configure_doorlock">도어락 설정</string>
+    <string name="passcode_different">두 비밀번호가 일치하지 않습니다.</string>
+    <string name="passcode_non_digit">숫자 비밀번호만 설정할 수 있습니다.</string>
+    <string name="passcode_too_short">비밀번호가 너무 짧습니다.</string>
+    <string name="passcode_too_long">비밀번호가 너무 깁니다.</string>
+    <string name="confirm">확인</string>
+    <string name="passcode_hint">비밀번호 (4~12자)</string>
+    <string name="passcode_confirm_hint">비밀번호 확인 (4~12자)</string>
+
+    <!-- Change passcode success activity -->
+    <string name="passcode_change_complete">비밀번호가 변경되었습니다.</string>
+    <string name="passcode_change_complete_instructions">이제부터 변경된 비밀번호로\n도어락 잠금해제를 할 수 있습니다.</string>
+
+    <!-- Review Activity -->
+    <string name="rating">별점</string>
+    <string name="rate_rating">별점주기</string>
+    <string name="review_content_field_hint">400자 이내로 작성해주세요.</string>
+    <string name="submit">등록</string>
+    <string name="review_posted">후기가 등록되었습니다.</string>
+
+    <!-- Rate Activity -->
+    <string name="apply">적용</string>
+
+    <!-- FindPasswordActivity -->
+    <string name="password_lost">비밀번호 분실</string>
+    <string name="find_password_instructions">등록 시 사용하신 이메일 주소를 입력해주세요.</string>
+    <string name="find_password">비밀번호 찾기</string>
+
+    <!-- FindPasscodeSuccessActivity -->
+    <string name="message_sent">메시지가 전송되었습니다.</string>
+    <string name="password_reset_link_sent">비밀번호를 재설정할 수 있는 링크가 포함된 Villim 메시지가 발송되었습니다.</string>
+    <string name="send_again">재전송</string>
+    <string name="send_again_complete">링크가 재전송되었습니다.</string>
+
+    <!-- Logout dialog -->
+    <string name="logout_confirm_format">정말로 %s님 아이디를 로그아웃 하시겠어요?</string>
+
+    <!-- Settings Activity -->
+    <string name="push_notifications">푸쉬 알림</string>
+    <string name="currency">통화</string>
+    <string name="language">언어</string>
+    <string name="version_info">버전 정보</string>
+    <string-array name="currencies_full">
+        <item>KRW (₩)</item>
+        <item>USD ($)</item>
+    </string-array>
+    <string-array name="currencies_short">
+        <item>₩</item>
+        <item>$</item>
+    </string-array>
+    <string-array name="languages">
+        <item>한국어</item>
+        <item>English</item>
+    </string-array>
+
+    <!-- Profile Edit Activity -->
+    <string name="sex">성별</string>
+    <string name="phone_number">전화번호</string>
+    <string name="add_phone_number">+전화번호 추가하기</string>
+    <string name="city_of_residency">거주 도시</string>
+    <string name="email_privacy_statement">이메일 주소는 다른 회원에게 공개되지 않습니다.</string>
+    <string name="sex_privacy_statement">이 자료는 통계 목적으로 사용되어 공개되지 않습니다.</string>
+    <string name="edit">수정</string>
+    <string name="profile_updated">프로필 정보가 업데이트 되었습니다.</string>
+    <string-array name="sex_array">
+        <item>남자</item>
+        <item>여자</item>
+        <item>비공개</item>
+    </string-array>
+
 </resources>

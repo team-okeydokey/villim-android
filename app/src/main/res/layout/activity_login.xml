@@ -40,14 +40,17 @@
 
         <TextView
             android:id="@+id/advertTitle"
+            fontPath="fonts/BMDOHYEON.otf"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/advert_title"
-            android:textSize="@dimen/advert_title_text_size" />
+            android:textSize="@dimen/advert_title_text_size"
+            android:textColor="#05060b" />
 
         <TextView
             android:id="@+id/advertDetail"
             android:layout_width="match_parent"
+            fontPath="fonts/NotoSansCJKkr-DemiLight.otf"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="@string/advert_detail"
@@ -128,7 +131,7 @@
             android:layout_alignParentLeft="true"
             android:background="@android:color/transparent"
             android:gravity="left|center_vertical"
-            android:text="@string/find_password"
+            android:text="@string/forgot_password"
             android:textColor="@drawable/login_help_button_text"
             android:textSize="@dimen/login_help_button_text_size" />
 

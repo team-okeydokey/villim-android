@@ -69,10 +69,11 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_below="@+id/review_title"
+            android:isIndicator="true"
             android:numStars="5"
             android:paddingBottom="16dp"
             android:progressTint="@color/rating_color"
-            android:stepSize="0.5" />
+            android:stepSize="0.1" />
 
         <!-- 정확성 -->
         <TextView
@@ -93,11 +94,12 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/overall_ratingbar"
             android:layout_toLeftOf="@id/anchor"
+            android:isIndicator="true"
             android:numStars="5"
             android:paddingBottom="10dp"
             android:paddingRight="20dp"
             android:progressTint="@color/rating_color"
-            android:stepSize="0.5" />
+            android:stepSize="0.1" />
 
 
         <!-- 의사소통 -->
@@ -120,11 +122,12 @@
             android:layout_below="@+id/accuracy_ratingbar"
             android:layout_gravity="right|center_vertical"
             android:layout_toLeftOf="@+id/anchor"
+            android:isIndicator="true"
             android:numStars="5"
             android:paddingBottom="10dp"
             android:paddingRight="20dp"
             android:progressTint="@color/rating_color"
-            android:stepSize="0.5" />
+            android:stepSize="0.1" />
 
         <!-- 청결도 -->
         <TextView
@@ -145,11 +148,12 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/communication_ratingbar"
             android:layout_toLeftOf="@+id/anchor"
+            android:isIndicator="true"
             android:numStars="5"
             android:paddingBottom="10dp"
             android:paddingRight="20dp"
             android:progressTint="@color/rating_color"
-            android:stepSize="0.5" />
+            android:stepSize="0.1" />
 
         <!-- 위치 -->
         <TextView
@@ -171,10 +175,11 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_below="@+id/overall_ratingbar"
+            android:isIndicator="true"
             android:numStars="5"
             android:paddingBottom="10dp"
             android:progressTint="@color/rating_color"
-            android:stepSize="0.5" />
+            android:stepSize="0.1" />
 
         <!-- 체크인 -->
         <TextView
@@ -196,10 +201,11 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_below="@+id/location_ratingbar"
+            android:isIndicator="true"
             android:numStars="5"
             android:paddingBottom="10dp"
             android:progressTint="@color/rating_color"
-            android:stepSize="0.5" />
+            android:stepSize="0.1" />
 
 
         <!-- 가치 -->
@@ -222,10 +228,11 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_below="@+id/checkin_ratingbar"
+            android:isIndicator="true"
             android:numStars="5"
             android:paddingBottom="10dp"
             android:progressTint="@color/rating_color"
-            android:stepSize="0.5" />
+            android:stepSize="0.1" />
 
 
     </RelativeLayout>

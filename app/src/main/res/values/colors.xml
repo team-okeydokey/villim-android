@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#ed2025</color>
-    <color name="colorPrimaryDark">#ed2025</color>
+    <color name="colorPrimaryDark">#1e1e1e</color>
     <color name="colorAccent">#FF4081</color>
 
     <!-- Splash screen -->
-    <color name="splash_screen">#E31313</color>
+    <color name="splash_screen">#1e1e1e</color>
 
     <!-- Font Colors -->
     <color name="h2">#a0a0a0</color>
@@ -23,7 +23,7 @@
     <!-- Main Activity -->
     <color name="main_background">#F0F1F2</color>
     <color name="main_toolbar_search_button">#333333</color>
-    <color name="search_filter_open">#ED2026</color>
+    <color name="search_filter_open">#1e1e1e</color>
 
     <!-- Navigation Buttons -->
     <color name="arrow_dark">#333333</color>
@@ -83,5 +83,12 @@
     <!-- Room detail Activity -->
     <color name="see_more">#de2025</color>
 
+    <!-- My Key Fragment -->
+    <color name="text_button_inactive">#aaaaaa</color>
+    <color name="slide_button_color">#ed2025</color>
 
+    <!-- Find password success activity -->
+    <color name="send_again_button_pressed">#000000</color>
+    <color name="send_again_button_normal">#2a2c32</color>
+    
 </resources>

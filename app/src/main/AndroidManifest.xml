@@ -3,8 +3,10 @@
     package="net.villim.villim">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
+        android:name=".VillimApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -13,6 +15,7 @@
         android:theme="@style/AppTheme.NoActionBar">
         <activity
             android:name=".SplashActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,26 +23,90 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" />
-        <activity android:name=".LocationFilterActivity" />
-        <activity android:name=".HouseDetailActivity" />
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".LocationFilterActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".HouseDetailActivity"
+            android:screenOrientation="portrait" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity android:name=".DateFilterActivity" />
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".SignupActivity" />
-        <activity android:name=".HouseDescriptionActivity" />
-        <activity android:name=".PricePolicyActivity" />
-        <activity android:name=".AmenityActivity" />
-        <activity android:name=".HousePolicyActivity" />
-        <activity android:name=".CancellationPolicyActivity" />
-        <activity android:name=".FullScreenMapActivity" />
-        <activity android:name=".HostProfileActivity" />
-        <activity android:name=".GalleryActivity" />
-        <activity android:name=".ViewReviewActivity"></activity>
+        <activity
+            android:name=".CalendarActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".LoginActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".SignupActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".HouseDescriptionActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".PricePolicyActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".AmenityActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".HousePolicyActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".CancellationPolicyActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".FullScreenMapActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".HostProfileActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".GalleryActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ViewReviewActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ReservationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ReservationSuccessActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".VisitDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ChangePasscodeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ChangePasscodeSuccessActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ReviewActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".RateActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".FindPasswordActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".FindPasswordSuccessActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".SettingsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".WebViewActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".ProfileEditActivity"></activity>
     </application>
 
 </manifest>

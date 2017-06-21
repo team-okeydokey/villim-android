@@ -8,10 +8,21 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
+import java.net.URL;
 import java.util.Date;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.HttpUrl;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 import static net.villim.villim.VillimKeys.KEY_HOST_ID;
 import static net.villim.villim.VillimKeys.KEY_HOUSE_ID;
+import static net.villim.villim.VillimKeys.KEY_MESSAGE;
+import static net.villim.villim.VillimKeys.KEY_QUERY_SUCCESS;
 import static net.villim.villim.VillimKeys.KEY_RATING_ACCURACY;
 import static net.villim.villim.VillimKeys.KEY_RATING_CHECKIN;
 import static net.villim.villim.VillimKeys.KEY_RATING_CLEANLINESS;
@@ -23,10 +34,13 @@ import static net.villim.villim.VillimKeys.KEY_RESERVATION_ID;
 import static net.villim.villim.VillimKeys.KEY_REVIEWER_ID;
 import static net.villim.villim.VillimKeys.KEY_REVIEWER_NAME;
 import static net.villim.villim.VillimKeys.KEY_REVIEWER_PROFILE_PIC_URL;
+import static net.villim.villim.VillimKeys.KEY_REVIEWS;
 import static net.villim.villim.VillimKeys.KEY_REVIEW_CONTENT;
 import static net.villim.villim.VillimKeys.KEY_REVIEW_DATE;
 
 public class VillimReview implements Parcelable {
+    private static VillimReview[] reviewArrayFromServer;
+
     /* Id는 db속의 id. Username 아님. */
     public int houseId;
     public int hostId;
@@ -131,15 +145,6 @@ public class VillimReview implements Parcelable {
         } catch (JSONException e) {
 
         }
-        return reviews;
-    }
-
-    public static VillimReview[] getHouseReviewsFromServer(int houseId) {
-        VillimReview review = new VillimReview(0, 0, 0, 0, "리뷰어 이름", "첫인상으로 많은 것이 결정되고 마케팅이 신뢰를 잃어가는 요즘과 같은 시대에서는, " +
-                "앱 마켓의 별점과 리뷰가 앱 다운로드 여부를 결정하는 중요한 요인입니다. " +
-                "최근 Apptentive에서 실시한 유저 관련 조사에 따르면, 유저 92%가 새로운 앱을 다운로드할 때 별점을 고려한다는 결과가 나왔습니다. " +
-                "뿐만 아니라 42%는 주변 지인의 추천보다도 별점을 더 신뢰한다고 하는데요. 높은 별점과 리뷰는 유저들에게 해당 앱이 좋은 앱이라는 인상을 심어주기 때문에 소비자들로부터 거부감을 줄", 2.3f);
-        VillimReview[] reviews = new VillimReview[]{review, review, review, review, review, review, review, review, review};
         return reviews;
     }
 

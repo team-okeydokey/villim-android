@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusableInTouchMode="true"
+    tools:context="net.villim.villim.ReviewActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/toolbar_height"
+        android:background="@android:color/white"
+        android:elevation="@dimen/toolbar_elevation"
+        app:contentInsetEnd="0dp"
+        app:contentInsetStart="0dp">
+
+        <TextView
+            android:id="@+id/toolbar_title"
+            style="@style/ToolbarTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/write_review"
+            android:textColor="@color/toolbar_title_color" />
+
+    </android.support.v7.widget.Toolbar>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar"
+        android:orientation="vertical">
+
+        <!-- Rating -->
+        <RelativeLayout
+            android:id="@+id/review_rating_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="20dp"
+            android:paddingLeft="25dp"
+            android:paddingRight="25dp"
+            android:paddingTop="20dp">
+
+            <TextView
+                android:id="@+id/rating_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:text="@string/rating"
+                android:textColor="#05060b"
+                android:textSize="16sp" />
+
+            <android.support.v7.widget.AppCompatRatingBar
+                android:id="@+id/overall_ratingbar"
+                style="@style/customRatingBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/rating_title"
+                android:isIndicator="true"
+                android:numStars="5"
+                android:progressTint="@color/rating_color"
+                android:stepSize="0.1" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:gravity="end"
+                android:lineSpacingExtra="2sp"
+                android:text="@string/rate_rating"
+                android:textColor="#de2025"
+                android:textSize="16sp" />
+        </RelativeLayout>
+
+        <include layout="@layout/category_divider" />
+
+        <!-- Review content -->
+        <TextView
+            android:id="@+id/review_content_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="20dp"
+            android:paddingLeft="25dp"
+            android:paddingRight="25dp"
+            android:paddingTop="20sp"
+            android:text="@string/review"
+            android:textColor="#05060b"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/review_content_field"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="left|top"
+            android:hint="@string/review_content_field_hint"
+            android:lineSpacingExtra="5sp"
+            android:paddingLeft="25dp"
+            android:paddingRight="25dp"
+            android:textColor="#585757"
+            android:textColorHint="#aaaaaa"
+            android:textSize="13sp" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/error_message"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/toolbar_height"
+        android:layout_above="@+id/submit_button"
+        android:layout_centerHorizontal="true"
+        android:background="@android:color/transparent"
+        android:gravity="center"
+        android:textColor="@color/login_error_text"
+        android:textSize="@dimen/login_error_message_text_size" />
+
+    <!-- Submit button -->
+    <Button
+        android:id="@+id/submit_button"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/next_button_height"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/next_button"
+        android:gravity="center"
+        android:text="@string/submit"
+        android:textColor="@drawable/next_button_text"
+        android:textSize="@dimen/next_button_text_size" />
+
+    <com.wang.avi.AVLoadingIndicatorView
+        android:id="@+id/loading_indicator"
+        style="@style/AVLoadingIndicatorView.Large"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:visibility="gone"
+        app:indicatorColor="@color/loading_animation_color"
+        app:indicatorName="BallGridPulseIndicator" />
+
+</RelativeLayout>

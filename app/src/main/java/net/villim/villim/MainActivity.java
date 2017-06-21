@@ -25,10 +25,12 @@ import android.widget.TextView;
 import java.util.Date;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends VillimActivity {
 
     private static final int LOCATION_FILTER = 0;
     private static final int DATE_FILTER = 1;
+
+    public final static String DATE_SELECTED = "date_selected";
 
     /* Tab fragment indices */
     private static final int DISCOVERY_FRAGMENT = 0;
@@ -39,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
     /* We can store the fragment references becasue we are using a FragmentPagerAdapter.
        If FragmentStatePagerAdapter is used, weak references must be used to refer to fragments. */
     private ProfileFragment profileFragment;
+    private VisitFragment visitFragment;
 
     private CoordinatorLayout container;
     private AppBarLayout appBarLayout;
@@ -48,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
     private String[] tabItems;
     private int[] tabIcons;
     private CharSequence toolBarTitle;
-    private TabLayout tabLayout;
+    private static TabLayout tabLayout;
     private UnSwipeableViewpager viewPager;
     private Button searchButton;
     private RelativeLayout searchFilters;
@@ -84,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
 //        toolbarTextView = (TextView) findViewById(R.id.toolbar_title);
         toolbarLogo = (ImageView) findViewById(R.id.toolbar_logo);
-        toolBarTitle = getString(R.string.app_name);
+//        toolBarTitle = getString(R.string.app_name);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         setTitle(toolBarTitle);
@@ -106,13 +109,13 @@ public class MainActivity extends AppCompatActivity {
             public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
                 if (verticalOffset == 0) { // Completely open.
 //                    toolbarTextView.setTextColor(getResources().getColor(android.R.color.white));
-                    toolbarLogo.setImageResource(R.drawable.logo_horizontal_white);
+                    toolbarLogo.setImageResource(R.drawable.browse_expand_logo);
                     toolbar.setBackgroundColor(getResources().getColor(R.color.search_filter_open));
                     searchButton.setBackground(getResources().getDrawable(R.drawable.btn_up_arrow));
                     appBarOpen = true;
                 } else if (verticalOffset == -appBarLayout.getTotalScrollRange()) { // Completely collapsed.
 //                    toolbarTextView.setTextColor(getResources().getColor(R.color.colorPrimary));
-                    toolbarLogo.setImageResource(R.drawable.logo_horizontal_red);
+                    toolbarLogo.setImageResource(R.drawable.browse_logo);
                     toolbar.setBackgroundColor(getResources().getColor(android.R.color.white));
                     searchButton.setBackground(getResources().getDrawable(R.drawable.btn_search));
                     appBarOpen = false;
@@ -124,8 +127,8 @@ public class MainActivity extends AppCompatActivity {
                     int toolBarLogoColor = getToolbarColorFromOffset(
                             verticalOffset, -appBarLayout.getTotalScrollRange(), 0,
                             toolBarOpenColor, toolBarCollpasedColor);
-                    toolbarLogo.setImageResource(R.drawable.logo_horizontal_white);
-                    toolbarLogo.setColorFilter(toolBarLogoColor);
+                    toolbarLogo.setImageResource(R.drawable.browse_expand_logo);
+//                    toolbarLogo.setColorFilter(toolBarLogoColor);
                     toolbar.setBackgroundColor(toolBarColor);
                     searchButton.setBackground(getResources().getDrawable(R.drawable.btn_up_arrow));
                 }
@@ -237,9 +240,9 @@ public class MainActivity extends AppCompatActivity {
                             dateSelected = false;
                             searchFilterDate.getCompoundDrawables()[DRAWABLE_RIGHT].mutate().setAlpha(HIDE);
                         } else {
-                            Intent dateFilterIntent = new Intent(MainActivity.this, DateFilterActivity.class);
-                            dateFilterIntent.putExtra(DateFilterActivity.START_DATE, startDate);
-                            dateFilterIntent.putExtra(DateFilterActivity.END_DATE, endDate);
+                            Intent dateFilterIntent = new Intent(MainActivity.this, CalendarActivity.class);
+                            dateFilterIntent.putExtra(CalendarActivity.START_DATE, startDate);
+                            dateFilterIntent.putExtra(CalendarActivity.END_DATE, endDate);
                             MainActivity.this.startActivityForResult(dateFilterIntent, DATE_FILTER);
                         }
                         return true;
@@ -288,6 +291,9 @@ public class MainActivity extends AppCompatActivity {
             switch (position) {
                 case PROFILE_FRAGMENT:
                     profileFragment = (ProfileFragment) createdFragment;
+                    break;
+                case VISIT_FRAGMENT:
+                    visitFragment = (VisitFragment) createdFragment;
                     break;
                 default:
                     break;
@@ -346,6 +352,12 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == ProfileFragment.LOGIN && null != profileFragment) {
             profileFragment.onActivityResult(requestCode, resultCode, data);
             return;
+        } else if (requestCode == ProfileFragment.PROFILE_EDIT && null != profileFragment) {
+            profileFragment.onActivityResult(requestCode, resultCode, data);
+            return;
+        } else if (requestCode == VisitFragment.VISIT_DETAIL && null != visitFragment) {
+            visitFragment.onActivityResult(requestCode, resultCode, data);
+            return;
         }
 
         /* Requests to mainactivity */
@@ -362,12 +374,12 @@ public class MainActivity extends AppCompatActivity {
             }
         } else if (requestCode == DATE_FILTER) {
             if (resultCode == Activity.RESULT_OK) {
-                startDate = (Date) data.getSerializableExtra(DateFilterActivity.START_DATE);
-                endDate = (Date) data.getSerializableExtra(DateFilterActivity.END_DATE);
+                startDate = (Date) data.getSerializableExtra(CalendarActivity.START_DATE);
+                endDate = (Date) data.getSerializableExtra(CalendarActivity.END_DATE);
 
                 String dateFilterText = String.format(getString(R.string.search_filter_date_format),
-                        startDate.getMonth(), startDate.getDate(),
-                        endDate.getMonth(), endDate.getDate());
+                        startDate.getMonth() + 1, startDate.getDate(),
+                        endDate.getMonth() + 1, endDate.getDate());
                 searchFilterDate.setText(dateFilterText);
                 /* Show clear button */
                 dateSelected = true;
@@ -429,9 +441,22 @@ public class MainActivity extends AppCompatActivity {
         appBarLayout.setVisibility(View.VISIBLE);
     }
 
-    public void selectTab(int index) {
+    public static void selectTab(int index) {
         TabLayout.Tab tab = tabLayout.getTabAt(index);
         tab.select();
     }
+
+    public boolean getDateSelected() {
+        return dateSelected;
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
 
 }

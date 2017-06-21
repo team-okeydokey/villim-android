@@ -6,7 +6,21 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.google.android.gms.maps.MapView;
 
-public class SplashActivity extends AppCompatActivity {
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+
+import okhttp3.Headers;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+
+import static net.villim.villim.VillimKeys.KEY_MESSAGE;
+import static net.villim.villim.VillimKeys.KEY_QUERY_SUCCESS;
+import static net.villim.villim.VillimKeys.KEY_USER_INFO;
+
+public class SplashActivity extends VillimActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +40,8 @@ public class SplashActivity extends AppCompatActivity {
                 }
             }
         }).start();
+
+        /* Update user info */
 
         /* Launch MainActivity */
         Intent intent = new Intent(this, MainActivity.class);

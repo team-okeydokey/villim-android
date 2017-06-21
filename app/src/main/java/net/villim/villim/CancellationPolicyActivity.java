@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import static net.villim.villim.VillimKeys.KEY_CANCELLATION_POLICY;
 
-public class CancellationPolicyActivity extends AppCompatActivity {
+public class CancellationPolicyActivity extends VillimActivity {
 
     private Toolbar toolbar;
     private Button closeButton;

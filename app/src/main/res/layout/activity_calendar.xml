@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/date_filter_activity"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/search_background"
+    tools:context="net.villim.villim.CalendarActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/toolbar_height"
+        android:background="@android:color/white"
+        android:elevation="@dimen/toolbar_elevation"
+        app:contentInsetEnd="0dp"
+        app:contentInsetStart="0dp">
+
+        <TextView
+            android:id="@+id/toolbar_title"
+            style="@style/ToolbarTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/date_filter_title"
+            android:textColor="@color/toolbar_title_color" />
+
+    </android.support.v7.widget.Toolbar>
+
+    <!-- 시작일 / 종료일 버튼 -->
+    <RelativeLayout
+        android:id="@+id/start_end_buttons"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/date_filter_text_container_height"
+        android:layout_below="@+id/toolbar"
+        android:layout_marginTop="30dp"
+        android:paddingBottom="@dimen/date_filter_text_padding_bottom"
+        android:paddingLeft="@dimen/date_filter_text_padding_side"
+        android:paddingRight="@dimen/date_filter_text_padding_side">
+
+        <TextView
+            android:id="@+id/start_date_text"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:gravity="bottom|left"
+            android:includeFontPadding="false"
+            android:lineSpacingExtra="5sp"
+            android:text="@string/date_filter_start_date"
+            android:textColor="#333333"
+            android:textSize="25sp" />
+
+
+        <TextView
+            android:id="@+id/end_date_text"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:gravity="bottom|right"
+            android:text="@string/date_filter_end_date"
+            android:textColor="#333333"
+            android:textSize="25sp" />
+
+    </RelativeLayout>
+
+
+    <View xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/start_end_buttons"
+        android:layout_marginLeft="@dimen/date_filter_text_padding_side"
+        android:layout_marginRight="@dimen/date_filter_text_padding_side"
+        android:background="@color/divider_color" />
+
+
+    <!-- CalendarView -->
+
+    <com.squareup.timessquare.CalendarPickerView
+        android:id="@+id/calendar_view"
+        android:layout_width="match_parent"
+        android:layout_height="260dp"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/divider"
+        android:background="@color/search_background"
+        android:clipToPadding="false"
+        android:paddingLeft="@dimen/calendar_padding_side"
+        android:paddingRight="@dimen/calendar_padding_side"
+        android:scrollbars="none"
+        app:tsquare_dayBackground="@drawable/day_background"
+        app:tsquare_dayTextColor="@drawable/day_text_color"
+        app:tsquare_dividerColor="@android:color/transparent"
+        app:tsquare_headerTextColor="@color/dateTimeRangePickerHeaderTextColor"
+        app:tsquare_titleTextColor="@color/dateTimeRangePickerTitleTextColor" />
+
+    <!-- 하단 저장하기 버튼 -->
+    <Button
+        android:id="@+id/save_selection_button"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/date_filter_bottom_button_height"
+        android:layout_alignParentBottom="true"
+        android:background="@color/date_filter_bottom_button_color"
+        android:text="@string/date_filter_save_date"
+        android:textColor="#ffffff"
+        android:textSize="17sp" />
+
+</RelativeLayout>
