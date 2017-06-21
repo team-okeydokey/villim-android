@@ -22,6 +22,7 @@ import com.bumptech.glide.Glide;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import static net.villim.villim.VillimKeys.FAQ_URL;
 import static net.villim.villim.VillimKeys.TERMS_OF_SERVICE_URL;
 import static net.villim.villim.WebViewActivity.TITLE;
 import static net.villim.villim.WebViewActivity.URL;
@@ -87,7 +88,7 @@ public class ProfileFragment extends Fragment implements LogoutDialog.LogoutDial
                 } else if (title.equals(getString(R.string.profile_title))) {
                     launchProfileEditActivity();
                 } else if (title.equals(getString(R.string.faq))) {
-
+                    launchFAQWebview();
                 } else if (title.equals(getString(R.string.settings))) {
                     launchSettingsActivity();
                 } else if (title.equals(getString(R.string.privacy_policy))) {
@@ -117,6 +118,13 @@ public class ProfileFragment extends Fragment implements LogoutDialog.LogoutDial
         Intent intent = new Intent(getActivity(), WebViewActivity.class);
         intent.putExtra(URL, TERMS_OF_SERVICE_URL);
         intent.putExtra(TITLE, getString(R.string.privacy_policy));
+        getActivity().startActivity(intent);
+    }
+
+    private void launchFAQWebview() {
+        Intent intent = new Intent(getActivity(), WebViewActivity.class);
+        intent.putExtra(URL, FAQ_URL);
+        intent.putExtra(TITLE, getString(R.string.faq));
         getActivity().startActivity(intent);
     }
 
@@ -244,7 +252,7 @@ public class ProfileFragment extends Fragment implements LogoutDialog.LogoutDial
                     iconResource = loggedIn ? R.drawable.icon_shield : R.drawable.icon_shield;
                     break;
             }
-            Drawable itemIcon =  getResources().getDrawable(iconResource);
+            Drawable itemIcon = getResources().getDrawable(iconResource);
             int iconSize = getResources().getDimensionPixelSize(R.dimen.profile_list_drawable_size);
             itemIcon.setBounds(0, 0, iconSize, iconSize);
             textView.setCompoundDrawables(itemIcon, null, null, null);
@@ -265,7 +273,7 @@ public class ProfileFragment extends Fragment implements LogoutDialog.LogoutDial
             }
         } else if (requestCode == PROFILE_EDIT) {
             if (resultCode == Activity.RESULT_OK) {
-               populateView();
+                populateView();
             }
             if (resultCode == Activity.RESULT_CANCELED) {
                 //Write your code if there's no result
