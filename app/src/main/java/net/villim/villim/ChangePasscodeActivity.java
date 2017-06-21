@@ -22,11 +22,13 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.net.URL;
 
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.CookieJar;
 import okhttp3.FormBody;
+import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
@@ -37,6 +39,8 @@ import static net.villim.villim.VillimKeys.KEY_CHANGE_SUCCESS;
 import static net.villim.villim.VillimKeys.KEY_MESSAGE;
 import static net.villim.villim.VillimKeys.KEY_PASSCODE;
 import static net.villim.villim.VillimKeys.KEY_PASSCODE_CONFIRM;
+import static net.villim.villim.VillimKeys.SERVER_HOST;
+import static net.villim.villim.VillimKeys.SERVER_SCHEME;
 
 public class ChangePasscodeActivity extends VillimActivity {
 
@@ -132,8 +136,14 @@ public class ChangePasscodeActivity extends VillimActivity {
                 .add(KEY_PASSCODE_CONFIRM, newPasscodeForm.getText().toString().trim())
                 .build();
 
+        URL url = new HttpUrl.Builder()
+                .scheme(SERVER_SCHEME)
+                .host(SERVER_HOST)
+                .addPathSegments(CHANGE_PASSCODE_URL)
+                .build().url();
+
         Request request = new Request.Builder()
-                .url(CHANGE_PASSCODE_URL)
+                .url(url)
                 .post(requestBody)
                 .build();
 

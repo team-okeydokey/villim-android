@@ -24,10 +24,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.net.URL;
 
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
+import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
@@ -145,7 +147,6 @@ public class SignupActivity extends VillimActivity {
                 .cookieJar(cookieJar)
                 .build();
 
-
         RequestBody requestBody = new FormBody.Builder()
                 .add(KEY_FIRSTNAME, signupFormFirstname.getText().toString().trim())
                 .add(KEY_LASTNAME, signupFormLastname.getText().toString().trim())
@@ -153,8 +154,20 @@ public class SignupActivity extends VillimActivity {
                 .add(KEY_PASSWORD, signupFormPassword.getText().toString())
                 .build();
 
+        //        URL url = new HttpUrl.Builder()
+//                .scheme(SERVER_SCHEME)
+//                .host(SERVER_HOST)
+//                .addPathSegments(LOGIN_URL)
+//                .build().url();
+
+        URL url = new HttpUrl.Builder()
+                .scheme("http")
+                .host("175.207.29.19")
+                .addPathSegments(SIGNUP_URL)
+                .build().url();
+
         Request request = new Request.Builder()
-                .url(SIGNUP_URL)
+                .url(url)
                 .post(requestBody)
                 .build();
 

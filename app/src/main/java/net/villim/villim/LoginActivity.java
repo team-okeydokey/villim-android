@@ -22,22 +22,27 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.net.URL;
 
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.CookieJar;
 import okhttp3.FormBody;
+import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
+import static net.villim.villim.VillimKeys.CHANGE_PASSCODE_URL;
 import static net.villim.villim.VillimKeys.KEY_EMAIL;
 import static net.villim.villim.VillimKeys.KEY_LOGIN_SUCCESS;
 import static net.villim.villim.VillimKeys.KEY_MESSAGE;
 import static net.villim.villim.VillimKeys.KEY_PASSWORD;
 import static net.villim.villim.VillimKeys.KEY_USER_INFO;
 import static net.villim.villim.VillimKeys.LOGIN_URL;
+import static net.villim.villim.VillimKeys.SERVER_HOST;
+import static net.villim.villim.VillimKeys.SERVER_SCHEME;
 
 
 public class LoginActivity extends VillimActivity {
@@ -136,8 +141,20 @@ public class LoginActivity extends VillimActivity {
                 .add(KEY_PASSWORD, loginFormPassword.getText().toString())
                 .build();
 
+//        URL url = new HttpUrl.Builder()
+//                .scheme(SERVER_SCHEME)
+//                .host(SERVER_HOST)
+//                .addPathSegments(LOGIN_URL)
+//                .build().url();
+
+        URL url = new HttpUrl.Builder()
+                .scheme("http")
+                .host("175.207.29.19")
+                .addPathSegments(LOGIN_URL)
+                .build().url();
+
         Request request = new Request.Builder()
-                .url(LOGIN_URL)
+                .url(url)
                 .post(requestBody)
                 .build();
 
