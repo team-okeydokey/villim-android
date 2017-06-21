@@ -192,14 +192,17 @@ public class MainActivity extends VillimActivity {
         int calendarWidth = getResources().getDimensionPixelSize(R.dimen.calendar_icon_width);
         int calendarHeight = getResources().getDimensionPixelSize(R.dimen.calendar_icon_height);
         int clearSize = getResources().getDimensionPixelSize(R.dimen.clear_icon_size);
+        /* Fetch icons */
         Drawable markerIcon = getResources().getDrawable(R.drawable.icon_marker);
         Drawable calendarIcon = getResources().getDrawable(R.drawable.icon_calendar);
         Drawable clearIcon = getResources().getDrawable(R.drawable.btn_delete_white);
         Drawable dateClearIcon = getResources().getDrawable(R.drawable.btn_delete_white);
+        /* Resize original image */
         markerIcon.setBounds(0, 0, markerSize, markerSize);
         calendarIcon.setBounds(0, 0, calendarWidth, calendarHeight);
         clearIcon.setBounds(0, 0, clearSize, clearSize);
         dateClearIcon.setBounds(0, 0, clearSize, clearSize);
+        /* Set tint to grey */
         markerIcon.setTint(getColor(R.color.search_field_color));
         calendarIcon.setTint(getColor(R.color.search_field_color));
         clearIcon.setTint(getColor(R.color.search_field_color));
