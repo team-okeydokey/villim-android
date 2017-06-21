@@ -4,7 +4,7 @@
     <dimen name="toolbar_elevation">3dp</dimen>
     <dimen name="toolbar_height">46dp</dimen>
     <dimen name="toolbar_logo_width">132dp</dimen>
-    <dimen name="toolbar_logo_height">24dp</dimen>
+    <dimen name="toolbar_logo_height">34dp</dimen>
     <dimen name="toolbar_search_button_size">24dp</dimen>
     <dimen name="toolbar_padding">10dp</dimen>
     <dimen name="search_filter_upper_padding">46dp</dimen>
