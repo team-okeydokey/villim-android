@@ -92,6 +92,7 @@ public class HouseDetailActivity extends VillimActivity implements OnMapReadyCal
     private CollapsingToolbarLayout collapsingToolbarLayout;
     private Toolbar toolbar;
     private ImageView toolbarImage;
+    private TextView toolbarTitle;
 
     private RelativeLayout hostInfo;
     private ImageView hostProfilePic;
@@ -168,6 +169,7 @@ public class HouseDetailActivity extends VillimActivity implements OnMapReadyCal
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(ContextCompat.getDrawable(getApplicationContext(), R.drawable.back_arrow_light));
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+        toolbarTitle = (TextView) findViewById(R.id.toolbar_title);
 
         /* Change back button color on collapse. */
         collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
@@ -177,10 +179,12 @@ public class HouseDetailActivity extends VillimActivity implements OnMapReadyCal
             @Override
             public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
                 if (verticalOffset == -appBarLayout.getTotalScrollRange()) { // Completely collapsed.
-                    collapsingToolbarLayout.setTitle(getString(R.string.room_detail_title));
+//                    collapsingToolbarLayout.setTitle(getString(R.string.room_detail_title));
+                    toolbarTitle.setVisibility(View.VISIBLE);
                     toolbar.getNavigationIcon().setColorFilter(getResources().getColor(R.color.arrow_dark), PorterDuff.Mode.SRC_ATOP);
                 } else {
-                    collapsingToolbarLayout.setTitle(" ");
+//                    collapsingToolbarLayout.setTitle(" ");
+                    toolbarTitle.setVisibility(View.INVISIBLE);
                     toolbar.getNavigationIcon().setColorFilter(getResources().getColor(R.color.arrow_light), PorterDuff.Mode.SRC_ATOP);
                 }
             }
