@@ -61,12 +61,22 @@
             android:textSize="15sp" />
 
         <TextView
-            android:id="@+id/base_price_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:gravity="left|center_vertical"
             android:lineSpacingExtra="5sp"
+            android:text="@string/base_monthly_price_explanation_1"
+            android:textColor="#585757"
+            android:textSize="13sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="left|center_vertical"
+            android:lineSpacingExtra="5sp"
+            android:text="@string/base_monthly_price_explanation_2"
             android:textColor="#585757"
             android:textSize="13sp" />
 
@@ -75,7 +85,74 @@
 
     <include layout="@layout/category_divider" />
 
-    <!-- 보증금 -->
+    <!--&lt;!&ndash; 보증금 &ndash;&gt;-->
+    <!--<android.support.v7.widget.LinearLayoutCompat-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:orientation="vertical"-->
+    <!--android:paddingBottom="15dp"-->
+    <!--android:paddingLeft="25dp"-->
+    <!--android:paddingRight="25dp"-->
+    <!--android:paddingTop="16dp">-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/deposit_title"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:gravity="left|center_vertical"-->
+    <!--android:text="@string/deposit"-->
+    <!--android:textColor="#05060b"-->
+    <!--android:textSize="15sp" />-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/deposit_content"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginTop="10dp"-->
+    <!--android:gravity="left|center_vertical"-->
+    <!--android:lineSpacingExtra="5sp"-->
+    <!--android:textColor="#585757"-->
+    <!--android:textSize="13sp" />-->
+
+    <!--</android.support.v7.widget.LinearLayoutCompat>-->
+    <!--&lt;!&ndash; End 보증금 &ndash;&gt;-->
+
+    <!--<include layout="@layout/category_divider" />-->
+
+    <!--&lt;!&ndash; 추가 인원 요금 &ndash;&gt;-->
+    <!--<android.support.v7.widget.LinearLayoutCompat-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:orientation="vertical"-->
+    <!--android:paddingBottom="15dp"-->
+    <!--android:paddingLeft="25dp"-->
+    <!--android:paddingRight="25dp"-->
+    <!--android:paddingTop="16dp">-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/additional_guest_fee_title"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:gravity="left|center_vertical"-->
+    <!--android:text="@string/additional_guest_fee"-->
+    <!--android:textColor="#05060b"-->
+    <!--android:textSize="15sp" />-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/additional_guest_fee_content"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginTop="10dp"-->
+    <!--android:gravity="left|center_vertical"-->
+    <!--android:lineSpacingExtra="5sp"-->
+    <!--android:textColor="#585757"-->
+    <!--android:textSize="13sp" />-->
+
+    <!--</android.support.v7.widget.LinearLayoutCompat>-->
+    <!--&lt;!&ndash; End 추가 인원 요금 &ndash;&gt;-->
+
+
+    <!-- 공과 예치금 -->
     <android.support.v7.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -86,60 +163,36 @@
         android:paddingTop="16dp">
 
         <TextView
-            android:id="@+id/deposit_title"
+            android:id="@+id/utility_fee_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="left|center_vertical"
-            android:text="@string/deposit"
+            android:text="@string/utility_fee"
             android:textColor="#05060b"
             android:textSize="15sp" />
 
         <TextView
-            android:id="@+id/deposit_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:gravity="left|center_vertical"
             android:lineSpacingExtra="5sp"
+            android:text="@string/utility_fee_explanation_1"
             android:textColor="#585757"
             android:textSize="13sp" />
 
-    </android.support.v7.widget.LinearLayoutCompat>
-    <!-- End 보증금 -->
-
-    <include layout="@layout/category_divider" />
-
-    <!-- 추가 인원 요금 -->
-    <android.support.v7.widget.LinearLayoutCompat
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingBottom="15dp"
-        android:paddingLeft="25dp"
-        android:paddingRight="25dp"
-        android:paddingTop="16dp">
-
         <TextView
-            android:id="@+id/additional_guest_fee_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="left|center_vertical"
-            android:text="@string/additional_guest_fee"
-            android:textColor="#05060b"
-            android:textSize="15sp" />
-
-        <TextView
-            android:id="@+id/additional_guest_fee_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:gravity="left|center_vertical"
             android:lineSpacingExtra="5sp"
+            android:text="@string/utility_fee_explanation_2"
             android:textColor="#585757"
             android:textSize="13sp" />
 
     </android.support.v7.widget.LinearLayoutCompat>
-    <!-- End 추가 인원 요금 -->
+    <!-- End 공과 예치금  -->
 
     <include layout="@layout/category_divider" />
 

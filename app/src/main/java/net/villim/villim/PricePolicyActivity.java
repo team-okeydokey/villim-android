@@ -11,6 +11,7 @@ import static net.villim.villim.VillimKeys.KEY_ADDITIONAL_GUEST_FEE;
 import static net.villim.villim.VillimKeys.KEY_CLEANING_FEE;
 import static net.villim.villim.VillimKeys.KEY_DEPOSIT;
 import static net.villim.villim.VillimKeys.KEY_RATE_PER_NIGHT;
+import static net.villim.villim.VillimKeys.KEY_UTILITY_FEE;
 
 public class PricePolicyActivity extends VillimActivity {
 
@@ -21,6 +22,7 @@ public class PricePolicyActivity extends VillimActivity {
     private TextView deposit;
     private TextView additionalGuestFee;
     private TextView cleaningFee;
+    private TextView utilityFee;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,45 +45,64 @@ public class PricePolicyActivity extends VillimActivity {
             }
         });
 
-        /* 기본 가격 */
-        basePrice = (TextView) findViewById(R.id.base_price_content);
-        String basePriceText = String.format(getString(R.string.won_text_format),
-                getIntent().getIntExtra(KEY_RATE_PER_NIGHT, 0));
-        basePrice.setText(basePriceText);
+//        /* 기본 가격 */
+//        basePrice = (TextView) findViewById(R.id.base_price_content);
+//        String basePriceText = String.format(getString(R.string.won_text_format),
+//                getIntent().getIntExtra(KEY_RATE_PER_NIGHT, 0));
+//        basePrice.setText(basePriceText);
 
-        /* 보증금 */
-        deposit = (TextView) findViewById(R.id.deposit_content);
-        int depositVal = getIntent().getIntExtra(KEY_DEPOSIT, 0);
-        String depositText;
-        switch (depositVal) {
-            case -1:
-                depositText = getString(R.string.cant_query);
-                break;
-            case 0:
-                depositText = getString(R.string.no_deposit);
-                break;
-            default:
-                depositText = String.format(getString(R.string.won_symbol_format), depositVal);
-                break;
-        }
-        deposit.setText(depositText);
+//        /* 보증금 */
+//        deposit = (TextView) findViewById(R.id.deposit_content);
+//        int depositVal = getIntent().getIntExtra(KEY_DEPOSIT, 0);
+//        String depositText;
+//        switch (depositVal) {
+//            case -1:
+//                depositText = getString(R.string.cant_query);
+//                break;
+//            case 0:
+//                depositText = getString(R.string.no_deposit);
+//                break;
+//            default:
+//                depositText = String.format(getString(R.string.won_symbol_format), depositVal);
+//                break;
+//        }
+//        deposit.setText(depositText);
+//
+//        /* 추가 인원 요금 */
+//        additionalGuestFee = (TextView) findViewById(R.id.additional_guest_fee_content);
+//        int additionalGuestFeeVal = getIntent().getIntExtra(KEY_ADDITIONAL_GUEST_FEE, 0);
+//        String additionalGuestFeeText;
+//        switch (additionalGuestFeeVal) {
+//            case -1:
+//                additionalGuestFeeText = getString(R.string.cant_query);
+//                break;
+//            case 0:
+//                additionalGuestFeeText = getString(R.string.no_additional_fee);
+//                break;
+//            default:
+//                additionalGuestFeeText = String.format(getString(R.string.won_symbol_format), additionalGuestFeeVal);
+//                break;
+//        }
+//        additionalGuestFee.setText(additionalGuestFeeText);
 
-        /* 추가 인원 요금 */
-        additionalGuestFee = (TextView) findViewById(R.id.additional_guest_fee_content);
-        int additionalGuestFeeVal = getIntent().getIntExtra(KEY_ADDITIONAL_GUEST_FEE, 0);
-        String additionalGuestFeeText;
-        switch (additionalGuestFeeVal) {
-            case -1:
-                additionalGuestFeeText = getString(R.string.cant_query);
-                break;
-            case 0:
-                additionalGuestFeeText = getString(R.string.no_additional_fee);
-                break;
-            default:
-                additionalGuestFeeText = String.format(getString(R.string.won_symbol_format), additionalGuestFeeVal);
-                break;
-        }
-        additionalGuestFee.setText(additionalGuestFeeText);
+
+//        /* 공과 예치금 */
+//        utilityFee = (TextView) findViewById(R.id.utility_fee_content);
+//        int utilityFeeVal = getIntent().getIntExtra(KEY_UTILITY_FEE, 0);
+//        String utilityFeeText;
+//        switch (utilityFeeVal) {
+//            case -1:
+//                utilityFeeText = getString(R.string.cant_query);
+//                break;
+//            case 0:
+//                utilityFeeText = getString(R.string.no_additional_fee);
+//                break;
+//            default:
+//                utilityFeeText = String.format(getString(R.string.won_symbol_format), utilityFeeVal);
+//                break;
+//        }
+//        utilityFee.setText(utilityFeeText);
+
 
         /* 청소비 */
         cleaningFee = (TextView) findViewById(R.id.cleaning_fee_content);

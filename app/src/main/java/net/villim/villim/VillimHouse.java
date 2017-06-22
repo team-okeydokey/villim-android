@@ -37,6 +37,7 @@ import static net.villim.villim.VillimKeys.KEY_NUM_BED;
 import static net.villim.villim.VillimKeys.KEY_NUM_BEDROOM;
 import static net.villim.villim.VillimKeys.KEY_NUM_GUEST;
 import static net.villim.villim.VillimKeys.KEY_RATE_PER_NIGHT;
+import static net.villim.villim.VillimKeys.KEY_UTILITY_FEE;
 
 /**
  * Created by seongmin on 5/30/17.
@@ -56,8 +57,7 @@ public class VillimHouse implements Parcelable {
     public int numBed;
     public int numBathroom;
     public int ratePerNight;
-    public int deposit;
-    public int additionalGuestFee;
+    public int utilityFee;
     public int cleaningFee;
     private int lockAddr;
     private int lockPc;
@@ -97,8 +97,7 @@ public class VillimHouse implements Parcelable {
             numBed = jsonObject.getInt(KEY_NUM_BED);
             numBathroom = jsonObject.getInt(KEY_NUM_BATHROOM);
             ratePerNight = jsonObject.getInt(KEY_RATE_PER_NIGHT);
-            deposit = jsonObject.getInt(KEY_DEPOSIT);
-            additionalGuestFee = jsonObject.getInt(KEY_ADDITIONAL_GUEST_FEE);
+            utilityFee = jsonObject.getInt(KEY_UTILITY_FEE);
             cleaningFee = jsonObject.getInt(KEY_CLEANING_FEE);
             lockAddr = jsonObject.getInt(KEY_LOCK_ADDR);
             lockPc = jsonObject.getInt(KEY_LOCK_PC);
@@ -152,8 +151,7 @@ public class VillimHouse implements Parcelable {
         house.numBed = jsonObject.optInt(KEY_NUM_BED);
         house.numBathroom = jsonObject.optInt(KEY_NUM_BATHROOM);
         house.ratePerNight = jsonObject.optInt(KEY_RATE_PER_NIGHT);
-        house.deposit = jsonObject.optInt(KEY_DEPOSIT);
-        house.additionalGuestFee = jsonObject.optInt(KEY_ADDITIONAL_GUEST_FEE);
+        house.utilityFee = jsonObject.optInt(KEY_UTILITY_FEE);
         house.cleaningFee = jsonObject.optInt(KEY_CLEANING_FEE);
         house.lockAddr = jsonObject.optInt(KEY_LOCK_ADDR);
         house.lockPc = jsonObject.optInt(KEY_LOCK_PC);
@@ -217,8 +215,7 @@ public class VillimHouse implements Parcelable {
         dest.writeInt(numBed);
         dest.writeInt(numBathroom);
         dest.writeInt(ratePerNight);
-        dest.writeInt(deposit);
-        dest.writeInt(additionalGuestFee);
+        dest.writeInt(utilityFee);
         dest.writeInt(cleaningFee);
         dest.writeInt(lockAddr);
         dest.writeInt(lockPc);
@@ -251,8 +248,7 @@ public class VillimHouse implements Parcelable {
         numBed = in.readInt();
         numBathroom = in.readInt();
         ratePerNight = in.readInt();
-        deposit = in.readInt();
-        additionalGuestFee = in.readInt();
+        utilityFee = in.readInt();
         cleaningFee = in.readInt();
         lockAddr = in.readInt();
         lockPc = in.readInt();

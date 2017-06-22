@@ -23,7 +23,7 @@ public class VillimKeys {
     public static final String RESERVE_URL = "v2/5942f90b120000ff12ddc665";
     public static final String FEATURED_HOUSES_URL = "v2/5944039a120000380bfcb53f";
     public static final String HOST_INFO_URL = "v2/594175a00f0000770ec63237";
-    public static final String HOUSE_INFO_URL = "v2/59441d55120000930dfcb57e";
+    public static final String HOUSE_INFO_URL = "v2/594b25f5120000f1054248af";
     public static final String HOUSE_REVIEW_URL = "v2/5941d5200f00002e16c632c4";
     public static final String VISIT_INFO_URL = "v2/5945b61113000067145b6fc6";
     public static final String POST_REVIEW_URL = "v2/59454496130000800b5b6f82";
@@ -88,6 +88,7 @@ public class VillimKeys {
     public static final String KEY_RATE_PER_NIGHT = "rate_per_night";
     public static final String KEY_DEPOSIT = "deposit";
     public static final String KEY_ADDITIONAL_GUEST_FEE = "additional_guest_fee";
+    public static final String KEY_UTILITY_FEE = "utility_fee";
     public static final String KEY_CLEANING_FEE = "cleaning_fee";
 
     public static final String KEY_LOCK_ADDR = "lock_addr";

@@ -78,6 +78,7 @@ import static net.villim.villim.VillimKeys.KEY_REVIEW_LAST_CONTENT;
 import static net.villim.villim.VillimKeys.KEY_REVIEW_LAST_PROFILE_PIC_URL;
 import static net.villim.villim.VillimKeys.KEY_REVIEW_LAST_RATING;
 import static net.villim.villim.VillimKeys.KEY_REVIEW_LAST_REVIEWER;
+import static net.villim.villim.VillimKeys.KEY_UTILITY_FEE;
 import static net.villim.villim.VillimKeys.SERVER_HOST;
 import static net.villim.villim.VillimKeys.SERVER_SCHEME;
 
@@ -429,8 +430,7 @@ public class HouseDetailActivity extends VillimActivity implements OnMapReadyCal
             public void onClick(View v) {
                 Intent intent = new Intent(HouseDetailActivity.this, PricePolicyActivity.class);
                 intent.putExtra(KEY_RATE_PER_NIGHT, house.ratePerNight);
-                intent.putExtra(KEY_DEPOSIT, house.deposit);
-                intent.putExtra(KEY_ADDITIONAL_GUEST_FEE, house.additionalGuestFee);
+                intent.putExtra(KEY_UTILITY_FEE, house.utilityFee);
                 intent.putExtra(KEY_CLEANING_FEE, house.cleaningFee);
                 startActivity(intent);
             }
