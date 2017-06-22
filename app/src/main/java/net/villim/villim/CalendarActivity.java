@@ -2,6 +2,7 @@ package net.villim.villim;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -67,12 +68,13 @@ public class CalendarActivity extends VillimActivity {
 
         /* Bottom button */
         saveSelectionButton = (Button) findViewById(R.id.save_selection_button);
-        saveSelectionButton.setEnabled(hasPresetDate);
         saveSelectionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (startDate.equals(endDate)){
                     Toast.makeText(getApplicationContext(), R.string.select_different_dates, Toast.LENGTH_LONG).show();
+                } else if (VillimUtil.daysBetween(startDate, endDate) < 30) {
+                    Toast.makeText(getApplicationContext(), R.string.book_at_least_a_month, Toast.LENGTH_LONG).show();
                 } else {
                     Intent returnIntent = new Intent();
                     returnIntent.putExtra(START_DATE, startDate);
@@ -99,6 +101,7 @@ public class CalendarActivity extends VillimActivity {
                         startDate = date;
                         changeState(STATE_SELECT_END);
                         endDate = null;
+                        deactivateBototmButton();
                         break;
                     case STATE_SELECT_END:
                         if (date.before(startDate)) {
@@ -118,7 +121,7 @@ public class CalendarActivity extends VillimActivity {
                 /* Set button clickable if both start date and end dates are set.
                    Highlight dates from startDate to endDate */
                 if (startDate != null && endDate != null) {
-                    saveSelectionButton.setEnabled(true);
+                    activateBottomButton();
                 }
 
             }
@@ -144,6 +147,9 @@ public class CalendarActivity extends VillimActivity {
             calendar.selectDate(startDate);
             calendar.selectDate(endDate);
             setStartAndEndDateText(startDate, endDate);
+            activateBottomButton();
+        } else {
+            deactivateBototmButton();
         }
     }
 
@@ -202,6 +208,18 @@ public class CalendarActivity extends VillimActivity {
 //                endDateTextView.setTextColor(getResources().getColor(R.color.date_filter_state_normal));
                 break;
         }
+    }
+
+    private void deactivateBototmButton() {
+        saveSelectionButton.setEnabled(false);
+        saveSelectionButton.setBackgroundColor(getResources().getColor(R.color.dark_button_disabled));
+        saveSelectionButton.setTextColor(Color.WHITE);
+    }
+
+    private void activateBottomButton() {
+        saveSelectionButton.setEnabled(true);
+        saveSelectionButton.setBackground(getResources().getDrawable(R.drawable.send_again_button));
+        saveSelectionButton.setTextColor(getResources().getColorStateList(R.color.dark_button_text));
     }
 
     @Override

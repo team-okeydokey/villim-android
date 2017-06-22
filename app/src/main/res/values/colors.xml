@@ -51,6 +51,7 @@
     <color name="dateTimeRangePickerRangeTextColorInactive">#B9B9B9</color>
     <color name="date_range_middle">#ffffff</color>
     <color name="date_range_selected">#ed2025</color>
+    <color name="dark_button_disabled">#e3e3e4</color>
 
     <!-- Discovery Fragment -->
     <color name="rating_color">#51ACCF</color>
