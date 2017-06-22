@@ -199,23 +199,23 @@ public class CalendarActivity extends VillimActivity {
         switch (state) {
             case STATE_SELECT_NONE:
                 selectState = STATE_SELECT_NONE;
-//                startDateTextView.setTextColor(getResources().getColor(R.color.date_filter_state_normal));
-//                endDateTextView.setTextColor(getResources().getColor(R.color.date_filter_state_normal));
+                startDateTextView.setTextColor(getResources().getColor(R.color.date_filter_state_normal));
+                endDateTextView.setTextColor(getResources().getColor(R.color.date_filter_state_normal));
                 break;
             case STATE_SELECT_START:
                 selectState = STATE_SELECT_START;
-//                startDateTextView.setTextColor(getResources().getColor(R.color.date_filter_state_highlighted));
-//                endDateTextView.setTextColor(getResources().getColor(R.color.date_filter_state_normal));
+                startDateTextView.setTextColor(getResources().getColor(R.color.date_filter_state_highlighted));
+                endDateTextView.setTextColor(getResources().getColor(R.color.date_filter_state_normal));
                 break;
             case STATE_SELECT_END:
                 selectState = STATE_SELECT_END;
-//                startDateTextView.setTextColor(getResources().getColor(R.color.date_filter_state_normal));
-//                endDateTextView.setTextColor(getResources().getColor(R.color.date_filter_state_highlighted));
+                startDateTextView.setTextColor(getResources().getColor(R.color.date_filter_state_normal));
+                endDateTextView.setTextColor(getResources().getColor(R.color.date_filter_state_highlighted));
                 break;
             default:
                 selectState = STATE_SELECT_NONE;
-//                startDateTextView.setTextColor(getResources().getColor(R.color.date_filter_state_normal));
-//                endDateTextView.setTextColor(getResources().getColor(R.color.date_filter_state_normal));
+                startDateTextView.setTextColor(getResources().getColor(R.color.date_filter_state_normal));
+                endDateTextView.setTextColor(getResources().getColor(R.color.date_filter_state_normal));
                 break;
         }
     }
