@@ -132,7 +132,7 @@
         <item>프로필 보기 및 수정</item>
         <item>FAQ</item>
         <item>환경 설정</item>
-        <item>개인정보 이용약관</item>
+        <item>개인정보 보호 및 이용약관</item>
     </string-array>
     <string-array name="profile_items_logged_out">
         <item>로그인</item>
@@ -146,7 +146,7 @@
     <string name="profile_title">프로필 보기 및 수정</string>
     <string name="settings">환경 설정</string>
     <string name="faq">FAQ</string>
-    <string name="privacy_policy">개인정보 이용약관</string>
+    <string name="privacy_policy">개인정보 보호 및 이용약관</string>
 
     <!-- Login Activity -->
     <string name="advert_title">전세계의 집이 나의 집!</string>
