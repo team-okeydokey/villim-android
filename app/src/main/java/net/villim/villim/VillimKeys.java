@@ -31,7 +31,7 @@ public class VillimKeys {
     public static final String CANCEL_VISIT_URL = "v2/5945baec13000005155b6fcc";
     public static final String TERMS_OF_SERVICE_URL = "https://www.klondikebar.com/";
     public static final String UPDATE_PROFILE_URL = "https://www.klondikebar.com/";
-    public static final String FAQ_URL = "https://www.klondikebar.com/";
+    public static final String FAQ_URL = "https://boo7387.wixsite.com/villim01/faq";
 
     /* Request success codes */
     public static final String KEY_QUERY_SUCCESS = "query_success";
