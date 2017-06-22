@@ -82,6 +82,7 @@
     <string name="reserve">예약하기</string>
     <string name="check_availability">입주 신청하기</string>
     <string name="price_text_format">₩ %1$s / %2$d일</string>
+    <string name="price_text_format_no_date">₩ %s / 월</string>
 
     <!-- Amenities -->
     <string name="amenity_bedsheet">침대시트</string>
