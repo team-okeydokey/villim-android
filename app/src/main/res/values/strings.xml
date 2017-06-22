@@ -197,7 +197,7 @@
     <string name="deposit">보증금</string>
     <string name="additional_guest_fee">추가 인원 요금</string>
     <string name="won_text_format">%d원</string>
-    <string name="won_symbol_format">₩ %d</string>
+    <string name="won_symbol_format">₩ %s</string>
     <string name="no_deposit">보증금 없음</string>
     <string name="no_additional_fee">추가요금 없음</string>
     <string name="cant_query">불러올 수 없음</string>

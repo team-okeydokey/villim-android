@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.text.NumberFormat;
+
 import static net.villim.villim.VillimKeys.KEY_ADDITIONAL_GUEST_FEE;
 import static net.villim.villim.VillimKeys.KEY_CLEANING_FEE;
 import static net.villim.villim.VillimKeys.KEY_DEPOSIT;
@@ -116,7 +118,8 @@ public class PricePolicyActivity extends VillimActivity {
                 cleaningFeeText = getString(R.string.no_additional_fee);
                 break;
             default:
-                cleaningFeeText = String.format(getString(R.string.won_symbol_format), cleaningFeeVal);
+                String cleaninFeeString = NumberFormat.getIntegerInstance().format(cleaningFeeVal);
+                cleaningFeeText = String.format(getString(R.string.won_symbol_format), cleaninFeeString);
                 break;
         }
         cleaningFee.setText(cleaningFeeText);

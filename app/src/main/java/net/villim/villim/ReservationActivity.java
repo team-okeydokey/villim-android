@@ -26,6 +26,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.net.URL;
+import java.text.NumberFormat;
 import java.util.Date;
 
 import okhttp3.Call;
@@ -209,7 +210,9 @@ public class ReservationActivity extends VillimActivity {
         String numNightsString = String.format(getString(R.string.num_nights_format), stayDuration);
         numberOfNightsText.setText(numNightsString);
 
-        String priceString = String.format(getString(R.string.won_symbol_format), stayDuration * house.ratePerNight);
+
+        String priceFormat = NumberFormat.getIntegerInstance().format(stayDuration * house.ratePerNight);
+        String priceString = String.format(getString(R.string.won_symbol_format), priceFormat);
         priceText.setText(priceString);
 
     }
