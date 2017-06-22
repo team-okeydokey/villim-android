@@ -195,6 +195,7 @@ public class HouseDetailActivity extends VillimActivity implements OnMapReadyCal
         hostRating = (RatingBar) findViewById(R.id.host_review_rating);
         hostReviewCount = (TextView) findViewById(R.id.host_review_count);
         contactHostButton = (Button) findViewById(R.id.contact_host_button);
+        contactHostButton.setVisibility(View.GONE); // For now.
 
         /* House Name and address */
         houseName = (TextView) findViewById(R.id.house_name);

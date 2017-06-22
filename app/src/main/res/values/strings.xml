@@ -67,7 +67,7 @@
     <string name="num_bedroom_format">방 %d개</string>
     <string name="num_bed_format">침대 %d개</string>
     <string name="num_bathroom_format">욕실 %d개</string>
-    <string name="description_title">상세 설명</string>
+    <string name="description_title">방 설명</string>
     <string name="amenities_title">시설</string>
     <string name="reviews_title">후기</string>
     <string name="see_more">+ 더보기</string>
@@ -80,7 +80,7 @@
     <string name="reviews_see_more_format">+%d개 후기 더보기</string>
     <string name="reviews_no_review">아직 작성된 후기가 없습니다.</string>
     <string name="reserve">예약하기</string>
-    <string name="check_availability">빌림가능확인</string>
+    <string name="check_availability">입주 신청하기</string>
     <string name="price_text_format">₩ %1$s / %2$d일</string>
 
     <!-- Amenities -->
