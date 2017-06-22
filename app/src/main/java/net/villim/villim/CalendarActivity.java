@@ -71,9 +71,19 @@ public class CalendarActivity extends VillimActivity {
         saveSelectionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                Calendar nextMonth = Calendar.getInstance();
+                nextMonth.set(startDate.getYear(), startDate.getMonth(), startDate.getDate());
+                nextMonth.add(Calendar.MONTH, 1);
+                nextMonth.add(Calendar.DATE, -1);
+                Date nextMonthDate = new Date();
+                nextMonthDate.setYear(nextMonth.get(Calendar.YEAR));
+                nextMonthDate.setMonth(nextMonth.get(Calendar.MONTH));
+                nextMonthDate.setDate(nextMonth.get(Calendar.DATE));
+
                 if (startDate.equals(endDate)){
                     Toast.makeText(getApplicationContext(), R.string.select_different_dates, Toast.LENGTH_LONG).show();
-                } else if (VillimUtil.daysBetween(startDate, endDate) < 30) {
+                } else if (endDate.before(nextMonthDate)) {
                     Toast.makeText(getApplicationContext(), R.string.book_at_least_a_month, Toast.LENGTH_LONG).show();
                 } else {
                     Intent returnIntent = new Intent();
