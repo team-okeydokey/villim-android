@@ -111,6 +111,9 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
+    <!-- Profile view activity -->
+    <dimen name="default_profile_image_margin_top">15dp</dimen>
+
 
     <!-- Profile edit page -->
     <dimen name="profile_edit_item_title_width">70dp</dimen>

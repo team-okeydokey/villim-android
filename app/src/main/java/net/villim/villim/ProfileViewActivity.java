@@ -3,20 +3,17 @@ package net.villim.villim;
 import android.app.Activity;
 import android.app.DialogFragment;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.net.Uri;
-import android.provider.MediaStore;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.MenuPopupWindow;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.ArrayAdapter;
+import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,12 +29,10 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URI;
 import java.net.URL;
 
 import okhttp3.Call;
 import okhttp3.Callback;
-import okhttp3.FormBody;
 import okhttp3.HttpUrl;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -60,13 +55,11 @@ import static net.villim.villim.VillimKeys.SERVER_HOST;
 import static net.villim.villim.VillimKeys.SERVER_SCHEME;
 import static net.villim.villim.VillimKeys.UPDATE_PROFILE_URL;
 
-public class ProfileEditActivity extends AppCompatActivity implements SimpleEditTextDialog.SimpleEditTextDialogListener {
+public class ProfileViewActivity extends AppCompatActivity {
     private static final int PHOTO_PICKER = 300;
 
-    private static final int FIRSTNAME = 0;
-
     private Toolbar toolbar;
-    private Button closeButton;
+    private Button editProfileButton;
 
     private RelativeLayout firstnameContainer;
     private RelativeLayout lastnameContainer;
@@ -77,13 +70,12 @@ public class ProfileEditActivity extends AppCompatActivity implements SimpleEdit
     private ImageView profilePicture;
     private TextView firstnameContent;
     private TextView lastnameContent;
-    private TextView sexContent;
+    //    private TextView sexContent;
     private TextView emailContent;
     private TextView phoneNumberContent;
     private Button addPhoneNumberButton;
     private TextView cityContent;
 
-    private Button bottomButton;
     private AVLoadingIndicatorView loadingIndicator;
 
     private VillimSession session;
@@ -95,38 +87,39 @@ public class ProfileEditActivity extends AppCompatActivity implements SimpleEdit
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile_edit);
+        setContentView(R.layout.activity_profile_view);
 
         newProfilePic = false;
         session = new VillimSession(getApplicationContext());
-        sex = session.getSex();
+//        sex = session.getSex();
 
 
         /* Toolbar */
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-        getSupportActionBar().setDisplayShowHomeEnabled(false);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(ContextCompat.getDrawable(getApplicationContext(), R.drawable.back_arrow_dark));
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-        /* Back button */
-        closeButton = (Button) findViewById(R.id.close_button);
-        closeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent returnIntent = new Intent();
-                setResult(Activity.RESULT_CANCELED, returnIntent);
-                finish();
-            }
-        });
+        /* Edit profile button */
+//        editProfileButton = (Button) findViewById(R.id.edit_button);
+//        editProfileButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//            }
+//        });
 
         /* Profile picture */
         profilePicture = (ImageView) findViewById(R.id.profile_picture);
         if (session.getProfilePicUrl().isEmpty()) {
+            addProfilePhotoTopMargin();
             Glide.with(this)
                     .load(R.drawable.img_default)
                     .into(profilePicture);
         } else {
+            removeProfilePhotoTopMargin();
             Glide.with(this)
                     .load(session.getProfilePicUrl())
                     .into(profilePicture);
@@ -136,31 +129,22 @@ public class ProfileEditActivity extends AppCompatActivity implements SimpleEdit
             public void onClick(View v) {
                 Intent pickPhotoIntent = new Intent(Intent.ACTION_PICK,
                         android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(pickPhotoIntent, PHOTO_PICKER);//one can be replaced with any action code
+                startActivityForResult(pickPhotoIntent, PHOTO_PICKER);
             }
         });
 
         /* First name */
         firstnameContainer = (RelativeLayout) findViewById(R.id.firstname_container);
-        firstnameContainer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SimpleEditTextDialog newFragment = SimpleEditTextDialog.newInstance(
-                        String.format(getString(R.string.edit_item), getString(R.string.firstname)),
-                        FIRSTNAME, getString(R.string.firstname), session.getFirstName());
-                newFragment.show(getFragmentManager(), "dialog");
-            }
-        });
         firstnameContent = (TextView) findViewById(R.id.firstname_content);
         firstnameContent.setText(session.getFirstName());
 
         /* Last name */
+        lastnameContainer = (RelativeLayout) findViewById(R.id.lastname_container);
         lastnameContent = (TextView) findViewById(R.id.lastname_content);
         lastnameContent.setText(session.getLastName());
 
         /* Sex */
-        sexContainer = (RelativeLayout) findViewById(R.id.sex_container);
-        sexContent = (TextView) findViewById(R.id.sex_content);
+//        sexContent = (TextView) findViewById(R.id.sex_content);
 //        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
 //                R.array.sex_array, android.R.layout.simple_spinner_item);
 //        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -182,14 +166,14 @@ public class ProfileEditActivity extends AppCompatActivity implements SimpleEdit
         cityContent = (TextView) findViewById(R.id.city_content);
         cityContent.setText(session.getCityOfResidence());
 
-        /* Buttom button */
-        bottomButton = (Button) findViewById(R.id.bottom_button);
-        bottomButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sendUpdateProfileRequest();
-            }
-        });
+//        /* Buttom button */
+//        bottomButton = (Button) findViewById(R.id.bottom_button);
+//        bottomButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                sendUpdateProfileRequest();
+//            }
+//        });
 
          /* Loading indicator */
         loadingIndicator = (AVLoadingIndicatorView) findViewById(R.id.loading_indicator);
@@ -221,7 +205,7 @@ public class ProfileEditActivity extends AppCompatActivity implements SimpleEdit
                     .setType(MultipartBody.FORM)
                     .addFormDataPart(KEY_FIRSTNAME, firstnameContent.getText().toString().trim())
                     .addFormDataPart(KEY_LASTNAME, lastnameContent.getText().toString().trim())
-                    .addFormDataPart(KEY_SEX, Integer.toString(sex))
+//                    .addFormDataPart(KEY_SEX, Integer.toString(sex))
                     .addFormDataPart(KEY_EMAIL, emailContent.getText().toString().trim())
                     .addFormDataPart(KEY_PHONE_NUMBER, phoneNumberContent.getText().toString().trim())
                     .addFormDataPart(KEY_CITY_OF_RESIDENCE, cityContent.getText().toString().trim())
@@ -231,7 +215,7 @@ public class ProfileEditActivity extends AppCompatActivity implements SimpleEdit
                     .setType(MultipartBody.FORM)
                     .addFormDataPart(KEY_FIRSTNAME, firstnameContent.getText().toString().trim())
                     .addFormDataPart(KEY_LASTNAME, lastnameContent.getText().toString().trim())
-                    .addFormDataPart(KEY_SEX, Integer.toString(sex))
+//                    .addFormDataPart(KEY_SEX, Integer.toString(sex))
                     .addFormDataPart(KEY_EMAIL, emailContent.getText().toString().trim())
                     .addFormDataPart(KEY_PHONE_NUMBER, phoneNumberContent.getText().toString().trim())
                     .addFormDataPart(KEY_CITY_OF_RESIDENCE, cityContent.getText().toString().trim())
@@ -292,12 +276,14 @@ public class ProfileEditActivity extends AppCompatActivity implements SimpleEdit
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-        if (requestCode == PHOTO_PICKER) {
+        if (requestCode == PHOTO_PICKER && data != null) {
             if (resultCode == Activity.RESULT_OK) {
                 newProfilePic = true;
                 Uri uri = data.getData();
                 profilePicUri = uri;
                 Glide.with(this).load(uri).into(profilePicture);
+
+                removeProfilePhotoTopMargin();
             }
             if (resultCode == Activity.RESULT_CANCELED) {
 
@@ -342,8 +328,38 @@ public class ProfileEditActivity extends AppCompatActivity implements SimpleEdit
         finish();
     }
 
-    @Override
-    public void onConfirm(DialogFragment dialog, int dataType, String newData) {
+    private void removeProfilePhotoTopMargin() {
+        LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) profilePicture.getLayoutParams();
+        layoutParams.setMargins(
+                layoutParams.leftMargin,
+                0,
+                layoutParams.rightMargin,
+                layoutParams.bottomMargin);
+        profilePicture.setLayoutParams(layoutParams);
 
+        profilePicture.setScaleType(ImageView.ScaleType.CENTER_CROP);
     }
+
+    private void addProfilePhotoTopMargin() {
+        float density = getApplicationContext().getResources().getDisplayMetrics().density;
+        int topMargin = (int) (density * getResources().getDimension(R.dimen.default_profile_image_margin_top));
+        LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) profilePicture.getLayoutParams();
+        layoutParams.setMargins(
+                layoutParams.leftMargin,
+                topMargin,
+                layoutParams.rightMargin,
+                layoutParams.bottomMargin);
+        profilePicture.setLayoutParams(layoutParams);
+
+        profilePicture.setScaleType(ImageView.ScaleType.FIT_CENTER);
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        Intent returnIntent = new Intent();
+        setResult(Activity.RESULT_CANCELED, returnIntent);
+        finish();
+        return true;
+    }
+
 }

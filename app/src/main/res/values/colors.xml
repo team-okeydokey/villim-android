@@ -92,5 +92,10 @@
     <!-- Find password success activity -->
     <color name="send_again_button_pressed">#000000</color>
     <color name="send_again_button_normal">#2a2c32</color>
+
+    <!-- Blue text button -->
+    <color name="blue_text_button_normal">#007AFF</color>
+    <color name="blue_text_button_pressed_text">#1565C0</color>
+
     
 </resources>

@@ -129,7 +129,7 @@ public class ProfileFragment extends Fragment implements LogoutDialog.LogoutDial
     }
 
     private void launchProfileEditActivity() {
-        Intent intent = new Intent(getActivity(), ProfileEditActivity.class);
+        Intent intent = new Intent(getActivity(), ProfileViewActivity.class);
         getActivity().startActivity(intent);
     }
 
