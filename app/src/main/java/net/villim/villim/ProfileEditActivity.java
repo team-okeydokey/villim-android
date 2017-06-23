@@ -1,6 +1,7 @@
 package net.villim.villim;
 
 import android.app.Activity;
+import android.app.DialogFragment;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -14,7 +15,9 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -57,20 +60,28 @@ import static net.villim.villim.VillimKeys.SERVER_HOST;
 import static net.villim.villim.VillimKeys.SERVER_SCHEME;
 import static net.villim.villim.VillimKeys.UPDATE_PROFILE_URL;
 
-public class ProfileEditActivity extends AppCompatActivity {
+public class ProfileEditActivity extends AppCompatActivity implements SimpleEditTextDialog.SimpleEditTextDialogListener {
     private static final int PHOTO_PICKER = 300;
+
+    private static final int FIRSTNAME = 0;
 
     private Toolbar toolbar;
     private Button closeButton;
 
+    private RelativeLayout firstnameContainer;
+    private RelativeLayout lastnameContainer;
+    private RelativeLayout sexContainer;
+    private RelativeLayout emailContainer;
+    private RelativeLayout cityContainer;
+
     private ImageView profilePicture;
-    private EditText firstnameForm;
-    private EditText lastnameForm;
-    private Spinner sexSpinner;
-    private EditText emailForm;
-    private EditText phoneNumberForm;
+    private TextView firstnameContent;
+    private TextView lastnameContent;
+    private TextView sexContent;
+    private TextView emailContent;
+    private TextView phoneNumberContent;
     private Button addPhoneNumberButton;
-    private EditText cityForm;
+    private TextView cityContent;
 
     private Button bottomButton;
     private AVLoadingIndicatorView loadingIndicator;
@@ -79,6 +90,7 @@ public class ProfileEditActivity extends AppCompatActivity {
 
     private boolean newProfilePic;
     private Uri profilePicUri;
+    private int sex;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,6 +99,8 @@ public class ProfileEditActivity extends AppCompatActivity {
 
         newProfilePic = false;
         session = new VillimSession(getApplicationContext());
+        sex = session.getSex();
+
 
         /* Toolbar */
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -126,31 +140,47 @@ public class ProfileEditActivity extends AppCompatActivity {
             }
         });
 
-        /* First & last name */
-        firstnameForm = (EditText) findViewById(R.id.firstname_form);
-        firstnameForm.setText(session.getFirstName());
-        lastnameForm = (EditText) findViewById(R.id.lastname_form);
-        lastnameForm.setText(session.getLastName());
+        /* First name */
+        firstnameContainer = (RelativeLayout) findViewById(R.id.firstname_container);
+        firstnameContainer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SimpleEditTextDialog newFragment = SimpleEditTextDialog.newInstance(
+                        String.format(getString(R.string.edit_item), getString(R.string.firstname)),
+                        FIRSTNAME, getString(R.string.firstname), session.getFirstName());
+                newFragment.show(getFragmentManager(), "dialog");
+            }
+        });
+        firstnameContent = (TextView) findViewById(R.id.firstname_content);
+        firstnameContent.setText(session.getFirstName());
+
+        /* Last name */
+        lastnameContent = (TextView) findViewById(R.id.lastname_content);
+        lastnameContent.setText(session.getLastName());
 
         /* Sex */
-        sexSpinner = (Spinner) findViewById(R.id.sex_spinner);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.sex_array, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        sexSpinner.setAdapter(adapter);
-        sexSpinner.setSelection(session.getSex());
+        sexContainer = (RelativeLayout) findViewById(R.id.sex_container);
+        sexContent = (TextView) findViewById(R.id.sex_content);
+//        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+//                R.array.sex_array, android.R.layout.simple_spinner_item);
+//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        sexContent.setAdapter(adapter);
+//        sexContent.setSelection(session.getSex());
+//        sexContent.setText(session.getSex());
 
         /* Email */
-        emailForm = (EditText) findViewById(R.id.email_form);
-        emailForm.setText(session.getEmail());
+        emailContainer = (RelativeLayout) findViewById(R.id.email_container);
+        emailContent = (TextView) findViewById(R.id.email_content);
+        emailContent.setText(session.getEmail());
 
         /* Phone number */
-        phoneNumberForm = (EditText) findViewById(R.id.phone_number_form);
-        phoneNumberForm.setText(session.getPhoneNumber());
+        phoneNumberContent = (TextView) findViewById(R.id.phone_number_content);
+        phoneNumberContent.setText(session.getPhoneNumber());
 
         /* City of residence */
-        cityForm = (EditText) findViewById(R.id.city_form);
-        cityForm.setText(session.getCityOfResidence());
+        cityContainer = (RelativeLayout) findViewById(R.id.city_container);
+        cityContent = (TextView) findViewById(R.id.city_content);
+        cityContent.setText(session.getCityOfResidence());
 
         /* Buttom button */
         bottomButton = (Button) findViewById(R.id.bottom_button);
@@ -189,22 +219,22 @@ public class ProfileEditActivity extends AppCompatActivity {
         if (newProfilePic) {
             requestBody = new MultipartBody.Builder()
                     .setType(MultipartBody.FORM)
-                    .addFormDataPart(KEY_FIRSTNAME, firstnameForm.getText().toString().trim())
-                    .addFormDataPart(KEY_LASTNAME, lastnameForm.getText().toString().trim())
-                    .addFormDataPart(KEY_SEX, Integer.toString(sexSpinner.getSelectedItemPosition()))
-                    .addFormDataPart(KEY_EMAIL, emailForm.getText().toString().trim())
-                    .addFormDataPart(KEY_PHONE_NUMBER, phoneNumberForm.getText().toString().trim())
-                    .addFormDataPart(KEY_CITY_OF_RESIDENCE, cityForm.getText().toString().trim())
+                    .addFormDataPart(KEY_FIRSTNAME, firstnameContent.getText().toString().trim())
+                    .addFormDataPart(KEY_LASTNAME, lastnameContent.getText().toString().trim())
+                    .addFormDataPart(KEY_SEX, Integer.toString(sex))
+                    .addFormDataPart(KEY_EMAIL, emailContent.getText().toString().trim())
+                    .addFormDataPart(KEY_PHONE_NUMBER, phoneNumberContent.getText().toString().trim())
+                    .addFormDataPart(KEY_CITY_OF_RESIDENCE, cityContent.getText().toString().trim())
                     .build();
         } else {
             requestBody = new MultipartBody.Builder()
                     .setType(MultipartBody.FORM)
-                    .addFormDataPart(KEY_FIRSTNAME, firstnameForm.getText().toString().trim())
-                    .addFormDataPart(KEY_LASTNAME, lastnameForm.getText().toString().trim())
-                    .addFormDataPart(KEY_SEX, Integer.toString(sexSpinner.getSelectedItemPosition()))
-                    .addFormDataPart(KEY_EMAIL, emailForm.getText().toString().trim())
-                    .addFormDataPart(KEY_PHONE_NUMBER, phoneNumberForm.getText().toString().trim())
-                    .addFormDataPart(KEY_CITY_OF_RESIDENCE, cityForm.getText().toString().trim())
+                    .addFormDataPart(KEY_FIRSTNAME, firstnameContent.getText().toString().trim())
+                    .addFormDataPart(KEY_LASTNAME, lastnameContent.getText().toString().trim())
+                    .addFormDataPart(KEY_SEX, Integer.toString(sex))
+                    .addFormDataPart(KEY_EMAIL, emailContent.getText().toString().trim())
+                    .addFormDataPart(KEY_PHONE_NUMBER, phoneNumberContent.getText().toString().trim())
+                    .addFormDataPart(KEY_CITY_OF_RESIDENCE, cityContent.getText().toString().trim())
                     .addFormDataPart(KEY_PROFILE_PIC, imageFiie.getName(),
                             RequestBody.create(MediaType.parse(imageFiie.getPath()), imageFiie))
                     .build();
@@ -312,4 +342,8 @@ public class ProfileEditActivity extends AppCompatActivity {
         finish();
     }
 
+    @Override
+    public void onConfirm(DialogFragment dialog, int dataType, String newData) {
+
+    }
 }
