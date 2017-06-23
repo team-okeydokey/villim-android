@@ -3,11 +3,14 @@ package net.villim.villim;
 import android.app.Activity;
 import android.app.DialogFragment;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -55,11 +58,17 @@ import static net.villim.villim.VillimKeys.SERVER_HOST;
 import static net.villim.villim.VillimKeys.SERVER_SCHEME;
 import static net.villim.villim.VillimKeys.UPDATE_PROFILE_URL;
 
-public class ProfileViewActivity extends AppCompatActivity {
+public class ProfileViewActivity extends AppCompatActivity implements SimpleEditTextDialog.SimpleEditTextDialogListener {
     private static final int PHOTO_PICKER = 300;
+
+    public static final int FIRSTNAME = 0;
+    public static final int LASTNAME = 1;
+    public static final int EMAIL = 2;
+    public static final int CITY = 3;
 
     private Toolbar toolbar;
     private Button editProfileButton;
+    private Button bottomButton;
 
     private RelativeLayout firstnameContainer;
     private RelativeLayout lastnameContainer;
@@ -114,15 +123,10 @@ public class ProfileViewActivity extends AppCompatActivity {
         /* Profile picture */
         profilePicture = (ImageView) findViewById(R.id.profile_picture);
         if (session.getProfilePicUrl().isEmpty()) {
-            addProfilePhotoTopMargin();
-            Glide.with(this)
-                    .load(R.drawable.ic_photo_camera_white_24dp)
-                    .into(profilePicture);
+            loadDefaultImage();
         } else {
-            removeProfilePhotoTopMargin();
-            Glide.with(this)
-                    .load(session.getProfilePicUrl())
-                    .into(profilePicture);
+            loadProfilePhoto(Uri.parse(session.getProfilePicUrl()));
+
         }
         profilePicture.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -134,14 +138,32 @@ public class ProfileViewActivity extends AppCompatActivity {
         });
 
         /* First name */
-        firstnameContainer = (RelativeLayout) findViewById(R.id.firstname_container);
         firstnameContent = (TextView) findViewById(R.id.firstname_content);
         firstnameContent.setText(session.getFirstName());
+        firstnameContainer = (RelativeLayout) findViewById(R.id.firstname_container);
+        firstnameContainer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SimpleEditTextDialog newFragment = SimpleEditTextDialog.newInstance(
+                        String.format(getString(R.string.edit_item), getString(R.string.firstname)),
+                        FIRSTNAME, getString(R.string.firstname), firstnameContent.getText().toString());
+                newFragment.show(getFragmentManager(), "dialog");
+            }
+        });
 
         /* Last name */
-        lastnameContainer = (RelativeLayout) findViewById(R.id.lastname_container);
         lastnameContent = (TextView) findViewById(R.id.lastname_content);
         lastnameContent.setText(session.getLastName());
+        lastnameContainer = (RelativeLayout) findViewById(R.id.lastname_container);
+        lastnameContainer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SimpleEditTextDialog newFragment = SimpleEditTextDialog.newInstance(
+                        String.format(getString(R.string.edit_item), getString(R.string.lastname)),
+                        LASTNAME, getString(R.string.lastname), lastnameContent.getText().toString());
+                newFragment.show(getFragmentManager(), "dialog");
+            }
+        });
 
         /* Sex */
 //        sexContent = (TextView) findViewById(R.id.sex_content);
@@ -153,30 +175,50 @@ public class ProfileViewActivity extends AppCompatActivity {
 //        sexContent.setText(session.getSex());
 
         /* Email */
-        emailContainer = (RelativeLayout) findViewById(R.id.email_container);
         emailContent = (TextView) findViewById(R.id.email_content);
         emailContent.setText(session.getEmail());
+        emailContainer = (RelativeLayout) findViewById(R.id.email_container);
+        emailContainer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SimpleEditTextDialog newFragment = SimpleEditTextDialog.newInstance(
+                        String.format(getString(R.string.edit_item), getString(R.string.email)),
+                        EMAIL, getString(R.string.email), emailContent.getText().toString());
+                newFragment.show(getFragmentManager(), "dialog");
+            }
+        });
 
         /* Phone number */
         phoneNumberContent = (TextView) findViewById(R.id.phone_number_content);
         phoneNumberContent.setText(session.getPhoneNumber());
 
         /* City of residence */
-        cityContainer = (RelativeLayout) findViewById(R.id.city_container);
         cityContent = (TextView) findViewById(R.id.city_content);
         cityContent.setText(session.getCityOfResidence());
+        cityContainer = (RelativeLayout) findViewById(R.id.city_container);
+        cityContainer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SimpleEditTextDialog newFragment = SimpleEditTextDialog.newInstance(
+                        String.format(getString(R.string.edit_item), getString(R.string.city_of_residence)),
+                        CITY, getString(R.string.city_of_residence), cityContent.getText().toString());
+                newFragment.show(getFragmentManager(), "dialog");
+            }
+        });
 
-//        /* Buttom button */
-//        bottomButton = (Button) findViewById(R.id.bottom_button);
-//        bottomButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                sendUpdateProfileRequest();
-//            }
-//        });
+        /* Buttom button */
+        bottomButton = (Button) findViewById(R.id.bottom_button);
+        bottomButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sendUpdateProfileRequest();
+            }
+        });
 
          /* Loading indicator */
         loadingIndicator = (AVLoadingIndicatorView) findViewById(R.id.loading_indicator);
+
+        deactivateBottomButton();
     }
 
 
@@ -277,14 +319,13 @@ public class ProfileViewActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         if (requestCode == PHOTO_PICKER && data != null) {
-            removeProfilePhotoTopMargin();
+
             if (resultCode == Activity.RESULT_OK) {
                 newProfilePic = true;
                 Uri uri = data.getData();
                 profilePicUri = uri;
-                Glide.with(this).load(uri).into(profilePicture);
-
-                removeProfilePhotoTopMargin();
+                loadProfilePhoto(uri);
+                activateBottomButton();
             }
             if (resultCode == Activity.RESULT_CANCELED) {
 
@@ -329,30 +370,71 @@ public class ProfileViewActivity extends AppCompatActivity {
         finish();
     }
 
-    private void removeProfilePhotoTopMargin() {
-//        LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) profilePicture.getLayoutParams();
-//        layoutParams.setMargins(
-//                layoutParams.leftMargin,
-//                0,
-//                layoutParams.rightMargin,
-//                layoutParams.bottomMargin);
-//        profilePicture.setLayoutParams(layoutParams);
+    @Override
+    public void onConfirm(DialogFragment dialog, int dataType, String newData) {
+        dialog.dismiss();
 
-        profilePicture.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        TextView newDataTextView;
+        switch (dataType) {
+            case FIRSTNAME:
+                newDataTextView = firstnameContent;
+                break;
+            case LASTNAME:
+                newDataTextView = lastnameContent;
+                break;
+            case EMAIL:
+                newDataTextView = emailContent;
+                break;
+            case CITY:
+                newDataTextView = cityContent;
+                break;
+            default:
+                newDataTextView = firstnameContent;
+        }
+
+        boolean notSame = !newDataTextView.getText().toString().trim().equals(newData);
+        boolean valid = !TextUtils.isEmpty(newData);
+        if (notSame && valid) {
+            newDataTextView.setText(newData);
+            activateBottomButton();
+        }
+
     }
 
-    private void addProfilePhotoTopMargin() {
-//        float density = getApplicationContext().getResources().getDisplayMetrics().density;
-//        int topMargin = (int) (density * getResources().getDimension(R.dimen.default_profile_image_margin_top));
-//        LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) profilePicture.getLayoutParams();
-//        layoutParams.setMargins(
-//                layoutParams.leftMargin,
-//                topMargin,
-//                layoutParams.rightMargin,
-//                layoutParams.bottomMargin);
-//        profilePicture.setLayoutParams(layoutParams);
+    private void loadProfilePhoto(Uri uri) {
+        profilePicture.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        Glide.with(this).load(uri).into(profilePicture);
+    }
 
+    private void loadDefaultImage() {
         profilePicture.setScaleType(ImageView.ScaleType.FIT_CENTER);
+
+        int iconSize = getResources().getDimensionPixelSize(R.dimen.photo_icon_size);
+
+        Drawable cameraIcon = getResources().getDrawable(R.drawable.ic_photo_camera_white_24dp);
+
+        cameraIcon.setBounds(0,0,iconSize,iconSize);
+
+//        Glide.with(this)
+//                .load("")
+//                .placeholder(cameraIcon)
+//                .override(iconSize, iconSize)
+//                .into(profilePicture);
+
+        profilePicture.setImageDrawable(cameraIcon);
+
+    }
+
+    private void activateBottomButton() {
+        bottomButton.setEnabled(true);
+        bottomButton.setBackground(getResources().getDrawable(R.drawable.next_button));
+        bottomButton.setTextColor(getResources().getColorStateList(R.color.white_text_button));
+    }
+
+    private void deactivateBottomButton() {
+        bottomButton.setEnabled(false);
+        bottomButton.setBackgroundColor(getResources().getColor(R.color.red_button_disabled));
+        bottomButton.setTextColor(Color.WHITE);
     }
 
     @Override

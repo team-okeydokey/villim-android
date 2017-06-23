@@ -44,6 +44,8 @@
         android:paddingRight="13dp">
 
         <RelativeLayout
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -53,23 +55,23 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
-                android:gravity="left|center_vertical"
+                android:gravity="center"
                 android:textColor="#05060b"
-                android:textSize="15sp" />
+                android:textSize="17sp" />
 
             <EditText
                 android:id="@+id/field_content"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="20dp"
-                android:layout_toRightOf="@+id/firstname_title"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/field_name"
                 android:gravity="left|center_vertical"
                 android:lineSpacingExtra="5sp"
                 android:maxLines="1"
                 android:textColor="#585757"
-                android:textSize="13sp" />
+                android:textSize="17sp" />
 
         </RelativeLayout>
 

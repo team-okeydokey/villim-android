@@ -318,13 +318,13 @@
     <string name="sex">성별</string>
     <string name="phone_number">전화번호</string>
     <string name="add_phone_number">+전화번호 추가하기</string>
-    <string name="city_of_residency">거주 도시</string>
+    <string name="city_of_residence">거주 도시</string>
     <string name="email_privacy_statement">이메일 주소는 다른 회원에게 공개되지 않습니다.</string>
     <string name="sex_privacy_statement">이 자료는 통계 목적으로 사용되어 공개되지 않습니다.</string>
     <string name="edit">수정</string>
     <string name="profile_updated">프로필 정보가 업데이트 되었습니다.</string>
     <string name="change">변경</string>
-    <string name="edit_item">%s 수정</string>
+    <string name="edit_item">%s 수정하기</string>
     <string-array name="sex_array">
         <item>남자</item>
         <item>여자</item>
