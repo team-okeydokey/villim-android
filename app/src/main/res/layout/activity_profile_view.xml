@@ -8,7 +8,38 @@
     android:orientation="vertical"
     tools:context=".ProfileViewActivity">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/toolbar_height"
+        android:background="@android:color/white"
+        android:elevation="@dimen/toolbar_elevation"
+        app:contentInsetEnd="0dp"
+        app:contentInsetStart="0dp">
+
+        <TextView
+            android:id="@+id/toolbar_title"
+            style="@style/ToolbarTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/profile_title"
+            android:textColor="@color/toolbar_title_color" />
+
+        <!--<Button-->
+        <!--android:id="@+id/edit_button"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="right"-->
+        <!--android:background="@android:color/transparent"-->
+        <!--android:text="@string/edit"-->
+        <!--android:textColor="@color/blue_text_button" />-->
+
+    </android.support.v7.widget.Toolbar>
+
     <ScrollView
+        android:layout_below="@id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -16,41 +47,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/toolbar_height"
-                android:background="@android:color/white"
-                android:elevation="@dimen/toolbar_elevation"
-                app:contentInsetEnd="0dp"
-                app:contentInsetStart="0dp">
-
-                <TextView
-                    android:id="@+id/toolbar_title"
-                    style="@style/ToolbarTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:text="@string/profile_title"
-                    android:textColor="@color/toolbar_title_color" />
-
-                <!--<Button-->
-                <!--android:id="@+id/edit_button"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_gravity="right"-->
-                <!--android:background="@android:color/transparent"-->
-                <!--android:text="@string/edit"-->
-                <!--android:textColor="@color/blue_text_button" />-->
-
-            </android.support.v7.widget.Toolbar>
 
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/toolbar"
                 android:orientation="vertical"
                 android:paddingBottom="100dp">
 
@@ -59,9 +60,9 @@
                     android:id="@+id/profile_picture"
                     android:layout_width="match_parent"
                     android:layout_height="250dp"
+                    android:background="#C8C8C8"
                     android:layout_gravity="center"
-                    android:layout_marginBottom="10dp"
-                    android:adjustViewBounds="true" />
+                    android:layout_marginBottom="10dp" />
 
                 <!-- 이름 -->
                 <RelativeLayout

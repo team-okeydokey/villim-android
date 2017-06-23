@@ -116,7 +116,7 @@ public class ProfileViewActivity extends AppCompatActivity {
         if (session.getProfilePicUrl().isEmpty()) {
             addProfilePhotoTopMargin();
             Glide.with(this)
-                    .load(R.drawable.img_default)
+                    .load(R.drawable.ic_photo_camera_white_24dp)
                     .into(profilePicture);
         } else {
             removeProfilePhotoTopMargin();
@@ -277,6 +277,7 @@ public class ProfileViewActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         if (requestCode == PHOTO_PICKER && data != null) {
+            removeProfilePhotoTopMargin();
             if (resultCode == Activity.RESULT_OK) {
                 newProfilePic = true;
                 Uri uri = data.getData();
@@ -329,27 +330,27 @@ public class ProfileViewActivity extends AppCompatActivity {
     }
 
     private void removeProfilePhotoTopMargin() {
-        LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) profilePicture.getLayoutParams();
-        layoutParams.setMargins(
-                layoutParams.leftMargin,
-                0,
-                layoutParams.rightMargin,
-                layoutParams.bottomMargin);
-        profilePicture.setLayoutParams(layoutParams);
+//        LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) profilePicture.getLayoutParams();
+//        layoutParams.setMargins(
+//                layoutParams.leftMargin,
+//                0,
+//                layoutParams.rightMargin,
+//                layoutParams.bottomMargin);
+//        profilePicture.setLayoutParams(layoutParams);
 
         profilePicture.setScaleType(ImageView.ScaleType.CENTER_CROP);
     }
 
     private void addProfilePhotoTopMargin() {
-        float density = getApplicationContext().getResources().getDisplayMetrics().density;
-        int topMargin = (int) (density * getResources().getDimension(R.dimen.default_profile_image_margin_top));
-        LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) profilePicture.getLayoutParams();
-        layoutParams.setMargins(
-                layoutParams.leftMargin,
-                topMargin,
-                layoutParams.rightMargin,
-                layoutParams.bottomMargin);
-        profilePicture.setLayoutParams(layoutParams);
+//        float density = getApplicationContext().getResources().getDisplayMetrics().density;
+//        int topMargin = (int) (density * getResources().getDimension(R.dimen.default_profile_image_margin_top));
+//        LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) profilePicture.getLayoutParams();
+//        layoutParams.setMargins(
+//                layoutParams.leftMargin,
+//                topMargin,
+//                layoutParams.rightMargin,
+//                layoutParams.bottomMargin);
+//        profilePicture.setLayoutParams(layoutParams);
 
         profilePicture.setScaleType(ImageView.ScaleType.FIT_CENTER);
     }
