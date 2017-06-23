@@ -125,7 +125,8 @@ public class ProfileViewActivity extends AppCompatActivity implements SimpleEdit
         if (session.getProfilePicUrl().isEmpty()) {
             loadDefaultImage();
         } else {
-            loadProfilePhoto(Uri.parse(session.getProfilePicUrl()));
+            profilePicUri = Uri.parse(session.getProfilePicUrl());
+            loadProfilePhoto(profilePicUri);
 
         }
         profilePicture.setOnClickListener(new View.OnClickListener() {
@@ -238,21 +239,10 @@ public class ProfileViewActivity extends AppCompatActivity implements SimpleEdit
                 .addPathSegments(UPDATE_PROFILE_URL)
                 .build().url();
 
-        File imageFiie = new File(profilePicUri.getPath());
-
         RequestBody requestBody;
 
         if (newProfilePic) {
-            requestBody = new MultipartBody.Builder()
-                    .setType(MultipartBody.FORM)
-                    .addFormDataPart(KEY_FIRSTNAME, firstnameContent.getText().toString().trim())
-                    .addFormDataPart(KEY_LASTNAME, lastnameContent.getText().toString().trim())
-//                    .addFormDataPart(KEY_SEX, Integer.toString(sex))
-                    .addFormDataPart(KEY_EMAIL, emailContent.getText().toString().trim())
-                    .addFormDataPart(KEY_PHONE_NUMBER, phoneNumberContent.getText().toString().trim())
-                    .addFormDataPart(KEY_CITY_OF_RESIDENCE, cityContent.getText().toString().trim())
-                    .build();
-        } else {
+            File imageFiie = new File(profilePicUri.getPath());
             requestBody = new MultipartBody.Builder()
                     .setType(MultipartBody.FORM)
                     .addFormDataPart(KEY_FIRSTNAME, firstnameContent.getText().toString().trim())
@@ -263,6 +253,16 @@ public class ProfileViewActivity extends AppCompatActivity implements SimpleEdit
                     .addFormDataPart(KEY_CITY_OF_RESIDENCE, cityContent.getText().toString().trim())
                     .addFormDataPart(KEY_PROFILE_PIC, imageFiie.getName(),
                             RequestBody.create(MediaType.parse(imageFiie.getPath()), imageFiie))
+                    .build();
+        } else {
+            requestBody = new MultipartBody.Builder()
+                    .setType(MultipartBody.FORM)
+                    .addFormDataPart(KEY_FIRSTNAME, firstnameContent.getText().toString().trim())
+                    .addFormDataPart(KEY_LASTNAME, lastnameContent.getText().toString().trim())
+//                    .addFormDataPart(KEY_SEX, Integer.toString(sex))
+                    .addFormDataPart(KEY_EMAIL, emailContent.getText().toString().trim())
+                    .addFormDataPart(KEY_PHONE_NUMBER, phoneNumberContent.getText().toString().trim())
+                    .addFormDataPart(KEY_CITY_OF_RESIDENCE, cityContent.getText().toString().trim())
                     .build();
         }
 
@@ -407,13 +407,13 @@ public class ProfileViewActivity extends AppCompatActivity implements SimpleEdit
     }
 
     private void loadDefaultImage() {
-        profilePicture.setScaleType(ImageView.ScaleType.FIT_CENTER);
+        profilePicture.setScaleType(ImageView.ScaleType.CENTER);
 
         int iconSize = getResources().getDimensionPixelSize(R.dimen.photo_icon_size);
 
-        Drawable cameraIcon = getResources().getDrawable(R.drawable.ic_photo_camera_white_24dp);
+        Drawable cameraIcon = getResources().getDrawable(R.drawable.ic_photo_camera_white_48dp);
 
-        cameraIcon.setBounds(0,0,iconSize,iconSize);
+        cameraIcon.setBounds(0, 0, iconSize, iconSize);
 
 //        Glide.with(this)
 //                .load("")

@@ -52,8 +52,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingBottom="100dp">
+                android:orientation="vertical">
 
                 <!-- Profile Picture -->
                 <ImageView
@@ -312,20 +311,20 @@
 
             </LinearLayout>
 
-            <Button
-                android:id="@+id/bottom_button"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/next_button_height"
-                android:layout_alignParentBottom="true"
-                android:background="@drawable/next_button"
-                android:text="@string/edit"
-                android:textColor="@drawable/next_button_text"
-                android:textSize="@dimen/next_button_text_size" />
-
         </RelativeLayout>
 
     </ScrollView>
 
+
+    <Button
+        android:id="@+id/bottom_button"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/next_button_height"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/next_button"
+        android:text="@string/edit"
+        android:textColor="@drawable/next_button_text"
+        android:textSize="@dimen/next_button_text_size" />
 
     <com.wang.avi.AVLoadingIndicatorView
         android:id="@+id/loading_indicator"
