@@ -167,7 +167,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="left|center_vertical"
-            android:text="@string/utility_fee"
+            android:text="@string/utility_fee_long"
             android:textColor="#05060b"
             android:textSize="15sp" />
 
@@ -212,7 +212,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="left|center_vertical"
-            android:text="@string/cleaning_Fee"
+            android:text="@string/cleaning_fee_long"
             android:textColor="#05060b"
             android:textSize="15sp" />
 

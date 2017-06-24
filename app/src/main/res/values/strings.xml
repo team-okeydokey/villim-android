@@ -184,15 +184,19 @@
     <string name="basic_description">기본 설명</string>
 
     <!-- Price Policy -->
+    <string name="base_price">기본 금액</string>
+
     <string name="base_monthly_price">임대료 (일시불 선불)</string>
     <string name="base_monthly_price_explanation_1">월 수 x 월세 + 추가로 사용하는 일 수 일일계산</string>
     <string name="base_monthly_price_explanation_2">시작일 및 종료일은 월 단위로 계산되며, 그 외 추가 일 수는 일일 계산됩니다.</string>
 
-    <string name="utility_fee">관리비 (일시불 선불)</string>
+    <string name="utility_fee">관리비</string>
+    <string name="utility_fee_long">관리비 (일시불 선불)</string>
     <string name="utility_fee_explanation_1" formatted="false">임대료의 15~20%\n3월 - 5월 및 9월 - 11월 임대료의 15%\n6월 - 8월 및 12월 - 2월 임대료의 20%</string>
     <string name="utility_fee_explanation_2">공과금 목록: 전기, 수도, 난방, 주차, 통신비 (인터넷 및 IP TV)</string>
 
-    <string name="cleaning_Fee">퇴실 청소비 (일시불 선불)</string>
+    <string name="cleaning_fee">퇴실 청소비</string>
+    <string name="cleaning_fee_long">퇴실 청소비 (일시불 선불)</string>
 
     <string name="deposit">보증금</string>
     <string name="additional_guest_fee">추가 인원 요금</string>
@@ -226,7 +230,7 @@
     <string name="overview_title_format_nodate">%s</string>
     <string name="host">호스트</string>
     <string name="duration">기간</string>
-    <string name="number_of_nights">숙박일 수</string>
+    <string name="number_of_nights">입주일 수</string>
     <string name="price">금액</string>
     <string name="select_start_Date">시작일 선택</string>
     <string name="select_end_date">종료일 선택</string>

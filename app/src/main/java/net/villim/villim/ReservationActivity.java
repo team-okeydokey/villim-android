@@ -66,8 +66,8 @@ public class ReservationActivity extends VillimActivity {
     private TextView overViewHouseName;
     private TextView overViewHouseInfo;
 
-    private ImageView hostProfilePic;
-    private TextView hostName;
+//    private ImageView hostProfilePic;
+//    private TextView hostName;
 
     private RelativeLayout startEndDates;
     private TextView startDateText;
@@ -75,6 +75,9 @@ public class ReservationActivity extends VillimActivity {
 
     private TextView numberOfNightsText;
     private TextView priceText;
+    private TextView basePriceText;
+    private TextView utilityFeeText;
+    private TextView cleaningFeeText;
     private TextView cancellationPolicyText;
 
     private Button reserveButton;
@@ -119,9 +122,9 @@ public class ReservationActivity extends VillimActivity {
         overViewHouseName = (TextView) findViewById(R.id.overview_house_name);
         overViewHouseInfo = (TextView) findViewById(R.id.overview_house_info);
 
-        /* Host info */
-        hostProfilePic = (ImageView) findViewById(R.id.host_profile_pic);
-        hostName = (TextView) findViewById(R.id.host_name);
+//        /* Host info */
+//        hostProfilePic = (ImageView) findViewById(R.id.host_profile_pic);
+//        hostName = (TextView) findViewById(R.id.host_name);
 
         /* Duration */
         startEndDates = (RelativeLayout) findViewById(R.id.start_end_dates);
@@ -131,6 +134,9 @@ public class ReservationActivity extends VillimActivity {
         /* Everything else */
         numberOfNightsText = (TextView) findViewById(R.id.number_of_nights);
         priceText = (TextView) findViewById(R.id.price);
+        basePriceText = (TextView) findViewById(R.id.base_price);
+        utilityFeeText = (TextView) findViewById(R.id.utility_fee);
+        cleaningFeeText = (TextView) findViewById(R.id.cleaning_fee);
         cancellationPolicyText = (TextView) findViewById(R.id.cancellation_policy);
 
         /* Network operations */
@@ -156,9 +162,9 @@ public class ReservationActivity extends VillimActivity {
         String overViewHouseInfoString = String.format(getString(R.string.overview_info_format), house.numGuest, house.numBedroom, house.numBed, house.numBathroom);
         overViewHouseInfo.setText(overViewHouseInfoString);
 
-        /* Host info */
-        hostName.setText(house.hostName);
-        Glide.with(this).load(house.hostProfilePicUrl).into(hostProfilePic);
+//        /* Host info */
+//        hostName.setText(house.hostName);
+//        Glide.with(this).load(house.hostProfilePicUrl).into(hostProfilePic);
 
         /* Duration */
         startEndDates.setOnClickListener(new View.OnClickListener() {
