@@ -45,7 +45,8 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".SignupActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".HouseDescriptionActivity"
             android:screenOrientation="portrait" />
@@ -106,7 +107,9 @@
         <activity
             android:name=".WebViewActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".ProfileViewActivity"></activity>
+        <activity
+            android:name=".ProfileViewActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
