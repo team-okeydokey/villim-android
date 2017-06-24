@@ -36,6 +36,7 @@ import static net.villim.villim.VillimKeys.KEY_NUM_BATHROOM;
 import static net.villim.villim.VillimKeys.KEY_NUM_BED;
 import static net.villim.villim.VillimKeys.KEY_NUM_BEDROOM;
 import static net.villim.villim.VillimKeys.KEY_NUM_GUEST;
+import static net.villim.villim.VillimKeys.KEY_RATE_PER_MONTH;
 import static net.villim.villim.VillimKeys.KEY_RATE_PER_NIGHT;
 import static net.villim.villim.VillimKeys.KEY_UTILITY_FEE;
 
@@ -56,6 +57,7 @@ public class VillimHouse implements Parcelable {
     public int numBedroom;
     public int numBed;
     public int numBathroom;
+    public int ratePerMonth;
     public int ratePerNight;
     public int utilityFee;
     public int cleaningFee;
@@ -150,6 +152,7 @@ public class VillimHouse implements Parcelable {
         house.numBedroom = jsonObject.optInt(KEY_NUM_BEDROOM);
         house.numBed = jsonObject.optInt(KEY_NUM_BED);
         house.numBathroom = jsonObject.optInt(KEY_NUM_BATHROOM);
+        house.ratePerMonth = jsonObject.optInt(KEY_RATE_PER_MONTH);
         house.ratePerNight = jsonObject.optInt(KEY_RATE_PER_NIGHT);
         house.utilityFee = jsonObject.optInt(KEY_UTILITY_FEE);
         house.cleaningFee = jsonObject.optInt(KEY_CLEANING_FEE);
@@ -214,6 +217,7 @@ public class VillimHouse implements Parcelable {
         dest.writeInt(numBedroom);
         dest.writeInt(numBed);
         dest.writeInt(numBathroom);
+        dest.writeInt(ratePerMonth);
         dest.writeInt(ratePerNight);
         dest.writeInt(utilityFee);
         dest.writeInt(cleaningFee);
@@ -247,6 +251,7 @@ public class VillimHouse implements Parcelable {
         numBedroom = in.readInt();
         numBed = in.readInt();
         numBathroom = in.readInt();
+        ratePerMonth = in.readInt();
         ratePerNight = in.readInt();
         utilityFee = in.readInt();
         cleaningFee = in.readInt();

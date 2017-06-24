@@ -85,6 +85,7 @@ public class VillimKeys {
     public static final String KEY_NUM_BED = "num_bed";
     public static final String KEY_NUM_BATHROOM = "num_bathroom";
 
+    public static final String KEY_RATE_PER_MONTH = "rate_per_month";
     public static final String KEY_RATE_PER_NIGHT = "rate_per_night";
     public static final String KEY_DEPOSIT = "deposit";
     public static final String KEY_ADDITIONAL_GUEST_FEE = "additional_guest_fee";
