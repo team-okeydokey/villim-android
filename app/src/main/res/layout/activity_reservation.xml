@@ -292,7 +292,7 @@
         android:layout_height="65dp"
         android:layout_alignParentBottom="true"
         android:background="@drawable/next_button"
-        android:text="@string/check_availability"
+        android:text="@string/book"
         android:textColor="@drawable/next_button_text"
         android:textSize="17sp" />
 

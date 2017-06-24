@@ -482,20 +482,24 @@ public class HouseDetailActivity extends VillimActivity implements OnMapReadyCal
         });
 
         /* Bottom Button */
-        int numberOfNights, price;
-        String priceString, priceText;
-        if (dateSelected) {
-            numberOfNights = VillimUtil.daysBetween(startDate, endDate);
-            price = numberOfNights * house.ratePerNight;
-            priceString = NumberFormat.getIntegerInstance().format(price);
-            priceText = String.format(getString(R.string.price_text_format), priceString, numberOfNights);
-        } else {
-            /* 선택된 날짜가 없을 떈 30일로 계산 */
-            numberOfNights = 30;
-            price = numberOfNights * house.ratePerNight;
-            priceString = NumberFormat.getIntegerInstance().format(price);
-            priceText = String.format(getString(R.string.price_text_format_no_date), priceString);
-        }
+//        int numberOfNights, price;
+//        String priceString, priceText;
+//        if (dateSelected) {
+//            numberOfNights = VillimUtil.daysBetween(startDate, endDate);
+//            price = numberOfNights * house.ratePerNight;
+//            priceString = NumberFormat.getIntegerInstance().format(price);
+//            priceText = String.format(getString(R.string.price_text_format), priceString, numberOfNights);
+//        } else {
+//            /* 선택된 날짜가 없을 떈 30일로 계산 */
+//            numberOfNights = 30;
+//            price = numberOfNights * house.ratePerNight;
+//            priceString = NumberFormat.getIntegerInstance().format(price);
+//            priceText = String.format(getString(R.string.price_text_format_no_date), priceString);
+//        }
+        /* 선택된 날짜가 없을 떈 30일로 계산 */
+        int price = house.ratePerMonth;
+        String priceString = NumberFormat.getIntegerInstance().format(price);
+        String priceText = String.format(getString(R.string.price_text_format_no_date), priceString);
 
         reserveButtonPrice.setText(priceText);
 

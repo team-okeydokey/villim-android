@@ -21,11 +21,12 @@ public class VillimKeys {
     public static final String MY_HOUSE_URL = "v2/594470cc120000a015fcb60f";
     public static final String OPEN_DOORLOCK_URL = "v2/5944895a120000f117fcb61b";
     public static final String RESERVE_URL = "v2/5942f90b120000ff12ddc665";
-    public static final String FEATURED_HOUSES_URL = "v2/5944039a120000380bfcb53f";
+    public static final String FEATURED_HOUSES_URL = "v2/594eb0f4100000cc00af3f70";
     public static final String HOST_INFO_URL = "v2/594175a00f0000770ec63237";
-    public static final String HOUSE_INFO_URL = "v2/594b25f5120000f1054248af";
+    public static final String HOUSE_INFO_URL = "v2/594eb177100000db00af3f71";
     public static final String HOUSE_REVIEW_URL = "v2/5941d5200f00002e16c632c4";
-    public static final String VISIT_INFO_URL = "v2/5945b61113000067145b6fc6";
+    public static final String VISIT_LIST_URL = "v2/594eb25a100000ec00af3f74";
+    public static final String VISIT_INFO_URL = "v2/594eb2c6100000f200af3f75";
     public static final String POST_REVIEW_URL = "v2/59454496130000800b5b6f82";
     public static final String FIND_PASSWORD_URL = "v2/59454496130000800b5b6f82";
     public static final String CANCEL_VISIT_URL = "v2/5945baec13000005155b6fcc";

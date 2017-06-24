@@ -651,7 +651,7 @@
                 android:layout_weight="1"
                 android:background="#de2025"
                 android:gravity="center"
-                android:text="@string/check_availability"
+                android:text="@string/book"
                 android:textColor="#ffffff"
                 android:textSize="17sp" />
 

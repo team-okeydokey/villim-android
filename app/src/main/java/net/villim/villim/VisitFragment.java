@@ -70,6 +70,9 @@ import static net.villim.villim.VillimKeys.KEY_NUM_GUEST;
 import static net.villim.villim.VillimKeys.KEY_QUERY_SUCCESS;
 import static net.villim.villim.VillimKeys.KEY_RATE_PER_NIGHT;
 import static net.villim.villim.VillimKeys.KEY_VISITS;
+import static net.villim.villim.VillimKeys.SERVER_HOST;
+import static net.villim.villim.VillimKeys.SERVER_SCHEME;
+import static net.villim.villim.VillimKeys.VISIT_LIST_URL;
 
 
 public class VisitFragment extends Fragment {
@@ -187,9 +190,9 @@ public class VisitFragment extends Fragment {
 
 
         URL url = new HttpUrl.Builder()
-                .scheme("http")
-                .host("www.mocky.io")
-                .addPathSegments("v2/59442bc2120000f60efcb5a4")
+                .scheme(SERVER_SCHEME)
+                .host(SERVER_HOST)
+                .addPathSegments(VISIT_LIST_URL)
                 .build().url();
 
         Request request = new Request.Builder()

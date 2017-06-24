@@ -38,10 +38,15 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
+import static net.villim.villim.CalendarActivity.END_DATE;
+import static net.villim.villim.CalendarActivity.START_DATE;
+import static net.villim.villim.MainActivity.DATE_SELECTED;
 import static net.villim.villim.VillimKeys.CANCEL_VISIT_URL;
 import static net.villim.villim.VillimKeys.KEY_ADDR_DIRECTION;
 import static net.villim.villim.VillimKeys.KEY_ADDR_SUMMARY;
 import static net.villim.villim.VillimKeys.KEY_CANCEL_SUCCESS;
+import static net.villim.villim.VillimKeys.KEY_HOUSE_ID;
+import static net.villim.villim.VillimKeys.KEY_HOUSE_INFO;
 import static net.villim.villim.VillimKeys.KEY_HOUSE_NAME;
 import static net.villim.villim.VillimKeys.KEY_HOUSE_THUMBNAIL_URL;
 import static net.villim.villim.VillimKeys.KEY_LATITUDE;
@@ -74,11 +79,8 @@ public class VisitDetailActivity extends VillimActivity implements CancelVisitDi
     private VillimSession session;
 
     private VillimVisit visit;
-    private String houseName;
-    private String houseThumbnailUrl;
-    private double houseLatitude;
-    private double houseLongitude;
-    private String houseAddrDirection;
+
+    private VillimHouse house;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,9 +114,9 @@ public class VisitDetailActivity extends VillimActivity implements CancelVisitDi
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(VisitDetailActivity.this, FullScreenMapActivity.class);
-                intent.putExtra(KEY_LATITUDE, houseLatitude);
-                intent.putExtra(KEY_LONGITUDE, houseLongitude);
-                intent.putExtra(KEY_ADDR_DIRECTION, houseAddrDirection);
+                intent.putExtra(KEY_LATITUDE, house.latitude);
+                intent.putExtra(KEY_LONGITUDE, house.longitude);
+                intent.putExtra(KEY_ADDR_DIRECTION, house.addrDirection);
                 startActivity(intent);
             }
         });
@@ -189,11 +191,9 @@ public class VisitDetailActivity extends VillimActivity implements CancelVisitDi
                     if (jsonObject.getBoolean(KEY_QUERY_SUCCESS)) {
                         JSONObject visitInfo = jsonObject.getJSONObject(KEY_VISIT_INFO);
                         visit = VillimVisit.createVisitFromJSONObject(visitInfo);
-                        houseName = visitInfo.getString(KEY_HOUSE_NAME);
-                        houseThumbnailUrl = visitInfo.getString(KEY_HOUSE_THUMBNAIL_URL);
-                        houseLatitude = visitInfo.getDouble(KEY_LATITUDE);
-                        houseLongitude = visitInfo.getDouble(KEY_LONGITUDE);
-                        houseAddrDirection = visitInfo.getString(KEY_ADDR_DIRECTION);
+
+                        JSONObject houseInfo = jsonObject.getJSONObject(KEY_HOUSE_INFO);
+                        house = VillimHouse.createHouseFromJSONObject(houseInfo);
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
@@ -286,18 +286,28 @@ public class VisitDetailActivity extends VillimActivity implements CancelVisitDi
         cancelVisitButton.setTextColor(getResources().getColorStateList(R.color.red_text_button));
 
         /* Set up slide button */
-        bottomButton.setText(getString(R.string.villim_request));
-        bottomButton.setOnClickListener(null);
+        bottomButton.setClickable(true);
+        bottomButton.setEnabled(true);
+        bottomButton.setText(getString(R.string.book));
+        bottomButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(VisitDetailActivity.this, ReservationActivity.class);
+                intent.putExtra(getString(R.string.key_house), house);
+                intent.putExtra(DATE_SELECTED, false);
+                startActivity(intent);
+            }
+        });
 
         /* House Name */
-        houseNameText.setText(houseName);
+        houseNameText.setText(house.houseName);
 
         /* Visit time */
         visitTimeText.setText(visit.visitTime);
 
         /* House thumbnail */
         Glide.with(this)
-                .load(houseThumbnailUrl)
+                .load(house.houseThumbnailUrl)
                 .into(houseThumbnail);
     }
 
@@ -309,6 +319,10 @@ public class VisitDetailActivity extends VillimActivity implements CancelVisitDi
         cancelVisitButton.setEnabled(false);
         cancelVisitButton.setClickable(false);
         cancelVisitButton.setTextColor(getResources().getColorStateList(R.color.text_button_inactive));
+
+        /* Slide button */
+        bottomButton.setClickable(false);
+        bottomButton.setEnabled(false);
 
         /* House thumbnail */
         Glide.with(this)

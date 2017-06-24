@@ -80,7 +80,7 @@
     <string name="reviews_see_more_format">+%d개 후기 더보기</string>
     <string name="reviews_no_review">아직 작성된 후기가 없습니다.</string>
     <string name="reserve">예약하기</string>
-    <string name="check_availability">입주 신청하기</string>
+    <string name="book">입주 신청하기</string>
     <string name="price_text_format">₩ %1$s / %2$d일</string>
     <string name="price_text_format_no_date">₩ %s / 월</string>
 
@@ -253,7 +253,7 @@
 
     <!-- Visit detail activity -->
     <string name="my_visit_list">내 방문목록</string>
-    <string name="villim_request">빌림 요청</string>
+    <string name="villim_request">빌림 요청하기</string>
     <string name="show_location">위치 보기</string>
     <string name="cancel_visit">방문 취소신청</string>
     <string name="cancel_visit_confirm">정말 방문을 취소 하시겠습니까?</string>
