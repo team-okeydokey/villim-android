@@ -1,0 +1,4 @@
+<resources>
+    <dimen name="slide_button_width">350dp</dimen>
+    <dimen name="slide_button_bottom_margin">80dp</dimen>
+</resources>
