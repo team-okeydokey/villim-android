@@ -138,7 +138,7 @@
         <item>로그인</item>
         <item>FAQ</item>
         <item>환경 설정</item>
-        <item>개인정보 이용약관</item>
+        <item>개인정보 보호 및 이용약관</item>
     </string-array>
     <string name="profile">프로필</string>
     <string name="login">로그인</string>
@@ -294,7 +294,7 @@
     <string name="send_again_complete">링크가 재전송되었습니다.</string>
 
     <!-- Logout dialog -->
-    <string name="logout_confirm_format">정말로 %s님 아이디를 로그아웃 하시겠어요?</string>
+    <string name="logout_confirm_format">%s님, 로그아웃 하시겠습니까?</string>
 
     <!-- Settings Activity -->
     <string name="push_notifications">푸쉬 알림</string>
