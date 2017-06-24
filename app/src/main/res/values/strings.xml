@@ -250,6 +250,7 @@
 
     <!-- Visit Fragment -->
     <string name="no_visit_list">방문 신청한 방이 없습니다.</string>
+    <string name="visit_list">방문 목록</string>
 
     <!-- Visit detail activity -->
     <string name="my_visit_list">내 방문목록</string>

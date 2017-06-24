@@ -5,8 +5,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -81,6 +83,7 @@ public class VisitFragment extends Fragment {
 
     private MainActivity activity;
 
+    private Toolbar toolbar;
     private RelativeLayout relativeLayout;
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
@@ -114,6 +117,13 @@ public class VisitFragment extends Fragment {
 //        activity.showBottomButtons(false, false);
 
         session = new VillimSession(getActivity().getApplicationContext());
+
+        /* Toolbar */
+        toolbar = (Toolbar) visitView.findViewById(R.id.toolbar);
+        activity.setSupportActionBar(toolbar);
+        activity.getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        activity.getSupportActionBar().setDisplayShowHomeEnabled(false);
+        activity.getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         relativeLayout = (RelativeLayout) visitView.findViewById(R.id.root_view);
         recyclerView = (RecyclerView) visitView.findViewById(R.id.discover_recycler_view);

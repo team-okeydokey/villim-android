@@ -153,7 +153,7 @@ public class MainActivity extends VillimActivity {
                 //setTitle(toolBarTitle);
                 // Fold search.
                 appBarLayout.setExpanded(false);
-                if (position != 0) { // Hide search button if not in discovery fragment.
+                if (position != DISCOVERY_FRAGMENT) { // Hide search button if not in discovery fragment or visit fragment.
                     searchButton.setVisibility(View.INVISIBLE);
                     hideToolbar();
                 } else {
