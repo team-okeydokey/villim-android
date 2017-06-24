@@ -6,6 +6,7 @@ import android.util.DisplayMetrics;
 import org.json.JSONArray;
 
 import java.text.DateFormat;
+import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -106,6 +107,13 @@ public class VillimUtil {
         } else {
             return array[code];
         }
+    }
+
+    public static String formatIntoCurrency(Context context, int currency, int price) {
+        String numberFormat = NumberFormat.getIntegerInstance().format(price);
+        String formatted = String.format(context.getString(R.string.money_format),
+                currencyStringFromInt(context, currency, false), numberFormat);
+        return formatted;
     }
 
     public static int dpToPixel(Context context, int dp) {

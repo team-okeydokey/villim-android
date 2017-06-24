@@ -217,9 +217,20 @@ public class ReservationActivity extends VillimActivity {
         numberOfNightsText.setText(numNightsString);
 
 
-        String priceFormat = NumberFormat.getIntegerInstance().format(stayDuration * house.ratePerNight);
-        String priceString = String.format(getString(R.string.won_symbol_format), priceFormat);
-        priceText.setText(priceString);
+        VillimPrice housePrice = new VillimPrice(start, end);
+        int prefCurrency = session.getCurrencyPref();
+
+        /* Total price */
+        priceText.setText(VillimUtil.formatIntoCurrency(getApplicationContext(), prefCurrency, housePrice.totalPrice));
+
+        /* Base price */
+        basePriceText.setText(VillimUtil.formatIntoCurrency(getApplicationContext(), prefCurrency, housePrice.basePrice));
+
+        /* Utility fee */
+        utilityFeeText.setText(VillimUtil.formatIntoCurrency(getApplicationContext(), prefCurrency, housePrice.utilityFee));
+
+        /* Cleaning fee */
+        cleaningFeeText.setText(VillimUtil.formatIntoCurrency(getApplicationContext(), prefCurrency, housePrice.cleaningFee));
 
     }
 

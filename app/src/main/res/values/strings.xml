@@ -336,4 +336,7 @@
         <item>비공개</item>
     </string-array>
 
+    <!-- Utility -->
+    <string name="money_format">%1$s %2$s</string>
+
 </resources>
