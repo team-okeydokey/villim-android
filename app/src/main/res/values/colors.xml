@@ -58,7 +58,8 @@
 
     <!-- Room Detail Activity -->
     <color name="room_detail_background">#F0F1F2</color>
-    <color name="divider_color">#C7C7C7</color>
+    <color name="divider_color_dark">#C7C7C7</color>
+    <color name="divider_color_red">#ed2025</color>
 
 
     <!-- Profile Fragment -->

@@ -73,7 +73,7 @@
         android:layout_below="@+id/start_end_buttons"
         android:layout_marginLeft="@dimen/calendar_padding_side"
         android:layout_marginRight="@dimen/calendar_padding_side"
-        android:background="@color/divider_color" />
+        android:background="@color/divider_color_dark" />
 
 
     <!-- CalendarView -->

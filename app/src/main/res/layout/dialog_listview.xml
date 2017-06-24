@@ -12,6 +12,7 @@
         android:paddingTop="13dp">
 
         <TextView
+            android:id="@+id/dialog_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
@@ -31,39 +32,14 @@
     </RelativeLayout>
 
     <include
-        layout="@layout/category_divider_dark"
+        layout="@layout/category_divider_red"
         android:background="#ed2025" />
 
-    <LinearLayout
+    <ListView
+        android:id="@+id/list_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingBottom="10dp"
-        android:paddingLeft="13dp"
-        android:paddingRight="13dp">
-
-        <TextView
-            android:id="@+id/logout_confirm_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:lineSpacingExtra="5sp"
-            android:paddingBottom="40dp"
-            android:paddingTop="40dp"
-            android:textColor="#05060b"
-            android:textSize="15sp" />
-
-        <Button
-            android:id="@+id/confirm_button"
-            android:layout_width="match_parent"
-            android:layout_height="46dp"
-            android:background="@drawable/next_button"
-            android:gravity="center"
-            android:lineSpacingExtra="5sp"
-            android:text="@string/confirm"
-            android:textColor="@drawable/next_button_text"
-            android:textSize="15sp" />
-    </LinearLayout>
+        android:layout_height="wrap_content">
+    </ListView>
 
 
 </LinearLayout>

@@ -67,7 +67,7 @@
                     android:stepSize="0.1" />
             </RelativeLayout>
 
-            <include layout="@layout/category_divider" />
+            <include layout="@layout/category_divider_dark" />
 
             <!-- 위치 -->
             <RelativeLayout
@@ -99,7 +99,7 @@
                     android:stepSize="0.1" />
             </RelativeLayout>
 
-            <include layout="@layout/category_divider" />
+            <include layout="@layout/category_divider_dark" />
 
             <!-- 의사소통 -->
             <RelativeLayout
@@ -131,7 +131,7 @@
                     android:stepSize="0.1" />
             </RelativeLayout>
 
-            <include layout="@layout/category_divider" />
+            <include layout="@layout/category_divider_dark" />
 
             <!-- 체크인 -->
             <RelativeLayout
@@ -163,7 +163,7 @@
                     android:stepSize="0.1" />
             </RelativeLayout>
 
-            <include layout="@layout/category_divider" />
+            <include layout="@layout/category_divider_dark" />
 
             <!-- 청결도 -->
             <RelativeLayout
@@ -195,7 +195,7 @@
                     android:stepSize="0.1" />
             </RelativeLayout>
 
-            <include layout="@layout/category_divider" />
+            <include layout="@layout/category_divider_dark" />
 
             <!-- 가치 -->
             <RelativeLayout
@@ -226,7 +226,7 @@
                     android:stepSize="0.1" />
             </RelativeLayout>
 
-            <include layout="@layout/category_divider" />
+            <include layout="@layout/category_divider_dark" />
 
 
         </LinearLayout>

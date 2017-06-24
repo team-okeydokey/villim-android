@@ -80,7 +80,7 @@
                 android:textSize="16sp" />
         </RelativeLayout>
 
-        <include layout="@layout/category_divider" />
+        <include layout="@layout/category_divider_dark" />
 
         <!-- Review content -->
         <TextView

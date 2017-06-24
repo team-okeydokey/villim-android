@@ -101,7 +101,7 @@
                 </RelativeLayout>
                 <!-- End 이름 -->
 
-                <include layout="@layout/category_divider" />
+                <include layout="@layout/category_divider_dark" />
 
                 <!-- 성 -->
                 <RelativeLayout
@@ -141,7 +141,7 @@
                 </RelativeLayout>
                 <!-- End 성 -->
 
-                <!--<include layout="@layout/category_divider" />-->
+                <!--<include layout="@laycategory_divider_darkider" />-->
 
                 <!--&lt;!&ndash; 성별 &ndash;&gt;-->
                 <!--<RelativeLayout-->
@@ -180,7 +180,7 @@
                 <!--</RelativeLayout>-->
                 <!--&lt;!&ndash; End 성별 &ndash;&gt;-->
 
-                <include layout="@layout/category_divider" />
+                <include layout="@layout/category_divider_dark" />
 
                 <!-- 이메일 -->
                 <RelativeLayout
@@ -219,7 +219,7 @@
                 </RelativeLayout>
                 <!-- End 이메일 -->
 
-                <include layout="@layout/category_divider" />
+                <include layout="@layout/category_divider_dark" />
 
                 <!-- 전화번호 -->
                 <RelativeLayout
@@ -271,7 +271,7 @@
                 </RelativeLayout>
                 <!-- End 전화번호 -->
 
-                <include layout="@layout/category_divider" />
+                <include layout="@layout/category_divider_dark" />
 
                 <!-- 거주 도시 -->
                 <RelativeLayout

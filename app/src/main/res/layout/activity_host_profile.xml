@@ -64,7 +64,7 @@
             android:textColor="#585757"
             android:textSize="13sp" />
 
-        <include layout="@layout/category_divider" />
+        <include layout="@layout/category_divider_dark" />
 
         <TextView
             android:id="@+id/host_about"

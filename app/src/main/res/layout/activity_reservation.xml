@@ -73,7 +73,7 @@
         </LinearLayout>
         <!-- End overview -->
 
-        <include layout="@layout/category_divider" />
+        <include layout="@layout/category_divider_dark" />
 
         <!-- host info -->
         <RelativeLayout
@@ -122,7 +122,7 @@
         </RelativeLayout>
         <!-- End host info -->
 
-        <include layout="@layout/category_divider" />
+        <include layout="@layout/category_divider_dark" />
 
         <!-- Duration -->
         <LinearLayout
@@ -182,7 +182,7 @@
         </LinearLayout>
         <!-- End Duration -->
 
-        <include layout="@layout/category_divider" />
+        <include layout="@layout/category_divider_dark" />
 
         <!-- Number of nights -->
         <RelativeLayout
@@ -215,7 +215,7 @@
         </RelativeLayout>
         <!-- End number of nights -->
 
-        <include layout="@layout/category_divider" />
+        <include layout="@layout/category_divider_dark" />
 
         <!-- Start price -->
         <RelativeLayout
@@ -249,7 +249,7 @@
         </RelativeLayout>
         <!-- End price -->
 
-        <include layout="@layout/category_divider" />
+        <include layout="@layout/category_divider_dark" />
 
         <!-- Start cancellation policy -->
         <RelativeLayout
@@ -281,7 +281,7 @@
         </RelativeLayout>
         <!-- End cancellation policy -->
 
-        <include layout="@layout/category_divider" />
+        <include layout="@layout/category_divider_dark" />
 
     </LinearLayout>
 

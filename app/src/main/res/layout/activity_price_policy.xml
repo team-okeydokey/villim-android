@@ -83,7 +83,7 @@
     </android.support.v7.widget.LinearLayoutCompat>
     <!-- End 기본 가격 -->
 
-    <include layout="@layout/category_divider" />
+    <include layout="@layout/category_divider_dark" />
 
     <!--&lt;!&ndash; 보증금 &ndash;&gt;-->
     <!--<android.support.v7.widget.LinearLayoutCompat-->
@@ -117,7 +117,7 @@
     <!--</android.support.v7.widget.LinearLayoutCompat>-->
     <!--&lt;!&ndash; End 보증금 &ndash;&gt;-->
 
-    <!--<include layout="@layout/category_divider" />-->
+    <!--<include layout="@laycategory_divider_darkider" />-->
 
     <!--&lt;!&ndash; 추가 인원 요금 &ndash;&gt;-->
     <!--<android.support.v7.widget.LinearLayoutCompat-->
@@ -194,7 +194,7 @@
     </android.support.v7.widget.LinearLayoutCompat>
     <!-- End 공과 예치금  -->
 
-    <include layout="@layout/category_divider" />
+    <include layout="@layout/category_divider_dark" />
 
     <!-- 청소비 -->
     <android.support.v7.widget.LinearLayoutCompat
@@ -229,6 +229,6 @@
     </android.support.v7.widget.LinearLayoutCompat>
     <!-- End 청소비 -->
 
-    <include layout="@layout/category_divider" />
+    <include layout="@layout/category_divider_dark" />
 
 </android.support.v7.widget.LinearLayoutCompat>

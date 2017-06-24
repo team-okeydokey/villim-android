@@ -63,7 +63,7 @@
                 android:thumbTint="#ed2025" />
         </RelativeLayout>
 
-        <include layout="@layout/category_divider" />
+        <include layout="@layout/category_divider_dark" />
 
         <!-- 통화 -->
         <RelativeLayout
@@ -96,7 +96,7 @@
                 android:textSize="15sp" />
         </RelativeLayout>
 
-        <include layout="@layout/category_divider" />
+        <include layout="@layout/category_divider_dark" />
 
         <!-- 언어 -->
         <RelativeLayout
@@ -129,7 +129,7 @@
                 android:textSize="15sp" />
         </RelativeLayout>
 
-        <include layout="@layout/category_divider" />
+        <include layout="@layout/category_divider_dark" />
 
         <!-- 버전정보 -->
         <RelativeLayout
@@ -162,7 +162,7 @@
                 android:textSize="15sp" />
         </RelativeLayout>
 
-        <include layout="@layout/category_divider" />
+        <include layout="@layout/category_divider_dark" />
 
     </LinearLayout>
 

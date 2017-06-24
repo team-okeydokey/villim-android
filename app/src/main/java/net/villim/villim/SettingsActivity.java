@@ -63,8 +63,8 @@ public class SettingsActivity extends VillimActivity
         currencyItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DialogFragment currencyDialog = new CurrencyPreferenceDialog();
-                currencyDialog.show(getFragmentManager(), "");
+                CurrencyPreferenceDialog currencyDialog = CurrencyPreferenceDialog.newInstance(getString(R.string.currency));
+                currencyDialog.show(getFragmentManager(), "dialog");
             }
         });
         currencyTextView = (TextView) findViewById(R.id.currency_textview);
@@ -76,8 +76,8 @@ public class SettingsActivity extends VillimActivity
         languageItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DialogFragment languageDialog = new LanguagePreferenceDialog();
-                languageDialog.show(getFragmentManager(), "");
+                LanguagePreferenceDialog languageDialog = LanguagePreferenceDialog.newInstance(getString(R.string.language));
+                languageDialog.show(getFragmentManager(), "dialog");
             }
         });
         languageTextView = (TextView) findViewById(R.id.language_textview);

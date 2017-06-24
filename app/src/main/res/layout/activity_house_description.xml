@@ -72,6 +72,6 @@
     </android.support.v7.widget.LinearLayoutCompat>
     <!-- End 기본 설명 -->
 
-    <include layout="@layout/category_divider" />
+    <include layout="@layout/category_divider_dark" />
 
 </android.support.v7.widget.LinearLayoutCompat>
