@@ -217,7 +217,7 @@ public class ReservationActivity extends VillimActivity {
         numberOfNightsText.setText(numNightsString);
 
 
-        VillimPrice housePrice = new VillimPrice(start, end);
+        VillimPrice housePrice = new VillimPrice(start, end, house.ratePerMonth, house.cleaningFee);
         int prefCurrency = session.getCurrencyPref();
 
         /* Total price */
@@ -230,7 +230,7 @@ public class ReservationActivity extends VillimActivity {
         utilityFeeText.setText(VillimUtil.formatIntoCurrency(getApplicationContext(), prefCurrency, housePrice.utilityFee));
 
         /* Cleaning fee */
-        cleaningFeeText.setText(VillimUtil.formatIntoCurrency(getApplicationContext(), prefCurrency, housePrice.cleaningFee));
+        cleaningFeeText.setText(VillimUtil.formatIntoCurrency(getApplicationContext(), prefCurrency, house.cleaningFee));
 
     }
 

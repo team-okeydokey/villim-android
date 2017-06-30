@@ -66,6 +66,34 @@ public class VillimUtil {
     public static int daysBetween(Date one, Date two) { long difference = (one.getTime()-two.getTime())/86400000; return (int) Math.abs(difference); }
 
 
+    public static int daysUntilEndOfMonth(Date date) {
+        int endDate;
+        switch (date.getMonth()) {
+            case 1:
+            case 3:
+            case 5:
+            case 7:
+            case 8:
+            case 10:
+            case 12:
+                endDate = 31; break;
+            case 4:
+            case 6:
+            case 9:
+            case 11:
+                endDate = 30; break;
+            case 2:
+                endDate = 28; break;
+            default:
+                endDate = 31; break;
+        }
+        return endDate - date.getDate();
+    }
+
+    public static int daysFromStartOfMonth(Date date) {
+        return date.getDate() - 1;
+    }
+
     public static String getWeekday(Context context, int weekday) {
         /* Java date은 0부터 6, Calendar 클래스 constant는 1부터 7. */
         switch (weekday + 1) {
