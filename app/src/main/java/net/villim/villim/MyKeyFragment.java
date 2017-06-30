@@ -204,7 +204,6 @@ public class MyKeyFragment extends Fragment {
                     /* 주의: response.body().string()은 한 번 부를 수 있음 */
                     JSONObject jsonObject = new JSONObject(response.body().string());
                     if (jsonObject.getBoolean(KEY_QUERY_SUCCESS)) {
-
                         houseId = jsonObject.optInt(KEY_HOUSE_ID);
                         houseName = jsonObject.optString(KEY_HOUSE_NAME);
                         startDate = VillimUtil.dateFromDateString(jsonObject.optString(KEY_START_DATE));

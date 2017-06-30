@@ -41,6 +41,8 @@ public class CalendarActivity extends VillimActivity {
 
     private Button saveSelectionButton;
 
+    private boolean highlightStartDate;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +52,8 @@ public class CalendarActivity extends VillimActivity {
         startDate = (Date) getIntent().getSerializableExtra(START_DATE);
         endDate = (Date) getIntent().getSerializableExtra(END_DATE);
         boolean hasPresetDate = (startDate != null && endDate != null);
+
+        highlightStartDate = true;
 
         /* Toolbar */
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -204,10 +208,16 @@ public class CalendarActivity extends VillimActivity {
                 break;
             case STATE_SELECT_START:
                 selectState = STATE_SELECT_START;
-                startDateTextView.setTextColor(getResources().getColor(R.color.date_filter_state_highlighted));
+
+                int colorId = highlightStartDate ?
+                        getResources().getColor(R.color.date_filter_state_highlighted) :
+                        getResources().getColor(R.color.date_filter_state_normal) ;
+
+                startDateTextView.setTextColor(colorId);
                 endDateTextView.setTextColor(getResources().getColor(R.color.date_filter_state_normal));
                 break;
             case STATE_SELECT_END:
+                highlightStartDate = false;
                 selectState = STATE_SELECT_END;
                 startDateTextView.setTextColor(getResources().getColor(R.color.date_filter_state_normal));
                 endDateTextView.setTextColor(getResources().getColor(R.color.date_filter_state_highlighted));
