@@ -50,7 +50,7 @@
                     android:id="@+id/discover_room_review_rating"
                     style="@style/customRatingBar"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:numStars="5"
                     android:progressTint="@color/rating_color"
@@ -59,7 +59,7 @@
                 <TextView
                     android:id="@+id/discover_room_review_count"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_marginLeft="@dimen/discover_recycler_padding"
                     android:gravity="center_vertical"
                     android:lineSpacingExtra="10sp"
