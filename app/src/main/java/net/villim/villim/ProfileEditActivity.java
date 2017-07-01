@@ -10,6 +10,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.telephony.PhoneNumberUtils;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -36,6 +37,7 @@ import org.json.JSONObject;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Locale;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -66,6 +68,7 @@ import static net.villim.villim.VillimKeys.UPDATE_PROFILE_URL;
 
 public class ProfileEditActivity extends VillimActivity {
     private static final int PHOTO_PICKER = 300;
+    private static final int ADD_PHONE_NUMBER = 301;
     public static final String PROFILE_PIC_URI = "profile_pic_uri";
 
     public static final int FIRSTNAME = 0;
@@ -97,6 +100,7 @@ public class ProfileEditActivity extends VillimActivity {
     private boolean newProfilePic;
 
     private Uri profilePicUri;
+    private String phoneNumber;
     private int sex;
 
     @Override
@@ -230,6 +234,14 @@ public class ProfileEditActivity extends VillimActivity {
         /* Phone number */
         phoneNumberContent = (TextView) findViewById(R.id.phone_number_content);
         phoneNumberContent.setText(session.getPhoneNumber());
+        addPhoneNumberButton = (Button) findViewById(R.id.add_phone_number_button);
+        addPhoneNumberButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ProfileEditActivity.this, AddPhoneNumberActivity.class);
+                startActivityForResult(intent, ADD_PHONE_NUMBER);
+            }
+        });
 
         /* City of residence */
         cityContent = (EditText) findViewById(R.id.city_content);
@@ -296,7 +308,7 @@ public class ProfileEditActivity extends VillimActivity {
                     .addFormDataPart(KEY_LASTNAME, lastnameContent.getText().toString().trim())
 //                    .addFormDataPart(KEY_SEX, Integer.toString(sex))
                     .addFormDataPart(KEY_EMAIL, emailContent.getText().toString().trim())
-                    .addFormDataPart(KEY_PHONE_NUMBER, phoneNumberContent.getText().toString().trim())
+                    .addFormDataPart(KEY_PHONE_NUMBER, phoneNumber)
                     .addFormDataPart(KEY_CITY_OF_RESIDENCE, cityContent.getText().toString().trim())
                     .addFormDataPart(KEY_PUSH_NOTIFICATIONS, Boolean.toString(session.getPushPref()))
                     .addFormDataPart(KEY_CURRENCY_PREFERENCE, Integer.toString(session.getCurrencyPref()))
@@ -311,7 +323,7 @@ public class ProfileEditActivity extends VillimActivity {
                     .addFormDataPart(KEY_LASTNAME, lastnameContent.getText().toString().trim())
 //                    .addFormDataPart(KEY_SEX, Integer.toString(sex))
                     .addFormDataPart(KEY_EMAIL, emailContent.getText().toString().trim())
-                    .addFormDataPart(KEY_PHONE_NUMBER, phoneNumberContent.getText().toString().trim())
+                    .addFormDataPart(KEY_PHONE_NUMBER, phoneNumber)
                     .addFormDataPart(KEY_CITY_OF_RESIDENCE, cityContent.getText().toString().trim())
                     .addFormDataPart(KEY_PUSH_NOTIFICATIONS, Boolean.toString(session.getPushPref()))
                     .addFormDataPart(KEY_CURRENCY_PREFERENCE, Integer.toString(session.getCurrencyPref()))
@@ -379,6 +391,17 @@ public class ProfileEditActivity extends VillimActivity {
                 Uri uri = data.getData();
                 profilePicUri = uri;
                 loadProfilePhoto(uri);
+                updateSaveButtonStatus();
+            }
+            if (resultCode == Activity.RESULT_CANCELED) {
+
+            }
+        } else if (requestCode == ADD_PHONE_NUMBER && data != null) {
+            if (resultCode == Activity.RESULT_OK) {
+                phoneNumber = data.getExtras().getString(KEY_PHONE_NUMBER).trim();
+                String phoneNumberString = PhoneNumberUtils.formatNumber(phoneNumber, Locale.getDefault().getCountry());
+                phoneNumberContent.setText(phoneNumberString);
+                newPhoneNumber = true;
                 updateSaveButtonStatus();
             }
             if (resultCode == Activity.RESULT_CANCELED) {
