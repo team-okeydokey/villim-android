@@ -1,5 +1,6 @@
 package net.villim.villim;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.AsyncTask;
@@ -84,6 +85,8 @@ import static net.villim.villim.VillimKeys.SERVER_SCHEME;
 
 
 public class HouseDetailActivity extends VillimActivity implements OnMapReadyCallback {
+
+    private final static int LOGIN = 101;
 
     private final static int MAX_AMENITY_ICONS = 6;
 
@@ -509,16 +512,37 @@ public class HouseDetailActivity extends VillimActivity implements OnMapReadyCal
         reserveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(HouseDetailActivity.this, ReservationActivity.class);
-                intent.putExtra(getString(R.string.key_house), house);
-                intent.putExtra(DATE_SELECTED, dateSelected);
-                if (dateSelected) {
-                    intent.putExtra(START_DATE, startDate);
-                    intent.putExtra(END_DATE, endDate);
+
+                VillimSession session = new VillimSession(getApplicationContext());
+                if (session.getLoggedIn()) {
+                    launchReservationActivity();
+                } else {
+                    launchLoginActivity();
                 }
-                startActivity(intent);
             }
         });
+    }
+
+    private void launchReservationActivity() {
+        Intent intent = new Intent(HouseDetailActivity.this, ReservationActivity.class);
+        intent.putExtra(getString(R.string.key_house), house);
+        intent.putExtra(DATE_SELECTED, dateSelected);
+        if (dateSelected) {
+            intent.putExtra(START_DATE, startDate);
+            intent.putExtra(END_DATE, endDate);
+        }
+        startActivity(intent);
+    }
+
+    private void launchLoginActivity() {
+        Intent intent = new Intent(HouseDetailActivity.this, LoginActivity.class);
+        intent.putExtra(getString(R.string.key_house), house);
+        intent.putExtra(DATE_SELECTED, dateSelected);
+        if (dateSelected) {
+            intent.putExtra(START_DATE, startDate);
+            intent.putExtra(END_DATE, endDate);
+        }
+        startActivityForResult(intent, LOGIN);
     }
 
     @Override
@@ -615,7 +639,6 @@ public class HouseDetailActivity extends VillimActivity implements OnMapReadyCal
 
     private void populateReviews() {
 
-
         if (house.houseReviewCount == 0) {
             /* Remove the whole review section andreplace it with "No review" textview. */
             LinearLayoutCompat parent = (LinearLayoutCompat) reviewBody.getParent();
@@ -663,6 +686,21 @@ public class HouseDetailActivity extends VillimActivity implements OnMapReadyCal
                         startActivity(intent);
                     }
                 });
+            }
+        }
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        /* Requests to mainactivity */
+        if (requestCode == LOGIN) {
+            if (resultCode == Activity.RESULT_OK) {
+               launchReservationActivity();
+            }
+            if (resultCode == Activity.RESULT_CANCELED) {
+                //Write your code if there's no result
             }
         }
     }
