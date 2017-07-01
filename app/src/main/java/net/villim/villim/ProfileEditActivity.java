@@ -46,12 +46,15 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 import static net.villim.villim.VillimKeys.KEY_CITY_OF_RESIDENCE;
+import static net.villim.villim.VillimKeys.KEY_CURRENCY_PREFERENCE;
 import static net.villim.villim.VillimKeys.KEY_EMAIL;
 import static net.villim.villim.VillimKeys.KEY_FIRSTNAME;
+import static net.villim.villim.VillimKeys.KEY_LANGUAGE_PREFERENCE;
 import static net.villim.villim.VillimKeys.KEY_LASTNAME;
 import static net.villim.villim.VillimKeys.KEY_MESSAGE;
 import static net.villim.villim.VillimKeys.KEY_PHONE_NUMBER;
 import static net.villim.villim.VillimKeys.KEY_PROFILE_PIC;
+import static net.villim.villim.VillimKeys.KEY_PUSH_NOTIFICATIONS;
 import static net.villim.villim.VillimKeys.KEY_SEX;
 import static net.villim.villim.VillimKeys.KEY_UPDATE_SUCCESS;
 import static net.villim.villim.VillimKeys.KEY_USER_INFO;
@@ -251,6 +254,9 @@ public class ProfileEditActivity extends AppCompatActivity implements SimpleEdit
                     .addFormDataPart(KEY_EMAIL, emailContent.getText().toString().trim())
                     .addFormDataPart(KEY_PHONE_NUMBER, phoneNumberContent.getText().toString().trim())
                     .addFormDataPart(KEY_CITY_OF_RESIDENCE, cityContent.getText().toString().trim())
+                    .addFormDataPart(KEY_PUSH_NOTIFICATIONS, Boolean.toString(session.getPushPref()))
+                    .addFormDataPart(KEY_CURRENCY_PREFERENCE, Integer.toString(session.getCurrencyPref()))
+                    .addFormDataPart(KEY_LANGUAGE_PREFERENCE, Integer.toString(session.getLanguagePref()))
                     .addFormDataPart(KEY_PROFILE_PIC, imageFiie.getName(),
                             RequestBody.create(MediaType.parse(imageFiie.getPath()), imageFiie))
                     .build();
@@ -263,6 +269,9 @@ public class ProfileEditActivity extends AppCompatActivity implements SimpleEdit
                     .addFormDataPart(KEY_EMAIL, emailContent.getText().toString().trim())
                     .addFormDataPart(KEY_PHONE_NUMBER, phoneNumberContent.getText().toString().trim())
                     .addFormDataPart(KEY_CITY_OF_RESIDENCE, cityContent.getText().toString().trim())
+                    .addFormDataPart(KEY_PUSH_NOTIFICATIONS, Boolean.toString(session.getPushPref()))
+                    .addFormDataPart(KEY_CURRENCY_PREFERENCE, Integer.toString(session.getCurrencyPref()))
+                    .addFormDataPart(KEY_LANGUAGE_PREFERENCE, Integer.toString(session.getLanguagePref()))
                     .build();
         }
 
