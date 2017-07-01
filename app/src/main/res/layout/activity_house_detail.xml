@@ -102,7 +102,7 @@
                     android:paddingBottom="15dp"
                     android:paddingLeft="@dimen/room_detail_activity_padding"
                     android:paddingRight="@dimen/room_detail_activity_padding"
-                    android:paddingTop="20dp">
+                    android:paddingTop="15dp">
 
                     <!-- Host profile pic -->
                     <com.mikhaellopez.circularimageview.CircularImageView
