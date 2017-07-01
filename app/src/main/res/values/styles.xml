@@ -57,8 +57,6 @@
     <style name="customRatingBar" parent="android:style/Widget.Material.RatingBar.Small">
         <item name="android:numStars">5</item>
         <item name="android:progressTint">@color/rating_color</item>
-        <item name="android:minHeight">18dp</item>
-        <item name="android:maxHeight">18dp</item>
         <item name="android:secondaryProgressTint">@color/rating_color</item>
     </style>
 
