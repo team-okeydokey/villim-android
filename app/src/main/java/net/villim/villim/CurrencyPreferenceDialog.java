@@ -12,11 +12,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
-
-import static net.villim.villim.ProfileViewActivity.EMAIL;
 
 /**
  * Created by seongmin on 6/17/17.

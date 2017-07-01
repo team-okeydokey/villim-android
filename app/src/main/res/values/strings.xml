@@ -139,7 +139,6 @@
         <item>FAQ</item>
         <item>환경 설정</item>
         <item>개인정보 보호 및 이용약관</item>
-        <item>프로필 보기 및 수정</item>
     </string-array>
     <string name="profile">프로필</string>
     <string name="login">로그인</string>
@@ -328,6 +327,7 @@
     <string name="email_privacy_statement">이메일 주소는 다른 회원에게 공개되지 않습니다.</string>
     <string name="sex_privacy_statement">이 자료는 통계 목적으로 사용되어 공개되지 않습니다.</string>
     <string name="edit">수정</string>
+    <string name="edit_profile">프로필 수정</string>
     <string name="profile_updated">프로필 정보가 업데이트 되었습니다.</string>
     <string name="change">변경</string>
     <string name="edit_item">%s 수정하기</string>

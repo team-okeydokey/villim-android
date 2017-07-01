@@ -24,7 +24,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:gravity="center"
-            android:text="@string/profile_title"
+            android:text="@string/profile"
             android:textColor="@color/toolbar_title_color" />
 
         <Button
@@ -93,7 +93,7 @@
                         android:lineSpacingExtra="5sp"
                         android:maxLines="1"
                         android:textColor="#05060b"
-                        android:textSize="17sp" />
+                        android:textSize="@dimen/profile_value_text_size" />
 
                 </LinearLayout>
                 <!-- End 이름 -->
@@ -128,7 +128,7 @@
                         android:lineSpacingExtra="5sp"
                         android:maxLines="1"
                         android:textColor="#05060b"
-                        android:textSize="17sp" />
+                        android:textSize="@dimen/profile_value_text_size" />
 
                 </LinearLayout>
                 <!-- End 성 -->
@@ -204,7 +204,7 @@
                         android:lineSpacingExtra="5sp"
                         android:maxLines="1"
                         android:textColor="#05060b"
-                        android:textSize="17sp" />
+                        android:textSize="@dimen/profile_value_text_size" />
 
                 </LinearLayout>
                 <!-- End 이메일 -->
@@ -245,7 +245,7 @@
                         android:lineSpacingExtra="5sp"
                         android:maxLines="1"
                         android:textColor="#05060b"
-                        android:textSize="17sp" />
+                        android:textSize="@dimen/profile_value_text_size" />
 
                     <!--<Button-->
                     <!--android:id="@+id/add_phone_number_button"-->
@@ -294,7 +294,7 @@
                         android:lineSpacingExtra="5sp"
                         android:maxLines="1"
                         android:textColor="#05060b"
-                        android:textSize="17sp" />
+                        android:textSize="@dimen/profile_value_text_size" />
 
                 </LinearLayout><!-- End 거주 도시 -->
 

@@ -114,6 +114,7 @@
     <!-- Profile view activity -->
     <dimen name="default_profile_image_margin_top">15dp</dimen>
     <dimen name="photo_icon_size">30dp</dimen>
+    <dimen name="profile_value_text_size">21sp</dimen>
 
 
     <!-- Profile edit page -->

@@ -209,16 +209,7 @@ public class LoginActivity extends VillimActivity {
         /* Store session */
         VillimSession session = new VillimSession(getApplicationContext());
         session.setLoggedIn(true);
-
-        /* Store basic info in shared preferences */
-        session.setUserId(user.userId);
-        session.setFullName(user.fullname);
-        session.setFirstName(user.firstname);
-        session.setLastName(user.lastname);
-        session.setEmail(user.email);
-        session.setProfilePicUrl(user.profilePicUrl);
-        session.setStatus(user.status);
-        session.setRoomId(user.roomId);
+        session.updateUserSession(user);
 
         /* Return from activity */
         Intent returnIntent = new Intent();
