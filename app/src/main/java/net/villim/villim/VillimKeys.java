@@ -82,6 +82,12 @@ public class VillimKeys {
     public static final String KEY_PHONE_NUMBER = "phone_number";
     public static final String KEY_CITY_OF_RESIDENCE = "city_of_residence";
     public static final String KEY_PROFILE_PIC = "profile_pic";
+    public static final String KEY_HOUSE_ID_CONFIRMED = "house_id_confirmed";
+    public static final String KEY_HOUSE_ID_STAYING = "house_id_staying";
+    public static final String KEY_HOUSE_ID_DONE = "house_id_done";
+    public static final String KEY_VISIT_HOUSE_ID_PENDING = "visit_hosue_id_confirmes";
+    public static final String KEY_VISIT_HOUSE_ID_CONFIRMED = "visit_hosue_id_pending";
+    public static final String KEY_VISIT_HOUSE_ID_DONE = "visit_house_id_done";
 
     /* Login Keys */
     public static final String KEY_MESSAGE = "message";
