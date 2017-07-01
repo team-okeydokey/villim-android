@@ -8,6 +8,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.format.DateUtils;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -86,9 +87,13 @@ public class CalendarActivity extends VillimActivity {
                 nextMonthDate.setDate(nextMonth.get(Calendar.DATE));
 
                 if (startDate.equals(endDate)){
-                    Toast.makeText(getApplicationContext(), R.string.select_different_dates, Toast.LENGTH_LONG).show();
+                    Toast toast =  Toast.makeText(getApplicationContext(), R.string.select_different_dates, Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.CENTER, 0, 0);
+                    toast.show();
                 } else if (endDate.before(nextMonthDate)) {
-                    Toast.makeText(getApplicationContext(), R.string.book_at_least_a_month, Toast.LENGTH_LONG).show();
+                    Toast toast = Toast.makeText(getApplicationContext(), R.string.book_at_least_a_month, Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.CENTER, 0, 0);
+                    toast.show();
                 } else {
                     Intent returnIntent = new Intent();
                     returnIntent.putExtra(START_DATE, startDate);
