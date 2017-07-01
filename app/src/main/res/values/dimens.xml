@@ -7,7 +7,7 @@
     <dimen name="toolbar_logo_height">34dp</dimen>
     <dimen name="toolbar_search_button_size">24dp</dimen>
     <dimen name="toolbar_padding">10dp</dimen>
-    <dimen name="search_filter_upper_padding">46dp</dimen>
+    <dimen name="search_filter_upper_padding">25dp</dimen>
     <dimen name="search_filter_padding">25dp</dimen>
     <dimen name="search_filter_text_size">20sp</dimen>
     <dimen name="search_filter_width">350dp</dimen>

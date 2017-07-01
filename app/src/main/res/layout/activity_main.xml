@@ -44,7 +44,7 @@
                     android:layout_width="@dimen/search_filter_width"
                     android:layout_height="@dimen/toolbar_height"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="30dp"
+                    android:layout_marginTop="@dimen/search_filter_padding"
                     android:background="@drawable/toolbar_filter"
                     android:drawablePadding="@dimen/filter_icon_drawable_padding"
                     android:gravity="left|center_vertical"
@@ -122,7 +122,7 @@
         android:layout_height="wrap_content"
         app:layout_anchor="@id/app_bar_layout"
         app:layout_anchorGravity="bottom"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
     <android.support.design.widget.TabLayout
         android:id="@+id/tab_layout"
