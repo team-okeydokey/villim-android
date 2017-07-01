@@ -14,6 +14,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -58,7 +59,7 @@ import static net.villim.villim.VillimKeys.SERVER_HOST;
 import static net.villim.villim.VillimKeys.SERVER_SCHEME;
 import static net.villim.villim.VillimKeys.UPDATE_PROFILE_URL;
 
-public class ProfileViewActivity extends AppCompatActivity implements SimpleEditTextDialog.SimpleEditTextDialogListener {
+public class ProfileEditActivity extends AppCompatActivity implements SimpleEditTextDialog.SimpleEditTextDialogListener {
     private static final int PHOTO_PICKER = 300;
 
     public static final int FIRSTNAME = 0;
@@ -67,8 +68,7 @@ public class ProfileViewActivity extends AppCompatActivity implements SimpleEdit
     public static final int CITY = 3;
 
     private Toolbar toolbar;
-    private Button editProfileButton;
-    private Button bottomButton;
+    private Button saveButton;
 
     private LinearLayout firstnameContainer;
     private LinearLayout lastnameContainer;
@@ -77,13 +77,13 @@ public class ProfileViewActivity extends AppCompatActivity implements SimpleEdit
     private LinearLayout cityContainer;
 
     private ImageView profilePicture;
-    private TextView firstnameContent;
-    private TextView lastnameContent;
+    private EditText firstnameContent;
+    private EditText lastnameContent;
     //    private TextView sexContent;
-    private TextView emailContent;
+    private EditText emailContent;
     private TextView phoneNumberContent;
     private Button addPhoneNumberButton;
-    private TextView cityContent;
+    private EditText cityContent;
 
     private AVLoadingIndicatorView loadingIndicator;
 
@@ -96,7 +96,7 @@ public class ProfileViewActivity extends AppCompatActivity implements SimpleEdit
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile_view);
+        setContentView(R.layout.activity_profile_edit);
 
         newProfilePic = false;
         session = new VillimSession(getApplicationContext());
@@ -112,12 +112,11 @@ public class ProfileViewActivity extends AppCompatActivity implements SimpleEdit
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         /* Edit profile button */
-        editProfileButton = (Button) findViewById(R.id.edit_button);
-        editProfileButton.setOnClickListener(new View.OnClickListener() {
+        saveButton = (Button) findViewById(R.id.save_button);
+        saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent editIntent = new Intent(ProfileViewActivity.this, ProfileEditActivity.class);
-                startActivity(editIntent);
+                sendUpdateProfileRequest();
             }
         });
 
@@ -130,17 +129,17 @@ public class ProfileViewActivity extends AppCompatActivity implements SimpleEdit
             loadProfilePhoto(profilePicUri);
 
         }
-//        profilePicture.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent pickPhotoIntent = new Intent(Intent.ACTION_PICK,
-//                        android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-//                startActivityForResult(pickPhotoIntent, PHOTO_PICKER);
-//            }
-//        });
+        profilePicture.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent pickPhotoIntent = new Intent(Intent.ACTION_PICK,
+                        android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(pickPhotoIntent, PHOTO_PICKER);
+            }
+        });
 
         /* First name */
-        firstnameContent = (TextView) findViewById(R.id.firstname_content);
+        firstnameContent = (EditText) findViewById(R.id.firstname_content);
         firstnameContent.setText(session.getFirstName());
         firstnameContainer = (LinearLayout) findViewById(R.id.firstname_container);
 //        firstnameContainer.setOnClickListener(new View.OnClickListener() {
@@ -154,7 +153,7 @@ public class ProfileViewActivity extends AppCompatActivity implements SimpleEdit
 //        });
 
         /* Last name */
-        lastnameContent = (TextView) findViewById(R.id.lastname_content);
+        lastnameContent = (EditText) findViewById(R.id.lastname_content);
         lastnameContent.setText(session.getLastName());
         lastnameContainer = (LinearLayout) findViewById(R.id.lastname_container);
 //        lastnameContainer.setOnClickListener(new View.OnClickListener() {
@@ -177,7 +176,7 @@ public class ProfileViewActivity extends AppCompatActivity implements SimpleEdit
 //        sexContent.setText(session.getSex());
 
         /* Email */
-        emailContent = (TextView) findViewById(R.id.email_content);
+        emailContent = (EditText) findViewById(R.id.email_content);
         emailContent.setText(session.getEmail());
         emailContainer = (LinearLayout) findViewById(R.id.email_container);
 //        emailContainer.setOnClickListener(new View.OnClickListener() {
@@ -195,7 +194,7 @@ public class ProfileViewActivity extends AppCompatActivity implements SimpleEdit
         phoneNumberContent.setText(session.getPhoneNumber());
 
         /* City of residence */
-        cityContent = (TextView) findViewById(R.id.city_content);
+        cityContent = (EditText) findViewById(R.id.city_content);
         cityContent.setText(session.getCityOfResidence());
         cityContainer = (LinearLayout) findViewById(R.id.city_container);
 //        cityContainer.setOnClickListener(new View.OnClickListener() {
@@ -220,7 +219,7 @@ public class ProfileViewActivity extends AppCompatActivity implements SimpleEdit
          /* Loading indicator */
         loadingIndicator = (AVLoadingIndicatorView) findViewById(R.id.loading_indicator);
 
-//        deactivateBottomButton();
+        deactivateSaveButton();
     }
 
 
@@ -326,7 +325,7 @@ public class ProfileViewActivity extends AppCompatActivity implements SimpleEdit
                 Uri uri = data.getData();
                 profilePicUri = uri;
                 loadProfilePhoto(uri);
-//                activateBottomButton();
+                activateSaveButton();
             }
             if (resultCode == Activity.RESULT_CANCELED) {
 
@@ -397,7 +396,7 @@ public class ProfileViewActivity extends AppCompatActivity implements SimpleEdit
         boolean valid = !TextUtils.isEmpty(newData);
         if (notSame && valid) {
             newDataTextView.setText(newData);
-//            activateBottomButton();
+            activateSaveButton();
         }
 
     }
@@ -426,17 +425,15 @@ public class ProfileViewActivity extends AppCompatActivity implements SimpleEdit
 
     }
 
-//    private void activateBottomButton() {
-//        bottomButton.setEnabled(true);
-//        bottomButton.setBackground(getResources().getDrawable(R.drawable.next_button));
-//        bottomButton.setTextColor(getResources().getColorStateList(R.color.white_text_button));
-//    }
-//
-//    private void deactivateBottomButton() {
-//        bottomButton.setEnabled(false);
-//        bottomButton.setBackgroundColor(getResources().getColor(R.color.red_button_disabled));
-//        bottomButton.setTextColor(Color.WHITE);
-//    }
+    private void activateSaveButton() {
+        saveButton.setEnabled(true);
+        saveButton.setTextColor(getResources().getColorStateList(R.color.blue_text_button));
+    }
+
+    private void deactivateSaveButton() {
+        saveButton.setEnabled(false);
+        saveButton.setTextColor(getResources().getColor(R.color.dark_button_disabled));
+    }
 
     @Override
     public boolean onSupportNavigateUp() {
