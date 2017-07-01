@@ -88,6 +88,7 @@ public class VillimKeys {
     public static final String KEY_VISIT_HOUSE_ID_PENDING = "visit_hosue_id_confirmes";
     public static final String KEY_VISIT_HOUSE_ID_CONFIRMED = "visit_hosue_id_pending";
     public static final String KEY_VISIT_HOUSE_ID_DONE = "visit_house_id_done";
+    public static final String KEY_HOUSE_TYPE = "house_type";
 
     /* Login Keys */
     public static final String KEY_MESSAGE = "message";

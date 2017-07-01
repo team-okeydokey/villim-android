@@ -39,6 +39,7 @@ import static net.villim.villim.VillimKeys.KEY_NUM_GUEST;
 import static net.villim.villim.VillimKeys.KEY_RATE_PER_MONTH;
 import static net.villim.villim.VillimKeys.KEY_RATE_PER_NIGHT;
 import static net.villim.villim.VillimKeys.KEY_UTILITY_FEE;
+import static net.villim.villim.VillimKeys.KEY_HOUSE_TYPE;
 
 /**
  * Created by seongmin on 5/30/17.
@@ -68,16 +69,17 @@ public class VillimHouse implements Parcelable {
     public String housePolicy;
     public String cancellationPolicy;
     public VillimUser host;
-    int hostId;
-    String hostName;
-    float hostRating;
-    int hostReviewCount;
-    String hostProfilePicUrl;
-    float houseRating;
-    int houseReviewCount;
-    int[] amenityIds;
-    String houseThumbnailUrl;
-    String[] housePicUrls;
+    public int hostId;
+    public String hostName;
+    public float hostRating;
+    public int hostReviewCount;
+    public String hostProfilePicUrl;
+    public float houseRating;
+    public int houseReviewCount;
+    public int[] amenityIds;
+    public String houseThumbnailUrl;
+    public String[] housePicUrls;
+    public int houseType;
 
     //public VillimReview[] reviews;
     //public int[] utilities;
@@ -120,6 +122,8 @@ public class VillimHouse implements Parcelable {
             amenityIds = VillimUtil.JSONArrayToIntArray(jsonObject.getJSONArray(KEY_AMENITY_IDS));
             housePicUrls = VillimUtil.JSONArrayToStringArray(jsonObject.getJSONArray(KEY_HOUSE_PIC_URLS));
 //            reviews = VillimReview.getHouseReviewsFromServer(houseId);
+
+            houseType = jsonObject.optInt(KEY_HOUSE_TYPE);
         } catch (JSONException e) {
 
         }
@@ -148,6 +152,7 @@ public class VillimHouse implements Parcelable {
         house.addrSummary = jsonObject.optString(KEY_ADDR_SUMMARY);
         house.addrDirection = jsonObject.optString(KEY_ADDR_DIRECTION);
         house.description = jsonObject.optString(KEY_DESCRIPTION);
+        house.houseType = jsonObject.optInt(KEY_HOUSE_TYPE);
         house.numGuest = jsonObject.optInt(KEY_NUM_GUEST);
         house.numBedroom = jsonObject.optInt(KEY_NUM_BEDROOM);
         house.numBed = jsonObject.optInt(KEY_NUM_BED);
@@ -213,6 +218,7 @@ public class VillimHouse implements Parcelable {
         dest.writeString(addrSummary);
         dest.writeString(addrDirection);
         dest.writeString(description);
+        dest.writeInt(houseType);
         dest.writeInt(numGuest);
         dest.writeInt(numBedroom);
         dest.writeInt(numBed);
@@ -247,6 +253,7 @@ public class VillimHouse implements Parcelable {
         addrSummary = in.readString();
         addrDirection = in.readString();
         description = in.readString();
+        houseType = in.readInt();
         numGuest = in.readInt();
         numBedroom = in.readInt();
         numBed = in.readInt();
