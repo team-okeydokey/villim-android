@@ -18,6 +18,12 @@ import static net.villim.villim.VillimKeys.KEY_ROOM_ID;
 import static net.villim.villim.VillimKeys.KEY_SEX;
 import static net.villim.villim.VillimKeys.KEY_USER_ID;
 import static net.villim.villim.VillimKeys.KEY_USER_STATUS;
+import static net.villim.villim.VillimKeys.KEY_HOUSE_ID_CONFIRMED;
+import static net.villim.villim.VillimKeys.KEY_HOUSE_ID_STAYING;
+import static net.villim.villim.VillimKeys.KEY_HOUSE_ID_DONE;
+import static net.villim.villim.VillimKeys.KEY_VISIT_HOUSE_ID_PENDING;
+import static net.villim.villim.VillimKeys.KEY_VISIT_HOUSE_ID_CONFIRMED;
+import static net.villim.villim.VillimKeys.KEY_VISIT_HOUSE_ID_DONE;
 
 /**
  * Created by seongmin on 6/9/17.
@@ -185,6 +191,135 @@ public class VillimSession {
         return city;
     }
 
+    /* House id confirmed */
+    public void setHouseIdConfirmed(int[] houseIdArray) {
+        StringBuilder str = new StringBuilder();
+        for (int i = 0; i < houseIdArray.length; i++) {
+            str.append(houseIdArray[i]).append(",");
+        }
+        prefs.edit().putString(KEY_HOUSE_ID_CONFIRMED, str.toString()).apply();
+    }
+
+    public int[] getHosueIdConfirmed() {
+        String rawString = prefs.getString(KEY_HOUSE_ID_CONFIRMED, "");
+        if (rawString.isEmpty()) {
+            return new int[0];
+        } else {
+            String[] stringArray = rawString.split(",");
+            int[] houseIdArray = new int[stringArray.length];
+
+            for (int i = 0; i < houseIdArray.length; i++) {
+                houseIdArray[i] = Integer.parseInt(stringArray[i]);
+            }
+            return houseIdArray;
+        }
+    }
+
+    /* House id staying */
+    public void setHouseIdStaying(int id) {
+        prefs.edit().putInt(KEY_HOUSE_ID_STAYING, id).apply();
+    }
+
+    public int getHouseIdStaying() {
+        int id = prefs.getInt(KEY_HOUSE_ID_STAYING, 0);
+        return id;
+    }
+
+    /* House id done */
+    public void setHouseIdDone(int[] houseIdArray) {
+        StringBuilder str = new StringBuilder();
+        for (int i = 0; i < houseIdArray.length; i++) {
+            str.append(houseIdArray[i]).append(",");
+        }
+        prefs.edit().putString(KEY_HOUSE_ID_DONE, str.toString()).apply();
+    }
+
+    public int[] getHosueIdDone() {
+        String rawString = prefs.getString(KEY_HOUSE_ID_DONE, "");
+        if (rawString.isEmpty()) {
+            return new int[0];
+        } else {
+            String[] stringArray = rawString.split(",");
+            int[] houseIdArray = new int[stringArray.length];
+
+            for (int i = 0; i < houseIdArray.length; i++) {
+                houseIdArray[i] = Integer.parseInt(stringArray[i]);
+            }
+            return houseIdArray;
+        }
+    }
+
+    /* Visit house id pending */
+    public void setVisitHouseIdPending(int[] houseIdArray) {
+        StringBuilder str = new StringBuilder();
+        for (int i = 0; i < houseIdArray.length; i++) {
+            str.append(houseIdArray[i]).append(",");
+        }
+        prefs.edit().putString(KEY_VISIT_HOUSE_ID_PENDING, str.toString()).apply();
+    }
+
+    public int[] getVisitHosueIdPending() {
+        String rawString = prefs.getString(KEY_VISIT_HOUSE_ID_PENDING, "");
+        if (rawString.isEmpty()) {
+            return new int[0];
+        } else {
+            String[] stringArray = rawString.split(",");
+            int[] houseIdArray = new int[stringArray.length];
+
+            for (int i = 0; i < houseIdArray.length; i++) {
+                houseIdArray[i] = Integer.parseInt(stringArray[i]);
+            }
+            return houseIdArray;
+        }
+    }
+
+    /* Visit house id confirmed */
+    public void setVisitHouseIdConfirmed(int[] houseIdArray) {
+        StringBuilder str = new StringBuilder();
+        for (int i = 0; i < houseIdArray.length; i++) {
+            str.append(houseIdArray[i]).append(",");
+        }
+        prefs.edit().putString(KEY_VISIT_HOUSE_ID_CONFIRMED, str.toString()).apply();
+    }
+
+    public int[] getVisitHosueIdConfirmed() {
+        String rawString = prefs.getString(KEY_VISIT_HOUSE_ID_CONFIRMED, "");
+        if (rawString.isEmpty()) {
+            return new int[0];
+        } else {
+            String[] stringArray = rawString.split(",");
+            int[] houseIdArray = new int[stringArray.length];
+
+            for (int i = 0; i < houseIdArray.length; i++) {
+                houseIdArray[i] = Integer.parseInt(stringArray[i]);
+            }
+            return houseIdArray;
+        }
+    }
+
+    /* Visit House id done */
+    public void setVisitHouseIdDone(int[] houseIdArray) {
+        StringBuilder str = new StringBuilder();
+        for (int i = 0; i < houseIdArray.length; i++) {
+            str.append(houseIdArray[i]).append(",");
+        }
+        prefs.edit().putString(KEY_VISIT_HOUSE_ID_DONE, str.toString()).apply();
+    }
+
+    public int[] getVisitHouseIdDone() {
+        String rawString = prefs.getString(KEY_VISIT_HOUSE_ID_DONE, "");
+        if (rawString.isEmpty()) {
+            return new int[0];
+        } else {
+            String[] stringArray = rawString.split(",");
+            int[] houseIdArray = new int[stringArray.length];
+
+            for (int i = 0; i < houseIdArray.length; i++) {
+                houseIdArray[i] = Integer.parseInt(stringArray[i]);
+            }
+            return houseIdArray;
+        }
+    }
 
     public void updateUserSession(VillimUser user) {
         setUserId(user.userId);
@@ -193,7 +328,6 @@ public class VillimSession {
         setLastName(user.lastname);
         setEmail(user.email);
         setProfilePicUrl(user.profilePicUrl);
-        setStatus(user.status);
         setRoomId(user.roomId);
         setPushPref(user.pushNotifications);
         setCurrencyPref(user.currencyPref);
@@ -201,5 +335,11 @@ public class VillimSession {
         setSex(user.sex);
         setPhoneNumber(user.phoneNumber);
         setCityOfResidence(user.cityOfResidence);
+        setHouseIdConfirmed(user.houseIdConfirmed);
+        setHouseIdStaying(user.houseIdStaying);
+        setHouseIdDone(user.houseIdDone);
+        setVisitHouseIdPending(user.visitHouseIdPending);
+        setVisitHouseIdConfirmed(user.visitHouseIdConfirmed);
+        setVisitHouseIdDone(user.visitHouseIdDone);
     }
 }
