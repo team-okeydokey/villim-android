@@ -110,6 +110,7 @@
         <activity
             android:name=".ProfileViewActivity"
             android:screenOrientation="portrait" />
+        <activity android:name=".ProfileEditActivity"></activity>
     </application>
 
 </manifest>

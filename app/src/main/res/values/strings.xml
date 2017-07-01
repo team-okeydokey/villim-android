@@ -139,6 +139,7 @@
         <item>FAQ</item>
         <item>환경 설정</item>
         <item>개인정보 보호 및 이용약관</item>
+        <item>프로필 보기 및 수정</item>
     </string-array>
     <string name="profile">프로필</string>
     <string name="login">로그인</string>
@@ -330,6 +331,7 @@
     <string name="profile_updated">프로필 정보가 업데이트 되었습니다.</string>
     <string name="change">변경</string>
     <string name="edit_item">%s 수정하기</string>
+    <string name="save">저장</string>
     <string-array name="sex_array">
         <item>남자</item>
         <item>여자</item>
