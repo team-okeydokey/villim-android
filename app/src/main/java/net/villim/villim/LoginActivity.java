@@ -36,7 +36,7 @@ import okhttp3.Response;
 
 import static net.villim.villim.VillimKeys.CHANGE_PASSCODE_URL;
 import static net.villim.villim.VillimKeys.KEY_EMAIL;
-import static net.villim.villim.VillimKeys.KEY_LOGIN_SUCCESS;
+import static net.villim.villim.VillimKeys.KEY_QUERY_SUCCESS;
 import static net.villim.villim.VillimKeys.KEY_MESSAGE;
 import static net.villim.villim.VillimKeys.KEY_PASSWORD;
 import static net.villim.villim.VillimKeys.KEY_USER_INFO;
@@ -177,7 +177,7 @@ public class LoginActivity extends VillimActivity {
                 try {
                     /* 주의: response.body().string()은 한 번 부를 수 있음 */
                     JSONObject jsonObject = new JSONObject(response.body().string());
-                    if (jsonObject.getBoolean(KEY_LOGIN_SUCCESS)) {
+                    if (jsonObject.getBoolean(KEY_QUERY_SUCCESS)) {
                         VillimUser user = VillimUser.createUserFromJSONObject((JSONObject) jsonObject.get(KEY_USER_INFO));
                         login(user);
                     } else {

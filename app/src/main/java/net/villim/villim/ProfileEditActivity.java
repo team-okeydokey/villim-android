@@ -115,6 +115,9 @@ public class ProfileEditActivity extends VillimActivity {
         newCity = false;
         newProfilePic = false;
         session = new VillimSession(getApplicationContext());
+
+        phoneNumber = session.getPhoneNumber();
+
 //        sex = session.getSex();
 
 

@@ -40,7 +40,7 @@ import static net.villim.villim.VillimKeys.KEY_FIRSTNAME;
 import static net.villim.villim.VillimKeys.KEY_LASTNAME;
 import static net.villim.villim.VillimKeys.KEY_MESSAGE;
 import static net.villim.villim.VillimKeys.KEY_PASSWORD;
-import static net.villim.villim.VillimKeys.KEY_SIGNUP_SUCCESS;
+import static net.villim.villim.VillimKeys.KEY_QUERY_SUCCESS;
 import static net.villim.villim.VillimKeys.KEY_USER;
 import static net.villim.villim.VillimKeys.KEY_USER_INFO;
 import static net.villim.villim.VillimKeys.SIGNUP_URL;
@@ -190,7 +190,7 @@ public class SignupActivity extends VillimActivity {
                 try {
                     /* 주의: response.body().string()은 한 번 부를 수 있음 */
                     JSONObject jsonObject = new JSONObject(response.body().string());
-                    if (jsonObject.getBoolean(KEY_SIGNUP_SUCCESS)) {
+                    if (jsonObject.getBoolean(KEY_QUERY_SUCCESS)) {
                         VillimUser user = VillimUser.createUserFromJSONObject((JSONObject) jsonObject.get(KEY_USER_INFO));
                         Intent returnIntent = new Intent();
                         returnIntent.putExtra(KEY_USER, user);
