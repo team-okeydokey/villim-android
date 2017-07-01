@@ -118,6 +118,30 @@ public class ProfileViewActivity extends VillimActivity {
 
         /* Profile picture */
         profilePicture = (ImageView) findViewById(R.id.profile_picture);
+
+        /* First name */
+        firstnameContent = (TextView) findViewById(R.id.firstname_content);
+
+        /* Last name */
+        lastnameContent = (TextView) findViewById(R.id.lastname_content);
+
+        /* Email */
+        emailContent = (TextView) findViewById(R.id.email_content);
+
+        /* Phone number */
+        phoneNumberContent = (TextView) findViewById(R.id.phone_number_content);
+
+        /* City of residence */
+        cityContent = (TextView) findViewById(R.id.city_content);
+
+         /* Loading indicator */
+        loadingIndicator = (AVLoadingIndicatorView) findViewById(R.id.loading_indicator);
+
+        populateView();
+    }
+
+    private void populateView() {
+        /* Profile picture */
         if (session.getProfilePicUrl().isEmpty()) {
             loadDefaultImage();
         } else {
@@ -126,126 +150,20 @@ public class ProfileViewActivity extends VillimActivity {
 
         }
 
-        /* First name */
-        firstnameContent = (TextView) findViewById(R.id.firstname_content);
+         /* First name */
         firstnameContent.setText(session.getFirstName());
-        firstnameContainer = (LinearLayout) findViewById(R.id.firstname_container);
 
         /* Last name */
-        lastnameContent = (TextView) findViewById(R.id.lastname_content);
         lastnameContent.setText(session.getLastName());
-        lastnameContainer = (LinearLayout) findViewById(R.id.lastname_container);
 
         /* Email */
-        emailContent = (TextView) findViewById(R.id.email_content);
         emailContent.setText(session.getEmail());
-        emailContainer = (LinearLayout) findViewById(R.id.email_container);
 
         /* Phone number */
-        phoneNumberContent = (TextView) findViewById(R.id.phone_number_content);
         phoneNumberContent.setText(session.getPhoneNumber());
 
         /* City of residence */
-        cityContent = (TextView) findViewById(R.id.city_content);
         cityContent.setText(session.getCityOfResidence());
-        cityContainer = (LinearLayout) findViewById(R.id.city_container);
-
-         /* Loading indicator */
-        loadingIndicator = (AVLoadingIndicatorView) findViewById(R.id.loading_indicator);
-
-    }
-
-
-    private void sendUpdateProfileRequest() {
-        startLoadingAnimation();
-
-        ClearableCookieJar cookieJar =
-                new PersistentCookieJar(new SetCookieCache(), new SharedPrefsCookiePersistor(getApplicationContext()));
-
-        OkHttpClient client = new OkHttpClient.Builder()
-                .cookieJar(cookieJar)
-                .build();
-
-        URL url = new HttpUrl.Builder()
-                .scheme(SERVER_SCHEME)
-                .host(SERVER_HOST)
-                .addPathSegments(UPDATE_PROFILE_URL)
-                .build().url();
-
-        RequestBody requestBody;
-
-        if (newProfilePic) {
-            File imageFiie = new File(profilePicUri.getPath());
-            requestBody = new MultipartBody.Builder()
-                    .setType(MultipartBody.FORM)
-                    .addFormDataPart(KEY_FIRSTNAME, firstnameContent.getText().toString().trim())
-                    .addFormDataPart(KEY_LASTNAME, lastnameContent.getText().toString().trim())
-//                    .addFormDataPart(KEY_SEX, Integer.toString(sex))
-                    .addFormDataPart(KEY_EMAIL, emailContent.getText().toString().trim())
-                    .addFormDataPart(KEY_PHONE_NUMBER, phoneNumberContent.getText().toString().trim())
-                    .addFormDataPart(KEY_CITY_OF_RESIDENCE, cityContent.getText().toString().trim())
-                    .addFormDataPart(KEY_PROFILE_PIC, imageFiie.getName(),
-                            RequestBody.create(MediaType.parse(imageFiie.getPath()), imageFiie))
-                    .build();
-        } else {
-            requestBody = new MultipartBody.Builder()
-                    .setType(MultipartBody.FORM)
-                    .addFormDataPart(KEY_FIRSTNAME, firstnameContent.getText().toString().trim())
-                    .addFormDataPart(KEY_LASTNAME, lastnameContent.getText().toString().trim())
-//                    .addFormDataPart(KEY_SEX, Integer.toString(sex))
-                    .addFormDataPart(KEY_EMAIL, emailContent.getText().toString().trim())
-                    .addFormDataPart(KEY_PHONE_NUMBER, phoneNumberContent.getText().toString().trim())
-                    .addFormDataPart(KEY_CITY_OF_RESIDENCE, cityContent.getText().toString().trim())
-                    .build();
-        }
-
-        Request request = new Request.Builder()
-                .url(url)
-                .post(requestBody)
-                .build();
-
-        client.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                // Something went wrong.
-                showErrorMessage(getString(R.string.cant_connect_to_server));
-                stopLoadingAnimation();
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                if (!response.isSuccessful()) {
-                    showErrorMessage(getString(R.string.server_error));
-                    stopLoadingAnimation();
-                    throw new IOException("Response not successful   " + response);
-                }
-                /* Request success. */
-                try {
-                    /* 주의: response.body().string()은 한 번 부를 수 있음 */
-                    final JSONObject jsonObject = new JSONObject(response.body().string());
-                    if (jsonObject.getBoolean(KEY_UPDATE_SUCCESS)) {
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                Toast.makeText(getApplicationContext(), getString(R.string.profile_updated),
-                                        Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                        VillimUser user = VillimUser.createUserFromJSONObject(jsonObject.getJSONObject(KEY_USER_INFO));
-                        session.updateUserSession(user);
-                        Intent returnIntent = new Intent();
-                        setResult(Activity.RESULT_OK, returnIntent);
-                        finish();
-                    } else {
-                        showErrorMessage(jsonObject.getString(KEY_MESSAGE));
-                    }
-                    stopLoadingAnimation();
-                } catch (JSONException e) {
-                    showErrorMessage(getString(R.string.open_room_error));
-                    stopLoadingAnimation();
-                }
-            }
-        });
     }
 
     @Override
@@ -254,11 +172,11 @@ public class ProfileViewActivity extends VillimActivity {
         if (requestCode == EDIT_PROFILE && data != null) {
 
             if (resultCode == Activity.RESULT_OK) {
-                newProfilePic = true;
-                Uri uri = Uri.parse(data.getExtras().getString(ProfileEditActivity.PROFILE_PIC_URI));
-                profilePicUri = uri;
-                loadProfilePhoto(uri);
+//                Uri uri = Uri.parse(data.getExtras().getString(ProfileEditActivity.PROFILE_PIC_URI));
+//                profilePicUri = uri;
+//                loadProfilePhoto(uri);
 //                activateBottomButton();
+                populateView();
             }
             if (resultCode == Activity.RESULT_CANCELED) {
 
