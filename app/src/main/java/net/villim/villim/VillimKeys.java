@@ -20,18 +20,18 @@ public class VillimKeys {
     public static final String CHANGE_PASSCODE_URL = "a/change-passcode";
     public static final String MY_HOUSE_URL = "a/my-house";
     public static final String OPEN_DOORLOCK_URL = "a/open-doorlock";
-    public static final String RESERVE_URL = "a/reserve";
+    public static final String RESERVE_URL = "a/reserve-house";
     public static final String FEATURED_HOUSES_URL = "a/featured-houses";
     public static final String HOST_INFO_URL = "a/host-info";
     public static final String HOUSE_INFO_URL = "a/house-info";
-    public static final String HOUSE_REVIEW_URL = "a/hosue-review";
+    public static final String HOUSE_REVIEW_URL = "a/house-reviews";
     public static final String VISIT_LIST_URL = "a/visit-list";
     public static final String VISIT_INFO_URL = "a/visit-info";
     public static final String POST_REVIEW_URL = "a/post-review";
     public static final String FIND_PASSWORD_URL = "a/find-password";
     public static final String CANCEL_VISIT_URL = "a/cancel-visit";
     public static final String TERMS_OF_SERVICE_URL = "https://www.klondikebar.com/";
-    public static final String UPDATE_PROFILE_URL = "https://www.klondikebar.com/";
+    public static final String UPDATE_PROFILE_URL = "a/update-profile";
     public static final String FAQ_URL = "https://boo7387.wixsite.com/villim01/faq";
 
 //    public static final String CHANGE_PASSCODE_URL = "v2/594478881200005716fcb615";

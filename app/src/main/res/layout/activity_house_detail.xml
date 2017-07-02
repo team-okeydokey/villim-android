@@ -8,18 +8,6 @@
     android:background="@color/room_detail_background"
     tools:context="net.villim.villim.HouseDetailActivity">
 
-
-    <com.wang.avi.AVLoadingIndicatorView
-        android:id="@+id/loading_indicator"
-        style="@style/AVLoadingIndicatorView.Large"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:visibility="gone"
-        app:indicatorColor="@color/loading_animation_color"
-        app:indicatorName="BallGridPulseIndicator" />
-
     <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
@@ -658,4 +646,16 @@
         </android.support.v7.widget.LinearLayoutCompat>
 
     </android.support.design.widget.CoordinatorLayout>
+
+    <com.wang.avi.AVLoadingIndicatorView
+        android:id="@+id/loading_indicator"
+        style="@style/AVLoadingIndicatorView.Large"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:visibility="gone"
+        app:indicatorColor="@color/loading_animation_color"
+        app:indicatorName="BallGridPulseIndicator" />
+
 </RelativeLayout>

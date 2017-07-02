@@ -141,15 +141,9 @@ public class LoginActivity extends VillimActivity {
                 .add(KEY_PASSWORD, loginFormPassword.getText().toString())
                 .build();
 
-//        URL url = new HttpUrl.Builder()
-//                .scheme(SERVER_SCHEME)
-//                .host(SERVER_HOST)
-//                .addPathSegments(LOGIN_URL)
-//                .build().url();
-
         URL url = new HttpUrl.Builder()
-                .scheme("http")
-                .host("175.207.29.19")
+                .scheme(SERVER_SCHEME)
+                .host(SERVER_HOST)
                 .addPathSegments(LOGIN_URL)
                 .build().url();
 

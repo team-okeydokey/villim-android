@@ -52,7 +52,8 @@ public class VillimUtil {
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date();
         try {
-            date = df.parse(dateString);
+            String onlyDate = dateString.split(" ")[0];
+            date = df.parse(onlyDate);
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -60,7 +61,7 @@ public class VillimUtil {
     }
 
     public static String dateStringFromDate(Context context, Date date) {
-        return String.format(context.getString(R.string.date_string_format), date.getYear(), date.getMonth()+1, date.getDate());
+        return String.format(context.getString(R.string.date_string_format), date.getYear()+1900, date.getMonth()+1, date.getDate());
     }
 
     public static int daysBetween(Date one, Date two) { long difference = (one.getTime()-two.getTime())/86400000; return (int) Math.abs(difference); }

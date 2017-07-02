@@ -41,6 +41,7 @@ import java.util.Locale;
 
 import okhttp3.Call;
 import okhttp3.Callback;
+import okhttp3.FormBody;
 import okhttp3.HttpUrl;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -59,6 +60,7 @@ import static net.villim.villim.VillimKeys.KEY_MESSAGE;
 import static net.villim.villim.VillimKeys.KEY_PHONE_NUMBER;
 import static net.villim.villim.VillimKeys.KEY_PROFILE_PIC;
 import static net.villim.villim.VillimKeys.KEY_PUSH_NOTIFICATIONS;
+import static net.villim.villim.VillimKeys.KEY_QUERY_SUCCESS;
 import static net.villim.villim.VillimKeys.KEY_SEX;
 import static net.villim.villim.VillimKeys.KEY_UPDATE_SUCCESS;
 import static net.villim.villim.VillimKeys.KEY_USER_INFO;
@@ -313,9 +315,9 @@ public class ProfileEditActivity extends VillimActivity {
                     .addFormDataPart(KEY_EMAIL, emailContent.getText().toString().trim())
                     .addFormDataPart(KEY_PHONE_NUMBER, phoneNumber)
                     .addFormDataPart(KEY_CITY_OF_RESIDENCE, cityContent.getText().toString().trim())
-                    .addFormDataPart(KEY_PUSH_NOTIFICATIONS, Boolean.toString(session.getPushPref()))
-                    .addFormDataPart(KEY_CURRENCY_PREFERENCE, Integer.toString(session.getCurrencyPref()))
-                    .addFormDataPart(KEY_LANGUAGE_PREFERENCE, Integer.toString(session.getLanguagePref()))
+//                    .addFormDataPart(KEY_PUSH_NOTIFICATIONS, Boolean.toString(session.getPushPref()))
+//                    .addFormDataPart(KEY_CURRENCY_PREFERENCE, Integer.toString(session.getCurrencyPref()))
+//                    .addFormDataPart(KEY_LANGUAGE_PREFERENCE, Integer.toString(session.getLanguagePref()))
                     .addFormDataPart(KEY_PROFILE_PIC, imageFiie.getName(),
                             RequestBody.create(MediaType.parse(imageFiie.getPath()), imageFiie))
                     .build();
@@ -328,10 +330,21 @@ public class ProfileEditActivity extends VillimActivity {
                     .addFormDataPart(KEY_EMAIL, emailContent.getText().toString().trim())
                     .addFormDataPart(KEY_PHONE_NUMBER, phoneNumber)
                     .addFormDataPart(KEY_CITY_OF_RESIDENCE, cityContent.getText().toString().trim())
-                    .addFormDataPart(KEY_PUSH_NOTIFICATIONS, Boolean.toString(session.getPushPref()))
-                    .addFormDataPart(KEY_CURRENCY_PREFERENCE, Integer.toString(session.getCurrencyPref()))
-                    .addFormDataPart(KEY_LANGUAGE_PREFERENCE, Integer.toString(session.getLanguagePref()))
+//                    .addFormDataPart(KEY_PUSH_NOTIFICATIONS, Boolean.toString(session.getPushPref()))
+//                    .addFormDataPart(KEY_CURRENCY_PREFERENCE, Integer.toString(session.getCurrencyPref()))
+//                    .addFormDataPart(KEY_LANGUAGE_PREFERENCE, Integer.toString(session.getLanguagePref()))
                     .build();
+//             requestBody = new FormBody.Builder()
+//                    .add(KEY_FIRSTNAME, firstnameContent.getText().toString().trim())
+//                    .add(KEY_LASTNAME, lastnameContent.getText().toString().trim())
+////                    .addFormDataPart(KEY_SEX, Integer.toString(sex))
+//                    .add(KEY_EMAIL, emailContent.getText().toString().trim())
+//                    .add(KEY_PHONE_NUMBER, phoneNumber)
+//                    .add(KEY_CITY_OF_RESIDENCE, cityContent.getText().toString().trim())
+////                    .addFormDataPart(KEY_PUSH_NOTIFICATIONS, Boolean.toString(session.getPushPref()))
+////                    .addFormDataPart(KEY_CURRENCY_PREFERENCE, Integer.toString(session.getCurrencyPref()))
+////                    .addFormDataPart(KEY_LANGUAGE_PREFERENCE, Integer.toString(session.getLanguagePref()))
+//                    .build();
         }
 
         Request request = new Request.Builder()
@@ -358,7 +371,7 @@ public class ProfileEditActivity extends VillimActivity {
                 try {
                     /* 주의: response.body().string()은 한 번 부를 수 있음 */
                     final JSONObject jsonObject = new JSONObject(response.body().string());
-                    if (jsonObject.getBoolean(KEY_UPDATE_SUCCESS)) {
+                    if (jsonObject.getBoolean(KEY_QUERY_SUCCESS)) {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
