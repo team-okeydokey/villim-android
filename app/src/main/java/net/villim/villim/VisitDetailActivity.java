@@ -54,7 +54,6 @@ import static net.villim.villim.VillimKeys.KEY_LONGITUDE;
 import static net.villim.villim.VillimKeys.KEY_MESSAGE;
 import static net.villim.villim.VillimKeys.KEY_QUERY_SUCCESS;
 import static net.villim.villim.VillimKeys.KEY_RESERVATION_ACTIVE;
-import static net.villim.villim.VillimKeys.KEY_ROOM_ID;
 import static net.villim.villim.VillimKeys.KEY_VISIT_ID;
 import static net.villim.villim.VillimKeys.KEY_VISIT_INFO;
 import static net.villim.villim.VillimKeys.SERVER_HOST;

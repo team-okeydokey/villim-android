@@ -49,12 +49,15 @@ import static net.villim.villim.VillimKeys.KEY_MESSAGE;
 import static net.villim.villim.VillimKeys.KEY_PASSWORD;
 import static net.villim.villim.VillimKeys.KEY_RESERVATION_INFO;
 import static net.villim.villim.VillimKeys.KEY_RESERVATION_SUCCESS;
-import static net.villim.villim.VillimKeys.KEY_ROOM_ID;
+import static net.villim.villim.VillimKeys.KEY_VISIT_INFO;
+import static net.villim.villim.VillimKeys.KEY_SUCCESS;
+import static net.villim.villim.VillimKeys.KEY_HOUSE_ID;
 import static net.villim.villim.VillimKeys.KEY_START_DATE;
 import static net.villim.villim.VillimKeys.KEY_USER_INFO;
 import static net.villim.villim.VillimKeys.RESERVE_URL;
 import static net.villim.villim.VillimKeys.SERVER_HOST;
 import static net.villim.villim.VillimKeys.SERVER_SCHEME;
+import static net.villim.villim.VillimKeys.VISIT_REQUEST_URL;
 
 public class ReservationActivity extends VillimActivity {
 
@@ -186,7 +189,8 @@ public class ReservationActivity extends VillimActivity {
             public void onClick(View v) {
                 if (session.getLoggedIn()) {
                     if (dateSelected){
-                        sendReservationRequest();
+//                        sendReservationRequest();
+                        sendVisitRequest();
                     } else {
                         Toast.makeText(getApplicationContext(), R.string.must_select_date, Toast.LENGTH_LONG).show();
                     }
@@ -263,7 +267,7 @@ public class ReservationActivity extends VillimActivity {
                 .build();
 
         RequestBody requestBody = new FormBody.Builder()
-                .add(KEY_ROOM_ID, Integer.toString(house.houseId))
+                .add(KEY_HOUSE_ID, Integer.toString(house.houseId))
                 .add(KEY_START_DATE, VillimUtil.dateStringFromDate(this, startDate))
                 .add(KEY_END_DATE, VillimUtil.dateStringFromDate(this, endDate))
                 .build();
@@ -298,10 +302,80 @@ public class ReservationActivity extends VillimActivity {
                 try {
                     /* 주의: response.body().string()은 한 번 부를 수 있음 */
                     JSONObject jsonObject = new JSONObject(response.body().string());
-                    if (jsonObject.getBoolean(KEY_RESERVATION_SUCCESS)) {
+                    if (jsonObject.getBoolean(KEY_SUCCESS)) {
                         VillimReservation reservation = VillimReservation.createReservationFromJSONObject((JSONObject) jsonObject.get(KEY_RESERVATION_INFO));
                         Intent intent = new Intent(ReservationActivity.this, ReservationSuccessActivity.class);
                         intent.putExtra(RESERVATION, reservation);
+                        stopLoadingAnimation();
+                        hideErrorMessage();
+                        startActivity(intent);
+                        finish();
+                    } else {
+                        showErrorMessage(jsonObject.getString(KEY_MESSAGE));
+                        stopLoadingAnimation();
+                    }
+                } catch (JSONException e) {
+                    showErrorMessage(getString(R.string.server_error));
+                    stopLoadingAnimation();
+                }
+            }
+        });
+    }
+
+    private void sendVisitRequest() {
+        startLoadingAnimation();
+        hideErrorMessage();
+
+        ClearableCookieJar cookieJar =
+                new PersistentCookieJar(new SetCookieCache(), new SharedPrefsCookiePersistor(getApplicationContext()));
+
+        OkHttpClient client = new OkHttpClient.Builder()
+                .cookieJar(cookieJar)
+                .build();
+
+        RequestBody requestBody = new FormBody.Builder()
+                .add(KEY_HOUSE_ID, Integer.toString(house.houseId))
+                .add(KEY_START_DATE, VillimUtil.dateStringFromDate(this, startDate))
+                .add(KEY_END_DATE, VillimUtil.dateStringFromDate(this, endDate))
+                .build();
+
+        URL url = new HttpUrl.Builder()
+                .scheme(SERVER_SCHEME)
+                .host(SERVER_HOST)
+                .addPathSegments(VISIT_REQUEST_URL)
+                .build().url();
+
+        Request request = new Request.Builder()
+                .url(url)
+                .post(requestBody)
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                // Something went wrong.
+                showErrorMessage(getString(R.string.cant_connect_to_server));
+                stopLoadingAnimation();
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (!response.isSuccessful()) {
+                    showErrorMessage(getString(R.string.server_error));
+                    stopLoadingAnimation();
+                    throw new IOException("Response not successful   " + response);
+                }
+                /* Request success. */
+                try {
+                    /* 주의: response.body().string()은 한 번 부를 수 있음 */
+                    JSONObject jsonObject = new JSONObject(response.body().string());
+                    if (jsonObject.getBoolean(KEY_SUCCESS)) {
+//                        VillimReservation reservation = VillimReservation.createReservationFromJSONObject((JSONObject) jsonObject.get(KEY_RESERVATION_INFO));
+//                        Intent intent = new Intent(ReservationActivity.this, ReservationSuccessActivity.class);
+//                        intent.putExtra(RESERVATION, reservation);
+                        VillimVisit visit = VillimVisit.createVisitFromJSONObject(jsonObject.getJSONObject(KEY_VISIT_INFO));
+                        Intent intent = new Intent(ReservationActivity.this, VisitRequestSuccessActivity.class);
+                        intent.putExtra(KEY_VISIT_INFO, visit);
                         stopLoadingAnimation();
                         hideErrorMessage();
                         startActivity(intent);

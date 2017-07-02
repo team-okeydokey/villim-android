@@ -14,7 +14,6 @@ import static net.villim.villim.VillimKeys.KEY_LASTNAME;
 import static net.villim.villim.VillimKeys.KEY_PHONE_NUMBER;
 import static net.villim.villim.VillimKeys.KEY_PROFILE_PIC_URL;
 import static net.villim.villim.VillimKeys.KEY_PUSH_NOTIFICATIONS;
-import static net.villim.villim.VillimKeys.KEY_ROOM_ID;
 import static net.villim.villim.VillimKeys.KEY_SEX;
 import static net.villim.villim.VillimKeys.KEY_USER_ID;
 import static net.villim.villim.VillimKeys.KEY_USER_STATUS;
@@ -121,15 +120,6 @@ public class VillimSession {
         return status;
     }
 
-    /* Room id */
-    public void setRoomId(int roomId) {
-        prefs.edit().putInt(KEY_ROOM_ID, roomId).apply();
-    }
-
-    public int getRoomId() {
-        int roomId = prefs.getInt(KEY_ROOM_ID, 0);
-        return roomId;
-    }
 
     /* Push Notifications */
     public void setPushPref(boolean pushPref) {
@@ -328,7 +318,6 @@ public class VillimSession {
         setLastName(user.lastname);
         setEmail(user.email);
         setProfilePicUrl(user.profilePicUrl);
-        setRoomId(user.roomId);
         setPushPref(user.pushNotifications);
         setCurrencyPref(user.currencyPref);
         setLanguagePref(user.languagePref);

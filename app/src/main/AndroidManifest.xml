@@ -110,9 +110,18 @@
         <activity
             android:name=".ProfileViewActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".ProfileEditActivity" />
-        <activity android:name=".AddPhoneNumberActivity" />
-        <activity android:name=".VerifyPhoneNumberActivity"></activity>
+        <activity
+            android:name=".ProfileEditActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".AddPhoneNumberActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".VerifyPhoneNumberActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".VisitRequestSuccessActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

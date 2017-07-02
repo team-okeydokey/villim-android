@@ -20,9 +20,7 @@ import static net.villim.villim.VillimKeys.KEY_LASTNAME;
 import static net.villim.villim.VillimKeys.KEY_PHONE_NUMBER;
 import static net.villim.villim.VillimKeys.KEY_PROFILE_PIC_URL;
 import static net.villim.villim.VillimKeys.KEY_PUSH_NOTIFICATIONS;
-import static net.villim.villim.VillimKeys.KEY_ROOM_ID;
 import static net.villim.villim.VillimKeys.KEY_SEX;
-import static net.villim.villim.VillimKeys.KEY_STATUS;
 import static net.villim.villim.VillimKeys.KEY_USER_ID;
 import static net.villim.villim.VillimKeys.KEY_VISIT_HOUSE_ID_CONFIRMED;
 import static net.villim.villim.VillimKeys.KEY_VISIT_HOUSE_ID_DONE;
@@ -40,7 +38,6 @@ public class VillimUser implements Parcelable {
     public String email;
     public String profilePicUrl;
     public String about;
-    public int roomId;
 
     public int sex;
     public String phoneNumber;
@@ -65,7 +62,6 @@ public class VillimUser implements Parcelable {
         email = in.readString();
         profilePicUrl = in.readString();
         about = in.readString();
-        roomId = in.readInt();
         sex = in.readInt();
         phoneNumber = in.readString();
         cityOfResidence = in.readString();
@@ -117,8 +113,6 @@ public class VillimUser implements Parcelable {
         boolean isProfilePicUrlNull = userInfo.isNull(KEY_PROFILE_PIC_URL);
         user.profilePicUrl = isProfilePicUrlNull ? null : userInfo.opt(KEY_PROFILE_PIC_URL).toString();
         user.about = userInfo.optString(KEY_ABOUT);
-        boolean isRoomIdNull = userInfo.isNull(KEY_ROOM_ID);
-        user.roomId = isRoomIdNull ? -1 : userInfo.optInt(KEY_ROOM_ID);
         user.sex = userInfo.optInt(KEY_SEX);
         user.phoneNumber = userInfo.optString(KEY_PHONE_NUMBER);
         user.cityOfResidence = userInfo.optString(KEY_CITY_OF_RESIDENCE);
@@ -148,7 +142,6 @@ public class VillimUser implements Parcelable {
         dest.writeString(email);
         dest.writeString(profilePicUrl);
         dest.writeString(about);
-        dest.writeInt(roomId);
         dest.writeInt(sex);
         dest.writeString(phoneNumber);
         dest.writeString(cityOfResidence);

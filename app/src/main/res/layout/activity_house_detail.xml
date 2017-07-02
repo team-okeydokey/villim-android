@@ -639,7 +639,7 @@
                 android:layout_weight="1"
                 android:background="#de2025"
                 android:gravity="center"
-                android:text="@string/book"
+                android:text="@string/request_visit"
                 android:textColor="#ffffff"
                 android:textSize="17sp" />
 

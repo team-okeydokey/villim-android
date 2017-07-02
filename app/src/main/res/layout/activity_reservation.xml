@@ -384,7 +384,7 @@
         android:layout_height="65dp"
         android:layout_alignParentBottom="true"
         android:background="@drawable/next_button"
-        android:text="@string/book"
+        android:text="@string/request_visit"
         android:textColor="@drawable/next_button_text"
         android:textSize="17sp" />
 

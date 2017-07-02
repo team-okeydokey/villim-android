@@ -24,9 +24,9 @@ import static net.villim.villim.VillimKeys.KEY_START_DATE;
  */
 
 public class VillimReservation implements Parcelable {
-    public static final int WAITING = 0;
-    public static final int CONFIRMED = 1;
-    public static final int ACTIVE = 2;
+    public static final int CONFIRMED = 0;
+    public static final int STAYING = 1;
+    public static final int DONE = 2;
 
     public int reservationId;
     public int houseId;
@@ -103,14 +103,14 @@ public class VillimReservation implements Parcelable {
 
     public static String stringFromReservationStatus(Context context, int status) {
         switch (status) {
-            case WAITING:
-                return context.getString(R.string.reservation_status_waiting);
             case CONFIRMED:
-                return context.getString(R.string.reservation_status_confirmed);
-            case ACTIVE:
-                return context.getString(R.string.reservation_status_active);
+                return context.getString(R.string.status_confirmed);
+            case STAYING:
+                return context.getString(R.string.status_active);
+            case DONE:
+                return context.getString(R.string.status_done);
             default:
-                return context.getString(R.string.reservation_status_waiting);
+                return context.getString(R.string.status_confirmed);
         }
     }
 }

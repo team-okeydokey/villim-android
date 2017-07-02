@@ -1,5 +1,6 @@
 package net.villim.villim;
 
+import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -11,16 +12,22 @@ import static net.villim.villim.VillimKeys.KEY_HOUSE_ID;
 import static net.villim.villim.VillimKeys.KEY_VISITOR_ID;
 import static net.villim.villim.VillimKeys.KEY_VISIT_ID;
 import static net.villim.villim.VillimKeys.KEY_VISIT_TIME;
+import static net.villim.villim.VillimKeys.KEY_VISIT_STATUS;
 
 /**
  * Created by seongmin on 6/15/17.
  */
 
 public class VillimVisit implements Parcelable {
+    public static final int PENDING = 0;
+    public static final int CONFIRMED = 1;
+    public static final int DONE = 2;
+
     public int visitId;
     public int houseId;
     public int visitorId;
     public String visitTime;
+    public int visitStatus;
 
     public VillimVisit() {
 
@@ -31,6 +38,7 @@ public class VillimVisit implements Parcelable {
         houseId = in.readInt();
         visitorId = in.readInt();
         visitTime = in.readString();
+        visitStatus = in.readInt();
     }
 
     public static final Creator<VillimVisit> CREATOR = new Creator<VillimVisit>() {
@@ -72,6 +80,7 @@ public class VillimVisit implements Parcelable {
         visit.houseId = userInfo.optInt(KEY_HOUSE_ID);
         visit.visitorId = userInfo.optInt(KEY_VISITOR_ID);
         visit.visitTime = userInfo.optString(KEY_VISIT_TIME);
+        visit.visitStatus = userInfo.optInt(KEY_VISIT_STATUS);
         return visit;
     }
 
@@ -87,6 +96,20 @@ public class VillimVisit implements Parcelable {
         dest.writeInt(houseId);
         dest.writeInt(visitorId);
         dest.writeString(visitTime);
+        dest.writeInt(visitStatus);
+    }
+
+    public static String stringFromVisitStatus(Context context, int status) {
+        switch (status) {
+            case PENDING:
+                return context.getString(R.string.status_pending);
+            case CONFIRMED:
+                return context.getString(R.string.status_confirmed);
+            case DONE:
+                return context.getString(R.string.status_done);
+            default:
+                return context.getString(R.string.status_pending);
+        }
     }
 }
 

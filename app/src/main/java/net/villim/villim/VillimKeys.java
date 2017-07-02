@@ -29,6 +29,7 @@ public class VillimKeys {
     public static final String VISIT_INFO_URL = "a/visit-info";
     public static final String POST_REVIEW_URL = "a/post-review";
     public static final String FIND_PASSWORD_URL = "a/find-password";
+    public static final String VISIT_REQUEST_URL = "a/visit-request";
     public static final String CANCEL_VISIT_URL = "a/cancel-visit";
     public static final String TERMS_OF_SERVICE_URL = "https://www.klondikebar.com/";
     public static final String UPDATE_PROFILE_URL = "a/update-profile";
@@ -74,7 +75,6 @@ public class VillimKeys {
     public static final String KEY_PROFILE_PIC_URL = "profile_pic_url";
     public static final String KEY_ABOUT = "about";
     public static final String KEY_USER_STATUS = "user_status";
-    public static final String KEY_ROOM_ID = "room_id";
     public static final String KEY_PUSH_NOTIFICATIONS = "push_notifications";
     public static final String KEY_CURRENCY_PREFERENCE = "currency_preference";
     public static final String KEY_LANGUAGE_PREFERENCE = "language_preference";
@@ -180,6 +180,7 @@ public class VillimKeys {
     public static final String KEY_VISIT_ID = "visit_id";
     public static final String KEY_VISITOR_ID = "visitor_id";
     public static final String KEY_VISIT_TIME = "visit_time";
+    public static final String KEY_VISIT_STATUS = "visit_status";
     public static final String KEY_VISIT_INFO = "visit_info";
 
     /* DoorlockPAsscodeActivity */
@@ -200,7 +201,8 @@ public class VillimKeys {
     /* Profile Edit Activity */
     public static final String KEY_UPDATE_SUCCESS = "update";
 
-
+    /* Success code */
+    public static final String KEY_SUCCESS = "success";
 }
 
 
