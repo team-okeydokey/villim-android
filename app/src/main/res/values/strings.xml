@@ -139,6 +139,7 @@
         <item>FAQ</item>
         <item>환경 설정</item>
         <item>개인정보 보호 및 이용약관</item>
+        <item>프로필 보기 및 수정</item>
     </string-array>
     <string name="profile">프로필</string>
     <string name="login">로그인</string>
@@ -356,5 +357,11 @@
     <string name="visit_guest">방문자</string>
     <string name="visit_request_success">방문 요청 완료</string>
     <string name="visit_status">방문 상태</string>
+
+    <!-- Add phone numbr activity -->
+    <string name="verify_phone">전화번호 인증</string>
+    <string name="verify_phone_title">인증번호를 입력해주세요</string>
+    <string name="verify_phone_instructions">핸드폰으로 전송된 인증번호를 입력해주세요.</string>
+
 
 </resources>

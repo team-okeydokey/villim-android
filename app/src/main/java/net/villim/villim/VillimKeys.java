@@ -31,6 +31,8 @@ public class VillimKeys {
     public static final String FIND_PASSWORD_URL = "a/find-password";
     public static final String VISIT_REQUEST_URL = "a/visit-request";
     public static final String CANCEL_VISIT_URL = "a/cancel-visit";
+    public static final String SEND_VERIFICATION_PHONE_URL = "a/send-verification-phone";
+    public static final String VERIFY_PHONE_URL = "a/verify-phone";
     public static final String TERMS_OF_SERVICE_URL = "https://www.klondikebar.com/";
     public static final String UPDATE_PROFILE_URL = "a/update-profile";
     public static final String FAQ_URL = "https://boo7387.wixsite.com/villim01/faq";
@@ -203,6 +205,9 @@ public class VillimKeys {
 
     /* Success code */
     public static final String KEY_SUCCESS = "success";
+
+    /* Verify phone activity */
+    public static final String KEY_VERIFICATION_CODE =  "verification_code";
 }
 
 

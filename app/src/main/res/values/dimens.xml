@@ -120,4 +120,8 @@
     <!-- Profile edit page -->
     <dimen name="profile_edit_item_title_width">70dp</dimen>
 
+    <!-- Verify phone activity -->
+    <dimen name="code_input_width">40dp</dimen>
+    <dimen name="code_input_margin">10dp</dimen>
+
 </resources>

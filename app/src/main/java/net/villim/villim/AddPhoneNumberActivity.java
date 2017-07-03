@@ -40,6 +40,8 @@ import static net.villim.villim.VillimKeys.KEY_MESSAGE;
 import static net.villim.villim.VillimKeys.KEY_PASSCODE;
 import static net.villim.villim.VillimKeys.KEY_PASSCODE_CONFIRM;
 import static net.villim.villim.VillimKeys.KEY_PHONE_NUMBER;
+import static net.villim.villim.VillimKeys.KEY_SUCCESS;
+import static net.villim.villim.VillimKeys.SEND_VERIFICATION_PHONE_URL;
 import static net.villim.villim.VillimKeys.SERVER_HOST;
 import static net.villim.villim.VillimKeys.SERVER_SCHEME;
 
@@ -96,8 +98,7 @@ public class AddPhoneNumberActivity extends VillimActivity {
                 boolean allDigits = phoneNumber.matches("[0-9]+");
                 boolean validInput = allFieldsFilledOut && !tooLong && !tooShort && allDigits;
                 if (validInput) {
-                    Intent intent = new Intent(AddPhoneNumberActivity.this, VerifyPhoneNumberActivity.class);
-                    startActivityForResult(intent, VERIFY_PHONE);
+                    sendSendVerificationPhoneRequest();
                 } else if (!allFieldsFilledOut) {
                     showErrorMessage(getString(R.string.empty_field));
                 } else if (tooLong) {
@@ -113,17 +114,79 @@ public class AddPhoneNumberActivity extends VillimActivity {
         });
     }
 
+    private void sendSendVerificationPhoneRequest() {
+        startLoadingAnimation();
+        hideErrorMessage();
+
+        CookieJar cookieJar =
+                new PersistentCookieJar(new SetCookieCache(), new SharedPrefsCookiePersistor(getApplicationContext()));
+
+        OkHttpClient client = new OkHttpClient.Builder().cookieJar(cookieJar).build();
+
+        RequestBody requestBody = new FormBody.Builder()
+                .add(KEY_PHONE_NUMBER, phonenumberForm.getText().toString().trim())
+                .build();
+
+//        URL url = new HttpUrl.Builder()
+//                .scheme(SERVER_SCHEME)
+//                .host(SERVER_HOST)
+//                .addPathSegments(SEND_VERIFICATION_PHONE_URL)
+//                .build().url();
+
+        URL url = new HttpUrl.Builder()
+                .scheme("http")
+                .host("www.mocky.io")
+                .addPathSegments("v2/595a87e20f000050039fe44b")
+                .build().url();
+
+        Request request = new Request.Builder()
+                .url(url)
+                .post(requestBody)
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                // Something went wrong.
+                showErrorMessage(getString(R.string.cant_connect_to_server));
+                stopLoadingAnimation();
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (!response.isSuccessful()) {
+                    showErrorMessage(getString(R.string.server_error));
+                    stopLoadingAnimation();
+                    throw new IOException("Response not successful   " + response);
+                }
+                /* Request success. */
+                try {
+                    /* 주의: response.body().string()은 한 번 부를 수 있음 */
+                    JSONObject jsonObject = new JSONObject(response.body().string());
+                    if (jsonObject.getBoolean(KEY_SUCCESS)) {
+                        Intent intent = new Intent(AddPhoneNumberActivity.this, VerifyPhoneNumberActivity.class);
+                        startActivityForResult(intent, VERIFY_PHONE);
+                    } else {
+                        showErrorMessage(jsonObject.getString(KEY_MESSAGE));
+                    }
+                    stopLoadingAnimation();
+                } catch (JSONException e) {
+                    showErrorMessage(getString(R.string.server_error));
+                    stopLoadingAnimation();
+                }
+            }
+        });
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         /* Requests to reservation activity */
         if (requestCode == VERIFY_PHONE) {
             if (resultCode == Activity.RESULT_OK) {
-
-                String phoneNumber = data.getExtras().getString(KEY_PHONE_NUMBER);
-
                 Intent returnIntent = new Intent();
-                returnIntent.putExtra(KEY_PHONE_NUMBER, phoneNumber);
+                returnIntent.putExtra(KEY_PHONE_NUMBER, phonenumberForm.getText().toString().trim());
+                setResult(Activity.RESULT_OK, returnIntent);
                 finish();
             }
             if (resultCode == Activity.RESULT_CANCELED) {
@@ -131,6 +194,13 @@ public class AddPhoneNumberActivity extends VillimActivity {
                 finish();
             }
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent returnIntent = new Intent();
+        setResult(Activity.RESULT_CANCELED, returnIntent);
+        finish();
     }
 
     @Override
