@@ -46,6 +46,7 @@ import static net.villim.villim.VillimKeys.KEY_ADDR_SUMMARY;
 import static net.villim.villim.VillimKeys.KEY_AMENITY_IDS;
 import static net.villim.villim.VillimKeys.KEY_CANCELLATION_POLICY;
 import static net.villim.villim.VillimKeys.KEY_CLEANING_FEE;
+import static net.villim.villim.VillimKeys.KEY_CONFIRMED_VISITS;
 import static net.villim.villim.VillimKeys.KEY_CURRENCY_PREFERENCE;
 import static net.villim.villim.VillimKeys.KEY_DEPOSIT;
 import static net.villim.villim.VillimKeys.KEY_DESCRIPTION;
@@ -70,6 +71,7 @@ import static net.villim.villim.VillimKeys.KEY_NUM_BATHROOM;
 import static net.villim.villim.VillimKeys.KEY_NUM_BED;
 import static net.villim.villim.VillimKeys.KEY_NUM_BEDROOM;
 import static net.villim.villim.VillimKeys.KEY_NUM_GUEST;
+import static net.villim.villim.VillimKeys.KEY_PENDING_VISITS;
 import static net.villim.villim.VillimKeys.KEY_QUERY_SUCCESS;
 import static net.villim.villim.VillimKeys.KEY_RATE_PER_NIGHT;
 import static net.villim.villim.VillimKeys.KEY_VISITS;
@@ -149,7 +151,7 @@ public class VisitFragment extends Fragment {
     private void populateView(JSONObject jsonObject) {
         // Network operation to fetch.
         try {
-            JSONArray visitArray = jsonObject.getJSONArray(KEY_VISITS);
+            JSONArray visitArray = jsonObject.getJSONArray(KEY_CONFIRMED_VISITS);
             VillimVisit[] visits = VillimVisit.visitArrayFromJsonArray(visitArray);
             VillimHouse[] houses = VillimHouse.houseArrayFromJsonArray(visitArray);
 

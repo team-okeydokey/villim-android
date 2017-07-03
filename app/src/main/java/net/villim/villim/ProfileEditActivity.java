@@ -321,6 +321,9 @@ public class ProfileEditActivity extends VillimActivity {
                     .addFormDataPart(KEY_PROFILE_PIC, imageFiie.getName(),
                             RequestBody.create(MediaType.parse(imageFiie.getPath()), imageFiie))
                     .build();
+
+            System.out.println(imageFiie.getName());
+            System.out.println(imageFiie.getPath());
         } else {
             requestBody = new MultipartBody.Builder()
                     .setType(MultipartBody.FORM)

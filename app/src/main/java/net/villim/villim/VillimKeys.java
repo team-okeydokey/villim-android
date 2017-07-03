@@ -184,6 +184,8 @@ public class VillimKeys {
     public static final String KEY_VISIT_TIME = "visit_time";
     public static final String KEY_VISIT_STATUS = "visit_status";
     public static final String KEY_VISIT_INFO = "visit_info";
+    public static final String KEY_PENDING_VISITS = "pending_visits";
+    public static final String KEY_CONFIRMED_VISITS = "confirmed_visits";
 
     /* DoorlockPAsscodeActivity */
     public static final String KEY_CHANGE_SUCCESS = "change_success";
