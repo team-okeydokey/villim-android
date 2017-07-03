@@ -352,8 +352,8 @@
     <string name="phone_number_too_long">전화번호가 너무 깁니다.</string>
 
     <!-- Visit success activity -->
-    <string name="vist_code">방문번호</string>
-    <string name="vist_guest">방문자</string>
+    <string name="visit_code">방문번호</string>
+    <string name="visit_guest">방문자</string>
     <string name="visit_request_success">방문 요청 완료</string>
     <string name="visit_status">방문 상태</string>
 
