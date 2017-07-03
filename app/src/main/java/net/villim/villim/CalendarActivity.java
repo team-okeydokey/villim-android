@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -22,6 +23,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
 
+import static net.villim.villim.VillimKeys.KEY_RESERVATIONS;
+
+
 public class CalendarActivity extends VillimActivity {
 
     public final static String START_DATE = "start_date";
@@ -35,6 +39,8 @@ public class CalendarActivity extends VillimActivity {
     private Date startDate;
     private Date endDate;
     int selectState;
+
+    VillimReservation[] reservations; // For disabling dates.
 
     private Toolbar toolbar;
     private TextView startDateTextView;
@@ -54,6 +60,12 @@ public class CalendarActivity extends VillimActivity {
         endDate = (Date) getIntent().getSerializableExtra(END_DATE);
         boolean hasPresetDate = (startDate != null && endDate != null);
 
+        Parcelable[] reservationArray = getIntent().getParcelableArrayExtra(KEY_RESERVATIONS);
+        reservations = new VillimReservation[reservationArray.length];
+        for (int i = 0 ; i < reservationArray.length; ++i) {
+            reservations[i] = (VillimReservation) reservationArray[i];
+        }
+        
         highlightStartDate = true;
 
         /* Toolbar */

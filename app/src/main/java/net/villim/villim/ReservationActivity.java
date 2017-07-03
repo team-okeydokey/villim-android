@@ -47,6 +47,7 @@ import static net.villim.villim.VillimKeys.KEY_END_DATE;
 import static net.villim.villim.VillimKeys.KEY_LOGIN_SUCCESS;
 import static net.villim.villim.VillimKeys.KEY_MESSAGE;
 import static net.villim.villim.VillimKeys.KEY_PASSWORD;
+import static net.villim.villim.VillimKeys.KEY_RESERVATIONS;
 import static net.villim.villim.VillimKeys.KEY_RESERVATION_INFO;
 import static net.villim.villim.VillimKeys.KEY_RESERVATION_SUCCESS;
 import static net.villim.villim.VillimKeys.KEY_VISIT_INFO;
@@ -176,6 +177,7 @@ public class ReservationActivity extends VillimActivity {
                 Intent dateFilterIntent = new Intent(ReservationActivity.this, CalendarActivity.class);
                 dateFilterIntent.putExtra(CalendarActivity.START_DATE, startDate);
                 dateFilterIntent.putExtra(CalendarActivity.END_DATE, endDate);
+                dateFilterIntent.putExtra(KEY_RESERVATIONS, house.reservations);
                 ReservationActivity.this.startActivityForResult(dateFilterIntent, CALENDAR);
             }
         });

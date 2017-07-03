@@ -147,6 +147,8 @@ public class VillimKeys {
     public static final String KEY_REVIEW_LAST_RATING = "review_last_rating";
     public static final String KEY_REVIEW_LAST_PROFILE_PIC_URL = "review_last_profile_pic_url";
 
+    public static final String KEY_RESERVATIONS = "reservations";
+
     /* Review info keys */
     public static final String KEY_REVIEWS = "reviews";
     public static final String KEY_REVIEW_COUNT = "review_count";

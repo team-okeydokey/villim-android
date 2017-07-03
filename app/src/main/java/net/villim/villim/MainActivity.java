@@ -24,6 +24,7 @@ import android.widget.TextView;
 
 import java.util.Date;
 
+import static net.villim.villim.VillimKeys.KEY_RESERVATIONS;
 
 public class MainActivity extends VillimActivity {
 
@@ -250,6 +251,7 @@ public class MainActivity extends VillimActivity {
                             Intent dateFilterIntent = new Intent(MainActivity.this, CalendarActivity.class);
                             dateFilterIntent.putExtra(CalendarActivity.START_DATE, startDate);
                             dateFilterIntent.putExtra(CalendarActivity.END_DATE, endDate);
+                            dateFilterIntent.putExtra(KEY_RESERVATIONS, new VillimReservation[0]);
                             MainActivity.this.startActivityForResult(dateFilterIntent, DATE_FILTER);
                         }
                         return true;
