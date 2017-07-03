@@ -46,6 +46,7 @@ import static net.villim.villim.VillimKeys.KEY_ADDR_SUMMARY;
 import static net.villim.villim.VillimKeys.KEY_AMENITY_IDS;
 import static net.villim.villim.VillimKeys.KEY_CANCELLATION_POLICY;
 import static net.villim.villim.VillimKeys.KEY_CLEANING_FEE;
+import static net.villim.villim.VillimKeys.KEY_CURRENCY_PREFERENCE;
 import static net.villim.villim.VillimKeys.KEY_DEPOSIT;
 import static net.villim.villim.VillimKeys.KEY_DESCRIPTION;
 import static net.villim.villim.VillimKeys.KEY_HOST_ID;
@@ -203,6 +204,7 @@ public class VisitFragment extends Fragment {
                 .scheme(SERVER_SCHEME)
                 .host(SERVER_HOST)
                 .addPathSegments(VISIT_LIST_URL)
+                .addQueryParameter(KEY_CURRENCY_PREFERENCE, Integer.toString(session.getCurrencyPref()))
                 .build().url();
 
         Request request = new Request.Builder()

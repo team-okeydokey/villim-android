@@ -62,6 +62,7 @@ import static net.villim.villim.VillimKeys.KEY_ADDR_SUMMARY;
 import static net.villim.villim.VillimKeys.KEY_AMENITY_IDS;
 import static net.villim.villim.VillimKeys.KEY_CANCELLATION_POLICY;
 import static net.villim.villim.VillimKeys.KEY_CLEANING_FEE;
+import static net.villim.villim.VillimKeys.KEY_CURRENCY_PREFERENCE;
 import static net.villim.villim.VillimKeys.KEY_DEPOSIT;
 import static net.villim.villim.VillimKeys.KEY_HOST_ID;
 import static net.villim.villim.VillimKeys.KEY_HOST_NAME;
@@ -267,6 +268,8 @@ public class HouseDetailActivity extends VillimActivity implements OnMapReadyCal
     public void sendHouseInfoRequest() {
         startLoadingAnimation();
 
+        VillimSession session = new VillimSession(getApplicationContext());
+
         ClearableCookieJar cookieJar =
                 new PersistentCookieJar(new SetCookieCache(), new SharedPrefsCookiePersistor(getApplicationContext()));
 
@@ -274,19 +277,12 @@ public class HouseDetailActivity extends VillimActivity implements OnMapReadyCal
                 .cookieJar(cookieJar)
                 .build();
 
-
-//        URL url = new HttpUrl.Builder()
-//                .scheme(SERVER_SCHEME)
-//                .host(SERVER_HOST)
-//                .addPathSegments("a/host-info")
-//                .addQueryParameter(KEY_HOST_ID, getIntent().getStringExtra(KEY_HOST_ID))
-//                .build().url();
-
         URL url = new HttpUrl.Builder()
                 .scheme(SERVER_SCHEME)
                 .host(SERVER_HOST)
                 .addPathSegments(HOUSE_INFO_URL)
                 .addQueryParameter(KEY_HOUSE_ID, Integer.toString(house.houseId))
+                .addQueryParameter(KEY_CURRENCY_PREFERENCE, Integer.toString(session.getCurrencyPref()))
                 .build().url();
 
         Request request = new Request.Builder()
