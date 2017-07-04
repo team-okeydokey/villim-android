@@ -54,17 +54,29 @@
                 android:textColor="#05060b"
                 android:textSize="16sp" />
 
-            <android.support.v7.widget.AppCompatRatingBar
+            <!--<android.support.v7.widget.AppCompatRatingBar-->
+                <!--android:id="@+id/overall_ratingbar"-->
+                <!--style="@style/customRatingBar"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_centerVertical="true"-->
+                <!--android:layout_marginLeft="10dp"-->
+                <!--android:layout_toRightOf="@+id/rating_title"-->
+                <!--android:isIndicator="true"-->
+                <!--android:numStars="5"-->
+                <!--android:progressTint="@color/rating_color"-->
+                <!--android:stepSize="0.1" />-->
+
+            <me.zhanghai.android.materialratingbar.MaterialRatingBar
                 android:id="@+id/overall_ratingbar"
-                style="@style/customRatingBar"
+                style="@style/Widget.MaterialRatingBar.RatingBar.Indicator"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
+                android:layout_height="24dp"
                 android:layout_marginLeft="10dp"
                 android:layout_toRightOf="@+id/rating_title"
-                android:isIndicator="true"
                 android:numStars="5"
                 android:progressTint="@color/rating_color"
+                android:secondaryProgressTint="@color/rating_color"
                 android:stepSize="0.1" />
 
 

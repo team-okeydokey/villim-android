@@ -56,15 +56,29 @@
                     android:textColor="#05060b"
                     android:textSize="16sp" />
 
-                <android.support.v7.widget.AppCompatRatingBar
+                <!--<android.support.v7.widget.AppCompatRatingBar-->
+                    <!--android:id="@+id/accuracy_ratingbar"-->
+                    <!--style="@style/VillimRatingBar"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="40dp"-->
+                    <!--android:layout_alignParentRight="true"-->
+                    <!--android:layout_centerVertical="true"-->
+                    <!--android:numStars="5"-->
+                    <!--android:stepSize="0.1" />-->
+
+                <me.zhanghai.android.materialratingbar.MaterialRatingBar
                     android:id="@+id/accuracy_ratingbar"
-                    style="@style/VillimRatingBar"
+                    style="@style/Widget.MaterialRatingBar.RatingBar"
                     android:layout_width="wrap_content"
+                    android:indeterminateTint="@color/rating_indeterminant_color"
                     android:layout_height="40dp"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:numStars="5"
+                    android:progressTint="@color/rating_color"
+                    android:secondaryProgressTint="@color/rating_color"
                     android:stepSize="0.1" />
+
             </RelativeLayout>
 
             <include layout="@layout/category_divider_dark" />
@@ -87,16 +101,30 @@
                     android:textColor="#05060b"
                     android:textSize="16sp" />
 
-                <android.support.v7.widget.AppCompatRatingBar
+                <!--<android.support.v7.widget.AppCompatRatingBar-->
+                    <!--android:id="@+id/location_ratingbar"-->
+                    <!--style="@style/VillimRatingBar"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="40dp"-->
+                    <!--android:layout_alignParentRight="true"-->
+                    <!--android:layout_centerVertical="true"-->
+                    <!--android:numStars="5"-->
+                    <!--android:progressTint="@color/rating_color"-->
+                    <!--android:stepSize="0.1" />-->
+
+                <me.zhanghai.android.materialratingbar.MaterialRatingBar
                     android:id="@+id/location_ratingbar"
-                    style="@style/VillimRatingBar"
+                    style="@style/Widget.MaterialRatingBar.RatingBar"
                     android:layout_width="wrap_content"
+                    android:indeterminateTint="@color/rating_indeterminant_color"
                     android:layout_height="40dp"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:numStars="5"
                     android:progressTint="@color/rating_color"
+                    android:secondaryProgressTint="@color/rating_color"
                     android:stepSize="0.1" />
+
             </RelativeLayout>
 
             <include layout="@layout/category_divider_dark" />
@@ -119,16 +147,30 @@
                     android:textColor="#05060b"
                     android:textSize="16sp" />
 
-                <android.support.v7.widget.AppCompatRatingBar
+                <!--<android.support.v7.widget.AppCompatRatingBar-->
+                    <!--android:id="@+id/communication_ratingbar"-->
+                    <!--style="@style/VillimRatingBar"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="40dp"-->
+                    <!--android:layout_alignParentRight="true"-->
+                    <!--android:layout_centerVertical="true"-->
+                    <!--android:numStars="5"-->
+                    <!--android:progressTint="@color/rating_color"-->
+                    <!--android:stepSize="0.1" />-->
+
+                <me.zhanghai.android.materialratingbar.MaterialRatingBar
                     android:id="@+id/communication_ratingbar"
-                    style="@style/VillimRatingBar"
+                    style="@style/Widget.MaterialRatingBar.RatingBar"
                     android:layout_width="wrap_content"
+                    android:indeterminateTint="@color/rating_indeterminant_color"
                     android:layout_height="40dp"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:numStars="5"
                     android:progressTint="@color/rating_color"
+                    android:secondaryProgressTint="@color/rating_color"
                     android:stepSize="0.1" />
+
             </RelativeLayout>
 
             <include layout="@layout/category_divider_dark" />
@@ -151,15 +193,28 @@
                     android:textColor="#05060b"
                     android:textSize="16sp" />
 
-                <android.support.v7.widget.AppCompatRatingBar
+                <!--<android.support.v7.widget.AppCompatRatingBar-->
+                    <!--android:id="@+id/checkin_ratingbar"-->
+                    <!--style="@style/VillimRatingBar"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="40dp"-->
+                    <!--android:layout_alignParentRight="true"-->
+                    <!--android:layout_centerVertical="true"-->
+                    <!--android:numStars="5"-->
+                    <!--android:progressTint="@color/rating_color"-->
+                    <!--android:stepSize="0.1" />-->
+
+                <me.zhanghai.android.materialratingbar.MaterialRatingBar
                     android:id="@+id/checkin_ratingbar"
-                    style="@style/VillimRatingBar"
+                    style="@style/Widget.MaterialRatingBar.RatingBar"
                     android:layout_width="wrap_content"
+                    android:indeterminateTint="@color/rating_indeterminant_color"
                     android:layout_height="40dp"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:numStars="5"
                     android:progressTint="@color/rating_color"
+                    android:secondaryProgressTint="@color/rating_color"
                     android:stepSize="0.1" />
             </RelativeLayout>
 
@@ -183,15 +238,28 @@
                     android:textColor="#05060b"
                     android:textSize="16sp" />
 
-                <android.support.v7.widget.AppCompatRatingBar
+                <!--<android.support.v7.widget.AppCompatRatingBar-->
+                    <!--android:id="@+id/cleanliness_ratingbar"-->
+                    <!--style="@style/VillimRatingBar"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="40dp"-->
+                    <!--android:layout_alignParentRight="true"-->
+                    <!--android:layout_centerVertical="true"-->
+                    <!--android:numStars="5"-->
+                    <!--android:progressTint="@color/rating_color"-->
+                    <!--android:stepSize="0.1" />-->
+
+                <me.zhanghai.android.materialratingbar.MaterialRatingBar
                     android:id="@+id/cleanliness_ratingbar"
-                    style="@style/VillimRatingBar"
+                    style="@style/Widget.MaterialRatingBar.RatingBar"
                     android:layout_width="wrap_content"
+                    android:indeterminateTint="@color/rating_indeterminant_color"
                     android:layout_height="40dp"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:numStars="5"
                     android:progressTint="@color/rating_color"
+                    android:secondaryProgressTint="@color/rating_color"
                     android:stepSize="0.1" />
             </RelativeLayout>
 
@@ -215,14 +283,27 @@
                     android:textColor="#05060b"
                     android:textSize="16sp" />
 
-                <android.support.v7.widget.AppCompatRatingBar
+                <!--<android.support.v7.widget.AppCompatRatingBar-->
+                    <!--android:id="@+id/value_ratingbar"-->
+                    <!--style="@style/VillimRatingBar"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="40dp"-->
+                    <!--android:layout_alignParentRight="true"-->
+                    <!--android:layout_centerVertical="true"-->
+                    <!--android:numStars="5"-->
+                    <!--android:stepSize="0.1" />-->
+
+                <me.zhanghai.android.materialratingbar.MaterialRatingBar
                     android:id="@+id/value_ratingbar"
-                    style="@style/VillimRatingBar"
+                    style="@style/Widget.MaterialRatingBar.RatingBar"
                     android:layout_width="wrap_content"
+                    android:indeterminateTint="@color/rating_indeterminant_color"
                     android:layout_height="40dp"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:numStars="5"
+                    android:progressTint="@color/rating_color"
+                    android:secondaryProgressTint="@color/rating_color"
                     android:stepSize="0.1" />
             </RelativeLayout>
 

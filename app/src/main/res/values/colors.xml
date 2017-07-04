@@ -55,6 +55,7 @@
 
     <!-- Discovery Fragment -->
     <color name="rating_color">#51ACCF</color>
+    <color name="rating_indeterminant_color">#4faccd</color>
 
     <!-- Room Detail Activity -->
     <color name="room_detail_background">#F0F1F2</color>
