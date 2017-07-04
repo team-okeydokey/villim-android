@@ -62,6 +62,8 @@ import static net.villim.villim.VillimKeys.VISIT_REQUEST_URL;
 
 public class ReservationActivity extends VillimActivity {
 
+    private final static int LOGIN = 101;
+
     private static final int CALENDAR = 0;
 
     private Toolbar toolbar;
@@ -190,9 +192,13 @@ public class ReservationActivity extends VillimActivity {
             @Override
             public void onClick(View v) {
                 if (session.getLoggedIn()) {
-                    if (dateSelected){
-//                        sendReservationRequest();
-                        sendVisitRequest();
+                    if (dateSelected) {
+                        if (session.getLoggedIn()) {
+                            // sendReservationRequest();
+                            sendVisitRequest();
+                        } else {
+                            launchLoginActivity();
+                        }
                     } else {
                         Toast.makeText(getApplicationContext(), R.string.must_select_date, Toast.LENGTH_LONG).show();
                     }
@@ -250,6 +256,13 @@ public class ReservationActivity extends VillimActivity {
                 endDate = (Date) data.getSerializableExtra(CalendarActivity.END_DATE);
                 updateStayInfo(startDate, endDate);
 
+            }
+            if (resultCode == Activity.RESULT_CANCELED) {
+                //Write your code if there's no result
+            }
+        } else if (requestCode == LOGIN) {
+            if (resultCode == Activity.RESULT_OK) {
+                sendReservationRequest();
             }
             if (resultCode == Activity.RESULT_CANCELED) {
                 //Write your code if there's no result
@@ -392,6 +405,17 @@ public class ReservationActivity extends VillimActivity {
                 }
             }
         });
+    }
+
+    private void launchLoginActivity() {
+        Intent intent = new Intent(ReservationActivity.this, LoginActivity.class);
+        intent.putExtra(getString(R.string.key_house), house);
+        intent.putExtra(DATE_SELECTED, dateSelected);
+        if (dateSelected) {
+            intent.putExtra(START_DATE, startDate);
+            intent.putExtra(END_DATE, endDate);
+        }
+        startActivityForResult(intent, LOGIN);
     }
 
     public void startLoadingAnimation() {
