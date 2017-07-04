@@ -482,7 +482,7 @@ public class HouseDetailActivity extends VillimActivity implements OnMapReadyCal
 //        int numberOfNights, price;
 //        String priceString, priceText;
 //        if (dateSelected) {
-//            numberOfNights = VillimUtil.daysBetween(startDate, endDate);
+//            numberOfNights = VillimUtils.daysBetween(startDate, endDate);
 //            price = numberOfNights * house.ratePerNight;
 //            priceString = NumberFormat.getIntegerInstance().format(price);
 //            priceText = String.format(getString(R.string.price_text_format), priceString, numberOfNights);

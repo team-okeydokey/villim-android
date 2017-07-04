@@ -11,14 +11,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import static net.villim.villim.VillimKeys.KEY_ADDITIONAL_GUEST_FEE;
 import static net.villim.villim.VillimKeys.KEY_ADDR_DIRECTION;
 import static net.villim.villim.VillimKeys.KEY_ADDR_FULL;
 import static net.villim.villim.VillimKeys.KEY_ADDR_SUMMARY;
 import static net.villim.villim.VillimKeys.KEY_AMENITY_IDS;
 import static net.villim.villim.VillimKeys.KEY_CANCELLATION_POLICY;
 import static net.villim.villim.VillimKeys.KEY_CLEANING_FEE;
-import static net.villim.villim.VillimKeys.KEY_DEPOSIT;
 import static net.villim.villim.VillimKeys.KEY_DESCRIPTION;
 import static net.villim.villim.VillimKeys.KEY_END_DATE;
 import static net.villim.villim.VillimKeys.KEY_HOST_ID;
@@ -108,7 +106,6 @@ public class VillimHouse implements Parcelable {
     }
 
     public static VillimHouse createHouseFromJSONObject(JSONObject jsonObject) {
-        System.out.println(jsonObject.toString());
 
         /* Create user instance */
         VillimHouse house = new VillimHouse();
@@ -146,8 +143,8 @@ public class VillimHouse implements Parcelable {
         house.houseReviewCount = jsonObject.optInt(KEY_HOUSE_REVIEW_COUNT);
 
         house.houseThumbnailUrl = jsonObject.optString(KEY_HOUSE_THUMBNAIL_URL);
-        house.amenityIds = VillimUtil.JSONArrayToIntArray(jsonObject.optJSONArray(KEY_AMENITY_IDS));
-        house.housePicUrls = VillimUtil.JSONArrayToStringArray(jsonObject.optJSONArray(KEY_HOUSE_PIC_URLS));
+        house.amenityIds = net.villim.villim.VillimUtils.JSONArrayToIntArray(jsonObject.optJSONArray(KEY_AMENITY_IDS));
+        house.housePicUrls = net.villim.villim.VillimUtils.JSONArrayToStringArray(jsonObject.optJSONArray(KEY_HOUSE_PIC_URLS));
 
         JSONArray reservationArray = jsonObject.optJSONArray(KEY_RESERVATIONS);
         if (reservationArray == null) {
@@ -158,8 +155,8 @@ public class VillimHouse implements Parcelable {
                 JSONObject reservationInfo = (JSONObject) reservationArray.optJSONObject(i);
 
                 VillimReservation reservation = new VillimReservation();
-                reservation.startDate = VillimUtil.dateFromDateString(reservationInfo.optString(KEY_START_DATE));
-                reservation.endDate = VillimUtil.dateFromDateString(reservationInfo.optString(KEY_END_DATE));
+                reservation.startDate = net.villim.villim.VillimUtils.dateFromDateString(reservationInfo.optString(KEY_START_DATE));
+                reservation.endDate = net.villim.villim.VillimUtils.dateFromDateString(reservationInfo.optString(KEY_END_DATE));
 
                 house.reservations[i] = reservation;
             }
@@ -285,7 +282,7 @@ public class VillimHouse implements Parcelable {
 
         for (int i = 0; i < reservations.length; ++i) {
             VillimReservation reservation = reservations[i];
-            List<Date> datesBetween = VillimUtil.datesBetween(reservation.startDate, reservation.endDate, true);
+            List<Date> datesBetween = net.villim.villim.VillimUtils.datesBetween(reservation.startDate, reservation.endDate, true);
             dates.addAll(datesBetween);
         }
 

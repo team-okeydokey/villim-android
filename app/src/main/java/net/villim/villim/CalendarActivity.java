@@ -4,9 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.format.DateUtils;
 import android.view.Gravity;
@@ -22,8 +20,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
-
-import static net.villim.villim.VillimKeys.KEY_RESERVATIONS;
 
 
 public class CalendarActivity extends VillimActivity {
@@ -61,11 +57,16 @@ public class CalendarActivity extends VillimActivity {
         endDate = (Date) getIntent().getSerializableExtra(END_DATE);
         boolean hasPresetDate = (startDate != null && endDate != null);
 
-        Date[] invalidDateArray = (Date[]) getIntent().getSerializableExtra(INVALID_DATES);
-        invalidDates = new Date[invalidDateArray.length];
-        for (int i = 0 ; i < invalidDateArray.length; ++i) {
-            invalidDates[i] = (Date) invalidDateArray[i];
+        long[] invalidDateArray = getIntent().getLongArrayExtra(INVALID_DATES);
+        invalidDates = net.villim.villim.VillimUtils.longArrayToDateArray(invalidDateArray);
+        System.out.println(invalidDates.length);
+
+        for (Date reservedDate : invalidDates) {
+            System.out.println(reservedDate.getMonth());
+            System.out.println(reservedDate.getDay());
+            System.out.println(reservedDate.getYear());
         }
+
 
         highlightStartDate = true;
 
@@ -211,7 +212,7 @@ public class CalendarActivity extends VillimActivity {
         /* Set start date text */
         if (startDate != null) {
             String startDateText = String.format(getString(R.string.date_filter_date_text_format), startDate.getMonth() + 1, startDate.getDate())
-                    + "\n" + VillimUtil.getWeekday(this, startDate.getDay());
+                    + "\n" + net.villim.villim.VillimUtils.getWeekday(this, startDate.getDay());
             startDateTextView.setText(startDateText);
         } else {
             startDateTextView.setText(getString(R.string.date_filter_start_date));
@@ -220,7 +221,7 @@ public class CalendarActivity extends VillimActivity {
         /* Set end date text. */
         if (endDate != null) {
             String endDateText = String.format(getString(R.string.date_filter_date_text_format), endDate.getMonth() + 1, endDate.getDate())
-                    + "\n" + VillimUtil.getWeekday(this, endDate.getDay());
+                    + "\n" + net.villim.villim.VillimUtils.getWeekday(this, endDate.getDay());
             endDateTextView.setText(endDateText);
         } else {
             endDateTextView.setText(getString(R.string.date_filter_end_date));

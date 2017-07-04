@@ -63,8 +63,8 @@ public class VillimPrice {
 
             if (currUtilityRate != nextUtilityRate) {
 
-                float currUtilityFee = VillimUtil.daysUntilEndOfMonth(currCal.getTime()) * dailyRent * currUtilityRate;
-                float nextUtilityFee = VillimUtil.daysFromStartOfMonth(currCal.getTime()) * dailyRent * nextUtilityRate;
+                float currUtilityFee = net.villim.villim.VillimUtils.daysUntilEndOfMonth(currCal.getTime()) * dailyRent * currUtilityRate;
+                float nextUtilityFee = net.villim.villim.VillimUtils.daysFromStartOfMonth(currCal.getTime()) * dailyRent * nextUtilityRate;
 
                 util += currUtilityFee;
                 util += nextUtilityFee;
@@ -82,7 +82,7 @@ public class VillimPrice {
 //        base -= monthlyRent;
 
         /* Calculate daily rent */
-        int days = VillimUtil.daysBetween(currCal.getTime(), endDate);
+        int days = net.villim.villim.VillimUtils.daysBetween(currCal.getTime(), endDate);
         if (days > 0) {
             base += days * dailyRent;
         }

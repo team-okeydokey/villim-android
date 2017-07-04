@@ -3,7 +3,6 @@ package net.villim.villim;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import static net.villim.villim.VillimKeys.KEY_ABOUT;
@@ -119,12 +118,12 @@ public class VillimUser implements Parcelable {
         user.pushNotifications = userInfo.optBoolean(KEY_PUSH_NOTIFICATIONS);
         user.currencyPref = userInfo.optInt(KEY_CURRENCY_PREFERENCE);
         user.languagePref = userInfo.optInt(KEY_LANGUAGE_PREFERENCE);
-        user.houseIdConfirmed = VillimUtil.JSONArrayToIntArray(userInfo.optJSONArray(KEY_HOUSE_ID_CONFIRMED));
+        user.houseIdConfirmed = net.villim.villim.VillimUtils.JSONArrayToIntArray(userInfo.optJSONArray(KEY_HOUSE_ID_CONFIRMED));
         user.houseIdStaying = userInfo.optInt(KEY_HOUSE_ID_STAYING);
-        user.houseIdDone = VillimUtil.JSONArrayToIntArray(userInfo.optJSONArray(KEY_HOUSE_ID_DONE));
-        user.visitHouseIdPending = VillimUtil.JSONArrayToIntArray(userInfo.optJSONArray(KEY_VISIT_HOUSE_ID_PENDING));
-        user.visitHouseIdConfirmed = VillimUtil.JSONArrayToIntArray(userInfo.optJSONArray(KEY_VISIT_HOUSE_ID_CONFIRMED));
-        user.visitHouseIdDone = VillimUtil.JSONArrayToIntArray(userInfo.optJSONArray(KEY_VISIT_HOUSE_ID_DONE));
+        user.houseIdDone = net.villim.villim.VillimUtils.JSONArrayToIntArray(userInfo.optJSONArray(KEY_HOUSE_ID_DONE));
+        user.visitHouseIdPending = net.villim.villim.VillimUtils.JSONArrayToIntArray(userInfo.optJSONArray(KEY_VISIT_HOUSE_ID_PENDING));
+        user.visitHouseIdConfirmed = net.villim.villim.VillimUtils.JSONArrayToIntArray(userInfo.optJSONArray(KEY_VISIT_HOUSE_ID_CONFIRMED));
+        user.visitHouseIdDone = net.villim.villim.VillimUtils.JSONArrayToIntArray(userInfo.optJSONArray(KEY_VISIT_HOUSE_ID_DONE));
         return user;
     }
 

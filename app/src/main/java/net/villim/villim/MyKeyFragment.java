@@ -2,13 +2,11 @@ package net.villim.villim;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.res.ResourcesCompat;
-import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -206,8 +204,8 @@ public class MyKeyFragment extends Fragment {
                     if (jsonObject.getBoolean(KEY_QUERY_SUCCESS)) {
                         houseId = jsonObject.optInt(KEY_HOUSE_ID);
                         houseName = jsonObject.optString(KEY_HOUSE_NAME);
-                        startDate = VillimUtil.dateFromDateString(jsonObject.optString(KEY_START_DATE));
-                        endDate = VillimUtil.dateFromDateString(jsonObject.optString(KEY_END_DATE));
+                        startDate = net.villim.villim.VillimUtils.dateFromDateString(jsonObject.optString(KEY_START_DATE));
+                        endDate = net.villim.villim.VillimUtils.dateFromDateString(jsonObject.optString(KEY_END_DATE));
                         houseThumbnailUrl = jsonObject.optString(KEY_HOUSE_THUMBNAIL_URL);
 
                         getActivity().runOnUiThread(new Runnable() {
@@ -315,7 +313,7 @@ public class MyKeyFragment extends Fragment {
         sliderThumb.setBounds(0,0,thumbSize,thumbSize);
         slideButton.setThumb(sliderThumb);
 //        slideButton.setThumbOffset(35); // Magic number that i found.
-        slideButton.setThumbOffset(VillimUtil.dpToPixel(getContext(), 13)); // Magic number that i found.
+        slideButton.setThumbOffset(net.villim.villim.VillimUtils.dpToPixel(getContext(), 13)); // Magic number that i found.
         slideButton.setOnClickListener(null);
         slideButton.setOnSlideChangeListener(null);
         slideButton.setSlideButtonListener(new SlideButton.SlideButtonListener() {

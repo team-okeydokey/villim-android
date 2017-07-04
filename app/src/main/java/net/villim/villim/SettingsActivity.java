@@ -1,14 +1,10 @@
 package net.villim.villim;
 
-import android.app.Activity;
 import android.app.DialogFragment;
-import android.content.Intent;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.RelativeLayout;
 import android.widget.Switch;
@@ -68,7 +64,7 @@ public class SettingsActivity extends VillimActivity
             }
         });
         currencyTextView = (TextView) findViewById(R.id.currency_textview);
-        String currencyString = VillimUtil.currencyStringFromInt(this, session.getCurrencyPref(), true);
+        String currencyString = net.villim.villim.VillimUtils.currencyStringFromInt(this, session.getCurrencyPref(), true);
         currencyTextView.setText(currencyString);
 
         /* Language */
@@ -81,7 +77,7 @@ public class SettingsActivity extends VillimActivity
             }
         });
         languageTextView = (TextView) findViewById(R.id.language_textview);
-        languageTextView.setText(VillimUtil.languageStringFromInt(this, session.getLanguagePref()));
+        languageTextView.setText(net.villim.villim.VillimUtils.languageStringFromInt(this, session.getLanguagePref()));
 
         /* Version info */
         versionInfoTextView = (TextView) findViewById(R.id.version_info_textview);
@@ -99,7 +95,7 @@ public class SettingsActivity extends VillimActivity
     @Override
     public void onCurrencyPicked(DialogFragment dialog, int code) {
         session.setCurrencyPref(code);
-        currencyTextView.setText(VillimUtil.currencyStringFromInt(this, session.getCurrencyPref(), true));
+        currencyTextView.setText(net.villim.villim.VillimUtils.currencyStringFromInt(this, session.getCurrencyPref(), true));
         dialog.dismiss();
     }
 
@@ -107,7 +103,7 @@ public class SettingsActivity extends VillimActivity
     @Override
     public void onLanguagePicked(DialogFragment dialog, int code) {
         session.setLanguagePref(code);
-        languageTextView.setText(VillimUtil.languageStringFromInt(this, session.getLanguagePref()));
+        languageTextView.setText(net.villim.villim.VillimUtils.languageStringFromInt(this, session.getLanguagePref()));
         dialog.dismiss();
     }
 

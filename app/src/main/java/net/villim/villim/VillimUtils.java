@@ -21,7 +21,7 @@ import org.joda.time.DateTime;
  * Created by seongmin on 6/9/17.
  */
 
-public class VillimUtil {
+public class VillimUtils {
 
     public static int[] JSONArrayToIntArray(JSONArray array) {
         // Deal with the case of a non-array value.
@@ -59,6 +59,8 @@ public class VillimUtil {
         try {
             String onlyDate = dateString.split(" ")[0];
             date = df.parse(onlyDate);
+            date.setYear(date.getYear() + 1900);
+            date.setMonth(date.getMonth() + 1);
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -174,6 +176,26 @@ public class VillimUtil {
         }
 
         if (includeEdge) { dates.add(endDate); }
+
+        return dates;
+    }
+
+    public static long[] dateArrayToLongArray(Date[] dates) {
+        long[] longs = new long[dates.length];
+
+        for (int i = 0; i < dates.length; ++i) {
+            longs[i] = new DateTime(dates[i]).getMillis();
+        }
+
+        return longs;
+    }
+
+    public static Date[] longArrayToDateArray(long[] longs) {
+        Date[] dates = new Date[longs.length];
+
+        for (int i = 0; i < longs.length; ++i) {
+            dates[i] = new DateTime(longs[i]).toDate();
+        }
 
         return dates;
     }

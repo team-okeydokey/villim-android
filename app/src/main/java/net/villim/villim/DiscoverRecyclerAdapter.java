@@ -101,7 +101,7 @@ public class DiscoverRecyclerAdapter extends RecyclerView.Adapter<DiscoverRecycl
         /* Currency symbol */
         VillimSession session = new VillimSession(context);
         holder.currencySymbol.setText(
-                VillimUtil.currencyStringFromInt(context, session.getCurrencyPref(), false));
+                net.villim.villim.VillimUtils.currencyStringFromInt(context, session.getCurrencyPref(), false));
         /* Room Rate */
         int price = currItem.ratePerMonth;
         String priceString = NumberFormat.getIntegerInstance().format(price);

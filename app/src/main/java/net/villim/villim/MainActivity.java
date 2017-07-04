@@ -251,7 +251,7 @@ public class MainActivity extends VillimActivity {
                             Intent dateFilterIntent = new Intent(MainActivity.this, CalendarActivity.class);
                             dateFilterIntent.putExtra(CalendarActivity.START_DATE, startDate);
                             dateFilterIntent.putExtra(CalendarActivity.END_DATE, endDate);
-                            dateFilterIntent.putExtra(CalendarActivity.INVALID_DATES, new Date[0]);
+                            dateFilterIntent.putExtra(CalendarActivity.INVALID_DATES, new long[0]);
                             MainActivity.this.startActivityForResult(dateFilterIntent, DATE_FILTER);
                         }
                         return true;
