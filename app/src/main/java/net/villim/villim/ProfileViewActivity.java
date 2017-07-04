@@ -172,10 +172,10 @@ public class ProfileViewActivity extends VillimActivity {
         if (requestCode == EDIT_PROFILE && data != null) {
 
             if (resultCode == Activity.RESULT_OK) {
-//                Uri uri = Uri.parse(data.getExtras().getString(ProfileEditActivity.PROFILE_PIC_URI));
-//                profilePicUri = uri;
-//                loadProfilePhoto(uri);
-//                activateBottomButton();
+                String uriString = data.getExtras().getString(ProfileEditActivity.PROFILE_PIC_URI);
+                Uri uri = Uri.parse(uriString);
+                profilePicUri = uri;
+                loadProfilePhoto(uri);
                 populateView();
             }
             if (resultCode == Activity.RESULT_CANCELED) {

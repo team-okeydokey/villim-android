@@ -334,6 +334,7 @@
     <string name="change">변경</string>
     <string name="edit_item">%s 수정하기</string>
     <string name="save">저장</string>
+    <string name="upload_error">업로드 하지 못 했습니다. 디시 시도해주세요.</string>
     <string-array name="sex_array">
         <item>남자</item>
         <item>여자</item>

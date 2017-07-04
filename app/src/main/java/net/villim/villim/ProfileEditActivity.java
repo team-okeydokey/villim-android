@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.provider.MediaStore;
@@ -29,10 +31,14 @@ import com.wang.avi.AVLoadingIndicatorView;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedOutputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.URL;
 
 import okhttp3.Call;
@@ -298,36 +304,33 @@ public class ProfileEditActivity extends VillimActivity {
 
         if (newProfilePic) {
 
+            File imageFiie = new File(getImagePath(getApplicationContext(),
+                    Uri.parse(getImageUrlWithAuthority(getApplicationContext(), profilePicUri))));
+            if (imageFiie == null) {
+                showErrorMessage(getString(R.string.upload_error));
+                return;
+            } else {
+                requestBody = new MultipartBody.Builder()
+                        .setType(MultipartBody.FORM)
+                        .addFormDataPart(KEY_FIRSTNAME, firstnameContent.getText().toString().trim())
+                        .addFormDataPart(KEY_LASTNAME, lastnameContent.getText().toString().trim())
+                        .addFormDataPart(KEY_EMAIL, emailContent.getText().toString().trim())
+                        .addFormDataPart(KEY_PHONE_NUMBER, phoneNumber)
+                        .addFormDataPart(KEY_CITY_OF_RESIDENCE, cityContent.getText().toString().trim())
+                        .addFormDataPart(KEY_PROFILE_PIC, imageFiie.getName(),
+                                RequestBody.create(MEDIA_TYPE_PNG, imageFiie))
+                        .build();
 
-            File imageFiie = new File(getImagePath(getApplicationContext(), profilePicUri));
+            }
 
-            requestBody = new MultipartBody.Builder()
-                    .setType(MultipartBody.FORM)
-                    .addFormDataPart(KEY_FIRSTNAME, firstnameContent.getText().toString().trim())
-                    .addFormDataPart(KEY_LASTNAME, lastnameContent.getText().toString().trim())
-//                    .addFormDataPart(KEY_SEX, Integer.toString(sex))
-                    .addFormDataPart(KEY_EMAIL, emailContent.getText().toString().trim())
-                    .addFormDataPart(KEY_PHONE_NUMBER, phoneNumber)
-                    .addFormDataPart(KEY_CITY_OF_RESIDENCE, cityContent.getText().toString().trim())
-//                    .addFormDataPart(KEY_PUSH_NOTIFICATIONS, Boolean.toString(session.getPushPref()))
-//                    .addFormDataPart(KEY_PREFERENCE_CURRENCY, Integer.toString(session.getCurrencyPref()))
-//                    .addFormDataPart(KEY_PREFERENCE_LANGUAGE, Integer.toString(session.getLanguagePref()))
-                    .addFormDataPart(KEY_PROFILE_PIC, imageFiie.getName(),
-                            RequestBody.create(MEDIA_TYPE_PNG, imageFiie))
-                    .build();
-  
         } else {
             requestBody = new MultipartBody.Builder()
                     .setType(MultipartBody.FORM)
                     .addFormDataPart(KEY_FIRSTNAME, firstnameContent.getText().toString().trim())
                     .addFormDataPart(KEY_LASTNAME, lastnameContent.getText().toString().trim())
-//                    .addFormDataPart(KEY_SEX, Integer.toString(sex))
                     .addFormDataPart(KEY_EMAIL, emailContent.getText().toString().trim())
                     .addFormDataPart(KEY_PHONE_NUMBER, phoneNumber)
                     .addFormDataPart(KEY_CITY_OF_RESIDENCE, cityContent.getText().toString().trim())
-//                    .addFormDataPart(KEY_PUSH_NOTIFICATIONS, Boolean.toString(session.getPushPref()))
-//                    .addFormDataPart(KEY_PREFERENCE_CURRENCY, Integer.toString(session.getCurrencyPref()))
-//                    .addFormDataPart(KEY_PREFERENCE_LANGUAGE, Integer.toString(session.getLanguagePref()))
                     .build();
         }
 
@@ -340,7 +343,6 @@ public class ProfileEditActivity extends VillimActivity {
             @Override
             public void onFailure(Call call, IOException e) {
                 // Something went wrong.
-                System.out.println(e.toString());
                 showErrorMessage(getString(R.string.cant_connect_to_server));
                 stopLoadingAnimation();
             }
@@ -367,7 +369,7 @@ public class ProfileEditActivity extends VillimActivity {
                         VillimUser user = VillimUser.createUserFromJSONObject(jsonObject.getJSONObject(KEY_USER_INFO));
                         session.updateUserSession(user);
                         Intent returnIntent = new Intent();
-                        returnIntent.putExtra(PROFILE_PIC_URI, profilePicUri);
+                        returnIntent.putExtra(PROFILE_PIC_URI, profilePicUri.toString());
                         setResult(Activity.RESULT_OK, returnIntent);
                         finish();
                     } else {
@@ -382,19 +384,47 @@ public class ProfileEditActivity extends VillimActivity {
         });
     }
 
-    public String getImagePath(Context context, Uri contentUri) {
+    private String getImagePath(Context context, Uri contentUri) {
+        System.out.println(contentUri.getPath());
         Cursor cursor = null;
         try {
             String[] proj = { MediaStore.Images.Media.DATA };
             cursor = context.getContentResolver().query(contentUri,  proj, null, null, null);
-            int column_index = cursor.getColumnIndex(proj[0]);
+            int columnIndex = cursor.getColumnIndex(proj[0]);
             cursor.moveToFirst();
-            return cursor.getString(column_index);
+            return cursor.getString(columnIndex);
         } finally {
             if (cursor != null) {
                 cursor.close();
             }
         }
+    }
+
+    private static String getImageUrlWithAuthority(Context context, Uri uri) {
+        InputStream is = null;
+        if (uri.getAuthority() != null) {
+            try {
+                is = context.getContentResolver().openInputStream(uri);
+                Bitmap bmp = BitmapFactory.decodeStream(is);
+                return writeToTempImageAndGetPathUri(context, bmp).toString();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }finally {
+                try {
+                    is.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return null;
+    }
+
+    private static Uri writeToTempImageAndGetPathUri(Context inContext, Bitmap inImage) {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        inImage.compress(Bitmap.CompressFormat.PNG, 100, bytes);
+        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
+        return Uri.parse(path);
     }
 
     @Override
@@ -543,5 +573,6 @@ public class ProfileEditActivity extends VillimActivity {
         finish();
         return true;
     }
+
 
 }
