@@ -95,60 +95,6 @@ public class VillimHouse implements Parcelable {
 
     }
 
-    public VillimHouse(JSONObject jsonObject) {
-        try {
-            houseId = jsonObject.getInt(KEY_HOUSE_ID);
-            houseName = jsonObject.getString(KEY_HOUSE_NAME);
-            addrFull = jsonObject.getString(KEY_ADDR_FULL);
-            addrSummary = jsonObject.getString(KEY_ADDR_SUMMARY);
-            addrDirection = jsonObject.getString(KEY_ADDR_DIRECTION);
-            description = jsonObject.getString(KEY_DESCRIPTION);
-            numGuest = jsonObject.getInt(KEY_NUM_GUEST);
-            numBedroom = jsonObject.getInt(KEY_NUM_BEDROOM);
-            numBed = jsonObject.getInt(KEY_NUM_BED);
-            numBathroom = jsonObject.getInt(KEY_NUM_BATHROOM);
-            ratePerNight = jsonObject.getInt(KEY_RATE_PER_NIGHT);
-            utilityFee = jsonObject.getInt(KEY_UTILITY_FEE);
-            cleaningFee = jsonObject.getInt(KEY_CLEANING_FEE);
-            lockAddr = jsonObject.getInt(KEY_LOCK_ADDR);
-            lockPc = jsonObject.getInt(KEY_LOCK_PC);
-            latitude = jsonObject.getDouble(KEY_LATITUDE);
-            longitude = jsonObject.getDouble(KEY_LONGITUDE);
-            housePolicy = jsonObject.getString(KEY_HOUSE_POLICY);
-            cancellationPolicy = jsonObject.getString(KEY_CANCELLATION_POLICY);
-
-            //host = VillimUser.getUserFromServer(jsonObject.getInt(KEY_HOST_ID));
-            hostId = jsonObject.getInt(KEY_HOST_ID);
-            hostName = jsonObject.getString(KEY_HOST_NAME);
-            hostRating = (float) jsonObject.getDouble(KEY_HOST_RATING);
-            hostReviewCount = jsonObject.getInt(KEY_HOST_REVIEW_COUNT);
-            hostProfilePicUrl = jsonObject.getString(KEY_HOST_PROFILE_PIC_URL);
-            houseRating = (float) jsonObject.getDouble(KEY_HOUSE_RATING);
-            houseReviewCount = jsonObject.getInt(KEY_HOUSE_REVIEW_COUNT);
-
-            amenityIds = VillimUtil.JSONArrayToIntArray(jsonObject.getJSONArray(KEY_AMENITY_IDS));
-            housePicUrls = VillimUtil.JSONArrayToStringArray(jsonObject.getJSONArray(KEY_HOUSE_PIC_URLS));
-//            reviews = VillimReview.getHouseReviewsFromServer(houseId);
-
-            houseType = jsonObject.optInt(KEY_HOUSE_TYPE);
-
-            JSONArray reservationArray = jsonObject.optJSONArray(KEY_RESERVATIONS);
-            reservations = new VillimReservation[reservationArray.length()];
-            for (int i = 0; i < reservationArray.length(); ++i) {
-                JSONObject reservationInfo = (JSONObject) reservationArray.get(i);
-
-                VillimReservation reservation = new VillimReservation();
-                reservation.startDate = VillimUtil.dateFromDateString(reservationInfo.getString(KEY_START_DATE));
-                reservation.endDate = VillimUtil.dateFromDateString(reservationInfo.getString(KEY_END_DATE));
-
-                reservations[i] = reservation;
-            }
-
-        } catch (JSONException e) {
-
-        }
-    }
-
     private String[] JSONtoArray(JSONArray array) {
         String[] stringsArray = new String[array.length()];
         try {
@@ -162,6 +108,8 @@ public class VillimHouse implements Parcelable {
     }
 
     public static VillimHouse createHouseFromJSONObject(JSONObject jsonObject) {
+        System.out.println(jsonObject.toString());
+
         /* Create user instance */
         VillimHouse house = new VillimHouse();
 
@@ -200,6 +148,22 @@ public class VillimHouse implements Parcelable {
         house.houseThumbnailUrl = jsonObject.optString(KEY_HOUSE_THUMBNAIL_URL);
         house.amenityIds = VillimUtil.JSONArrayToIntArray(jsonObject.optJSONArray(KEY_AMENITY_IDS));
         house.housePicUrls = VillimUtil.JSONArrayToStringArray(jsonObject.optJSONArray(KEY_HOUSE_PIC_URLS));
+
+        JSONArray reservationArray = jsonObject.optJSONArray(KEY_RESERVATIONS);
+        if (reservationArray == null) {
+            house.reservations = new VillimReservation[0];
+        } else {
+            house.reservations = new VillimReservation[reservationArray.length()];
+            for (int i = 0; i < reservationArray.length(); ++i) {
+                JSONObject reservationInfo = (JSONObject) reservationArray.optJSONObject(i);
+
+                VillimReservation reservation = new VillimReservation();
+                reservation.startDate = VillimUtil.dateFromDateString(reservationInfo.optString(KEY_START_DATE));
+                reservation.endDate = VillimUtil.dateFromDateString(reservationInfo.optString(KEY_END_DATE));
+
+                house.reservations[i] = reservation;
+            }
+        }
 
         return house;
     }
@@ -263,8 +227,8 @@ public class VillimHouse implements Parcelable {
         dest.writeString(houseThumbnailUrl);
         dest.writeIntArray(amenityIds);
         dest.writeStringArray(housePicUrls);
-//        dest.writeParcelableArray(reviews, 0);
-        dest.writeParcelableArray(reservations, 0);
+//        dest.writeTypedArray(reviews, 0);
+        dest.writeTypedArray(reservations, 0);
     }
 
     protected VillimHouse(Parcel in) {

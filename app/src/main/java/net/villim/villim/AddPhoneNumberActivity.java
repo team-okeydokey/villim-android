@@ -165,6 +165,7 @@ public class AddPhoneNumberActivity extends VillimActivity {
                     JSONObject jsonObject = new JSONObject(response.body().string());
                     if (jsonObject.getBoolean(KEY_SUCCESS)) {
                         Intent intent = new Intent(AddPhoneNumberActivity.this, VerifyPhoneNumberActivity.class);
+                        intent.putExtra(KEY_PHONE_NUMBER, phonenumberForm.getText().toString().trim());
                         startActivityForResult(intent, VERIFY_PHONE);
                     } else {
                         showErrorMessage(jsonObject.getString(KEY_MESSAGE));

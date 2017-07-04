@@ -38,6 +38,7 @@ import okhttp3.Response;
 
 import static net.villim.villim.VillimKeys.KEY_EMAIL;
 import static net.villim.villim.VillimKeys.KEY_MESSAGE;
+import static net.villim.villim.VillimKeys.KEY_PHONE_NUMBER;
 import static net.villim.villim.VillimKeys.KEY_POST_SUCCESS;
 import static net.villim.villim.VillimKeys.KEY_SUCCESS;
 import static net.villim.villim.VillimKeys.KEY_VERIFICATION_CODE;
@@ -64,6 +65,8 @@ public class VerifyPhoneNumberActivity extends VillimActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_verify_phone_number);
+
+        final String phoneNumber = getIntent().getStringExtra(KEY_PHONE_NUMBER);
 
         /* Toolbar */
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -231,7 +234,7 @@ public class VerifyPhoneNumberActivity extends VillimActivity {
                 boolean validInput = allFieldsFilledOut && allDigits;
                 if (validInput) {
                     String verificationCode = extractCodeInput();
-                    sendVerifyPhoneRequest(verificationCode);
+                    sendVerifyPhoneRequest(phoneNumber, verificationCode);
                 } else if (!allFieldsFilledOut) {
                     showErrorMessage(getString(R.string.empty_field));
                 } else if (!allDigits) {
@@ -251,7 +254,7 @@ public class VerifyPhoneNumberActivity extends VillimActivity {
         return code1Input + code2Input + code3Input + code4Input + code5Input + code6Input;
     }
 
-    private void sendVerifyPhoneRequest(String verificationCode) {
+    private void sendVerifyPhoneRequest(String phoneNumber, String verificationCode) {
         startLoadingAnimation();
         hideErrorMessage();
 
@@ -261,6 +264,7 @@ public class VerifyPhoneNumberActivity extends VillimActivity {
         OkHttpClient client = new OkHttpClient.Builder().cookieJar(cookieJar).build();
 
         RequestBody requestBody = new FormBody.Builder()
+                .add(KEY_PHONE_NUMBER, phoneNumber)
                 .add(KEY_VERIFICATION_CODE, verificationCode)
                 .build();
 
