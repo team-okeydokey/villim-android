@@ -226,17 +226,17 @@
             android:textSize="13sp" />
 
         <!--<android.support.v7.widget.AppCompatRatingBar-->
-            <!--android:id="@+id/location_ratingbar"-->
-            <!--style="@style/customRatingBar"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_alignParentRight="true"-->
-            <!--android:layout_below="@+id/overall_ratingbar"-->
-            <!--android:isIndicator="true"-->
-            <!--android:numStars="5"-->
-            <!--android:paddingBottom="10dp"-->
-            <!--android:progressTint="@color/rating_color"-->
-            <!--android:stepSize="0.1" />-->
+        <!--android:id="@+id/location_ratingbar"-->
+        <!--style="@style/customRatingBar"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:layout_below="@+id/overall_ratingbar"-->
+        <!--android:isIndicator="true"-->
+        <!--android:numStars="5"-->
+        <!--android:paddingBottom="10dp"-->
+        <!--android:progressTint="@color/rating_color"-->
+        <!--android:stepSize="0.1" />-->
 
         <me.zhanghai.android.materialratingbar.MaterialRatingBar
             android:id="@+id/location_ratingbar"
@@ -246,6 +246,7 @@
             android:layout_alignParentRight="true"
             android:layout_below="@+id/overall_ratingbar"
             android:numStars="5"
+            android:paddingBottom="10dp"
             android:progressTint="@color/rating_color"
             android:secondaryProgressTint="@color/rating_color"
             android:stepSize="0.1" />
@@ -264,27 +265,27 @@
             android:textSize="13sp" />
 
         <!--<android.support.v7.widget.AppCompatRatingBar-->
-            <!--android:id="@+id/checkin_ratingbar"-->
-            <!--style="@style/customRatingBar"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_alignParentRight="true"-->
-            <!--android:layout_below="@+id/location_ratingbar"-->
-            <!--android:isIndicator="true"-->
-            <!--android:numStars="5"-->
-            <!--android:paddingBottom="10dp"-->
-            <!--android:progressTint="@color/rating_color"-->
-            <!--android:stepSize="0.1" />-->
+        <!--android:id="@+id/checkin_ratingbar"-->
+        <!--style="@style/customRatingBar"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:layout_below="@+id/location_ratingbar"-->
+        <!--android:isIndicator="true"-->
+        <!--android:numStars="5"-->
+        <!--android:paddingBottom="10dp"-->
+        <!--android:progressTint="@color/rating_color"-->
+        <!--android:stepSize="0.1" />-->
 
         <me.zhanghai.android.materialratingbar.MaterialRatingBar
             android:id="@+id/checkin_ratingbar"
-            android:layout_alignParentRight="true"
-            android:paddingBottom="10dp"
-            android:layout_below="@+id/location_ratingbar"
             style="@style/Widget.MaterialRatingBar.RatingBar.Indicator.Small"
             android:layout_width="@dimen/view_review_rating_bar_width"
             android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/location_ratingbar"
             android:numStars="5"
+            android:paddingBottom="10dp"
             android:progressTint="@color/rating_color"
             android:secondaryProgressTint="@color/rating_color"
             android:stepSize="0.1" />
@@ -318,13 +319,13 @@
 
         <me.zhanghai.android.materialratingbar.MaterialRatingBar
             android:id="@+id/value_ratingbar"
-            android:layout_alignParentRight="true"
-            android:layout_below="@+id/checkin_ratingbar"
-            android:paddingBottom="10dp"
             style="@style/Widget.MaterialRatingBar.RatingBar.Indicator.Small"
             android:layout_width="@dimen/view_review_rating_bar_width"
             android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/checkin_ratingbar"
             android:numStars="5"
+            android:paddingBottom="10dp"
             android:progressTint="@color/rating_color"
             android:secondaryProgressTint="@color/rating_color"
             android:stepSize="0.1" />
