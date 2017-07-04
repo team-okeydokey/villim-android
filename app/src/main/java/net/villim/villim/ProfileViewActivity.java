@@ -160,7 +160,7 @@ public class ProfileViewActivity extends VillimActivity {
         emailContent.setText(session.getEmail());
 
         /* Phone number */
-        phoneNumberContent.setText(session.getPhoneNumber());
+        phoneNumberContent.setText(VillimUtils.formatPhoneNumber(session.getPhoneNumber()));
 
         /* City of residence */
         cityContent.setText(session.getCityOfResidence());

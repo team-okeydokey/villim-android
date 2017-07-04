@@ -127,16 +127,10 @@ public class AddPhoneNumberActivity extends VillimActivity {
                 .add(KEY_PHONE_NUMBER, phonenumberForm.getText().toString().trim())
                 .build();
 
-//        URL url = new HttpUrl.Builder()
-//                .scheme(SERVER_SCHEME)
-//                .host(SERVER_HOST)
-//                .addPathSegments(SEND_VERIFICATION_PHONE_URL)
-//                .build().url();
-
         URL url = new HttpUrl.Builder()
-                .scheme("http")
-                .host("www.mocky.io")
-                .addPathSegments("v2/595a87e20f000050039fe44b")
+                .scheme(SERVER_SCHEME)
+                .host(SERVER_HOST)
+                .addPathSegments(SEND_VERIFICATION_PHONE_URL)
                 .build().url();
 
         Request request = new Request.Builder()

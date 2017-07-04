@@ -238,7 +238,7 @@ public class ProfileEditActivity extends VillimActivity {
 
         /* Phone number */
         phoneNumberContent = (TextView) findViewById(R.id.phone_number_content);
-        phoneNumberContent.setText(session.getPhoneNumber());
+        phoneNumberContent.setText(VillimUtils.formatPhoneNumber(session.getPhoneNumber()));
         addPhoneNumberButton = (Button) findViewById(R.id.add_phone_number_button);
         addPhoneNumberButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -418,7 +418,7 @@ public class ProfileEditActivity extends VillimActivity {
         } else if (requestCode == ADD_PHONE_NUMBER && data != null) {
             if (resultCode == Activity.RESULT_OK) {
                 phoneNumber = data.getExtras().getString(KEY_PHONE_NUMBER).trim();
-                String phoneNumberString = PhoneNumberUtils.formatNumber(phoneNumber, Locale.getDefault().getCountry());
+                String phoneNumberString = VillimUtils.formatPhoneNumber(phoneNumber);
                 phoneNumberContent.setText(phoneNumberString);
                 newPhoneNumber = true;
                 updateSaveButtonStatus();

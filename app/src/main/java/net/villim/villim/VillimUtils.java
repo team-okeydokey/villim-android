@@ -1,6 +1,7 @@
 package net.villim.villim;
 
 import android.content.Context;
+import android.telephony.PhoneNumberUtils;
 import android.util.DisplayMetrics;
 
 import org.json.JSONArray;
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import org.joda.time.DateTime;
 
@@ -198,5 +200,10 @@ public class VillimUtils {
         }
 
         return dates;
+    }
+
+    public static String formatPhoneNumber(String phoneNumber) {
+        String phoneNumberString = PhoneNumberUtils.formatNumber(phoneNumber, Locale.getDefault().getCountry());
+        return phoneNumberString;
     }
 }
