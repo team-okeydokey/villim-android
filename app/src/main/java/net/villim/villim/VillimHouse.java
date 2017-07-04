@@ -7,6 +7,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 import static net.villim.villim.VillimKeys.KEY_ADDITIONAL_GUEST_FEE;
 import static net.villim.villim.VillimKeys.KEY_ADDR_DIRECTION;
 import static net.villim.villim.VillimKeys.KEY_ADDR_FULL;
@@ -310,4 +314,17 @@ public class VillimHouse implements Parcelable {
             return new VillimHouse[size];
         }
     };
+
+    public Date[] getInvalidDates() {
+
+        List<Date> dates = new ArrayList<>();
+
+        for (int i = 0; i < reservations.length; ++i) {
+            VillimReservation reservation = reservations[i];
+            List<Date> datesBetween = VillimUtil.datesBetween(reservation.startDate, reservation.endDate, true);
+            dates.addAll(datesBetween);
+        }
+
+        return dates.toArray(new Date[0]);
+    }
 }

@@ -9,8 +9,13 @@ import java.text.DateFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
+
+import org.joda.time.DateTime;
+
 
 /**
  * Created by seongmin on 6/9/17.
@@ -153,5 +158,23 @@ public class VillimUtil {
     public static int pixelToDp( Context context, int px) {
         DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
         return Math.round(px / (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
+    }
+
+    public static List<Date> datesBetween(Date startDate, Date endDate, boolean includeEdge) {
+        DateTime dateTime1 = new DateTime(startDate);
+        DateTime dateTime2 = new DateTime(endDate);
+
+        List<Date> dates = new ArrayList();
+
+        if (includeEdge) { dates.add(startDate); }
+
+        while( dateTime1.isBefore(dateTime2) ){
+            dates.add( dateTime1.toDate() );
+            dateTime1 = dateTime1.plusDays(1);
+        }
+
+        if (includeEdge) { dates.add(endDate); }
+
+        return dates;
     }
 }

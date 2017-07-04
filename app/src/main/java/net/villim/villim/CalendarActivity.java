@@ -30,6 +30,7 @@ public class CalendarActivity extends VillimActivity {
 
     public final static String START_DATE = "start_date";
     public final static String END_DATE = "end_date";
+    public final static String INVALID_DATES = "invalid_dates";
 
     private final static int STATE_SELECT_NONE = 0;
     private final static int STATE_SELECT_START = 1;
@@ -40,7 +41,7 @@ public class CalendarActivity extends VillimActivity {
     private Date endDate;
     int selectState;
 
-    VillimReservation[] reservations; // For disabling dates.
+    Date[] invalidDates;
 
     private Toolbar toolbar;
     private TextView startDateTextView;
@@ -60,12 +61,12 @@ public class CalendarActivity extends VillimActivity {
         endDate = (Date) getIntent().getSerializableExtra(END_DATE);
         boolean hasPresetDate = (startDate != null && endDate != null);
 
-        Parcelable[] reservationArray = getIntent().getParcelableArrayExtra(KEY_RESERVATIONS);
-        reservations = new VillimReservation[reservationArray.length];
-        for (int i = 0 ; i < reservationArray.length; ++i) {
-            reservations[i] = (VillimReservation) reservationArray[i];
+        Date[] invalidDateArray = (Date[]) getIntent().getSerializableExtra(INVALID_DATES);
+        invalidDates = new Date[invalidDateArray.length];
+        for (int i = 0 ; i < invalidDateArray.length; ++i) {
+            invalidDates[i] = (Date) invalidDateArray[i];
         }
-        
+
         highlightStartDate = true;
 
         /* Toolbar */
@@ -121,6 +122,17 @@ public class CalendarActivity extends VillimActivity {
         Calendar nextYear = Calendar.getInstance();
         nextYear.add(Calendar.YEAR, 1);
         final CalendarPickerView calendar = (CalendarPickerView) findViewById(R.id.calendar_view);
+        calendar.setDateSelectableFilter(new CalendarPickerView.DateSelectableFilter() {
+            @Override
+            public boolean isDateSelectable(Date date) {
+                for (Date reservedDate : invalidDates) {
+                    if (date.equals(reservedDate)) {
+                        return false;
+                    }
+                }
+                return true;
+            }
+        });
         Date tomorrow = new Date(System.currentTimeMillis() + DateUtils.DAY_IN_MILLIS);
         calendar.init(tomorrow, nextYear.getTime())
                 .inMode(CalendarPickerView.SelectionMode.RANGE);

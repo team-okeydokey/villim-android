@@ -177,7 +177,7 @@ public class ReservationActivity extends VillimActivity {
                 Intent dateFilterIntent = new Intent(ReservationActivity.this, CalendarActivity.class);
                 dateFilterIntent.putExtra(CalendarActivity.START_DATE, startDate);
                 dateFilterIntent.putExtra(CalendarActivity.END_DATE, endDate);
-                dateFilterIntent.putExtra(KEY_RESERVATIONS, house.reservations);
+                dateFilterIntent.putExtra(CalendarActivity.INVALID_DATES, house.getInvalidDates());
                 ReservationActivity.this.startActivityForResult(dateFilterIntent, CALENDAR);
             }
         });
