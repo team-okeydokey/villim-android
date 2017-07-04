@@ -32,40 +32,10 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 import static net.villim.villim.VillimKeys.FEATURED_HOUSES_URL;
-import static net.villim.villim.VillimKeys.KEY_ADDITIONAL_GUEST_FEE;
-import static net.villim.villim.VillimKeys.KEY_ADDR_DIRECTION;
-import static net.villim.villim.VillimKeys.KEY_ADDR_FULL;
-import static net.villim.villim.VillimKeys.KEY_ADDR_SUMMARY;
-import static net.villim.villim.VillimKeys.KEY_AMENITY_IDS;
-import static net.villim.villim.VillimKeys.KEY_CANCELLATION_POLICY;
-import static net.villim.villim.VillimKeys.KEY_CLEANING_FEE;
-import static net.villim.villim.VillimKeys.KEY_CURRENCY_PREFERENCE;
-import static net.villim.villim.VillimKeys.KEY_DEPOSIT;
-import static net.villim.villim.VillimKeys.KEY_DESCRIPTION;
-import static net.villim.villim.VillimKeys.KEY_HOST_ID;
-import static net.villim.villim.VillimKeys.KEY_HOST_NAME;
-import static net.villim.villim.VillimKeys.KEY_HOST_PROFILE_PIC_URL;
-import static net.villim.villim.VillimKeys.KEY_HOST_RATING;
-import static net.villim.villim.VillimKeys.KEY_HOST_REVIEW_COUNT;
+import static net.villim.villim.VillimKeys.KEY_PREFERENCE_CURRENCY;
 import static net.villim.villim.VillimKeys.KEY_HOUSES;
-import static net.villim.villim.VillimKeys.KEY_HOUSE_ID;
-import static net.villim.villim.VillimKeys.KEY_HOUSE_NAME;
-import static net.villim.villim.VillimKeys.KEY_HOUSE_PIC_URLS;
-import static net.villim.villim.VillimKeys.KEY_HOUSE_POLICY;
-import static net.villim.villim.VillimKeys.KEY_HOUSE_RATING;
-import static net.villim.villim.VillimKeys.KEY_HOUSE_REVIEW_COUNT;
-import static net.villim.villim.VillimKeys.KEY_LATITUDE;
-import static net.villim.villim.VillimKeys.KEY_LOCK_ADDR;
-import static net.villim.villim.VillimKeys.KEY_LOCK_PC;
-import static net.villim.villim.VillimKeys.KEY_LONGITUDE;
 import static net.villim.villim.VillimKeys.KEY_MESSAGE;
-import static net.villim.villim.VillimKeys.KEY_NUM_BATHROOM;
-import static net.villim.villim.VillimKeys.KEY_NUM_BED;
-import static net.villim.villim.VillimKeys.KEY_NUM_BEDROOM;
-import static net.villim.villim.VillimKeys.KEY_NUM_GUEST;
 import static net.villim.villim.VillimKeys.KEY_QUERY_SUCCESS;
-import static net.villim.villim.VillimKeys.KEY_RATE_PER_NIGHT;
-import static net.villim.villim.VillimKeys.KEY_VISIT_ID;
 import static net.villim.villim.VillimKeys.SERVER_HOST;
 import static net.villim.villim.VillimKeys.SERVER_SCHEME;
 
@@ -133,7 +103,7 @@ public class DiscoverFragment extends Fragment {
                 .scheme(SERVER_SCHEME)
                 .host(SERVER_HOST)
                 .addPathSegments(FEATURED_HOUSES_URL)
-                .addQueryParameter(KEY_CURRENCY_PREFERENCE, Integer.toString(session.getCurrencyPref()))
+                .addQueryParameter(KEY_PREFERENCE_CURRENCY, Integer.toString(session.getCurrencyPref()))
                 .build().url();
 
         Request request = new Request.Builder()

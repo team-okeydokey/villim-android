@@ -1,26 +1,21 @@
 package net.villim.villim;
 
 import android.app.Activity;
-import android.app.DialogFragment;
+import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
+import android.database.Cursor;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.telephony.PhoneNumberUtils;
 import android.text.Editable;
-import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,13 +30,13 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
-import java.util.Locale;
 
 import okhttp3.Call;
 import okhttp3.Callback;
-import okhttp3.FormBody;
 import okhttp3.HttpUrl;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -51,18 +46,13 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 import static net.villim.villim.VillimKeys.KEY_CITY_OF_RESIDENCE;
-import static net.villim.villim.VillimKeys.KEY_CURRENCY_PREFERENCE;
 import static net.villim.villim.VillimKeys.KEY_EMAIL;
 import static net.villim.villim.VillimKeys.KEY_FIRSTNAME;
-import static net.villim.villim.VillimKeys.KEY_LANGUAGE_PREFERENCE;
 import static net.villim.villim.VillimKeys.KEY_LASTNAME;
 import static net.villim.villim.VillimKeys.KEY_MESSAGE;
 import static net.villim.villim.VillimKeys.KEY_PHONE_NUMBER;
 import static net.villim.villim.VillimKeys.KEY_PROFILE_PIC;
-import static net.villim.villim.VillimKeys.KEY_PUSH_NOTIFICATIONS;
 import static net.villim.villim.VillimKeys.KEY_QUERY_SUCCESS;
-import static net.villim.villim.VillimKeys.KEY_SEX;
-import static net.villim.villim.VillimKeys.KEY_UPDATE_SUCCESS;
 import static net.villim.villim.VillimKeys.KEY_USER_INFO;
 import static net.villim.villim.VillimKeys.SERVER_HOST;
 import static net.villim.villim.VillimKeys.SERVER_SCHEME;
@@ -72,6 +62,7 @@ public class ProfileEditActivity extends VillimActivity {
     private static final int PHOTO_PICKER = 300;
     private static final int ADD_PHONE_NUMBER = 301;
     public static final String PROFILE_PIC_URI = "profile_pic_uri";
+    private static final MediaType MEDIA_TYPE_PNG = MediaType.parse("image/png");
 
     public static final int FIRSTNAME = 0;
     public static final int LASTNAME = 1;
@@ -306,7 +297,10 @@ public class ProfileEditActivity extends VillimActivity {
         RequestBody requestBody;
 
         if (newProfilePic) {
-            File imageFiie = new File(profilePicUri.getPath());
+
+
+            File imageFiie = new File(getImagePath(getApplicationContext(), profilePicUri));
+
             requestBody = new MultipartBody.Builder()
                     .setType(MultipartBody.FORM)
                     .addFormDataPart(KEY_FIRSTNAME, firstnameContent.getText().toString().trim())
@@ -316,14 +310,14 @@ public class ProfileEditActivity extends VillimActivity {
                     .addFormDataPart(KEY_PHONE_NUMBER, phoneNumber)
                     .addFormDataPart(KEY_CITY_OF_RESIDENCE, cityContent.getText().toString().trim())
 //                    .addFormDataPart(KEY_PUSH_NOTIFICATIONS, Boolean.toString(session.getPushPref()))
-//                    .addFormDataPart(KEY_CURRENCY_PREFERENCE, Integer.toString(session.getCurrencyPref()))
-//                    .addFormDataPart(KEY_LANGUAGE_PREFERENCE, Integer.toString(session.getLanguagePref()))
+//                    .addFormDataPart(KEY_PREFERENCE_CURRENCY, Integer.toString(session.getCurrencyPref()))
+//                    .addFormDataPart(KEY_PREFERENCE_LANGUAGE, Integer.toString(session.getLanguagePref()))
                     .addFormDataPart(KEY_PROFILE_PIC, imageFiie.getName(),
-                            RequestBody.create(MediaType.parse(imageFiie.getPath()), imageFiie))
+                            RequestBody.create(MEDIA_TYPE_PNG, imageFiie))
                     .build();
-
+            System.out.println(MEDIA_TYPE_PNG);
             System.out.println(imageFiie.getName());
-            System.out.println(imageFiie.getPath());
+            System.out.println(profilePicUri.getPath());
         } else {
             requestBody = new MultipartBody.Builder()
                     .setType(MultipartBody.FORM)
@@ -334,20 +328,9 @@ public class ProfileEditActivity extends VillimActivity {
                     .addFormDataPart(KEY_PHONE_NUMBER, phoneNumber)
                     .addFormDataPart(KEY_CITY_OF_RESIDENCE, cityContent.getText().toString().trim())
 //                    .addFormDataPart(KEY_PUSH_NOTIFICATIONS, Boolean.toString(session.getPushPref()))
-//                    .addFormDataPart(KEY_CURRENCY_PREFERENCE, Integer.toString(session.getCurrencyPref()))
-//                    .addFormDataPart(KEY_LANGUAGE_PREFERENCE, Integer.toString(session.getLanguagePref()))
+//                    .addFormDataPart(KEY_PREFERENCE_CURRENCY, Integer.toString(session.getCurrencyPref()))
+//                    .addFormDataPart(KEY_PREFERENCE_LANGUAGE, Integer.toString(session.getLanguagePref()))
                     .build();
-//             requestBody = new FormBody.Builder()
-//                    .add(KEY_FIRSTNAME, firstnameContent.getText().toString().trim())
-//                    .add(KEY_LASTNAME, lastnameContent.getText().toString().trim())
-////                    .addFormDataPart(KEY_SEX, Integer.toString(sex))
-//                    .add(KEY_EMAIL, emailContent.getText().toString().trim())
-//                    .add(KEY_PHONE_NUMBER, phoneNumber)
-//                    .add(KEY_CITY_OF_RESIDENCE, cityContent.getText().toString().trim())
-////                    .addFormDataPart(KEY_PUSH_NOTIFICATIONS, Boolean.toString(session.getPushPref()))
-////                    .addFormDataPart(KEY_CURRENCY_PREFERENCE, Integer.toString(session.getCurrencyPref()))
-////                    .addFormDataPart(KEY_LANGUAGE_PREFERENCE, Integer.toString(session.getLanguagePref()))
-//                    .build();
         }
 
         Request request = new Request.Builder()
@@ -359,6 +342,7 @@ public class ProfileEditActivity extends VillimActivity {
             @Override
             public void onFailure(Call call, IOException e) {
                 // Something went wrong.
+                System.out.println(e.toString());
                 showErrorMessage(getString(R.string.cant_connect_to_server));
                 stopLoadingAnimation();
             }
@@ -398,6 +382,21 @@ public class ProfileEditActivity extends VillimActivity {
                 }
             }
         });
+    }
+
+    public String getImagePath(Context context, Uri contentUri) {
+        Cursor cursor = null;
+        try {
+            String[] proj = { MediaStore.Images.Media.DATA };
+            cursor = context.getContentResolver().query(contentUri,  proj, null, null, null);
+            int column_index = cursor.getColumnIndex(proj[0]);
+            cursor.moveToFirst();
+            return cursor.getString(column_index);
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
     }
 
     @Override

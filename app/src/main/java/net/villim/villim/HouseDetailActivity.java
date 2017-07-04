@@ -1,6 +1,5 @@
 package net.villim.villim;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.AsyncTask;
@@ -8,7 +7,6 @@ import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
@@ -55,15 +53,12 @@ import static net.villim.villim.CalendarActivity.START_DATE;
 import static net.villim.villim.HouseDescriptionActivity.KEY_BASIC_DESCRIPTION;
 import static net.villim.villim.MainActivity.DATE_SELECTED;
 import static net.villim.villim.VillimKeys.HOUSE_INFO_URL;
-import static net.villim.villim.VillimKeys.KEY_ABOUT;
-import static net.villim.villim.VillimKeys.KEY_ADDITIONAL_GUEST_FEE;
 import static net.villim.villim.VillimKeys.KEY_ADDR_DIRECTION;
 import static net.villim.villim.VillimKeys.KEY_ADDR_SUMMARY;
 import static net.villim.villim.VillimKeys.KEY_AMENITY_IDS;
 import static net.villim.villim.VillimKeys.KEY_CANCELLATION_POLICY;
 import static net.villim.villim.VillimKeys.KEY_CLEANING_FEE;
-import static net.villim.villim.VillimKeys.KEY_CURRENCY_PREFERENCE;
-import static net.villim.villim.VillimKeys.KEY_DEPOSIT;
+import static net.villim.villim.VillimKeys.KEY_PREFERENCE_CURRENCY;
 import static net.villim.villim.VillimKeys.KEY_HOST_ID;
 import static net.villim.villim.VillimKeys.KEY_HOST_NAME;
 import static net.villim.villim.VillimKeys.KEY_HOST_PROFILE_PIC_URL;
@@ -280,7 +275,7 @@ public class HouseDetailActivity extends VillimActivity implements OnMapReadyCal
                 .host(SERVER_HOST)
                 .addPathSegments(HOUSE_INFO_URL)
                 .addQueryParameter(KEY_HOUSE_ID, Integer.toString(house.houseId))
-                .addQueryParameter(KEY_CURRENCY_PREFERENCE, Integer.toString(session.getCurrencyPref()))
+                .addQueryParameter(KEY_PREFERENCE_CURRENCY, Integer.toString(session.getCurrencyPref()))
                 .build().url();
 
         Request request = new Request.Builder()

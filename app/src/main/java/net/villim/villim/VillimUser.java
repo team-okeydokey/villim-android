@@ -7,14 +7,14 @@ import org.json.JSONObject;
 
 import static net.villim.villim.VillimKeys.KEY_ABOUT;
 import static net.villim.villim.VillimKeys.KEY_CITY_OF_RESIDENCE;
-import static net.villim.villim.VillimKeys.KEY_CURRENCY_PREFERENCE;
+import static net.villim.villim.VillimKeys.KEY_PREFERENCE_CURRENCY;
 import static net.villim.villim.VillimKeys.KEY_EMAIL;
 import static net.villim.villim.VillimKeys.KEY_FIRSTNAME;
 import static net.villim.villim.VillimKeys.KEY_FULLNAME;
 import static net.villim.villim.VillimKeys.KEY_HOUSE_ID_CONFIRMED;
 import static net.villim.villim.VillimKeys.KEY_HOUSE_ID_DONE;
 import static net.villim.villim.VillimKeys.KEY_HOUSE_ID_STAYING;
-import static net.villim.villim.VillimKeys.KEY_LANGUAGE_PREFERENCE;
+import static net.villim.villim.VillimKeys.KEY_PREFERENCE_LANGUAGE;
 import static net.villim.villim.VillimKeys.KEY_LASTNAME;
 import static net.villim.villim.VillimKeys.KEY_PHONE_NUMBER;
 import static net.villim.villim.VillimKeys.KEY_PROFILE_PIC_URL;
@@ -116,8 +116,8 @@ public class VillimUser implements Parcelable {
         user.phoneNumber = userInfo.optString(KEY_PHONE_NUMBER);
         user.cityOfResidence = userInfo.optString(KEY_CITY_OF_RESIDENCE);
         user.pushNotifications = userInfo.optBoolean(KEY_PUSH_NOTIFICATIONS);
-        user.currencyPref = userInfo.optInt(KEY_CURRENCY_PREFERENCE);
-        user.languagePref = userInfo.optInt(KEY_LANGUAGE_PREFERENCE);
+        user.currencyPref = userInfo.optInt(KEY_PREFERENCE_CURRENCY);
+        user.languagePref = userInfo.optInt(KEY_PREFERENCE_LANGUAGE);
         user.houseIdConfirmed = net.villim.villim.VillimUtils.JSONArrayToIntArray(userInfo.optJSONArray(KEY_HOUSE_ID_CONFIRMED));
         user.houseIdStaying = userInfo.optInt(KEY_HOUSE_ID_STAYING);
         user.houseIdDone = net.villim.villim.VillimUtils.JSONArrayToIntArray(userInfo.optJSONArray(KEY_HOUSE_ID_DONE));

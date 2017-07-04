@@ -78,8 +78,8 @@ public class VillimKeys {
     public static final String KEY_ABOUT = "about";
     public static final String KEY_USER_STATUS = "user_status";
     public static final String KEY_PUSH_NOTIFICATIONS = "push_notifications";
-    public static final String KEY_CURRENCY_PREFERENCE = "currency_preference";
-    public static final String KEY_LANGUAGE_PREFERENCE = "language_preference";
+    public static final String KEY_PREFERENCE_CURRENCY = "preferred_currency";
+    public static final String KEY_PREFERENCE_LANGUAGE = "preferred_language";
     public static final String KEY_SEX = "sex";
     public static final String KEY_PHONE_NUMBER = "phone_number";
     public static final String KEY_CITY_OF_RESIDENCE = "city_of_residence";

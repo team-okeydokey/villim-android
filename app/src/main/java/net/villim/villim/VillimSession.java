@@ -5,11 +5,11 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
 import static net.villim.villim.VillimKeys.KEY_CITY_OF_RESIDENCE;
-import static net.villim.villim.VillimKeys.KEY_CURRENCY_PREFERENCE;
+import static net.villim.villim.VillimKeys.KEY_PREFERENCE_CURRENCY;
 import static net.villim.villim.VillimKeys.KEY_EMAIL;
 import static net.villim.villim.VillimKeys.KEY_FIRSTNAME;
 import static net.villim.villim.VillimKeys.KEY_FULLNAME;
-import static net.villim.villim.VillimKeys.KEY_LANGUAGE_PREFERENCE;
+import static net.villim.villim.VillimKeys.KEY_PREFERENCE_LANGUAGE;
 import static net.villim.villim.VillimKeys.KEY_LASTNAME;
 import static net.villim.villim.VillimKeys.KEY_PHONE_NUMBER;
 import static net.villim.villim.VillimKeys.KEY_PROFILE_PIC_URL;
@@ -133,21 +133,21 @@ public class VillimSession {
 
     /* Currency */
     public void setCurrencyPref(int currencyPref) {
-        prefs.edit().putInt(KEY_CURRENCY_PREFERENCE, currencyPref).apply();
+        prefs.edit().putInt(KEY_PREFERENCE_CURRENCY, currencyPref).apply();
     }
 
     public int getCurrencyPref() {
-        int currencyPref = prefs.getInt(KEY_CURRENCY_PREFERENCE, 0);
+        int currencyPref = prefs.getInt(KEY_PREFERENCE_CURRENCY, 0);
         return currencyPref;
     }
 
     /* Language */
     public void setLanguagePref(int languagePref) {
-        prefs.edit().putInt(KEY_LANGUAGE_PREFERENCE, languagePref).apply();
+        prefs.edit().putInt(KEY_PREFERENCE_LANGUAGE, languagePref).apply();
     }
 
     public int getLanguagePref() {
-        int languagePref = prefs.getInt(KEY_LANGUAGE_PREFERENCE, 0);
+        int languagePref = prefs.getInt(KEY_PREFERENCE_LANGUAGE, 0);
         return languagePref;
     }
 
