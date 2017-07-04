@@ -136,10 +136,10 @@ public class VillimHouse implements Parcelable {
         //host = VillimUser.getUserFromServer(jsonObject.getInt(KEY_HOST_ID));
         house.hostId = jsonObject.optInt(KEY_HOST_ID);
         house.hostName = jsonObject.optString(KEY_HOST_NAME);
-        house.hostRating = (float) jsonObject.optDouble(KEY_HOST_RATING);
+        house.hostRating = (float) jsonObject.optDouble(KEY_HOST_RATING, 0);
         house.hostReviewCount = jsonObject.optInt(KEY_HOST_REVIEW_COUNT);
         house.hostProfilePicUrl = jsonObject.optString(KEY_HOST_PROFILE_PIC_URL);
-        house.houseRating = (float) jsonObject.optDouble(KEY_HOUSE_RATING);
+        house.houseRating = (float) jsonObject.optDouble(KEY_HOUSE_RATING, 0);
         house.houseReviewCount = jsonObject.optInt(KEY_HOUSE_REVIEW_COUNT);
 
         house.houseThumbnailUrl = jsonObject.optString(KEY_HOUSE_THUMBNAIL_URL);

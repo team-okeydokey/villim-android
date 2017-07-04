@@ -306,18 +306,13 @@ public class HouseDetailActivity extends VillimActivity implements OnMapReadyCal
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                try {
-                                    house = VillimHouse.createHouseFromJSONObject(jsonObject.getJSONObject(KEY_HOUSE_INFO));
-                                    dataDownloaded = true;
-                                    lastReviewContent = jsonObject.getJSONObject(KEY_HOUSE_INFO).getString(KEY_REVIEW_LAST_CONTENT);
-                                    lastReviewReviewer = jsonObject.getJSONObject(KEY_HOUSE_INFO).getString(KEY_REVIEW_LAST_REVIEWER);
-                                    lastReviewProfilePictureUrl = jsonObject.getJSONObject(KEY_HOUSE_INFO).getString(KEY_REVIEW_LAST_PROFILE_PIC_URL);
-                                    lastReviewRating = (float) jsonObject.getJSONObject(KEY_HOUSE_INFO).getDouble(KEY_REVIEW_LAST_RATING);
-                                    populateView();
-                                } catch (JSONException e) {
-                                    showErrorMessage(getString(R.string.server_error));
-                                    stopLoadingAnimation();
-                                }
+                                house = VillimHouse.createHouseFromJSONObject(jsonObject.optJSONObject(KEY_HOUSE_INFO));
+                                dataDownloaded = true;
+                                lastReviewContent = jsonObject.optJSONObject(KEY_HOUSE_INFO).optString(KEY_REVIEW_LAST_CONTENT);
+                                lastReviewReviewer = jsonObject.optJSONObject(KEY_HOUSE_INFO).optString(KEY_REVIEW_LAST_REVIEWER);
+                                lastReviewProfilePictureUrl = jsonObject.optJSONObject(KEY_HOUSE_INFO).optString(KEY_REVIEW_LAST_PROFILE_PIC_URL);
+                                lastReviewRating = (float) jsonObject.optJSONObject(KEY_HOUSE_INFO).optDouble(KEY_REVIEW_LAST_RATING);
+                                populateView();
                             }
                         });
 
