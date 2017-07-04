@@ -125,15 +125,26 @@
                             android:layout_below="@+id/host_name"
                             android:orientation="horizontal">
 
-                            <android.support.v7.widget.AppCompatRatingBar
+                            <!--<android.support.v7.widget.AppCompatRatingBar-->
+                                <!--android:id="@+id/host_review_rating"-->
+                                <!--style="@style/customRatingBar"-->
+                                <!--android:layout_width="wrap_content"-->
+                                <!--android:layout_height="match_parent"-->
+                                <!--android:layout_gravity="center_vertical"-->
+                                <!--android:isIndicator="true"-->
+                                <!--android:numStars="5"-->
+                                <!--android:progressTint="@color/rating_color"-->
+                                <!--android:stepSize="0.1" />-->
+
+                            <me.zhanghai.android.materialratingbar.MaterialRatingBar
                                 android:id="@+id/host_review_rating"
-                                style="@style/customRatingBar"
+                                style="@style/Widget.MaterialRatingBar.RatingBar.Indicator.Small"
                                 android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
+                                android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
-                                android:isIndicator="true"
                                 android:numStars="5"
                                 android:progressTint="@color/rating_color"
+                                android:secondaryProgressTint="@color/rating_color"
                                 android:stepSize="0.1" />
 
                             <TextView
@@ -441,16 +452,27 @@
                                 android:layout_height="wrap_content" />
 
                             <!-- Reviewer rating -->
-                            <android.support.v7.widget.AppCompatRatingBar
+                            <!--<android.support.v7.widget.AppCompatRatingBar-->
+                            <!--android:id="@+id/reviewer_rating"-->
+                            <!--style="@style/customRatingBar"-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="match_parent"-->
+                            <!--android:layout_gravity="center_vertical"-->
+                            <!--android:layout_marginLeft="@dimen/reviews_padding"-->
+                            <!--android:isIndicator="true"-->
+                            <!--android:numStars="5"-->
+                            <!--android:progressTint="@color/rating_color"-->
+                            <!--android:stepSize="0.1" />-->
+                            <me.zhanghai.android.materialratingbar.MaterialRatingBar
                                 android:id="@+id/reviewer_rating"
-                                style="@style/customRatingBar"
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:layout_gravity="center_vertical"
                                 android:layout_marginLeft="@dimen/reviews_padding"
-                                android:isIndicator="true"
+                                style="@style/Widget.MaterialRatingBar.RatingBar.Indicator.Small"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
                                 android:numStars="5"
                                 android:progressTint="@color/rating_color"
+                                android:secondaryProgressTint="@color/rating_color"
                                 android:stepSize="0.1" />
 
                         </android.support.v7.widget.LinearLayoutCompat>
@@ -478,19 +500,30 @@
                                 android:textColor="@color/see_more"
                                 android:textSize="13sp" />
 
-                            <!-- House rating -->
-                            <android.support.v7.widget.AppCompatRatingBar
+                            <!--&lt;!&ndash; House rating &ndash;&gt;-->
+                            <!--<android.support.v7.widget.AppCompatRatingBar-->
+                            <!--android:id="@+id/house_rating"-->
+                            <!--style="@style/customRatingBar"-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="match_parent"-->
+                            <!--android:layout_alignParentRight="true"-->
+                            <!--android:layout_gravity="center_vertical"-->
+                            <!--android:isIndicator="true"-->
+                            <!--android:numStars="5"-->
+                            <!--android:progressTint="@color/rating_color"-->
+                            <!--android:stepSize="0.1" />-->
+
+                            <me.zhanghai.android.materialratingbar.MaterialRatingBar
                                 android:id="@+id/house_rating"
-                                style="@style/customRatingBar"
+                                style="@style/Widget.MaterialRatingBar.RatingBar.Indicator.Small"
                                 android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
                                 android:layout_alignParentRight="true"
+                                android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
-                                android:isIndicator="true"
                                 android:numStars="5"
                                 android:progressTint="@color/rating_color"
+                                android:secondaryProgressTint="@color/rating_color"
                                 android:stepSize="0.1" />
-
 
                         </RelativeLayout>
 

@@ -40,6 +40,7 @@ dependencies {
     compile 'com.github.jchernandez:SlideButton:0.1+'
     compile 'com.github.franmontiel:PersistentCookieJar:v1.0.1'
     compile 'uk.co.chrisjenx:calligraphy:2.3.0'
+    compile 'me.zhanghai.android.materialratingbar:library:1.0.2'
     compile 'joda-time:joda-time:2.9.9'
     testCompile 'junit:junit:4.12'
 }
