@@ -170,7 +170,7 @@ public class DiscoverFragment extends Fragment implements MainActivity.onSearchF
                 .addQueryParameter(KEY_PREFERENCE_CURRENCY, Integer.toString(currency));
 
         if (location != null) {
-            builder.addQueryParameter(KEY_LOCATION, location);
+            builder.addPathSegment(location);
         }
 
         if (checkin != null && chekout != null) {
