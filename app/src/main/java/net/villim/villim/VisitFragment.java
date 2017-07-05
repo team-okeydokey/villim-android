@@ -119,7 +119,7 @@ public class VisitFragment extends Fragment {
         try {
             JSONArray visitArray = jsonObject.getJSONArray(KEY_CONFIRMED_VISITS);
             VillimVisit[] visits = VillimVisit.visitArrayFromJsonArray(visitArray);
-            VillimHouse[] houses = VillimHouse.houseArrayFromJsonArray(visitArray);
+            VillimHouse[] houses = VillimHouse.houseArrayFromJsonArray(getActivity().getApplicationContext(), visitArray);
 
             if (visits.length == 0) {
                 showNoVisitScreen();

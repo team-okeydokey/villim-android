@@ -306,7 +306,7 @@ public class HouseDetailActivity extends VillimActivity implements OnMapReadyCal
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                house = VillimHouse.createHouseFromJSONObject(jsonObject.optJSONObject(KEY_HOUSE_INFO));
+                                house = VillimHouse.createHouseFromJSONObject(getApplicationContext(), jsonObject.optJSONObject(KEY_HOUSE_INFO));
                                 dataDownloaded = true;
                                 lastReviewContent = jsonObject.optJSONObject(KEY_HOUSE_INFO).optString(KEY_REVIEW_LAST_CONTENT);
                                 lastReviewReviewer = jsonObject.optJSONObject(KEY_HOUSE_INFO).optString(KEY_REVIEW_LAST_REVIEWER);
@@ -331,6 +331,7 @@ public class HouseDetailActivity extends VillimActivity implements OnMapReadyCal
 
     // Make this async.
     private void populateView() {
+
         /* House picture */
         if (house.housePicUrls.length > 0) {
             toolbarImage.setOnClickListener(new View.OnClickListener() {

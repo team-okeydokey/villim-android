@@ -39,7 +39,7 @@ public class CalendarActivity extends VillimActivity {
     private DateTime endDate;
     int selectState;
 
-    Date[] invalidDates;
+    DateTime[] invalidDates;
 
     private Toolbar toolbar;
     private TextView startDateTextView;
@@ -61,14 +61,6 @@ public class CalendarActivity extends VillimActivity {
 
         long[] invalidDateArray = getIntent().getLongArrayExtra(INVALID_DATES);
         invalidDates = net.villim.villim.VillimUtils.longArrayToDateArray(invalidDateArray);
-        System.out.println(invalidDates.length);
-
-        for (Date reservedDate : invalidDates) {
-            System.out.println(reservedDate.getMonth());
-            System.out.println(reservedDate.getDay());
-            System.out.println(reservedDate.getYear());
-        }
-
 
         highlightStartDate = true;
 
@@ -83,7 +75,6 @@ public class CalendarActivity extends VillimActivity {
         /* Set up start date / end date select texts. */
         startDateTextView = (TextView) findViewById(R.id.start_date_text);
         endDateTextView = (TextView) findViewById(R.id.end_date_text);
-
 
         changeState(STATE_SELECT_START);
 
@@ -128,8 +119,8 @@ public class CalendarActivity extends VillimActivity {
         calendar.setDateSelectableFilter(new CalendarPickerView.DateSelectableFilter() {
             @Override
             public boolean isDateSelectable(Date date) {
-                for (Date reservedDate : invalidDates) {
-                    if (date.equals(reservedDate)) {
+                for (DateTime reservedDate : invalidDates) {
+                    if (reservedDate.toDate().equals(date)) {
                         return false;
                     }
                 }

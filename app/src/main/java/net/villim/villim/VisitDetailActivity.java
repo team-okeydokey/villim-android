@@ -192,7 +192,7 @@ public class VisitDetailActivity extends VillimActivity implements CancelVisitDi
                         visit = VillimVisit.createVisitFromJSONObject(visitInfo);
 
                         JSONObject houseInfo = jsonObject.getJSONObject(KEY_HOUSE_INFO);
-                        house = VillimHouse.createHouseFromJSONObject(houseInfo);
+                        house = VillimHouse.createHouseFromJSONObject(getApplicationContext(), houseInfo);
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {

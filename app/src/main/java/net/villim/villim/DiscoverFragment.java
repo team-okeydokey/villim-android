@@ -40,7 +40,6 @@ import static net.villim.villim.VillimKeys.KEY_HOUSES;
 import static net.villim.villim.VillimKeys.KEY_MESSAGE;
 import static net.villim.villim.VillimKeys.KEY_QUERY_SUCCESS;
 import static net.villim.villim.VillimKeys.KEY_CHECKIN;
-import static net.villim.villim.VillimKeys.KEY_LOCATION;
 import static net.villim.villim.VillimKeys.SERVER_HOST;
 import static net.villim.villim.VillimKeys.SERVER_SCHEME;
 
@@ -175,9 +174,9 @@ public class DiscoverFragment extends Fragment implements MainActivity.onSearchF
 
         if (checkin != null && chekout != null) {
             builder.addQueryParameter(KEY_CHECKIN,
-                VillimUtils.dateTimetoString(getActivity().getApplicationContext(), checkin));
+                VillimUtils.datetoString(getActivity().getApplicationContext(), checkin));
             builder.addQueryParameter(KEY_CHECKOUT,
-                    VillimUtils.dateTimetoString(getActivity().getApplicationContext(), chekout));
+                    VillimUtils.datetoString(getActivity().getApplicationContext(), chekout));
         }
 
         URL url  = builder.build().url();
@@ -228,7 +227,9 @@ public class DiscoverFragment extends Fragment implements MainActivity.onSearchF
     private void populateView(JSONObject jsonObject) {
         try {
             JSONArray houseArray = jsonObject.getJSONArray(KEY_HOUSES);
-            VillimHouse[] houses = VillimHouse.houseArrayFromJsonArray(houseArray);
+            VillimHouse[] houses = VillimHouse.houseArrayFromJsonArray(
+                    getActivity().getApplicationContext(),
+                    houseArray);
 
             adapter = new DiscoverRecyclerAdapter(houses);
             recyclerView.setAdapter(adapter);

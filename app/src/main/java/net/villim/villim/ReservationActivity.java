@@ -17,6 +17,7 @@ import com.franmontiel.persistentcookiejar.cache.SetCookieCache;
 import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
 import com.wang.avi.AVLoadingIndicatorView;
 
+import org.joda.time.DateTime;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -102,7 +103,6 @@ public class ReservationActivity extends VillimActivity {
             endDate = (Date) getIntent().getSerializableExtra(END_DATE);
             stayDuration = net.villim.villim.VillimUtils.daysBetween(startDate, endDate);
         }
-
 
         /* Toolbar */
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -308,7 +308,10 @@ public class ReservationActivity extends VillimActivity {
                     /* 주의: response.body().string()은 한 번 부를 수 있음 */
                     JSONObject jsonObject = new JSONObject(response.body().string());
                     if (jsonObject.getBoolean(KEY_SUCCESS)) {
-                        VillimReservation reservation = VillimReservation.createReservationFromJSONObject((JSONObject) jsonObject.get(KEY_RESERVATION_INFO));
+                        VillimReservation reservation =
+                                VillimReservation.createReservationFromJSONObject(
+                                        getApplicationContext(),
+                                        (JSONObject) jsonObject.get(KEY_RESERVATION_INFO));
                         Intent intent = new Intent(ReservationActivity.this, ReservationSuccessActivity.class);
                         intent.putExtra(RESERVATION, reservation);
                         stopLoadingAnimation();

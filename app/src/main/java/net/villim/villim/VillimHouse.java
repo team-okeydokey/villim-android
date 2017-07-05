@@ -1,8 +1,10 @@
 package net.villim.villim;
 
+import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import org.joda.time.DateTime;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -105,7 +107,7 @@ public class VillimHouse implements Parcelable {
         return stringsArray;
     }
 
-    public static VillimHouse createHouseFromJSONObject(JSONObject jsonObject) {
+    public static VillimHouse createHouseFromJSONObject(Context context, JSONObject jsonObject) {
 
         /* Create user instance */
         VillimHouse house = new VillimHouse();
@@ -155,9 +157,8 @@ public class VillimHouse implements Parcelable {
                 JSONObject reservationInfo = (JSONObject) reservationArray.optJSONObject(i);
 
                 VillimReservation reservation = new VillimReservation();
-                reservation.startDate = net.villim.villim.VillimUtils.dateFromDateString(reservationInfo.optString(KEY_CHECKIN));
-                reservation.endDate = net.villim.villim.VillimUtils.dateFromDateString(reservationInfo.optString(KEY_CHECKOUT));
-
+                reservation.startDate = net.villim.villim.VillimUtils.dateFromString(context, reservationInfo.optString(KEY_CHECKIN));
+                reservation.endDate = net.villim.villim.VillimUtils.dateFromString(context, reservationInfo.optString(KEY_CHECKOUT));
                 house.reservations[i] = reservation;
             }
         }
@@ -165,7 +166,7 @@ public class VillimHouse implements Parcelable {
         return house;
     }
 
-    public static VillimHouse[] houseArrayFromJsonArray(JSONArray jsonArray) {
+    public static VillimHouse[] houseArrayFromJsonArray(Context context, JSONArray jsonArray) {
 
         if (jsonArray == null) {
             return new VillimHouse[0];
@@ -175,7 +176,7 @@ public class VillimHouse implements Parcelable {
 
         try {
             for (int i = 0; i < jsonArray.length(); ++i) {
-                VillimHouse house = createHouseFromJSONObject(jsonArray.getJSONObject(i));
+                VillimHouse house = createHouseFromJSONObject(context, jsonArray.getJSONObject(i));
                 houses[i] = house;
             }
 
@@ -225,7 +226,7 @@ public class VillimHouse implements Parcelable {
         dest.writeIntArray(amenityIds);
         dest.writeStringArray(housePicUrls);
 //        dest.writeTypedArray(reviews, 0);
-        dest.writeTypedArray(reservations, 0);
+        dest.writeTypedArray(reservations, flags);
     }
 
     protected VillimHouse(Parcel in) {
@@ -276,16 +277,16 @@ public class VillimHouse implements Parcelable {
         }
     };
 
-    public Date[] getInvalidDates() {
+    public DateTime[] getInvalidDates() {
 
-        List<Date> dates = new ArrayList<>();
+        List<DateTime> dates = new ArrayList<>();
 
         for (int i = 0; i < reservations.length; ++i) {
             VillimReservation reservation = reservations[i];
-            List<Date> datesBetween = net.villim.villim.VillimUtils.datesBetween(reservation.startDate, reservation.endDate, true);
-            dates.addAll(datesBetween);
+            List<DateTime> reservedDates = net.villim.villim.VillimUtils.datesBetween(reservation.startDate, reservation.endDate, true);
+            dates.addAll(reservedDates);
         }
 
-        return dates.toArray(new Date[0]);
+        return dates.toArray(new DateTime[0]);
     }
 }

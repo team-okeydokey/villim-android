@@ -166,16 +166,16 @@ public class VillimUtils {
         return Math.round(px / (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
     }
 
-    public static List<Date> datesBetween(Date startDate, Date endDate, boolean includeEdge) {
-        DateTime dateTime1 = new DateTime(startDate);
-        DateTime dateTime2 = new DateTime(endDate);
+    public static List<DateTime> datesBetween(DateTime startDate, DateTime endDate, boolean includeEdge) {
+        DateTime dateTime1 = startDate;
+        DateTime dateTime2 = endDate;
 
-        List<Date> dates = new ArrayList();
+        List<DateTime> dates = new ArrayList<>();
 
         if (includeEdge) { dates.add(startDate); }
 
-        while( dateTime1.isBefore(dateTime2) ){
-            dates.add( dateTime1.toDate() );
+        while(dateTime1.isBefore(dateTime2)){
+            dates.add(dateTime1);
             dateTime1 = dateTime1.plusDays(1);
         }
 
@@ -184,7 +184,7 @@ public class VillimUtils {
         return dates;
     }
 
-    public static long[] dateArrayToLongArray(Date[] dates) {
+    public static long[] dateArrayToLongArray(DateTime[] dates) {
         long[] longs = new long[dates.length];
 
         for (int i = 0; i < dates.length; ++i) {
@@ -194,11 +194,11 @@ public class VillimUtils {
         return longs;
     }
 
-    public static Date[] longArrayToDateArray(long[] longs) {
-        Date[] dates = new Date[longs.length];
+    public static DateTime[] longArrayToDateArray(long[] longs) {
+        DateTime[] dates = new DateTime[longs.length];
 
         for (int i = 0; i < longs.length; ++i) {
-            dates[i] = new DateTime(longs[i]).toDate();
+            dates[i] = new DateTime(longs[i]);
         }
 
         return dates;
@@ -209,9 +209,15 @@ public class VillimUtils {
         return phoneNumberString;
     }
 
-    public static String dateTimetoString(Context context, DateTime datetime) {
-        DateTimeFormatter dtf = DateTimeFormat.forPattern(context.getString(R.string.date_format));
-        String dateString = dtf.print(datetime);
+    public static String datetoString(Context context, DateTime datetime) {
+        DateTimeFormatter formatter = DateTimeFormat.forPattern(context.getString(R.string.date_format));
+        String dateString = formatter.print(datetime);
         return dateString;
+    }
+
+    public static DateTime dateFromString(Context context, String dateString) {
+        DateTimeFormatter formatter = DateTimeFormat.forPattern(context.getString(R.string.date_format));
+        DateTime date = formatter.parseDateTime(dateString);
+        return date;
     }
 }
