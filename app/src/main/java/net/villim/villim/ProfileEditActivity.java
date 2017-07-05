@@ -396,7 +396,6 @@ public class ProfileEditActivity extends VillimActivity {
     }
 
     private String getImagePath(Context context, Uri contentUri) {
-        System.out.println(contentUri.getPath());
         Cursor cursor = null;
         try {
             String[] proj = {MediaStore.Images.Media.DATA};

@@ -89,7 +89,7 @@ public class ProfileFragment extends Fragment implements LogoutDialog.LogoutDial
                     dialog.show(getActivity().getFragmentManager(), "LogoutFragment");
 
                 } else if (title.equals(getString(R.string.profile_title))) {
-                    launchProfileEditActivity();
+                    launchProfileViewActivity();
                 } else if (title.equals(getString(R.string.faq))) {
                     launchFAQWebview();
                 } else if (title.equals(getString(R.string.settings))) {
@@ -131,9 +131,9 @@ public class ProfileFragment extends Fragment implements LogoutDialog.LogoutDial
         getActivity().startActivity(intent);
     }
 
-    private void launchProfileEditActivity() {
+    private void launchProfileViewActivity() {
         Intent intent = new Intent(getActivity(), ProfileViewActivity.class);
-        getActivity().startActivity(intent);
+        getActivity().startActivityForResult(intent, PROFILE_EDIT);
     }
 
     // Make this async.
@@ -287,6 +287,7 @@ public class ProfileFragment extends Fragment implements LogoutDialog.LogoutDial
             }
             if (resultCode == Activity.RESULT_CANCELED) {
                 //Write your code if there's no result
+                populateView();
             }
         }
     }
