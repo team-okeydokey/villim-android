@@ -6,6 +6,7 @@ import android.app.DialogFragment;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -18,7 +19,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -152,9 +155,16 @@ public class ProfileFragment extends Fragment implements LogoutDialog.LogoutDial
                         .load(R.drawable.img_default)
                         .into(profilePicture);
             } else {
-                Glide.with(this)
-                        .load(session.getProfilePicUrl())
-                        .into(profilePicture);
+                File profilePic = session.getLocalStoreProfilePictureFile();
+
+                if (profilePic == null) {
+                    Glide.with(this).load(session.getProfilePicUrl()).diskCacheStrategy(DiskCacheStrategy.NONE)
+                            .skipMemoryCache(true).into(profilePicture);
+                } else {
+                    Glide.with(this).load(profilePic).diskCacheStrategy(DiskCacheStrategy.NONE)
+                            .skipMemoryCache(true).into(profilePicture);
+                }
+
             }
         }
     }

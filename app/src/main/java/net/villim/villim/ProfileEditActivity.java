@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.content.ContextCompat;
 import android.os.Bundle;
@@ -22,6 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.franmontiel.persistentcookiejar.ClearableCookieJar;
 import com.franmontiel.persistentcookiejar.PersistentCookieJar;
 import com.franmontiel.persistentcookiejar.cache.SetCookieCache;
@@ -150,7 +152,7 @@ public class ProfileEditActivity extends VillimActivity {
             @Override
             public void onClick(View v) {
                 Intent pickPhotoIntent = new Intent(Intent.ACTION_PICK,
-                        android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                        MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(pickPhotoIntent, PHOTO_PICKER);
             }
         });
@@ -160,7 +162,8 @@ public class ProfileEditActivity extends VillimActivity {
         firstnameContent.setText(session.getFirstName());
         firstnameContent.addTextChangedListener(new TextWatcher() {
             @Override
-            public void afterTextChanged(Editable s) {}
+            public void afterTextChanged(Editable s) {
+            }
 
             @Override
             public void beforeTextChanged(CharSequence s, int start,
@@ -183,7 +186,8 @@ public class ProfileEditActivity extends VillimActivity {
         lastnameContent.setText(session.getLastName());
         lastnameContent.addTextChangedListener(new TextWatcher() {
             @Override
-            public void afterTextChanged(Editable s) {}
+            public void afterTextChanged(Editable s) {
+            }
 
             @Override
             public void beforeTextChanged(CharSequence s, int start,
@@ -215,7 +219,8 @@ public class ProfileEditActivity extends VillimActivity {
         emailContent.setText(session.getEmail());
         emailContent.addTextChangedListener(new TextWatcher() {
             @Override
-            public void afterTextChanged(Editable s) {}
+            public void afterTextChanged(Editable s) {
+            }
 
             @Override
             public void beforeTextChanged(CharSequence s, int start,
@@ -250,7 +255,8 @@ public class ProfileEditActivity extends VillimActivity {
         cityContent.setText(session.getCityOfResidence());
         cityContent.addTextChangedListener(new TextWatcher() {
             @Override
-            public void afterTextChanged(Editable s) {}
+            public void afterTextChanged(Editable s) {
+            }
 
             @Override
             public void beforeTextChanged(CharSequence s, int start,
@@ -284,6 +290,7 @@ public class ProfileEditActivity extends VillimActivity {
     }
 
 
+
     private void sendUpdateProfileRequest() {
         startLoadingAnimation();
 
@@ -304,10 +311,11 @@ public class ProfileEditActivity extends VillimActivity {
 
         if (newProfilePic) {
 
-            File imageFiie = new File(getImagePath(getApplicationContext(),
-                    Uri.parse(getImageUrlWithAuthority(getApplicationContext(), profilePicUri))));
+            File imageFiie = session.getLocalStoreProfilePictureFile();
+
             if (imageFiie == null) {
                 showErrorMessage(getString(R.string.upload_error));
+                stopLoadingAnimation();
                 return;
             } else {
                 requestBody = new MultipartBody.Builder()
@@ -339,57 +347,60 @@ public class ProfileEditActivity extends VillimActivity {
                 .post(requestBody)
                 .build();
 
-        client.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                // Something went wrong.
-                showErrorMessage(getString(R.string.cant_connect_to_server));
-                stopLoadingAnimation();
-            }
+        client.newCall(request).
 
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                if (!response.isSuccessful()) {
-                    showErrorMessage(getString(R.string.server_error));
-                    stopLoadingAnimation();
-                    throw new IOException("Response not successful   " + response);
-                }
-                /* Request success. */
-                try {
-                    /* 주의: response.body().string()은 한 번 부를 수 있음 */
-                    final JSONObject jsonObject = new JSONObject(response.body().string());
-                    if (jsonObject.getBoolean(KEY_QUERY_SUCCESS)) {
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                Toast.makeText(getApplicationContext(), getString(R.string.profile_updated),
-                                        Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                        VillimUser user = VillimUser.createUserFromJSONObject(jsonObject.getJSONObject(KEY_USER_INFO));
-                        session.updateUserSession(user);
-                        Intent returnIntent = new Intent();
-                        returnIntent.putExtra(PROFILE_PIC_URI, profilePicUri.toString());
-                        setResult(Activity.RESULT_OK, returnIntent);
-                        finish();
-                    } else {
-                        showErrorMessage(jsonObject.getString(KEY_MESSAGE));
+                enqueue(new Callback() {
+                    @Override
+                    public void onFailure(Call call, IOException e) {
+                        // Something went wrong.
+                        showErrorMessage(getString(R.string.cant_connect_to_server));
+                        stopLoadingAnimation();
+                        e.printStackTrace();
                     }
-                    stopLoadingAnimation();
-                } catch (JSONException e) {
-                    showErrorMessage(getString(R.string.open_room_error));
-                    stopLoadingAnimation();
-                }
-            }
-        });
+
+                    @Override
+                    public void onResponse(Call call, Response response) throws IOException {
+                        if (!response.isSuccessful()) {
+                            showErrorMessage(getString(R.string.server_error));
+                            stopLoadingAnimation();
+                            throw new IOException("Response not successful   " + response);
+                        }
+                /* Request success. */
+                        try {
+                    /* 주의: response.body().string()은 한 번 부를 수 있음 */
+                            final JSONObject jsonObject = new JSONObject(response.body().string());
+                            if (jsonObject.getBoolean(KEY_QUERY_SUCCESS)) {
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toast.makeText(getApplicationContext(), getString(R.string.profile_updated),
+                                                Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                                VillimUser user = VillimUser.createUserFromJSONObject(jsonObject.getJSONObject(KEY_USER_INFO));
+                                session.updateUserSession(user);
+                                Intent returnIntent = new Intent();
+                                returnIntent.putExtra(PROFILE_PIC_URI, profilePicUri.toString());
+                                setResult(Activity.RESULT_OK, returnIntent);
+                                finish();
+                            } else {
+                                showErrorMessage(jsonObject.getString(KEY_MESSAGE));
+                            }
+                            stopLoadingAnimation();
+                        } catch (JSONException e) {
+                            showErrorMessage(getString(R.string.open_room_error));
+                            stopLoadingAnimation();
+                        }
+                    }
+                });
     }
 
     private String getImagePath(Context context, Uri contentUri) {
         System.out.println(contentUri.getPath());
         Cursor cursor = null;
         try {
-            String[] proj = { MediaStore.Images.Media.DATA };
-            cursor = context.getContentResolver().query(contentUri,  proj, null, null, null);
+            String[] proj = {MediaStore.Images.Media.DATA};
+            cursor = context.getContentResolver().query(contentUri, proj, null, null, null);
             int columnIndex = cursor.getColumnIndex(proj[0]);
             cursor.moveToFirst();
             return cursor.getString(columnIndex);
@@ -409,7 +420,7 @@ public class ProfileEditActivity extends VillimActivity {
                 return writeToTempImageAndGetPathUri(context, bmp).toString();
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
-            }finally {
+            } finally {
                 try {
                     is.close();
                 } catch (IOException e) {
@@ -436,7 +447,8 @@ public class ProfileEditActivity extends VillimActivity {
                 newProfilePic = true;
                 Uri uri = data.getData();
                 profilePicUri = uri;
-                loadProfilePhoto(uri);
+                savePhotoCache(profilePicUri);
+                loadProfilePhoto(profilePicUri);
                 updateSaveButtonStatus();
             }
             if (resultCode == Activity.RESULT_CANCELED) {
@@ -524,9 +536,40 @@ public class ProfileEditActivity extends VillimActivity {
 //
 //    }
 
+    private void savePhotoCache(Uri uri) {
+        /* Save image into cache */
+        File filepath = Environment.getExternalStorageDirectory();
+        File dir = new File(filepath.getAbsolutePath()
+                + "/" + getString(R.string.app_name));
+        dir.mkdirs();
+
+        File imageFiie = new File(dir, session.getUserId() + ".jpg");
+        try {
+            Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
+//            OutputStream os = new BufferedOutputStream(new FileOutputStream(imageFiie));
+            OutputStream os = new FileOutputStream(imageFiie);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 50, os);
+            os.flush();
+            os.close();
+        } catch (IOException e) {
+            imageFiie = null;
+        }
+
+        /* Update session */
+        session.setLocalStoreProfilePicturePath(imageFiie.getAbsolutePath());
+    }
+
     private void loadProfilePhoto(Uri uri) {
         profilePicture.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        Glide.with(this).load(uri).into(profilePicture);
+        File profilePic = session.getLocalStoreProfilePictureFile();
+
+        if (profilePic == null) {
+            Glide.with(this).load(session.getProfilePicUrl()).diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .skipMemoryCache(true).into(profilePicture);
+        } else {
+            Glide.with(this).load(profilePic).diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .skipMemoryCache(true).into(profilePicture);
+        }
     }
 
     private void loadDefaultImage() {

@@ -4,7 +4,10 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
+import java.io.File;
+
 import static net.villim.villim.VillimKeys.KEY_CITY_OF_RESIDENCE;
+import static net.villim.villim.VillimKeys.KEY_LOCAL_STORE_PROFILE_PICTURE;
 import static net.villim.villim.VillimKeys.KEY_PREFERENCE_CURRENCY;
 import static net.villim.villim.VillimKeys.KEY_EMAIL;
 import static net.villim.villim.VillimKeys.KEY_FIRSTNAME;
@@ -310,6 +313,34 @@ public class VillimSession {
             return houseIdArray;
         }
     }
+
+    /* City of residence */
+    public void setLocalStoreProfilePicturePath(String path) {
+        prefs.edit().putString(KEY_LOCAL_STORE_PROFILE_PICTURE, path).apply();
+    }
+
+    public String getLocalStoreProfilePicturePath() {
+        String path = prefs.getString(KEY_LOCAL_STORE_PROFILE_PICTURE, null);
+        return path;
+    }
+
+    public File getLocalStoreProfilePictureFile() {
+        String path = prefs.getString(KEY_LOCAL_STORE_PROFILE_PICTURE, null);
+
+        if (path == null) { return null; };
+
+        File imageFile = null;
+
+        if (path != null) {
+            imageFile = new File(path);
+            if (imageFile != null && imageFile.exists()) {
+                return imageFile;
+            }
+        }
+
+        return null;
+    }
+
 
     public void updateUserSession(VillimUser user) {
         setUserId(user.userId);

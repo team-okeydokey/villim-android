@@ -21,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.franmontiel.persistentcookiejar.ClearableCookieJar;
 import com.franmontiel.persistentcookiejar.PersistentCookieJar;
 import com.franmontiel.persistentcookiejar.cache.SetCookieCache;
@@ -147,7 +148,6 @@ public class ProfileViewActivity extends VillimActivity {
         } else {
             profilePicUri = Uri.parse(session.getProfilePicUrl());
             loadProfilePhoto(profilePicUri);
-
         }
 
          /* First name */
@@ -173,8 +173,7 @@ public class ProfileViewActivity extends VillimActivity {
 
             if (resultCode == Activity.RESULT_OK) {
                 String uriString = data.getExtras().getString(ProfileEditActivity.PROFILE_PIC_URI);
-                Uri uri = Uri.parse(uriString);
-                profilePicUri = uri;
+                Uri uri = Uri.parse(session.getLocalStoreProfilePicturePath());
                 loadProfilePhoto(uri);
                 populateView();
             }
@@ -254,7 +253,16 @@ public class ProfileViewActivity extends VillimActivity {
 
     private void loadProfilePhoto(Uri uri) {
         profilePicture.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        Glide.with(this).load(uri).into(profilePicture);
+
+        File profilePic = session.getLocalStoreProfilePictureFile();
+
+        if (profilePic == null) {
+            Glide.with(this).load(session.getProfilePicUrl()).diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .skipMemoryCache(true).into(profilePicture);
+        } else {
+            Glide.with(this).load(profilePic).diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .skipMemoryCache(true).into(profilePicture);
+        }
     }
 
     private void loadDefaultImage() {

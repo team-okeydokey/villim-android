@@ -196,6 +196,9 @@ public class VillimKeys {
 
     /* Search filter */
     public static final String KEY_LOCATION =  "location";
+
+    /* Local store */
+    public static final String KEY_LOCAL_STORE_PROFILE_PICTURE =  "local_store_profile_picture";
 }
 
 
