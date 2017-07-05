@@ -171,10 +171,15 @@ public class CalendarActivity extends VillimActivity {
         calendar.setOnInvalidDateSelectedListener(new CalendarPickerView.OnInvalidDateSelectedListener() {
             @Override
             public void onInvalidDateSelected(Date date) {
-                CharSequence text = getString(R.string.invalid_date_selected);
-                int duration = Toast.LENGTH_SHORT;
-                Toast toast = Toast.makeText(getApplicationContext(), text, duration);
-                toast.show();
+                Date today = new Date(System.currentTimeMillis());
+                if (date.equals(today)) {
+                    CharSequence text = getString(R.string.invalid_date_selected);
+                    int duration = Toast.LENGTH_SHORT;
+                    Toast toast = Toast.makeText(getApplicationContext(), text, duration);
+                    toast.show();
+                } else {
+                    
+                }
             }
         });
 
