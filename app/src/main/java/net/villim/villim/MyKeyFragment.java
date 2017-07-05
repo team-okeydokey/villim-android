@@ -37,7 +37,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-import static net.villim.villim.VillimKeys.KEY_END_DATE;
+import static net.villim.villim.VillimKeys.KEY_CHECKOUT;
 import static net.villim.villim.VillimKeys.KEY_HOUSE_ID;
 import static net.villim.villim.VillimKeys.KEY_HOUSE_NAME;
 import static net.villim.villim.VillimKeys.KEY_HOUSE_THUMBNAIL_URL;
@@ -45,7 +45,7 @@ import static net.villim.villim.VillimKeys.KEY_MESSAGE;
 import static net.villim.villim.VillimKeys.KEY_OPEN_AUTHORIZED;
 import static net.villim.villim.VillimKeys.KEY_OPEN_SUCESS;
 import static net.villim.villim.VillimKeys.KEY_QUERY_SUCCESS;
-import static net.villim.villim.VillimKeys.KEY_START_DATE;
+import static net.villim.villim.VillimKeys.KEY_CHECKIN;
 import static net.villim.villim.VillimKeys.MY_HOUSE_URL;
 import static net.villim.villim.VillimKeys.OPEN_DOORLOCK_URL;
 import static net.villim.villim.VillimKeys.SERVER_HOST;
@@ -204,8 +204,8 @@ public class MyKeyFragment extends Fragment {
                     if (jsonObject.getBoolean(KEY_QUERY_SUCCESS)) {
                         houseId = jsonObject.optInt(KEY_HOUSE_ID);
                         houseName = jsonObject.optString(KEY_HOUSE_NAME);
-                        startDate = net.villim.villim.VillimUtils.dateFromDateString(jsonObject.optString(KEY_START_DATE));
-                        endDate = net.villim.villim.VillimUtils.dateFromDateString(jsonObject.optString(KEY_END_DATE));
+                        startDate = net.villim.villim.VillimUtils.dateFromDateString(jsonObject.optString(KEY_CHECKIN));
+                        endDate = net.villim.villim.VillimUtils.dateFromDateString(jsonObject.optString(KEY_CHECKOUT));
                         houseThumbnailUrl = jsonObject.optString(KEY_HOUSE_THUMBNAIL_URL);
 
                         getActivity().runOnUiThread(new Runnable() {

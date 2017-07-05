@@ -4,6 +4,8 @@ import android.content.Context;
 import android.telephony.PhoneNumberUtils;
 import android.util.DisplayMetrics;
 
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 import org.json.JSONArray;
 
 import java.text.DateFormat;
@@ -205,5 +207,11 @@ public class VillimUtils {
     public static String formatPhoneNumber(String phoneNumber) {
         String phoneNumberString = PhoneNumberUtils.formatNumber(phoneNumber, Locale.getDefault().getCountry());
         return phoneNumberString;
+    }
+
+    public static String dateTimetoString(Context context, DateTime datetime) {
+        DateTimeFormatter dtf = DateTimeFormat.forPattern(context.getString(R.string.date_format));
+        String dateString = dtf.print(datetime);
+        return dateString;
     }
 }

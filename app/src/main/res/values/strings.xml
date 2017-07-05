@@ -363,5 +363,7 @@
     <string name="verify_phone_title">인증번호를 입력해주세요</string>
     <string name="verify_phone_instructions">핸드폰으로 전송된 인증번호를 입력해주세요.</string>
 
+    <!-- DateTime format -->
+    <string name="date_format">yyyy-MM-dd</string>
 
 </resources>

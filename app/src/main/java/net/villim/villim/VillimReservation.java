@@ -9,7 +9,7 @@ import org.json.JSONObject;
 
 import java.util.Date;
 
-import static net.villim.villim.VillimKeys.KEY_END_DATE;
+import static net.villim.villim.VillimKeys.KEY_CHECKOUT;
 import static net.villim.villim.VillimKeys.KEY_GUEST_ID;
 import static net.villim.villim.VillimKeys.KEY_HOST_ID;
 import static net.villim.villim.VillimKeys.KEY_HOUSE_ID;
@@ -17,7 +17,7 @@ import static net.villim.villim.VillimKeys.KEY_RESERVATION_CODE;
 import static net.villim.villim.VillimKeys.KEY_RESERVATION_ID;
 import static net.villim.villim.VillimKeys.KEY_RESERVATION_STATUS;
 import static net.villim.villim.VillimKeys.KEY_RESERVATION_TIME;
-import static net.villim.villim.VillimKeys.KEY_START_DATE;
+import static net.villim.villim.VillimKeys.KEY_CHECKIN;
 
 /**
  * Created by seongmin on 6/15/17.
@@ -74,8 +74,8 @@ public class VillimReservation implements Parcelable {
             reservation.houseId = reservationInfo.getInt(KEY_HOUSE_ID);
             reservation.hostId = reservationInfo.getInt(KEY_HOST_ID);
             reservation.guestId = reservationInfo.getInt(KEY_GUEST_ID);
-            reservation.startDate = net.villim.villim.VillimUtils.dateFromDateString(reservationInfo.getString(KEY_START_DATE));
-            reservation.endDate = net.villim.villim.VillimUtils.dateFromDateString(reservationInfo.getString(KEY_END_DATE));
+            reservation.startDate = net.villim.villim.VillimUtils.dateFromDateString(reservationInfo.getString(KEY_CHECKIN));
+            reservation.endDate = net.villim.villim.VillimUtils.dateFromDateString(reservationInfo.getString(KEY_CHECKOUT));
             reservation.reservationTime = reservationInfo.getString(KEY_RESERVATION_TIME);
             reservation.reservationStatus = reservationInfo.getInt(KEY_RESERVATION_STATUS);
             reservation.reservationCode = reservationInfo.getString(KEY_RESERVATION_CODE);

@@ -18,7 +18,7 @@ import static net.villim.villim.VillimKeys.KEY_AMENITY_IDS;
 import static net.villim.villim.VillimKeys.KEY_CANCELLATION_POLICY;
 import static net.villim.villim.VillimKeys.KEY_CLEANING_FEE;
 import static net.villim.villim.VillimKeys.KEY_DESCRIPTION;
-import static net.villim.villim.VillimKeys.KEY_END_DATE;
+import static net.villim.villim.VillimKeys.KEY_CHECKOUT;
 import static net.villim.villim.VillimKeys.KEY_HOST_ID;
 import static net.villim.villim.VillimKeys.KEY_HOST_NAME;
 import static net.villim.villim.VillimKeys.KEY_HOST_PROFILE_PIC_URL;
@@ -42,7 +42,7 @@ import static net.villim.villim.VillimKeys.KEY_NUM_GUEST;
 import static net.villim.villim.VillimKeys.KEY_RATE_PER_MONTH;
 import static net.villim.villim.VillimKeys.KEY_RATE_PER_NIGHT;
 import static net.villim.villim.VillimKeys.KEY_RESERVATIONS;
-import static net.villim.villim.VillimKeys.KEY_START_DATE;
+import static net.villim.villim.VillimKeys.KEY_CHECKIN;
 import static net.villim.villim.VillimKeys.KEY_UTILITY_FEE;
 import static net.villim.villim.VillimKeys.KEY_HOUSE_TYPE;
 
@@ -155,8 +155,8 @@ public class VillimHouse implements Parcelable {
                 JSONObject reservationInfo = (JSONObject) reservationArray.optJSONObject(i);
 
                 VillimReservation reservation = new VillimReservation();
-                reservation.startDate = net.villim.villim.VillimUtils.dateFromDateString(reservationInfo.optString(KEY_START_DATE));
-                reservation.endDate = net.villim.villim.VillimUtils.dateFromDateString(reservationInfo.optString(KEY_END_DATE));
+                reservation.startDate = net.villim.villim.VillimUtils.dateFromDateString(reservationInfo.optString(KEY_CHECKIN));
+                reservation.endDate = net.villim.villim.VillimUtils.dateFromDateString(reservationInfo.optString(KEY_CHECKOUT));
 
                 house.reservations[i] = reservation;
             }

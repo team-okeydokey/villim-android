@@ -37,13 +37,13 @@ import static net.villim.villim.CalendarActivity.END_DATE;
 import static net.villim.villim.CalendarActivity.START_DATE;
 import static net.villim.villim.MainActivity.DATE_SELECTED;
 import static net.villim.villim.ReservationSuccessActivity.RESERVATION;
-import static net.villim.villim.VillimKeys.KEY_END_DATE;
+import static net.villim.villim.VillimKeys.KEY_CHECKOUT;
 import static net.villim.villim.VillimKeys.KEY_MESSAGE;
 import static net.villim.villim.VillimKeys.KEY_RESERVATION_INFO;
 import static net.villim.villim.VillimKeys.KEY_VISIT_INFO;
 import static net.villim.villim.VillimKeys.KEY_SUCCESS;
 import static net.villim.villim.VillimKeys.KEY_HOUSE_ID;
-import static net.villim.villim.VillimKeys.KEY_START_DATE;
+import static net.villim.villim.VillimKeys.KEY_CHECKIN;
 import static net.villim.villim.VillimKeys.RESERVE_URL;
 import static net.villim.villim.VillimKeys.SERVER_HOST;
 import static net.villim.villim.VillimKeys.SERVER_SCHEME;
@@ -273,8 +273,8 @@ public class ReservationActivity extends VillimActivity {
 
         RequestBody requestBody = new FormBody.Builder()
                 .add(KEY_HOUSE_ID, Integer.toString(house.houseId))
-                .add(KEY_START_DATE, net.villim.villim.VillimUtils.dateStringFromDate(this, startDate))
-                .add(KEY_END_DATE, net.villim.villim.VillimUtils.dateStringFromDate(this, endDate))
+                .add(KEY_CHECKIN, net.villim.villim.VillimUtils.dateStringFromDate(this, startDate))
+                .add(KEY_CHECKOUT, net.villim.villim.VillimUtils.dateStringFromDate(this, endDate))
                 .build();
 
         URL url = new HttpUrl.Builder()
@@ -340,8 +340,8 @@ public class ReservationActivity extends VillimActivity {
 
         RequestBody requestBody = new FormBody.Builder()
                 .add(KEY_HOUSE_ID, Integer.toString(house.houseId))
-                .add(KEY_START_DATE, net.villim.villim.VillimUtils.dateStringFromDate(this, startDate))
-                .add(KEY_END_DATE, net.villim.villim.VillimUtils.dateStringFromDate(this, endDate))
+                .add(KEY_CHECKIN, net.villim.villim.VillimUtils.dateStringFromDate(this, startDate))
+                .add(KEY_CHECKOUT, net.villim.villim.VillimUtils.dateStringFromDate(this, endDate))
                 .build();
 
         URL url = new HttpUrl.Builder()

@@ -31,6 +31,7 @@ public class VillimKeys {
     public static final String CANCEL_VISIT_URL = "a/cancel-visit";
     public static final String SEND_VERIFICATION_PHONE_URL = "send-verification-phone";
     public static final String VERIFY_PHONE_URL = "verify-phone";
+    public static final String SEARCH_URL = "s";
     public static final String TERMS_OF_SERVICE_URL = "https://www.klondikebar.com/";
     public static final String UPDATE_PROFILE_URL = "a/update-profile";
     public static final String FAQ_URL = "https://boo7387.wixsite.com/villim01/faq";
@@ -150,8 +151,8 @@ public class VillimKeys {
     public static final String KEY_RESERVATION_SUCCESS = "reservation_success";
     public static final String KEY_RESERVATION_INFO = "reservation_info";
     public static final String KEY_GUEST_ID = "guest_id";
-    public static final String KEY_START_DATE = "start_date";
-    public static final String KEY_END_DATE = "end_date";
+    public static final String KEY_CHECKIN = "checkin";
+    public static final String KEY_CHECKOUT = "checkout";
     public static final String KEY_RESERVATION_TIME = "reservation_time";
     public static final String KEY_RESERVATION_STATUS = "reservation_status";
     public static final String KEY_RESERVATION_CODE = "reservation_code";
@@ -192,6 +193,9 @@ public class VillimKeys {
 
     /* Verify phone activity */
     public static final String KEY_VERIFICATION_CODE =  "verification_code";
+
+    /* Search filter */
+    public static final String KEY_LOCATION =  "location";
 }
 
 
