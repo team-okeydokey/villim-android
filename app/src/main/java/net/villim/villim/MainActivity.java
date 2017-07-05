@@ -66,9 +66,9 @@ public class MainActivity extends VillimActivity {
 
     private boolean appBarOpen;
 
-    private String filterLocation;
-    private Date startDate;
-    private Date endDate;
+    private String location;
+    private DateTime startDate;
+    private DateTime endDate;
 
     private int toolBarCollpasedColor;
     private int toolBarOpenColor;
@@ -88,7 +88,11 @@ public class MainActivity extends VillimActivity {
 
         appBarOpen = false;
         locationSelected = false;
-        locationSelected = false;
+        dateSelected = false;
+
+        location = null;
+        startDate = null;
+        endDate = null;
 
         /* Toolbar */
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -228,11 +232,11 @@ public class MainActivity extends VillimActivity {
                         if (locationSelected && event.getRawX() >= (searchFilterDate.getRight() - searchFilterDate.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
                             searchFilterLocation.setText(getString(R.string.all_locations));
                             locationSelected = false;
-                            filterLocation = null;
+                            location = null;
                             searchFilterLocation.getCompoundDrawables()[DRAWABLE_RIGHT].mutate().setAlpha(HIDE);
                             /* Reload houses */
                             discoverFragment.onSearchFilterChanged (
-                                    filterLocation,
+                                    location,
                                     new DateTime(startDate),
                                     new DateTime(endDate));
                         } else {
@@ -260,7 +264,7 @@ public class MainActivity extends VillimActivity {
                             dateSelected = false;
                             searchFilterDate.getCompoundDrawables()[DRAWABLE_RIGHT].mutate().setAlpha(HIDE);
                             discoverFragment.onSearchFilterChanged (
-                                    filterLocation,
+                                    location,
                                     new DateTime(startDate),
                                     new DateTime(endDate));
                         } else {
@@ -391,38 +395,38 @@ public class MainActivity extends VillimActivity {
         /* Requests to mainactivity */
         if (requestCode == LOCATION_FILTER) {
             if (resultCode == Activity.RESULT_OK) {
-                VillimLocation location = data.getParcelableExtra(LocationFilterActivity.LOCATION);
-                filterLocation = location.addrSummary;
-                searchFilterLocation.setText(filterLocation);
+                VillimLocation villimLocation = data.getParcelableExtra(LocationFilterActivity.LOCATION);
+                location = villimLocation.addrSummary;
+                searchFilterLocation.setText(location);
                 /* Show clear button */
                 locationSelected = true;
                 searchFilterLocation.getCompoundDrawables()[DRAWABLE_RIGHT].mutate().setAlpha(SHOW);
                 /* Update discoverfragment */
                 discoverFragment.onSearchFilterChanged(
-                        filterLocation,
-                        new DateTime(startDate),
-                        new DateTime(endDate));
+                        location,
+                        startDate,
+                        endDate);
             }
             if (resultCode == Activity.RESULT_CANCELED) {
                 //Write your code if there's no result
             }
         } else if (requestCode == DATE_FILTER) {
             if (resultCode == Activity.RESULT_OK) {
-                startDate = (Date) data.getSerializableExtra(CalendarActivity.START_DATE);
-                endDate = (Date) data.getSerializableExtra(CalendarActivity.END_DATE);
+                startDate = (DateTime) data.getSerializableExtra(CalendarActivity.START_DATE);
+                endDate = (DateTime) data.getSerializableExtra(CalendarActivity.END_DATE);
 
                 String dateFilterText = String.format(getString(R.string.search_filter_date_format),
-                        startDate.getMonth() + 1, startDate.getDate(),
-                        endDate.getMonth() + 1, endDate.getDate());
+                        startDate.getMonthOfYear(), startDate.getDayOfMonth(),
+                        endDate.getMonthOfYear(), endDate.getDayOfMonth());
                 searchFilterDate.setText(dateFilterText);
                 /* Show clear button */
                 dateSelected = true;
                 searchFilterDate.getCompoundDrawables()[DRAWABLE_RIGHT].mutate().setAlpha(SHOW);
                 /* Update discoverfragment */
                 discoverFragment.onSearchFilterChanged(
-                        filterLocation,
-                        new DateTime(startDate),
-                        new DateTime(endDate));
+                        location,
+                        startDate,
+                        endDate);
             }
             if (resultCode == Activity.RESULT_CANCELED) {
                 //Write your code if there's no result
@@ -489,11 +493,11 @@ public class MainActivity extends VillimActivity {
         return dateSelected;
     }
 
-    public Date getStartDate() {
+    public DateTime getStartDate() {
         return startDate;
     }
 
-    public Date getEndDate() {
+    public DateTime getEndDate() {
         return endDate;
     }
 

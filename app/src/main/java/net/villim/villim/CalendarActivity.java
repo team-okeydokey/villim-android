@@ -15,6 +15,8 @@ import android.widget.Toast;
 
 import com.squareup.timessquare.CalendarPickerView;
 
+import org.joda.time.DateTime;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -33,8 +35,8 @@ public class CalendarActivity extends VillimActivity {
     private final static int STATE_SELECT_END = 2;
 
     private TimeZone timeZone;
-    private Date startDate;
-    private Date endDate;
+    private DateTime startDate;
+    private DateTime endDate;
     int selectState;
 
     Date[] invalidDates;
@@ -53,8 +55,8 @@ public class CalendarActivity extends VillimActivity {
         setContentView(R.layout.activity_calendar);
 
         timeZone = TimeZone.getDefault();
-        startDate = (Date) getIntent().getSerializableExtra(START_DATE);
-        endDate = (Date) getIntent().getSerializableExtra(END_DATE);
+        startDate = (DateTime) getIntent().getSerializableExtra(START_DATE);
+        endDate = (DateTime) getIntent().getSerializableExtra(END_DATE);
         boolean hasPresetDate = (startDate != null && endDate != null);
 
         long[] invalidDateArray = getIntent().getLongArrayExtra(INVALID_DATES);
@@ -92,19 +94,19 @@ public class CalendarActivity extends VillimActivity {
             public void onClick(View v) {
 
                 Calendar nextMonth = Calendar.getInstance();
-                nextMonth.set(startDate.getYear(), startDate.getMonth(), startDate.getDate());
+                nextMonth.set(startDate.getYear(), startDate.getMonthOfYear(), startDate.getDayOfMonth());
                 nextMonth.add(Calendar.MONTH, 1);
                 nextMonth.add(Calendar.DATE, -1);
-                Date nextMonthDate = new Date();
-                nextMonthDate.setYear(nextMonth.get(Calendar.YEAR));
-                nextMonthDate.setMonth(nextMonth.get(Calendar.MONTH));
-                nextMonthDate.setDate(nextMonth.get(Calendar.DATE));
+                DateTime nextMonthDate = new DateTime()
+                        .withYear(nextMonth.get(Calendar.YEAR))
+                        .withMonthOfYear(nextMonth.get(Calendar.MONTH))
+                        .withDayOfMonth(nextMonth.get(Calendar.DATE));
 
                 if (startDate.equals(endDate)){
                     Toast toast =  Toast.makeText(getApplicationContext(), R.string.select_different_dates, Toast.LENGTH_LONG);
                     toast.setGravity(Gravity.CENTER, 0, 0);
                     toast.show();
-                } else if (endDate.before(nextMonthDate)) {
+                } else if (endDate.isBefore(nextMonthDate)) {
                     Toast toast = Toast.makeText(getApplicationContext(), R.string.book_at_least_a_month, Toast.LENGTH_LONG);
                     toast.setGravity(Gravity.CENTER, 0, 0);
                     toast.show();
@@ -142,17 +144,16 @@ public class CalendarActivity extends VillimActivity {
             public void onDateSelected(Date date) {
                 switch (selectState) {
                     case STATE_SELECT_START:
-                        startDate = date;
+                        startDate = new DateTime(date);
                         changeState(STATE_SELECT_END);
                         endDate = null;
                         deactivateBototmButton();
                         break;
                     case STATE_SELECT_END:
-                        if (date.before(startDate)) {
-                            startDate = date;
-
+                        if (date.before(startDate.toDate())) {
+                            startDate = new DateTime(date);
                         } else {
-                            endDate = date;
+                            endDate = new DateTime(date);
                             changeState(STATE_SELECT_START);
                         }
                         break;
@@ -188,8 +189,8 @@ public class CalendarActivity extends VillimActivity {
 
         if (hasPresetDate) {
             calendar.clearHighlightedDates();
-            calendar.selectDate(startDate);
-            calendar.selectDate(endDate);
+            calendar.selectDate(startDate.toDate());
+            calendar.selectDate(endDate.toDate());
             setStartAndEndDateText(startDate, endDate);
             activateBottomButton();
         } else {
@@ -197,7 +198,7 @@ public class CalendarActivity extends VillimActivity {
         }
     }
 
-    private void updateSelectedDates(List<Date> dates) {
+    private void updateSelectedDates(List<DateTime> dates) {
         if (dates.size() > 0) {
             startDate = dates.get(0);
             endDate = dates.get(dates.size() - 1);
@@ -208,11 +209,11 @@ public class CalendarActivity extends VillimActivity {
         setStartAndEndDateText(startDate, endDate);
     }
 
-    private void setStartAndEndDateText(Date startDate, Date endDate) {
+    private void setStartAndEndDateText(DateTime startDate, DateTime endDate) {
         /* Set start date text */
         if (startDate != null) {
-            String startDateText = String.format(getString(R.string.date_filter_date_text_format), startDate.getMonth() + 1, startDate.getDate())
-                    + "\n" + net.villim.villim.VillimUtils.getWeekday(this, startDate.getDay());
+            String startDateText = String.format(getString(R.string.date_filter_date_text_format), startDate.getMonthOfYear(), startDate.getDayOfMonth())
+                    + "\n" + net.villim.villim.VillimUtils.getWeekday(this, startDate.getDayOfMonth());
             startDateTextView.setText(startDateText);
         } else {
             startDateTextView.setText(getString(R.string.date_filter_start_date));
@@ -220,8 +221,8 @@ public class CalendarActivity extends VillimActivity {
 
         /* Set end date text. */
         if (endDate != null) {
-            String endDateText = String.format(getString(R.string.date_filter_date_text_format), endDate.getMonth() + 1, endDate.getDate())
-                    + "\n" + net.villim.villim.VillimUtils.getWeekday(this, endDate.getDay());
+            String endDateText = String.format(getString(R.string.date_filter_date_text_format), endDate.getMonthOfYear(), endDate.getDayOfMonth())
+                    + "\n" + net.villim.villim.VillimUtils.getWeekday(this, endDate.getDayOfMonth());
             endDateTextView.setText(endDateText);
         } else {
             endDateTextView.setText(getString(R.string.date_filter_end_date));
