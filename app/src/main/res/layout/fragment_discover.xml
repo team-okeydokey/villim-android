@@ -19,7 +19,7 @@
         android:paddingRight="@dimen/discover_recycler_padding"
         android:layout_centerInParent="true"/>
 
-    <com.wang.avi.AVLoadingIndicatorView
+    <com.wang.avi.BallClipRotateMultipleIndicator
         android:id="@+id/loading_indicator"
         style="@style/AVLoadingIndicatorView.Large"
         android:layout_width="wrap_content"
