@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f0f1f2"
+    android:orientation="vertical"
+    tools:context=".ProfileViewActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/toolbar_height"
+        android:background="@android:color/white"
+        android:elevation="@dimen/toolbar_elevation"
+        app:contentInsetEnd="0dp"
+        app:contentInsetStart="0dp">
+
+        <TextView
+            android:id="@+id/toolbar_title"
+            style="@style/ToolbarTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/profile"
+            android:textColor="@color/toolbar_title_color" />
+
+        <Button
+            android:id="@+id/edit_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:background="@android:color/transparent"
+            android:text="@string/edit"
+            android:textColor="@color/blue_text_button" />
+
+    </android.support.v7.widget.Toolbar>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbar"
+        android:background="#f0f1f2">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="40dp">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <!-- Profile Picture -->
+                <ImageView
+                    android:id="@+id/profile_picture"
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="10dp"
+                    android:background="#C8C8C8" />
+
+                <!-- 이름 -->
+                <LinearLayout
+                    android:id="@+id/firstname_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left|center_vertical"
+                    android:orientation="vertical"
+                    android:paddingBottom="17dp"
+                    android:paddingLeft="25dp"
+                    android:paddingRight="25dp"
+                    android:paddingTop="17dp">
+
+                    <TextView
+                        android:id="@+id/firstname_title"
+                        android:layout_width="@dimen/profile_edit_item_title_width"
+                        android:layout_height="wrap_content"
+                        android:gravity="left|center_vertical"
+                        android:text="@string/firstname"
+                        android:textColor="#585757"
+                        android:textSize="17sp" />
+
+                    <TextView
+                        android:id="@+id/firstname_content"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="left|center_vertical"
+                        android:lineSpacingExtra="5sp"
+                        android:maxLines="1"
+                        android:textColor="#05060b"
+                        android:textSize="@dimen/profile_value_text_size" />
+
+                </LinearLayout>
+                <!-- End 이름 -->
+
+                <include layout="@layout/category_divider_dark" />
+
+                <!-- 성 -->
+                <LinearLayout
+                    android:id="@+id/lastname_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left|center_vertical"
+                    android:orientation="vertical"
+                    android:paddingBottom="17dp"
+                    android:paddingLeft="25dp"
+                    android:paddingRight="25dp"
+                    android:paddingTop="17dp">
+
+                    <TextView
+                        android:id="@+id/lastname_title"
+                        android:layout_width="@dimen/profile_edit_item_title_width"
+                        android:layout_height="wrap_content"
+                        android:gravity="left|center_vertical"
+                        android:text="@string/lastname"
+                        android:textColor="#585757"
+                        android:textSize="17sp" />
+
+                    <TextView
+                        android:id="@+id/lastname_content"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:lineSpacingExtra="5sp"
+                        android:maxLines="1"
+                        android:textColor="#05060b"
+                        android:textSize="@dimen/profile_value_text_size" />
+
+                </LinearLayout>
+                <!-- End 성 -->
+
+                <!--<include layout="@laycategory_divider_darkider" />-->
+
+                <!--&lt;!&ndash; 성별 &ndash;&gt;-->
+                <!--<RelativeLayout-->
+                <!--android:id="@+id/sex_container"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:paddingBottom="17dp"-->
+                <!--android:paddingLeft="25dp"-->
+                <!--android:paddingRight="25dp"-->
+                <!--android:paddingTop="17dp">-->
+
+                <!--<TextView-->
+                <!--android:id="@+id/sex_title"-->
+                <!--android:layout_width="@dimen/profile_edit_item_title_width"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignParentLeft="true"-->
+                <!--android:layout_centerVertical="true"-->
+                <!--android:gravity="left|center_vertical"-->
+                <!--android:text="@string/sex"-->
+                <!--android:textColor="#585757"-->
+                <!--android:textSize="15sp" />-->
+
+                <!--<TextView-->
+                <!--android:id="@+id/sex_content"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_centerVertical="true"-->
+                <!--android:layout_marginLeft="20dp"-->
+                <!--android:layout_toRightOf="@+id/sex_title"-->
+                <!--android:gravity="left|center_vertical"-->
+                <!--android:lineSpacingExtra="5sp"-->
+                <!--android:textColor="#05060b"-->
+                <!--android:textSize="13sp" />-->
+
+
+                <!--</RelativeLayout>-->
+                <!--&lt;!&ndash; End 성별 &ndash;&gt;-->
+
+                <include layout="@layout/category_divider_dark" />
+
+                <!-- 이메일 -->
+                <LinearLayout
+                    android:id="@+id/email_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left|center_vertical"
+                    android:orientation="vertical"
+                    android:paddingBottom="17dp"
+                    android:paddingLeft="25dp"
+                    android:paddingRight="25dp"
+                    android:paddingTop="17dp">
+
+                    <TextView
+                        android:id="@+id/email_title"
+                        android:layout_width="@dimen/profile_edit_item_title_width"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:gravity="left|center_vertical"
+                        android:text="@string/email"
+                        android:textColor="#585757"
+                        android:textSize="17sp" />
+
+                    <TextView
+                        android:id="@+id/email_content"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="left|center_vertical"
+                        android:lineSpacingExtra="5sp"
+                        android:maxLines="1"
+                        android:textColor="#05060b"
+                        android:textSize="@dimen/profile_value_text_size" />
+
+                </LinearLayout>
+                <!-- End 이메일 -->
+
+                <include layout="@layout/category_divider_dark" />
+
+                <!-- 전화번호 -->
+                <LinearLayout
+                    android:id="@+id/phone_number_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left|center_vertical"
+                    android:orientation="vertical"
+                    android:paddingBottom="17dp"
+                    android:paddingLeft="25dp"
+                    android:paddingRight="25dp"
+                    android:paddingTop="17dp">
+
+                    <TextView
+                        android:id="@+id/phone_number_title"
+                        android:layout_width="@dimen/profile_edit_item_title_width"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:gravity="left|center_vertical"
+                        android:text="@string/phone_number"
+                        android:textColor="#585757"
+                        android:textSize="17sp" />
+
+                    <TextView
+                        android:id="@+id/phone_number_content"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_centerVertical="true"
+                        android:layout_toLeftOf="@+id/add_phone_number_button"
+                        android:layout_toRightOf="@+id/phone_number_title"
+                        android:gravity="left|center_vertical"
+                        android:lineSpacingExtra="5sp"
+                        android:maxLines="1"
+                        android:textColor="#05060b"
+                        android:textSize="@dimen/profile_value_text_size" />
+
+                    <!--<Button-->
+                    <!--android:id="@+id/add_phone_number_button"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_alignParentRight="true"-->
+                    <!--android:background="@android:color/transparent"-->
+                    <!--android:gravity="right"-->
+                    <!--android:minHeight="0dp"-->
+                    <!--android:padding="0dp"-->
+                    <!--android:text="@string/change"-->
+                    <!--android:textColor="@color/red_text_button"-->
+                    <!--android:textSize="17sp" />-->
+
+                </LinearLayout>
+                <!-- End 전화번호 -->
+
+                <include layout="@layout/category_divider_dark" />
+
+                <!-- 거주 도시 -->
+                <LinearLayout
+                    android:id="@+id/city_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left|center_vertical"
+                    android:orientation="vertical"
+                    android:paddingBottom="17dp"
+                    android:paddingLeft="25dp"
+                    android:paddingRight="25dp"
+                    android:paddingTop="17dp">
+
+                    <TextView
+                        android:id="@+id/city_title"
+                        android:layout_width="@dimen/profile_edit_item_title_width"
+                        android:layout_height="wrap_content"
+                        android:gravity="left|center_vertical"
+                        android:text="@string/city_of_residence"
+                        android:textColor="#585757"
+                        android:textSize="17sp" />
+
+                    <TextView
+                        android:id="@+id/city_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="left|center_vertical"
+                        android:lineSpacingExtra="5sp"
+                        android:maxLines="1"
+                        android:textColor="#05060b"
+                        android:textSize="@dimen/profile_value_text_size" />
+
+                </LinearLayout><!-- End 거주 도시 -->
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+
+    <!--<Button-->
+    <!--android:id="@+id/bottom_button"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="@dimen/next_button_height"-->
+    <!--android:layout_alignParentBottom="true"-->
+    <!--android:background="@drawable/next_button"-->
+    <!--android:text="@string/edit"-->
+    <!--android:textColor="@drawable/next_button_text"-->
+    <!--android:textSize="@dimen/next_button_text_size" />-->
+
+    <include layout="@layout/loading_indicator" />
+
+</RelativeLayout>

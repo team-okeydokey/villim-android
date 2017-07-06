@@ -3,24 +3,21 @@ package net.villim.villim;
 import android.app.Activity;
 import android.content.Intent;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.franmontiel.persistentcookiejar.ClearableCookieJar;
 import com.franmontiel.persistentcookiejar.PersistentCookieJar;
 import com.franmontiel.persistentcookiejar.cache.SetCookieCache;
 import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
 import com.wang.avi.AVLoadingIndicatorView;
 
+import org.joda.time.DateTime;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -41,21 +38,21 @@ import static net.villim.villim.CalendarActivity.END_DATE;
 import static net.villim.villim.CalendarActivity.START_DATE;
 import static net.villim.villim.MainActivity.DATE_SELECTED;
 import static net.villim.villim.ReservationSuccessActivity.RESERVATION;
-import static net.villim.villim.VillimKeys.KEY_EMAIL;
-import static net.villim.villim.VillimKeys.KEY_END_DATE;
-import static net.villim.villim.VillimKeys.KEY_LOGIN_SUCCESS;
+import static net.villim.villim.VillimKeys.KEY_CHECKOUT;
 import static net.villim.villim.VillimKeys.KEY_MESSAGE;
-import static net.villim.villim.VillimKeys.KEY_PASSWORD;
 import static net.villim.villim.VillimKeys.KEY_RESERVATION_INFO;
-import static net.villim.villim.VillimKeys.KEY_RESERVATION_SUCCESS;
-import static net.villim.villim.VillimKeys.KEY_ROOM_ID;
-import static net.villim.villim.VillimKeys.KEY_START_DATE;
-import static net.villim.villim.VillimKeys.KEY_USER_INFO;
+import static net.villim.villim.VillimKeys.KEY_VISIT_INFO;
+import static net.villim.villim.VillimKeys.KEY_SUCCESS;
+import static net.villim.villim.VillimKeys.KEY_HOUSE_ID;
+import static net.villim.villim.VillimKeys.KEY_CHECKIN;
 import static net.villim.villim.VillimKeys.RESERVE_URL;
 import static net.villim.villim.VillimKeys.SERVER_HOST;
 import static net.villim.villim.VillimKeys.SERVER_SCHEME;
+import static net.villim.villim.VillimKeys.VISIT_REQUEST_URL;
 
 public class ReservationActivity extends VillimActivity {
+
+    private final static int LOGIN = 101;
 
     private static final int CALENDAR = 0;
 
@@ -65,8 +62,8 @@ public class ReservationActivity extends VillimActivity {
     private TextView overViewHouseName;
     private TextView overViewHouseInfo;
 
-    private ImageView hostProfilePic;
-    private TextView hostName;
+//    private ImageView hostProfilePic;
+//    private TextView hostName;
 
     private RelativeLayout startEndDates;
     private TextView startDateText;
@@ -74,6 +71,9 @@ public class ReservationActivity extends VillimActivity {
 
     private TextView numberOfNightsText;
     private TextView priceText;
+    private TextView basePriceText;
+    private TextView utilityFeeText;
+    private TextView cleaningFeeText;
     private TextView cancellationPolicyText;
 
     private Button reserveButton;
@@ -101,9 +101,8 @@ public class ReservationActivity extends VillimActivity {
         if (dateSelected) {
             startDate = (Date) getIntent().getSerializableExtra(START_DATE);
             endDate = (Date) getIntent().getSerializableExtra(END_DATE);
-            stayDuration = VillimUtil.daysBetween(startDate, endDate);
+            stayDuration = net.villim.villim.VillimUtils.daysBetween(startDate, endDate);
         }
-
 
         /* Toolbar */
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -118,9 +117,9 @@ public class ReservationActivity extends VillimActivity {
         overViewHouseName = (TextView) findViewById(R.id.overview_house_name);
         overViewHouseInfo = (TextView) findViewById(R.id.overview_house_info);
 
-        /* Host info */
-        hostProfilePic = (ImageView) findViewById(R.id.host_profile_pic);
-        hostName = (TextView) findViewById(R.id.host_name);
+//        /* Host info */
+//        hostProfilePic = (ImageView) findViewById(R.id.host_profile_pic);
+//        hostName = (TextView) findViewById(R.id.host_name);
 
         /* Duration */
         startEndDates = (RelativeLayout) findViewById(R.id.start_end_dates);
@@ -130,6 +129,9 @@ public class ReservationActivity extends VillimActivity {
         /* Everything else */
         numberOfNightsText = (TextView) findViewById(R.id.number_of_nights);
         priceText = (TextView) findViewById(R.id.price);
+        basePriceText = (TextView) findViewById(R.id.base_price);
+        utilityFeeText = (TextView) findViewById(R.id.utility_fee);
+        cleaningFeeText = (TextView) findViewById(R.id.cleaning_fee);
         cancellationPolicyText = (TextView) findViewById(R.id.cancellation_policy);
 
         /* Network operations */
@@ -155,9 +157,9 @@ public class ReservationActivity extends VillimActivity {
         String overViewHouseInfoString = String.format(getString(R.string.overview_info_format), house.numGuest, house.numBedroom, house.numBed, house.numBathroom);
         overViewHouseInfo.setText(overViewHouseInfoString);
 
-        /* Host info */
-        hostName.setText(house.hostName);
-        Glide.with(this).load(house.hostProfilePicUrl).into(hostProfilePic);
+//        /* Host info */
+//        hostName.setText(house.hostName);
+//        Glide.with(this).load(house.hostProfilePicUrl).into(hostProfilePic);
 
         /* Duration */
         startEndDates.setOnClickListener(new View.OnClickListener() {
@@ -166,6 +168,8 @@ public class ReservationActivity extends VillimActivity {
                 Intent dateFilterIntent = new Intent(ReservationActivity.this, CalendarActivity.class);
                 dateFilterIntent.putExtra(CalendarActivity.START_DATE, startDate);
                 dateFilterIntent.putExtra(CalendarActivity.END_DATE, endDate);
+                dateFilterIntent.putExtra(CalendarActivity.INVALID_DATES,
+                        VillimUtils.dateArrayToLongArray(house.getInvalidDates()));
                 ReservationActivity.this.startActivityForResult(dateFilterIntent, CALENDAR);
             }
         });
@@ -178,8 +182,13 @@ public class ReservationActivity extends VillimActivity {
             @Override
             public void onClick(View v) {
                 if (session.getLoggedIn()) {
-                    if (dateSelected){
-                        sendReservationRequest();
+                    if (dateSelected) {
+                        if (session.getLoggedIn()) {
+                            // sendReservationRequest();
+                            sendVisitRequest();
+                        } else {
+                            launchLoginActivity();
+                        }
                     } else {
                         Toast.makeText(getApplicationContext(), R.string.must_select_date, Toast.LENGTH_LONG).show();
                     }
@@ -194,23 +203,36 @@ public class ReservationActivity extends VillimActivity {
     private void updateStayInfo(Date start, Date end) {
         dateSelected = true;
         reserveButton.setEnabled(true);
-        stayDuration = VillimUtil.daysBetween(startDate, endDate);
+        stayDuration = net.villim.villim.VillimUtils.daysBetween(startDate, endDate);
 
          /* Set date strings. */
         String startDateString = String.format(getString(R.string.date_filter_date_text_format), startDate.getMonth() + 1, startDate.getDate())
-                + "\n" + VillimUtil.getWeekday(this, startDate.getDay());
+                + "\n" + net.villim.villim.VillimUtils.getWeekday(this, startDate.getDay());
         startDateText.setText(startDateString);
 
         String endDateString = String.format(getString(R.string.date_filter_date_text_format), endDate.getMonth() + 1, endDate.getDate())
-                + "\n" + VillimUtil.getWeekday(this, endDate.getDay());
+                + "\n" + net.villim.villim.VillimUtils.getWeekday(this, endDate.getDay());
         endDateText.setText(endDateString);
 
         /* Set number of nights and price texts */
         String numNightsString = String.format(getString(R.string.num_nights_format), stayDuration);
         numberOfNightsText.setText(numNightsString);
 
-        String priceString = String.format(getString(R.string.won_symbol_format), stayDuration * house.ratePerNight);
-        priceText.setText(priceString);
+
+        VillimPrice housePrice = new VillimPrice(start, end, house.ratePerMonth, house.cleaningFee);
+        int prefCurrency = session.getCurrencyPref();
+
+        /* Total price */
+        priceText.setText(net.villim.villim.VillimUtils.formatIntoCurrency(getApplicationContext(), prefCurrency, housePrice.totalPrice));
+
+        /* Base price */
+        basePriceText.setText(net.villim.villim.VillimUtils.formatIntoCurrency(getApplicationContext(), prefCurrency, housePrice.basePrice));
+
+        /* Utility fee */
+        utilityFeeText.setText(net.villim.villim.VillimUtils.formatIntoCurrency(getApplicationContext(), prefCurrency, housePrice.utilityFee));
+
+        /* Cleaning fee */
+        cleaningFeeText.setText(net.villim.villim.VillimUtils.formatIntoCurrency(getApplicationContext(), prefCurrency, house.cleaningFee));
 
     }
 
@@ -224,6 +246,13 @@ public class ReservationActivity extends VillimActivity {
                 endDate = (Date) data.getSerializableExtra(CalendarActivity.END_DATE);
                 updateStayInfo(startDate, endDate);
 
+            }
+            if (resultCode == Activity.RESULT_CANCELED) {
+                //Write your code if there's no result
+            }
+        } else if (requestCode == LOGIN) {
+            if (resultCode == Activity.RESULT_OK) {
+                sendReservationRequest();
             }
             if (resultCode == Activity.RESULT_CANCELED) {
                 //Write your code if there's no result
@@ -243,9 +272,9 @@ public class ReservationActivity extends VillimActivity {
                 .build();
 
         RequestBody requestBody = new FormBody.Builder()
-                .add(KEY_ROOM_ID, Integer.toString(house.houseId))
-                .add(KEY_START_DATE, VillimUtil.dateStringFromDate(this, startDate))
-                .add(KEY_END_DATE, VillimUtil.dateStringFromDate(this, endDate))
+                .add(KEY_HOUSE_ID, Integer.toString(house.houseId))
+                .add(KEY_CHECKIN, net.villim.villim.VillimUtils.dateStringFromDate(this, startDate))
+                .add(KEY_CHECKOUT, net.villim.villim.VillimUtils.dateStringFromDate(this, endDate))
                 .build();
 
         URL url = new HttpUrl.Builder()
@@ -278,8 +307,11 @@ public class ReservationActivity extends VillimActivity {
                 try {
                     /* 주의: response.body().string()은 한 번 부를 수 있음 */
                     JSONObject jsonObject = new JSONObject(response.body().string());
-                    if (jsonObject.getBoolean(KEY_RESERVATION_SUCCESS)) {
-                        VillimReservation reservation = VillimReservation.createReservationFromJSONObject((JSONObject) jsonObject.get(KEY_RESERVATION_INFO));
+                    if (jsonObject.getBoolean(KEY_SUCCESS)) {
+                        VillimReservation reservation =
+                                VillimReservation.createReservationFromJSONObject(
+                                        getApplicationContext(),
+                                        (JSONObject) jsonObject.get(KEY_RESERVATION_INFO));
                         Intent intent = new Intent(ReservationActivity.this, ReservationSuccessActivity.class);
                         intent.putExtra(RESERVATION, reservation);
                         stopLoadingAnimation();
@@ -296,6 +328,87 @@ public class ReservationActivity extends VillimActivity {
                 }
             }
         });
+    }
+
+    private void sendVisitRequest() {
+        startLoadingAnimation();
+        hideErrorMessage();
+
+        ClearableCookieJar cookieJar =
+                new PersistentCookieJar(new SetCookieCache(), new SharedPrefsCookiePersistor(getApplicationContext()));
+
+        OkHttpClient client = new OkHttpClient.Builder()
+                .cookieJar(cookieJar)
+                .build();
+
+        RequestBody requestBody = new FormBody.Builder()
+                .add(KEY_HOUSE_ID, Integer.toString(house.houseId))
+                .add(KEY_CHECKIN, net.villim.villim.VillimUtils.dateStringFromDate(this, startDate))
+                .add(KEY_CHECKOUT, net.villim.villim.VillimUtils.dateStringFromDate(this, endDate))
+                .build();
+
+        URL url = new HttpUrl.Builder()
+                .scheme(SERVER_SCHEME)
+                .host(SERVER_HOST)
+                .addPathSegments(VISIT_REQUEST_URL)
+                .build().url();
+
+        Request request = new Request.Builder()
+                .url(url)
+                .post(requestBody)
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                // Something went wrong.
+                showErrorMessage(getString(R.string.cant_connect_to_server));
+                stopLoadingAnimation();
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (!response.isSuccessful()) {
+                    showErrorMessage(getString(R.string.server_error));
+                    stopLoadingAnimation();
+                    throw new IOException("Response not successful   " + response);
+                }
+                /* Request success. */
+                try {
+                    /* 주의: response.body().string()은 한 번 부를 수 있음 */
+                    JSONObject jsonObject = new JSONObject(response.body().string());
+                    if (jsonObject.getBoolean(KEY_SUCCESS)) {
+//                        VillimReservation reservation = VillimReservation.createReservationFromJSONObject((JSONObject) jsonObject.get(KEY_RESERVATION_INFO));
+//                        Intent intent = new Intent(ReservationActivity.this, ReservationSuccessActivity.class);
+//                        intent.putExtra(RESERVATION, reservation);
+                        VillimVisit visit = VillimVisit.createVisitFromJSONObject(jsonObject.getJSONObject(KEY_VISIT_INFO));
+                        Intent intent = new Intent(ReservationActivity.this, VisitRequestSuccessActivity.class);
+                        intent.putExtra(KEY_VISIT_INFO, visit);
+                        stopLoadingAnimation();
+                        hideErrorMessage();
+                        startActivity(intent);
+                        finish();
+                    } else {
+                        showErrorMessage(jsonObject.getString(KEY_MESSAGE));
+                        stopLoadingAnimation();
+                    }
+                } catch (JSONException e) {
+                    showErrorMessage(getString(R.string.server_error));
+                    stopLoadingAnimation();
+                }
+            }
+        });
+    }
+
+    private void launchLoginActivity() {
+        Intent intent = new Intent(ReservationActivity.this, LoginActivity.class);
+        intent.putExtra(getString(R.string.key_house), house);
+        intent.putExtra(DATE_SELECTED, dateSelected);
+        if (dateSelected) {
+            intent.putExtra(START_DATE, startDate);
+            intent.putExtra(END_DATE, endDate);
+        }
+        startActivityForResult(intent, LOGIN);
     }
 
     public void startLoadingAnimation() {

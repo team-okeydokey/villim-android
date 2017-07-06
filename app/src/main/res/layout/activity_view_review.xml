@@ -62,17 +62,31 @@
             android:textColor="#05060b"
             android:textSize="15sp" />
 
-        <android.support.v7.widget.AppCompatRatingBar
+        <!--<android.support.v7.widget.AppCompatRatingBar-->
+        <!--android:id="@+id/overall_ratingbar"-->
+        <!--style="@style/customRatingBar"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:layout_below="@+id/review_title"-->
+        <!--android:isIndicator="true"-->
+        <!--android:numStars="5"-->
+        <!--android:paddingBottom="16dp"-->
+        <!--android:progressTint="@color/rating_color"-->
+        <!--android:stepSize="0.1" />-->
+
+        <me.zhanghai.android.materialratingbar.MaterialRatingBar
             android:id="@+id/overall_ratingbar"
-            style="@style/customRatingBar"
+            style="@style/Widget.MaterialRatingBar.RatingBar.Indicator.Small"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_below="@+id/review_title"
-            android:isIndicator="true"
+            android:layout_gravity="center_vertical"
             android:numStars="5"
             android:paddingBottom="16dp"
             android:progressTint="@color/rating_color"
+            android:secondaryProgressTint="@color/rating_color"
             android:stepSize="0.1" />
 
         <!-- 정확성 -->
@@ -87,18 +101,32 @@
             android:textColor="#585757"
             android:textSize="13sp" />
 
-        <android.support.v7.widget.AppCompatRatingBar
+        <!--<android.support.v7.widget.AppCompatRatingBar-->
+        <!--android:id="@+id/accuracy_ratingbar"-->
+        <!--style="@style/customRatingBar"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_below="@+id/overall_ratingbar"-->
+        <!--android:layout_toLeftOf="@id/anchor"-->
+        <!--android:isIndicator="true"-->
+        <!--android:numStars="5"-->
+        <!--android:paddingBottom="10dp"-->
+        <!--android:paddingRight="20dp"-->
+        <!--android:progressTint="@color/rating_color"-->
+        <!--android:stepSize="0.1" />-->
+
+        <me.zhanghai.android.materialratingbar.MaterialRatingBar
             android:id="@+id/accuracy_ratingbar"
-            style="@style/customRatingBar"
-            android:layout_width="wrap_content"
+            style="@style/Widget.MaterialRatingBar.RatingBar.Indicator.Small"
+            android:layout_width="@dimen/view_review_rating_bar_width"
             android:layout_height="wrap_content"
             android:layout_below="@+id/overall_ratingbar"
             android:layout_toLeftOf="@id/anchor"
-            android:isIndicator="true"
             android:numStars="5"
             android:paddingBottom="10dp"
             android:paddingRight="20dp"
             android:progressTint="@color/rating_color"
+            android:secondaryProgressTint="@color/rating_color"
             android:stepSize="0.1" />
 
 
@@ -114,19 +142,34 @@
             android:textColor="#585757"
             android:textSize="13sp" />
 
-        <android.support.v7.widget.AppCompatRatingBar
+        <!--<android.support.v7.widget.AppCompatRatingBar-->
+        <!--android:id="@+id/communication_ratingbar"-->
+        <!--style="@style/customRatingBar"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_below="@+id/accuracy_ratingbar"-->
+        <!--android:layout_gravity="right|center_vertical"-->
+        <!--android:layout_toLeftOf="@+id/anchor"-->
+        <!--android:isIndicator="true"-->
+        <!--android:numStars="5"-->
+        <!--android:paddingBottom="10dp"-->
+        <!--android:paddingRight="20dp"-->
+        <!--android:progressTint="@color/rating_color"-->
+        <!--android:stepSize="0.1" />-->
+
+        <me.zhanghai.android.materialratingbar.MaterialRatingBar
             android:id="@+id/communication_ratingbar"
-            style="@style/customRatingBar"
-            android:layout_width="wrap_content"
+            style="@style/Widget.MaterialRatingBar.RatingBar.Indicator.Small"
+            android:layout_width="@dimen/view_review_rating_bar_width"
             android:layout_height="wrap_content"
             android:layout_below="@+id/accuracy_ratingbar"
             android:layout_gravity="right|center_vertical"
             android:layout_toLeftOf="@+id/anchor"
-            android:isIndicator="true"
             android:numStars="5"
             android:paddingBottom="10dp"
             android:paddingRight="20dp"
             android:progressTint="@color/rating_color"
+            android:secondaryProgressTint="@color/rating_color"
             android:stepSize="0.1" />
 
         <!-- 청결도 -->
@@ -141,18 +184,32 @@
             android:textColor="#585757"
             android:textSize="13sp" />
 
-        <android.support.v7.widget.AppCompatRatingBar
+        <!--<android.support.v7.widget.AppCompatRatingBar-->
+        <!--android:id="@+id/cleanliness_ratingbar"-->
+        <!--style="@style/customRatingBar"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_below="@+id/communication_ratingbar"-->
+        <!--android:layout_toLeftOf="@+id/anchor"-->
+        <!--android:isIndicator="true"-->
+        <!--android:numStars="5"-->
+        <!--android:paddingBottom="10dp"-->
+        <!--android:paddingRight="20dp"-->
+        <!--android:progressTint="@color/rating_color"-->
+        <!--android:stepSize="0.1" />-->
+
+        <me.zhanghai.android.materialratingbar.MaterialRatingBar
             android:id="@+id/cleanliness_ratingbar"
-            style="@style/customRatingBar"
-            android:layout_width="wrap_content"
+            style="@style/Widget.MaterialRatingBar.RatingBar.Indicator.Small"
+            android:layout_width="@dimen/view_review_rating_bar_width"
             android:layout_height="wrap_content"
             android:layout_below="@+id/communication_ratingbar"
             android:layout_toLeftOf="@+id/anchor"
-            android:isIndicator="true"
             android:numStars="5"
             android:paddingBottom="10dp"
             android:paddingRight="20dp"
             android:progressTint="@color/rating_color"
+            android:secondaryProgressTint="@color/rating_color"
             android:stepSize="0.1" />
 
         <!-- 위치 -->
@@ -168,17 +225,30 @@
             android:textColor="#585757"
             android:textSize="13sp" />
 
-        <android.support.v7.widget.AppCompatRatingBar
+        <!--<android.support.v7.widget.AppCompatRatingBar-->
+        <!--android:id="@+id/location_ratingbar"-->
+        <!--style="@style/customRatingBar"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:layout_below="@+id/overall_ratingbar"-->
+        <!--android:isIndicator="true"-->
+        <!--android:numStars="5"-->
+        <!--android:paddingBottom="10dp"-->
+        <!--android:progressTint="@color/rating_color"-->
+        <!--android:stepSize="0.1" />-->
+
+        <me.zhanghai.android.materialratingbar.MaterialRatingBar
             android:id="@+id/location_ratingbar"
-            style="@style/customRatingBar"
-            android:layout_width="wrap_content"
+            style="@style/Widget.MaterialRatingBar.RatingBar.Indicator.Small"
+            android:layout_width="@dimen/view_review_rating_bar_width"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_below="@+id/overall_ratingbar"
-            android:isIndicator="true"
             android:numStars="5"
             android:paddingBottom="10dp"
             android:progressTint="@color/rating_color"
+            android:secondaryProgressTint="@color/rating_color"
             android:stepSize="0.1" />
 
         <!-- 체크인 -->
@@ -194,17 +264,30 @@
             android:textColor="#585757"
             android:textSize="13sp" />
 
-        <android.support.v7.widget.AppCompatRatingBar
+        <!--<android.support.v7.widget.AppCompatRatingBar-->
+        <!--android:id="@+id/checkin_ratingbar"-->
+        <!--style="@style/customRatingBar"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:layout_below="@+id/location_ratingbar"-->
+        <!--android:isIndicator="true"-->
+        <!--android:numStars="5"-->
+        <!--android:paddingBottom="10dp"-->
+        <!--android:progressTint="@color/rating_color"-->
+        <!--android:stepSize="0.1" />-->
+
+        <me.zhanghai.android.materialratingbar.MaterialRatingBar
             android:id="@+id/checkin_ratingbar"
-            style="@style/customRatingBar"
-            android:layout_width="wrap_content"
+            style="@style/Widget.MaterialRatingBar.RatingBar.Indicator.Small"
+            android:layout_width="@dimen/view_review_rating_bar_width"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_below="@+id/location_ratingbar"
-            android:isIndicator="true"
             android:numStars="5"
             android:paddingBottom="10dp"
             android:progressTint="@color/rating_color"
+            android:secondaryProgressTint="@color/rating_color"
             android:stepSize="0.1" />
 
 
@@ -221,17 +304,30 @@
             android:textColor="#585757"
             android:textSize="13sp" />
 
-        <android.support.v7.widget.AppCompatRatingBar
+        <!--<android.support.v7.widget.AppCompatRatingBar-->
+        <!--android:id="@+id/value_ratingbar"-->
+        <!--style="@style/customRatingBar"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:layout_below="@+id/checkin_ratingbar"-->
+        <!--android:isIndicator="true"-->
+        <!--android:numStars="5"-->
+        <!--android:paddingBottom="10dp"-->
+        <!--android:progressTint="@color/rating_color"-->
+        <!--android:stepSize="0.1" />-->
+
+        <me.zhanghai.android.materialratingbar.MaterialRatingBar
             android:id="@+id/value_ratingbar"
-            style="@style/customRatingBar"
-            android:layout_width="wrap_content"
+            style="@style/Widget.MaterialRatingBar.RatingBar.Indicator.Small"
+            android:layout_width="@dimen/view_review_rating_bar_width"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_below="@+id/checkin_ratingbar"
-            android:isIndicator="true"
             android:numStars="5"
             android:paddingBottom="10dp"
             android:progressTint="@color/rating_color"
+            android:secondaryProgressTint="@color/rating_color"
             android:stepSize="0.1" />
 
 
@@ -243,7 +339,7 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_below="@+id/review_overview"
-        android:background="@color/divider_color" />
+        android:background="@color/divider_color_dark" />
 
     <!-- 후기 리스트 -->
 
@@ -256,16 +352,7 @@
         android:paddingRight="25dp" />
 
 
-    <com.wang.avi.AVLoadingIndicatorView
-        android:id="@+id/loading_indicator"
-        style="@style/AVLoadingIndicatorView.Large"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:visibility="gone"
-        app:indicatorColor="@color/loading_animation_color"
-        app:indicatorName="BallGridPulseIndicator" />
+    <include layout="@layout/loading_indicator" />
 
 
 </RelativeLayout>

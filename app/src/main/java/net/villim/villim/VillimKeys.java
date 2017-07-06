@@ -5,33 +5,36 @@ package net.villim.villim;
  */
 
 public class VillimKeys {
-    /* Versio Info */
-    public static final String APP_VERSION = "0.7.1";
+    /* Version Info */
+    public static final String APP_VERSION = "0.8.1";
 
     /* Server constants */
-//    public static final String SERVER_SCHEME = "http";
-//    public static final String SERVER_HOST = "175.207.29.19";
     public static final String SERVER_SCHEME = "http";
-    public static final String SERVER_HOST = "www.mocky.io";
+    public static final String SERVER_HOST = "175.207.29.19";
 
     /* URLS */
     public static final String LOGIN_URL = "a/login";
     public static final String SIGNUP_URL = "a/signup";
-    public static final String CHANGE_PASSCODE_URL = "v2/594478881200005716fcb615";
-    public static final String MY_HOUSE_URL = "v2/594470cc120000a015fcb60f";
-    public static final String OPEN_DOORLOCK_URL = "v2/5944895a120000f117fcb61b";
-    public static final String RESERVE_URL = "v2/5942f90b120000ff12ddc665";
-    public static final String FEATURED_HOUSES_URL = "v2/5944039a120000380bfcb53f";
-    public static final String HOST_INFO_URL = "v2/594175a00f0000770ec63237";
-    public static final String HOUSE_INFO_URL = "v2/59441d55120000930dfcb57e";
-    public static final String HOUSE_REVIEW_URL = "v2/5941d5200f00002e16c632c4";
-    public static final String VISIT_INFO_URL = "v2/5945b61113000067145b6fc6";
-    public static final String POST_REVIEW_URL = "v2/59454496130000800b5b6f82";
-    public static final String FIND_PASSWORD_URL = "v2/59454496130000800b5b6f82";
-    public static final String CANCEL_VISIT_URL = "v2/5945baec13000005155b6fcc";
+    public static final String CHANGE_PASSCODE_URL = "a/change-passcode";
+    public static final String MY_HOUSE_URL = "a/my-house";
+    public static final String OPEN_DOORLOCK_URL = "a/open-doorlock";
+    public static final String RESERVE_URL = "a/reserve-house";
+    public static final String FEATURED_HOUSES_URL = "a/featured-houses";
+    public static final String HOST_INFO_URL = "a/host-info";
+    public static final String HOUSE_INFO_URL = "a/house-info";
+    public static final String HOUSE_REVIEW_URL = "a/house-reviews";
+    public static final String VISIT_LIST_URL = "a/visit-list";
+    public static final String VISIT_INFO_URL = "a/visit-info";
+    public static final String POST_REVIEW_URL = "a/post-review";
+    public static final String FIND_PASSWORD_URL = "a/find-password";
+    public static final String VISIT_REQUEST_URL = "a/visit-request";
+    public static final String CANCEL_VISIT_URL = "a/cancel-visit";
+    public static final String SEND_VERIFICATION_PHONE_URL = "send-verification-phone";
+    public static final String VERIFY_PHONE_URL = "verify-phone";
+    public static final String SEARCH_URL = "s";
     public static final String TERMS_OF_SERVICE_URL = "https://www.klondikebar.com/";
-    public static final String UPDATE_PROFILE_URL = "https://www.klondikebar.com/";
-    public static final String FAQ_URL = "https://www.klondikebar.com/";
+    public static final String UPDATE_PROFILE_URL = "a/update-profile";
+    public static final String FAQ_URL = "https://boo7387.wixsite.com/villim01/faq";
 
     /* Request success codes */
     public static final String KEY_QUERY_SUCCESS = "query_success";
@@ -55,14 +58,20 @@ public class VillimKeys {
     public static final String KEY_PROFILE_PIC_URL = "profile_pic_url";
     public static final String KEY_ABOUT = "about";
     public static final String KEY_USER_STATUS = "user_status";
-    public static final String KEY_ROOM_ID = "room_id";
     public static final String KEY_PUSH_NOTIFICATIONS = "push_notifications";
-    public static final String KEY_CURRENCY_PREFERENCE = "currency_preference";
-    public static final String KEY_LANGUAGE_PREFERENCE = "language_preference";
+    public static final String KEY_PREFERENCE_CURRENCY = "curr";
+    public static final String KEY_PREFERENCE_LANGUAGE = "preferred_language";
     public static final String KEY_SEX = "sex";
     public static final String KEY_PHONE_NUMBER = "phone_number";
     public static final String KEY_CITY_OF_RESIDENCE = "city_of_residence";
     public static final String KEY_PROFILE_PIC = "profile_pic";
+    public static final String KEY_HOUSE_ID_CONFIRMED = "house_id_confirmed";
+    public static final String KEY_HOUSE_ID_STAYING = "house_id_staying";
+    public static final String KEY_HOUSE_ID_DONE = "house_id_done";
+    public static final String KEY_VISIT_HOUSE_ID_PENDING = "visit_hosue_id_confirmes";
+    public static final String KEY_VISIT_HOUSE_ID_CONFIRMED = "visit_hosue_id_pending";
+    public static final String KEY_VISIT_HOUSE_ID_DONE = "visit_house_id_done";
+    public static final String KEY_HOUSE_TYPE = "house_type";
 
     /* Login Keys */
     public static final String KEY_MESSAGE = "message";
@@ -85,9 +94,11 @@ public class VillimKeys {
     public static final String KEY_NUM_BED = "num_bed";
     public static final String KEY_NUM_BATHROOM = "num_bathroom";
 
+    public static final String KEY_RATE_PER_MONTH = "rate_per_month";
     public static final String KEY_RATE_PER_NIGHT = "rate_per_night";
     public static final String KEY_DEPOSIT = "deposit";
     public static final String KEY_ADDITIONAL_GUEST_FEE = "additional_guest_fee";
+    public static final String KEY_UTILITY_FEE = "utility_fee";
     public static final String KEY_CLEANING_FEE = "cleaning_fee";
 
     public static final String KEY_LOCK_ADDR = "lock_addr";
@@ -117,6 +128,8 @@ public class VillimKeys {
     public static final String KEY_REVIEW_LAST_RATING = "review_last_rating";
     public static final String KEY_REVIEW_LAST_PROFILE_PIC_URL = "review_last_profile_pic_url";
 
+    public static final String KEY_RESERVATIONS = "reservations";
+
     /* Review info keys */
     public static final String KEY_REVIEWS = "reviews";
     public static final String KEY_REVIEW_COUNT = "review_count";
@@ -138,8 +151,8 @@ public class VillimKeys {
     public static final String KEY_RESERVATION_SUCCESS = "reservation_success";
     public static final String KEY_RESERVATION_INFO = "reservation_info";
     public static final String KEY_GUEST_ID = "guest_id";
-    public static final String KEY_START_DATE = "start_date";
-    public static final String KEY_END_DATE = "end_date";
+    public static final String KEY_CHECKIN = "checkin";
+    public static final String KEY_CHECKOUT = "checkout";
     public static final String KEY_RESERVATION_TIME = "reservation_time";
     public static final String KEY_RESERVATION_STATUS = "reservation_status";
     public static final String KEY_RESERVATION_CODE = "reservation_code";
@@ -152,7 +165,10 @@ public class VillimKeys {
     public static final String KEY_VISIT_ID = "visit_id";
     public static final String KEY_VISITOR_ID = "visitor_id";
     public static final String KEY_VISIT_TIME = "visit_time";
+    public static final String KEY_VISIT_STATUS = "visit_status";
     public static final String KEY_VISIT_INFO = "visit_info";
+    public static final String KEY_PENDING_VISITS = "pending_visits";
+    public static final String KEY_CONFIRMED_VISITS = "confirmed_visits";
 
     /* DoorlockPAsscodeActivity */
     public static final String KEY_CHANGE_SUCCESS = "change_success";
@@ -172,7 +188,17 @@ public class VillimKeys {
     /* Profile Edit Activity */
     public static final String KEY_UPDATE_SUCCESS = "update";
 
+    /* Success code */
+    public static final String KEY_SUCCESS = "success";
 
+    /* Verify phone activity */
+    public static final String KEY_VERIFICATION_CODE =  "verification_code";
+
+    /* Search filter */
+    public static final String KEY_LOCATION =  "location";
+
+    /* Local store */
+    public static final String KEY_LOCAL_STORE_PROFILE_PICTURE =  "local_store_profile_picture";
 }
 
 

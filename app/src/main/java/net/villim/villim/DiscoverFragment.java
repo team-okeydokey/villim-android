@@ -17,6 +17,7 @@ import com.franmontiel.persistentcookiejar.cache.SetCookieCache;
 import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
 import com.wang.avi.AVLoadingIndicatorView;
 
+import org.joda.time.DateTime;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -32,45 +33,21 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 import static net.villim.villim.VillimKeys.FEATURED_HOUSES_URL;
-import static net.villim.villim.VillimKeys.KEY_ADDITIONAL_GUEST_FEE;
-import static net.villim.villim.VillimKeys.KEY_ADDR_DIRECTION;
-import static net.villim.villim.VillimKeys.KEY_ADDR_FULL;
-import static net.villim.villim.VillimKeys.KEY_ADDR_SUMMARY;
-import static net.villim.villim.VillimKeys.KEY_AMENITY_IDS;
-import static net.villim.villim.VillimKeys.KEY_CANCELLATION_POLICY;
-import static net.villim.villim.VillimKeys.KEY_CLEANING_FEE;
-import static net.villim.villim.VillimKeys.KEY_DEPOSIT;
-import static net.villim.villim.VillimKeys.KEY_DESCRIPTION;
-import static net.villim.villim.VillimKeys.KEY_HOST_ID;
-import static net.villim.villim.VillimKeys.KEY_HOST_NAME;
-import static net.villim.villim.VillimKeys.KEY_HOST_PROFILE_PIC_URL;
-import static net.villim.villim.VillimKeys.KEY_HOST_RATING;
-import static net.villim.villim.VillimKeys.KEY_HOST_REVIEW_COUNT;
+import static net.villim.villim.VillimKeys.SEARCH_URL;
+import static net.villim.villim.VillimKeys.KEY_CHECKOUT;
+import static net.villim.villim.VillimKeys.KEY_PREFERENCE_CURRENCY;
 import static net.villim.villim.VillimKeys.KEY_HOUSES;
-import static net.villim.villim.VillimKeys.KEY_HOUSE_ID;
-import static net.villim.villim.VillimKeys.KEY_HOUSE_NAME;
-import static net.villim.villim.VillimKeys.KEY_HOUSE_PIC_URLS;
-import static net.villim.villim.VillimKeys.KEY_HOUSE_POLICY;
-import static net.villim.villim.VillimKeys.KEY_HOUSE_RATING;
-import static net.villim.villim.VillimKeys.KEY_HOUSE_REVIEW_COUNT;
-import static net.villim.villim.VillimKeys.KEY_LATITUDE;
-import static net.villim.villim.VillimKeys.KEY_LOCK_ADDR;
-import static net.villim.villim.VillimKeys.KEY_LOCK_PC;
-import static net.villim.villim.VillimKeys.KEY_LONGITUDE;
 import static net.villim.villim.VillimKeys.KEY_MESSAGE;
-import static net.villim.villim.VillimKeys.KEY_NUM_BATHROOM;
-import static net.villim.villim.VillimKeys.KEY_NUM_BED;
-import static net.villim.villim.VillimKeys.KEY_NUM_BEDROOM;
-import static net.villim.villim.VillimKeys.KEY_NUM_GUEST;
 import static net.villim.villim.VillimKeys.KEY_QUERY_SUCCESS;
-import static net.villim.villim.VillimKeys.KEY_RATE_PER_NIGHT;
+import static net.villim.villim.VillimKeys.KEY_CHECKIN;
 import static net.villim.villim.VillimKeys.SERVER_HOST;
 import static net.villim.villim.VillimKeys.SERVER_SCHEME;
 
 
-public class DiscoverFragment extends Fragment {
+public class DiscoverFragment extends Fragment implements MainActivity.onSearchFilterChangedListener {
 
     private MainActivity activity;
+    private VillimSession session;
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private RecyclerView.Adapter adapter;
@@ -98,6 +75,7 @@ public class DiscoverFragment extends Fragment {
         View discoverView = inflater.inflate(R.layout.fragment_discover, container, false);
 
         activity = ((MainActivity) getActivity());
+        session = new VillimSession(getActivity().getApplicationContext());
 
         recyclerView = (RecyclerView) discoverView.findViewById(R.id.discover_recycler_view);
         layoutManager = new LinearLayoutManager(activity);
@@ -109,12 +87,12 @@ public class DiscoverFragment extends Fragment {
         /* Loading indicator */
         loadingIndicator = (AVLoadingIndicatorView) discoverView.findViewById(R.id.loading_indicator);
 
-        sendFeaturedHousesRequest();
+        sendFeaturedHousesRequest(session.getCurrencyPref());
 
         return discoverView;
     }
 
-    private void sendFeaturedHousesRequest() {
+    private void sendFeaturedHousesRequest(int currency) {
         startLoadingAnimation();
 
         ClearableCookieJar cookieJar =
@@ -129,7 +107,79 @@ public class DiscoverFragment extends Fragment {
                 .scheme(SERVER_SCHEME)
                 .host(SERVER_HOST)
                 .addPathSegments(FEATURED_HOUSES_URL)
+                .addQueryParameter(KEY_PREFERENCE_CURRENCY, Integer.toString(currency))
                 .build().url();
+
+        Request request = new Request.Builder()
+                .url(url)
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                // Something went wrong.
+                showErrorMessage(getString(R.string.cant_connect_to_server));
+                stopLoadingAnimation();
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (!response.isSuccessful()) {
+                    showErrorMessage(getString(R.string.server_error));
+                    stopLoadingAnimation();
+                    throw new IOException("Response not successful   " + response);
+                }
+                /* Request success. */
+                try {
+                    /* 주의: response.body().string()은 한 번 부를 수 있음 */
+                    final JSONObject jsonObject = new JSONObject(response.body().string());
+                    if (jsonObject.getBoolean(KEY_QUERY_SUCCESS)) {
+                        getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                populateView(jsonObject);
+                            }
+                        });
+                    } else {
+                        showErrorMessage(jsonObject.getString(KEY_MESSAGE));
+                    }
+                    stopLoadingAnimation();
+                } catch (JSONException e) {
+                    showErrorMessage(getString(R.string.server_error));
+                    stopLoadingAnimation();
+                }
+            }
+        });
+    }
+
+    private void sendSearchRequest(String location, DateTime checkin, DateTime chekout, int currency) {
+        startLoadingAnimation();
+
+        ClearableCookieJar cookieJar =
+                new PersistentCookieJar(new SetCookieCache(), new SharedPrefsCookiePersistor(getActivity().getApplicationContext()));
+
+        OkHttpClient client = new OkHttpClient.Builder()
+                .cookieJar(cookieJar)
+                .build();
+
+        HttpUrl.Builder builder = new HttpUrl.Builder()
+                .scheme(SERVER_SCHEME)
+                .host(SERVER_HOST)
+                .addPathSegments(SEARCH_URL)
+                .addQueryParameter(KEY_PREFERENCE_CURRENCY, Integer.toString(currency));
+
+        if (location != null) {
+            builder.addPathSegment(location);
+        }
+
+        if (checkin != null && chekout != null) {
+            builder.addQueryParameter(KEY_CHECKIN,
+                VillimUtils.datetoString(getActivity().getApplicationContext(), checkin));
+            builder.addQueryParameter(KEY_CHECKOUT,
+                    VillimUtils.datetoString(getActivity().getApplicationContext(), chekout));
+        }
+
+        URL url  = builder.build().url();
 
         Request request = new Request.Builder()
                 .url(url)
@@ -177,7 +227,9 @@ public class DiscoverFragment extends Fragment {
     private void populateView(JSONObject jsonObject) {
         try {
             JSONArray houseArray = jsonObject.getJSONArray(KEY_HOUSES);
-            VillimHouse[] houses = VillimHouse.houseArrayFromJsonArray(houseArray);
+            VillimHouse[] houses = VillimHouse.houseArrayFromJsonArray(
+                    getActivity().getApplicationContext(),
+                    houseArray);
 
             adapter = new DiscoverRecyclerAdapter(houses);
             recyclerView.setAdapter(adapter);
@@ -222,6 +274,15 @@ public class DiscoverFragment extends Fragment {
                         Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    @Override
+    public void onSearchFilterChanged(String location, DateTime startDate, DateTime endDate) {
+        if (location == null && startDate == null && endDate == null) {
+            sendFeaturedHousesRequest(session.getCurrencyPref());
+        } else {
+            sendSearchRequest(location, startDate, endDate, session.getCurrencyPref());
+        }
     }
 
 }

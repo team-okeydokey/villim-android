@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
@@ -54,14 +53,12 @@ import static net.villim.villim.CalendarActivity.START_DATE;
 import static net.villim.villim.HouseDescriptionActivity.KEY_BASIC_DESCRIPTION;
 import static net.villim.villim.MainActivity.DATE_SELECTED;
 import static net.villim.villim.VillimKeys.HOUSE_INFO_URL;
-import static net.villim.villim.VillimKeys.KEY_ABOUT;
-import static net.villim.villim.VillimKeys.KEY_ADDITIONAL_GUEST_FEE;
 import static net.villim.villim.VillimKeys.KEY_ADDR_DIRECTION;
 import static net.villim.villim.VillimKeys.KEY_ADDR_SUMMARY;
 import static net.villim.villim.VillimKeys.KEY_AMENITY_IDS;
 import static net.villim.villim.VillimKeys.KEY_CANCELLATION_POLICY;
 import static net.villim.villim.VillimKeys.KEY_CLEANING_FEE;
-import static net.villim.villim.VillimKeys.KEY_DEPOSIT;
+import static net.villim.villim.VillimKeys.KEY_PREFERENCE_CURRENCY;
 import static net.villim.villim.VillimKeys.KEY_HOST_ID;
 import static net.villim.villim.VillimKeys.KEY_HOST_NAME;
 import static net.villim.villim.VillimKeys.KEY_HOST_PROFILE_PIC_URL;
@@ -78,6 +75,7 @@ import static net.villim.villim.VillimKeys.KEY_REVIEW_LAST_CONTENT;
 import static net.villim.villim.VillimKeys.KEY_REVIEW_LAST_PROFILE_PIC_URL;
 import static net.villim.villim.VillimKeys.KEY_REVIEW_LAST_RATING;
 import static net.villim.villim.VillimKeys.KEY_REVIEW_LAST_REVIEWER;
+import static net.villim.villim.VillimKeys.KEY_UTILITY_FEE;
 import static net.villim.villim.VillimKeys.SERVER_HOST;
 import static net.villim.villim.VillimKeys.SERVER_SCHEME;
 
@@ -92,6 +90,7 @@ public class HouseDetailActivity extends VillimActivity implements OnMapReadyCal
     private CollapsingToolbarLayout collapsingToolbarLayout;
     private Toolbar toolbar;
     private ImageView toolbarImage;
+    private TextView toolbarTitle;
 
     private RelativeLayout hostInfo;
     private ImageView hostProfilePic;
@@ -168,6 +167,7 @@ public class HouseDetailActivity extends VillimActivity implements OnMapReadyCal
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(ContextCompat.getDrawable(getApplicationContext(), R.drawable.back_arrow_light));
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+        toolbarTitle = (TextView) findViewById(R.id.toolbar_title);
 
         /* Change back button color on collapse. */
         collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
@@ -177,10 +177,12 @@ public class HouseDetailActivity extends VillimActivity implements OnMapReadyCal
             @Override
             public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
                 if (verticalOffset == -appBarLayout.getTotalScrollRange()) { // Completely collapsed.
-                    collapsingToolbarLayout.setTitle(getString(R.string.room_detail_title));
+//                    collapsingToolbarLayout.setTitle(getString(R.string.room_detail_title));
+                    toolbarTitle.setVisibility(View.VISIBLE);
                     toolbar.getNavigationIcon().setColorFilter(getResources().getColor(R.color.arrow_dark), PorterDuff.Mode.SRC_ATOP);
                 } else {
-                    collapsingToolbarLayout.setTitle(" ");
+//                    collapsingToolbarLayout.setTitle(" ");
+                    toolbarTitle.setVisibility(View.INVISIBLE);
                     toolbar.getNavigationIcon().setColorFilter(getResources().getColor(R.color.arrow_light), PorterDuff.Mode.SRC_ATOP);
                 }
             }
@@ -195,6 +197,7 @@ public class HouseDetailActivity extends VillimActivity implements OnMapReadyCal
         hostRating = (RatingBar) findViewById(R.id.host_review_rating);
         hostReviewCount = (TextView) findViewById(R.id.host_review_count);
         contactHostButton = (Button) findViewById(R.id.contact_host_button);
+        contactHostButton.setVisibility(View.GONE); // For now.
 
         /* House Name and address */
         houseName = (TextView) findViewById(R.id.house_name);
@@ -258,6 +261,8 @@ public class HouseDetailActivity extends VillimActivity implements OnMapReadyCal
     public void sendHouseInfoRequest() {
         startLoadingAnimation();
 
+        VillimSession session = new VillimSession(getApplicationContext());
+
         ClearableCookieJar cookieJar =
                 new PersistentCookieJar(new SetCookieCache(), new SharedPrefsCookiePersistor(getApplicationContext()));
 
@@ -265,19 +270,12 @@ public class HouseDetailActivity extends VillimActivity implements OnMapReadyCal
                 .cookieJar(cookieJar)
                 .build();
 
-
-//        URL url = new HttpUrl.Builder()
-//                .scheme(SERVER_SCHEME)
-//                .host(SERVER_HOST)
-//                .addPathSegments("a/host-info")
-//                .addQueryParameter(KEY_HOST_ID, getIntent().getStringExtra(KEY_HOST_ID))
-//                .build().url();
-
         URL url = new HttpUrl.Builder()
                 .scheme(SERVER_SCHEME)
                 .host(SERVER_HOST)
                 .addPathSegments(HOUSE_INFO_URL)
                 .addQueryParameter(KEY_HOUSE_ID, Integer.toString(house.houseId))
+                .addQueryParameter(KEY_PREFERENCE_CURRENCY, Integer.toString(session.getCurrencyPref()))
                 .build().url();
 
         Request request = new Request.Builder()
@@ -308,18 +306,13 @@ public class HouseDetailActivity extends VillimActivity implements OnMapReadyCal
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                try {
-                                    house = VillimHouse.createHouseFromJSONObject(jsonObject.getJSONObject(KEY_HOUSE_INFO));
-                                    dataDownloaded = true;
-                                    lastReviewContent = jsonObject.getJSONObject(KEY_HOUSE_INFO).getString(KEY_REVIEW_LAST_CONTENT);
-                                    lastReviewReviewer = jsonObject.getJSONObject(KEY_HOUSE_INFO).getString(KEY_REVIEW_LAST_REVIEWER);
-                                    lastReviewProfilePictureUrl = jsonObject.getJSONObject(KEY_HOUSE_INFO).getString(KEY_REVIEW_LAST_PROFILE_PIC_URL);
-                                    lastReviewRating = (float) jsonObject.getJSONObject(KEY_HOUSE_INFO).getDouble(KEY_REVIEW_LAST_RATING);
-                                    populateView();
-                                } catch (JSONException e) {
-                                    showErrorMessage(getString(R.string.server_error));
-                                    stopLoadingAnimation();
-                                }
+                                house = VillimHouse.createHouseFromJSONObject(getApplicationContext(), jsonObject.optJSONObject(KEY_HOUSE_INFO));
+                                dataDownloaded = true;
+                                lastReviewContent = jsonObject.optJSONObject(KEY_HOUSE_INFO).optString(KEY_REVIEW_LAST_CONTENT);
+                                lastReviewReviewer = jsonObject.optJSONObject(KEY_HOUSE_INFO).optString(KEY_REVIEW_LAST_REVIEWER);
+                                lastReviewProfilePictureUrl = jsonObject.optJSONObject(KEY_HOUSE_INFO).optString(KEY_REVIEW_LAST_PROFILE_PIC_URL);
+                                lastReviewRating = (float) jsonObject.optJSONObject(KEY_HOUSE_INFO).optDouble(KEY_REVIEW_LAST_RATING);
+                                populateView();
                             }
                         });
 
@@ -338,6 +331,7 @@ public class HouseDetailActivity extends VillimActivity implements OnMapReadyCal
 
     // Make this async.
     private void populateView() {
+
         /* House picture */
         if (house.housePicUrls.length > 0) {
             toolbarImage.setOnClickListener(new View.OnClickListener() {
@@ -424,8 +418,7 @@ public class HouseDetailActivity extends VillimActivity implements OnMapReadyCal
             public void onClick(View v) {
                 Intent intent = new Intent(HouseDetailActivity.this, PricePolicyActivity.class);
                 intent.putExtra(KEY_RATE_PER_NIGHT, house.ratePerNight);
-                intent.putExtra(KEY_DEPOSIT, house.deposit);
-                intent.putExtra(KEY_ADDITIONAL_GUEST_FEE, house.additionalGuestFee);
+                intent.putExtra(KEY_UTILITY_FEE, house.utilityFee);
                 intent.putExtra(KEY_CLEANING_FEE, house.cleaningFee);
                 startActivity(intent);
             }
@@ -477,16 +470,25 @@ public class HouseDetailActivity extends VillimActivity implements OnMapReadyCal
         });
 
         /* Bottom Button */
-        int numberOfNights;
-        if (dateSelected) {
-            numberOfNights = VillimUtil.daysBetween(startDate, endDate);
-        } else {
-            /* 선택된 날짜가 없을 떈 30일로 계산 */
-            numberOfNights = 30;
-        }
-        int price = numberOfNights * house.ratePerNight;
+//        int numberOfNights, price;
+//        String priceString, priceText;
+//        if (dateSelected) {
+//            numberOfNights = VillimUtils.daysBetween(startDate, endDate);
+//            price = numberOfNights * house.ratePerNight;
+//            priceString = NumberFormat.getIntegerInstance().format(price);
+//            priceText = String.format(getString(R.string.price_text_format), priceString, numberOfNights);
+//        } else {
+//            /* 선택된 날짜가 없을 떈 30일로 계산 */
+//            numberOfNights = 30;
+//            price = numberOfNights * house.ratePerNight;
+//            priceString = NumberFormat.getIntegerInstance().format(price);
+//            priceText = String.format(getString(R.string.price_text_format_no_date), priceString);
+//        }
+        /* 선택된 날짜가 없을 떈 30일로 계산 */
+        int price = house.ratePerMonth;
         String priceString = NumberFormat.getIntegerInstance().format(price);
-        String priceText = String.format(getString(R.string.price_text_format), priceString, numberOfNights);
+        String priceText = String.format(getString(R.string.price_text_format_no_date), priceString);
+
         reserveButtonPrice.setText(priceText);
 
         /* Set drawable to bottom button. */
@@ -495,16 +497,21 @@ public class HouseDetailActivity extends VillimActivity implements OnMapReadyCal
         reserveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(HouseDetailActivity.this, ReservationActivity.class);
-                intent.putExtra(getString(R.string.key_house), house);
-                intent.putExtra(DATE_SELECTED, dateSelected);
-                if (dateSelected) {
-                    intent.putExtra(START_DATE, startDate);
-                    intent.putExtra(END_DATE, endDate);
-                }
-                startActivity(intent);
+                VillimSession session = new VillimSession(getApplicationContext());
+                launchReservationActivity();
             }
         });
+    }
+
+    private void launchReservationActivity() {
+        Intent intent = new Intent(HouseDetailActivity.this, ReservationActivity.class);
+        intent.putExtra(getString(R.string.key_house), house);
+        intent.putExtra(DATE_SELECTED, dateSelected);
+        if (dateSelected) {
+            intent.putExtra(START_DATE, startDate);
+            intent.putExtra(END_DATE, endDate);
+        }
+        startActivity(intent);
     }
 
     @Override
@@ -600,7 +607,6 @@ public class HouseDetailActivity extends VillimActivity implements OnMapReadyCal
     }
 
     private void populateReviews() {
-
 
         if (house.houseReviewCount == 0) {
             /* Remove the whole review section andreplace it with "No review" textview. */

@@ -31,7 +31,7 @@
     </RelativeLayout>
 
     <include
-        layout="@layout/category_divider"
+        layout="@layout/category_divider_dark"
         android:background="#ed2025" />
 
     <LinearLayout

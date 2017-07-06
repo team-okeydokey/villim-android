@@ -36,7 +36,7 @@ import okhttp3.Response;
 
 import static net.villim.villim.VillimKeys.CHANGE_PASSCODE_URL;
 import static net.villim.villim.VillimKeys.KEY_EMAIL;
-import static net.villim.villim.VillimKeys.KEY_LOGIN_SUCCESS;
+import static net.villim.villim.VillimKeys.KEY_QUERY_SUCCESS;
 import static net.villim.villim.VillimKeys.KEY_MESSAGE;
 import static net.villim.villim.VillimKeys.KEY_PASSWORD;
 import static net.villim.villim.VillimKeys.KEY_USER_INFO;
@@ -141,15 +141,9 @@ public class LoginActivity extends VillimActivity {
                 .add(KEY_PASSWORD, loginFormPassword.getText().toString())
                 .build();
 
-//        URL url = new HttpUrl.Builder()
-//                .scheme(SERVER_SCHEME)
-//                .host(SERVER_HOST)
-//                .addPathSegments(LOGIN_URL)
-//                .build().url();
-
         URL url = new HttpUrl.Builder()
-                .scheme("http")
-                .host("175.207.29.19")
+                .scheme(SERVER_SCHEME)
+                .host(SERVER_HOST)
                 .addPathSegments(LOGIN_URL)
                 .build().url();
 
@@ -177,7 +171,7 @@ public class LoginActivity extends VillimActivity {
                 try {
                     /* 주의: response.body().string()은 한 번 부를 수 있음 */
                     JSONObject jsonObject = new JSONObject(response.body().string());
-                    if (jsonObject.getBoolean(KEY_LOGIN_SUCCESS)) {
+                    if (jsonObject.getBoolean(KEY_QUERY_SUCCESS)) {
                         VillimUser user = VillimUser.createUserFromJSONObject((JSONObject) jsonObject.get(KEY_USER_INFO));
                         login(user);
                     } else {
@@ -209,16 +203,7 @@ public class LoginActivity extends VillimActivity {
         /* Store session */
         VillimSession session = new VillimSession(getApplicationContext());
         session.setLoggedIn(true);
-
-        /* Store basic info in shared preferences */
-        session.setUserId(user.userId);
-        session.setFullName(user.fullname);
-        session.setFirstName(user.firstname);
-        session.setLastName(user.lastname);
-        session.setEmail(user.email);
-        session.setProfilePicUrl(user.profilePicUrl);
-        session.setStatus(user.status);
-        session.setRoomId(user.roomId);
+        session.updateUserSession(user);
 
         /* Return from activity */
         Intent returnIntent = new Intent();

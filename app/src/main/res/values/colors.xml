@@ -24,6 +24,7 @@
     <color name="main_background">#F0F1F2</color>
     <color name="main_toolbar_search_button">#333333</color>
     <color name="search_filter_open">#1e1e1e</color>
+    <color name="search_field_color">#B3B3B3</color>
 
     <!-- Navigation Buttons -->
     <color name="arrow_dark">#333333</color>
@@ -50,13 +51,16 @@
     <color name="dateTimeRangePickerRangeTextColorInactive">#B9B9B9</color>
     <color name="date_range_middle">#ffffff</color>
     <color name="date_range_selected">#ed2025</color>
+    <color name="dark_button_disabled">#e3e3e4</color>
 
     <!-- Discovery Fragment -->
     <color name="rating_color">#51ACCF</color>
+    <color name="rating_indeterminant_color">#4faccd</color>
 
     <!-- Room Detail Activity -->
     <color name="room_detail_background">#F0F1F2</color>
-    <color name="divider_color">#C7C7C7</color>
+    <color name="divider_color_dark">#C7C7C7</color>
+    <color name="divider_color_red">#ed2025</color>
 
 
     <!-- Profile Fragment -->
@@ -90,5 +94,11 @@
     <!-- Find password success activity -->
     <color name="send_again_button_pressed">#000000</color>
     <color name="send_again_button_normal">#2a2c32</color>
+    <color name="red_button_disabled">#e3e3e4</color>
+
+    <!-- Blue text button -->
+    <color name="blue_text_button_normal">#007AFF</color>
+    <color name="blue_text_button_pressed_text">#1565C0</color>
+
     
 </resources>

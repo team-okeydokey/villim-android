@@ -3,24 +3,27 @@ package net.villim.villim;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import static net.villim.villim.VillimKeys.KEY_ABOUT;
 import static net.villim.villim.VillimKeys.KEY_CITY_OF_RESIDENCE;
-import static net.villim.villim.VillimKeys.KEY_CURRENCY_PREFERENCE;
+import static net.villim.villim.VillimKeys.KEY_PREFERENCE_CURRENCY;
 import static net.villim.villim.VillimKeys.KEY_EMAIL;
 import static net.villim.villim.VillimKeys.KEY_FIRSTNAME;
 import static net.villim.villim.VillimKeys.KEY_FULLNAME;
-import static net.villim.villim.VillimKeys.KEY_LANGUAGE_PREFERENCE;
+import static net.villim.villim.VillimKeys.KEY_HOUSE_ID_CONFIRMED;
+import static net.villim.villim.VillimKeys.KEY_HOUSE_ID_DONE;
+import static net.villim.villim.VillimKeys.KEY_HOUSE_ID_STAYING;
+import static net.villim.villim.VillimKeys.KEY_PREFERENCE_LANGUAGE;
 import static net.villim.villim.VillimKeys.KEY_LASTNAME;
 import static net.villim.villim.VillimKeys.KEY_PHONE_NUMBER;
 import static net.villim.villim.VillimKeys.KEY_PROFILE_PIC_URL;
 import static net.villim.villim.VillimKeys.KEY_PUSH_NOTIFICATIONS;
-import static net.villim.villim.VillimKeys.KEY_ROOM_ID;
 import static net.villim.villim.VillimKeys.KEY_SEX;
-import static net.villim.villim.VillimKeys.KEY_STATUS;
 import static net.villim.villim.VillimKeys.KEY_USER_ID;
+import static net.villim.villim.VillimKeys.KEY_VISIT_HOUSE_ID_CONFIRMED;
+import static net.villim.villim.VillimKeys.KEY_VISIT_HOUSE_ID_DONE;
+import static net.villim.villim.VillimKeys.KEY_VISIT_HOUSE_ID_PENDING;
 
 /**
  * Created by seongmin on 5/31/17.
@@ -34,8 +37,6 @@ public class VillimUser implements Parcelable {
     public String email;
     public String profilePicUrl;
     public String about;
-    public int status;
-    public int roomId;
 
     public int sex;
     public String phoneNumber;
@@ -43,6 +44,14 @@ public class VillimUser implements Parcelable {
     public boolean pushNotifications;
     public int currencyPref;
     public int languagePref;
+
+    public int[] houseIdConfirmed;
+    public int houseIdStaying;
+    public int[] houseIdDone;
+
+    public int[] visitHouseIdPending;
+    public int[] visitHouseIdConfirmed;
+    public int[] visitHouseIdDone;
 
     protected VillimUser(Parcel in) {
         userId = in.readInt();
@@ -52,14 +61,20 @@ public class VillimUser implements Parcelable {
         email = in.readString();
         profilePicUrl = in.readString();
         about = in.readString();
-        status = in.readInt();
-        roomId = in.readInt();
         sex = in.readInt();
         phoneNumber = in.readString();
         cityOfResidence = in.readString();
         pushNotifications = in.readByte() != 0;
         currencyPref = in.readInt();
         languagePref = in.readInt();
+
+        houseIdConfirmed = in.createIntArray();
+        houseIdStaying = in.readInt();
+        houseIdDone = in.createIntArray();
+
+        visitHouseIdPending = in.createIntArray();
+        visitHouseIdConfirmed = in.createIntArray();
+        visitHouseIdDone = in.createIntArray();
     }
 
     public static final Creator<VillimUser> CREATOR = new Creator<VillimUser>() {
@@ -97,15 +112,18 @@ public class VillimUser implements Parcelable {
         boolean isProfilePicUrlNull = userInfo.isNull(KEY_PROFILE_PIC_URL);
         user.profilePicUrl = isProfilePicUrlNull ? null : userInfo.opt(KEY_PROFILE_PIC_URL).toString();
         user.about = userInfo.optString(KEY_ABOUT);
-        user.status = userInfo.optInt(KEY_STATUS);
-        boolean isRoomIdNull = userInfo.isNull(KEY_ROOM_ID);
-        user.roomId = isRoomIdNull ? -1 : userInfo.optInt(KEY_ROOM_ID);
         user.sex = userInfo.optInt(KEY_SEX);
         user.phoneNumber = userInfo.optString(KEY_PHONE_NUMBER);
         user.cityOfResidence = userInfo.optString(KEY_CITY_OF_RESIDENCE);
         user.pushNotifications = userInfo.optBoolean(KEY_PUSH_NOTIFICATIONS);
-        user.currencyPref = userInfo.optInt(KEY_CURRENCY_PREFERENCE);
-        user.languagePref = userInfo.optInt(KEY_LANGUAGE_PREFERENCE);
+        user.currencyPref = userInfo.optInt(KEY_PREFERENCE_CURRENCY);
+        user.languagePref = userInfo.optInt(KEY_PREFERENCE_LANGUAGE);
+        user.houseIdConfirmed = net.villim.villim.VillimUtils.JSONArrayToIntArray(userInfo.optJSONArray(KEY_HOUSE_ID_CONFIRMED));
+        user.houseIdStaying = userInfo.optInt(KEY_HOUSE_ID_STAYING);
+        user.houseIdDone = net.villim.villim.VillimUtils.JSONArrayToIntArray(userInfo.optJSONArray(KEY_HOUSE_ID_DONE));
+        user.visitHouseIdPending = net.villim.villim.VillimUtils.JSONArrayToIntArray(userInfo.optJSONArray(KEY_VISIT_HOUSE_ID_PENDING));
+        user.visitHouseIdConfirmed = net.villim.villim.VillimUtils.JSONArrayToIntArray(userInfo.optJSONArray(KEY_VISIT_HOUSE_ID_CONFIRMED));
+        user.visitHouseIdDone = net.villim.villim.VillimUtils.JSONArrayToIntArray(userInfo.optJSONArray(KEY_VISIT_HOUSE_ID_DONE));
         return user;
     }
 
@@ -123,13 +141,17 @@ public class VillimUser implements Parcelable {
         dest.writeString(email);
         dest.writeString(profilePicUrl);
         dest.writeString(about);
-        dest.writeInt(status);
-        dest.writeInt(roomId);
         dest.writeInt(sex);
         dest.writeString(phoneNumber);
         dest.writeString(cityOfResidence);
         dest.writeByte((byte) (pushNotifications ? 1 : 0));
         dest.writeInt(currencyPref);
         dest.writeInt(languagePref);
+        dest.writeIntArray(houseIdConfirmed);
+        dest.writeInt(houseIdStaying);
+        dest.writeIntArray(houseIdDone);
+        dest.writeIntArray(visitHouseIdPending);
+        dest.writeIntArray(visitHouseIdConfirmed);
+        dest.writeIntArray(visitHouseIdDone);
     }
 }

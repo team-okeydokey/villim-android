@@ -22,10 +22,15 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import org.joda.time.DateTime;
+
 import java.util.Date;
 
-
 public class MainActivity extends VillimActivity {
+
+    public interface onSearchFilterChangedListener {
+        public void onSearchFilterChanged(String location, DateTime startDate, DateTime endDate);
+    }
 
     private static final int LOCATION_FILTER = 0;
     private static final int DATE_FILTER = 1;
@@ -40,6 +45,7 @@ public class MainActivity extends VillimActivity {
 
     /* We can store the fragment references becasue we are using a FragmentPagerAdapter.
        If FragmentStatePagerAdapter is used, weak references must be used to refer to fragments. */
+    private DiscoverFragment discoverFragment;
     private ProfileFragment profileFragment;
     private VisitFragment visitFragment;
 
@@ -60,8 +66,9 @@ public class MainActivity extends VillimActivity {
 
     private boolean appBarOpen;
 
-    private Date startDate;
-    private Date endDate;
+    private String location;
+    private DateTime startDate;
+    private DateTime endDate;
 
     private int toolBarCollpasedColor;
     private int toolBarOpenColor;
@@ -81,7 +88,11 @@ public class MainActivity extends VillimActivity {
 
         appBarOpen = false;
         locationSelected = false;
-        locationSelected = false;
+        dateSelected = false;
+
+        location = null;
+        startDate = null;
+        endDate = null;
 
         /* Toolbar */
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -153,7 +164,7 @@ public class MainActivity extends VillimActivity {
                 //setTitle(toolBarTitle);
                 // Fold search.
                 appBarLayout.setExpanded(false);
-                if (position != 0) { // Hide search button if not in discovery fragment.
+                if (position != DISCOVERY_FRAGMENT) { // Hide search button if not in discovery fragment or visit fragment.
                     searchButton.setVisibility(View.INVISIBLE);
                     hideToolbar();
                 } else {
@@ -192,14 +203,21 @@ public class MainActivity extends VillimActivity {
         int calendarWidth = getResources().getDimensionPixelSize(R.dimen.calendar_icon_width);
         int calendarHeight = getResources().getDimensionPixelSize(R.dimen.calendar_icon_height);
         int clearSize = getResources().getDimensionPixelSize(R.dimen.clear_icon_size);
+        /* Fetch icons */
         Drawable markerIcon = getResources().getDrawable(R.drawable.icon_marker);
         Drawable calendarIcon = getResources().getDrawable(R.drawable.icon_calendar);
         Drawable clearIcon = getResources().getDrawable(R.drawable.btn_delete_white);
         Drawable dateClearIcon = getResources().getDrawable(R.drawable.btn_delete_white);
+        /* Resize original image */
         markerIcon.setBounds(0, 0, markerSize, markerSize);
         calendarIcon.setBounds(0, 0, calendarWidth, calendarHeight);
         clearIcon.setBounds(0, 0, clearSize, clearSize);
         dateClearIcon.setBounds(0, 0, clearSize, clearSize);
+        /* Set tint to grey */
+        markerIcon.setTint(getColor(R.color.search_field_color));
+        calendarIcon.setTint(getColor(R.color.search_field_color));
+        clearIcon.setTint(getColor(R.color.search_field_color));
+        dateClearIcon.setTint(getColor(R.color.search_field_color));
         searchFilterLocation.setCompoundDrawables(markerIcon, null, clearIcon, null);
         searchFilterDate.setCompoundDrawables(calendarIcon, null, dateClearIcon, null);
         /* Launch filter activities */
@@ -214,7 +232,13 @@ public class MainActivity extends VillimActivity {
                         if (locationSelected && event.getRawX() >= (searchFilterDate.getRight() - searchFilterDate.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
                             searchFilterLocation.setText(getString(R.string.all_locations));
                             locationSelected = false;
+                            location = null;
                             searchFilterLocation.getCompoundDrawables()[DRAWABLE_RIGHT].mutate().setAlpha(HIDE);
+                            /* Reload houses */
+                            discoverFragment.onSearchFilterChanged (
+                                    location,
+                                    new DateTime(startDate),
+                                    new DateTime(endDate));
                         } else {
                             Intent locationFilterIntent = new Intent(MainActivity.this, LocationFilterActivity.class);
                             MainActivity.this.startActivityForResult(locationFilterIntent, LOCATION_FILTER);
@@ -239,10 +263,15 @@ public class MainActivity extends VillimActivity {
                             endDate = null;
                             dateSelected = false;
                             searchFilterDate.getCompoundDrawables()[DRAWABLE_RIGHT].mutate().setAlpha(HIDE);
+                            discoverFragment.onSearchFilterChanged (
+                                    location,
+                                    new DateTime(startDate),
+                                    new DateTime(endDate));
                         } else {
                             Intent dateFilterIntent = new Intent(MainActivity.this, CalendarActivity.class);
                             dateFilterIntent.putExtra(CalendarActivity.START_DATE, startDate);
                             dateFilterIntent.putExtra(CalendarActivity.END_DATE, endDate);
+                            dateFilterIntent.putExtra(CalendarActivity.INVALID_DATES, new long[0]);
                             MainActivity.this.startActivityForResult(dateFilterIntent, DATE_FILTER);
                         }
                         return true;
@@ -289,6 +318,9 @@ public class MainActivity extends VillimActivity {
             Fragment createdFragment = (Fragment) super.instantiateItem(container, position);
             // save the appropriate reference depending on position
             switch (position) {
+                case DISCOVERY_FRAGMENT:
+                    discoverFragment = (DiscoverFragment) createdFragment;
+                    break;
                 case PROFILE_FRAGMENT:
                     profileFragment = (ProfileFragment) createdFragment;
                     break;
@@ -363,27 +395,38 @@ public class MainActivity extends VillimActivity {
         /* Requests to mainactivity */
         if (requestCode == LOCATION_FILTER) {
             if (resultCode == Activity.RESULT_OK) {
-                VillimLocation location = data.getParcelableExtra(LocationFilterActivity.LOCATION);
-                searchFilterLocation.setText(location.addrSummary);
+                VillimLocation villimLocation = data.getParcelableExtra(LocationFilterActivity.LOCATION);
+                location = villimLocation.addrSummary;
+                searchFilterLocation.setText(location);
                 /* Show clear button */
                 locationSelected = true;
                 searchFilterLocation.getCompoundDrawables()[DRAWABLE_RIGHT].mutate().setAlpha(SHOW);
+                /* Update discoverfragment */
+                discoverFragment.onSearchFilterChanged(
+                        location,
+                        startDate,
+                        endDate);
             }
             if (resultCode == Activity.RESULT_CANCELED) {
                 //Write your code if there's no result
             }
         } else if (requestCode == DATE_FILTER) {
             if (resultCode == Activity.RESULT_OK) {
-                startDate = (Date) data.getSerializableExtra(CalendarActivity.START_DATE);
-                endDate = (Date) data.getSerializableExtra(CalendarActivity.END_DATE);
+                startDate = (DateTime) data.getSerializableExtra(CalendarActivity.START_DATE);
+                endDate = (DateTime) data.getSerializableExtra(CalendarActivity.END_DATE);
 
                 String dateFilterText = String.format(getString(R.string.search_filter_date_format),
-                        startDate.getMonth() + 1, startDate.getDate(),
-                        endDate.getMonth() + 1, endDate.getDate());
+                        startDate.getMonthOfYear(), startDate.getDayOfMonth(),
+                        endDate.getMonthOfYear(), endDate.getDayOfMonth());
                 searchFilterDate.setText(dateFilterText);
                 /* Show clear button */
                 dateSelected = true;
                 searchFilterDate.getCompoundDrawables()[DRAWABLE_RIGHT].mutate().setAlpha(SHOW);
+                /* Update discoverfragment */
+                discoverFragment.onSearchFilterChanged(
+                        location,
+                        startDate,
+                        endDate);
             }
             if (resultCode == Activity.RESULT_CANCELED) {
                 //Write your code if there's no result
@@ -450,11 +493,11 @@ public class MainActivity extends VillimActivity {
         return dateSelected;
     }
 
-    public Date getStartDate() {
+    public DateTime getStartDate() {
         return startDate;
     }
 
-    public Date getEndDate() {
+    public DateTime getEndDate() {
         return endDate;
     }
 

@@ -46,20 +46,31 @@
                 android:layout_marginTop="5dp"
                 android:orientation="horizontal">
 
-                <android.support.v7.widget.AppCompatRatingBar
+                <!--<android.support.v7.widget.AppCompatRatingBar-->
+                <!--android:id="@+id/discover_room_review_rating"-->
+                <!--style="@style/customRatingBar"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_gravity="center_vertical"-->
+                <!--android:numStars="5"-->
+                <!--android:progressTint="@color/rating_color"-->
+                <!--android:stepSize="0.1" />-->
+
+                <me.zhanghai.android.materialratingbar.MaterialRatingBar
                     android:id="@+id/discover_room_review_rating"
-                    style="@style/customRatingBar"
+                    style="@style/Widget.MaterialRatingBar.RatingBar.Indicator.Small"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:numStars="5"
                     android:progressTint="@color/rating_color"
+                    android:secondaryProgressTint="@color/rating_color"
                     android:stepSize="0.1" />
 
                 <TextView
                     android:id="@+id/discover_room_review_count"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_marginLeft="@dimen/discover_recycler_padding"
                     android:gravity="center_vertical"
                     android:lineSpacingExtra="10sp"

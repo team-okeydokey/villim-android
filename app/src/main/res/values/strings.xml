@@ -34,7 +34,7 @@
     <string name="search_choose_date">\u0020 날짜 선택하기</string>
     <string name="search_date_between">~</string>
     <string name="search_date_format">\u0020 %1$d년 %2$d월 %3$d일</string>
-    <string name="search_no_date">날짜 미정</string>
+    <string name="no_date">날짜 미정</string>
     <string name="search_popular_locations">인기지역</string>
     <string name="invalid_date_selected">내일 날짜부터 예약할 수 있습니다.</string>
 
@@ -52,11 +52,13 @@
     <string name="saturday">토요일</string>
     <string name="sunday">일요일</string>
     <string name="select_different_dates">시작일과 종료일이 같을 수 없습니다.</string>
+    <string name="book_at_least_a_month">최소 입주 기간은 한 달입니다.</string>
+    <string name="month_name_format">LLLL yyyy\n</string>
 
     <!-- Discover Fragment -->
     <string name="key_house">key_house</string>
-    <string name="room_price_value" formatted="false">%s / 박</string>
-    <string name="review_count_text" formatted="false">후기 %d개</string>
+    <string name="room_price_value">%s / 월</string>
+    <string name="review_count_text">후기 %d개</string>
 
     <!-- Room Detail Activity -->
     <string name="room_detail_title">방 정보</string>
@@ -65,7 +67,7 @@
     <string name="num_bedroom_format">방 %d개</string>
     <string name="num_bed_format">침대 %d개</string>
     <string name="num_bathroom_format">욕실 %d개</string>
-    <string name="description_title">상세 설명</string>
+    <string name="description_title">방 설명</string>
     <string name="amenities_title">시설</string>
     <string name="reviews_title">후기</string>
     <string name="see_more">+ 더보기</string>
@@ -78,8 +80,9 @@
     <string name="reviews_see_more_format">+%d개 후기 더보기</string>
     <string name="reviews_no_review">아직 작성된 후기가 없습니다.</string>
     <string name="reserve">예약하기</string>
-    <string name="check_availability">빌림가능확인</string>
+    <string name="book">입주 신청하기</string>
     <string name="price_text_format">₩ %1$s / %2$d일</string>
+    <string name="price_text_format_no_date">₩ %s / 월</string>
 
     <!-- Amenities -->
     <string name="amenity_bedsheet">침대시트</string>
@@ -129,13 +132,13 @@
         <item>프로필 보기 및 수정</item>
         <item>FAQ</item>
         <item>환경 설정</item>
-        <item>개인정보 이용약관</item>
+        <item>개인정보 보호 및 이용약관</item>
     </string-array>
     <string-array name="profile_items_logged_out">
         <item>로그인</item>
         <item>FAQ</item>
         <item>환경 설정</item>
-        <item>개인정보 이용약관</item>
+        <item>개인정보 보호 및 이용약관</item>
     </string-array>
     <string name="profile">프로필</string>
     <string name="login">로그인</string>
@@ -143,7 +146,7 @@
     <string name="profile_title">프로필 보기 및 수정</string>
     <string name="settings">환경 설정</string>
     <string name="faq">FAQ</string>
-    <string name="privacy_policy">개인정보 이용약관</string>
+    <string name="privacy_policy">개인정보 보호 및 이용약관</string>
 
     <!-- Login Activity -->
     <string name="advert_title">전세계의 집이 나의 집!</string>
@@ -181,15 +184,28 @@
     <string name="basic_description">기본 설명</string>
 
     <!-- Price Policy -->
-    <string name="base_monthly_price">기본 가격: 월단위</string>
+    <string name="base_price">기본 금액</string>
+
+    <string name="base_monthly_price">임대료 (일시불 선불)</string>
+    <string name="base_monthly_price_explanation_1">월 수 x 월세 + 추가로 사용하는 일 수 일일계산</string>
+    <string name="base_monthly_price_explanation_2">시작일 및 종료일은 월 단위로 계산되며, 그 외 추가 일 수는 일일 계산됩니다.</string>
+
+    <string name="utility_fee">관리비</string>
+    <string name="utility_fee_long">관리비 (일시불 선불)</string>
+    <string name="utility_fee_explanation_1" formatted="false">임대료의 15~20%\n3월 - 5월 및 9월 - 11월 임대료의 15%\n6월 - 8월 및 12월 - 2월 임대료의 20%</string>
+    <string name="utility_fee_explanation_2">공과금 목록: 전기, 수도, 난방, 주차, 통신비 (인터넷 및 IP TV)</string>
+
+    <string name="cleaning_fee">퇴실 청소비</string>
+    <string name="cleaning_fee_long">퇴실 청소비 (일시불 선불)</string>
+
     <string name="deposit">보증금</string>
     <string name="additional_guest_fee">추가 인원 요금</string>
-    <string name="cleaning_Fee">청소비</string>
     <string name="won_text_format">%d원</string>
-    <string name="won_symbol_format">₩ %d</string>
+    <string name="won_symbol_format">₩ %s</string>
     <string name="no_deposit">보증금 없음</string>
     <string name="no_additional_fee">추가요금 없음</string>
     <string name="cant_query">불러올 수 없음</string>
+
 
     <!-- Amenity Activity -->
     <string name='amenity'>편의시설</string>
@@ -210,12 +226,11 @@
 
     <!-- Reservation Activity -->
     <string name="villim_reserve">빌림요청</string>
-    <string name="villim_reserve_do">빌림요청하기</string>
     <string name="overview_title_format_hasdate">%1$s에서 %2$d박</string>
     <string name="overview_title_format_nodate">%s</string>
     <string name="host">호스트</string>
     <string name="duration">기간</string>
-    <string name="number_of_nights">숙박일 수</string>
+    <string name="number_of_nights">입주일 수</string>
     <string name="price">금액</string>
     <string name="select_start_Date">시작일 선택</string>
     <string name="select_end_date">종료일 선택</string>
@@ -223,6 +238,7 @@
     <string name="num_nights_format">%d일</string>
     <string name="overview_info_format">인원 %1$d명, 방 %2$d개, 침대 %3$d개, 욕실 %4$d개</string>
     <string name="must_select_date">시작일과 종료일을 선택해주세요.</string>
+    <string name="request_visit">방문 신청하기</string>
 
     <!-- ReservationResult Activity -->
     <string name="date_string_format">"%1$04d-%2$02d-%3$02d"</string>
@@ -233,16 +249,18 @@
     <string name="reservation_date">예약 일자</string>
     <string name="reservation_status">예약 상태</string>
 
-    <string name="reservation_status_waiting">대기중</string>
-    <string name="reservation_status_confirmed">예약 완료</string>
-    <string name="reservation_status_active">거주중</string>
+    <string name="status_pending">대기중</string>
+    <string name="status_confirmed">예약 완료</string>
+    <string name="status_active">거주중</string>
+    <string name="status_done">방문 완료</string>
 
     <!-- Visit Fragment -->
     <string name="no_visit_list">방문 신청한 방이 없습니다.</string>
+    <string name="visit_list">방문 목록</string>
 
     <!-- Visit detail activity -->
     <string name="my_visit_list">내 방문목록</string>
-    <string name="villim_request">빌림 요청</string>
+    <string name="villim_request">빌림 요청하기</string>
     <string name="show_location">위치 보기</string>
     <string name="cancel_visit">방문 취소신청</string>
     <string name="cancel_visit_confirm">정말 방문을 취소 하시겠습니까?</string>
@@ -283,7 +301,7 @@
     <string name="send_again_complete">링크가 재전송되었습니다.</string>
 
     <!-- Logout dialog -->
-    <string name="logout_confirm_format">정말로 %s님 아이디를 로그아웃 하시겠어요?</string>
+    <string name="logout_confirm_format">%s님, 로그아웃 하시겠습니까?</string>
 
     <!-- Settings Activity -->
     <string name="push_notifications">푸쉬 알림</string>
@@ -306,16 +324,46 @@
     <!-- Profile Edit Activity -->
     <string name="sex">성별</string>
     <string name="phone_number">전화번호</string>
-    <string name="add_phone_number">+전화번호 추가하기</string>
-    <string name="city_of_residency">거주 도시</string>
+    <string name="change_phone_number">전화번호 변경</string>
+    <string name="city_of_residence">거주 도시</string>
     <string name="email_privacy_statement">이메일 주소는 다른 회원에게 공개되지 않습니다.</string>
     <string name="sex_privacy_statement">이 자료는 통계 목적으로 사용되어 공개되지 않습니다.</string>
     <string name="edit">수정</string>
+    <string name="edit_profile">프로필 수정</string>
     <string name="profile_updated">프로필 정보가 업데이트 되었습니다.</string>
+    <string name="change">변경</string>
+    <string name="edit_item">%s 수정하기</string>
+    <string name="save">저장</string>
+    <string name="upload_error">업로드 하지 못 했습니다. 디시 시도해주세요.</string>
     <string-array name="sex_array">
         <item>남자</item>
         <item>여자</item>
         <item>비공개</item>
     </string-array>
+
+    <!-- Utility -->
+    <string name="money_format">%1$s %2$s</string>
+
+    <!-- Add phone number activity -->
+    <string name="add_phone_number">전화번호 추가</string>
+    <string name="enter_phone_number">전화번호를 입력하세요.</string>
+    <string name="phone_number_hint">\'-\' 없이 숫자만 입력해주세요.</string>
+    <string name="phone_number_non_digit">숫자만 입력해주세요.</string>
+    <string name="phone_number_too_short">전화번호가 너무 짧습니다.</string>
+    <string name="phone_number_too_long">전화번호가 너무 깁니다.</string>
+
+    <!-- Visit success activity -->
+    <string name="visit_code">방문번호</string>
+    <string name="visit_guest">방문자</string>
+    <string name="visit_request_success">방문 요청 완료</string>
+    <string name="visit_status">방문 상태</string>
+
+    <!-- Add phone numbr activity -->
+    <string name="verify_phone">전화번호 인증</string>
+    <string name="verify_phone_title">인증번호를 입력해주세요</string>
+    <string name="verify_phone_instructions">핸드폰으로 전송된 인증번호를 입력해주세요.</string>
+
+    <!-- DateTime format -->
+    <string name="date_format">yyyy-MM-dd</string>
 
 </resources>

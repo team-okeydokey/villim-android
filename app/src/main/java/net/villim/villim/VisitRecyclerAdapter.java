@@ -3,7 +3,6 @@ package net.villim.villim;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,10 +14,6 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 
 import java.text.NumberFormat;
-
-import static net.villim.villim.CalendarActivity.END_DATE;
-import static net.villim.villim.CalendarActivity.START_DATE;
-import static net.villim.villim.MainActivity.DATE_SELECTED;
 
 /**
  * Created by seongmin on 6/16/17.
@@ -97,9 +92,9 @@ public class VisitRecyclerAdapter extends RecyclerView.Adapter<VisitRecyclerAdap
         /* Currency symbol */
         VillimSession session = new VillimSession(context);
         holder.currencySymbol.setText(
-                VillimUtil.currencyStringFromInt(context, session.getCurrencyPref(), false));
+                net.villim.villim.VillimUtils.currencyStringFromInt(context, session.getCurrencyPref(), false));
         /* Room Rate */
-        int price = currItem.ratePerNight;
+        int price = currItem.ratePerMonth;
         String priceString = NumberFormat.getIntegerInstance().format(price);
         String priceText = String.format(context.getString(R.string.room_price_value, priceString));
         holder.houseRate.setText(priceText);

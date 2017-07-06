@@ -1,0 +1,6 @@
+<resources>
+
+    <!-- Date Filter Activity -->
+    <string name="month_name_format">yyyy년 LLLL\n</string>
+
+</resources>

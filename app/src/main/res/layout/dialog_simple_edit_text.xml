@@ -1,0 +1,91 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="13dp"
+        android:paddingLeft="13dp"
+        android:paddingRight="13dp"
+        android:paddingTop="13dp">
+
+        <TextView
+            android:id="@+id/dialog_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center_horizontal"
+            android:text="@string/cancel_visit"
+            android:textColor="#333333"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/close_button"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/btn_close" />
+
+    </RelativeLayout>
+
+    <include
+        layout="@layout/category_divider_dark"
+        android:background="#ed2025" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="10dp"
+        android:paddingLeft="13dp"
+        android:paddingRight="13dp">
+
+        <RelativeLayout
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/field_name"
+                android:layout_width="@dimen/profile_edit_item_title_width"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:textColor="#05060b"
+                android:textSize="17sp" />
+
+            <EditText
+                android:id="@+id/field_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/field_name"
+                android:gravity="left|center_vertical"
+                android:lineSpacingExtra="5sp"
+                android:maxLines="1"
+                android:textColor="#585757"
+                android:textSize="17sp" />
+
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/confirm_button"
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:background="@drawable/next_button"
+            android:gravity="center"
+            android:lineSpacingExtra="5sp"
+            android:text="@string/confirm"
+            android:textColor="@drawable/next_button_text"
+            android:textSize="15sp" />
+    </LinearLayout>
+
+
+</LinearLayout>

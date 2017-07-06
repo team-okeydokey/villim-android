@@ -2,13 +2,11 @@ package net.villim.villim;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.res.ResourcesCompat;
-import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,7 +37,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-import static net.villim.villim.VillimKeys.KEY_END_DATE;
+import static net.villim.villim.VillimKeys.KEY_CHECKOUT;
 import static net.villim.villim.VillimKeys.KEY_HOUSE_ID;
 import static net.villim.villim.VillimKeys.KEY_HOUSE_NAME;
 import static net.villim.villim.VillimKeys.KEY_HOUSE_THUMBNAIL_URL;
@@ -47,7 +45,7 @@ import static net.villim.villim.VillimKeys.KEY_MESSAGE;
 import static net.villim.villim.VillimKeys.KEY_OPEN_AUTHORIZED;
 import static net.villim.villim.VillimKeys.KEY_OPEN_SUCESS;
 import static net.villim.villim.VillimKeys.KEY_QUERY_SUCCESS;
-import static net.villim.villim.VillimKeys.KEY_START_DATE;
+import static net.villim.villim.VillimKeys.KEY_CHECKIN;
 import static net.villim.villim.VillimKeys.MY_HOUSE_URL;
 import static net.villim.villim.VillimKeys.OPEN_DOORLOCK_URL;
 import static net.villim.villim.VillimKeys.SERVER_HOST;
@@ -204,11 +202,10 @@ public class MyKeyFragment extends Fragment {
                     /* 주의: response.body().string()은 한 번 부를 수 있음 */
                     JSONObject jsonObject = new JSONObject(response.body().string());
                     if (jsonObject.getBoolean(KEY_QUERY_SUCCESS)) {
-
                         houseId = jsonObject.optInt(KEY_HOUSE_ID);
                         houseName = jsonObject.optString(KEY_HOUSE_NAME);
-                        startDate = VillimUtil.dateFromDateString(jsonObject.optString(KEY_START_DATE));
-                        endDate = VillimUtil.dateFromDateString(jsonObject.optString(KEY_END_DATE));
+                        startDate = net.villim.villim.VillimUtils.dateFromDateString(jsonObject.optString(KEY_CHECKIN));
+                        endDate = net.villim.villim.VillimUtils.dateFromDateString(jsonObject.optString(KEY_CHECKOUT));
                         houseThumbnailUrl = jsonObject.optString(KEY_HOUSE_THUMBNAIL_URL);
 
                         getActivity().runOnUiThread(new Runnable() {
@@ -316,7 +313,7 @@ public class MyKeyFragment extends Fragment {
         sliderThumb.setBounds(0,0,thumbSize,thumbSize);
         slideButton.setThumb(sliderThumb);
 //        slideButton.setThumbOffset(35); // Magic number that i found.
-        slideButton.setThumbOffset(VillimUtil.dpToPixel(getContext(), 13)); // Magic number that i found.
+        slideButton.setThumbOffset(net.villim.villim.VillimUtils.dpToPixel(getContext(), 13)); // Magic number that i found.
         slideButton.setOnClickListener(null);
         slideButton.setOnSlideChangeListener(null);
         slideButton.setSlideButtonListener(new SlideButton.SlideButtonListener() {

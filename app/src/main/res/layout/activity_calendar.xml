@@ -71,9 +71,9 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_below="@+id/start_end_buttons"
-        android:layout_marginLeft="@dimen/date_filter_text_padding_side"
-        android:layout_marginRight="@dimen/date_filter_text_padding_side"
-        android:background="@color/divider_color" />
+        android:layout_marginLeft="@dimen/calendar_padding_side"
+        android:layout_marginRight="@dimen/calendar_padding_side"
+        android:background="@color/divider_color_dark" />
 
 
     <!-- CalendarView -->
@@ -101,9 +101,9 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/date_filter_bottom_button_height"
         android:layout_alignParentBottom="true"
-        android:background="@color/date_filter_bottom_button_color"
+        android:background="@drawable/send_again_button"
         android:text="@string/date_filter_save_date"
-        android:textColor="#ffffff"
+        android:textColor="@color/dark_button_text"
         android:textSize="17sp" />
 
 </RelativeLayout>

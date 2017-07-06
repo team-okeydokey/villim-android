@@ -30,9 +30,9 @@
 
     <!-- Top buttons -->
     <RelativeLayout
-        android:layout_below="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar">
 
         <Button
             android:id="@+id/location_button"
@@ -108,25 +108,18 @@
 
     <Button
         android:id="@+id/bottom_button"
-        android:layout_width="@dimen/slide_button_width"
+        android:layout_width="match_parent"
         android:layout_height="@dimen/slide_button_height"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="@dimen/slide_button_bottom_margin"
+        android:layout_marginLeft="@dimen/mykey_button_margin_side"
+        android:layout_marginRight="@dimen/mykey_button_margin_side"
         android:background="@drawable/back_slide_button"
         android:lineSpacingExtra="6.9sp"
         android:textColor="#ffffff"
         android:textSize="16.8sp" />
 
-    <com.wang.avi.AVLoadingIndicatorView
-        android:id="@+id/loading_indicator"
-        style="@style/AVLoadingIndicatorView.Large"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:visibility="gone"
-        app:indicatorColor="@color/loading_animation_color"
-        app:indicatorName="BallGridPulseIndicator" />
+    <include layout="@layout/loading_indicator" />
 
 </RelativeLayout>

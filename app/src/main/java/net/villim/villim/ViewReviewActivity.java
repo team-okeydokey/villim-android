@@ -187,28 +187,24 @@ public class ViewReviewActivity extends VillimActivity {
     private void populateView(JSONObject jsonObject) {
 
         try {
-
             /* Add ratings */
-            overAllRatingBar.setRating((float) jsonObject.getDouble(KEY_RATING_OVERALL));
-            accuracyRatingBar.setRating((float) jsonObject.getDouble(KEY_RATING_ACCURACY));
-            communicationRatingBar.setRating((float) jsonObject.getDouble(KEY_RATING_COMMUNICATION));
-            cleanlinessRatingBar.setRating((float) jsonObject.getDouble(KEY_RATING_CLEANLINESS));
-            locationRatingBar.setRating((float) jsonObject.getDouble(KEY_RATING_LOCATION));
-            checkinRatingBar.setRating((float) jsonObject.getDouble(KEY_RATING_CHECKIN));
-            valueRatingBar.setRating((float) jsonObject.getDouble(KEY_RATING_VALUE));
-
+            overAllRatingBar.setRating((float) jsonObject.optDouble(KEY_RATING_OVERALL));
+            accuracyRatingBar.setRating((float) jsonObject.optDouble(KEY_RATING_ACCURACY));
+            communicationRatingBar.setRating((float) jsonObject.optDouble(KEY_RATING_COMMUNICATION));
+            cleanlinessRatingBar.setRating((float) jsonObject.optDouble(KEY_RATING_CLEANLINESS));
+            locationRatingBar.setRating((float) jsonObject.optDouble(KEY_RATING_LOCATION));
+            checkinRatingBar.setRating((float) jsonObject.optDouble(KEY_RATING_CHECKIN));
+            valueRatingBar.setRating((float) jsonObject.optDouble(KEY_RATING_VALUE));
 
             JSONArray reviewsArray = jsonObject.getJSONArray(KEY_REVIEWS);
 
             /* Indicate review count in title. */
-            reviewCount.setText(String.format(getString(R.string.review_count_format), reviewsArray.length()));
 
+            reviewCount.setText(String.format(getString(R.string.review_count_format), reviewsArray.length()));
             VillimReview[] reviews = VillimReview.reviewArrayFromJsonArray(reviewsArray);
             ReviewAdapter adapter = new ReviewAdapter(this, reviews);
             reviewListView.setAdapter(adapter);
-
         } catch (JSONException e) {
-
         }
     }
 
@@ -249,17 +245,17 @@ public class ViewReviewActivity extends VillimActivity {
             VillimReview review = (VillimReview) getItem(position);
 
             ImageView reviewerProfilePic = (ImageView) view.findViewById(R.id.reviewer_profile_pic);
-            TextView reviewerName = (TextView) view.findViewById(R.id.reviewer_name);
-            TextView reviewDate = (TextView) view.findViewById(R.id.review_date);
-            TextView reviewContent = (TextView) view.findViewById(R.id.review_content);
+            TextView reviewerNameTextView = (TextView) view.findViewById(R.id.reviewer_name);
+            TextView reviewDateTextView = (TextView) view.findViewById(R.id.review_date);
+            TextView reviewContentTextView = (TextView) view.findViewById(R.id.review_content);
 
             Glide.with(getApplicationContext()).load(review.reviewerProfilePicUrl).into(reviewerProfilePic);
-            reviewerName.setText(review.reviewerName);
+            reviewerNameTextView.setText(review.reviewerName);
             String reviewDateString = String.format(getString(R.string.review_date_format),
                     review.reviewDate.getYear()+1900,
                     review.reviewDate.getMonth() + 1);
-            reviewDate.setText(reviewDateString);
-            reviewContent.setText(review.reviewContent);
+            reviewDateTextView.setText(reviewDateString);
+            reviewContentTextView.setText(review.reviewContent);
 
             return view;
         }

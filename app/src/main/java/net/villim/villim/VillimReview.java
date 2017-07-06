@@ -8,21 +8,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
-import java.net.URL;
 import java.util.Date;
-
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.HttpUrl;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 
 import static net.villim.villim.VillimKeys.KEY_HOST_ID;
 import static net.villim.villim.VillimKeys.KEY_HOUSE_ID;
-import static net.villim.villim.VillimKeys.KEY_MESSAGE;
-import static net.villim.villim.VillimKeys.KEY_QUERY_SUCCESS;
 import static net.villim.villim.VillimKeys.KEY_RATING_ACCURACY;
 import static net.villim.villim.VillimKeys.KEY_RATING_CHECKIN;
 import static net.villim.villim.VillimKeys.KEY_RATING_CLEANLINESS;
@@ -34,7 +23,6 @@ import static net.villim.villim.VillimKeys.KEY_RESERVATION_ID;
 import static net.villim.villim.VillimKeys.KEY_REVIEWER_ID;
 import static net.villim.villim.VillimKeys.KEY_REVIEWER_NAME;
 import static net.villim.villim.VillimKeys.KEY_REVIEWER_PROFILE_PIC_URL;
-import static net.villim.villim.VillimKeys.KEY_REVIEWS;
 import static net.villim.villim.VillimKeys.KEY_REVIEW_CONTENT;
 import static net.villim.villim.VillimKeys.KEY_REVIEW_DATE;
 
@@ -110,24 +98,23 @@ public class VillimReview implements Parcelable {
 
          /* No need to null check here because if we dont set it, it's going to be null anyway */
         try {
-            review.houseId = reviewInfo.getInt(KEY_HOUSE_ID);
-            review.hostId = reviewInfo.getInt(KEY_HOST_ID);
-            review.reviewerId = reviewInfo.getInt(KEY_REVIEWER_ID);
-            review.reservationId = reviewInfo.getInt(KEY_RESERVATION_ID);
-            review.reviewerName = reviewInfo.getString(KEY_REVIEWER_NAME);
-            review.reviewContent = reviewInfo.getString(KEY_REVIEW_CONTENT);
+            review.houseId = reviewInfo.optInt(KEY_HOUSE_ID);
+            review.hostId = reviewInfo.optInt(KEY_HOST_ID);
+            review.reviewerId = reviewInfo.optInt(KEY_REVIEWER_ID);
+            review.reservationId = reviewInfo.optInt(KEY_RESERVATION_ID);
+            review.reviewerName = reviewInfo.optString(KEY_REVIEWER_NAME);
+            review.reviewContent = reviewInfo.optString(KEY_REVIEW_CONTENT);
             boolean isReviewerProfilePicUrlNull = reviewInfo.isNull(KEY_REVIEWER_PROFILE_PIC_URL);
             review.reviewerProfilePicUrl = isReviewerProfilePicUrlNull ? null : reviewInfo.getString(KEY_REVIEWER_PROFILE_PIC_URL);
-            review.reviewDate = VillimUtil.dateFromDateString(reviewInfo.getString(KEY_REVIEW_DATE));
-            review.overAllRating = (float) reviewInfo.getDouble(KEY_RATING_OVERALL);
-            review.accuracyRating = (float) reviewInfo.getDouble(KEY_RATING_ACCURACY);
-            review.communicationRating = (float) reviewInfo.getDouble(KEY_RATING_COMMUNICATION);
-            review.cleanlinessRating = (float) reviewInfo.getDouble(KEY_RATING_CLEANLINESS);
-            review.locationRating = (float) reviewInfo.getDouble(KEY_RATING_LOCATION);
-            review.checkinRating = (float) reviewInfo.getDouble(KEY_RATING_CHECKIN);
-            review.valueRating = (float) reviewInfo.getDouble(KEY_RATING_VALUE);
+            review.reviewDate = net.villim.villim.VillimUtils.dateFromDateString(reviewInfo.getString(KEY_REVIEW_DATE));
+            review.overAllRating = (float) reviewInfo.optDouble(KEY_RATING_OVERALL);
+            review.accuracyRating = (float) reviewInfo.optDouble(KEY_RATING_ACCURACY);
+            review.communicationRating = (float) reviewInfo.optDouble(KEY_RATING_COMMUNICATION);
+            review.cleanlinessRating = (float) reviewInfo.optDouble(KEY_RATING_CLEANLINESS);
+            review.locationRating = (float) reviewInfo.optDouble(KEY_RATING_LOCATION);
+            review.checkinRating = (float) reviewInfo.optDouble(KEY_RATING_CHECKIN);
+            review.valueRating = (float) reviewInfo.optDouble(KEY_RATING_VALUE);
         } catch (JSONException e) {
-
         }
         return review;
     }

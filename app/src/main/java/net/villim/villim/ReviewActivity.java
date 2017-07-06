@@ -51,7 +51,6 @@ import static net.villim.villim.VillimKeys.KEY_RATING_COMMUNICATION;
 import static net.villim.villim.VillimKeys.KEY_RATING_LOCATION;
 import static net.villim.villim.VillimKeys.KEY_RATING_VALUE;
 import static net.villim.villim.VillimKeys.KEY_REVIEW_CONTENT;
-import static net.villim.villim.VillimKeys.KEY_ROOM_ID;
 import static net.villim.villim.VillimKeys.POST_REVIEW_URL;
 import static net.villim.villim.VillimKeys.SERVER_HOST;
 import static net.villim.villim.VillimKeys.SERVER_SCHEME;

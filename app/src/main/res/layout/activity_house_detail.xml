@@ -8,18 +8,6 @@
     android:background="@color/room_detail_background"
     tools:context="net.villim.villim.HouseDetailActivity">
 
-
-    <com.wang.avi.AVLoadingIndicatorView
-        android:id="@+id/loading_indicator"
-        style="@style/AVLoadingIndicatorView.Large"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:visibility="gone"
-        app:indicatorColor="@color/loading_animation_color"
-        app:indicatorName="BallGridPulseIndicator" />
-
     <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
@@ -40,6 +28,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:fitsSystemWindows="true"
+                app:titleEnabled="false"
                 app:contentScrim="?attr/colorPrimary"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
 
@@ -54,11 +43,26 @@
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/toolbar_height"
+                    app:contentInsetStartWithNavigation="0dp"
                     android:elevation="3dp"
                     app:contentInsetEnd="0dp"
                     app:contentInsetStart="0dp"
                     app:layout_collapseMode="pin"
-                    app:popupTheme="@style/CollapsingToolbar" />
+                    app:popupTheme="@style/CollapsingToolbar">
+
+
+                    <TextView
+                        android:id="@+id/toolbar_title"
+                        style="@style/ToolbarTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:text="@string/room_detail_title"
+                        android:textColor="@color/toolbar_title_color" />
+
+
+                </android.support.v7.widget.Toolbar>
 
             </android.support.design.widget.CollapsingToolbarLayout>
 
@@ -86,7 +90,7 @@
                     android:paddingBottom="15dp"
                     android:paddingLeft="@dimen/room_detail_activity_padding"
                     android:paddingRight="@dimen/room_detail_activity_padding"
-                    android:paddingTop="20dp">
+                    android:paddingTop="15dp">
 
                     <!-- Host profile pic -->
                     <com.mikhaellopez.circularimageview.CircularImageView
@@ -121,15 +125,26 @@
                             android:layout_below="@+id/host_name"
                             android:orientation="horizontal">
 
-                            <android.support.v7.widget.AppCompatRatingBar
+                            <!--<android.support.v7.widget.AppCompatRatingBar-->
+                                <!--android:id="@+id/host_review_rating"-->
+                                <!--style="@style/customRatingBar"-->
+                                <!--android:layout_width="wrap_content"-->
+                                <!--android:layout_height="match_parent"-->
+                                <!--android:layout_gravity="center_vertical"-->
+                                <!--android:isIndicator="true"-->
+                                <!--android:numStars="5"-->
+                                <!--android:progressTint="@color/rating_color"-->
+                                <!--android:stepSize="0.1" />-->
+
+                            <me.zhanghai.android.materialratingbar.MaterialRatingBar
                                 android:id="@+id/host_review_rating"
-                                style="@style/customRatingBar"
+                                style="@style/Widget.MaterialRatingBar.RatingBar.Indicator.Small"
                                 android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
+                                android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
-                                android:isIndicator="true"
                                 android:numStars="5"
                                 android:progressTint="@color/rating_color"
+                                android:secondaryProgressTint="@color/rating_color"
                                 android:stepSize="0.1" />
 
                             <TextView
@@ -191,7 +206,7 @@
 
                 <!-- End house name & address -->
 
-                <include layout="@layout/category_divider" />
+                <include layout="@layout/category_divider_dark" />
 
                 <!-- Iconographs -->
                 <android.support.v7.widget.LinearLayoutCompat
@@ -285,7 +300,7 @@
                 </android.support.v7.widget.LinearLayoutCompat>
                 <!-- End Iconographs -->
 
-                <include layout="@layout/category_divider" />
+                <include layout="@layout/category_divider_dark" />
 
                 <!-- Description -->
 
@@ -321,7 +336,7 @@
                     android:text="@string/see_more" />
                 <!-- End description -->
 
-                <include layout="@layout/category_divider" />
+                <include layout="@layout/category_divider_dark" />
 
                 <!-- Price policy -->
                 <RelativeLayout
@@ -355,7 +370,7 @@
                 </RelativeLayout>
                 <!-- End price policy -->
 
-                <include layout="@layout/category_divider" />
+                <include layout="@layout/category_divider_dark" />
 
                 <!-- Amenities -->
 
@@ -384,7 +399,7 @@
                 </android.support.v7.widget.LinearLayoutCompat>
                 <!-- End Amenities -->
 
-                <include layout="@layout/category_divider" />
+                <include layout="@layout/category_divider_dark" />
 
                 <!-- Reviews -->
 
@@ -437,16 +452,27 @@
                                 android:layout_height="wrap_content" />
 
                             <!-- Reviewer rating -->
-                            <android.support.v7.widget.AppCompatRatingBar
+                            <!--<android.support.v7.widget.AppCompatRatingBar-->
+                            <!--android:id="@+id/reviewer_rating"-->
+                            <!--style="@style/customRatingBar"-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="match_parent"-->
+                            <!--android:layout_gravity="center_vertical"-->
+                            <!--android:layout_marginLeft="@dimen/reviews_padding"-->
+                            <!--android:isIndicator="true"-->
+                            <!--android:numStars="5"-->
+                            <!--android:progressTint="@color/rating_color"-->
+                            <!--android:stepSize="0.1" />-->
+                            <me.zhanghai.android.materialratingbar.MaterialRatingBar
                                 android:id="@+id/reviewer_rating"
-                                style="@style/customRatingBar"
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:layout_gravity="center_vertical"
                                 android:layout_marginLeft="@dimen/reviews_padding"
-                                android:isIndicator="true"
+                                style="@style/Widget.MaterialRatingBar.RatingBar.Indicator.Small"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
                                 android:numStars="5"
                                 android:progressTint="@color/rating_color"
+                                android:secondaryProgressTint="@color/rating_color"
                                 android:stepSize="0.1" />
 
                         </android.support.v7.widget.LinearLayoutCompat>
@@ -474,19 +500,30 @@
                                 android:textColor="@color/see_more"
                                 android:textSize="13sp" />
 
-                            <!-- House rating -->
-                            <android.support.v7.widget.AppCompatRatingBar
+                            <!--&lt;!&ndash; House rating &ndash;&gt;-->
+                            <!--<android.support.v7.widget.AppCompatRatingBar-->
+                            <!--android:id="@+id/house_rating"-->
+                            <!--style="@style/customRatingBar"-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="match_parent"-->
+                            <!--android:layout_alignParentRight="true"-->
+                            <!--android:layout_gravity="center_vertical"-->
+                            <!--android:isIndicator="true"-->
+                            <!--android:numStars="5"-->
+                            <!--android:progressTint="@color/rating_color"-->
+                            <!--android:stepSize="0.1" />-->
+
+                            <me.zhanghai.android.materialratingbar.MaterialRatingBar
                                 android:id="@+id/house_rating"
-                                style="@style/customRatingBar"
+                                style="@style/Widget.MaterialRatingBar.RatingBar.Indicator.Small"
                                 android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
                                 android:layout_alignParentRight="true"
+                                android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
-                                android:isIndicator="true"
                                 android:numStars="5"
                                 android:progressTint="@color/rating_color"
+                                android:secondaryProgressTint="@color/rating_color"
                                 android:stepSize="0.1" />
-
 
                         </RelativeLayout>
 
@@ -497,7 +534,7 @@
 
                 <!-- End reviews -->
 
-                <include layout="@layout/category_divider" />
+                <include layout="@layout/category_divider_dark" />
 
                 <!-- Map -->
 
@@ -509,7 +546,7 @@
 
                 <!-- End map -->
 
-                <include layout="@layout/category_divider" />
+                <include layout="@layout/category_divider_dark" />
 
                 <!-- House policy -->
                 <RelativeLayout
@@ -543,7 +580,7 @@
                 </RelativeLayout>
                 <!-- End house policy -->
 
-                <include layout="@layout/category_divider" />
+                <include layout="@layout/category_divider_dark" />
 
                 <!-- Cancellation Policy -->
                 <RelativeLayout
@@ -612,8 +649,8 @@
 
 
                     <TextView
-                        fontPath="fonts/NotoSansCJKkr-Bold.otf"
                         android:id="@+id/reserve_button_price"
+                        fontPath="fonts/NotoSansCJKkr-Bold.otf"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="10dp"
@@ -628,18 +665,21 @@
 
             <!-- Red portion -->
             <TextView
-                fontPath="fonts/NotoSansCJKkr-Medium.otf"
                 android:id="@+id/reserve_button_reserve"
+                fontPath="fonts/NotoSansCJKkr-Medium.otf"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="#de2025"
                 android:gravity="center"
-                android:text="@string/check_availability"
+                android:text="@string/request_visit"
                 android:textColor="#ffffff"
                 android:textSize="17sp" />
 
         </android.support.v7.widget.LinearLayoutCompat>
 
     </android.support.design.widget.CoordinatorLayout>
+
+    <include layout="@layout/loading_indicator" />
+
 </RelativeLayout>

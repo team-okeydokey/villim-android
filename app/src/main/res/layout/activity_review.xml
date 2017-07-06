@@ -54,17 +54,29 @@
                 android:textColor="#05060b"
                 android:textSize="16sp" />
 
-            <android.support.v7.widget.AppCompatRatingBar
+            <!--<android.support.v7.widget.AppCompatRatingBar-->
+                <!--android:id="@+id/overall_ratingbar"-->
+                <!--style="@style/customRatingBar"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_centerVertical="true"-->
+                <!--android:layout_marginLeft="10dp"-->
+                <!--android:layout_toRightOf="@+id/rating_title"-->
+                <!--android:isIndicator="true"-->
+                <!--android:numStars="5"-->
+                <!--android:progressTint="@color/rating_color"-->
+                <!--android:stepSize="0.1" />-->
+
+            <me.zhanghai.android.materialratingbar.MaterialRatingBar
                 android:id="@+id/overall_ratingbar"
-                style="@style/customRatingBar"
+                style="@style/Widget.MaterialRatingBar.RatingBar.Indicator"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
+                android:layout_height="24dp"
                 android:layout_marginLeft="10dp"
                 android:layout_toRightOf="@+id/rating_title"
-                android:isIndicator="true"
                 android:numStars="5"
                 android:progressTint="@color/rating_color"
+                android:secondaryProgressTint="@color/rating_color"
                 android:stepSize="0.1" />
 
 
@@ -80,7 +92,7 @@
                 android:textSize="16sp" />
         </RelativeLayout>
 
-        <include layout="@layout/category_divider" />
+        <include layout="@layout/category_divider_dark" />
 
         <!-- Review content -->
         <TextView
@@ -132,15 +144,6 @@
         android:textColor="@drawable/next_button_text"
         android:textSize="@dimen/next_button_text_size" />
 
-    <com.wang.avi.AVLoadingIndicatorView
-        android:id="@+id/loading_indicator"
-        style="@style/AVLoadingIndicatorView.Large"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:visibility="gone"
-        app:indicatorColor="@color/loading_animation_color"
-        app:indicatorName="BallGridPulseIndicator" />
+    <include layout="@layout/loading_indicator" />
 
 </RelativeLayout>

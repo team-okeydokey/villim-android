@@ -4,20 +4,28 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
+import java.io.File;
+
 import static net.villim.villim.VillimKeys.KEY_CITY_OF_RESIDENCE;
-import static net.villim.villim.VillimKeys.KEY_CURRENCY_PREFERENCE;
+import static net.villim.villim.VillimKeys.KEY_LOCAL_STORE_PROFILE_PICTURE;
+import static net.villim.villim.VillimKeys.KEY_PREFERENCE_CURRENCY;
 import static net.villim.villim.VillimKeys.KEY_EMAIL;
 import static net.villim.villim.VillimKeys.KEY_FIRSTNAME;
 import static net.villim.villim.VillimKeys.KEY_FULLNAME;
-import static net.villim.villim.VillimKeys.KEY_LANGUAGE_PREFERENCE;
+import static net.villim.villim.VillimKeys.KEY_PREFERENCE_LANGUAGE;
 import static net.villim.villim.VillimKeys.KEY_LASTNAME;
 import static net.villim.villim.VillimKeys.KEY_PHONE_NUMBER;
 import static net.villim.villim.VillimKeys.KEY_PROFILE_PIC_URL;
 import static net.villim.villim.VillimKeys.KEY_PUSH_NOTIFICATIONS;
-import static net.villim.villim.VillimKeys.KEY_ROOM_ID;
 import static net.villim.villim.VillimKeys.KEY_SEX;
 import static net.villim.villim.VillimKeys.KEY_USER_ID;
 import static net.villim.villim.VillimKeys.KEY_USER_STATUS;
+import static net.villim.villim.VillimKeys.KEY_HOUSE_ID_CONFIRMED;
+import static net.villim.villim.VillimKeys.KEY_HOUSE_ID_STAYING;
+import static net.villim.villim.VillimKeys.KEY_HOUSE_ID_DONE;
+import static net.villim.villim.VillimKeys.KEY_VISIT_HOUSE_ID_PENDING;
+import static net.villim.villim.VillimKeys.KEY_VISIT_HOUSE_ID_CONFIRMED;
+import static net.villim.villim.VillimKeys.KEY_VISIT_HOUSE_ID_DONE;
 
 /**
  * Created by seongmin on 6/9/17.
@@ -115,15 +123,6 @@ public class VillimSession {
         return status;
     }
 
-    /* Room id */
-    public void setRoomId(int roomId) {
-        prefs.edit().putInt(KEY_ROOM_ID, roomId).apply();
-    }
-
-    public int getRoomId() {
-        int roomId = prefs.getInt(KEY_ROOM_ID, 0);
-        return roomId;
-    }
 
     /* Push Notifications */
     public void setPushPref(boolean pushPref) {
@@ -137,21 +136,21 @@ public class VillimSession {
 
     /* Currency */
     public void setCurrencyPref(int currencyPref) {
-        prefs.edit().putInt(KEY_CURRENCY_PREFERENCE, currencyPref).apply();
+        prefs.edit().putInt(KEY_PREFERENCE_CURRENCY, currencyPref).apply();
     }
 
     public int getCurrencyPref() {
-        int currencyPref = prefs.getInt(KEY_CURRENCY_PREFERENCE, 0);
+        int currencyPref = prefs.getInt(KEY_PREFERENCE_CURRENCY, 0);
         return currencyPref;
     }
 
     /* Language */
     public void setLanguagePref(int languagePref) {
-        prefs.edit().putInt(KEY_LANGUAGE_PREFERENCE, languagePref).apply();
+        prefs.edit().putInt(KEY_PREFERENCE_LANGUAGE, languagePref).apply();
     }
 
     public int getLanguagePref() {
-        int languagePref = prefs.getInt(KEY_LANGUAGE_PREFERENCE, 0);
+        int languagePref = prefs.getInt(KEY_PREFERENCE_LANGUAGE, 0);
         return languagePref;
     }
 
@@ -185,6 +184,163 @@ public class VillimSession {
         return city;
     }
 
+    /* House id confirmed */
+    public void setHouseIdConfirmed(int[] houseIdArray) {
+        StringBuilder str = new StringBuilder();
+        for (int i = 0; i < houseIdArray.length; i++) {
+            str.append(houseIdArray[i]).append(",");
+        }
+        prefs.edit().putString(KEY_HOUSE_ID_CONFIRMED, str.toString()).apply();
+    }
+
+    public int[] getHosueIdConfirmed() {
+        String rawString = prefs.getString(KEY_HOUSE_ID_CONFIRMED, "");
+        if (rawString.isEmpty()) {
+            return new int[0];
+        } else {
+            String[] stringArray = rawString.split(",");
+            int[] houseIdArray = new int[stringArray.length];
+
+            for (int i = 0; i < houseIdArray.length; i++) {
+                houseIdArray[i] = Integer.parseInt(stringArray[i]);
+            }
+            return houseIdArray;
+        }
+    }
+
+    /* House id staying */
+    public void setHouseIdStaying(int id) {
+        prefs.edit().putInt(KEY_HOUSE_ID_STAYING, id).apply();
+    }
+
+    public int getHouseIdStaying() {
+        int id = prefs.getInt(KEY_HOUSE_ID_STAYING, 0);
+        return id;
+    }
+
+    /* House id done */
+    public void setHouseIdDone(int[] houseIdArray) {
+        StringBuilder str = new StringBuilder();
+        for (int i = 0; i < houseIdArray.length; i++) {
+            str.append(houseIdArray[i]).append(",");
+        }
+        prefs.edit().putString(KEY_HOUSE_ID_DONE, str.toString()).apply();
+    }
+
+    public int[] getHosueIdDone() {
+        String rawString = prefs.getString(KEY_HOUSE_ID_DONE, "");
+        if (rawString.isEmpty()) {
+            return new int[0];
+        } else {
+            String[] stringArray = rawString.split(",");
+            int[] houseIdArray = new int[stringArray.length];
+
+            for (int i = 0; i < houseIdArray.length; i++) {
+                houseIdArray[i] = Integer.parseInt(stringArray[i]);
+            }
+            return houseIdArray;
+        }
+    }
+
+    /* Visit house id pending */
+    public void setVisitHouseIdPending(int[] houseIdArray) {
+        StringBuilder str = new StringBuilder();
+        for (int i = 0; i < houseIdArray.length; i++) {
+            str.append(houseIdArray[i]).append(",");
+        }
+        prefs.edit().putString(KEY_VISIT_HOUSE_ID_PENDING, str.toString()).apply();
+    }
+
+    public int[] getVisitHosueIdPending() {
+        String rawString = prefs.getString(KEY_VISIT_HOUSE_ID_PENDING, "");
+        if (rawString.isEmpty()) {
+            return new int[0];
+        } else {
+            String[] stringArray = rawString.split(",");
+            int[] houseIdArray = new int[stringArray.length];
+
+            for (int i = 0; i < houseIdArray.length; i++) {
+                houseIdArray[i] = Integer.parseInt(stringArray[i]);
+            }
+            return houseIdArray;
+        }
+    }
+
+    /* Visit house id confirmed */
+    public void setVisitHouseIdConfirmed(int[] houseIdArray) {
+        StringBuilder str = new StringBuilder();
+        for (int i = 0; i < houseIdArray.length; i++) {
+            str.append(houseIdArray[i]).append(",");
+        }
+        prefs.edit().putString(KEY_VISIT_HOUSE_ID_CONFIRMED, str.toString()).apply();
+    }
+
+    public int[] getVisitHosueIdConfirmed() {
+        String rawString = prefs.getString(KEY_VISIT_HOUSE_ID_CONFIRMED, "");
+        if (rawString.isEmpty()) {
+            return new int[0];
+        } else {
+            String[] stringArray = rawString.split(",");
+            int[] houseIdArray = new int[stringArray.length];
+
+            for (int i = 0; i < houseIdArray.length; i++) {
+                houseIdArray[i] = Integer.parseInt(stringArray[i]);
+            }
+            return houseIdArray;
+        }
+    }
+
+    /* Visit House id done */
+    public void setVisitHouseIdDone(int[] houseIdArray) {
+        StringBuilder str = new StringBuilder();
+        for (int i = 0; i < houseIdArray.length; i++) {
+            str.append(houseIdArray[i]).append(",");
+        }
+        prefs.edit().putString(KEY_VISIT_HOUSE_ID_DONE, str.toString()).apply();
+    }
+
+    public int[] getVisitHouseIdDone() {
+        String rawString = prefs.getString(KEY_VISIT_HOUSE_ID_DONE, "");
+        if (rawString.isEmpty()) {
+            return new int[0];
+        } else {
+            String[] stringArray = rawString.split(",");
+            int[] houseIdArray = new int[stringArray.length];
+
+            for (int i = 0; i < houseIdArray.length; i++) {
+                houseIdArray[i] = Integer.parseInt(stringArray[i]);
+            }
+            return houseIdArray;
+        }
+    }
+
+    /* City of residence */
+    public void setLocalStoreProfilePicturePath(String path) {
+        prefs.edit().putString(KEY_LOCAL_STORE_PROFILE_PICTURE, path).apply();
+    }
+
+    public String getLocalStoreProfilePicturePath() {
+        String path = prefs.getString(KEY_LOCAL_STORE_PROFILE_PICTURE, null);
+        return path;
+    }
+
+    public File getLocalStoreProfilePictureFile() {
+        String path = prefs.getString(KEY_LOCAL_STORE_PROFILE_PICTURE, null);
+
+        if (path == null) { return null; };
+
+        File imageFile = null;
+
+        if (path != null) {
+            imageFile = new File(path);
+            if (imageFile != null && imageFile.exists()) {
+                return imageFile;
+            }
+        }
+
+        return null;
+    }
+
 
     public void updateUserSession(VillimUser user) {
         setUserId(user.userId);
@@ -193,13 +349,17 @@ public class VillimSession {
         setLastName(user.lastname);
         setEmail(user.email);
         setProfilePicUrl(user.profilePicUrl);
-        setStatus(user.status);
-        setRoomId(user.roomId);
         setPushPref(user.pushNotifications);
         setCurrencyPref(user.currencyPref);
         setLanguagePref(user.languagePref);
         setSex(user.sex);
         setPhoneNumber(user.phoneNumber);
         setCityOfResidence(user.cityOfResidence);
+        setHouseIdConfirmed(user.houseIdConfirmed);
+        setHouseIdStaying(user.houseIdStaying);
+        setHouseIdDone(user.houseIdDone);
+        setVisitHouseIdPending(user.visitHouseIdPending);
+        setVisitHouseIdConfirmed(user.visitHouseIdConfirmed);
+        setVisitHouseIdDone(user.visitHouseIdDone);
     }
 }

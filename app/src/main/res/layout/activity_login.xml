@@ -44,13 +44,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/advert_title"
-            android:textSize="@dimen/advert_title_text_size"
-            android:textColor="#05060b" />
+            android:textColor="#05060b"
+            android:textSize="@dimen/advert_title_text_size" />
 
         <TextView
             android:id="@+id/advertDetail"
-            android:layout_width="match_parent"
             fontPath="fonts/NotoSansCJKkr-DemiLight.otf"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="@string/advert_detail"
@@ -91,6 +91,7 @@
             android:layout_height="@dimen/toolbar_height"
             android:layout_below="@id/login_form_email"
             android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
             android:background="@drawable/login_field"
             android:drawablePadding="@dimen/filter_icon_drawable_padding"
             android:gravity="left|center_vertical"
@@ -159,15 +160,6 @@
         android:textColor="@drawable/next_button_text"
         android:textSize="@dimen/next_button_text_size" />
 
-    <com.wang.avi.AVLoadingIndicatorView
-        android:id="@+id/loading_indicator"
-        style="@style/AVLoadingIndicatorView.Large"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:visibility="gone"
-        app:indicatorColor="@color/loading_animation_color"
-        app:indicatorName="BallGridPulseIndicator" />
+    <include layout="@layout/loading_indicator" />
 
 </RelativeLayout>

@@ -82,7 +82,7 @@
     </RelativeLayout>
 
     <include
-        layout="@layout/category_divider"
+        layout="@layout/category_divider_dark"
         android:background="#e86367" />
 
     <!-- Reservation guest -->
@@ -115,7 +115,7 @@
     </RelativeLayout>
 
     <include
-        layout="@layout/category_divider"
+        layout="@layout/category_divider_dark"
         android:background="#e86367" />
 
     <!-- Reservation date -->
@@ -148,7 +148,7 @@
     </RelativeLayout>
 
     <include
-        layout="@layout/category_divider"
+        layout="@layout/category_divider_dark"
         android:background="#e86367" />
 
     <!-- Reservation status -->

@@ -28,204 +28,292 @@
 
     </android.support.v7.widget.Toolbar>
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/toolbar"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar">
 
-        <!-- 정확성 -->
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="20dp"
-            android:paddingLeft="25dp"
-            android:paddingRight="25dp"
-            android:paddingTop="20dp">
+            android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
+            <!-- 정확성 -->
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:text="@string/accuracy"
-                android:textColor="#05060b"
-                android:textSize="16sp" />
+                android:paddingBottom="20dp"
+                android:paddingLeft="25dp"
+                android:paddingRight="25dp"
+                android:paddingTop="20dp">
 
-            <android.support.v7.widget.AppCompatRatingBar
-                android:id="@+id/accuracy_ratingbar"
-                style="@style/VillimRatingBar"
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:numStars="5"
-                android:stepSize="0.1" />
-        </RelativeLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:text="@string/accuracy"
+                    android:textColor="#05060b"
+                    android:textSize="16sp" />
 
-        <include layout="@layout/category_divider" />
+                <!--<android.support.v7.widget.AppCompatRatingBar-->
+                    <!--android:id="@+id/accuracy_ratingbar"-->
+                    <!--style="@style/VillimRatingBar"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="40dp"-->
+                    <!--android:layout_alignParentRight="true"-->
+                    <!--android:layout_centerVertical="true"-->
+                    <!--android:numStars="5"-->
+                    <!--android:stepSize="0.1" />-->
 
-        <!-- 위치 -->
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="20dp"
-            android:paddingLeft="25dp"
-            android:paddingRight="25dp"
-            android:paddingTop="20dp">
+                <me.zhanghai.android.materialratingbar.MaterialRatingBar
+                    android:id="@+id/accuracy_ratingbar"
+                    style="@style/Widget.MaterialRatingBar.RatingBar"
+                    android:layout_width="wrap_content"
+                    android:indeterminateTint="@color/rating_indeterminant_color"
+                    android:layout_height="40dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:numStars="5"
+                    android:progressTint="@color/rating_color"
+                    android:secondaryProgressTint="@color/rating_color"
+                    android:stepSize="0.1" />
 
-            <TextView
-                android:layout_width="wrap_content"
+            </RelativeLayout>
+
+            <include layout="@layout/category_divider_dark" />
+
+            <!-- 위치 -->
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:text="@string/location"
-                android:textColor="#05060b"
-                android:textSize="16sp" />
+                android:paddingBottom="20dp"
+                android:paddingLeft="25dp"
+                android:paddingRight="25dp"
+                android:paddingTop="20dp">
 
-            <android.support.v7.widget.AppCompatRatingBar
-                android:id="@+id/location_ratingbar"
-                style="@style/VillimRatingBar"
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:numStars="5"
-                android:progressTint="@color/rating_color"
-                android:stepSize="0.1" />
-        </RelativeLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:text="@string/location"
+                    android:textColor="#05060b"
+                    android:textSize="16sp" />
 
-        <include layout="@layout/category_divider" />
+                <!--<android.support.v7.widget.AppCompatRatingBar-->
+                    <!--android:id="@+id/location_ratingbar"-->
+                    <!--style="@style/VillimRatingBar"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="40dp"-->
+                    <!--android:layout_alignParentRight="true"-->
+                    <!--android:layout_centerVertical="true"-->
+                    <!--android:numStars="5"-->
+                    <!--android:progressTint="@color/rating_color"-->
+                    <!--android:stepSize="0.1" />-->
 
-        <!-- 의사소통 -->
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="20dp"
-            android:paddingLeft="25dp"
-            android:paddingRight="25dp"
-            android:paddingTop="20dp">
+                <me.zhanghai.android.materialratingbar.MaterialRatingBar
+                    android:id="@+id/location_ratingbar"
+                    style="@style/Widget.MaterialRatingBar.RatingBar"
+                    android:layout_width="wrap_content"
+                    android:indeterminateTint="@color/rating_indeterminant_color"
+                    android:layout_height="40dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:numStars="5"
+                    android:progressTint="@color/rating_color"
+                    android:secondaryProgressTint="@color/rating_color"
+                    android:stepSize="0.1" />
 
-            <TextView
-                android:layout_width="wrap_content"
+            </RelativeLayout>
+
+            <include layout="@layout/category_divider_dark" />
+
+            <!-- 의사소통 -->
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:text="@string/communication"
-                android:textColor="#05060b"
-                android:textSize="16sp" />
+                android:paddingBottom="20dp"
+                android:paddingLeft="25dp"
+                android:paddingRight="25dp"
+                android:paddingTop="20dp">
 
-            <android.support.v7.widget.AppCompatRatingBar
-                android:id="@+id/communication_ratingbar"
-                style="@style/VillimRatingBar"
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:numStars="5"
-                android:progressTint="@color/rating_color"
-                android:stepSize="0.1" />
-        </RelativeLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:text="@string/communication"
+                    android:textColor="#05060b"
+                    android:textSize="16sp" />
 
-        <include layout="@layout/category_divider" />
+                <!--<android.support.v7.widget.AppCompatRatingBar-->
+                    <!--android:id="@+id/communication_ratingbar"-->
+                    <!--style="@style/VillimRatingBar"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="40dp"-->
+                    <!--android:layout_alignParentRight="true"-->
+                    <!--android:layout_centerVertical="true"-->
+                    <!--android:numStars="5"-->
+                    <!--android:progressTint="@color/rating_color"-->
+                    <!--android:stepSize="0.1" />-->
 
-        <!-- 체크인 -->
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="20dp"
-            android:paddingLeft="25dp"
-            android:paddingRight="25dp"
-            android:paddingTop="20dp">
+                <me.zhanghai.android.materialratingbar.MaterialRatingBar
+                    android:id="@+id/communication_ratingbar"
+                    style="@style/Widget.MaterialRatingBar.RatingBar"
+                    android:layout_width="wrap_content"
+                    android:indeterminateTint="@color/rating_indeterminant_color"
+                    android:layout_height="40dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:numStars="5"
+                    android:progressTint="@color/rating_color"
+                    android:secondaryProgressTint="@color/rating_color"
+                    android:stepSize="0.1" />
 
-            <TextView
-                android:layout_width="wrap_content"
+            </RelativeLayout>
+
+            <include layout="@layout/category_divider_dark" />
+
+            <!-- 체크인 -->
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:text="@string/checkin"
-                android:textColor="#05060b"
-                android:textSize="16sp" />
+                android:paddingBottom="20dp"
+                android:paddingLeft="25dp"
+                android:paddingRight="25dp"
+                android:paddingTop="20dp">
 
-            <android.support.v7.widget.AppCompatRatingBar
-                android:id="@+id/checkin_ratingbar"
-                style="@style/VillimRatingBar"
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:numStars="5"
-                android:progressTint="@color/rating_color"
-                android:stepSize="0.1" />
-        </RelativeLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:text="@string/checkin"
+                    android:textColor="#05060b"
+                    android:textSize="16sp" />
 
-        <include layout="@layout/category_divider" />
+                <!--<android.support.v7.widget.AppCompatRatingBar-->
+                    <!--android:id="@+id/checkin_ratingbar"-->
+                    <!--style="@style/VillimRatingBar"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="40dp"-->
+                    <!--android:layout_alignParentRight="true"-->
+                    <!--android:layout_centerVertical="true"-->
+                    <!--android:numStars="5"-->
+                    <!--android:progressTint="@color/rating_color"-->
+                    <!--android:stepSize="0.1" />-->
 
-        <!-- 청결도 -->
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="20dp"
-            android:paddingLeft="25dp"
-            android:paddingRight="25dp"
-            android:paddingTop="20dp">
+                <me.zhanghai.android.materialratingbar.MaterialRatingBar
+                    android:id="@+id/checkin_ratingbar"
+                    style="@style/Widget.MaterialRatingBar.RatingBar"
+                    android:layout_width="wrap_content"
+                    android:indeterminateTint="@color/rating_indeterminant_color"
+                    android:layout_height="40dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:numStars="5"
+                    android:progressTint="@color/rating_color"
+                    android:secondaryProgressTint="@color/rating_color"
+                    android:stepSize="0.1" />
+            </RelativeLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
+            <include layout="@layout/category_divider_dark" />
+
+            <!-- 청결도 -->
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:text="@string/cleanliness"
-                android:textColor="#05060b"
-                android:textSize="16sp" />
+                android:paddingBottom="20dp"
+                android:paddingLeft="25dp"
+                android:paddingRight="25dp"
+                android:paddingTop="20dp">
 
-            <android.support.v7.widget.AppCompatRatingBar
-                android:id="@+id/cleanliness_ratingbar"
-                style="@style/VillimRatingBar"
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:numStars="5"
-                android:progressTint="@color/rating_color"
-                android:stepSize="0.1" />
-        </RelativeLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:text="@string/cleanliness"
+                    android:textColor="#05060b"
+                    android:textSize="16sp" />
 
-        <include layout="@layout/category_divider" />
+                <!--<android.support.v7.widget.AppCompatRatingBar-->
+                    <!--android:id="@+id/cleanliness_ratingbar"-->
+                    <!--style="@style/VillimRatingBar"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="40dp"-->
+                    <!--android:layout_alignParentRight="true"-->
+                    <!--android:layout_centerVertical="true"-->
+                    <!--android:numStars="5"-->
+                    <!--android:progressTint="@color/rating_color"-->
+                    <!--android:stepSize="0.1" />-->
 
-        <!-- 가치 -->
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="20dp"
-            android:paddingLeft="25dp"
-            android:paddingRight="25dp"
-            android:paddingTop="20dp">
+                <me.zhanghai.android.materialratingbar.MaterialRatingBar
+                    android:id="@+id/cleanliness_ratingbar"
+                    style="@style/Widget.MaterialRatingBar.RatingBar"
+                    android:layout_width="wrap_content"
+                    android:indeterminateTint="@color/rating_indeterminant_color"
+                    android:layout_height="40dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:numStars="5"
+                    android:progressTint="@color/rating_color"
+                    android:secondaryProgressTint="@color/rating_color"
+                    android:stepSize="0.1" />
+            </RelativeLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
+            <include layout="@layout/category_divider_dark" />
+
+            <!-- 가치 -->
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:text="@string/value"
-                android:textColor="#05060b"
-                android:textSize="16sp" />
+                android:paddingBottom="20dp"
+                android:paddingLeft="25dp"
+                android:paddingRight="25dp"
+                android:paddingTop="20dp">
 
-            <android.support.v7.widget.AppCompatRatingBar
-                android:id="@+id/value_ratingbar"
-                style="@style/VillimRatingBar"
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:numStars="5"
-                android:stepSize="0.1" />
-        </RelativeLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:text="@string/value"
+                    android:textColor="#05060b"
+                    android:textSize="16sp" />
 
-        <include layout="@layout/category_divider" />
+                <!--<android.support.v7.widget.AppCompatRatingBar-->
+                    <!--android:id="@+id/value_ratingbar"-->
+                    <!--style="@style/VillimRatingBar"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="40dp"-->
+                    <!--android:layout_alignParentRight="true"-->
+                    <!--android:layout_centerVertical="true"-->
+                    <!--android:numStars="5"-->
+                    <!--android:stepSize="0.1" />-->
+
+                <me.zhanghai.android.materialratingbar.MaterialRatingBar
+                    android:id="@+id/value_ratingbar"
+                    style="@style/Widget.MaterialRatingBar.RatingBar"
+                    android:layout_width="wrap_content"
+                    android:indeterminateTint="@color/rating_indeterminant_color"
+                    android:layout_height="40dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:numStars="5"
+                    android:progressTint="@color/rating_color"
+                    android:secondaryProgressTint="@color/rating_color"
+                    android:stepSize="0.1" />
+            </RelativeLayout>
+
+            <include layout="@layout/category_divider_dark" />
 
 
-    </LinearLayout>
+        </LinearLayout>
+
+    </ScrollView>
+
 
     <!-- Apply button -->
     <Button

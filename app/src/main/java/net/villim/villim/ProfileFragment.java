@@ -6,6 +6,7 @@ import android.app.DialogFragment;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -18,7 +19,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -86,7 +89,7 @@ public class ProfileFragment extends Fragment implements LogoutDialog.LogoutDial
                     dialog.show(getActivity().getFragmentManager(), "LogoutFragment");
 
                 } else if (title.equals(getString(R.string.profile_title))) {
-                    launchProfileEditActivity();
+                    launchProfileViewActivity();
                 } else if (title.equals(getString(R.string.faq))) {
                     launchFAQWebview();
                 } else if (title.equals(getString(R.string.settings))) {
@@ -128,9 +131,9 @@ public class ProfileFragment extends Fragment implements LogoutDialog.LogoutDial
         getActivity().startActivity(intent);
     }
 
-    private void launchProfileEditActivity() {
-        Intent intent = new Intent(getActivity(), ProfileEditActivity.class);
-        getActivity().startActivity(intent);
+    private void launchProfileViewActivity() {
+        Intent intent = new Intent(getActivity(), ProfileViewActivity.class);
+        getActivity().startActivityForResult(intent, PROFILE_EDIT);
     }
 
     // Make this async.
@@ -152,9 +155,16 @@ public class ProfileFragment extends Fragment implements LogoutDialog.LogoutDial
                         .load(R.drawable.img_default)
                         .into(profilePicture);
             } else {
-                Glide.with(this)
-                        .load(session.getProfilePicUrl())
-                        .into(profilePicture);
+                File profilePic = session.getLocalStoreProfilePictureFile();
+
+                if (profilePic == null) {
+                    Glide.with(this).load(session.getProfilePicUrl()).diskCacheStrategy(DiskCacheStrategy.NONE)
+                            .skipMemoryCache(true).into(profilePicture);
+                } else {
+                    Glide.with(this).load(profilePic).diskCacheStrategy(DiskCacheStrategy.NONE)
+                            .skipMemoryCache(true).into(profilePicture);
+                }
+
             }
         }
     }
@@ -277,6 +287,7 @@ public class ProfileFragment extends Fragment implements LogoutDialog.LogoutDial
             }
             if (resultCode == Activity.RESULT_CANCELED) {
                 //Write your code if there's no result
+                populateView();
             }
         }
     }

@@ -2,11 +2,12 @@ package net.villim.villim;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.format.DateUtils;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -14,25 +15,31 @@ import android.widget.Toast;
 
 import com.squareup.timessquare.CalendarPickerView;
 
+import org.joda.time.DateTime;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
 
+
 public class CalendarActivity extends VillimActivity {
 
     public final static String START_DATE = "start_date";
     public final static String END_DATE = "end_date";
+    public final static String INVALID_DATES = "invalid_dates";
 
     private final static int STATE_SELECT_NONE = 0;
     private final static int STATE_SELECT_START = 1;
     private final static int STATE_SELECT_END = 2;
 
     private TimeZone timeZone;
-    private Date startDate;
-    private Date endDate;
+    private DateTime startDate;
+    private DateTime endDate;
     int selectState;
+
+    DateTime[] invalidDates;
 
     private Toolbar toolbar;
     private TextView startDateTextView;
@@ -40,15 +47,22 @@ public class CalendarActivity extends VillimActivity {
 
     private Button saveSelectionButton;
 
+    private boolean highlightStartDate;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar);
 
         timeZone = TimeZone.getDefault();
-        startDate = (Date) getIntent().getSerializableExtra(START_DATE);
-        endDate = (Date) getIntent().getSerializableExtra(END_DATE);
+        startDate = (DateTime) getIntent().getSerializableExtra(START_DATE);
+        endDate = (DateTime) getIntent().getSerializableExtra(END_DATE);
         boolean hasPresetDate = (startDate != null && endDate != null);
+
+        long[] invalidDateArray = getIntent().getLongArrayExtra(INVALID_DATES);
+        invalidDates = net.villim.villim.VillimUtils.longArrayToDateArray(invalidDateArray);
+
+        highlightStartDate = true;
 
         /* Toolbar */
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -62,17 +76,31 @@ public class CalendarActivity extends VillimActivity {
         startDateTextView = (TextView) findViewById(R.id.start_date_text);
         endDateTextView = (TextView) findViewById(R.id.end_date_text);
 
-
         changeState(STATE_SELECT_START);
 
         /* Bottom button */
         saveSelectionButton = (Button) findViewById(R.id.save_selection_button);
-        saveSelectionButton.setEnabled(hasPresetDate);
         saveSelectionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                Calendar nextMonth = Calendar.getInstance();
+                nextMonth.set(startDate.getYear(), startDate.getMonthOfYear(), startDate.getDayOfMonth());
+                nextMonth.add(Calendar.MONTH, 1);
+                nextMonth.add(Calendar.DATE, -1);
+                DateTime nextMonthDate = new DateTime()
+                        .withYear(nextMonth.get(Calendar.YEAR))
+                        .withMonthOfYear(nextMonth.get(Calendar.MONTH))
+                        .withDayOfMonth(nextMonth.get(Calendar.DATE));
+
                 if (startDate.equals(endDate)){
-                    Toast.makeText(getApplicationContext(), R.string.select_different_dates, Toast.LENGTH_LONG).show();
+                    Toast toast =  Toast.makeText(getApplicationContext(), R.string.select_different_dates, Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.CENTER, 0, 0);
+                    toast.show();
+                } else if (endDate.isBefore(nextMonthDate)) {
+                    Toast toast = Toast.makeText(getApplicationContext(), R.string.book_at_least_a_month, Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.CENTER, 0, 0);
+                    toast.show();
                 } else {
                     Intent returnIntent = new Intent();
                     returnIntent.putExtra(START_DATE, startDate);
@@ -88,6 +116,17 @@ public class CalendarActivity extends VillimActivity {
         Calendar nextYear = Calendar.getInstance();
         nextYear.add(Calendar.YEAR, 1);
         final CalendarPickerView calendar = (CalendarPickerView) findViewById(R.id.calendar_view);
+        calendar.setDateSelectableFilter(new CalendarPickerView.DateSelectableFilter() {
+            @Override
+            public boolean isDateSelectable(Date date) {
+                for (DateTime reservedDate : invalidDates) {
+                    if (reservedDate.toDate().equals(date)) {
+                        return false;
+                    }
+                }
+                return true;
+            }
+        });
         Date tomorrow = new Date(System.currentTimeMillis() + DateUtils.DAY_IN_MILLIS);
         calendar.init(tomorrow, nextYear.getTime())
                 .inMode(CalendarPickerView.SelectionMode.RANGE);
@@ -96,16 +135,16 @@ public class CalendarActivity extends VillimActivity {
             public void onDateSelected(Date date) {
                 switch (selectState) {
                     case STATE_SELECT_START:
-                        startDate = date;
+                        startDate = new DateTime(date);
                         changeState(STATE_SELECT_END);
                         endDate = null;
+                        deactivateBototmButton();
                         break;
                     case STATE_SELECT_END:
-                        if (date.before(startDate)) {
-                            startDate = date;
-
+                        if (date.before(startDate.toDate())) {
+                            startDate = new DateTime(date);
                         } else {
-                            endDate = date;
+                            endDate = new DateTime(date);
                             changeState(STATE_SELECT_START);
                         }
                         break;
@@ -118,7 +157,7 @@ public class CalendarActivity extends VillimActivity {
                 /* Set button clickable if both start date and end dates are set.
                    Highlight dates from startDate to endDate */
                 if (startDate != null && endDate != null) {
-                    saveSelectionButton.setEnabled(true);
+                    activateBottomButton();
                 }
 
             }
@@ -132,22 +171,30 @@ public class CalendarActivity extends VillimActivity {
         calendar.setOnInvalidDateSelectedListener(new CalendarPickerView.OnInvalidDateSelectedListener() {
             @Override
             public void onInvalidDateSelected(Date date) {
-                CharSequence text = getString(R.string.invalid_date_selected);
-                int duration = Toast.LENGTH_SHORT;
-                Toast toast = Toast.makeText(getApplicationContext(), text, duration);
-                toast.show();
+                Date today = new Date(System.currentTimeMillis());
+                if (date.equals(today)) {
+                    CharSequence text = getString(R.string.invalid_date_selected);
+                    int duration = Toast.LENGTH_SHORT;
+                    Toast toast = Toast.makeText(getApplicationContext(), text, duration);
+                    toast.show();
+                } else {
+                    
+                }
             }
         });
 
         if (hasPresetDate) {
             calendar.clearHighlightedDates();
-            calendar.selectDate(startDate);
-            calendar.selectDate(endDate);
+            calendar.selectDate(startDate.toDate());
+            calendar.selectDate(endDate.toDate());
             setStartAndEndDateText(startDate, endDate);
+            activateBottomButton();
+        } else {
+            deactivateBototmButton();
         }
     }
 
-    private void updateSelectedDates(List<Date> dates) {
+    private void updateSelectedDates(List<DateTime> dates) {
         if (dates.size() > 0) {
             startDate = dates.get(0);
             endDate = dates.get(dates.size() - 1);
@@ -158,11 +205,11 @@ public class CalendarActivity extends VillimActivity {
         setStartAndEndDateText(startDate, endDate);
     }
 
-    private void setStartAndEndDateText(Date startDate, Date endDate) {
+    private void setStartAndEndDateText(DateTime startDate, DateTime endDate) {
         /* Set start date text */
         if (startDate != null) {
-            String startDateText = String.format(getString(R.string.date_filter_date_text_format), startDate.getMonth() + 1, startDate.getDate())
-                    + "\n" + VillimUtil.getWeekday(this, startDate.getDay());
+            String startDateText = String.format(getString(R.string.date_filter_date_text_format), startDate.getMonthOfYear(), startDate.getDayOfMonth())
+                    + "\n" + net.villim.villim.VillimUtils.getWeekday(this, startDate.getDayOfMonth());
             startDateTextView.setText(startDateText);
         } else {
             startDateTextView.setText(getString(R.string.date_filter_start_date));
@@ -170,8 +217,8 @@ public class CalendarActivity extends VillimActivity {
 
         /* Set end date text. */
         if (endDate != null) {
-            String endDateText = String.format(getString(R.string.date_filter_date_text_format), endDate.getMonth() + 1, endDate.getDate())
-                    + "\n" + VillimUtil.getWeekday(this, endDate.getDay());
+            String endDateText = String.format(getString(R.string.date_filter_date_text_format), endDate.getMonthOfYear(), endDate.getDayOfMonth())
+                    + "\n" + net.villim.villim.VillimUtils.getWeekday(this, endDate.getDayOfMonth());
             endDateTextView.setText(endDateText);
         } else {
             endDateTextView.setText(getString(R.string.date_filter_end_date));
@@ -183,25 +230,43 @@ public class CalendarActivity extends VillimActivity {
         switch (state) {
             case STATE_SELECT_NONE:
                 selectState = STATE_SELECT_NONE;
-//                startDateTextView.setTextColor(getResources().getColor(R.color.date_filter_state_normal));
-//                endDateTextView.setTextColor(getResources().getColor(R.color.date_filter_state_normal));
+                startDateTextView.setTextColor(getResources().getColor(R.color.date_filter_state_normal));
+                endDateTextView.setTextColor(getResources().getColor(R.color.date_filter_state_normal));
                 break;
             case STATE_SELECT_START:
                 selectState = STATE_SELECT_START;
-//                startDateTextView.setTextColor(getResources().getColor(R.color.date_filter_state_highlighted));
-//                endDateTextView.setTextColor(getResources().getColor(R.color.date_filter_state_normal));
+
+                int colorId = highlightStartDate ?
+                        getResources().getColor(R.color.date_filter_state_highlighted) :
+                        getResources().getColor(R.color.date_filter_state_normal) ;
+
+                startDateTextView.setTextColor(colorId);
+                endDateTextView.setTextColor(getResources().getColor(R.color.date_filter_state_normal));
                 break;
             case STATE_SELECT_END:
+                highlightStartDate = false;
                 selectState = STATE_SELECT_END;
-//                startDateTextView.setTextColor(getResources().getColor(R.color.date_filter_state_normal));
-//                endDateTextView.setTextColor(getResources().getColor(R.color.date_filter_state_highlighted));
+                startDateTextView.setTextColor(getResources().getColor(R.color.date_filter_state_normal));
+                endDateTextView.setTextColor(getResources().getColor(R.color.date_filter_state_highlighted));
                 break;
             default:
                 selectState = STATE_SELECT_NONE;
-//                startDateTextView.setTextColor(getResources().getColor(R.color.date_filter_state_normal));
-//                endDateTextView.setTextColor(getResources().getColor(R.color.date_filter_state_normal));
+                startDateTextView.setTextColor(getResources().getColor(R.color.date_filter_state_normal));
+                endDateTextView.setTextColor(getResources().getColor(R.color.date_filter_state_normal));
                 break;
         }
+    }
+
+    private void deactivateBototmButton() {
+        saveSelectionButton.setEnabled(false);
+        saveSelectionButton.setBackgroundColor(getResources().getColor(R.color.dark_button_disabled));
+        saveSelectionButton.setTextColor(Color.WHITE);
+    }
+
+    private void activateBottomButton() {
+        saveSelectionButton.setEnabled(true);
+        saveSelectionButton.setBackground(getResources().getDrawable(R.drawable.send_again_button));
+        saveSelectionButton.setTextColor(getResources().getColorStateList(R.color.dark_button_text));
     }
 
     @Override
